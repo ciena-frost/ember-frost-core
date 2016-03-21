@@ -10,13 +10,15 @@
     "build": "ember build",
     "start": "ember server",
     "test": "npm run lint && ember test",
-    "lint": "eslint *.js addon app config tests"
+    "lint": "eslint *.js addon app blueprints config tests"
   },
   "repository": "git@github.com:ciena-frost/ember-frost-core.git",
   "engines": {
     "node": ">= 5.0.0"
   },
-  "author": "",
+  "author": "Roxanne Panthaky (https://github.com/rox163)",
+  "contributors": [
+  ],
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.2.0",
@@ -57,6 +59,7 @@
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.5",
+    "ember-cli-sass": "^5.2.0",
     "ember-computed-decorators": "^0.2.2",
     "ember-cli-htmlbars": "^1.0.1",
     "ember-one-way-controls": "0.5.3",
