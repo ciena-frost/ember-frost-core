@@ -1,0 +1,8 @@
+<svg viewBox="0 0 25 25">
+	<rect x="2" y="4" fill="#7B7F7F" width="21" height="18"/>
+	<rect x="8" y="8" opacity="0.6" fill="#F1F1F1" width="4" height="13"/>
+	<rect x="3" y="8" opacity="0.6" fill="#F1F1F1" width="4" height="13"/>
+	<polygon opacity="0.6" fill="#F1F1F1" points="17,21 13,21 13,8 17,8 				"/>
+	<rect x="18" y="8" opacity="0.6" fill="#F1F1F1" width="4" height="13"/>
+	<rect x="20" y="5" fill="#F1F1F1" width="2" height="2"/>
+</svg>

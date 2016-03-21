@@ -72,3 +72,18 @@
     }
   }
 }
+
+
+.frost-icon {
+  .frost-icon-chevron {
+    fill: $frost-color-grey-5;
+  }
+
+  .frost-icon-close-circle {
+    fill: $frost-color-blue-1;
+  }
+
+  .frost-icon-link {
+  // No default fill - determined by the frost-link class
+  }
+}

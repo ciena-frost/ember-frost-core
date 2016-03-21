@@ -1,0 +1,23 @@
+<svg viewBox="0 0 60 60">
+	<path fill="#009999" d="M60,30c0,16.6-13.4,30-30,30c-4.1,0-8-0.8-11.5-2.3C7.6,53.2,0,42.5,0,30C0,13.4,13.4,0,30,0
+		c16.3,0,29.6,13.1,30,29.3C60,29.5,60,29.8,60,30z"/>
+	<defs>
+		<path id="SVGID_1_" d="M60,29.5c0,16.6-13.4,30-30,30c-4.1,0-8-0.8-11.5-2.2L13.1,44H40V20.7l12.9-5.4l7,13.4
+			C59.9,29,60,29.3,60,29.5z"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  overflow="visible"/>
+	</clipPath>
+	<polygon opacity="0.25" clip-path="url(#SVGID_2_)" fill="#272425" points="53.1,15.4 60,31 56.9,55 25.9,60 15,44 24.4,25.7
+		"/>
+	<path clip-path="url(#SVGID_2_)" fill="none" d="M60,29.5c0,16.6-13.4,30-30,30"/>
+		<rect x="15" y="21" opacity="0.3" fill="#FFFFFF" enable-background="new    " width="25" height="23"/>
+		<path fill="#F1F1F1" d="M21,20v25h5V20H21z M25,24h-3v-3h3V24z M25,28h-3v-3h3V28z M25,32h-3v-3h3V32z M25,43h-3v-3h3V43z"/>
+		<rect x="17" y="26" opacity="0.2" fill="#F1F1F1" enable-background="new    " width="3" height="16"/>
+		<rect x="27" y="26" opacity="0.2" fill="#F1F1F1" enable-background="new    " width="3" height="16"/>
+		<rect x="31" y="26" opacity="0.2" fill="#F1F1F1" enable-background="new    " width="3" height="16"/>
+		<rect x="35" y="26" opacity="0.2" fill="#F1F1F1" enable-background="new    " width="3" height="16"/>
+		<circle opacity="0.2" fill="#F1F1F1" enable-background="new    " cx="37.1" cy="23.6" r="1.4"/>
+	<path fill="#FFFFFF" d="M52,13v9.7c0,1.1-0.9,2.3-2,2.3h-5l-5,4v-4h-6c-1.1,0-2-1.2-2-2.4v-9.5c0-1.1,0.9-2.1,2-2.1h16
+		C51.1,11,52,11.9,52,13z"/>
+</svg>

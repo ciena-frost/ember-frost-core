@@ -1,0 +1,21 @@
+<svg viewBox="0 0 60 60">
+	<path fill="#009999" d="M60,30c0,16.6-13.4,30-30,30c-4.1,0-8-0.8-11.5-2.3C7.6,53.2,0,42.5,0,30C0,13.4,13.4,0,30,0
+		c16.3,0,29.6,13.1,30,29.3C60,29.5,60,29.8,60,30z"/>
+	<defs>
+		<path id="SVGID_1_" d="M60,29.5c0,16.6-13.4,30-30,30c-4.1,0-8-0.8-11.5-2.2L13.1,44L22,28l18-7.3l8.7-6.8l11.2,14.9
+			C59.9,29,60,29.3,60,29.5z"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  overflow="visible"/>
+	</clipPath>
+	<polygon opacity="0.25" clip-path="url(#SVGID_2_)" fill="#272425" points="53.1,15.4 60,31 56.9,55 25.9,60 15,44 24.4,25.7
+		"/>
+	<path clip-path="url(#SVGID_2_)" fill="none" d="M60,29.5c0,16.6-13.4,30-30,30"/>
+	<circle fill="#65A8A6" cx="25.8" cy="37.4" r="12.3"/>
+	<circle fill="#B4D8D7" cx="21.9" cy="19.6" r="7.3"/>
+	<circle fill="#9AD6D4" cx="35.4" cy="28.1" r="4.8"/>
+	<circle fill="#B2E0E0" cx="46.1" cy="13.8" r="2.5"/>
+	<circle opacity="0.7" fill="#FFFFFF" cx="43.1" cy="39.8" r="2.5"/>
+	<circle opacity="0.5" fill="#FFFFFF" cx="49.4" cy="30.1" r="4.3"/>
+	<circle fill="#FFFFFF" cx="36.4" cy="15.7" r="9.4"/>
+</svg>

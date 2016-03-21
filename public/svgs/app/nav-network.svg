@@ -1,0 +1,12 @@
+<svg viewBox="0 0 40 40" enable-background="new 0 0 40 40" >
+<g>
+	<g opacity="0.8">
+		<path fill="#BABCBE" d="M20.1,13.2c3.8,0,6.9,3.1,6.9,6.9s-3.1,6.9-6.9,6.9s-6.9-3.1-6.9-6.9S16.3,13.2,20.1,13.2 M20.1,11.2
+			c-4.9,0-8.9,4-8.9,8.9s4,8.9,8.9,8.9s8.9-4,8.9-8.9S24.9,11.2,20.1,11.2L20.1,11.2z"/>
+	</g>
+	<polyline fill="none" stroke="#BABCBE" stroke-width="2" stroke-miterlimit="10" points="13,8.5 20.1,1.5 26.9,8.5 	"/>
+	<polyline fill="none" stroke="#BABCBE" stroke-width="2" stroke-miterlimit="10" points="31.5,13.1 38.5,20.2 31.5,27 	"/>
+	<polyline fill="none" stroke="#BABCBE" stroke-width="2" stroke-miterlimit="10" points="27,31.5 19.9,38.5 13.1,31.5 	"/>
+	<polyline fill="none" stroke="#BABCBE" stroke-width="2" stroke-miterlimit="10" points="8.5,26.9 1.5,19.8 8.5,13 	"/>
+</g>
+</svg>

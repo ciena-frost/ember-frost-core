@@ -8,6 +8,7 @@ var Router = Ember.Router.extend({
 Router.map(function () {
   this.route('demo', { path: '/' })
   this.route('checkbox')
+  this.route('icons')
 })
 
 export default Router
