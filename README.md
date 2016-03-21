@@ -12,7 +12,6 @@
 # ember-frost-core
 
  * [Installation](#installation)
- * [API](#api)
  * [Components](#components)
  * [Contributing](#contributing)
 
@@ -22,14 +21,9 @@ ember install ember-frost-core
 ```
 
 ## Components
+The following components are available when you install ember-frost-core
 
 * [Frost-checkbox](frost-checkbox.md)
-
-## API
-
-| Attribute | Type | Value | Description |
-| --------- | ---- | ----- | ----------- |
-| ` ` | ` ` | ` ` | Coming soon |
 
 
 ## Development

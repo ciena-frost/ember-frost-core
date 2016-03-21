@@ -19,9 +19,9 @@ describeComponent(
       //   {{/frost-checkbox}}
       // `);
 
-    this.render(hbs`{{frost-checkbox}}`)
+      this.render(hbs`{{frost-checkbox}}`)
       expect(this.$()).to.have.length(1)
-    }),
+    })
 
     it('triggers value change', function () {
       this.set('checkbox-value', '')
