@@ -1,34 +1,40 @@
----
 language: node_js
-node_js:
-  - "0.12"
-
 sudo: false
-
-cache:
-  directories:
-    - node_modules
-
-env:
-  - EMBER_TRY_SCENARIO=default
-  - EMBER_TRY_SCENARIO=ember-release
-  - EMBER_TRY_SCENARIO=ember-beta
-  - EMBER_TRY_SCENARIO=ember-canary
-
-matrix:
-  fast_finish: true
-  allow_failures:
-    - env: EMBER_TRY_SCENARIO=ember-canary
-
+node_js:
+- '5.3'
+branches:
+  except:
+  - /^v[0-9\.]+/
 before_install:
-  - export PATH=/usr/local/phantomjs-2.0.0/bin:$PATH
-  - "npm config set spin false"
-  - "npm install -g npm@^2"
-
+- npm install -g coveralls pr-bumper
+- pr-bumper check
 install:
-  - npm install -g bower
-  - npm install
-  - bower install
-
-script:
-  - ember try $EMBER_TRY_SCENARIO test
+- npm install
+- bower install
+after_success:
+- sed -i -- 's/SF:ember-frost-core\/\(.*\)/SF:addon\/\1.js/' coverage/lcov.info && rm -f coverage/lcov.info--
+- cat coverage/lcov.info | coveralls
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - g++-4.8
+env:
+  matrix:
+  - CXX=g++-4.8
+  global:
+before_deploy:
+- pr-bumper bump
+deploy:
+  provider: npm
+  email: npm.ciena@gmail.com
+  skip_cleanup: true
+  api_key:
+  on:
+    branch: master
+    tags: false
+after_deploy:
+- .travis/publish-gh-pages.sh
+notifications:
+  slack:

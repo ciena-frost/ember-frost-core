@@ -1,4 +1,3 @@
-/*jshint node:true*/
 module.exports = {
   scenarios: [
     {
@@ -41,4 +40,4 @@ module.exports = {
       }
     }
   ]
-};
+}
