@@ -10,3 +10,38 @@
   max-width: 400px;
   margin: auto;
 }
+.dummy-body {
+  padding-left: 20px;
+}
+
+.section {
+  float: left;
+  padding-right: 50px;
+
+  > .title {
+    font-size: $frost-font-xl;
+    padding-bottom: 20px;
+  }
+
+  .example {
+    padding-bottom: 10px;
+
+    > .title {
+      font-size: $frost-font-l;
+      padding-bottom: 10px;
+    }
+
+    .snippet {
+      display: inline-block;
+      font-size: $frost-font-s;
+      margin-right: 20px;
+      margin-top: -15px;
+      vertical-align: top;
+    }
+
+    .demo {
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+}

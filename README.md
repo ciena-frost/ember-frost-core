@@ -11,15 +11,19 @@
 
 # ember-frost-core
 
- * [Installation](#Installation)
- * [API](#API)
- * [Examples](#Examples)
- * [Contributing](#Contributing)
+ * [Installation](#installation)
+ * [API](#api)
+ * [Components](#components)
+ * [Contributing](#contributing)
 
 ## Installation
 ```
 ember install ember-frost-core
 ```
+
+## Components
+
+* [Frost-checkbox](frost-checkbox.md)
 
 ## API
 
@@ -27,12 +31,6 @@ ember install ember-frost-core
 | --------- | ---- | ----- | ----------- |
 | ` ` | ` ` | ` ` | Coming soon |
 
-## Examples
-
-### Example
-```handlebars
-Coming soon
-```
 
 ## Development
 ### Setup

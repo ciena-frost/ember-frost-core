@@ -1,0 +1,159 @@
+<div class="section">
+  <div class="title">frost-checkbox</div>
+  <div class="example">
+    <div class="title">Basic</div>
+    <div class="snippet">
+{{format-markdown "```handlebars
+{{frost-checkbox id='basic'}}
+```"
+}}
+    </div>
+    <div class="demo">
+      {{frost-checkbox
+        id="basic"}}
+    </div>
+  </div>
+  <div class="example">
+    <div class="title">Label</div>
+    <div class="snippet">
+{{format-markdown "```handlebars
+{{#frost-checkbox
+  id='label'}}label
+{{/frost-checkbox}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{#frost-checkbox
+        id="label"}}label
+      {{/frost-checkbox}}
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="title">Autofocus</div>
+    <div class="snippet">
+{{format-markdown "```handlebars
+{{#frost-checkbox
+id='autofocus'
+autofocus=true}}autofocus
+{{/frost-checkbox}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{#frost-checkbox
+        id="autofocus"
+        autofocus=true}}autofocus
+      {{/frost-checkbox}}
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="title">Checked</div>
+    <div class="snippet">
+{{format-markdown "```handlebars
+{{#frost-checkbox
+  id='checked'
+  checked=true}}checked
+{{/frost-checkbox}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{#frost-checkbox
+        id="checked"
+        checked=true}}checked
+      {{/frost-checkbox}}
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="title">Disabled</div>
+    <div class="snippet">
+{{format-markdown "```handlebars
+{{#frost-checkbox
+  id='disabled'
+  disabled=true
+  checked=true}}disabled
+{{/frost-checkbox}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{#frost-checkbox
+        id="disabled"
+        disabled=true
+        checked=true}}disabled
+      {{/frost-checkbox}}
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="title">Name</div>
+    <div class="snippet">
+{{format-markdown "```handlebars
+{{#frost-checkbox
+  id='name'
+  name='name'}}name
+{{/frost-checkbox}}
+```"
+}}
+    </div>
+    <div class="demo">
+      {{#frost-checkbox
+        id="name"
+        name="name"}}name
+      {{/frost-checkbox}}
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="title">Value</div>
+    <div class="snippet">
+{{format-markdown "```handlebars
+{{#frost-checkbox
+  id='value'
+  value='value'
+  onInput=(action 'value')}}value
+{{/frost-checkbox}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{#frost-checkbox
+        id="value"
+        value="value"
+        onInput=(action "value")}}value
+      {{/frost-checkbox}}
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="title">Error</div>
+    <div class="snippet">
+{{format-markdown "```handlebars
+{{#frost-checkbox
+  id='errored'
+  classNameBindings='error'
+  value='value'
+  onInput=(action 'value')}}errored
+{{/frost-checkbox}}
+```"
+      }}
+    </div>
+    <div class="demo">
+     {{#frost-checkbox
+        id="errored"
+        classNameBindings="error"
+        value="value"
+        onInput=(action "value")}}errored{{/frost-checkbox}}
+      {{#frost-button
+        class="small secondary"
+        on-click=(action "toggleError")
+      }}
+        <div class="text">Toggle error</div>
+      {{/frost-button}}
+    </div>
+  </div>
+</div>

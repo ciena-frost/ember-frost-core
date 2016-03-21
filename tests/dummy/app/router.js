@@ -7,6 +7,7 @@ var Router = Ember.Router.extend({
 
 Router.map(function () {
   this.route('demo', { path: '/' })
+  this.route('checkbox')
 })
 
 export default Router
