@@ -1,0 +1,133 @@
+<div class="dummy-notification-container">
+  {{#each notifications as |notification|}}
+    {{notification-message notification=notification}}
+  {{/each}}
+</div>
+
+<div class="dummy-body">
+    <div class="section">
+        <div class="title">frost-text</div>
+        <div class="example">
+            <div class="title">Basic</div>
+            <div class="snippet">
+              {{format-markdown "```handlebars
+{{frost-text
+  autofocus=true
+  placeholder='basic field'
+}}
+```"
+              }}
+            </div>
+            <div class="demo">
+              {{frost-text
+              autofocus=true
+              placeholder='basic field'
+              }}
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="title">Action</div>
+            <div class="snippet">
+              {{format-markdown "```handlebars
+{{frost-text
+  onInput=(action 'text')
+}}
+```"
+              }}
+            </div>
+            <div class="demo">
+              {{frost-text
+              onInput=(action "text")
+              }}
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="title">Bound</div>
+            <div class="snippet">
+              {{format-markdown "```handlebars
+{{frost-text
+  onInput=(action 'bind')
+  value=boundText
+}}
+{{frost-text
+  onInput=(action 'bind2')
+  value=boundText
+}}
+```"
+              }}
+            </div>
+            <div class="demo">
+              {{frost-text
+              onInput=(action "bind")
+              value=boundText
+              }}
+                <br>Bound Text: {{boundText}}<br>
+              {{frost-text
+              onInput=(action "bind2")
+              value=boundText
+              }}
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="title">Error</div>
+            <div class="snippet">
+              {{format-markdown "```handlebars
+{{frost-text
+  classNameBindings='error'
+}}
+```"
+              }}
+            </div>
+            <div class="demo">
+              {{frost-text
+              classNameBindings="error"
+              }}
+              {{#frost-button
+              class="small secondary"
+              on-click=(action "toggleError")
+              }}
+                  <div class="text">Toggle error</div>
+              {{/frost-button}}
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="title">Attributes - e.g. Disabled</div>
+            <div class="snippet">
+              {{format-markdown "```handlebars
+{{frost-text
+  disabled=true
+}}
+```"
+              }}
+            </div>
+            <div class="demo">
+              {{frost-text
+              disabled=true
+              }}
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="title">Attributes - e.g. Read-only</div>
+            <div class="snippet">
+              {{format-markdown "```handlebars
+{{frost-text
+  readonly=true
+  value='Read only text'
+}}
+```"
+              }}
+            </div>
+            <div class="demo">
+              {{frost-text
+              readonly=true
+              value="Read only text"
+              }}
+            </div>
+        </div>
+    </div>
+</div>

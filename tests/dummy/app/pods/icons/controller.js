@@ -1,5 +1,5 @@
 import Ember from 'ember'
-import svgs from 'ember-frost-icons/svgs'
+import svgs from 'ember-frost-core/svgs'
 import _ from 'lodash/lodash'
 
 export default Ember.Controller.extend({
