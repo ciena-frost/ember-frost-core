@@ -14,6 +14,20 @@
   padding-left: 20px;
 }
 
+.title {
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-family: $frost-font-family;
+  font-size: $frost-font-l;
+}
+
+.list-item {
+  padding-bottom: 5px;
+  padding-top: 10px;
+  font-family: $frost-font-family;
+  font-size: $frost-font-m;
+}
+
 .section {
   float: left;
   padding-right: 50px;
