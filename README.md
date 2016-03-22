@@ -25,6 +25,7 @@ The following components are available when you install ember-frost-core
 
 * [Frost-checkbox](frost-checkbox.md)
 * [Frost-icons](frost-icons.md)
+* [Frost-theme](frost-theme.md)
 
 
 ## Development
