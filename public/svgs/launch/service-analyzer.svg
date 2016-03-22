@@ -1,0 +1,31 @@
+<svg viewBox="0 0 70 60">
+	<polygon fill="#00AA3E" points="17.7,59.9 0.4,29.9 17.7,0 52.3,0 69.6,29.9 52.3,59.9 "/>
+	<polygon opacity="0.1" fill="#272425" points="53.2,17.2 21.8,16.5 13.9,40.2 29.5,59.9 51.6,60 64.8,38.2 "/>
+	<g opacity="0.7">
+		<circle fill="#F1F1F2" cx="21.9" cy="20.9" r="4.4"/>
+		<circle fill="#F1F1F2" cx="17.5" cy="39.6" r="4.4"/>
+		<circle fill="#F1F1F2" cx="41.9" cy="32.7" r="4.4"/>
+		<polyline fill="none" stroke="#F1F1F2" stroke-width="3" stroke-miterlimit="10" points="21.5,20.9 16.5,39.6 41.9,32.7 		"/>
+		<line fill="none" stroke="#F1F1F2" stroke-width="3" stroke-miterlimit="10" x1="21.5" y1="20.9" x2="23.2" y2="22"/>
+		<line fill="none" stroke="#F1F1F2" stroke-width="3" stroke-miterlimit="10" stroke-dasharray="3.6282,3.6282" x1="26.3" y1="23.9" x2="37" y2="30.8"/>
+		<line fill="none" stroke="#F1F1F2" stroke-width="3" stroke-miterlimit="10" x1="38.5" y1="31.8" x2="40.2" y2="32.9"/>
+		<path fill="#FFFFFF" d="M35.7,12.3"/>
+	</g>
+	<image overflow="visible" opacity="0.25" width="33" height="29" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACEAAAAdCAYAAAAkXAW5AAAACXBIWXMAAAsSAAALEgHS3X78AAAA
+GXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAm1JREFUeNrMl31PwkAMxnfbgdOJ
+EdRETUyM3/9jmfiKoqiDsTF75qmpZTdu4x+XPAE2aH+0tz43E20/TLT7UfdJYMSr2QGmFq+1D8h6
+AJxiJdMRhBOvlTZATAMAJx0IOdikAwgDVKSStBJimLqpEgzgkg1J+6SMdEBKARMCIgFc0gXpi/RJ
+ykkFvvcLYhta4AAOScekCWlMGgHK4ju+NVKLBCWSzkmvpBfSjPRBWso1IivBLdgHwAXpknQOkAzX
+44BKrFGFTwDck/ZwvRJVqHQlGCJDBRzADemKdIbzww4QBSCe0NIIFVjgWskwVrVigB9MUAEHcC0g
++lQiw3m3Lt5US35y63ZYLMIRWnAKgBMEk2ui7eA1keKzS/qIuKmOoxcm3xkpkh7iNcNaSTpAVHi/
+EHFSxP9zl1nPkLIo/VDNCRs4J2LxJ3WcjcFnA6dln6kZHCNuGdumx6iO+sSLo39w/FuI2qO++4it
+sWyL/VZC7HwmsHrawivlnrUPQrtfgam2xPskcGLKYcVxCjGqKw1iPQA5ptw7NEDgYYCdy7H9ARed
+432O839ArKJnAJf4mXQHgJWy86QFgsu/RHJnYA+kKeLmYnPzW4m6wXSmMDKLMjrTORJO2ja+uRUL
+JHUQt/hDLzCylVwf1uN8UyQp4HxjQBxgXxAKMUfiB+wppoi/atpZ6d2QQUl5UzISJjZQHmIadlXc
+ji9UYwZxO0rZDtMwXtmo2E1ZezhnW3xEtrYESA6YHJ83FqbZYmBWKQkwMnmnyd12KXdT8hY1AQ8+
+TQ5oAiflWg2poOcO37U+T2JBT19dH+3MDv7RenwLMAA2RQbKJV0bZwAAAABJRU5ErkJggg==" transform="matrix(1 0 0 1 28 5)">
+	</image>
+	<path fill="#FFFFFF" d="M51,25H38.4c-2.2,0-4-1.8-4-4v-7.4c0-2.2,1.8-4,4-4H51c2.2,0,4,1.8,4,4V21C55,23.2,53.2,25,51,25z"/>
+	<polyline fill="none" stroke="#00AA3E" stroke-width="2" stroke-miterlimit="10" points="34.4,20.1 40.3,20.1 41.5,16.6 44.3,21.5
+		45.8,18.5 46.6,19.7 52.1,19.6 	"/>
+</svg>

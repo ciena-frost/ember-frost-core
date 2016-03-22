@@ -1,0 +1,22 @@
+<svg viewBox="0 0 60 60">
+	<path fill="#009EEF" d="M55,60H5c-2.8,0-5-2.2-5-5V5c0-2.8,2.2-5,5-5h50c2.8,0,5,2.2,5,5v50C60,57.8,57.8,60,55,60z"/>
+	<polygon opacity="0.25" fill="#FFFFFF" points="10,18 10,38 23,46 23,24 	"/>
+	<polygon opacity="0.25" fill="#FFFFFF" points="38,18 38,39 50,46 50,24 	"/>
+	<polygon opacity="0.25" fill="#FFFFFF" points="37,18 37,39 24,46 24,24 	"/>
+	<defs>
+		<polygon id="SVGID_1_" points="37,5 37,18.8 53.8,36 21,36 21,5 			"/>
+	</defs>
+	<clipPath id="SVGID_2_">
+		<use xlink:href="#SVGID_1_"  overflow="visible"/>
+	</clipPath>
+	<circle clip-path="url(#SVGID_2_)" fill="#FFFFFF" cx="37.3" cy="19" r="10.5"/>
+	<defs>
+		<polygon id="SVGID_3_" points="38,5.8 38,17.8 46.1,25.9 61.4,13.6 			"/>
+	</defs>
+	<clipPath id="SVGID_4_">
+		<use xlink:href="#SVGID_3_" overflow="visible"/>
+	</clipPath>
+	<path clip-path="url(#SVGID_4_)" fill="#FFFFFF" d="M37.3,10.8c4.5,0,8.2,3.7,8.2,8.2s-3.7,8.2-8.2,8.2s-8.2-3.7-8.2-8.2
+		S32.8,10.8,37.3,10.8 M37.3,8.5c-5.8,0-10.5,4.7-10.5,10.5s4.7,10.5,10.5,10.5S47.8,24.8,47.8,19S43.1,8.5,37.3,8.5L37.3,8.5z"/>
+	<polygon opacity="0.15" fill="#272425" points="50,24 60,36 60,60 24.1,60 10,38 24,46 38,38 50,46 "/>
+</svg>

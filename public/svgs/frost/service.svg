@@ -1,0 +1,14 @@
+<svg viewBox="0 0 35 35">
+	<g opacity="0.5">
+		<rect x="27.4" y="2.2" fill="#7C807F" width="7.6" height="7.6"/>
+		<rect x="19" y="25" fill="#7C807F" width="7.6" height="7.6"/>
+		<rect y="11.8" fill="#7C807F" width="7.6" height="7.6"/>
+		<line opacity="0.4" fill="none" stroke="#7C807F" stroke-width="2" stroke-miterlimit="10" x1="4.8" y1="15.6" x2="22.9" y2="27.8"/>
+		<line opacity="0.4" fill="none" stroke="#7C807F" stroke-width="2" stroke-miterlimit="10" x1="22.9" y1="27.8" x2="31.2" y2="6"/>
+		<g opacity="0.4">
+			<line fill="none" stroke="#7C807F" stroke-width="2" stroke-miterlimit="10" x1="4.8" y1="15.6" x2="6.2" y2="15.1"/>
+			<line fill="none" stroke="#7C807F" stroke-width="2" stroke-miterlimit="10" stroke-dasharray="2.7901,2.7901" x1="8.8" y1="14.2" x2="28.5" y2="7"/>
+			<line fill="none" stroke="#7C807F" stroke-width="2" stroke-miterlimit="10" x1="29.8" y1="6.6" x2="31.2" y2="6"/>
+		</g>
+	</g>
+</svg>

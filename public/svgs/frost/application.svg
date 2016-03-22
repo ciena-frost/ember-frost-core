@@ -1,0 +1,18 @@
+<svg viewBox="0 0 45 45">
+	<path class='base' d="M40.12,45h-35c-2.761,0-5-2.239-5-5V5c0-2.761,2.239-5,5-5h35c2.761,0,5,2.239,5,5v35
+		C45.12,42.761,42.882,45,40.12,45z"/>
+	<polygon style="fill:#272425;opacity:0.15;" points="35,9.772 45,21.721 45.086,40.586 44.917,41.375 44.75,41.75 44.417,42.542
+		43.958,43.25 43.167,44 42.042,44.583 40.458,45 13.336,45 8.758,36 35.008,36 "/>
+	<rect x="8.758" y="9.945" style="fill:#FFFFFF;opacity:0.4;" width="26.25" height="3.259"/>
+	<rect x="8.758" y="9.795" style="fill:#F1F1F1;opacity:0.5;" width="26.25" height="26.25"/>
+	<path style="fill:#F1F1F1;opacity:0.5;stroke:#F1F1F1;stroke-width:0.25;stroke-miterlimit:10;" d="M14.302,20.333h-3.604
+		c-0.385,0-0.698-0.312-0.698-0.698v-3.604c0-0.385,0.312-0.698,0.698-0.698h3.604c0.385,0,0.698,0.312,0.698,0.698v3.604
+		C15,20.021,14.688,20.333,14.302,20.333z"/>
+	<path style="fill:#F1F1F1;opacity:0.5;stroke:#F1F1F1;stroke-width:0.25;stroke-miterlimit:10;" d="M12.5,26.92L12.5,26.92
+		c-1.381,0-2.5-1.119-2.5-2.5v0c0-1.381,1.119-2.5,2.5-2.5h0c1.381,0,2.5,1.119,2.5,2.5v0C15,25.801,13.881,26.92,12.5,26.92z"/>
+	<polygon style="fill:#F1F1F1;opacity:0.5;stroke:#F1F1F1;stroke-width:0.25;stroke-miterlimit:10;" points="11.25,33.15 10,30.98
+		11.25,28.81 13.75,28.81 15,30.98 13.75,33.15 "/>
+	<rect x="16.562" y="15.333" style="fill:#F1F1F1;opacity:0.5;" width="16.938" height="5"/>
+	<rect x="16.562" y="21.92" style="fill:#F1F1F1;opacity:0.5;" width="16.938" height="5"/>
+	<rect x="16.562" y="28.48" style="fill:#F1F1F1;opacity:0.5;" width="16.938" height="5"/>
+</svg>

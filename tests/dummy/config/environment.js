@@ -39,7 +39,7 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
-    ENV.baseURL = '/frost-core'
+    ENV.baseURL = '/ember-frost-core'
     ENV.isDemo = true
     ENV['ember-cli-mirage'] = {
       enabled: true
