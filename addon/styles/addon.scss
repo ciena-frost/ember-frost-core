@@ -1,4 +1,5 @@
 @import 'node_modules/ember-frost-theme/scss/frost-theme';
+@import 'frost-text';
 
 .frost-checkbox {
   display: inline-block;
@@ -87,3 +88,4 @@
   // No default fill - determined by the frost-link class
   }
 }
+
