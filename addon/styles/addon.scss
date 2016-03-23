@@ -70,6 +70,7 @@
 
     &:focus + .label::before {
       background-image: linear-gradient(lighten($frost-color-blue-1, 50%), lighten($frost-color-blue-1, 45%));
+      border: 1px solid red;
     }
   }
 }
