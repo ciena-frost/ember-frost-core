@@ -4,14 +4,19 @@
   "description": "The default blueprint for ember-cli addons.",
   "frostGuideDirectories": [
     {
-      "name": "ember-frost-checkbox",
+      "demoName": "checkbox",
       "frostGuideDirectory": "ui-components/button-controls/checkbox",
       "readme": "frost-checkbox.md"
     },
     {
-      "name": "ember-frost-icons",
+      "demoName": "icons",
       "frostGuideDirectory": "ui-components/icons",
       "readme": "frost-icons.md"
+    },
+    {
+      "demoName": "text-input",
+      "frostGuideDirectory": "ui-components/input-controls/text",
+      "readme": "frost-text.md"
     }
   ],
   "directories": {
@@ -29,8 +34,7 @@
     "node": ">= 5.0.0"
   },
   "author": "Roxanne Panthaky (https://github.com/rox163)",
-  "contributors": [
-  ],
+  "contributors": [],
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.2.0",
@@ -62,6 +66,7 @@
     "ember-try": "^0.2.2",
     "eslint": "2.1.0",
     "eslint-config-frost-standard": "^1.0.0",
+    "frost-guide-custom-routing": "0.0.4",
     "loader.js": "^4.0.0",
     "markdown-code-highlighting": "0.0.6"
   },
