@@ -2,6 +2,18 @@
   "name": "ember-frost-core",
   "version": "0.0.0",
   "description": "The default blueprint for ember-cli addons.",
+  "frostGuideDirectories": [
+    {
+      "name": "ember-frost-checkbox",
+      "frostGuideDirectory": "ui-components/button-controls/checkbox",
+      "readme": "frost-checkbox.md"
+    },
+    {
+      "name": "ember-frost-icons",
+      "frostGuideDirectory": "ui-components/icons",
+      "readme": "frost-icons.md"
+    }
+  ],
   "directories": {
     "doc": "doc",
     "test": "tests"
