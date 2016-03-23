@@ -75,6 +75,10 @@
     "frost"
   ],
   "dependencies": {
+    "broccoli-flatiron": "0.0.0",
+    "broccoli-funnel": "^1.0.1",
+    "broccoli-merge-trees": "^1.0.0",
+    "broccoli-svgstore": "0.1.0",
     "ember-cli-babel": "^5.1.5",
     "ember-cli-sass": "^5.2.0",
     "ember-computed-decorators": "^0.2.2",
