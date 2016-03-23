@@ -22,6 +22,12 @@ export default Ember.Controller.extend({
           icon,
           markdown: `\`${icon}\``
         }
+      }).filter((entry) => {
+        // filter out objects when used on frost-guide as it picks up other svgs (folder in folder)
+        // these nested folders return as objects with its properties equal to folders inside
+        if (typeof Ember.get(svgs, entry.icon.replace(/\//g, '.')) === 'string') {
+          return true
+        }
       }))
     }, [])
   }),
