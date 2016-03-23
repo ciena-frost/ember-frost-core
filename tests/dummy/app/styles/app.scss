@@ -7,11 +7,22 @@
   right: 10px;
   z-index: 999;
   width: 80%;
-  max-width: 400px;
+  max-width: 200px;
   margin: auto;
 }
 .dummy-body {
-  padding-left: 20px;
+  padding: 0 20px;
+}
+
+pre {
+  margin: 0;
+}
+
+.dummy-body.text-input.field {
+  .example .snippet {
+    width: 305px;
+    margin: 5px 0 10px 0;
+  }
 }
 
 .title {
@@ -28,9 +39,12 @@
   font-size: $frost-font-m;
 }
 
+
 .section {
-  float: left;
-  padding-right: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  width: calc(100vw - 250px);
 
   > .title {
     font-size: $frost-font-xl;
@@ -38,30 +52,31 @@
   }
 
   .example {
+    padding-right: 50px;
     padding-bottom: 10px;
 
     > .title {
       font-size: $frost-font-l;
-      padding-bottom: 10px;
+      padding-bottom: 5px;
     }
 
     .snippet {
       display: inline-block;
       font-size: $frost-font-s;
       margin-right: 20px;
-      margin-top: -15px;
+      margin-top: -5px;
       vertical-align: top;
     }
 
     .demo {
-      display: inline-block;
+      display: block;
       vertical-align: top;
     }
   }
 }
 
 
-.demo {
+.icon-demo {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
