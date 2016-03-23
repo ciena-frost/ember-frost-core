@@ -20,6 +20,15 @@ module.exports = [
       path: {
         path: '/area'
       }
-    }]
+    }, {
+      id: 'password',
+      alias: 'password',
+      type: 'route',
+      route: 'text-input.password',
+      path: {
+        path: '/password'
+      }
+    }
+   ]
   }
 ]

@@ -3,8 +3,9 @@ import Ember from 'ember'
 import layout from '../templates/components/frost-text'
 
 export default Ember.Component.extend({
-  attributeBindings: ['autofocus', 'placeholder', 'disabled', 'readonly', 'value', 'type'],
+  attributeBindings: ['align', 'autofocus', 'placeholder', 'disabled', 'readonly', 'value', 'type'],
   classNames: ['frost-text'],
+  classNameBindings: ['right', 'center'],
   layout: layout,
 
   showClear: false,
@@ -27,6 +28,11 @@ export default Ember.Component.extend({
   onFocus: Ember.on('focusIn', function (e) {
     e.target.select()
   }),
+
+  didInitAttrs () {
+    this.set('right', this.get('align') === 'right')
+    this.set('center', this.get('align') === 'center')
+  },
 
   actions: {
     clear: function () {
