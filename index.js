@@ -26,8 +26,8 @@ module.exports = {
     if (this.options.babel.optional.indexOf('es7.decorators') === -1) {
       this.options.babel.optional.push('es7.decorators')
     }
-
   },
+
   treeForAddon: function (tree) {
     // Flatten the svgs into js imports with inline svg using flatiron and merge the result into the addon tree
     var svgPaths = []
