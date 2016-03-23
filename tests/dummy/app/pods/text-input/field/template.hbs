@@ -66,7 +66,41 @@
           }}
           </div>
       </div>
+      <div class="example">
+        <div class="title">Disabled - no text</div>
+        <div class="demo">
+          {{frost-text
+            disabled=true
+          }}
+        </div>
+        <div class="snippet">
+          {{format-markdown "```handlebars
+{{frost-text
+disabled=true
+}}
+  ```"
+          }}
+        </div>
+      </div>
 
+      <div class="example">
+        <div class="title">Disabled - prefilled</div>
+        <div class="demo">
+          {{frost-text
+            disabled=true
+            value="Read only text"
+          }}
+        </div>
+        <div class="snippet">
+          {{format-markdown "```handlebars
+{{frost-text
+  disabled=true
+  value='Read only text'
+}}
+    ```"
+}}
+        </div>
+      </div>
       <div class="example">
         <div class="title">Align</div>
         <div class="demo">
@@ -81,41 +115,6 @@
 }}
     ```"
           }}
-        </div>
-      </div>
-        <div class="example">
-          <div class="title">Disabled</div>
-          <div class="demo">
-            {{frost-text
-            disabled=true
-            }}
-          </div>
-          <div class="snippet">
-            {{format-markdown "```handlebars
-{{frost-text
-  disabled=true
-}}
-    ```"
-            }}
-          </div>
-      </div>
-
-      <div class="example">
-        <div class="title">Read-only</div>
-        <div class="demo">
-          {{frost-text
-          readonly=true
-          value="Read only text"
-          }}
-        </div>
-        <div class="snippet">
-          {{format-markdown "```handlebars
-{{frost-text
-  readonly=true
-  value='Read only text'
-}}
-    ```"
-}}
         </div>
       </div>
   </div>
