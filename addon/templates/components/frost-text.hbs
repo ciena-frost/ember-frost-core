@@ -1,0 +1,11 @@
+{{input
+  type=type
+  autofocus=autofocus
+  disabled=disabled
+  value=value
+  placeholder=placeholder
+  readonly=readonly}}
+{{#if showClear}}
+  {{!frost-icon class='clear' icon='frost/close'}}
+  <a class="clear" {{action "clear"}}>x</a>
+{{/if}}
