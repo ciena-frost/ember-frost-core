@@ -22,7 +22,7 @@ describeComponent(
       this.render(hbs`{{frost-textarea}}`)
       expect(this.$()).to.have.length(1)
     })
-    
+
     it('action is fired on input', function () {
       this.set('input-value', '')
       this.on('test-action', function (attr) {
