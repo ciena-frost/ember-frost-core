@@ -32,7 +32,7 @@
 
 ### Primary
 
-```
+```handlebars
 {{frost-button
   priority='primary'
   size='small'
@@ -41,7 +41,7 @@
 ```
 ### Secondary
 
-```
+```handlebars
 {{frost-button
   priority='secondary'
   size='small'
@@ -50,7 +50,7 @@
 ```
 ### Tertiary
 
-```
+```handlebars
 {{frost-button
   priority='tertiary'
   size='small'
@@ -60,7 +60,7 @@
 
 ### Size - small
 
-```
+```handlebars
 {{frost-button
   priority='confirm'
   size='small'
@@ -70,7 +70,7 @@
 
 ### Size - medium
 
-```
+```handlebars
 {{frost-button
   priority='confirm'
   size='medium'
@@ -80,7 +80,7 @@
 
 ### Size - large
 
-```
+```handlebars
 {{frost-button
   priority='confirm'
   size='large'
@@ -91,7 +91,7 @@
 
 ### Icon - small
 
-```
+```handlebars
 {{frost-button
   priority='confirm'
   size='small'
@@ -101,7 +101,7 @@
 
 ### Icon - medium
 
-```
+```handlebars
 {{frost-button
   priority='confirm'
   size='medium'
@@ -111,7 +111,7 @@
 
 ### Icon - large
 
-```
+```handlebars
 {{frost-button
   priority='confirm'
   size='large'
@@ -121,7 +121,7 @@
 
 ### Disabled
 
-```
+```handlebars
 {{frost-button
   priority='confirm'
   size='medium'
@@ -132,7 +132,7 @@
 
 ### Autofocus
 
-```
+```handlebars
 {{frost-button
   priority='confirm'
   size='medium'
@@ -143,7 +143,7 @@
 
 ### Icon and Info - horizontal
 
-```
+```handlebars
 {{frost-button
   priority='confirm'
   size='extra-large'
@@ -155,7 +155,7 @@
 
 ### Icon and Info - vertical
 
-```
+```handlebars
 {{frost-button
   priority='confirm'
   size='extra-large'
@@ -168,7 +168,7 @@
 
 ### Icon and Text - horizontal
 
-```
+```handlebars
 {{frost-button
   priority='confirm'
   size='extra-large'
@@ -179,7 +179,7 @@
 
 ### Icon and Text - vertical
 
-```
+```handlebars
 {{frost-button
   priority='confirm'
   size='extra-large'
@@ -191,7 +191,7 @@
 
 ### Design - tab
 
-```
+```handlebars
 {{frost-button
   design='tab'
   text='Design Tab'
@@ -201,7 +201,7 @@
 
 ### Events - onClick
 
-```
+```handlebars
 {{frost-button
   priority='confirm'
   size='medium'
