@@ -22,7 +22,7 @@ export default Ember.Component.extend({
       default:
         this.set('size', 'small')
         break
-      }
+    }
   },
 
   didInsertElement () {
