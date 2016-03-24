@@ -1,0 +1,387 @@
+<div class="dummy-notification-container">
+  {{#each notifications as |notification|}}
+      {{notification-message notification=notification}}
+  {{/each}}
+</div>
+
+<h2>frost-button</h2>
+{{#frost-checkbox
+  checked=vertical
+  on-input=(action "toggleVertical")
+}}
+  Vertical
+{{/frost-checkbox}}
+
+<br/>
+
+<div class="section">
+  <div class="example">
+    <div class="title">Primary</div>
+    <div class="code">
+      {{format-markdown "```handlebars
+{{frost-button
+  on-click=(action 'click')
+  priority='confirm'
+  size='small'
+  text='Action'
+  vertical=vertical
+}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{frost-button
+        on-click=(action 'click')
+        priority='confirm'
+        size='small'
+        text='Action'
+        vertical=vertical
+      }}
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="title">Secondary</div>
+    <div class="code">
+      {{format-markdown "```handlebars
+{{frost-button
+  on-click=(action 'click')
+  priority='normal'
+  size='small'
+  text='Action'
+  vertical=vertical
+}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{frost-button
+        on-click=(action 'click')
+        priority='normal'
+        size='small'
+        text='Action'
+        vertical=vertical
+      }}
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="title">Tertiary</div>
+    <div class="code">
+      {{format-markdown "```handlebars
+{{frost-button
+  on-click=(action 'click')
+  priority='cancel'
+  size='small'
+  text='Action'
+  vertical=vertical
+}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{frost-button
+        on-click=(action 'click')
+        priority='cancel'
+        size='small'
+        text='Action'
+        vertical=vertical
+      }}
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="example">
+    <div class="title">Small</div>
+    <div class="code">
+      {{format-markdown "```handlebars
+{{frost-button
+  on-click=(action 'click')
+  priority='primary'
+  size='small'
+  text='Action'
+  vertical=vertical
+}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{frost-button
+        on-click=(action 'click')
+        priority='primary'
+        size='small'
+        text='Action'
+        vertical=vertical
+      }}
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="title">Medium</div>
+    <div class="code">
+      {{format-markdown "```handlebars
+{{frost-button
+  on-click=(action 'click')
+  size='medium'
+  priority='primary'
+  text='Action'
+  vertical=vertical
+}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{frost-button
+        on-click=(action 'click')
+        priority='primary'
+        size='medium'
+        text='Action'
+        vertical=vertical
+      }}
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="title">Large</div>
+    <div class="code">
+      {{format-markdown "```handlebars
+{{frost-button
+  on-click=(action 'click')
+  priority='primary'
+  size='large'
+  text='Action'
+  vertical=vertical
+}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{frost-button
+        on-click=(action 'click')
+        size='large'
+        priority='primary'
+        text='Action'
+        vertical=vertical
+      }}
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="example">
+    <div class="title">Icon Small</div>
+    <div class="code">
+      {{format-markdown "```handlebars
+{{frost-button
+  icon='frost/add'
+  on-click=(action 'click')
+  priority='primary'
+  size='small'
+  vertical=vertical
+}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{frost-button
+        icon='frost/add'
+        on-click=(action 'click')
+        priority='primary'
+        size='small'
+        vertical=vertical
+      }}
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="title">Icon Medium</div>
+    <div class="code">
+      {{format-markdown "```handlebars
+{{frost-button
+  icon='frost/add'
+  on-click=(action 'click')
+  priority='primary'
+  size='medium'
+  vertical=vertical
+}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{frost-button
+        icon='frost/add'
+        on-click=(action 'click')
+        priority='primary'
+        size='medium'
+        vertical=vertical
+      }}
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="title">Icon Large</div>
+    <div class="code">
+      {{format-markdown "```handlebars
+{{frost-button
+  icon='frost/add'
+  on-click=(action 'click')
+  priority='primary'
+  size='large'
+  vertical=vertical
+}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{frost-button
+        icon='frost/add'
+        on-click=(action 'click')
+        priority='primary'
+        size='large'
+        vertical=vertical
+      }}
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="example">
+    <div class="title">Disabled</div>
+    <div class="code">
+      {{format-markdown "```handlebars
+{{frost-button
+  disabled=true
+  on-click=(action 'click')
+  priority='primary'
+  size='small'
+  text='Action'
+  vertical=vertical
+}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{frost-button
+        disabled=true
+        on-click=(action 'click')
+        priority='primary'
+        size='small'
+        text='Action'
+        vertical=vertical
+      }}
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="title">Autofocus</div>
+    <div class="code">
+      {{format-markdown "```handlebars
+{{frost-button
+  autofocus=true
+  on-click=(action 'click')
+  priority='primary'
+  size='small'
+  text='Action'
+  vertical=vertical
+}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{frost-button
+        autofocus=true
+        on-click=(action 'click')
+        priority='primary'
+        size='small'
+        text='Action'
+        vertical=vertical
+      }}
+    </div>
+  </div>
+
+   <div class="example">
+    <div class="title">Design - tab</div>
+    <div class="code">
+      {{format-markdown "```handlebars
+{{frost-button
+  autofocus=true
+  on-click=(action 'click')
+  design='tab'
+  text='Design Tab'
+  vertical=vertical
+}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{frost-button
+        autofocus=true
+        on-click=(action 'click')
+        design='tab'
+        text='Design Tab'
+        vertical=vertical
+      }}
+    </div>
+  </div>
+
+
+</div>
+
+<div class="section">
+  <div class="example">
+    <div class="title">Icon and Info</div>
+    <div class="code">
+      {{format-markdown "```handlebars
+{{frost-button
+  icon='frost/add'
+  on-click=(action 'click')
+  priority='primary'
+  size='extra-large'
+  subtext='Subtext'
+  text='Text'
+  vertical=vertical
+}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{frost-button
+        icon='frost/add'
+        on-click=(action 'click')
+        priority='primary'
+        size='extra-large'
+        subtext='Subtext'
+        text='Text'
+        vertical=vertical
+      }}
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="title">Icon and Text</div>
+    <div class="code">
+      {{format-markdown "```handlebars
+{{frost-button
+  icon='frost/add'
+  on-click=(action 'click')
+  priority='primary'
+  size='medium'
+  text='Text'
+  vertical=vertical
+}}
+```"
+      }}
+    </div>
+    <div class="demo">
+      {{frost-button
+        icon='frost/add'
+        on-click=(action 'click')
+        priority='primary'
+        size='medium'
+        text='Text'
+        vertical=vertical
+      }}
+    </div>
+  </div>
+</div>

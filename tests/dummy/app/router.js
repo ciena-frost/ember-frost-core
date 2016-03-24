@@ -14,6 +14,7 @@ Router.map(function () {
   this.route('demo', { path: '/' })
   this.route('checkbox')
   this.route('icons')
+  this.route('button')
 //  this.route('text-input', function () {
 //    this.route('field', { path: '/field' })
 //    this.route('area', { path: '/area' })
