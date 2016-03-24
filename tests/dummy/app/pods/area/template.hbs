@@ -1,0 +1,36 @@
+<div class='dummy-header'>Basic</div>
+<div style="padding: 10px 20px;">
+    {{frost-textarea id="basic" autofocus=true placeholder='Text goes here!'}}
+</div>
+
+<div class='dummy-header'>Defined number of Columns + Rows</div>
+<div style="padding: 10px 20px;">
+    {{frost-textarea id="columns-rows" cols="80" rows="6"}}
+</div>
+
+<div class='dummy-header'>Action</div>
+<div style="padding: 10px 20px;">
+    {{frost-textarea id="action" on-input=(action "text") value='Default text'}}
+</div>
+
+<div class='dummy-header'>Attributes - e.g. Disabled</div>
+<div style="padding: 10px 20px;">
+    {{frost-textarea id="disabled" disabled=true}}
+</div>
+
+<div class='dummy-header'>Attributes - e.g. Error</div>
+<div style="padding: 10px 20px;display: flex;">
+    {{frost-textarea style="margin-right: 10px;" id="error" classNameBindings="error" }}
+    <div style="margin-left: 10px;"></div>
+    {{#frost-button on-click=(action "toggleError") class="small secondary"}}
+        <div class='text'>Toggle error</div>
+    {{/frost-button}}
+</div>
+
+<div class='dummy-header'>Attributes - e.g. Read only</div>
+<div style="padding: 10px 20px;">
+    {{frost-textarea id="read-only" readonly=true value="Read only textarea"}}
+</div>
+
+
+
