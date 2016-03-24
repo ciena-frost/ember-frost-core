@@ -1,17 +1,23 @@
 import Ember from 'ember'
 
 export default Ember.Controller.extend({
-  error: true,
+  vertical: false,
 
   actions: {
-    onInputHandler (attrs) {
-      console.log('checkbox value: ' + attrs.value)
+    click () {
       this.notifications.addNotification({
-        message: "value: '" + attrs.value + "'",
+        message: 'Action sent',
         type: 'success',
         autoClear: true,
         clearDuration: 2000
       })
+    },
+
+    /**
+     * Toggle vertical rendering
+     */
+    toggleVertical () {
+      this.toggleProperty('vertical')
     }
   }
 })

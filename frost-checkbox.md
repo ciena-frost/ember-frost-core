@@ -7,19 +7,95 @@
 
 | Attribute   | Type | Value | Description |
 | ----------- | ---- | ----- | ----------- |
-| `onInput`   |`string` | `<action-name>` | The action callback to call when the value of the checkbox changes as the user clicks |
+| `size` | `string` | `small` | **default** - small size checkbox |
+|  | | `medium` | medium size checkbox |
+|  |  | `large` | large size checkbox |
+| `label` | `string` | `<label-name>` | label for the checkbox |
+| `autofocus` | `boolean` | `false` | **default** - basic checkbox  |
+|  |  | `true` | sets focus on checkbox |
+| `checked` | `boolean` | `false` | **default** - basic checkbox |
+|  |  | `true` | checked checkbox |
+| `disabled` | `boolean` | `false` | **default** - basic checkbox |
+|  |  | `true` | disabled checkbox |
+| `class` | `string` | `error` | sets checkbox to error state |
+| `onInput` |`string` | `<action-name>` | The action callback to call when the value of the checkbox changes as the user clicks |
 
 ## Examples
 
+### Basic
+
 ```
-{{#frost-checkbox
-  id='myCheckbox'
-  onInput=(action 'value')}}My checkbox
-{{/frost-checkbox}}
+{{frost-checkbox}}
+```
+
+### Size
+
+```
+{{frost-checkbox
+  size='large'
+}}
+```
+
+### Label
+
+```
+{{frost-checkbox
+  label='label'
+}}
+```
+
+### Autofocus
+
+```
+{{frost-checkbox
+  autofocus=true
+}}
+```
+
+### Checked
+
+```
+{{frost-checkbox
+  checked=true
+}}
+```
+
+### Disabled - checked
+
+```
+{{frost-checkbox
+  disabled=true
+  checked=true
+}}
+```
+### Disabled - not checked
+
+```
+{{frost-checkbox
+  disabled=true
+}}
+```
+
+### Error
+
+```
+{{frost-checkbox
+  class='error'
+}}
+```
+
+### Events - onInput
+
+```
+{{frost-text
+  onInput=(action 'onInputHandler')
+}}
 ```
 
 ```javascript
-value (attrs) {
-  console.log(attrs.id + ' - ' + attrs.value)
-}
+actions: {
+  onInputHandler(attrs) {
+    console.log('checkbox value: ' + attrs.value)
+    }
+  }
 ```

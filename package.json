@@ -1,6 +1,6 @@
 {
   "name": "ember-frost-core",
-  "version": "0.0.0",
+  "version": "0.0.4",
   "description": "The default blueprint for ember-cli addons.",
   "frostGuideDirectories": [
     {
@@ -14,7 +14,7 @@
       "readme": "frost-icons.md"
     },
     {
-      "demoName": "text-input",
+      "demoName": "field",
       "frostGuideDirectory": "ui-components/input-controls/text",
       "readme": "frost-text.md"
     }

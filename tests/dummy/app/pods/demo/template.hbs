@@ -2,13 +2,28 @@
   <div class="title">frost-core</div>
 
   <li class='list-item'>
+    {{#frost-link 'button'}}Button{{/frost-link}}
+  </li>
+  <li class='list-item'>
     {{#frost-link 'checkbox'}}Checkbox{{/frost-link}}
   </li>
   <li class='list-item'>
     {{#frost-link 'icons'}}Icons{{/frost-link}}
   </li>
-  <li class='list-item'>{{#frost-link "text-input.field"}}Textfield{{/frost-link}}</li>
-  <li class='list-item'>{{#frost-link "text-input.password"}}Password{{/frost-link}}</li>
-<!--  <li class='list-item'>{{!#link-to "text-input.area"}}Text area{{!/link-to}}</li>-->
+
+  <li class='list-item'>Text Input
+    <ul>
+      <li class='list-item'>
+        {{#frost-link 'field'}}Field{{/frost-link}}
+      </li>
+      <li class='list-item'>
+        {{#frost-link 'area'}}Area{{/frost-link}}
+      </li>
+      <li class='list-item'>
+        {{#frost-link 'password'}}Password{{/frost-link}}
+      </li>
+    </ul>
+
+  </li>
 </div>
 {{outlet}}
