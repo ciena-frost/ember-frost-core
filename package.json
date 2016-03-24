@@ -9,6 +9,11 @@
       "readme": "frost-checkbox.md"
     },
     {
+      "demoName": "button",
+      "frostGuideDirectory": "ui-components/button-controls/button",
+      "readme": "frost-button.md"
+    },
+    {
       "demoName": "icons",
       "frostGuideDirectory": "ui-components/icons",
       "readme": "frost-icons.md"
@@ -27,6 +32,11 @@
       "demoName": "area",
       "frostGuideDirectory": "ui-components/input-controls/text-area",
       "readme": "frost-textarea.md"
+    },
+    {
+      "demoName": "link",
+      "frostGuideDirectory": "ui-components/button-controls/link",
+      "readme": "frost-link.md"
     },
     {
       "demoName": "palette",

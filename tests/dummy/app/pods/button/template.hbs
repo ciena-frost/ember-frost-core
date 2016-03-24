@@ -19,19 +19,13 @@
     <div class="title">Primary</div>
     <div class="code">
       {{format-markdown "```handlebars
-{{frost-button
-  on-click=(action 'click')
-  priority='confirm'
-  size='small'
-  text='Action'
-  vertical=vertical
-}}
+
 ```"
       }}
     </div>
     <div class="demo">
       {{frost-button
-        on-click=(action 'click')
+        onClick=(action 'click')
         priority='confirm'
         size='small'
         text='Action'

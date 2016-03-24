@@ -12,7 +12,7 @@ Modify your `ember-cli-build.js` to include:
 const app = new EmberAddon(defaults, {
     sassOptions: {
       includePaths: [
-        'node_modules/ember-frost-core/styles/addon'
+        'node_modules/ember-frost-core/styles'
       ]
     }
   })
@@ -22,10 +22,11 @@ Modify your `app.scss` to include
 
 
 ```sass
-@import 'addon';
+@import 'frost-theme';
+@import 'frost-core';
 ```
 
-You now have access to the theme variables
+You now have access to the theme and core variables
 
 e.g.
 

@@ -216,8 +216,8 @@ export default Ember.Component.extend({
       return true
     }
 
-    if (!this.get('disabled') && _.isFunction(this.attrs['on-click'])) {
-      this.attrs['on-click'](this.get('id'))
+    if (!this.get('disabled') && _.isFunction(this.attrs['onClick'])) {
+      this.attrs['onClick'](this.get('id'))
     }
   })
 })
