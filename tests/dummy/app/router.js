@@ -21,6 +21,9 @@ Router.map(function () {
   this.route('palette')
   this.route('typography')
   this.route('layout')
+  this.route('link', function () {
+    this.route('min', {path: '/min'})
+  })
 })
 
 export default Router

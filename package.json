@@ -29,6 +29,11 @@
       "readme": "frost-textarea.md"
     },
     {
+      "demoName": "link",
+      "frostGuideDirectory": "ui-components/button-controls/link",
+      "readme": "frost-link.md"
+    },
+    {
       "demoName": "palette",
       "frostGuideDirectory": "design-conventions/colors",
       "readme": "frost-css.md"

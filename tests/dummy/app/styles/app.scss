@@ -20,6 +20,10 @@
 pre {
   margin: 0;
 }
+.section-title {
+  font-size: $frost-font-xl;
+  margin-bottom: 15px;
+}
 
 .dummy-body.text-input.field {
   .example .snippet {
@@ -49,7 +53,12 @@ pre {
   }
 }
 
-
+.dummy-body.link {
+  .example .snippet {
+    width: 305px;
+    margin: 5px 0 10px 0;
+  }
+}
 
 .title {
   padding-bottom: 10px;
