@@ -1,0 +1,287 @@
+@import 'node_modules/ember-frost-theme/scss/frost-theme';
+
+@mixin button-color ($color) {
+  color: $color;
+  svg * {
+    stroke: $color;
+    fill: $color;
+  }
+}
+
+$frost-color-button-primary-active: $frost-color-blue-4; // TODO move to ember-frost-theme
+
+.frost-button {
+  padding: 0;
+  border: none;
+  border-radius: 2px;
+  background-color: transparent;
+  color: $frost-color-white;
+  cursor: pointer;
+
+  &:focus, &:active {
+    outline: none;
+  }
+
+  &:focus {
+    box-shadow: 0px 1px 6px transparentize($frost-color-blue-1, .25)
+  }
+
+  &.disabled {
+    opacity: 0.25;
+  }
+
+  &.hidden {
+    visibility: hidden;
+  }
+
+  // Function based coloring
+  &.primary {
+    background-color: $frost-color-button-primary-bg;
+    @include button-color($frost-color-button-primary);
+
+    &:hover {
+      background-color: $frost-color-button-primary-hover-bg;
+    }
+
+    &:focus {
+      border: solid 2px $frost-color-blue-4;
+    }
+
+    &.disabled:hover {
+      background-color: $frost-color-button-primary-bg;
+      box-shadow: none;
+    }
+
+    &:active {
+      background-color: $frost-color-button-primary-bg;
+      @include button-color($frost-color-button-primary-active);
+    }
+  }
+
+  &.secondary {
+    border: 2px solid $frost-color-button-secondary-border;
+    background-color: $frost-color-button-secondary-bg;
+    @include button-color($frost-color-button-secondary);
+
+    &:hover {
+      background-color: transparentize($frost-color-blue-1, .9);
+    }
+
+    &.disabled:hover {
+      background-color: $frost-color-button-secondary-bg;
+      box-shadow: none;
+    }
+
+    &:active {
+      background-color: $frost-color-button-secondary-active-bg;
+      @include button-color($frost-color-button-secondary-active);
+    }
+  }
+
+  &.tertiary {
+    background-color: $frost-color-button-tertiary-bg;
+    @include button-color($frost-color-button-tertiary);
+
+    &:hover {
+      background-color: $frost-color-button-tertiary-hover-bg;
+    }
+
+    &:focus {
+      border: 1px solid $frost-color-blue-4;
+    }
+
+    &.disabled:hover {
+      background-color: $frost-color-button-tertiary-bg;
+    }
+
+    &:active {
+      @include button-color($frost-color-button-tertiary-active);
+    }
+  }
+
+  // Sizes
+  &.extra-large {
+    height: 60px;
+    padding: 0 30px 0 15px;
+    font-size: $frost-font-m;
+
+    .frost-icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &.large {
+    height: 50px;
+    padding: 0 20px;
+    font-size: $frost-font-m;
+
+    .frost-icon {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &.medium {
+    height: 40px;
+    padding: 0 20px;
+    font-size: $frost-font-s;
+
+    .frost-icon {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  &.small {
+    height: 30px;
+    padding: 0 10px;
+    font-size: $frost-font-xs;
+
+    .frost-icon {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  // Design - 'tab'
+  &.tab {
+    height: 35px;
+    padding: 0 15px;
+    box-shadow: none;
+    cursor: default;
+
+    .text {
+      font-family: $frost-font-family;
+      font-size: $frost-font-m;
+      color: $frost-color-grey-5;
+    }
+
+    &:hover {
+      background-color: $frost-color-button-tertiary-hover-bg;
+    }
+  }
+
+  // Content - text
+  &.text {
+    // Deprecated format
+    vertical-align: middle;
+  }
+
+  > .text {
+    vertical-align: middle;
+  }
+
+  // Content - icon
+  &.icon {
+    // Deprecated format
+    display: inline-flex;
+  }
+
+  > .icon {
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  // Content - text-info
+  > .icon-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .text {
+      margin-left: 10px;
+    }
+  }
+
+  &:active {
+    > .info {
+      background-color: $frost-color-button-primary-bg;
+      @include button-color($frost-color-button-primary-active);
+      .content .text, .content .subtext {
+        color: $frost-color-button-primary-active;
+      }
+    }
+  }
+
+  // Content - info
+  > .info {
+    display: flex;
+    align-items: center;
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding-left: 10px;
+
+      .text {
+        font-size: $frost-font-m;
+        color: $frost-color-button-primary;
+      }
+
+      .subtext {
+        font-size: $frost-font-xs;
+        color: rgba($frost-color-white, 0.8);
+      }
+    }
+  }
+
+  &.vertical {
+    height: auto;
+
+    &.extra-large {
+      padding: 19px 15px;
+
+      .icon {
+        height: 22px;
+      }
+    }
+
+    &.large {
+      padding: 16px 20px;
+
+      .icon {
+        height: 18px;
+      }
+    }
+
+    &.medium {
+      padding: 13px 20px;
+
+      .icon {
+        height: 14px;
+      }
+    }
+
+    &.small {
+      padding: 9px 10px;
+
+      .icon {
+        height: 12px;
+      }
+    }
+
+    .frost-icon + .content,
+    .frost-icon + .text {
+      margin-top: 8px;
+    }
+
+    .info {
+      flex-direction: column;
+
+      .content {
+        padding-left: 0px;
+      }
+    }
+
+    .icon-text {
+      flex-direction: column;
+
+      .text {
+        margin-left: 0;
+      }
+    }
+  }
+}

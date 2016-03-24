@@ -14,6 +14,7 @@ Router.map(function () {
   this.route('demo', { path: '/' })
   this.route('checkbox')
   this.route('icons')
+  this.route('button')
   this.route('field')
   this.route('area')
   this.route('password')

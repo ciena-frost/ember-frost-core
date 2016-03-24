@@ -1,0 +1,24 @@
+{{#if isTextOnly}}
+  <div class="text">{{text}}</div>
+{{/if}}
+{{#if isIconOnly}}
+  <div class="icon">
+    {{frost-icon icon=icon}}
+  </div>
+{{/if}}
+{{#if isIconAndText}}
+  <div class="icon-text text">
+    {{frost-icon icon=icon}}
+    <div class="text">{{text}}</div>
+  </div>
+{{/if}}
+{{#if isInfo}}
+  <div class="info">
+    {{frost-icon icon=icon}}
+    <div class='content'>
+      <div class='text'>{{text}}</div>
+      <div class='subtext'>{{subtext}}</div>
+    </div>
+  </div>
+{{/if}}
+{{yield}}
