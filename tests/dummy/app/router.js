@@ -14,10 +14,9 @@ Router.map(function () {
   this.route('demo', { path: '/' })
   this.route('checkbox')
   this.route('icons')
-//  this.route('text-input', function () {
-//    this.route('field', { path: '/field' })
-//    this.route('area', { path: '/area' })
-//  })
+  this.route('field')
+  this.route('area')
+  this.route('password')
 })
 
 export default Router
