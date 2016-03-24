@@ -31,12 +31,17 @@
     {
       "demoName": "palette",
       "frostGuideDirectory": "design-conventions/colors",
-      "readme": "frost-theme.md"
+      "readme": "frost-css.md"
     },
     {
       "demoName": "typography",
       "frostGuideDirectory": "design-conventions/typography",
-      "readme": "frost-theme.md"
+      "readme": "frost-css.md"
+    },
+    {
+      "demoName": "layout",
+      "frostGuideDirectory": "design-conventions/layout",
+      "readme": "frost-css.md"
     }
   ],
   "directories": {
@@ -75,9 +80,6 @@
     "ember-data": "~2.3.0",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
-    "ember-frost-css-core": "^1.0.0",
-    "ember-frost-link": "1.3.1",
-    "ember-frost-theme": "1.4.5",
     "ember-load-initializers": "^0.5.0",
     "ember-lodash": "~0.0.6",
     "ember-resolver": "^2.0.3",

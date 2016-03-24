@@ -1,29 +1,32 @@
 <div class="dummy-body">
   <div class="title">frost-core</div>
 
-  <li class='list-item'>
-    {{#frost-link 'button'}}Button{{/frost-link}}
+ <li class='list-item'>
+    {{!#frost-link 'button'}}Button{{!/frost-link}}
   </li>
   <li class='list-item'>
-    {{#frost-link 'checkbox'}}Checkbox{{/frost-link}}
+    {{!#frost-link 'checkbox'}}Checkbox{{!/frost-link}}
   </li>
   <li class='list-item'>
-    {{#frost-link 'icons'}}Icons{{/frost-link}}
+    {{!#frost-link 'icons'}}Icons{{!/frost-link}}
   </li>
   <li class='list-item'>
-    {{#frost-link 'field'}}Text input field{{/frost-link}}
+    {{!#frost-link 'field'}}Text input field{{!/frost-link}}
   </li>
   <li class='list-item'>
-    {{#frost-link 'area'}}Text input area{{/frost-link}}
+    {{!#frost-link 'area'}}Text input area{{!/frost-link}}
   </li>
   <li class='list-item'>
-    {{#frost-link 'password'}}Password{{/frost-link}}
+    {{#link-to 'password'}}Password{{/link-to}}
   </li>
   <li class='list-item'>
-    {{#frost-link 'palette'}}Color palette{{/frost-link}}
+    {{#link-to 'palette'}}Color palette{{/link-to}}
   </li>
   <li class='list-item'>
-    {{#frost-link 'typography'}}Typography{{/frost-link}}
+    {{#link-to 'typography'}}Typography{{/link-to}}
+  </li>
+  <li class='list-item'>
+    {{#link-to 'layout'}}Layout{{/link-to}}
   </li>
 </div>
 {{outlet}}

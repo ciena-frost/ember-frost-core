@@ -20,6 +20,7 @@ Router.map(function () {
   this.route('password')
   this.route('palette')
   this.route('typography')
+  this.route('layout')
 })
 
 export default Router

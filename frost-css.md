@@ -1,6 +1,6 @@
 # ember-frost-theme
 
-SASS based default theme variables for Frost projects
+SASS based normalization and default theme variables for Frost projects
 
 # Usage
 
@@ -12,7 +12,7 @@ Modify your `ember-cli-build.js` to include:
 const app = new EmberAddon(defaults, {
     sassOptions: {
       includePaths: [
-        'node_modules/ember-frost-theme/scss'
+        'node_modules/ember-frost-core/styles/addon'
       ]
     }
   })
@@ -22,7 +22,7 @@ Modify your `app.scss` to include
 
 
 ```sass
-@import 'frost-theme';
+@import 'addon';
 ```
 
 You now have access to the theme variables

@@ -1,0 +1,25 @@
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+}
+
+.wrapper > * {
+  padding: 10px;
+  flex-basis: 100%;
+}
+
+.main {
+  text-align: left;
+  background: deepskyblue;
+}
+
+.aside-1 {
+  background: gold;
+  flex-basis: auto;
+}
+
+.aside-2 {
+  background: hotpink;
+  flex-basis: auto;
+}

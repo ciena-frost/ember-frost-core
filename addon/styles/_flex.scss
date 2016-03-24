@@ -1,0 +1,11 @@
+html,
+body,
+body > .ember-view {
+  height: 100%; // 100% height is used for vertical flexbox
+}
+
+@for $x from 1 through 11 {
+  .frost-flex-#{$x} {
+    flex: (#{$x});
+  }
+}
