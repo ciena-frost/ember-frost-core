@@ -1,172 +1,154 @@
-<div class="section">
-  <div class="title">frost-checkbox</div>
-  <div class="example">
-    <div class="title">Basic</div>
-    <div class="snippet">
-{{format-markdown "```handlebars
-{{frost-checkbox id='basic'}}
-```"
-}}
-    </div>
-    <div class="demo">
-      {{frost-checkbox id="basic"}}
-    </div>
-  </div>
+<div class="dummy-notification-container">
+{{#each notifications as |notification|}}
+  {{notification-message notification=notification}}
+{{/each}}
+</div>
 
-  <div class="example">
-    <div class="title">Label</div>
-    <div class="snippet">
-{{format-markdown "```handlebars
+<div class='dummy-body text-input field'>
+  <div class='section'>
+
+    <div class='example'>
+      <div class='title'>Basic</div>
+      <div class='demo'>
+        {{frost-checkbox}}
+      </div>
+      <div class='snippet'>
+        {{format-markdown
+"```handlebars
+{{frost-checkbox}}
+```"}}
+      </div>
+    </div>
+
+   <div class='example'>
+      <div class='title'>Size</div>
+      <div class='demo'>
+        {{frost-checkbox size='large'}}
+      </div>
+      <div class='snippet'>
+        {{format-markdown
+"```handlebars
 {{frost-checkbox
-  id='label'
+  size='large'
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>Label</div>
+      <div class='demo'>
+        {{frost-checkbox label='label'}}
+      </div>
+      <div class='snippet'>
+        {{format-markdown
+"```handlebars
+{{frost-checkbox
   label='label'
 }}
-```"
-      }}
+```"}}
+      </div>
     </div>
-    <div class="demo">
-      {{frost-checkbox
-        id='label'
-        label='label'
-      }}
+
+    <div class='example'>
+      <div class='title'>Autofocus</div>
+      <div class='demo'>
+        {{frost-checkbox autofocus='true'}}
+      </div>
+      <div class='snippet'>
+        {{format-markdown
+"```handlebars
+{{frost-checkbox
+  autofocus='true'
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>Checked</div>
+      <div class='demo'>
+        {{frost-checkbox checked='true'}}
+      </div>
+      <div class='snippet'>
+        {{format-markdown
+"```handlebars
+{{frost-checkbox
+  checked='true'
+}}
+```"}}
+      </div>
+    </div>
+
+
+
+    <div class='example'>
+      <div class='title'>Disabled - checked</div>
+      <div class='demo'>
+        {{frost-checkbox disabled='true' checked='true'}}
+      </div>
+      <div class='snippet'>
+        {{format-markdown
+"```handlebars
+{{frost-checkbox
+  disabled='true'
+  checked='true'
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>Disabled - not checked</div>
+      <div class='demo'>
+        {{frost-checkbox disabled='true'}}
+      </div>
+      <div class='snippet'>
+        {{format-markdown
+"```handlebars
+{{frost-checkbox
+  disabled='true'
+}}
+```"}}
+      </div>
+    </div>
+
+   <div class='example'>
+      <div class='title'>Error</div>
+      <div class='demo'>
+        {{frost-checkbox class='error'}}
+      </div>
+      <div class='snippet'>
+        {{format-markdown
+"```handlebars
+{{frost-checkbox
+  class='error'
+}}
+```"}}
+      </div>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class='section'>
+
+    <div class="example">
+      <div class="title">Events: onInput</div>
+      <div class="demo">
+        {{frost-checkbox onInput=(action 'onInputHandler')
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-text
+  onInput=(action 'onInputHandler')
+}}
+```"
+        }}
+      </div>
     </div>
   </div>
 
-  <div class="example">
-    <div class="title">Autofocus</div>
-    <div class="snippet">
-{{format-markdown "```handlebars
-{{frost-checkbox
-  id='autofocus'
-  autofocus=true
-  label='autofocus'
-}}
-```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-checkbox
-        id='autofocus'
-        autofocus=true
-        label='autofocus'
-      }}
-    </div>
-  </div>
-
-  <div class="example">
-    <div class="title">Checked</div>
-    <div class="snippet">
-{{format-markdown "```handlebars
-{{frost-checkbox
-  id='checked'
-  checked=true
-  label='Checked'
-}}
-```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-checkbox
-        id='checked'
-        checked=true
-        label='Checked'
-      }}
-    </div>
-  </div>
-
-  <div class="example">
-    <div class="title">Disabled</div>
-    <div class="snippet">
-{{format-markdown "```handlebars
-{{frost-checkbox
-  id='disabled'
-  disabled=true
-  checked=true
-  label='disabled'
-}}
-```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-checkbox
-        id="disabled"
-        disabled=true
-        checked=true
-        label='disabled'
-      }}
-    </div>
-  </div>
-
-  <div class="example">
-    <div class="title">Name</div>
-    <div class="snippet">
-{{format-markdown "```handlebars
-{{frost-checkbox
-  id='name'
-  name='name'
-  label='name'
-}}
-```"
-}}
-    </div>
-    <div class="demo">
-      {{frost-checkbox
-        id='name'
-        name='name'
-        label='name'
-      }}
-    </div>
-  </div>
-
-  <div class="example">
-    <div class="title">onInput event</div>
-    <div class="snippet">
-{{format-markdown "```handlebars
-{{frost-checkbox
-  id='value'
-  onInput=(action 'value')
-  label='value'
-}}
-```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-checkbox
-        id='value'
-        onInput=(action 'value')
-        label='value'
-      }}
-    </div>
-  </div>
-
-  <div class="example">
-    <div class="title">Error</div>
-    <div class="snippet">
-{{format-markdown "```handlebars
-{{frost-checkbox
-  id='errored'
-  classNameBindings='error'
-  value='value'
-  onInput=(action 'value')
-  label='errored'
-}}
-```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-checkbox
-        id='errored'
-        classNameBindings='error'
-        value='value'
-        onInput=(action 'value')
-        label='errored'
-      }}
-      {{#frost-button
-        class="small secondary"
-        on-click=(action "toggleError")
-      }}
-        <div class="text">Toggle error</div>
-      {{/frost-button}}
-    </div>
-  </div>
 </div>

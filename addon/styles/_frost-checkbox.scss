@@ -1,0 +1,108 @@
+@import 'node_modules/ember-frost-theme/scss/frost-theme';
+
+.frost-checkbox {
+  display: inline-block;
+  position: relative;
+
+  &.error {
+    > .label::before {
+      border: 1px solid $frost-color-input-error-border;
+    }
+  }
+
+   &.small {
+    > .label::before  {
+      width: 20px;
+      height: 20px;
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+  }
+
+  &.medium {
+    > .label::before {
+      width: 25px;
+      height: 25px;
+    }
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  &.large {
+    > .label::before {
+      width: 30px;
+      height: 30px;
+    }
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  .input[type=checkbox] {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      outline: none;
+      display: none;
+  }
+
+  .label {
+    display: inline-block;
+    position: relative;
+    font-size: $frost-font-s;
+    color: $frost-color-grey-5;
+    user-select: none;
+    cursor: pointer;
+
+    &::before {
+      display: inline-block;
+      position: relative;
+      background-image: linear-gradient($frost-color-white, $frost-color-input-disabled-bg);
+      margin-right: 5px;
+      border: 1px solid $frost-color-grey-6;
+      vertical-align: middle;
+      content: "";
+    }
+  }
+
+  input[disabled] + .label::before {
+    border: 1px solid $frost-color-lgrey-1;
+    background-image: linear-gradient($frost-color-input-disabled-bg, $frost-color-input-disabled-bg);
+  }
+
+  input:not([disabled]) + .label.label:hover::before {
+    background-image: linear-gradient(lighten($frost-color-blue-1, 50%), lighten($frost-color-blue-1, 45%));
+  }
+
+  svg {
+    visibility: hidden;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    fill: $frost-color-blue-1;
+  }
+
+  .input {
+    &:checked + .label svg {
+      visibility: visible;
+    }
+
+    &:checked:disabled + .label svg {
+      fill: $frost-color-grey-6;
+    }
+
+    &:focus + .label::before {
+      background-image: linear-gradient(lighten($frost-color-blue-1, 50%), lighten($frost-color-blue-1, 45%));
+      border: 1px solid $frost-color-grey-5;
+    }
+  }
+}
