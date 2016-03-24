@@ -22,10 +22,11 @@ Modify your `app.scss` to include
 
 
 ```sass
-@import 'addon';
+@import 'frost-theme';
+@import 'frost-core';
 ```
 
-You now have access to the theme variables
+You now have access to the theme and core variables
 
 e.g.
 
