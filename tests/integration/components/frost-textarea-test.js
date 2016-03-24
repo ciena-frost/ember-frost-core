@@ -35,5 +35,19 @@ describeComponent(
         expect(this.get('input-value')).to.eql('a')
       })
     })
+
+    it('textarea cleared on button click', function () {
+      this.set('input-value', '')
+      this.on('test-action', function (attr) {
+        this.set('input-value', attr.value)
+      })
+
+      this.render(hbs`{{frost-textarea id="clearText" onInput=(action "test-action")}}`)
+      Ember.run(() => this.$('#clearText').val('a').trigger('input'))
+      Ember.run(() => this.$('#clearText .clear').click())
+      Ember.run.next(this, () => {
+        expect(this.get('input-value')).to.eql('')
+      })
+    })
   }
 )
