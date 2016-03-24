@@ -1,5 +1,5 @@
 module.exports = [
-   {
+  {
     id: 'link',
     alias: 'Demo',
     type: 'route',
