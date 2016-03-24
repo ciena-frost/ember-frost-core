@@ -1,15 +1,13 @@
 import Ember from 'ember'
 
 export default Ember.Controller.extend({
+  error: true,
+
   actions: {
-
-    toggleError () {
-      this.toggleProperty('error')
-    },
-
-    value (attrs) {
+    onInputHandler (attrs) {
+      console.log('checkbox value: ' + attrs.value)
       this.notifications.addNotification({
-        message: attrs.id + ' - ' + attrs.value,
+        message: "value: '" + attrs.value + "'",
         type: 'success',
         autoClear: true,
         clearDuration: 2000

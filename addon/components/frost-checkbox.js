@@ -5,10 +5,24 @@ import _ from 'lodash/lodash'
 export default Ember.Component.extend({
   layout: layout,
   classNames: ['frost-checkbox'],
+  classNameBindings: ['size'],
 
   didInitAttrs () {
     const checked = this.attrs ? this.attrs.checked : false
     this.set('isChecked', checked)
+
+    const checkboxSize = this.get('size')
+    switch (checkboxSize) {
+      case 'large':
+        this.set('size', 'large')
+        break
+      case 'medium':
+        this.set('size', 'medium')
+        break
+      default:
+        this.set('size', 'small')
+        break
+    }
   },
 
   didInsertElement () {
