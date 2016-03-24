@@ -1,6 +1,9 @@
 # ember-frost-icons
 A collection of icons for frost
 
+ * [API](#api)
+ * [Examples](#examples)
+ 
 ## API
 
 | Name   | Description |

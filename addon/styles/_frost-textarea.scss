@@ -8,6 +8,7 @@
 
   > textarea {
     padding: 5px;
+    padding-right: 30px;
     border: 1px solid $frost-color-input-border;
     font-size: $frost-font-s;
     color: $frost-color-grey-1;
@@ -25,9 +26,8 @@
       outline: none;
     }
 
-    &:hover:enabled:read-write {
-      margin: -1px;
-      border: 2px solid $frost-color-input-focus-border;
+    &:hover:enabled:read-write:not(:focus) {
+      border: 1px solid $frost-color-input-focus-border;
       outline: none;
     }
 
@@ -42,7 +42,8 @@
   }
 
   .clear {
-    margin: 3px 0 0 -37px;
+    z-index: 1;
+    margin: 5px 0 0 -45px;
     width: 35px;
     > svg {
       height: 26px;
