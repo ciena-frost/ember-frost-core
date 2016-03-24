@@ -14,7 +14,7 @@
       "readme": "frost-icons.md"
     },
     {
-      "demoName": "text-input",
+      "demoName": "field",
       "frostGuideDirectory": "ui-components/input-controls/text",
       "readme": "frost-text.md"
     }
