@@ -1,16 +1,13 @@
-# ember-frost-text
+# ember-frost-password
 
  * [API](#api)
  * [Examples](#examples)
  
 ## API
-
 | Attribute | Type | Value | Description |
 | --------- | ---- | ----- | ----------- |
-| `autofocus` |`boolean` | `false` | **default**: Nothing to see here, just your average text input |
-| | | `true` | Look at me! |
-| `align` |`string` | `right` | Right align text input |
-| | | `center` | Center align text input |
+| `revealable` | `boolean` | `false` | **default**: Nothing to see here |
+| | | `true` | Make password input revealable |
 | `disabled` | `boolean` | `false` | **default**: Type to your heart's content |
 | | | `true` | :no_entry_sign: Can't update this! :notes: |
 | `onInput` | `string` | `<action-name>` | triggers associated action when the input value is changed |
@@ -18,45 +15,32 @@
 
 ## Examples
 
-### Focus on Input
-```handlebars
-{{frost-text
-  autofocus=true
-}}
-```
-### Align text
-```handlebars
-{{frost-text
-  align='right'
-}}
-```
-
 ### Handle Changes to Value
 ```handlebars
-{{frost-text
+{{frost-password
   onInput=(action 'onInputHandler')
 }}
 ```
 
-### Bind Value
+### Make Password Revealable
 ```handlebars
-{{frost-text
-  value=boundText
+{{frost-password
+  revealable=true
 }}
 ```
 
 ### Disable Input
 ```handlebars
-{{frost-text
+{{frost-password
   disabled=true
-  value="Disabled"
+  value='Disabled'
 }}
 ```
 
-### Make Input Read Only
+### Make Input Read Only Input
 ```handlebars
-{{frost-text
+{{frost-password
   readOnly=true
-  value="Read Only"
+  value='Read Only'
 }}
 ```

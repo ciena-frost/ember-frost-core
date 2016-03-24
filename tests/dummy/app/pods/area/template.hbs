@@ -1,0 +1,137 @@
+<div class="dummy-body textarea">
+  <div class="section">
+    <div class="example">
+        <div class="title">Basic</div>
+        <div class="demo">
+          {{frost-textarea}}
+        </div>
+        <div class="snippet">
+          {{format-markdown "```handlebars
+{{frost-textarea}}
+  ```"
+          }}
+        </div>
+    </div>
+    <div class="example">
+        <div class="title">Autofocus</div>
+        <div class="demo">
+          {{frost-textarea
+            autofocus=true
+          }}
+        </div>
+        <div class="snippet">
+          {{format-markdown "```handlebars
+{{frost-textarea
+  autofocus=true
+}}
+  ```"
+          }}
+        </div>
+    </div>
+    <div class="example">
+        <div class="title">Placeholder</div>
+        <div class="demo">
+          {{frost-textarea
+            placeholder='Text goes here!'
+          }}
+        </div>
+        <div class="snippet">
+          {{format-markdown "```handlebars
+{{frost-textarea
+  placeholder='Text goes here!'
+}}
+  ```"
+          }}
+        </div>
+    </div>
+    <div class="example">
+      <div class="title">Defined number of Columns + Rows</div>
+      <div class="demo">
+        {{frost-textarea
+          cols="80"
+          rows="6"
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-textarea
+  cols='80'
+  rows='6'
+}}
+```"
+        }}
+      </div>
+    </div>
+    <div class="example">
+      <div class="title">Disabled</div>
+      <div class="demo">
+        {{frost-textarea
+          disabled=true
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-textarea
+  disabled=true
+}}
+```"
+        }}
+      </div>
+    </div>
+    <div class="example">
+      <div class="title">Error</div>
+      <div class="demo">
+        {{frost-textarea
+          class='error'
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-textarea
+  class='error'
+}}
+```"
+        }}
+      </div>
+    </div>
+    <div class="example">
+      <div class="title">Read-only</div>
+      <div class="demo">
+        {{frost-textarea
+          readonly=true
+          value="Read only textarea"
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-textarea
+  readonly=true
+  value='Read only textarea'
+}}
+```"
+        }}
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class='section'>
+    <div class="example">
+      <div class="title">Events: onInput</div>
+      <div class="demo">
+        {{frost-textarea
+          onInput=(action "onInputHandler")
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-textarea
+  onInput=(action 'onInputHandler')
+}}
+```"
+        }}
+      </div>
+    </div>
+  </div>
+</div>
