@@ -1,0 +1,58 @@
+@import 'node_modules/ember-frost-theme/scss/frost-theme';
+
+.frost-textarea {
+  display: flex;
+  align-items: flex-start;
+  &.error > textarea {
+    border: 1px solid $frost-color-input-error-border;
+    color: $frost-color-danger;
+  }
+
+  > textarea {
+    padding: 5px;
+    padding-right: 30px;
+    border: 1px solid $frost-color-input-border;
+    font-size: $frost-font-s;
+    color: $frost-color-grey-1;
+    resize: none;
+
+
+    &:disabled {
+      border: 1px solid $frost-color-input-disabled-border;
+      background: $frost-color-input-disabled-bg;
+    }
+
+    &:focus {
+      margin: -1px;
+      border: 2px solid $frost-color-input-focus-border;
+      outline: none;
+    }
+
+    &:hover:enabled:read-write:not(:focus) {
+      border: 1px solid $frost-color-input-focus-border;
+      outline: none;
+    }
+
+    &:read-only {
+      border: none;
+      cursor: default;
+    }
+  }
+
+  .frost-button:focus {
+    box-shadow: none;
+  }
+
+  .clear {
+    z-index: 1;
+    margin: 5px 0 0 -45px;
+    width: 35px;
+    > svg {
+      height: 26px;
+      fill: $frost-color-grey-6;
+      cursor: pointer;
+     }
+
+  }
+
+}

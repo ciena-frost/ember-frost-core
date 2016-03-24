@@ -1,5 +1,8 @@
 # ember-frost-password
 
+ * [API](#api)
+ * [Examples](#examples)
+ 
 ## API
 | Attribute | Type | Value | Description |
 | --------- | ---- | ----- | ----------- |
@@ -15,7 +18,7 @@
 ### Handle Changes to Value
 ```handlebars
 {{frost-password
-  onInput=(action 'closure')
+  onInput=(action 'onInputHandler')
 }}
 ```
 

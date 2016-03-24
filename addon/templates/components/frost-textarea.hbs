@@ -1,0 +1,16 @@
+{{textarea
+  autofocus=autofocus
+  cols=cols
+  disabled=disabled
+  form=form
+  value=value
+  placeholder=placeholder
+  readonly=readonly
+  rows=rows
+  wrap=wrap
+}}
+{{#if showClear}}
+  {{#frost-button class='clear' type='icon' on-click=(action 'clear')}}
+    {{frost-icon  icon='frost/close'}}
+  {{/frost-button}}
+{{/if}}

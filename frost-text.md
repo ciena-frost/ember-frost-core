@@ -1,4 +1,8 @@
 # ember-frost-text
+
+ * [API](#api)
+ * [Examples](#examples)
+ 
 ## API
 
 | Attribute | Type | Value | Description |
@@ -30,7 +34,7 @@
 ### Handle Changes to Value
 ```handlebars
 {{frost-text
-  onInput=(action 'closure')
+  onInput=(action 'onInputHandler')
 }}
 ```
 
