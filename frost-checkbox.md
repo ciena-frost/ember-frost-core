@@ -48,7 +48,7 @@
 
 ```
 {{frost-checkbox
-  autofocus='true'
+  autofocus=true
 }}
 ```
 
@@ -56,7 +56,7 @@
 
 ```
 {{frost-checkbox
-  checked='true'
+  checked=true
 }}
 ```
 
@@ -64,15 +64,15 @@
 
 ```
 {{frost-checkbox
-  disabled='true'
-  checked='true'
+  disabled=true
+  checked=true
 }}
 ```
 ### Disabled - not checked
 
 ```
 {{frost-checkbox
-  disabled='true'
+  disabled=true
 }}
 ```
 

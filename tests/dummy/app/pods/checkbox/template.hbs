@@ -4,7 +4,7 @@
 {{/each}}
 </div>
 
-<div class='dummy-body text-input field'>
+<div class='dummy-body checkbox'>
   <div class='section'>
 
     <div class='example'>
@@ -20,8 +20,38 @@
       </div>
     </div>
 
+  <div class='example'>
+      <div class='title'>Size - small</div>
+      <div class='demo'>
+        {{frost-checkbox size='small'}}
+      </div>
+      <div class='snippet'>
+        {{format-markdown
+"```handlebars
+{{frost-checkbox
+  size='small'
+}}
+```"}}
+      </div>
+    </div>
+
+  <div class='example'>
+      <div class='title'>Size - medium</div>
+      <div class='demo'>
+        {{frost-checkbox size='medium'}}
+      </div>
+      <div class='snippet'>
+        {{format-markdown
+"```handlebars
+{{frost-checkbox
+  size='medium'
+}}
+```"}}
+      </div>
+    </div>
+
    <div class='example'>
-      <div class='title'>Size</div>
+      <div class='title'>Size - large</div>
       <div class='demo'>
         {{frost-checkbox size='large'}}
       </div>
@@ -53,13 +83,13 @@
     <div class='example'>
       <div class='title'>Autofocus</div>
       <div class='demo'>
-        {{frost-checkbox autofocus='true'}}
+        {{frost-checkbox autofocus=true}}
       </div>
       <div class='snippet'>
         {{format-markdown
 "```handlebars
 {{frost-checkbox
-  autofocus='true'
+  autofocus=true
 }}
 ```"}}
       </div>
@@ -68,13 +98,13 @@
     <div class='example'>
       <div class='title'>Checked</div>
       <div class='demo'>
-        {{frost-checkbox checked='true'}}
+        {{frost-checkbox checked=true}}
       </div>
       <div class='snippet'>
         {{format-markdown
 "```handlebars
 {{frost-checkbox
-  checked='true'
+  checked=true
 }}
 ```"}}
       </div>
@@ -85,14 +115,14 @@
     <div class='example'>
       <div class='title'>Disabled - checked</div>
       <div class='demo'>
-        {{frost-checkbox disabled='true' checked='true'}}
+        {{frost-checkbox disabled=true checked=true}}
       </div>
       <div class='snippet'>
         {{format-markdown
 "```handlebars
 {{frost-checkbox
-  disabled='true'
-  checked='true'
+  disabled=true
+  checked=true
 }}
 ```"}}
       </div>
@@ -101,13 +131,13 @@
     <div class='example'>
       <div class='title'>Disabled - not checked</div>
       <div class='demo'>
-        {{frost-checkbox disabled='true'}}
+        {{frost-checkbox disabled=true}}
       </div>
       <div class='snippet'>
         {{format-markdown
 "```handlebars
 {{frost-checkbox
-  disabled='true'
+  disabled=true
 }}
 ```"}}
       </div>
