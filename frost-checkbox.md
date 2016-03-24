@@ -88,7 +88,7 @@ A check in a box, a checkbox
 ### Events - onInput
 
 ```
-{{frost-text
+{{frost-checkbox
   onInput=(action 'onInputHandler')
 }}
 ```
