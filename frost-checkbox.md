@@ -25,13 +25,13 @@ A check in a box, a checkbox
 
 ### Basic
 
-```
+```handlebars
 {{frost-checkbox}}
 ```
 
 ### Size
 
-```
+```handlebars
 {{frost-checkbox
   size='large'
 }}
@@ -39,7 +39,7 @@ A check in a box, a checkbox
 
 ### Label
 
-```
+```handlebars
 {{frost-checkbox
   label='label'
 }}
@@ -47,7 +47,7 @@ A check in a box, a checkbox
 
 ### Autofocus
 
-```
+```handlebars
 {{frost-checkbox
   autofocus=true
 }}
@@ -55,7 +55,7 @@ A check in a box, a checkbox
 
 ### Checked
 
-```
+```handlebars
 {{frost-checkbox
   checked=true
 }}
@@ -63,7 +63,7 @@ A check in a box, a checkbox
 
 ### Disabled - checked
 
-```
+```handlebars
 {{frost-checkbox
   disabled=true
   checked=true
@@ -71,7 +71,7 @@ A check in a box, a checkbox
 ```
 ### Disabled - not checked
 
-```
+```handlebars
 {{frost-checkbox
   disabled=true
 }}
@@ -79,7 +79,7 @@ A check in a box, a checkbox
 
 ### Error
 
-```
+```handlebars
 {{frost-checkbox
   class='error'
 }}
@@ -87,8 +87,8 @@ A check in a box, a checkbox
 
 ### Events - onInput
 
-```
-{{frost-text
+```handlebars
+{{frost-checkbox
   onInput=(action 'onInputHandler')
 }}
 ```

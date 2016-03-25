@@ -4,7 +4,8 @@ export default Ember.Controller.extend({
   vertical: false,
 
   actions: {
-    click () {
+    onClickHandler () {
+      console.log('button clicked')
       this.notifications.addNotification({
         message: 'Action sent',
         type: 'success',

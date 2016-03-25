@@ -1,381 +1,390 @@
 <div class="dummy-notification-container">
-  {{#each notifications as |notification|}}
-      {{notification-message notification=notification}}
-  {{/each}}
+{{#each notifications as |notification|}}
+  {{notification-message notification=notification}}
+{{/each}}
 </div>
 
-<h2>frost-button</h2>
-{{#frost-checkbox
-  checked=vertical
-  on-input=(action "toggleVertical")
-}}
-  Vertical
-{{/frost-checkbox}}
 
-<br/>
+<div class='dummy-body button'>
+  <div class='section'>
 
-<div class="section">
-  <div class="example">
-    <div class="title">Primary</div>
-    <div class="code">
-      {{format-markdown "```handlebars
-
-```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-button
-        onClick=(action 'click')
-        priority='confirm'
-        size='small'
-        text='Action'
-        vertical=vertical
-      }}
-    </div>
-  </div>
-
-  <div class="example">
-    <div class="title">Secondary</div>
-    <div class="code">
-      {{format-markdown "```handlebars
+    <div class='example'>
+      <div class='title'>Primary</div>
+      <div class='demo'>
+        {{frost-button
+          priority='primary'
+          size='small'
+          text='Action'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
 {{frost-button
-  on-click=(action 'click')
-  priority='normal'
-  size='small'
-  text='Action'
-  vertical=vertical
-}}
-```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-button
-        on-click=(action 'click')
-        priority='normal'
-        size='small'
-        text='Action'
-        vertical=vertical
-      }}
-    </div>
-  </div>
-
-  <div class="example">
-    <div class="title">Tertiary</div>
-    <div class="code">
-      {{format-markdown "```handlebars
-{{frost-button
-  on-click=(action 'click')
-  priority='cancel'
-  size='small'
-  text='Action'
-  vertical=vertical
-}}
-```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-button
-        on-click=(action 'click')
-        priority='cancel'
-        size='small'
-        text='Action'
-        vertical=vertical
-      }}
-    </div>
-  </div>
-</div>
-
-<div class="section">
-  <div class="example">
-    <div class="title">Small</div>
-    <div class="code">
-      {{format-markdown "```handlebars
-{{frost-button
-  on-click=(action 'click')
   priority='primary'
   size='small'
   text='Action'
-  vertical=vertical
 }}
-```"
-      }}
+```"}}
+      </div>
     </div>
-    <div class="demo">
-      {{frost-button
-        on-click=(action 'click')
-        priority='primary'
-        size='small'
-        text='Action'
-        vertical=vertical
-      }}
-    </div>
-  </div>
 
-  <div class="example">
-    <div class="title">Medium</div>
-    <div class="code">
-      {{format-markdown "```handlebars
+    <div class='example'>
+      <div class='title'>Secondary</div>
+      <div class='demo'>
+        {{frost-button
+          priority='secondary'
+          size='small'
+          text='Action'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
 {{frost-button
-  on-click=(action 'click')
+  priority='secondary'
+  size='small'
+  text='Action'
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>Tertiary</div>
+      <div class='demo'>
+        {{frost-button
+          priority='tertiary'
+          size='small'
+          text='Action'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='tertiary'
+  size='small'
+  text='Action'
+}}
+```"}}
+      </div>
+    </div>
+
+
+
+    <div class='example'>
+      <div class='title'>Size - small</div>
+      <div class='demo'>
+        {{frost-button
+          priority='confirm'
+          size='small'
+          text='Action'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='confirm'
+  size='small'
+  text='Action'
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>Size - medium</div>
+      <div class='demo'>
+        {{frost-button
+          priority='confirm'
+          size='medium'
+          text='Action'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='confirm'
   size='medium'
-  priority='primary'
   text='Action'
-  vertical=vertical
 }}
-```"
-      }}
+```"}}
+      </div>
     </div>
-    <div class="demo">
-      {{frost-button
-        on-click=(action 'click')
-        priority='primary'
-        size='medium'
-        text='Action'
-        vertical=vertical
-      }}
-    </div>
-  </div>
 
-  <div class="example">
-    <div class="title">Large</div>
-    <div class="code">
-      {{format-markdown "```handlebars
+    <div class='example'>
+      <div class='title'>Size - large</div>
+      <div class='demo'>
+        {{frost-button
+          priority='confirm'
+          size='large'
+          text='Action'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
 {{frost-button
-  on-click=(action 'click')
-  priority='primary'
+  priority='confirm'
   size='large'
   text='Action'
-  vertical=vertical
 }}
-```"
-      }}
+```"}}
+      </div>
     </div>
-    <div class="demo">
-      {{frost-button
-        on-click=(action 'click')
-        size='large'
-        priority='primary'
-        text='Action'
-        vertical=vertical
-      }}
-    </div>
-  </div>
-</div>
 
-<div class="section">
-  <div class="example">
-    <div class="title">Icon Small</div>
-    <div class="code">
-      {{format-markdown "```handlebars
+
+    <div class='example'>
+      <div class='title'>Icon - small</div>
+      <div class='demo'>
+        {{frost-button
+          priority='confirm'
+          size='small'
+          icon='frost/add'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
 {{frost-button
-  icon='frost/add'
-  on-click=(action 'click')
-  priority='primary'
+  priority='confirm'
   size='small'
-  vertical=vertical
-}}
-```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-button
-        icon='frost/add'
-        on-click=(action 'click')
-        priority='primary'
-        size='small'
-        vertical=vertical
-      }}
-    </div>
-  </div>
-
-  <div class="example">
-    <div class="title">Icon Medium</div>
-    <div class="code">
-      {{format-markdown "```handlebars
-{{frost-button
   icon='frost/add'
-  on-click=(action 'click')
-  priority='primary'
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>Icon - medium</div>
+      <div class='demo'>
+        {{frost-button
+          priority='confirm'
+          size='medium'
+          icon='frost/add'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='confirm'
   size='medium'
-  vertical=vertical
-}}
-```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-button
-        icon='frost/add'
-        on-click=(action 'click')
-        priority='primary'
-        size='medium'
-        vertical=vertical
-      }}
-    </div>
-  </div>
-
-  <div class="example">
-    <div class="title">Icon Large</div>
-    <div class="code">
-      {{format-markdown "```handlebars
-{{frost-button
   icon='frost/add'
-  on-click=(action 'click')
-  priority='primary'
-  size='large'
-  vertical=vertical
 }}
-```"
-      }}
+```"}}
+      </div>
     </div>
-    <div class="demo">
-      {{frost-button
-        icon='frost/add'
-        on-click=(action 'click')
-        priority='primary'
-        size='large'
-        vertical=vertical
-      }}
-    </div>
-  </div>
-</div>
 
-<div class="section">
-  <div class="example">
-    <div class="title">Disabled</div>
-    <div class="code">
-      {{format-markdown "```handlebars
+    <div class='example'>
+      <div class='title'>Icon - large</div>
+      <div class='demo'>
+        {{frost-button
+          priority='confirm'
+          size='large'
+          icon='frost/add'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
 {{frost-button
+  priority='confirm'
+  size='large'
+  icon='frost/add'
+}}
+```"}}
+      </div>
+    </div>
+
+
+    <div class='example'>
+      <div class='title'>Disabled</div>
+      <div class='demo'>
+        {{frost-button
+          priority='confirm'
+          size='medium'
+          text='Action'
+          disabled=true
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='confirm'
+  size='medium'
+  text='Action'
   disabled=true
-  on-click=(action 'click')
-  priority='primary'
-  size='small'
-  text='Action'
-  vertical=vertical
 }}
-```"
-      }}
+```"}}
+      </div>
     </div>
-    <div class="demo">
-      {{frost-button
-        disabled=true
-        on-click=(action 'click')
-        priority='primary'
-        size='small'
-        text='Action'
-        vertical=vertical
-      }}
-    </div>
-  </div>
 
-  <div class="example">
-    <div class="title">Autofocus</div>
-    <div class="code">
-      {{format-markdown "```handlebars
+
+  <div class='example'>
+      <div class='title'>Autofocus</div>
+      <div class='demo'>
+        {{frost-button
+          priority='confirm'
+          size='medium'
+          text='Action'
+          autofocus=true
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
 {{frost-button
-  autofocus=true
-  on-click=(action 'click')
-  priority='primary'
-  size='small'
+  priority='confirm'
+  size='medium'
   text='Action'
-  vertical=vertical
-}}
-```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-button
-        autofocus=true
-        on-click=(action 'click')
-        priority='primary'
-        size='small'
-        text='Action'
-        vertical=vertical
-      }}
-    </div>
-  </div>
-
-   <div class="example">
-    <div class="title">Design - tab</div>
-    <div class="code">
-      {{format-markdown "```handlebars
-{{frost-button
   autofocus=true
-  on-click=(action 'click')
+}}
+```"}}
+      </div>
+    </div>
+
+
+    <div class='example'>
+      <div class='title'>Icon and Info - horizontal</div>
+      <div class='demo'>
+        {{frost-button
+          priority='confirm'
+          size='extra-large'
+          icon='frost/add'
+          text='Text'
+          subtext='Subtext'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='confirm'
+  size='extra-large'
+  icon='frost/add'
+  text='Text'
+  subtext='Subtext'
+}}
+```"}}
+      </div>
+    </div>
+
+
+    <div class='example'>
+      <div class='title'>Icon and Info - vertical</div>
+      <div class='demo'>
+        {{frost-button
+          priority='confirm'
+          size='extra-large'
+          vertical=true
+          icon='frost/add'
+          text='Text'
+          subtext='Subtext'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='confirm'
+  size='extra-large'
+  vertical=true
+  icon='frost/add'
+  text='Text'
+  subtext='Subtext'
+}}
+```"}}
+      </div>
+    </div>
+
+
+    <div class='example'>
+      <div class='title'>Icon and Text - horizontal</div>
+      <div class='demo'>
+        {{frost-button
+          priority='confirm'
+          size='extra-large'
+          icon='frost/add'
+          text='Text'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='confirm'
+  size='extra-large'
+  icon='frost/add'
+  text='Text'
+}}
+```"}}
+      </div>
+    </div>
+
+
+    <div class='example'>
+      <div class='title'>Icon and Text - vertical</div>
+      <div class='demo'>
+        {{frost-button
+          priority='confirm'
+          size='extra-large'
+          vertical=true
+          icon='frost/add'
+          text='Text'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='confirm'
+  size='extra-large'
+  vertical=true
+  icon='frost/add'
+  text='Text'
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>Design - tab</div>
+      <div class='demo'>
+        {{frost-button
+          design='tab'
+          text='Design Tab'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
   design='tab'
   text='Design Tab'
-  vertical=vertical
 }}
-```"
-      }}
+```"}}
+      </div>
     </div>
-    <div class="demo">
-      {{frost-button
-        autofocus=true
-        on-click=(action 'click')
-        design='tab'
-        text='Design Tab'
-        vertical=vertical
-      }}
-    </div>
+
+
+
   </div>
 
+  <hr>
 
-</div>
+  <div class='section'>
 
-<div class="section">
-  <div class="example">
-    <div class="title">Icon and Info</div>
-    <div class="code">
-      {{format-markdown "```handlebars
+    <div class="example">
+      <div class="title">Events: onClick</div>
+      <div class="demo">
+        {{frost-button
+          priority='confirm'
+          size='medium'
+          text='Action'
+          onClick=(action 'onClickHandler')
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
 {{frost-button
-  icon='frost/add'
-  on-click=(action 'click')
-  priority='primary'
-  size='extra-large'
-  subtext='Subtext'
-  text='Text'
-  vertical=vertical
-}}
-```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-button
-        icon='frost/add'
-        on-click=(action 'click')
-        priority='primary'
-        size='extra-large'
-        subtext='Subtext'
-        text='Text'
-        vertical=vertical
-      }}
-    </div>
-  </div>
-
-  <div class="example">
-    <div class="title">Icon and Text</div>
-    <div class="code">
-      {{format-markdown "```handlebars
-{{frost-button
-  icon='frost/add'
-  on-click=(action 'click')
-  priority='primary'
+  priority='confirm'
   size='medium'
-  text='Text'
-  vertical=vertical
+  text='Action'
+  onClick=(action 'onClickHandler')
 }}
 ```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-button
-        icon='frost/add'
-        on-click=(action 'click')
-        priority='primary'
-        size='medium'
-        text='Text'
-        vertical=vertical
-      }}
+        }}
+      </div>
     </div>
   </div>
+
 </div>
