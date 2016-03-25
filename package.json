@@ -1,12 +1,17 @@
 {
   "name": "ember-frost-core",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "The library of core frost components",
   "frostGuideDirectories": [
     {
       "demoName": "checkbox",
       "frostGuideDirectory": "ui-components/button-controls/checkbox",
       "readme": "frost-checkbox.md"
+    },
+    {
+      "demoName": "button",
+      "frostGuideDirectory": "ui-components/button-controls/button",
+      "readme": "frost-button.md"
     },
     {
       "demoName": "icons",
@@ -27,6 +32,11 @@
       "demoName": "area",
       "frostGuideDirectory": "ui-components/input-controls/text-area",
       "readme": "frost-textarea.md"
+    },
+    {
+      "demoName": "link",
+      "frostGuideDirectory": "ui-components/button-controls/link",
+      "readme": "frost-link.md"
     },
     {
       "demoName": "palette",

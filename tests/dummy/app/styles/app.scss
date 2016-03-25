@@ -1,4 +1,5 @@
-@import 'addon';
+@import 'frost-theme';
+@import 'frost-app';
 @import 'typography';
 @import 'layout';
 
@@ -19,6 +20,10 @@
 }
 pre {
   margin: 0;
+}
+.section-title {
+  font-size: $frost-font-xl;
+  margin-bottom: 15px;
 }
 
 .dummy-body.text-input.field {
@@ -52,6 +57,13 @@ pre {
 .dummy-body.button {
   .example .snippet {
     width: 320px;
+    margin: 5px 0 10px 0;
+  }
+}
+
+.dummy-body.link {
+  .example .snippet {
+    width: 305px;
     margin: 5px 0 10px 0;
   }
 }

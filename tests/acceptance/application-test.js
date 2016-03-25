@@ -91,4 +91,11 @@ describe('Acceptance: Application', function () {
       expect(currentPath()).to.equal('layout')
     })
   })
+  it('can visit /link', function () {
+    visit('/link')
+
+    andThen(function () {
+      expect(currentPath()).to.equal('link.index')
+    })
+  })
 })

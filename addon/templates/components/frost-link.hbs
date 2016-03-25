@@ -1,0 +1,18 @@
+{{#if (eq priority 'primary')}}
+    <div class='content'>
+      {{yield}}
+        <div class='svg'>{{frost-icon icon='frost/new-tab'}}</div>
+    </div>
+{{/if}}
+
+{{#if (eq priority 'secondary')}}
+    <div class='content'>
+      {{yield}}
+    </div>
+{{/if}}
+
+{{#if (eq priority 'tertiary')}}
+    <div class='content'>
+      {{yield}}
+    </div>
+{{/if}}
