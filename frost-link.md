@@ -5,36 +5,68 @@
 ## API
 
 | Attribute | Type | Value | Description |
-| --------- | ---- | ----- | ----------- |
-| `disabled` | `boolean` | `false` | **default**: Click to redirect from one route to another |
-| | | `true` | :no_entry_sign: Can't click this! :notes: |
-| `size` | `string` | `small` | The smallest link you ever did see |
-| | | `medium` | **default**: Not quite as small as `small`, but not very big either |
-| | | `large` | Now *that's* what I call a link! |
-| `priority` | `string` | `primary` | Call-to-action :telephone: |
-| | | `secondary` | **default**: Run of the mill, garden variety  |
-| | | `tertiary` | Low-key, subdued  |
+| --------- | ---- | ----- | ----------- 
+| `priority` | `string` | `primary` | primary link - opens content in a new tab |
+|  |  | `secondary` | secondary link - opens content in the same tab |
+|  |  | `tertiary` | tertiary link - opens content in the same tab |
+|  |  | `action` | action link - opens content in the same tab|
+| `size` | `string` | `small` | small size link |
+|  |  | `medium` | medium size link |
+|  |  | `large` | large size link |
+| `disabled` | `boolean` | `false` | **default** - basic link |
+|  |  | `true` | disabled link |
+| `icon` | `string` | `<icon-name>` | the name of a frost-icon |
 
 
 ## Examples
 
-### Primary small
+### Primary - disabled
 ```handlebars
-{{#frost-link
-  'routename'
+{{#frost-link 'route name'
   priority='primary'
   size='small'
+  disabled=true
 }}
-  <div class='text'>Primary</div>
+  Primary
 {{/frost-link}}
 ```
 
-### Font based on size
+### Primary - medium
 ```handlebars
-{{#frost-link
-  'routename'
-  priority='tertiary'
+{{#frost-link 'route name'
+  priority='primary'
+  size='medium'
 }}
-  <div class='text'>Tertiary</div>
+  Primary
+{{/frost-link}}
+```
+
+### Secondary - large
+```handlebars
+{{#frost-link 'route name'
+  priority='secondary'
+  size='large'
+}}
+  Secondary
+{{/frost-link}}
+```
+
+### Tertiary - medium
+```handlebars
+{{#frost-link 'route name'
+  priority='tertiary'
+  size='medium'
+}}
+  Link one
+{{/frost-link}}
+```
+
+### Action
+```handlebars
+{{#frost-link 'route name'
+  priority='action'
+  icon='frost/infobar-find'
+}}
+  Action
 {{/frost-link}}
 ```

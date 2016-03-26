@@ -12,6 +12,9 @@ function addPriorityClass (priority, classes) {
     case 'tertiary':
       classes.push('tertiary')
       break
+    case 'action':
+      classes.push('action')
+      break
     default:
       // no class to add for invalid priority
       break
@@ -47,9 +50,13 @@ export default Ember.LinkComponent.extend({
     'disabled'
   ],
 
-  priority: 'secondary',
+  priority: '',
 
-  size: 'medium',
+  size: '',
+
+  text: '',
+
+  target: '',
 
   layout,
 
@@ -57,6 +64,11 @@ export default Ember.LinkComponent.extend({
     const classes = []
     addSizeClass(this.get('size'), classes)
     addPriorityClass(this.get('priority'), classes)
+
+    // primary link opens content in a new tab
+    if (classes.indexOf('primary') > -1) {
+      this.set('target', '_blank')
+    }
 
     return classes.join(' ')
   })

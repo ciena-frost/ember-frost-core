@@ -5,15 +5,6 @@ export default Ember.Controller.extend({
   fontSize: 20,
 
   actions: {
-    text (attrs) {
-      this.notifications.addNotification({
-        message: "value: '" + attrs.value + "'",
-        type: 'success',
-        autoClear: true,
-        clearDuration: 2000
-      })
-    },
-
     increase (fontSize) {
       this.set('fontSize', fontSize + 1)
     },
