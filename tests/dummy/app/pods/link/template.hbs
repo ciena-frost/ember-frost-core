@@ -4,30 +4,6 @@
   <div class="section">
 
     <div class="example">
-      <div class="title">Disabled</div>
-      <div class="demo">
-        {{#frost-link 'link.min'
-          priority='primary'
-          size='small'
-          disabled=true
-        }}
-          Primary
-        {{/frost-link}}
-      </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{#frost-link 'link.min'
-  priority='primary'
-  size='small'
-  disabled=true
-}}
-  Primary
-{{/frost-link}}
-```"}}
-      </div>
-    </div>
-
-    <div class="example">
       <div class="title">Small</div>
       <div class="demo">
         {{#frost-link 'link.min'
@@ -86,6 +62,30 @@
 {{#frost-link 'link.min'
   priority='primary'
   size='large'
+}}
+  Primary
+{{/frost-link}}
+```"}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">Disabled</div>
+      <div class="demo">
+        {{#frost-link 'link.min'
+          priority='primary'
+          size='small'
+          disabled=true
+        }}
+          Primary
+        {{/frost-link}}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{#frost-link 'link.min'
+  priority='primary'
+  size='small'
+  disabled=true
 }}
   Primary
 {{/frost-link}}
@@ -101,30 +101,6 @@
   <div class="section">
 
     <div class="example">
-      <div class="title">Disabled</div>
-      <div class="demo">
-        {{#frost-link 'link.min'
-          priority='secondary'
-          size='small'
-          disabled=true
-        }}
-          Secondary
-        {{/frost-link}}
-      </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{#frost-link 'link.min'
-  priority='secondary'
-  size='small'
-  disabled=true
-}}
-  Secondary
-{{/frost-link}}
-```"}}
-      </div>
-    </div>
-
-    <div class="example">
       <div class="title">Small</div>
       <div class="demo">
         {{#frost-link 'link.min'
@@ -190,6 +166,30 @@
       </div>
     </div>
 
+    <div class="example">
+      <div class="title">Disabled</div>
+      <div class="demo">
+        {{#frost-link 'link.min'
+          priority='secondary'
+          size='small'
+          disabled=true
+        }}
+          Secondary
+        {{/frost-link}}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{#frost-link 'link.min'
+  priority='secondary'
+  size='small'
+  disabled=true
+}}
+  Secondary
+{{/frost-link}}
+```"}}
+      </div>
+    </div>
+
   </div>
 
   <hr>
@@ -197,14 +197,13 @@
   <div class="section">
 
     <div class="example">
-      <div class="title">Adjustable font size</div>
+      <div class="title">Size based on font</div>
       <div class="demo">
         <div class='extra-padding'>
           <span style="font-size: {{fontSize}}px">
             Lorem
             {{#frost-link 'link.min'
               priority='tertiary'
-              size='medium'
             }}
               Link one
             {{/frost-link}}
@@ -231,7 +230,6 @@
         {{format-markdown "```handlebars
 {{#frost-link 'link.min'
   priority='tertiary'
-  size='medium'
 }}
   Link one
 {{/frost-link}}
@@ -245,7 +243,6 @@
       <div class="demo">
         {{#frost-link 'link.min'
           priority='tertiary'
-          size='medium'
           disabled=true
         }}
           Link one
@@ -255,7 +252,6 @@
         {{format-markdown "```handlebars
 {{#frost-link 'link.min'
   priority='tertiary'
-  size='medium'
   disabled=true
 }}
   Link one
@@ -269,11 +265,11 @@
   <hr>
   <div class="section-title">Actions</div>
   <div class="section">
-      <div class="example">
+    <div class="example">
       <div class="title">Action</div>
       <div class="demo">
         {{#frost-link 'link.min'
-          priority='action'
+          design='info-bar-action'
           icon='frost/infobar-find'
         }}
           Action
@@ -282,7 +278,7 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{#frost-link 'link.min'
-  priority='action'
+  design='info-bar-action'
   icon='frost/infobar-find'
 }}
   Action

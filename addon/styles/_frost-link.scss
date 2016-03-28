@@ -3,6 +3,10 @@ $frost-color-link-primary-pressed-bg: #1e9de5;
 $frost-color-link-secondary-pressed-bg: #e7eef3;
 $frost-color-link-focus-box-shadow: 0 1px 6px rgba(0,158,239, 0.75);
 
+$frost-color-link-action-bg: $frost-color-white;
+$frost-color-link-action-bg-hover: rgba($frost-color-blue-1, 0.05);
+$frost-color-link-action-focus: 0 1px 6px rgba($frost-color-blue-1, 0.75);
+$frost-color-link-action-active:  rgba($frost-color-blue-1, 0.1);
 
 .frost-link {
   display: inline-block;
@@ -215,23 +219,22 @@ $frost-color-link-focus-box-shadow: 0 1px 6px rgba(0,158,239, 0.75);
     }
 
     .svg {
-      &:not(.action) {
-        margin-left: 10px;
-      }
+      margin-left: 10px;
+
       .frost-icon {
         vertical-align: middle;
       }
     }
   }
 
-  // Action button styling
+  // Link action styling
   &.action {
     display: flex;
     align-items: center;
     flex-direction: column;
     width: 75px;
     height: 75px;
-    background-color: $frost-color-white;
+    background-color: $frost-color-link-action-bg;
     color: $frost-color-blue-1;
 
     .frost-icon  {
@@ -250,8 +253,28 @@ $frost-color-link-focus-box-shadow: 0 1px 6px rgba(0,158,239, 0.75);
       line-height: 1;
     }
 
+    > .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    box-sizing: border-box;
+
+    .text {
+      vertical-align: middle;
+      text-align: center;
+      padding: 0 1px 2px 1px;
+    }
+
+    .svg {
+      .frost-icon {
+        vertical-align: middle;
+      }
+    }
+  }
+
     &:hover {
-      background-color:rgba($frost-color-blue-1, 0.05);
+      background-color: $frost-color-link-action-bg-hover;
       box-shadow: none;
 
       .text{
@@ -262,11 +285,11 @@ $frost-color-link-focus-box-shadow: 0 1px 6px rgba(0,158,239, 0.75);
 
     &:focus{
       outline:0;
-      box-shadow:0 1px 6px rgba($frost-color-blue-1, 0.75);
+      box-shadow: $frost-color-link-action-focus;
     }
 
     &:active {
-      background-color: rgba($frost-color-blue-1, 0.1);
+      background-color: $frost-color-link-action-active;
       opacity: 0.7;
       color: $frost-color-blue-1;
       box-shadow: none;
