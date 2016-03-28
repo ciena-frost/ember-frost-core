@@ -3,6 +3,10 @@ $frost-color-link-primary-pressed-bg: #1e9de5;
 $frost-color-link-secondary-pressed-bg: #e7eef3;
 $frost-color-link-focus-box-shadow: 0 1px 6px rgba(0,158,239, 0.75);
 
+$frost-color-link-action-bg: $frost-color-white;
+$frost-color-link-action-bg-hover: rgba($frost-color-blue-1, 0.05);
+$frost-color-link-action-focus: 0 1px 6px rgba($frost-color-blue-1, 0.75);
+$frost-color-link-action-active:  rgba($frost-color-blue-1, 0.1);
 
 .frost-link {
   display: inline-block;
@@ -121,6 +125,7 @@ $frost-color-link-focus-box-shadow: 0 1px 6px rgba(0,158,239, 0.75);
   &.tertiary {
     background-color: inherit;
     color: $frost-color-blue-1;
+    margin-bottom: -7px;
 
     .text {
       border-bottom-width: 1px;
@@ -215,9 +220,87 @@ $frost-color-link-focus-box-shadow: 0 1px 6px rgba(0,158,239, 0.75);
 
     .svg {
       margin-left: 10px;
+
       .frost-icon {
         vertical-align: middle;
       }
     }
+  }
+
+  // Link action styling
+  &.info-bar {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 75px;
+    height: 75px;
+    background-color: $frost-color-link-action-bg;
+    color: $frost-color-blue-1;
+
+    .frost-icon  {
+      margin-left: -10px;
+      padding-bottom: 0px;
+      width: 40px;
+      height: 40px;
+    }
+
+    .text {
+      display: inline-block;
+      padding: 5px 1px 2px 1px;
+      margin-top: -5px;
+      font-size: $frost-font-s;
+      color: $frost-color-blue-1;
+      line-height: 1;
+    }
+
+    > .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    box-sizing: border-box;
+
+    .text {
+      vertical-align: middle;
+      text-align: center;
+      padding: 0 1px 2px 1px;
+    }
+
+    .svg {
+      .frost-icon {
+        vertical-align: middle;
+      }
+    }
+  }
+
+    &:hover {
+      background-color: $frost-color-link-action-bg-hover;
+      box-shadow: none;
+
+      .text{
+          border-bottom-width: 1px;
+          border-bottom-style: solid;
+        }
+    }
+
+    &:focus{
+      outline:0;
+      box-shadow: $frost-color-link-action-focus;
+    }
+
+    &:active {
+      background-color: $frost-color-link-action-active;
+      opacity: 0.7;
+      color: $frost-color-blue-1;
+      box-shadow: none;
+    }
+  }
+
+  &.separator {
+    border-right: 1px solid $frost-color-lgrey-1;
+  }
+
+  &.space {
+    width: 5px;
   }
 }

@@ -5,36 +5,77 @@
 ## API
 
 | Attribute | Type | Value | Description |
-| --------- | ---- | ----- | ----------- |
-| `disabled` | `boolean` | `false` | **default**: Click to redirect from one route to another |
-| | | `true` | :no_entry_sign: Can't click this! :notes: |
-| `size` | `string` | `small` | The smallest link you ever did see |
-| | | `medium` | **default**: Not quite as small as `small`, but not very big either |
-| | | `large` | Now *that's* what I call a link! |
-| `priority` | `string` | `primary` | Call-to-action :telephone: |
-| | | `secondary` | **default**: Run of the mill, garden variety  |
-| | | `tertiary` | Low-key, subdued  |
+| --------- | ---- | ----- | ----------- 
+| `priority` | `string` | `primary` | primary link - opens content in a new tab |
+|  |  | `secondary` | secondary link - opens content in the same tab |
+|  |  | `tertiary` | tertiary link - opens content in the same tab |
+| `size` | `string` | `small` | small size link |
+|  |  | `medium` | medium size link |
+|  |  | `large` | large size link |
+| `design` | `string` | `info-bar` | custom link styling for the info-bar context.  Requires `icon` to be specified.  Should not be used with `priority` and `size`. |
+| `disabled` | `boolean` | `false` | **default** - basic link |
+|  |  | `true` | disabled link |
+| `icon` | `string` | `<icon-name>` | the name of a frost-icon |
 
 
 ## Examples
 
-### Primary small
+### Primary - small
 ```handlebars
-{{#frost-link
-  'routename'
+{{#frost-link 'route name'
   priority='primary'
   size='small'
 }}
-  <div class='text'>Primary</div>
+  Primary
 {{/frost-link}}
 ```
 
-### Font based on size
+### Primary - medium
 ```handlebars
-{{#frost-link
-  'routename'
+{{#frost-link 'route name'
+  priority='primary'
+  size='medium'
+}}
+  Primary
+{{/frost-link}}
+```
+
+### Secondary - large
+```handlebars
+{{#frost-link 'route name'
+  priority='secondary'
+  size='large'
+}}
+  Secondary
+{{/frost-link}}
+```
+
+### Tertiary - Size based on font
+```handlebars
+{{#frost-link 'route name'
   priority='tertiary'
 }}
-  <div class='text'>Tertiary</div>
+  Link one
+{{/frost-link}}
+```
+
+### Primary - disabled
+```handlebars
+{{#frost-link 'route name'
+  priority='primary'
+  size='small'
+  disabled=true
+}}
+  Primary
+{{/frost-link}}
+```
+
+### Design - info-bar
+```handlebars
+{{#frost-link 'route name'
+  design='info-bar'
+  icon='icon'
+}}
+  Action
 {{/frost-link}}
 ```

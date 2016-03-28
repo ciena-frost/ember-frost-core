@@ -35,6 +35,17 @@ function addSizeClass (size, classes) {
   }
 }
 
+function addDesignClass (design, classes) {
+  switch (design) {
+    case 'info-bar':
+      classes.push('info-bar')
+      break
+    default:
+      // no class to add for invalid design
+      break
+  }
+}
+
 export default Ember.LinkComponent.extend({
   classNames: ['frost-link'],
 
@@ -47,16 +58,45 @@ export default Ember.LinkComponent.extend({
     'disabled'
   ],
 
-  priority: 'secondary',
+  priority: '',
 
-  size: 'medium',
+  icon: '',
+
+  size: '',
+
+  design: '',
+
+  text: '',
+
+  target: '',
 
   layout,
 
   extraClasses: Ember.computed('priority', function () {
     const classes = []
-    addSizeClass(this.get('size'), classes)
-    addPriorityClass(this.get('priority'), classes)
+    addDesignClass(this.get('design'), classes)
+
+    // only add size and priority if design has not been specified
+    if (classes.length === 0) {
+      addSizeClass(this.get('size'), classes)
+      addPriorityClass(this.get('priority'), classes)
+    } else {
+      // design link requires an icon
+      if (this.get('icon') === '') {
+        Ember.Logger.error('Error: The `design` property requires `icon` property to be specified.')
+        return
+      }
+
+      // display warning when design property is used together with size and/or priority
+      if ((this.get('priority') !== '') || (this.get('size') !== '')) {
+        Ember.Logger.warn('Warning: The `design` property takes precedence over `size` and `priority`.')
+      }
+    }
+
+    // primary link opens content in a new tab
+    if (this.get('priority').indexOf('primary') > -1) {
+      this.set('target', '_blank')
+    }
 
     return classes.join(' ')
   })
