@@ -12,9 +12,6 @@ function addPriorityClass (priority, classes) {
     case 'tertiary':
       classes.push('tertiary')
       break
-    case 'action':
-      classes.push('action')
-      break
     default:
       // no class to add for invalid priority
       break
@@ -40,8 +37,8 @@ function addSizeClass (size, classes) {
 
 function addDesignClass (design, classes) {
   switch (design) {
-    case 'info-bar-action':
-      classes.push('action')
+    case 'info-bar':
+      classes.push('info-bar')
       break
     default:
       // no class to add for invalid design
@@ -84,9 +81,6 @@ export default Ember.LinkComponent.extend({
       addSizeClass(this.get('size'), classes)
       addPriorityClass(this.get('priority'), classes)
     } else {
-      // use generic action style for design
-      this.set('design', 'action')
-
       // design link requires an icon
       if (this.get('icon') === '') {
         Ember.Logger.error('Error: The `design` property requires `icon` property to be specified.')
