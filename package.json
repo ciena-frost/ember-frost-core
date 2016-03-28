@@ -1,16 +1,16 @@
 {
   "name": "ember-frost-core",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "The library of core frost components",
   "frostGuideDirectories": [
     {
       "demoName": "checkbox",
-      "frostGuideDirectory": "ui-components/button-controls/checkbox",
+      "frostGuideDirectory": "ui-components/input-fields/checkbox",
       "readme": "frost-checkbox.md"
     },
     {
       "demoName": "button",
-      "frostGuideDirectory": "ui-components/button-controls/button",
+      "frostGuideDirectory": "ui-components/buttons-and-links/button",
       "readme": "frost-button.md"
     },
     {
@@ -20,22 +20,22 @@
     },
     {
       "demoName": "field",
-      "frostGuideDirectory": "ui-components/input-controls/text",
+      "frostGuideDirectory": "ui-components/input-fields/text-field",
       "readme": "frost-text.md"
     },
     {
       "demoName": "password",
-      "frostGuideDirectory": "ui-components/input-controls/password",
+      "frostGuideDirectory": "ui-components/input-fields/password",
       "readme": "frost-password.md"
     },
     {
       "demoName": "area",
-      "frostGuideDirectory": "ui-components/input-controls/text-area",
+      "frostGuideDirectory": "ui-components/input-fields/text-area",
       "readme": "frost-textarea.md"
     },
     {
       "demoName": "link",
-      "frostGuideDirectory": "ui-components/button-controls/link",
+      "frostGuideDirectory": "ui-components/buttons-and-links/link",
       "readme": "frost-link.md"
     },
     {
