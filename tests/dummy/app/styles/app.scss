@@ -90,7 +90,7 @@ pre {
   display: flex;
   flex-direction: row;
   flex-flow: wrap;
-  width: calc(100vw - 250px);
+  width: calc(100% - 250px);
 
   > .title {
     font-size: $frost-font-xl;
