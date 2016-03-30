@@ -1,35 +1,11 @@
 <div class="dummy-body">
   <div class="title">frost-core</div>
-
- <li class='list-item'>
-    {{#link-to 'button'}}Button{{/link-to}}
-  </li>
-  <li class='list-item'>
-    {{#link-to 'checkbox'}}Checkbox{{/link-to}}
-  </li>
-  <li class='list-item'>
-    {{#link-to 'icons'}}Icons{{/link-to}}
-  </li>
-  <li class='list-item'>
-    {{#link-to 'field'}}Text input field{{/link-to}}
-  </li>
-  <li class='list-item'>
-    {{#link-to 'area'}}Text input area{{/link-to}}
-  </li>
-  <li class='list-item'>
-    {{#link-to 'password'}}Password{{/link-to}}
-  </li>
-  <li class='list-item'>
-    {{#link-to 'link'}}Link{{/link-to}}
-  </li>
-  <li class='list-item'>
-    {{#link-to 'palette'}}Color palette{{/link-to}}
-  </li>
-  <li class='list-item'>
-    {{#link-to 'typography'}}Typography{{/link-to}}
-  </li>
-  <li class='list-item'>
-    {{#link-to 'layout'}}Layout{{/link-to}}
-  </li>
+  {{#each model.routes as |route|}}
+    <li class='list-item'>
+      {{#link-to route.routeName}}
+        {{route.label}}
+      {{/link-to}}
+    </li>
+  {{/each}}
 </div>
 {{outlet}}

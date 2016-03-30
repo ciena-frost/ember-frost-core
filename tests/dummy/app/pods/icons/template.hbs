@@ -1,33 +1,46 @@
-<h2>frost-icon</h2>
+<div class="dummy-body icon">
 
-{{format-markdown "```handlebars
-{{frost-icon icon=<icon-name>}}
-```"
+  <div class="section-title">Default</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="demo">
+        {{frost-icon
+          icon='frost/round-add'
+        }}
+      </div>
+
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-icon
+  icon='frost/round-add'
 }}
-
-The &lt;icon-name&gt; above can be any of the names shown below, for instance:
-
-{{format-markdown "```handlebars
-{{frost-icon icon=\"frost/add\"}}
-```"
-}}
-
-<div class="background-chooser {{ backgroundColor }}-selected">
-  <h3>Background Color</h3>
-  {{#each backgroundColors as |bgColor index| }}
-    <button {{ action 'colorSelected' bgColor }} class="{{ bgColor }}"></button>
-  {{/each}}
-</div>
-
-<div class="icon-demo">
-{{#each entries as |entry|}}
-  <div class="entry">
-    <div class="title">
-      {{format-markdown entry.markdown }}
+```"}}
+      </div>
     </div>
-    <div class="content" class="{{ backgroundColor }}">
-      {{frost-icon icon=entry.icon}}
-    </div>
+
   </div>
-{{/each}}
+
+  <div class="section-title">Available Icons</div>
+  <hr>
+  <div class="background-chooser {{ backgroundColor }}-selected">
+    <h3>Background Color</h3>
+    {{#each backgroundColors as |bgColor index| }}
+      <button {{ action 'colorSelected' bgColor }} class="{{ bgColor }}"></button>
+    {{/each}}
+  </div>
+
+  <div class="icon-demo">
+    {{#each entries as |entry|}}
+      <div class="entry">
+        <div class="title">
+          {{format-markdown entry.markdown }}
+        </div>
+        <div class="content" class="{{ backgroundColor }}">
+          {{frost-icon icon=entry.icon}}
+        </div>
+      </div>
+    {{/each}}
+  </div>
+
 </div>

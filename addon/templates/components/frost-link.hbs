@@ -1,10 +1,14 @@
-{{#if design}}
+{{#if (eq design 'info-bar')}}
   <div class='content '>
     <div class=' text'>
       <div class='svg'>{{frost-icon icon=icon}}</div>
       {{yield}}
       </div>
   </div>
+{{else if (eq design 'in-line')}}
+   <div class='content text'>
+      {{yield}}
+    </div>
 {{else if priority}}
   {{#if (eq priority 'primary')}}
     <div class='content text'>
@@ -16,10 +20,6 @@
       <div class='text'>
         {{yield}}
       </div>
-    </div>
-  {{else if (eq priority 'tertiary')}}
-    <div class='content text'>
-      {{yield}}
     </div>
   {{/if}}
 {{else}}

@@ -1,24 +1,36 @@
-{{#if isTextOnly}}
-  <div class="text">{{text}}</div>
-{{/if}}
-{{#if isIconOnly}}
-  <div class="icon">
-    {{frost-icon icon=icon}}
+{{#if (eq design 'info-bar')}}
+  <div class='content'>
+    <div class=' text'>
+      <div class='svg'>{{frost-icon icon=icon}}</div>
+      <div class="text">{{text}}</div>
+      {{yield}}
+      </div>
   </div>
-{{/if}}
-{{#if isIconAndText}}
-  <div class="icon-text text">
-    {{frost-icon icon=icon}}
+{{else if (eq design 'in-line')}}
+  <div class="text">{{text}}</div>{{else}}
+  {{#if isTextOnly}}
     <div class="text">{{text}}</div>
-  </div>
-{{/if}}
-{{#if isInfo}}
-  <div class="info">
-    {{frost-icon icon=icon}}
-    <div class='content'>
-      <div class='text'>{{text}}</div>
-      <div class='subtext'>{{subtext}}</div>
+  {{/if}}
+  {{#if isIconOnly}}
+    <div class="icon">
+      {{frost-icon icon=icon}}
     </div>
-  </div>
+  {{/if}}
+  {{#if isIconAndText}}
+    <div class="icon-text text">
+      {{frost-icon icon=icon}}
+      <div class="text">{{text}}</div>
+    </div>
+  {{/if}}
+  {{#if isInfo}}
+    <div class="info">
+      {{frost-icon icon=icon}}
+      <div class='content'>
+        <div class='text'>{{text}}</div>
+        <div class='subtext'>{{subtext}}</div>
+      </div>
+    </div>
+  {{/if}}
 {{/if}}
+
 {{yield}}

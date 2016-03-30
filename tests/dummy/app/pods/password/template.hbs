@@ -1,7 +1,10 @@
 <div class="dummy-body password">
+
+  <div class="section-title">Default</div>
+  <hr>
+
   <div class="section">
-  <div class="example">
-      <div class="title">Basic</div>
+    <div class="example">
       <div class="demo">
         {{frost-password}}
       </div>
@@ -11,10 +14,17 @@
 ```"
         }}
       </div>
+    </div>
   </div>
 
+
+  <div class="section-title">State</div>
+  <hr>
+
+  <div class="section">
+
   <div class="example">
-      <div class="title">Errored</div>
+      <div class="title">error</div>
       <div class="demo">
         {{frost-password
           class="error"
@@ -31,7 +41,7 @@
   </div>
 
   <div class="example">
-      <div class="title">Disabled</div>
+      <div class="title">disabled</div>
       <div class="demo">
         {{frost-password
           disabled=true
@@ -45,10 +55,15 @@
 ```"
         }}
       </div>
+    </div>
   </div>
 
+  <div class="section-title">Options</div>
+  <hr>
+
+  <div class="section">
   <div class="example">
-    <div class="title">Revealable</div>
+    <div class="title">revealable</div>
     <div class="demo">
       {{frost-password
         revealable=true
@@ -65,11 +80,12 @@
   </div>
 </div>
 
+<div class="section-title">Events</div>
 <hr>
 
-<div class='section'>
-  <div class="example">
-      <div class="title">Event: onInput</div>
+  <div class="section">
+    <div class="example">
+      <div class="title">onInput</div>
       <div class="demo">
         {{frost-password
           id='action'

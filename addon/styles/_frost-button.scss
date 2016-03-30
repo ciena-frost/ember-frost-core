@@ -17,6 +17,16 @@ $frost-color-button-tertiary-hover-bg: rgba($frost-color-blue-1, 0.05) !global;
 $frost-color-button-tertiary-active: $frost-color-blue-3 !global;
 $frost-color-button-tertiary-active-bg: #e7eef3 !global;
 
+// info-bar style
+$frost-color-button-info-bar-bg: $frost-color-white;
+$frost-color-button-info-bar-bg-hover: rgba($frost-color-blue-1, 0.05);
+$frost-color-button-info-bar-focus: 0 1px 6px rgba($frost-color-blue-1, 0.75);
+$frost-color-button-info-bar-active:  rgba($frost-color-blue-1, 0.1);
+
+// in-line style
+$frost-color-button-in-line-darken-1: darken($frost-color-blue-1, 8);
+$frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
+
 @mixin button-color ($color) {
   color: $color;
   svg * {
@@ -32,6 +42,7 @@ $frost-color-button-tertiary-active-bg: #e7eef3 !global;
   background-color: transparent;
   color: $frost-color-white;
   cursor: pointer;
+  font-family: $frost-font-family;
 
   &:focus, &:active {
     outline: none;
@@ -49,26 +60,24 @@ $frost-color-button-tertiary-active-bg: #e7eef3 !global;
     visibility: hidden;
   }
 
-  // Function based coloring
+  // ----------------------
+  // Priority based coloring
+  // ----------------------
+
+  // priority = 'primary'
   &.primary {
-    // update theme $frost-color-button-primary-bg
     background: $frost-color-button-primary-bg;
     @include button-color($frost-color-button-primary);
 
-    &:hover {
+    &:hover:not(.disabled) {
       background: $frost-color-button-primary-hover-bg;
     }
 
-    &:focus {
+    &:focus:not(.disabled) {
       border: solid 2px $frost-color-blue-4;
     }
 
-    &.disabled:hover {
-      background-color: $frost-color-button-primary-bg;
-      box-shadow: none;
-    }
-
-    &:active {
+    &:active:not(.disabled) {
       background: $frost-color-button-primary-active-bg;
       @include button-color($frost-color-button-primary-active);
 
@@ -78,21 +87,17 @@ $frost-color-button-tertiary-active-bg: #e7eef3 !global;
     }
   }
 
+  // priority = 'secondary'
   &.secondary {
     border: 2px solid $frost-color-button-secondary-border;
     background-color: $frost-color-button-secondary-bg;
     @include button-color($frost-color-button-secondary);
 
-    &:hover {
+    &:hover:not(.disabled) {
       background-color: transparentize($frost-color-blue-1, .9);
     }
 
-    &.disabled:hover {
-      background-color: $frost-color-button-secondary-bg;
-      box-shadow: none;
-    }
-
-    &:active {
+    &:active:not(.disabled) {
       background: $frost-color-button-secondary-active-bg;
       @include button-color($frost-color-button-secondary-active);
 
@@ -102,24 +107,21 @@ $frost-color-button-tertiary-active-bg: #e7eef3 !global;
     }
   }
 
+  // priority = 'tertiary'
   &.tertiary {
     background-color: $frost-color-button-tertiary-bg;
     @include button-color($frost-color-button-tertiary);
 
-    &:hover {
+    &:hover:not(.disabled) {
       background-color: $frost-color-button-tertiary-hover-bg;
     }
 
-    &:focus {
+    &:focus:not(.disabled) {
       outline: 0;
       box-shadow: 1px solid $frost-color-blue-4;
     }
 
-    &.disabled:hover {
-      background-color: $frost-color-button-tertiary-bg;
-    }
-
-    &:active {
+    &:active:not(.disabled) {
       background: $frost-color-button-tertiary-active-bg;
       @include button-color($frost-color-button-tertiary-active);
 
@@ -129,10 +131,14 @@ $frost-color-button-tertiary-active-bg: #e7eef3 !global;
     }
   }
 
+  // ----------------------
   // Sizes
+  // ----------------------
+
+  // size = 'extra-large'
   &.extra-large {
     height: 60px;
-    padding: 0 30px 0 15px;
+    padding: 0 30px 0 30px;
     font-size: $frost-font-l;
 
     .frost-icon {
@@ -141,17 +147,19 @@ $frost-color-button-tertiary-active-bg: #e7eef3 !global;
     }
   }
 
+  // size = 'large'
   &.large {
     height: 50px;
     padding: 0 20px;
     font-size: $frost-font-l;
 
     .frost-icon {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
     }
   }
 
+  // size = 'medium'
   &.medium {
     height: 40px;
     padding: 0 20px;
@@ -163,10 +171,11 @@ $frost-color-button-tertiary-active-bg: #e7eef3 !global;
     }
   }
 
+  // size = 'size'
   &.small {
     height: 30px;
     padding: 0 10px;
-    font-size: $frost-font-xs;
+    font-size: $frost-font-s;
 
     .frost-icon {
       width: 20px;
@@ -174,7 +183,11 @@ $frost-color-button-tertiary-active-bg: #e7eef3 !global;
     }
   }
 
-  // Design - 'tab'
+  // ----------------------
+  // Design based coloring
+  // ----------------------
+
+  // design = 'tab'
   &.tab {
     height: 35px;
     padding: 0 15px;
@@ -189,6 +202,107 @@ $frost-color-button-tertiary-active-bg: #e7eef3 !global;
 
     &:hover {
       background-color: $frost-color-button-tertiary-hover-bg;
+    }
+  }
+
+  // design = 'info-bar'
+  &.info-bar {
+    display: inline;
+    align-items: center;
+    flex-direction: column;
+    width: 75px;
+    height: 75px;
+    background-color: $frost-color-button-info-bar-bg;
+    color: $frost-color-blue-1;
+
+    .frost-icon  {
+      margin-left: -10px;
+      padding-bottom: 0px;
+      width: 30px;
+      height: 30px;
+    }
+
+    .text {
+      display: inline-block;
+      padding: 5px 1px 2px 1px;
+      margin-top: -5px;
+      font-size: $frost-font-s;
+      color: $frost-color-blue-1;
+      line-height: 1;
+    }
+
+    > .content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      box-sizing: border-box;
+
+      .text {
+        vertical-align: middle;
+        text-align: center;
+        padding: 0 1px 2px 1px;
+      }
+
+      .svg {
+        margin-left: 10px;
+        margin-bottom: 10px;
+
+        .frost-icon {
+          vertical-align: middle;
+        }
+      }
+    }
+
+    &:hover:not(.disabled) {
+      background-color: $frost-color-button-info-bar-bg-hover;
+      box-shadow: none;
+    }
+
+    &:focus:not(.disabled) {
+      outline:0;
+      box-shadow: $frost-color-button-info-bar-focus;
+    }
+
+    &:active:not(.disabled) {
+      background-color: $frost-color-button-info-bar-active;
+      opacity: 0.7;
+      color: $frost-color-blue-1;
+      box-shadow: none;
+    }
+  }
+
+  // design = 'in-line'
+  &.in-line {
+    .text {
+      color: $frost-color-blue-1;
+    }
+
+    &:hover:not(.disabled) {
+      .text {
+        color: $frost-color-button-in-line-darken-1;
+      }
+    }
+
+    &:focus:not(.disabled) {
+      outline:0;
+      box-shadow: none;
+      .text {
+        color: $frost-color-button-in-line-darken-1;
+      }
+    }
+
+    &:active:not(.disabled) {
+      .text {
+        box-shadow: none;
+        color: $frost-color-button-in-line-darken-2;
+      }
+    }
+
+    &.disabled {
+      opacity: 0.3;
+      background: none;
+      box-shadow: none;
     }
   }
 

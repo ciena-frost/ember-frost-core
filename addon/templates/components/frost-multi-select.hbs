@@ -1,0 +1,44 @@
+<input
+  class="trigger"
+  type="text"
+  value={{prompt}}
+  onFocus={{action 'onFocus'}}
+  onBlur={{action 'onBlur'}}
+  onInput={{action 'onChange'}}
+  disabled={{disableInput}}
+>
+
+<div class="down-arrow" onClick={{action 'onClickArrow'}}>
+  <svg viewBox='0 0 15 15'>
+    <polygon points='7.5,11.4 1.1,5 2.5,3.6 7.5,8.6 12.5,3.6 13.9,5'/>
+  </svg>
+</div>
+<div class="drop-down-container">
+  <div class="multi-status">
+    <span class="number-selected">{{selected.length}} selected</span>
+    <span class="clear" tabIndex={-1} onClick={{action 'clearSelection'}}>Clear all</span>
+  </div>
+  <div class="list-container">
+    <div class="up-arrow"></div>
+    <ul ref="container" style="max-height: {{maxListHeight}}px">
+      {{#each displayItems as |item|}}
+        <li
+          class={{item.className}}
+          data-value={{item.value}}
+          data-index={{item.index}}
+          onClick={{action 'onSelect'}}
+          onMouseOver={{action 'onItemOver'}}
+        >
+          {{frost-checkbox
+            checked=item.selected
+            onInput=(action 'onCheck')
+            value=item.index
+          }}
+          {{item.label}}
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+
+</div>
+{{yield}}

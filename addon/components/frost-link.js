@@ -9,9 +9,6 @@ function addPriorityClass (priority, classes) {
     case 'secondary':
       classes.push('secondary')
       break
-    case 'tertiary':
-      classes.push('tertiary')
-      break
     default:
       // no class to add for invalid priority
       break
@@ -39,6 +36,9 @@ function addDesignClass (design, classes) {
   switch (design) {
     case 'info-bar':
       classes.push('info-bar')
+      break
+    case 'in-line':
+      classes.push('in-line')
       break
     default:
       // no class to add for invalid design
@@ -80,22 +80,16 @@ export default Ember.LinkComponent.extend({
     if (classes.length === 0) {
       addSizeClass(this.get('size'), classes)
       addPriorityClass(this.get('priority'), classes)
-    } else {
-      // design link requires an icon
-      if (this.get('icon') === '') {
-        Ember.Logger.error('Error: The `design` property requires `icon` property to be specified.')
-        return
-      }
 
+      // primary link opens content in a new tab
+      if ((this.get('priority').indexOf('primary') > -1) && (this.get('disabled') === false)) {
+        this.set('target', '_blank')
+      }
+    } else {
       // display warning when design property is used together with size and/or priority
       if ((this.get('priority') !== '') || (this.get('size') !== '')) {
         Ember.Logger.warn('Warning: The `design` property takes precedence over `size` and `priority`.')
       }
-    }
-
-    // primary link opens content in a new tab
-    if (this.get('priority').indexOf('primary') > -1) {
-      this.set('target', '_blank')
     }
 
     return classes.join(' ')
