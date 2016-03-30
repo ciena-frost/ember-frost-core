@@ -23,14 +23,15 @@ ember install ember-frost-core
 ## Components
 The following components are available when you install ember-frost-core
 
-* [Frost-css](frost-css.md)
-* [Frost-link](frost-link.md)
-* [Frost-checkbox](frost-checkbox.md)
-* [Frost-icons](frost-icons.md)
-* [Frost-text](frost-text.md)
-* [Frost-textarea](frost-textarea.md)
-* [Frost-password](frost-password.md)
-* [Frost-button](frost-button.md)
+* [frost-button](frost-button.md)
+* [frost-checkbox](frost-checkbox.md)
+* [frost-css](frost-css.md)
+* [frost-icons](frost-icons.md)
+* [frost-link](frost-link.md)
+* [frost-password](frost-password.md)
+* [frost-select](frost-select.md)
+* [frost-text](frost-text.md)
+* [frost-textarea](frost-textarea.md)
 
 
 ## Development
