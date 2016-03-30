@@ -107,7 +107,6 @@ describeComponent(
     /* it('opens when focused', function (done) {
       this.$('.frost-select input').focus()
       Ember.run.later(() => {
-        console.log(this.$('.frost-select').attr('class'))
         expect(this.$('.frost-select').hasClass('open')).to.be.true
         done()
       })
@@ -186,11 +185,9 @@ describeComponent(
 
     it('selects the hovered item when it is clicked', function (done) {
       let listItem = this.$('.frost-select li:first-child')
-      console.log(`listitem: ${listItem[0]}`)
       listItem.click()
       Ember.run.later(() => {
         let listItem = this.$('.frost-select li:first-child')
-        console.log(`listitem: ${listItem[0]}`)
         expect(listItem.hasClass('selected')).to.be.true
         done()
       })

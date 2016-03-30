@@ -25,10 +25,20 @@ export default Ember.Controller.extend({
 
   actions: {
     onChange (values) {
-      console.log('User selected: ' + values)
+      this.notifications.addNotification({
+        message: 'User selected: ' + values,
+        type: 'success',
+        autoClear: true,
+        clearDuration: 2000
+      })
     },
     onInput (filterValue) {
-      console.log('Handling input: ' + filterValue)
+      this.notifications.addNotification({
+        message: 'Handling input: ' + filterValue,
+        type: 'success',
+        autoClear: true,
+        clearDuration: 2000
+      })
       this.set('search', filterValue)
     }
   }
