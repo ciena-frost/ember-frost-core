@@ -8,7 +8,7 @@
       {{format-markdown "```handlebars
 {{frost-select
   data=data
-  onChange=(action 'onChange')
+  onChange=(action 'onChangeHandler')
 }}
 ```"
       }}
@@ -16,7 +16,7 @@
     <div class="demo">
       {{frost-select
         data=data
-        onChange=(action 'onChange')
+        onChange=(action 'onChangeHandler')
       }}
     </div>
   </div>
@@ -27,7 +27,7 @@
       {{format-markdown "```handlebars
 {{frost-select
   data=data
-  onChange=(action 'onChange')
+  onChange=(action 'onChangeHandler')
   selected=selectedIndex
 }}
 ```"
@@ -36,7 +36,7 @@
     <div class="demo">
       {{frost-select
         data=data
-        onChange=(action 'onChange')
+        onChange=(action 'onChangeHandler')
         selected=selectedIndex
       }}
     </div>
@@ -48,7 +48,7 @@
       {{format-markdown "```handlebars
 {{frost-select
   data=data
-  onChange=(action 'onChange')
+  onChange=(action 'onChangeHandler')
   selectedValue=preSelectedValue
 }}
 ```"
@@ -57,7 +57,7 @@
     <div class="demo">
       {{frost-select
         data=data
-        onChange=(action 'onChange')
+        onChange=(action 'onChangeHandler')
         selectedValue=preSelectedValue
       }}
     </div>
@@ -69,8 +69,8 @@
       {{format-markdown "```handlebars
 {{frost-select
   data=data
-  onChange=(action 'onChange')
-  onInput=(action 'onInput')
+  onChange=(action 'onChangeHandler')
+  onInput=(action 'onInputHandler')
 }}
 ```"
       }}
@@ -78,8 +78,8 @@
     <div class="demo">
       {{frost-select
         data=data
-        onChange=(action 'onChange')
-        onInput=(action 'onInput')
+        onChange=(action 'onChangeHandler')
+        onInput=(action 'onInputHandler')
       }}
     </div>
   </div>
@@ -91,7 +91,7 @@
 {{frost-select
   data=data
   disabled=true
-  onChange=(action 'onChange')
+  onChange=(action 'onChangeHandler')
   selected=selectedIndex
 }}
 ```"
@@ -101,7 +101,7 @@
       {{frost-select
         data=data
         disabled=true
-        onChange=(action 'onChange')
+        onChange=(action 'onChangeHandler')
         selected=selectedIndex
       }}
     </div>
@@ -114,7 +114,7 @@
 {{frost-select
   data=data
   error=true
-  onChange=(action 'onChange')
+  onChange=(action 'onChangeHandler')
 }}
 ```"
       }}
@@ -123,7 +123,7 @@
       {{frost-select
         data=data
         error=true
-        onChange=(action 'onChange')
+        onChange=(action 'onChangeHandler')
       }}
     </div>
   </div>
@@ -140,7 +140,7 @@
       {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
-  onChange=(action 'onChange')
+  onChange=(action 'onChangeHandler')
 }}
 ```"
       }}
@@ -148,7 +148,7 @@
     <div class="demo">
       {{frost-multi-select
         data=data
-        onChange=(action 'onChange')
+        onChange=(action 'onChangeHandler')
       }}
     </div>
   </div>
@@ -159,7 +159,7 @@
       {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
-  onChange=(action 'onChange')
+  onChange=(action 'onChangeHandler')
   selected=selectedIndices
 }}
 ```"
@@ -168,7 +168,7 @@
     <div class="demo">
       {{frost-multi-select
         data=data
-        onChange=(action 'onChange')
+        onChange=(action 'onChangeHandler')
         selected=selectedIndices
       }}
     </div>
@@ -180,7 +180,7 @@
       {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
-  onChange=(action 'onChange')
+  onChange=(action 'onChangeHandler')
   selectedValue=selectedValues
 }}
 ```"
@@ -189,7 +189,7 @@
     <div class="demo">
       {{frost-multi-select
         data=data
-        onChange=(action 'onChange')
+        onChange=(action 'onChangeHandler')
         selectedValue=selectedValues
       }}
     </div>
@@ -202,7 +202,7 @@
 {{frost-multi-select
   data=data
   disabled=true
-  onChange=(action 'onChange')
+  onChange=(action 'onChangeHandler')
   selected=selectedIndices
 }}
 ```"
@@ -212,7 +212,7 @@
       {{frost-multi-select
         data=data
         disabled=true
-        onChange=(action 'onChange')
+        onChange=(action 'onChangeHandler')
         selected=selectedIndices
       }}
     </div>
@@ -225,7 +225,7 @@
 {{frost-multi-select
   data=data
   error=true
-  onChange=(action 'onChange')
+  onChange=(action 'onChangeHandler')
 }}
 ```"
       }}
@@ -234,7 +234,7 @@
       {{frost-multi-select
         data=data
         error=true
-        onChange=(action 'onChange')
+        onChange=(action 'onChangeHandler')
       }}
     </div>
   </div>

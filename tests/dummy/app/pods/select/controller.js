@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
   selectedValues: ['Arthur Curry', 'Adam Meadows'],
 
   actions: {
-    onChange (values) {
+    onChangeHandler (values) {
       this.notifications.addNotification({
         message: 'User selected: ' + values,
         type: 'success',
@@ -32,7 +32,7 @@ export default Ember.Controller.extend({
         clearDuration: 2000
       })
     },
-    onInput (filterValue) {
+    onInputHandler (filterValue) {
       this.notifications.addNotification({
         message: 'Handling input: ' + filterValue,
         type: 'success',
