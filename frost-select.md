@@ -33,7 +33,7 @@ multipleSelected = [1, 2]
 ```
 
 ### Simple single select
-```
+```handlebars
 {{frost-select
   data=data
   selected=singleSelected
@@ -42,7 +42,7 @@ multipleSelected = [1, 2]
 ```
 
 ### Multi select
-```
+```handlebars
 {{frost-multi-select
   data=data
   onChange=(action 'yourCallbackAction')
@@ -51,7 +51,7 @@ multipleSelected = [1, 2]
 ```
 
 ### Simple single select w/ external filtering
-```
+```handlebars
 {{frost-select
   data=data
   onChange=(action 'yourCallbackAction')
@@ -67,7 +67,7 @@ var selectedValue = "bar"
 ```
 And in your HTMLbars template
 
-```
+```handlebars
 {{frost-select
   data=data
   selectedValue=selectedValue
