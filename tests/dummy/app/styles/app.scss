@@ -13,7 +13,7 @@
   margin: auto;
 }
 .dummy-body {
-  padding: 0 20px;
+  padding: 0 10px;
 }
 .dummy-content {
   width: 100%;
@@ -21,53 +21,59 @@
 pre {
   margin: 0;
 }
+
+hr {
+  text-align: left;
+  margin-left: 0;
+  width: calc(100vw - 250px);
+}
 .section-title {
   font-size: $frost-font-xl;
-  margin-bottom: 15px;
+  padding: 10px;
 }
 
 .dummy-body.text-input.field {
   .example .snippet {
     width: 305px;
-    margin: 5px 0 10px 0;
+    margin: 15px 0 10px 0;
   }
 }
 
 .dummy-body.textarea {
   .example .snippet {
     width: 305px;
-    margin: 5px 0 10px 0;
+    margin: 15px 0 10px 0;
   }
 }
 
 .dummy-body.password {
   .example .snippet {
     width: 305px;
-    margin: 5px 0 10px 0;
+    margin: 15px 0 10px 0;
   }
 }
 
 .dummy-body.checkbox {
   .example .snippet {
     width: 310px;
-    margin: 5px 0 10px 0;
+    margin: 15px 0 10px 0;
   }
 }
 
 .dummy-body.button {
   .example .snippet {
     width: 320px;
-    margin: 5px 0 10px 0;
+    margin: 15px 0 10px 0;
   }
 }
 
 .dummy-body.link {
   .example .snippet {
-    width: 305px;
-    margin: 5px 0 10px 0;
+    width: 300px;
+    margin: 15px 0 10px 0;
   }
   .extra-padding {
-    padding-bottom: 10px;
+    padding-bottom: 20px;
   }
 }
 
@@ -91,6 +97,7 @@ pre {
   flex-direction: row;
   flex-flow: wrap;
   width: calc(100vw - 250px);
+  padding-left: 10px;
 
   > .title {
     font-size: $frost-font-xl;
@@ -98,12 +105,12 @@ pre {
   }
 
   .example {
-    padding-right: 50px;
+    padding-right: 25px;
     padding-bottom: 10px;
 
     > .title {
       font-size: $frost-font-l;
-      padding-bottom: 5px;
+      padding-bottom: 15px;
     }
 
     .snippet {
@@ -117,6 +124,11 @@ pre {
     .demo {
       display: block;
       vertical-align: top;
+      > .frost-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 20px;
+      }
     }
   }
 }
