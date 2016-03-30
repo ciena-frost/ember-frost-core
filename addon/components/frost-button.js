@@ -74,9 +74,6 @@ function addDesignClass (design, classes) {
     case 'info-bar':
       classes.push('info-bar')
       break
-    case 'in-line':
-      classes.push('in-line')
-      break
     default:
       // no class to add for this invalid size
       break
