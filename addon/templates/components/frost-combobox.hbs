@@ -1,0 +1,18 @@
+<input class="trigger" type="text" value={{prompt}} onFocus={{action "onFocus"}} onBlur={{action "onBlur"}} onInput={{action "onChange"}}>
+<div class="down-arrow">
+    <svg viewBox='0 0 15 15'>
+        <polygon points='7.5,11.4 1.1,5 2.5,3.6 7.5,8.6 12.5,3.6 13.9,5 '/>
+    </svg>
+</div>
+<div class='drop-down-container'>
+    <div class='list-container'>
+        <div class='up-arrow'></div>
+        <ul ref='container' style="max-height: {{maxListHeight}}px">
+            {{#each displayItems as |item|}}
+                <li class={{item.className}} data-value={{item.value}} data-index={{item.index}} onClick={{action "onSelect"}} onMouseOver={{action "onItemOver"}}>{{item.label}}
+                </li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
+{{yield}}
