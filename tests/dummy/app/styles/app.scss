@@ -27,6 +27,17 @@ hr {
   margin-left: 0;
   width: calc(100vw - 250px);
 }
+
+.section-header {
+  margin: 10px 0;
+  font-size: $frost-font-xl;
+  color: $frost-color-white;
+  width: calc(100vw - 250px);
+  height: 55px;
+  background-color: $frost-color-blue-1;
+  padding: 10px;
+}
+
 .section-title {
   font-size: $frost-font-xl;
   padding: 10px;
@@ -74,6 +85,13 @@ hr {
   }
   .extra-padding {
     padding-bottom: 20px;
+  }
+}
+
+.dummy-body.select {
+  .example .snippet {
+    width: 330px;
+    margin: 15px 0 10px 0;
   }
 }
 
