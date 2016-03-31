@@ -1,11 +1,11 @@
-# ember-frost-link <br />
+# frost-link <br />
 * [API](#api)
 * [Examples](#examples)
 
 ## API
 
 | Attribute | Type | Value | Description |
-| --------- | ---- | ----- | ----------- 
+| --------- | ---- | ----- | -----------
 | `priority` | `string` | `primary` | primary link - opens content in a new tab |
 |  |  | `secondary` | secondary link - opens content in the same tab |
 | `design` | `string` | `in-line` | custom link styling for in-line text, opens content in the same tab.  Should not be used with `priority` and `size`. |

@@ -1,4 +1,4 @@
-# ember-frost-checkbox <br />
+# frost-checkbox <br />
 A check in a box, a checkbox
 
  * [API](#api)

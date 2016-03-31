@@ -20,6 +20,10 @@ export default [
     routeName: 'layout'
   },
   {
+    label: 'Loading',
+    routeName: 'loading'
+  },
+  {
     label: 'Link',
     routeName: 'link'
   },
