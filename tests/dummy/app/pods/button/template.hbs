@@ -6,10 +6,13 @@
 
 
 <div class='dummy-body button'>
+
+  <div class="section-title">Primary</div>
+  <hr>
   <div class='section'>
 
     <div class='example'>
-      <div class='title'>Primary</div>
+      <div class='title'>small</div>
       <div class='demo'>
         {{frost-button
           priority='primary'
@@ -29,7 +32,76 @@
     </div>
 
     <div class='example'>
-      <div class='title'>Secondary</div>
+      <div class='title'>medium</div>
+      <div class='demo'>
+        {{frost-button
+          priority='primary'
+          size='medium'
+          text='Action'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='primary'
+  size='medium'
+  text='Action'
+}}
+```"}}
+      </div>
+    </div>
+
+
+    <div class='example'>
+      <div class='title'>large</div>
+      <div class='demo'>
+        {{frost-button
+          priority='primary'
+          size='large'
+          text='Action'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='primary'
+  size='large'
+  text='Action'
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>disabled</div>
+      <div class='demo'>
+        {{frost-button
+          priority='primary'
+          size='medium'
+          disabled=true
+          text='Action'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='primary'
+  size='medium'
+  disabled=true
+  text='Action'
+}}
+```"}}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Secondary</div>
+  <hr>
+  <div class='section'>
+
+    <div class='example'>
+      <div class='title'>small</div>
       <div class='demo'>
         {{frost-button
           priority='secondary'
@@ -49,7 +121,77 @@
     </div>
 
     <div class='example'>
-      <div class='title'>Tertiary</div>
+      <div class='title'>medium</div>
+      <div class='demo'>
+        {{frost-button
+          priority='secondary'
+          size='medium'
+          text='Action'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='secondary'
+  size='medium'
+  text='Action'
+}}
+```"}}
+      </div>
+    </div>
+
+
+    <div class='example'>
+      <div class='title'>large</div>
+      <div class='demo'>
+        {{frost-button
+          priority='secondary'
+          size='large'
+          text='Action'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='secondary'
+  size='large'
+  text='Action'
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>disabled</div>
+      <div class='demo'>
+        {{frost-button
+          priority='secondary'
+          size='medium'
+          disabled=true
+          text='Action'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='secondary'
+  size='medium'
+  disabled=true
+  text='Action'
+}}
+```"}}
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="section-title">Tertiary</div>
+  <hr>
+  <div class='section'>
+
+    <div class='example'>
+      <div class='title'>small</div>
       <div class='demo'>
         {{frost-button
           priority='tertiary'
@@ -68,33 +210,11 @@
       </div>
     </div>
 
-
-
     <div class='example'>
-      <div class='title'>Size - small</div>
+      <div class='title'>medium</div>
       <div class='demo'>
         {{frost-button
-          priority='confirm'
-          size='small'
-          text='Action'
-        }}
-      </div>
-      <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='confirm'
-  size='small'
-  text='Action'
-}}
-```"}}
-      </div>
-    </div>
-
-    <div class='example'>
-      <div class='title'>Size - medium</div>
-      <div class='demo'>
-        {{frost-button
-          priority='confirm'
+          priority='tertiary'
           size='medium'
           text='Action'
         }}
@@ -102,7 +222,7 @@
       <div class='snippet'>
         {{format-markdown "```handlebars
 {{frost-button
-  priority='confirm'
+  priority='tertiary'
   size='medium'
   text='Action'
 }}
@@ -110,11 +230,12 @@
       </div>
     </div>
 
+
     <div class='example'>
-      <div class='title'>Size - large</div>
+      <div class='title'>large</div>
       <div class='demo'>
         {{frost-button
-          priority='confirm'
+          priority='tertiary'
           size='large'
           text='Action'
         }}
@@ -122,7 +243,7 @@
       <div class='snippet'>
         {{format-markdown "```handlebars
 {{frost-button
-  priority='confirm'
+  priority='tertiary'
   size='large'
   text='Action'
 }}
@@ -130,12 +251,40 @@
       </div>
     </div>
 
-
     <div class='example'>
-      <div class='title'>Icon - small</div>
+      <div class='title'>disabled</div>
       <div class='demo'>
         {{frost-button
-          priority='confirm'
+          priority='tertiary'
+          size='medium'
+          disabled=true
+          text='Action'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='tertiary'
+  size='medium'
+  disabled=true
+  text='Action'
+}}
+```"}}
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="section-title">Icon</div>
+  <hr>
+  <div class='section'>
+
+    <div class='example'>
+      <div class='title'>small</div>
+      <div class='demo'>
+        {{frost-button
+          priority='primary'
           size='small'
           icon='frost/add'
         }}
@@ -143,7 +292,7 @@
       <div class='snippet'>
         {{format-markdown "```handlebars
 {{frost-button
-  priority='confirm'
+  priority='primary'
   size='small'
   icon='frost/add'
 }}
@@ -152,10 +301,10 @@
     </div>
 
     <div class='example'>
-      <div class='title'>Icon - medium</div>
+      <div class='title'>medium</div>
       <div class='demo'>
         {{frost-button
-          priority='confirm'
+          priority='primary'
           size='medium'
           icon='frost/add'
         }}
@@ -163,7 +312,7 @@
       <div class='snippet'>
         {{format-markdown "```handlebars
 {{frost-button
-  priority='confirm'
+  priority='primary'
   size='medium'
   icon='frost/add'
 }}
@@ -172,10 +321,10 @@
     </div>
 
     <div class='example'>
-      <div class='title'>Icon - large</div>
+      <div class='title'>large</div>
       <div class='demo'>
         {{frost-button
-          priority='confirm'
+          priority='primary'
           size='large'
           icon='frost/add'
         }}
@@ -183,7 +332,7 @@
       <div class='snippet'>
         {{format-markdown "```handlebars
 {{frost-button
-  priority='confirm'
+  priority='primary'
   size='large'
   icon='frost/add'
 }}
@@ -191,22 +340,165 @@
       </div>
     </div>
 
-
     <div class='example'>
-      <div class='title'>Disabled</div>
+      <div class='title'>disabled</div>
       <div class='demo'>
         {{frost-button
-          priority='confirm'
+          priority='primary'
           size='medium'
+          disabled=true
+          icon='frost/add'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='primary'
+  size='medium'
+  disabled=true
+  icon='frost/add'
+}}
+```"}}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Icon and Text</div>
+  <hr>
+  <div class='section'>
+
+    <div class='example'>
+      <div class='title'>small</div>
+      <div class='demo'>
+        {{frost-button
+          priority='tertiary'
+          size='small'
+          icon='frost/round-add'
+          text='Text'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='tertiary'
+  size='small'
+  icon='frost/round-add'
+  text='Text'
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>medium</div>
+      <div class='demo'>
+        {{frost-button
+          priority='tertiary'
+          size='medium'
+          icon='frost/round-add'
+          text='Text'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='tertiary'
+  size='medium'
+  icon='frost/round-add'
+  text='Text'
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>large</div>
+      <div class='demo'>
+        {{frost-button
+          priority='tertiary'
+          size='large'
+          icon='frost/round-add'
+          text='Text'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='tertiary'
+  size='large'
+  icon='frost/round-add'
+  text='Text'
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>disabled</div>
+      <div class='demo'>
+        {{frost-button
+          priority='tertiary'
+          size='medium'
+          disabled=true
+          icon='frost/round-add'
+          text='Text'
+        }}
+      </div>
+      <div class='snippet'>
+        {{format-markdown "```handlebars
+{{frost-button
+  priority='tertiary'
+  size='medium'
+  disabled=true
+  icon='frost/round-add'
+  text='Text'
+}}
+```"}}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Design</div>
+  <hr>
+  <div class='section'>
+
+    <div class="example">
+      <div class="title">info-bar</div>
+      <div class="demo">
+        {{frost-button
+          design='info-bar'
+          icon='frost/infobar-find'
+          text='Action'
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-button
+  design='info-bar'
+  icon='frost/infobar-find'
+  text='Action'
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">disabled info-bar</div>
+      <div class="demo">
+        {{frost-button
+          design='info-bar'
+          icon='frost/infobar-find'
           text='Action'
           disabled=true
         }}
       </div>
-      <div class='snippet'>
+      <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-button
-  priority='confirm'
-  size='medium'
+  design='info-bar'
+  icon='frost/infobar-find'
   text='Action'
   disabled=true
 }}
@@ -214,157 +506,13 @@
       </div>
     </div>
 
-
-  <div class='example'>
-      <div class='title'>Autofocus</div>
-      <div class='demo'>
-        {{frost-button
-          priority='confirm'
-          size='medium'
-          text='Action'
-          autofocus=true
-        }}
-      </div>
-      <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='confirm'
-  size='medium'
-  text='Action'
-  autofocus=true
-}}
-```"}}
-      </div>
-    </div>
-
-
-    <div class='example'>
-      <div class='title'>Icon and Info - horizontal</div>
-      <div class='demo'>
-        {{frost-button
-          priority='confirm'
-          size='extra-large'
-          icon='frost/add'
-          text='Text'
-          subtext='Subtext'
-        }}
-      </div>
-      <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='confirm'
-  size='extra-large'
-  icon='frost/add'
-  text='Text'
-  subtext='Subtext'
-}}
-```"}}
-      </div>
-    </div>
-
-
-    <div class='example'>
-      <div class='title'>Icon and Info - vertical</div>
-      <div class='demo'>
-        {{frost-button
-          priority='confirm'
-          size='extra-large'
-          vertical=true
-          icon='frost/add'
-          text='Text'
-          subtext='Subtext'
-        }}
-      </div>
-      <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='confirm'
-  size='extra-large'
-  vertical=true
-  icon='frost/add'
-  text='Text'
-  subtext='Subtext'
-}}
-```"}}
-      </div>
-    </div>
-
-
-    <div class='example'>
-      <div class='title'>Icon and Text - horizontal</div>
-      <div class='demo'>
-        {{frost-button
-          priority='confirm'
-          size='extra-large'
-          icon='frost/add'
-          text='Text'
-        }}
-      </div>
-      <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='confirm'
-  size='extra-large'
-  icon='frost/add'
-  text='Text'
-}}
-```"}}
-      </div>
-    </div>
-
-
-    <div class='example'>
-      <div class='title'>Icon and Text - vertical</div>
-      <div class='demo'>
-        {{frost-button
-          priority='confirm'
-          size='extra-large'
-          vertical=true
-          icon='frost/add'
-          text='Text'
-        }}
-      </div>
-      <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='confirm'
-  size='extra-large'
-  vertical=true
-  icon='frost/add'
-  text='Text'
-}}
-```"}}
-      </div>
-    </div>
-
-    <div class='example'>
-      <div class='title'>Design - tab</div>
-      <div class='demo'>
-        {{frost-button
-          design='tab'
-          text='Design Tab'
-        }}
-      </div>
-      <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  design='tab'
-  text='Design Tab'
-}}
-```"}}
-      </div>
-    </div>
-
-
-
   </div>
 
+ <div class="section-title">Events</div>
   <hr>
-
   <div class='section'>
-
     <div class="example">
-      <div class="title">Events: onClick</div>
+      <div class="title">onClick</div>
       <div class="demo">
         {{frost-button
           priority='confirm'
@@ -376,7 +524,7 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-button
-  priority='confirm'
+  priority='primary'
   size='medium'
   text='Action'
   onClick=(action 'onClickHandler')
@@ -385,6 +533,7 @@
         }}
       </div>
     </div>
+
   </div>
 
 </div>

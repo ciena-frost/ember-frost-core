@@ -8,11 +8,11 @@
 | --------- | ---- | ----- | ----------- 
 | `priority` | `string` | `primary` | primary link - opens content in a new tab |
 |  |  | `secondary` | secondary link - opens content in the same tab |
-|  |  | `tertiary` | tertiary link - opens content in the same tab |
+| `design` | `string` | `in-line` | custom link styling for in-line text, opens content in the same tab.  Should not be used with `priority` and `size`. |
+|  | | `info-bar` | custom link styling for the info-bar context, opens content in the same tab.  Requires `icon` to be specified.  Should not be used with `priority` and `size`. |
 | `size` | `string` | `small` | small size link |
 |  |  | `medium` | medium size link |
 |  |  | `large` | large size link |
-| `design` | `string` | `info-bar` | custom link styling for the info-bar context.  Requires `icon` to be specified.  Should not be used with `priority` and `size`. |
 | `disabled` | `boolean` | `false` | **default** - basic link |
 |  |  | `true` | disabled link |
 | `icon` | `string` | `<icon-name>` | the name of a frost-icon |
@@ -50,16 +50,7 @@
 {{/frost-link}}
 ```
 
-### Tertiary - Size based on font
-```handlebars
-{{#frost-link 'route name'
-  priority='tertiary'
-}}
-  Link one
-{{/frost-link}}
-```
-
-### Primary - disabled
+### Disabled
 ```handlebars
 {{#frost-link 'route name'
   priority='primary'
@@ -67,6 +58,15 @@
   disabled=true
 }}
   Primary
+{{/frost-link}}
+```
+
+### Design - in-line (font based on size)
+```handlebars
+{{#frost-link 'link.min'
+  design='in-line'
+}}
+  link
 {{/frost-link}}
 ```
 

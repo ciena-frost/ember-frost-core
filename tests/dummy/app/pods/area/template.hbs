@@ -1,7 +1,9 @@
 <div class="dummy-body textarea">
+
+  <div class="section-title">Default</div>
+  <hr>
   <div class="section">
     <div class="example">
-        <div class="title">Basic</div>
         <div class="demo">
           {{frost-textarea}}
         </div>
@@ -12,24 +14,51 @@
           }}
         </div>
     </div>
+  </div>
+
+  <div class="section-title">State</div>
+  <hr>
+  <div class="section">
     <div class="example">
-        <div class="title">Autofocus</div>
-        <div class="demo">
-          {{frost-textarea
-            autofocus=true
-          }}
-        </div>
-        <div class="snippet">
-          {{format-markdown "```handlebars
+      <div class="title">error</div>
+      <div class="demo">
+        {{frost-textarea
+          class='error'
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
 {{frost-textarea
-  autofocus=true
+  class='error'
 }}
-  ```"
-          }}
-        </div>
+```"
+        }}
+      </div>
     </div>
     <div class="example">
-        <div class="title">Placeholder</div>
+      <div class="title">disabled</div>
+      <div class="demo">
+        {{frost-textarea
+          disabled=true
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-textarea
+  disabled=true
+}}
+```"
+        }}
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Options</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+        <div class="title">placeholder</div>
         <div class="demo">
           {{frost-textarea
             placeholder='Text goes here!'
@@ -45,7 +74,7 @@
         </div>
     </div>
     <div class="example">
-      <div class="title">Defined number of Columns + Rows</div>
+      <div class="title">cols & rows</div>
       <div class="demo">
         {{frost-textarea
           cols="80"
@@ -62,45 +91,14 @@
         }}
       </div>
     </div>
-    <div class="example">
-      <div class="title">Disabled</div>
-      <div class="demo">
-        {{frost-textarea
-          disabled=true
-        }}
-      </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-textarea
-  disabled=true
-}}
-```"
-        }}
-      </div>
-    </div>
-    <div class="example">
-      <div class="title">Error</div>
-      <div class="demo">
-        {{frost-textarea
-          class='error'
-        }}
-      </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-textarea
-  class='error'
-}}
-```"
-        }}
-      </div>
-    </div>
+
   </div>
 
+  <div class="section-title">Events</div>
   <hr>
-
-  <div class='section'>
+  <div class="section">
     <div class="example">
-      <div class="title">Events: onInput</div>
+      <div class="title">onInput</div>
       <div class="demo">
         {{frost-textarea
           onInput=(action "onInputHandler")

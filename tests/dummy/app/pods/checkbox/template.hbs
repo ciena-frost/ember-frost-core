@@ -5,10 +5,14 @@
 </div>
 
 <div class='dummy-body checkbox'>
+
+
+  <div class="section-title">Default</div>
+  <hr>
+
   <div class='section'>
 
     <div class='example'>
-      <div class='title'>Basic</div>
       <div class='demo'>
         {{frost-checkbox}}
       </div>
@@ -20,8 +24,15 @@
       </div>
     </div>
 
+  </div>
+
+
+  <div class="section-title">Size</div>
+  <hr>
+  <div class='section'>
+
   <div class='example'>
-      <div class='title'>Size - small</div>
+      <div class='title'>small</div>
       <div class='demo'>
         {{frost-checkbox size='small'}}
       </div>
@@ -36,7 +47,7 @@
     </div>
 
   <div class='example'>
-      <div class='title'>Size - medium</div>
+      <div class='title'>medium</div>
       <div class='demo'>
         {{frost-checkbox size='medium'}}
       </div>
@@ -51,7 +62,7 @@
     </div>
 
    <div class='example'>
-      <div class='title'>Size - large</div>
+      <div class='title'>large</div>
       <div class='demo'>
         {{frost-checkbox size='large'}}
       </div>
@@ -65,38 +76,13 @@
       </div>
     </div>
 
-    <div class='example'>
-      <div class='title'>Label</div>
-      <div class='demo'>
-        {{frost-checkbox label='label'}}
-      </div>
-      <div class='snippet'>
-        {{format-markdown
-"```handlebars
-{{frost-checkbox
-  label='label'
-}}
-```"}}
-      </div>
-    </div>
+
+  <div class="section-title">State</div>
+  <hr>
+  <div class='section'>
 
     <div class='example'>
-      <div class='title'>Autofocus</div>
-      <div class='demo'>
-        {{frost-checkbox autofocus=true}}
-      </div>
-      <div class='snippet'>
-        {{format-markdown
-"```handlebars
-{{frost-checkbox
-  autofocus=true
-}}
-```"}}
-      </div>
-    </div>
-
-    <div class='example'>
-      <div class='title'>Checked</div>
+      <div class='title'>checked</div>
       <div class='demo'>
         {{frost-checkbox checked=true}}
       </div>
@@ -110,10 +96,8 @@
       </div>
     </div>
 
-
-
     <div class='example'>
-      <div class='title'>Disabled - checked</div>
+      <div class='title'>disabled checked</div>
       <div class='demo'>
         {{frost-checkbox disabled=true checked=true}}
       </div>
@@ -129,22 +113,7 @@
     </div>
 
     <div class='example'>
-      <div class='title'>Disabled - not checked</div>
-      <div class='demo'>
-        {{frost-checkbox disabled=true}}
-      </div>
-      <div class='snippet'>
-        {{format-markdown
-"```handlebars
-{{frost-checkbox
-  disabled=true
-}}
-```"}}
-      </div>
-    </div>
-
-   <div class='example'>
-      <div class='title'>Error</div>
+      <div class='title'>error</div>
       <div class='demo'>
         {{frost-checkbox class='error'}}
       </div>
@@ -158,14 +127,36 @@
       </div>
     </div>
 
+    </div>
+
+  <div class="section-title">Options</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>label</div>
+      <div class='demo'>
+        {{frost-checkbox label='label'}}
+      </div>
+      <div class='snippet'>
+        {{format-markdown
+"```handlebars
+{{frost-checkbox
+  label='label'
+}}
+```"}}
+      </div>
+    </div>
+
+    </div>
+
   </div>
 
+  <div class="section-title">Events</div>
   <hr>
-
   <div class='section'>
 
     <div class="example">
-      <div class="title">Events: onInput</div>
+      <div class="title">onInput</div>
       <div class="demo">
         {{frost-checkbox onInput=(action 'onInputHandler')
         }}

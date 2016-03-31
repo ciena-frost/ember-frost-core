@@ -24,7 +24,7 @@ describeComponent(
       // `);
 
       this.render(hbs`
-        {{frost-icon icon='frost/launcher'}}
+        {{frost-icon icon='frost/round-add'}}
       `)
 
       expect(this.$()).to.have.length(1)
