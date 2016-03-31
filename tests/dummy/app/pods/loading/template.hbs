@@ -1,10 +1,40 @@
-<div class='loading-container'>
-  <div class="flex-container">
-    <div class="text">Ripple:</div>
-    {{frost-loading}}
+<div class="dummy-body">
+
+  <div class="section-title">Default</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="demo">
+        {{frost-loading}}
+      </div>
+
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-loading}}
+```"}}
+      </div>
+    </div>
+
   </div>
-  <div class="flex-container">
-    <div class="text">Ring:</div>
-    {{frost-loading type='ring'}}
+
+  <div class="section-title">Options</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class='title'>type</div>
+      <div class="demo">
+        {{frost-loading
+          type='ring'
+        }}
+      </div>
+
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-loading
+  type='ring'
+}}
+```"}}
+      </div>
+    </div>
   </div>
 </div>
