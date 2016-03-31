@@ -1,241 +1,314 @@
-<div class="section">
-  <div class="title">frost-select</div>
-</div>
-<div class="section">
-  <div class="example">
-    <div class="title">Local filtering</div>
-    <div class="snippet">
-      {{format-markdown "```handlebars
+<div class="dummy-body select">
+  <div class="section-header">frost-select</div>
+
+  <div class="section-title">Content</div>
+  <hr>
+  <div class="section">
+
+    <div class="example">
+      <div class="title">data</div>
+      <div class="demo">
+        {{frost-select
+          data=data
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
 {{frost-select
   data=data
-  onChange=(action 'onChangeHandler')
 }}
-```"
-      }}
+```"}}
+      </div>
     </div>
-    <div class="demo">
-      {{frost-select
-        data=data
-        onChange=(action 'onChangeHandler')
-      }}
-    </div>
+
   </div>
 
-  <div class="example">
-    <div class="title">Pre-selected index</div>
-    <div class="snippet">
-      {{format-markdown "```handlebars
+  <div class="section-title">Options</div>
+  <hr>
+  <div class="section">
+
+    <div class="example">
+      <div class="title">selected</div>
+      <div class="demo">
+        {{frost-select
+          data=data
+          selected=selectedIndex
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
 {{frost-select
   data=data
-  onChange=(action 'onChangeHandler')
   selected=selectedIndex
 }}
-```"
-      }}
+```"}}
+      </div>
     </div>
-    <div class="demo">
-      {{frost-select
-        data=data
-        onChange=(action 'onChangeHandler')
-        selected=selectedIndex
-      }}
+
+    <div class="example">
+      <div class="title">selectedValue</div>
+      <div class="demo">
+        {{frost-select
+          data=data
+          selectedValue=preSelectedValue
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-select
+  data=data
+  selectedValue=preSelectedValue
+}}
+```"}}
+      </div>
     </div>
   </div>
 
-  <div class="example">
-    <div class="title">Pre-selected value</div>
-    <div class="snippet">
-      {{format-markdown "```handlebars
+  <div class="section-title">State</div>
+  <hr>
+  <div class="section">
+
+    <div class="example">
+      <div class="title">error</div>
+      <div class="demo">
+        {{frost-select
+          data=data
+          selected=selectedIndex
+          error=true
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-select
+  data=data
+  selected=selectedIndex
+  error=true
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">disabled</div>
+      <div class="demo">
+        {{frost-select
+          data=data
+          selectedValue=preSelectedValue
+          disabled=true
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-select
+  data=data
+  selectedValue=preSelectedValue
+  disabled=true
+}}
+```"}}
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Events</div>
+  <hr>
+  <div class="section">
+
+    <div class="example">
+      <div class="title">onChange - local filtering</div>
+      <div class="demo">
+        {{frost-select
+          data=data
+          onChange=(action 'onChangeHandler')
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
 {{frost-select
   data=data
   onChange=(action 'onChangeHandler')
-  selectedValue=preSelectedValue
 }}
-```"
-      }}
+```"}}
+      </div>
     </div>
-    <div class="demo">
-      {{frost-select
-        data=data
-        onChange=(action 'onChangeHandler')
-        selectedValue=preSelectedValue
-      }}
-    </div>
-  </div>
 
-  <div class="example">
-    <div class="title">External filtering</div>
-    <div class="snippet">
-      {{format-markdown "```handlebars
+    <div class="example">
+      <div class="title">onInput - external filtering</div>
+      <div class="demo">
+        {{frost-select
+          data=data
+          onChange=(action 'onChangeHandler')
+          onInput=(action 'onInputHandler')
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
 {{frost-select
   data=data
   onChange=(action 'onChangeHandler')
   onInput=(action 'onInputHandler')
 }}
-```"
-      }}
+```"}}
+      </div>
     </div>
-    <div class="demo">
-      {{frost-select
-        data=data
-        onChange=(action 'onChangeHandler')
-        onInput=(action 'onInputHandler')
-      }}
-    </div>
+
   </div>
 
-  <div class="example">
-    <div class="title">Disabled</div>
-    <div class="snippet">
-      {{format-markdown "```handlebars
-{{frost-select
-  data=data
-  disabled=true
-  onChange=(action 'onChangeHandler')
-  selected=selectedIndex
-}}
-```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-select
-        data=data
-        disabled=true
-        onChange=(action 'onChangeHandler')
-        selected=selectedIndex
-      }}
-    </div>
-  </div>
-
-  <div class="example">
-    <div class="title">Error</div>
-    <div class="snippet">
-      {{format-markdown "```handlebars
-{{frost-select
-  data=data
-  error=true
-  onChange=(action 'onChangeHandler')
-}}
-```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-select
-        data=data
-        error=true
-        onChange=(action 'onChangeHandler')
-      }}
-    </div>
-  </div>
 </div>
 
 
-<div class="section">
-  <div class="title">frost-multi-select</div>
-</div>
-<div class="section">
-  <div class="example">
-    <div class="title">Local filtering</div>
-    <div class="snippet">
-      {{format-markdown "```handlebars
+<div class="dummy-body select">
+  <div class="section-header">frost-multi-select</div>
+
+  <div class="section-title">Content</div>
+  <hr>
+  <div class="section">
+
+    <div class="example">
+      <div class="title">data</div>
+      <div class="demo">
+        {{frost-multi-select
+          data=data
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
-  onChange=(action 'onChangeHandler')
 }}
-```"
-      }}
+```"}}
+      </div>
     </div>
-    <div class="demo">
-      {{frost-multi-select
-        data=data
-        onChange=(action 'onChangeHandler')
-      }}
-    </div>
+
   </div>
 
-  <div class="example">
-    <div class="title">Multiple pre-selected indices</div>
-    <div class="snippet">
-      {{format-markdown "```handlebars
+
+
+  <div class="section-title">Selection</div>
+  <hr>
+  <div class="section">
+
+    <div class="example">
+      <div class="title">selected</div>
+      <div class="demo">
+        {{frost-multi-select
+          data=data
+          selected=selectedIndices
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
-  onChange=(action 'onChangeHandler')
   selected=selectedIndices
 }}
-```"
-      }}
+```"}}
+      </div>
     </div>
-    <div class="demo">
-      {{frost-multi-select
-        data=data
-        onChange=(action 'onChangeHandler')
-        selected=selectedIndices
-      }}
-    </div>
-  </div>
 
-  <div class="example">
-    <div class="title">Multiple pre-selected values</div>
-    <div class="snippet">
-      {{format-markdown "```handlebars
+    <div class="example">
+      <div class="title">selectedValue</div>
+      <div class="demo">
+        {{frost-multi-select
+          data=data
+          selectedValue=selectedValues
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
-  onChange=(action 'onChangeHandler')
   selectedValue=selectedValues
 }}
-```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-multi-select
-        data=data
-        onChange=(action 'onChangeHandler')
-        selectedValue=selectedValues
-      }}
+```"}}
+      </div>
     </div>
   </div>
 
-  <div class="example">
-    <div class="title">Disabled</div>
-    <div class="snippet">
-      {{format-markdown "```handlebars
-{{frost-multi-select
-  data=data
-  disabled=true
-  onChange=(action 'onChangeHandler')
-  selected=selectedIndices
-}}
-```"
-      }}
-    </div>
-    <div class="demo">
-      {{frost-multi-select
-        data=data
-        disabled=true
-        onChange=(action 'onChangeHandler')
-        selected=selectedIndices
-      }}
-    </div>
-  </div>
+  <div class="section-title">State</div>
+  <hr>
+  <div class="section">
 
-  <div class="example">
-    <div class="title">Error</div>
-    <div class="snippet">
-      {{format-markdown "```handlebars
+    <div class="example">
+      <div class="title">error</div>
+      <div class="demo">
+        {{frost-multi-select
+          data=data
+          error=true
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
   error=true
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">disabled</div>
+      <div class="demo">
+        {{frost-multi-select
+          data=data
+          selectedValue=preSelectedValue
+          disabled=true
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-multi-select
+  data=data
+  selectedValue=preSelectedValue
+  disabled=true
+}}
+```"}}
+      </div>
+    </div>
+  </div>
+
+
+  <div class="section-title">Events</div>
+  <hr>
+  <div class="section">
+
+    <div class="example">
+      <div class="title">onChange - local filtering</div>
+      <div class="demo">
+        {{frost-multi-select
+          data=data
+          onChange=(action 'onChangeHandler')
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-select
+  data=data
   onChange=(action 'onChangeHandler')
 }}
-```"
-      }}
+```"}}
+      </div>
     </div>
-    <div class="demo">
-      {{frost-multi-select
-        data=data
-        error=true
-        onChange=(action 'onChangeHandler')
-      }}
+
+    <div class="example">
+      <div class="title">onInput - external filtering</div>
+      <div class="demo">
+        {{frost-multi-select
+          data=data
+          onChange=(action 'onChangeHandler')
+          onInput=(action 'onInputHandler')
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-multi-select
+  data=data
+  onChange=(action 'onChangeHandler')
+  onInput=(action 'onInputHandler')
+}}
+```"}}
+      </div>
     </div>
+
   </div>
 </div>
