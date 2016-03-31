@@ -1,4 +1,4 @@
-# ember-frost-textarea
+# frost-textarea
 a text area component
 
  * [API](#api)

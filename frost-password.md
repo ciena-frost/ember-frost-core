@@ -1,8 +1,8 @@
-# ember-frost-password
+# frost-password
 
  * [API](#api)
  * [Examples](#examples)
- 
+
 ## API
 | Attribute | Type | Value | Description |
 | --------- | ---- | ----- | ----------- |

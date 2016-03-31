@@ -1,8 +1,8 @@
-# ember-frost-text
+# frost-text
 
  * [API](#api)
  * [Examples](#examples)
- 
+
 ## API
 
 | Attribute | Type | Value | Description |

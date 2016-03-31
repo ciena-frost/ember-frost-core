@@ -1,4 +1,4 @@
-# ember-frost-select
+# frost-select
 
  * [API](#api)
  * [Examples](#examples)

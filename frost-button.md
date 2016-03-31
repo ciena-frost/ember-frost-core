@@ -1,4 +1,4 @@
-# ember-frost-button <br />
+# frost-button <br />
 
  * [API](#api)
  * [Examples](#examples)
