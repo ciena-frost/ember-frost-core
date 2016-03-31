@@ -7,56 +7,71 @@
 
 | Attribute | Type | Value | Description |
 | --------- | ---- | ----- | ----------- |
-| `autofocus` |`boolean` | `false` | **default**: Nothing to see here, just your average text input |
-| | | `true` | Look at me! |
-| `align` |`string` | `right` | Right align text input |
-| | | `center` | Center align text input |
-| `disabled` | `boolean` | `false` | **default**: Type to your heart's content |
-| | | `true` | :no_entry_sign: Can't update this! :notes: |
-| `onInput` | `string` | `<action-name>` | triggers associated action when the input value is changed |
-| `value` | `string` | `<value-text>` | what text to put in input |
+| `value` | `string` | `<value-text>` | text to be displayed in text field |
+| `align` |`string` | `right` | right align text input |
+| `placeholder` | `string` | `<text>` | placeholder text |
+| `autofocus` |`boolean` | `false` | **default** - normal text field |
+| | | `true` | text field in focus |
+| | | `center` | center align text input |
+| `disabled` | `boolean` | `false` | **default** - normal text field |
+| | | `true` | disabled text field |
+| `class` | `string` | `error` | sets text field to error state |
+| `onInput` | `string` | `<action-name>` | triggers associated action when text is entered |
+
 
 ## Examples
 
-### Focus on Input
+### Default
+```handlebars
+{{frost-text}}
+```
+
+### Error
+```handlebars
+{{frost-text
+  class='error'
+}}
+```
+### Disabled
+```handlebars
+{{frost-text
+  disabled=true
+}}
+```
+
+### Focus
 ```handlebars
 {{frost-text
   autofocus=true
 }}
 ```
-### Align text
+
+### Text alignment
 ```handlebars
 {{frost-text
   align='right'
 }}
 ```
 
-### Handle Changes to Value
+### Text placeholder
+```handlebars
+{{frost-text
+  placeholder='basic field'
+}}
+```
+
+### Events - onInput
 ```handlebars
 {{frost-text
   onInput=(action 'onInputHandler')
 }}
 ```
 
-### Bind Value
-```handlebars
-{{frost-text
-  value=boundText
-}}
+```javascript
+actions: {
+  onInputHandler () {
+    console.log('field value: ' + attrs.value)
+  }
+}
 ```
 
-### Disable Input
-```handlebars
-{{frost-text
-  disabled=true
-  value="Disabled"
-}}
-```
-
-### Make Input Read Only
-```handlebars
-{{frost-text
-  readOnly=true
-  value="Read Only"
-}}
-```

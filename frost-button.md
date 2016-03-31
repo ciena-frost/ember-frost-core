@@ -16,7 +16,7 @@
 |  |  | `large` | large size button |
 | `text` | `string` | `<button-text>` | text to display on the button |
 | `icon` | `string` | `<icon-name>` | the name of a frost-icon |
-| `autofocus` | `boolean` | `false` | ***default*** - basic button |
+| `autofocus` | `boolean` | `false` | **default** - basic button |
 | |  | `true` | sets focus on button |
 | `disabled` | `boolean` | `false` | **default** - basic button |
 |  |  | `true` | disabled button |

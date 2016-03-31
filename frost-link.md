@@ -15,6 +15,8 @@
 |  |  | `large` | large size link |
 | `disabled` | `boolean` | `false` | **default** - basic link |
 |  |  | `true` | disabled link |
+| `autofocus` | `boolean` | `false` | **default** - basic link |
+|  |  | `true` | link in focus |
 | `icon` | `string` | `<icon-name>` | the name of a frost-icon |
 
 

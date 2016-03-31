@@ -7,12 +7,15 @@
 | Attribute       | Type | Value | Description |
 | --------------- | ---- | ----- | ----------- |
 | `data`          | `array` | `[{"label: "foo", "value": "bar"}]` |  An array of "label"/"value" key/value pairs representing the rows in the select drop-down. |
-| `disabled`      | `boolean` | `true`/`false` | disable/enable the component |
-| `error`         | `boolean` | `true`/`false` | tell component to render an error styling |
-| `onChange`     | `string` | `<action-name>` | The action callback to call when the value of the select component changes |
-| `onInput`      | `string` | `<action-name>` | The action callback to call when the value of the filter changes as the user types |
 | `selected`      | `number` or `array` | `1` or `[1, 2]` | The indices of the pre-selected values corresponding to values in the passed-in data. |
 | `selectedValue` | `any`, `array` if using multi-select, `null` to clear | `'bar'` or `['bar', 'buzz']` | A value to choose in the drop down programmatically, or an array of values if using multi-select. Takes precedence over `selected` attribute. Passing `null` will clear the selected state. |
+| `disabled`      | `boolean` | `false` | **default** - normal select component |
+|      |  | `true` | disabled select component |
+| `error`        | `boolean` |`false` | **default** - normal select component |
+|    | | `true` | sets select component to error state |
+| `onChange`     | `string` | `<action-name>` | The action callback to call when the value of the select component changes |
+| `onInput`      | `string` | `<action-name>` | The action callback to call when the value of the filter changes as the user types |
+
 
 ## Examples
 Assuming the following data is available in the consuming context:
@@ -73,7 +76,7 @@ And in your HTMLbars template
   selectedValue=selectedValue
 }}
 ```
-will select
+will select `"bar"`.
 
 ##### Multiple Values
 If you are using multi-select, an array will be treated as multiple values to choose. In the example,

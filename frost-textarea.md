@@ -7,44 +7,59 @@ a text area component
 ## API
 | Attribute | Type | Value | Description |
 | --------- | ---- | ----- | ----------- |
-| `autofocus` | `boolean` |`true`| puts autofocus on the object |
-|  |  |`false`| ***default***|
-| `disabled` | `boolean` |`true`| shows the object as disabled |
-|  |  |`false`| ***default***|
-| `readonly` | `boolean` |`true`| object is not editable |
-|  |  |`false`| ***default***|
-| `cols` | `integer` |`<num-of-cols>`| specifies the number of columns for the object |
-| `rows` | `integer` |`<num-of-rows>`| specifies the number of rows for the object |
-| `value` | `string` |`<textarea-text>`| default string that the object will display |
+| `value` | `string` |`<value-text>`| text to be displayed in text area |
+| `cols` | `integer` |`<num-of-cols>`| number of columns for text area |
+| `rows` | `integer` |`<num-of-rows>`| number of rows for text area |
+| `autofocus` | `boolean` |`false`| **default** - normal text area |
+|  |  |`true`| text area in focus |
+| `disabled` | `boolean` | `false` | **default** - normal text area |
+| | | `true` | disabled text area |
+| `class` | `string` | `error` | sets text area to error state |
 | `onInput` | `string` |`<action-name>`| triggers associated action when text is entered |
 
 ## Examples
-### autofocus
+
+### Default
 ```handlebars
-{{frost-textarea autofocus=true}}
+{{frost-textarea}}
 ```
 
-### error
+### Error
 ```handlebars
-{{frost-textarea class='error'}}
+{{frost-textarea
+  class='error'
+}}
+```
+### Disabled
+```handlebars
+{{frost-textarea
+  disabled=true
+}}
 ```
 
-### disabled
+### Focus
 ```handlebars
-{{frost-textarea disabled=true}}
+{{frost-textarea
+  autofocus=true
+}}
 ```
 
-### readonly and value
+### Size - cols and rows
 ```handlebars
-{{frost-textarea readonly=true value='Read only textarea'}}
+{{frost-textarea
+  cols='80' rows='6'}}
 ```
 
-### cols and rows
+### Events - onInput
 ```handlebars
-{{frost-textarea cols='80' rows='6'}}
+{{frost-textarea
+  onInput=(action 'onInputHandler')}}
 ```
 
-### onInput
-```handlebars
-{{frost-textarea onInput=(action 'onInputHandler')}}
+```javascript
+actions: {
+  onInputHandler () {
+    console.log('text area value: ' + attrs.value)
+  }
+}
 ```
