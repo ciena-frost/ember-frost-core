@@ -95,14 +95,14 @@ hr {
   }
 }
 
-.title {
+.dummy-body .title {
   padding-bottom: 10px;
   padding-top: 10px;
   font-family: $frost-font-family;
   font-size: $frost-font-l;
 }
 
-.list-item {
+.dummy-body .list-item {
   padding-bottom: 5px;
   padding-top: 10px;
   font-family: $frost-font-family;
@@ -110,7 +110,7 @@ hr {
 }
 
 
-.section {
+.dummy-body .section {
   display: flex;
   flex-direction: row;
   flex-flow: wrap;
@@ -152,7 +152,7 @@ hr {
 }
 
 
-.icon-demo {
+.dummy-body .icon-demo {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
