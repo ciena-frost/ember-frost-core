@@ -98,7 +98,7 @@ describeComponent(
       this.$('.frost-select .down-arrow').click()
       this.$('.frost-select .down-arrow').click()
       Ember.run.later(() => {
-        expect(this.$('.frost-select').hasClass('ope')).to.be.false
+        expect(this.$('.frost-select').hasClass('open')).to.be.false
         done()
       })
     })
