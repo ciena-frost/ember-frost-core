@@ -60,6 +60,13 @@ export default Ember.Component.extend({
   // ==========================================================================
 
   @readOnly
+
+  @computed('maxListHeight')
+  containerStyle (maxListHeight) {
+    return Ember.String.htmlSafe(`max-height: ${maxListHeight}px`)
+  },
+
+  @readOnly
   @computed('items', 'selected', 'hovered', 'filter')
   /**
    * Get the display items
