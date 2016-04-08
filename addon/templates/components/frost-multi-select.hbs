@@ -20,7 +20,7 @@
   </div>
   <div class="list-container">
     <div class="up-arrow"></div>
-    <ul ref="container" style="max-height: {{maxListHeight}}px">
+    <ul ref="container" style={{containerStyle}}>
       {{#each displayItems as |item|}}
         <li
           class={{item.className}}
