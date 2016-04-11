@@ -4,33 +4,21 @@ SASS based normalization and default theme variables for Frost projects
 
 # Usage
 
-
-Modify your `ember-cli-build.js` to include:
-
-
-```javascript
-const app = new EmberAddon(defaults, {
-    sassOptions: {
-      includePaths: [
-        'node_modules/ember-frost-core/styles'
-      ]
-    }
-  })
-```
-
 Modify your `app.scss` to include
 
 
 ```sass
-@import 'frost-theme';
-@import 'frost-core';
+@import 'node_modules/ember-frost-core/addon/styles/frost-theme';
+@import 'node_modules/ember-frost-core/addon/styles/frost-app';
 ```
 
 You now have access to the theme and core variables
 
 e.g.
 
-`$frost-button-primary`
+`$frost-color-blue-1`
+`$frost-color-input-border`
+`$frost-font-m`
 
 # Contribution
 

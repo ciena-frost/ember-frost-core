@@ -16,7 +16,6 @@ $padding: 0 19px 0 6px;
   display: flex;
   align-items: center;
   width: 175px;
-  max-width: 385px;
   &.error {
     > input {
       border: $error-border;
