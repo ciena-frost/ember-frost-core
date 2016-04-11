@@ -1,8 +1,8 @@
 import config from '../config/environment'
 
 export default function () {
-  if (config && config.isDemo) {
-    this.namespace = 'https://ciena-frost.github.io'
+  if (config && config.mirageNamespace) {
+    this.namespace = config.mirageNamespace
   }
 
   this.get('/nodes', function (db) {
