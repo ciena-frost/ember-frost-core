@@ -10,7 +10,7 @@ module.exports = {
       'ember-frost-password',
       'ember-frost-select',
       'ember-frost-text',
-      'ember-frost-textare',
+      'ember-frost-textarea',
       'ember-frost-theme'
     ].map((packageName) => {
       return {name: packageName}
