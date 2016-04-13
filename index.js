@@ -30,6 +30,11 @@ module.exports = {
       app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'Roboto-Regular.woff2'), { destDir: 'assets/fonts' })
       app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'stylesheet.css'))
     }
+
+    if (typeof app.import === 'function') {
+      app.import(app.bowerDirectory + '/perfect-scrollbar/js/perfect-scrollbar.js')
+      app.import(app.bowerDirectory + '/perfect-scrollbar/css/perfect-scrollbar.css')
+    }
   },
 
   init: function (app) {

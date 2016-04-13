@@ -1,0 +1,23 @@
+<div class="dummy-body scroll">
+
+  <div class="section-title">Default</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="demo scroll-size">
+        {{#frost-scroll class='full' on-scroll-y-end=(action 'yEndReached')}}
+          {{frost-icon icon='frost/add' class='dummy-svg-huge'}}
+        {{/frost-scroll}}
+      </div>
+
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{#frost-scroll class='full' on-scroll-y-end=(action 'yEndReached')}}
+  {{frost-icon icon='frost/add' class='dummy-svg-huge'}}
+{{/frost-scroll}}
+```"}}
+      </div>
+    </div>
+
+  </div>
+</div>
