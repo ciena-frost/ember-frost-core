@@ -7,10 +7,17 @@ export default Ember.Component.extend({
   classNames: ['frost-checkbox'],
   classNameBindings: ['size'],
 
-  didInitAttrs () {
-    const checked = this.attrs ? this.attrs.checked : false
-    this.set('isChecked', checked)
+  isChecked: Ember.computed('checked', function () {
+    const checked = this.get('checked')
 
+    if ([null, undefined, false].indexOf(checked) !== -1) {
+      return false
+    }
+
+    return true
+  }),
+
+  didInitAttrs () {
     const checkboxSize = this.get('size')
     switch (checkboxSize) {
       case 'large':
