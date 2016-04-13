@@ -1,35 +1,31 @@
 import Ember from 'ember'
+import computed from 'ember-computed-decorators'
 import layout from '../templates/components/frost-checkbox'
 import _ from 'lodash/lodash'
 
 export default Ember.Component.extend({
   layout: layout,
   classNames: ['frost-checkbox'],
-  classNameBindings: ['size'],
+  classNameBindings: ['sizeClass'],
 
-  isChecked: Ember.computed('checked', function () {
-    const checked = this.get('checked')
+  @computed('checked')
+  /**
+   * Determine whether or not input should be checked
+   * @param {Boolean|null|undefined} checked - desired checked state
+   * @returns {Boolean} whether or not input should be checked
+   */
+  isChecked (checked) {
+    return [null, undefined, false].indexOf(checked) === -1
+  },
 
-    if ([null, undefined, false].indexOf(checked) !== -1) {
-      return false
-    }
-
-    return true
-  }),
-
-  didInitAttrs () {
-    const checkboxSize = this.get('size')
-    switch (checkboxSize) {
-      case 'large':
-        this.set('size', 'large')
-        break
-      case 'medium':
-        this.set('size', 'medium')
-        break
-      default:
-        this.set('size', 'small')
-        break
-    }
+  @computed('size')
+  /**
+   * Get class for setting input size
+   * @param {String} size - desired size
+   * @returns {String} size class (defaults to small if not provided)
+   */
+  sizeClass (size) {
+    return size || 'small'
   },
 
   didInsertElement () {

@@ -4,8 +4,8 @@ import {describeComponent} from 'ember-mocha'
 import {beforeEach, describe, it} from 'mocha'
 
 describeComponent(
-  'frost-textarea',
-  'FrostTextareaComponent',
+  'frost-password',
+  'FrostPasswordComponent',
   {},
   function () {
     let component
@@ -14,8 +14,8 @@ describeComponent(
       component = this.subject()
     })
 
-    it('includes className frost-textarea', function () {
-      expect(component.classNames).to.include('frost-textarea')
+    it('includes className frost-password', function () {
+      expect(component.classNames).to.include('frost-password')
     })
 
     describe('when onBlur property is omitted', function () {

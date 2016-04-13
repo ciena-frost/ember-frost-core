@@ -114,6 +114,24 @@
   <div class="section">
 
     <div class="example">
+      <div class="title">onBlur</div>
+      <div class="demo">
+        {{frost-select
+          data=data
+          onBlur=(action 'onBlurHandler')
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-select
+  data=data
+  onBlur=(action 'onBlurHandler')
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class="example">
       <div class="title">onChange - local filtering</div>
       <div class="demo">
         {{frost-select
@@ -273,6 +291,24 @@
   <div class="section">
 
     <div class="example">
+      <div class="title">onBlur</div>
+      <div class="demo">
+        {{frost-multi-select
+          data=data
+          onBlur=(action 'onBlurHandler')
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-multi-select
+  data=data
+  onBlur=(action 'onBlurHandler')
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class="example">
       <div class="title">onChange - local filtering</div>
       <div class="demo">
         {{frost-multi-select
@@ -282,7 +318,7 @@
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
-{{frost-select
+{{frost-multi-select
   data=data
   onChange=(action 'onChangeHandler')
 }}

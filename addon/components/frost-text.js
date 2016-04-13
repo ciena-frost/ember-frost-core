@@ -41,6 +41,14 @@ export default Ember.Component.extend({
       this.$('input').val('')
       this.set('showClear', false)
       this.$('input').trigger('input')
+    },
+
+    onBlur () {
+      const onBlur = this.get('onBlur')
+
+      if (onBlur) {
+        onBlur()
+      }
     }
   }
 })

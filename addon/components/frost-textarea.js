@@ -33,6 +33,14 @@ export default Ember.Component.extend({
       this.$('textarea').val('')
       this.set('showClear', false)
       this.$('textarea').trigger('input')
+    },
+
+    onBlur () {
+      const onBlur = this.get('onBlur')
+
+      if (onBlur) {
+        onBlur()
+      }
     }
   }
 })

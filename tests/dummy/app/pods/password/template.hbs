@@ -84,11 +84,28 @@
 <hr>
 
   <div class="section">
+
+    <div class="example">
+      <div class="title">onBlur</div>
+      <div class="demo">
+        {{frost-password
+          onBlur=(action 'onBlurHandler')
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-password
+  onBlur=(action 'onBlurHandler')
+}}
+```"
+        }}
+      </div>
+    </div>
+
     <div class="example">
       <div class="title">onInput</div>
       <div class="demo">
         {{frost-password
-          id='action'
           onInput=(action 'onInputHandler')
         }}
       </div>
@@ -101,5 +118,6 @@
         }}
       </div>
     </div>
+
   </div>
 </div>
