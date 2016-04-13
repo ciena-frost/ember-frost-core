@@ -19,7 +19,8 @@ module.exports = {
     return this.removePackagesFromProject(packagesToRemove)
       .then(() => {
         return this.addBowerPackagesToProject([
-          {name: 'lodash', target: '^4.10.0'}
+          {name: 'lodash', target: '^4.10.0'},
+          {name: 'perfect-scrollbar', target: '>=0.6.7 <2.0.0'}
         ])
       })
       .then(() => {
