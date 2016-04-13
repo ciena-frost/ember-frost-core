@@ -1,0 +1,24 @@
+{
+  ".text.mustache": {
+    "frost-text": {
+      "prefix": "frost-text",
+      "body": "{{frost-text\n\tonInput=(action $1)\n}}\n$2"
+    },
+    "frost-textarea": {
+      "prefix": "frost-textarea",
+      "body": "{{frost-textarea\n\tonInput=(action $1)\n}}\n$2"
+    },
+    "frost-password": {
+      "prefix": "frost-password",
+      "body": "{{frost-password\n\tonInput=(action $1)\n}}\n$2"
+    },
+    "frost-checkbox": {
+      "prefix": "frost-checkbox",
+      "body": "{{frost-checkbox\n\tonInput=(action $1)\n}}\n$2"
+    },
+    "frost-button": {
+      "prefix": "frost-button",
+      "body": "{{frost-button\n\tpriority='primary'\n\tsize='medium'\n\ttext=$1\n\tonClick=(action $2)\n}}\n$3"
+    }
+  }
+}
