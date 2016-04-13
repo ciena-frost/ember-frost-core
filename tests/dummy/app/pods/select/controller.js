@@ -24,6 +24,15 @@ export default Ember.Controller.extend({
   selectedValues: ['Arthur Curry', 'Adam Meadows'],
 
   actions: {
+    onBlurHandler () {
+      this.notifications.addNotification({
+        message: 'blur event',
+        type: 'success',
+        autoClear: true,
+        clearDuration: 2000
+      })
+    },
+
     onChangeHandler (values) {
       this.notifications.addNotification({
         message: 'User selected: ' + values,

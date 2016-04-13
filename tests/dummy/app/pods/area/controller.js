@@ -3,6 +3,15 @@ import Ember from 'ember'
 export default Ember.Controller.extend({
 
   actions: {
+    onBlurHandler () {
+      this.notifications.addNotification({
+        message: 'blur event',
+        type: 'success',
+        autoClear: true,
+        clearDuration: 2000
+      })
+    },
+
     onInputHandler (attrs) {
       console.log('text area value: ' + attrs.value)
       this.notifications.addNotification({

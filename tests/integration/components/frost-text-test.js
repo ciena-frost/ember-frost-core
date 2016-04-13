@@ -50,5 +50,14 @@ describeComponent(
         expect(this.get('input-value')).to.eql('')
       })
     })
+
+    it('calls onBlur callback when focus is lost', function (done) {
+      this.on('test-action', function () {
+        done()
+      })
+
+      this.render(hbs`{{frost-text onBlur=(action "test-action")}}`)
+      this.$('input').focus().val('a').focusout()
+    })
   }
 )

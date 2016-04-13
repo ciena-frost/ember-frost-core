@@ -41,6 +41,14 @@ export default Ember.Component.extend({
   }),
 
   actions: {
+    onBlur () {
+      const onBlur = this.get('onBlur')
+
+      if (onBlur) {
+        onBlur()
+      }
+    },
+
     onInput (args) {
       this.set('isRevealerVisible', args.value.length > 0)
       if (_.isFunction(this.get('onInput'))) {

@@ -125,6 +125,24 @@
   <div class="section-title">Events</div>
   <hr>
   <div class='section'>
+
+    <div class="example">
+      <div class="title">onBlur</div>
+      <div class="demo">
+        {{frost-text
+          onBlur=(action 'onBlurHandler')
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+    {{frost-text
+    onBlur=(action 'onBlurHandler')
+    }}
+    ```"
+        }}
+      </div>
+    </div>
+
     <div class="example">
       <div class="title">onInput</div>
       <div class="demo">
@@ -141,5 +159,6 @@
         }}
       </div>
     </div>
+
   </div>
 </div>

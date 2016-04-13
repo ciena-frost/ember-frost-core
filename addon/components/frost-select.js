@@ -461,6 +461,12 @@ export default Ember.Component.extend({
     // TODO: add jsdoc
     onBlur (event) {
       this.set('focus', false)
+
+      const onBlur = this.get('onBlur')
+
+      if (onBlur) {
+        onBlur()
+      }
     },
 
     // TODO: add jsdoc
