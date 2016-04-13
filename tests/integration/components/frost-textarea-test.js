@@ -56,7 +56,7 @@ describeComponent(
       })
 
       this.render(hbs`{{frost-textarea onBlur=(action "test-action")}}`)
-      this.$('textarea').focus().val('a').blur().focusout()
+      this.$('textarea').focus().val('a').focusout()
     })
   }
 )

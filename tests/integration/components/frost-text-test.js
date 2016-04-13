@@ -57,7 +57,7 @@ describeComponent(
       })
 
       this.render(hbs`{{frost-text onBlur=(action "test-action")}}`)
-      this.$('input').focus().val('a').blur().focusout()
+      this.$('input').focus().val('a').focusout()
     })
   }
 )
