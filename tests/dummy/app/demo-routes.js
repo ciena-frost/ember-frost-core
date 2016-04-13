@@ -32,6 +32,10 @@ export default [
     routeName: 'password'
   },
   {
+    label: 'Scroll',
+    routeName: 'scroll'
+  },
+  {
     label: 'Select',
     routeName: 'select'
   },
