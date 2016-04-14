@@ -42,6 +42,14 @@ export default Ember.Component.extend({
   }),
 
   actions: {
+    onBlur () {
+      const onBlur = this.get('onBlur')
+
+      if (onBlur) {
+        onBlur()
+      }
+    },
+
     input () {
       let id = this.get('value')
 

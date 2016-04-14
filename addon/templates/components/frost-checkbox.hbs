@@ -7,7 +7,7 @@
     name=name
     update=(action 'input')
 }}
-<label for={{inputId}} class='label' tabIndex=0>
+<label for={{inputId}} class='label' onBlur={{action 'onBlur'}} tabIndex=0>
   {{#if hasBlock}}
     {{yield}}
   {{else}}
