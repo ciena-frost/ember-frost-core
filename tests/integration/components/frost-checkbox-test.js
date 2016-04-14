@@ -39,5 +39,20 @@ describeComponent(
         expect(this.get('checkbox-value')).to.eql(true)
       })
     })
+
+    // TODO: figure out why action is called more than once in test
+    it('calls onBlur callback when focus is lost', function (done) {
+      let called = false
+
+      this.on('test-action', function () {
+        if (!called) {
+          called = true
+          done()
+        }
+      })
+
+      this.render(hbs`{{frost-checkbox onBlur=(action "test-action")}}`)
+      this.$('label').trigger('blur')
+    })
   }
 )

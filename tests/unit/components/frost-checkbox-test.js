@@ -37,5 +37,19 @@ describeComponent(
         })
       })
     })
+
+    describe('when onBlur property is omitted', function () {
+      beforeEach(function () {
+        run(() => {
+          component.set('onBlur', undefined)
+        })
+      })
+
+      it('does not throw an error when onBlur action is triggered', function () {
+        expect(function () {
+          component.get('actions.onBlur').call(component)
+        }).not.to.throw(Error)
+      })
+    })
   }
 )
