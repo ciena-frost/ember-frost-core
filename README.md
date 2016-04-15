@@ -42,7 +42,6 @@ git clone git@github.com:ciena-frost/ember-frost-core.git
 cd ember-frost-core
 npm install && bower install
 ```
-
 ### Development Server
 A dummy application for development is available under `ember-frost-core/tests/dummy`.
 To run the server run `ember server` (or `npm start`) from the root of the repository and
