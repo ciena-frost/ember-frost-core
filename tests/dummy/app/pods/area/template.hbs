@@ -99,16 +99,18 @@
   <div class="section">
 
     <div class="example">
-      <div class="title">onBlur</div>
+      <div class="title">onFocus, onBlur</div>
       <div class="demo">
         {{frost-textarea
           onBlur=(action "onBlurHandler")
+          onFocus=(action "onFocusHandler")
         }}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-textarea
   onBlur=(action 'onBlurHandler')
+  onFocus=(action 'onFocusHandler')
 }}
 ```"
         }}

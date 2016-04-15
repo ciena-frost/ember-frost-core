@@ -26,6 +26,13 @@ export default Ember.Component.extend({
     }
   }),
 
+  _onFocus: Ember.on('focusIn', function () {
+    // If an onFocus handler is defined, call it
+    if (this.attrs.onFocus) {
+      this.attrs.onFocus()
+    }
+  }),
+
   actions: {
     clear: function () {
       this.set('value', '')

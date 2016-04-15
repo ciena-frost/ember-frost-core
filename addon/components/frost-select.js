@@ -489,6 +489,10 @@ export default Ember.Component.extend({
     onFocus () {
       this.openList()
       this.set('focus', true)
+      // If an onFocus event handler is defined, call it
+      if (this.attrs.onFocus) {
+        this.attrs.onFocus()
+      }
       return false
     },
 

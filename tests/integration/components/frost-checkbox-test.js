@@ -54,5 +54,7 @@ describeComponent(
       this.render(hbs`{{frost-checkbox onBlur=(action "test-action")}}`)
       this.$('label').trigger('blur')
     })
+
+    // TODO: test onFocus once we can figure out how
   }
 )

@@ -40,6 +40,13 @@ export default Ember.Component.extend({
     return this.get('revealable') && this.get('isCapsOn') && this.get('isRevealerVisible')
   }),
 
+  _onFocus: Ember.on('focusIn', function (e) {
+    // If an onFocus handler is defined, call it
+    if (this.attrs.onFocus) {
+      this.attrs.onFocus()
+    }
+  }),
+
   actions: {
     onBlur () {
       const onBlur = this.get('onBlur')
