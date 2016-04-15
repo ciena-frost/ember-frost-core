@@ -27,7 +27,14 @@ export default Ember.Component.extend({
   sizeClass (size) {
     return size || 'small'
   },
-
+  keyPress (e) {
+    if (e.keyCode === 32) {
+      this.$('input').prop('checked', !this.$('input').prop('checked'))
+      e.preventDefault()
+      e.stopPropagation()
+      return false
+    }
+  },
   didInsertElement () {
     if (this.get('autofocus')) {
       Ember.run.next('render', () => {
@@ -59,7 +66,6 @@ export default Ember.Component.extend({
 
     input () {
       let id = this.get('value')
-
       if (_.isFunction(this.attrs['onInput'])) {
         this.attrs['onInput']({
           id: Ember.isEmpty(id) ? this.get('id') : id,
