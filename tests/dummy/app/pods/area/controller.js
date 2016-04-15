@@ -12,6 +12,15 @@ export default Ember.Controller.extend({
       })
     },
 
+    onFocusHandler () {
+      this.notifications.addNotification({
+        message: 'focus event',
+        type: 'success',
+        autoClear: true,
+        clearDuration: 2000
+      })
+    },
+
     onInputHandler (attrs) {
       console.log('text area value: ' + attrs.value)
       this.notifications.addNotification({

@@ -93,6 +93,7 @@ export default Ember.Component.extend({
     'autofocus',
     'disabled',
     'type',
+    'tabIndex',
     'title'
   ],
 
@@ -221,6 +222,13 @@ export default Ember.Component.extend({
 
     if (!this.get('disabled') && _.isFunction(this.attrs['onClick'])) {
       this.attrs['onClick'](this.get('id'))
+    }
+  }),
+
+  _onFocus: Ember.on('focusIn', function (e) {
+    // If an onFocus handler is defined, call it
+    if (this.attrs.onFocus) {
+      this.attrs.onFocus()
     }
   })
 })
