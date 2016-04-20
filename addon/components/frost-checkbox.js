@@ -30,6 +30,7 @@ export default Ember.Component.extend({
   keyPress (e) {
     if (e.keyCode === 32) {
       this.$('input').prop('checked', !this.$('input').prop('checked'))
+      this.send('input')
       e.preventDefault()
       e.stopPropagation()
       return false
