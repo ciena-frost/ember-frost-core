@@ -27,14 +27,6 @@ $frost-color-button-info-bar-active:  rgba($frost-color-blue-1, 0.1);
 $frost-color-button-in-line-darken-1: darken($frost-color-blue-1, 8);
 $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
 
-@mixin button-color ($color) {
-  color: $color;
-  svg * {
-    stroke: $color;
-    fill: $color;
-  }
-}
-
 .frost-button {
   padding: 0;
   border: none;
@@ -67,7 +59,7 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
   // priority = 'primary'
   &.primary {
     background: $frost-color-button-primary-bg;
-    @include button-color($frost-color-button-primary);
+    color: $frost-color-button-primary;
 
     &:hover:not(.disabled) {
       background: $frost-color-button-primary-hover-bg;
@@ -79,7 +71,7 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
 
     &:active:not(.disabled) {
       background: $frost-color-button-primary-active-bg;
-      @include button-color($frost-color-button-primary-active);
+      color: $frost-color-button-primary-active;
 
       .text {
         opacity: 0.5;
@@ -91,7 +83,7 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
   &.secondary {
     border: 2px solid $frost-color-button-secondary-border;
     background-color: $frost-color-button-secondary-bg;
-    @include button-color($frost-color-button-secondary);
+    color: $frost-color-button-secondary;
 
     &:hover:not(.disabled) {
       background-color: transparentize($frost-color-blue-1, .9);
@@ -99,7 +91,7 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
 
     &:active:not(.disabled) {
       background: $frost-color-button-secondary-active-bg;
-      @include button-color($frost-color-button-secondary-active);
+      color: $frost-color-button-secondary-active;
 
       .text {
         opacity: 0.5;
@@ -110,7 +102,7 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
   // priority = 'tertiary'
   &.tertiary {
     background-color: $frost-color-button-tertiary-bg;
-    @include button-color($frost-color-button-tertiary);
+    color: $frost-color-button-tertiary;
 
     &:hover:not(.disabled) {
       background-color: $frost-color-button-tertiary-hover-bg;
@@ -123,7 +115,7 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
 
     &:active:not(.disabled) {
       background: $frost-color-button-tertiary-active-bg;
-      @include button-color($frost-color-button-tertiary-active);
+      color: $frost-color-button-tertiary-active;
 
       .text {
         opacity: 0.5;
@@ -305,6 +297,54 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
       box-shadow: none;
     }
   }
+  
+  // design = 'app-bar'
+  &.app-bar {
+    display: inline;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+    padding: 0 20px;
+    background: $frost-color-night-2;
+  
+    > .icon-text {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      .text {
+        margin-left: 20px;
+      }
+    }
+    
+    .frost-icon  {
+      padding-bottom: 0px;
+      width: 35px;
+      height: 35px;
+    }
+
+    .text {
+      display: flex;
+      color: $frost-color-white;
+    }
+    .svg {
+      margin-left: 10px;
+      margin-bottom: 10px;
+      color: inherit;
+      order: 2;
+
+      .frost-icon {
+        vertical-align: middle;
+      }
+    }
+    
+    &:focus {
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+  
+  
 
   // Content - text
   &.text {
@@ -342,7 +382,7 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
   &:active {
     > .info {
       background-color: $frost-color-button-primary-bg;
-      @include button-color($frost-color-button-primary-active);
+      color: $frost-color-button-primary-active;
       .content .text, .content .subtext {
         color: $frost-color-button-primary-active;
       }
