@@ -31,5 +31,16 @@ describeComponent(
         }).not.to.throw(Error)
       })
     })
+
+    it('defaults to zero tabindex', function () {
+      expect(component.tabindex).to.equal(0)
+      expect(this.$('textarea').prop('tabindex')).to.equal(0)
+    })
+
+    it('passes tabindex to the underlying field', function () {
+      component.set('tabindex', -1)
+      expect(component.tabindex).to.equal(-1)
+      expect(this.$('textarea').prop('tabindex')).to.equal(-1)
+    })
   }
 )
