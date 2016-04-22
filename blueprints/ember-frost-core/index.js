@@ -28,7 +28,8 @@ module.exports = {
           packages: [
             {name: 'ember-computed-decorators', target: '>=0.2.2 <2.0.0'},
             {name: 'ember-lodash', target: '>=0.0.6 <2.0.0'},
-            {name: 'ember-one-way-controls', target: '>=0.5.3 <2.0.0'}
+            {name: 'ember-one-way-controls', target: '>=0.5.3 <2.0.0'},
+            {name: 'ember-truth-helpers', target: '^1.0.0'}
           ]
         })
       })
