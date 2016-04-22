@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   layout: layout,
 
   showClear: false,
+  tabindex: 0,
 
   onChange: Ember.on('input', function (e) {
     const id = this.get('id')

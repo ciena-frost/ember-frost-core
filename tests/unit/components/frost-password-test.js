@@ -6,7 +6,9 @@ import {beforeEach, describe, it} from 'mocha'
 describeComponent(
   'frost-password',
   'FrostPasswordComponent',
-  {},
+  {
+    needs: ['component:frost-text']
+  },
   function () {
     let component
 
@@ -30,6 +32,17 @@ describeComponent(
           component.get('actions.onBlur').call(component)
         }).not.to.throw(Error)
       })
+    })
+
+    it('defaults to zero tabindex', function () {
+      expect(component.tabindex).to.equal(0)
+      expect(this.$('input').prop('tabindex')).to.equal(0)
+    })
+
+    it('passes tabindex to the underlying field', function () {
+      component.set('tabindex', -1)
+      expect(component.tabindex).to.equal(-1)
+      expect(this.$('input').prop('tabindex')).to.equal(-1)
     })
   }
 )

@@ -12,6 +12,7 @@ export default Ember.Component.extend({
   revealed: false,
   revealIcon: 'frost/show',
   type: 'password',
+  tabindex: 0,
 
   focusOut: Ember.on('focusOut', function () {
     this.set('isCapsOn', false)

@@ -62,22 +62,38 @@
   <hr>
 
   <div class="section">
-  <div class="example">
-    <div class="title">revealable</div>
-    <div class="demo">
-      {{frost-password
-        revealable=true
-      }}
-    </div>
-    <div class="snippet">
-      {{format-markdown "```handlebars
+    <div class="example">
+      <div class="title">revealable</div>
+      <div class="demo">
+        {{frost-password
+          revealable=true
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
 {{frost-password
   revealable=true
 }}
 ```"
-      }}
+        }}
+      </div>
     </div>
-  </div>
+    <div class="example">
+      <div class="title">tabindex</div>
+      <div class="demo">
+        {{frost-password
+          tabindex='-1'
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-password
+  tabindex='-1'
+}}
+```"
+        }}
+      </div>
+    </div>
 </div>
 
 <div class="section-title">Events</div>

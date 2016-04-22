@@ -8,6 +8,7 @@ export default Ember.Component.extend({
   layout: layout,
 
   showClear: false,
+  tabindex: 0,
 
   oninput: Ember.on('input', function (e) {
     if (_.isFunction(this.attrs['onInput'])) {
