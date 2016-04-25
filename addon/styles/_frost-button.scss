@@ -46,6 +46,15 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
 
   &.disabled {
     opacity: 0.25;
+    // In Firefox, the click on the app bar was not detected - added this to enable it.
+    // From https://developer.mozilla.org/en/docs/Web/CSS/pointer-events
+    //     The CSS property pointer-events allows authors to control under what circumstances (if any)
+    //     a particular graphic element can become the target of mouse events.
+    //     none: The element is never the target of mouse events; however, mouse events may target
+    //            its descendant elements if those descendants have pointer-events set to some other value.
+    //            In these circumstances, mouse events will trigger event listeners on this parent element
+    //            as appropriate on their way to/from the descendant during the event capture/bubble phases.
+    pointer-events: none;
   }
 
   &.hidden {
