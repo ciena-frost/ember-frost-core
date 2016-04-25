@@ -1,6 +1,6 @@
 /* globals module */
 
-'use strict'
+// 'use strict'
 
 const pkg = require('./package.json')
 const Funnel = require('broccoli-funnel')
