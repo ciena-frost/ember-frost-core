@@ -4,7 +4,7 @@ SASS based normalization and default theme variables for Frost projects
 
 # Usage
 
-Modify your `app.scss` to include
+Modify your `app.scss` to include 
 
 
 ```sass
