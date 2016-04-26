@@ -72,6 +72,15 @@ $error-border: 1px solid $frost-color-input-error-border;
       vertical-align: middle;
       content: "";
     }
+
+    &:focus {
+      outline: none;
+
+      &::before {
+        background-image: linear-gradient(lighten($frost-color-blue-1, 50%), lighten($frost-color-blue-1, 45%));
+        border: 1px solid $frost-color-grey-5;
+      }
+    }
   }
 
   input[disabled] + .label::before {
