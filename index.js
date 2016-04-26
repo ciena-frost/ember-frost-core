@@ -1,15 +1,15 @@
 /* globals module */
 
-'use strict'
+// 'use strict'
 
-let pkg = require('./package.json')
-let Funnel = require('broccoli-funnel')
+const pkg = require('./package.json')
+const Funnel = require('broccoli-funnel')
 
-let flatiron = require('broccoli-flatiron')
-let fs = require('fs')
-let mergeTrees = require('broccoli-merge-trees')
-let path = require('path')
-let svgstore = require('broccoli-svgstore')
+const flatiron = require('broccoli-flatiron')
+const fs = require('fs')
+const mergeTrees = require('broccoli-merge-trees')
+const path = require('path')
+const svgstore = require('broccoli-svgstore')
 
 module.exports = {
   name: 'ember-frost-core',
