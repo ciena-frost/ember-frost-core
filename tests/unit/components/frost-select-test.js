@@ -1,17 +1,22 @@
 const expect = chai.expect
 const {run} = Ember
 import {describeComponent} from 'ember-mocha'
-import {beforeEach, describe, it} from 'mocha'
+import {afterEach, beforeEach, describe, it} from 'mocha'
 
 describeComponent(
   'frost-select',
   'FrostSelectComponent',
   {},
   function () {
-    let component
+    let component, sandbox
 
     beforeEach(function () {
+      sandbox = sinon.sandbox.create()
       component = this.subject()
+    })
+
+    afterEach(function () {
+      sandbox.restore()
     })
 
     it('includes className frost-select', function () {
@@ -29,6 +34,37 @@ describeComponent(
         expect(function () {
           component.get('actions.onBlur').call(component)
         }).not.to.throw(Error)
+      })
+    })
+
+    describe('.didReceiveAttrs()', function () {
+      ;[0, 1].forEach((selectedIndex) => {
+        describe(`when selected index is ${selectedIndex} and no previous selected index`, function () {
+          beforeEach(function () {
+            component.set('selected', selectedIndex)
+            sandbox.stub(component, 'set')
+
+            const attrs = {
+              newAttrs: {
+                data: {
+                  value: [
+                    {label: 'Foo', value: 'foo'},
+                    {label: 'Bar', value: 'bar'}
+                  ]
+                },
+                selected: {value: selectedIndex}
+              }
+            }
+
+            component.didReceiveAttrs(attrs)
+          })
+
+          it('sets selected to expected', function () {
+            const args = component.set.lastCall.args
+            expect(args[0]).to.eql('selected')
+            expect(args[1]).to.eql([selectedIndex])
+          })
+        })
       })
     })
   }
