@@ -228,7 +228,12 @@ export default Ember.Component.extend({
     } else if (isAttrDifferent(attrs.newAttrs, attrs.oldAttrs, 'selected')) {
       let selected = this.get('selected')
 
-      selected = selected && (_.isArray(selected) || _.isNumber(selected)) ? [].concat(selected) : []
+      if (_.isNumber(selected)) {
+        selected = [selected]
+      } else if (!_.isArray(selected)) {
+        selected = []
+      }
+
       this.set('selected', selected)
     }
   },
