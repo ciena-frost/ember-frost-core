@@ -9,11 +9,7 @@ import layout from '../templates/components/frost-select'
 function isAttrDifferent (newAttrs, oldAttrs, attributeName) {
   let oldValue = _.get(oldAttrs, attributeName + '.value')
   let newValue = _.get(newAttrs, attributeName + '.value')
-
-  if (newValue !== undefined && !_.isEqual(oldValue, newValue)) {
-    return true
-  }
-  return false
+  return newValue !== undefined && !_.isEqual(oldValue, newValue)
 }
 
 /** Hook for handling outside element click
@@ -223,9 +219,14 @@ export default Ember.Component.extend({
   /* Ember.Component method */
   didReceiveAttrs (attrs) {
     this._super(...arguments)
-    if (isAttrDifferent(attrs.newAttrs, attrs.oldAttrs, 'selectedValue')) {
+
+    const dataChanged = isAttrDifferent(attrs.newAttrs, attrs.oldAttrs, 'data')
+    const selectedChanged = isAttrDifferent(attrs.newAttrs, attrs.oldAttrs, 'selected')
+    const selectedValueChanged = isAttrDifferent(attrs.newAttrs, attrs.oldAttrs, 'selectedValue')
+
+    if (selectedValueChanged || (dataChanged && _.get(attrs.newAttrs, 'selectedValue.value'))) {
       this.selectOptionByValue(attrs.newAttrs.selectedValue.value)
-    } else if (isAttrDifferent(attrs.newAttrs, attrs.oldAttrs, 'selected')) {
+    } else if (selectedChanged || (dataChanged && _.get(attrs.newAttrs, 'selected.value'))) {
       let selected = this.get('selected')
 
       if (_.isNumber(selected)) {

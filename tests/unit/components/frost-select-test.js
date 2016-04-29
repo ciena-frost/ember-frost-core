@@ -66,6 +66,40 @@ describeComponent(
           })
         })
       })
+
+      describe('when previous selected value but no data', function () {
+        beforeEach(function () {
+          component.setProperties({
+            data: [],
+            selected: [],
+            selectedValue: 'foo'
+          })
+
+          sandbox.stub(component, 'selectOptionByValue')
+
+          Ember.run(() => {
+            component.didReceiveAttrs({
+              newAttrs: {
+                data: {
+                  value: [
+                    {label: 'Foo', value: 'foo'},
+                    {label: 'Bar', value: 'bar'}
+                  ]
+                },
+                selectedValue: {value: 'foo'}
+              },
+              oldAttrs: {
+                data: {value: []},
+                selectedValue: {value: 'foo'}
+              }
+            })
+          })
+        })
+
+        it('sets selected to expected', function () {
+          expect(component.selectOptionByValue.lastCall.args).to.eql(['foo'])
+        })
+      })
     })
   }
 )
