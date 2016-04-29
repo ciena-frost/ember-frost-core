@@ -14,8 +14,33 @@ describeComponent(
       component = this.subject()
     })
 
-    it('includes className frost-checkbox', function () {
-      expect(component.classNames).to.include('frost-checkbox')
+    it('sets dependent keys correctly', function () {
+      const isCheckedDependentKeys = [
+        'checked'
+      ]
+
+      const sizeClassDependentKeys = [
+        'size'
+      ]
+
+      const inputIdDependentKeys = [
+        'id'
+      ]
+
+      expect(
+        component.isChecked._dependentKeys,
+        'Dependent keys are correct for isChecked()'
+      ).to.eql(isCheckedDependentKeys)
+
+      expect(
+        component.sizeClass._dependentKeys,
+        'Dependent keys are correct for sizeClass()'
+      ).to.eql(sizeClassDependentKeys)
+
+      expect(
+        component.inputId._dependentKeys,
+        'Dependent keys are correct for inputId()'
+      ).to.eql(inputIdDependentKeys)
     })
 
     it('defaults state to unchecked', function () {
