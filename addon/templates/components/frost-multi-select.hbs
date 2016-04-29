@@ -1,11 +1,12 @@
 <input
   class="trigger"
+  disabled={{disableInput}}
+  onBlur={{action 'onBlur'}}
+  onFocus={{action 'onFocus'}}
+  onInput={{action 'onChange'}}
+  placeholder={{placeholder}}
   type="text"
   value={{prompt}}
-  onFocus={{action 'onFocus'}}
-  onBlur={{action 'onBlur'}}
-  onInput={{action 'onChange'}}
-  disabled={{disableInput}}
 >
 
 <div class="down-arrow" onClick={{action 'onClickArrow'}}>

@@ -15,6 +15,7 @@
 |    | | `true` | sets select component to error state |
 | `onChange`     | `string` | `<action-name>` | The action callback to call when the value of the select component changes |
 | `onInput`      | `string` | `<action-name>` | The action callback to call when the value of the filter changes as the user types |
+| `placeholder` | `string` | | Placeholder text for when nothing is selected. |
 
 
 ## Examples
