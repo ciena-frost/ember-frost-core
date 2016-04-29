@@ -8,10 +8,11 @@ import _ from 'lodash'
 import Ember from 'ember'
 
 const testTemplate = hbs`{{frost-select
-  onChange=onChange
   data=data
-  selected=selected
   greeting=greeting
+  onChange=onChange
+  placeholder=placeholder
+  selected=selected
   selectedValue=selVal
 }}`
 
@@ -56,6 +57,7 @@ describeComponent(
       props = {
         selected: 1,
         onChange: sinon.spy(),
+        placeholder: 'Select something already',
         data: [
           {
             value: 'Lex Diamond',
@@ -94,6 +96,7 @@ describeComponent(
         done()
       })
     })
+
     it('closes when down arrow clicked a second time', (done) => {
       this.$('.frost-select .down-arrow').click()
       this.$('.frost-select .down-arrow').click()
@@ -295,6 +298,11 @@ describeComponent(
           done()
         })
       })
+    })
+
+    it('supports placeholder', function () {
+      const $input = this.$('.frost-select input')
+      expect($input.attr('placeholder')).to.eql('Select something already')
     })
   }
 )
