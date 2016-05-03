@@ -17,8 +17,6 @@ Router.map(function () {
   demoRoutes.forEach((route) => {
     this.route(route.routeName)
   })
-
-  this.route('link.min')
 })
 
 export default Router

@@ -15,7 +15,7 @@
     },
     {
       "demoName": "icons",
-      "frostGuideDirectory": "ui-components/icons",
+      "frostGuideDirectory": "design-conventions/icons",
       "readme": "frost-icons.md"
     },
     {
@@ -52,6 +52,21 @@
       "demoName": "layout",
       "frostGuideDirectory": "design-conventions/layout",
       "readme": "frost-css.md"
+    },
+    {
+      "demoName": "loading",
+      "frostGuideDirectory": "ui-components/indicator-controls/progress-indicators",
+      "readme": "frost-loading.md"
+    },
+    {
+      "demoName": "scroll",
+      "frostGuideDirectory": "ui-components/content-views/scrollbar",
+      "readme": "frost-scroll.md"
+    },
+    {
+      "demoName": "select",
+      "frostGuideDirectory": "ui-components/input-controls/select",
+      "readme": "frost-select.md"
     }
   ],
   "directories": {
