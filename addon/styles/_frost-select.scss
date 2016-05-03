@@ -19,6 +19,7 @@ $frost-input-select-option-row-height: 35px;
   outline: none;
   position: relative;
   width: 200px;
+  background: $frost-select-container-background;
 
   .up-arrow {
     @include triangle-up($frost-select-container-background, 12px);
