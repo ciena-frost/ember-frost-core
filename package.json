@@ -84,11 +84,22 @@
     "node": ">= 5.0.0"
   },
   "author": "Roxanne Panthaky (https://github.com/rox163)",
-  "contributors": [],
+  "contributors": [
+    "Adam Meadows (https://github.com/job13er)",
+    "Eric White (https://github.com/EWhite613)",
+    "Frank Amoroso (https://github.com/TheAxeMan301)",
+    "Gabriel Knoy (https://github.com/gknoy)",
+    "Gosia Hyndman (https://github.com/vesper2000)",
+    "Justin Lafleur (https://github.com/laflower)",
+    "Matthew Dahl (https://github.com/sandersky)",
+    "Michael Carroll (https://github.com/juwara0)",
+    "Peter Banka (https://github.com/psbanka)",
+    "Steven Glanzer (https://github.com/sglanzer)"
+  ],
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.2.0",
-    "ember-cli": "2.3.0",
+    "ember-cli": "^2.5.0",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-code-coverage": "0.1.2",
     "ember-cli-dependency-checker": "^1.2.0",
@@ -100,7 +111,7 @@
     "ember-cli-sass": "^5.2.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-computed-decorators": ">=0.2.2 <2.0.0",
-    "ember-data": "2.3.0",
+    "ember-data": "^2.5.3",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
     "ember-load-initializers": "^0.5.0",
