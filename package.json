@@ -10,7 +10,7 @@
     },
     {
       "demoName": "button",
-      "frostGuideDirectory": "ui-components/buttons-and-links/button",
+      "frostGuideDirectory": "ui-components/button-controls/button",
       "readme": "frost-button.md"
     },
     {
@@ -35,7 +35,7 @@
     },
     {
       "demoName": "link",
-      "frostGuideDirectory": "ui-components/buttons-and-links/link",
+      "frostGuideDirectory": "ui-components/buttons-controls/link",
       "readme": "frost-link.md"
     },
     {
