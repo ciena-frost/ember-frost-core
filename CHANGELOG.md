@@ -1,3 +1,8 @@
+# 0.9.0
+
+* **Added** `CHANGELOG` with all previous history.
+* Upgraded to latest Ember, Ember CLI, and Ember Data.
+
 # 0.8.2 (May 13, 2016)
 
 * **Fixed** padding for `frost-select`.
