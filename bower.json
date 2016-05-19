@@ -15,7 +15,9 @@
     "highlightjs": "^9.3.0"
   },
   "resolutions": {
-    "blanket": "5e94fc30f2e694bb5c3718ddcbf60d467f4b4d26",
     "ember": "2.5.1"
+  },
+  "devDependencies": {
+    "blanket": "5e94fc30f2e694bb5c3718ddcbf60d467f4b4d26"
   }
 }
