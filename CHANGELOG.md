@@ -1,3 +1,7 @@
+# 0.9.3
+
+Minor - updating path for frost guide.
+
 # 0.9.2
 No CHANGELOG section found in Pull Request description.
 Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
