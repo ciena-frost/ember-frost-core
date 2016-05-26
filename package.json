@@ -5,7 +5,7 @@
   "frostGuideDirectories": [
     {
       "demoName": "checkbox",
-      "frostGuideDirectory": "ui-components/input-fields/checkbox",
+      "frostGuideDirectory": "ui-components/button-controls/checkbox",
       "readme": "frost-checkbox.md"
     },
     {
@@ -35,7 +35,7 @@
     },
     {
       "demoName": "link",
-      "frostGuideDirectory": "ui-components/buttons-controls/link",
+      "frostGuideDirectory": "ui-components/button-controls/link",
       "readme": "frost-link.md"
     },
     {
@@ -65,7 +65,7 @@
     },
     {
       "demoName": "select",
-      "frostGuideDirectory": "ui-components/input-controls/select",
+      "frostGuideDirectory": "ui-components/content-views/select",
       "readme": "frost-select.md"
     }
   ],
