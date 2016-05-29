@@ -20,6 +20,29 @@
     </div>
 
   </div>
+  
+  <div class="section-title">Icon pack</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="demo">
+        {{frost-icon
+          pack='frost'
+          icon='frost/round-add'
+        }}
+      </div>
+
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-icon
+  pack='frost'
+  icon='frost/round-add'
+}}
+```"}}
+      </div>
+    </div>
+
+  </div>
 
   <div class="section-title">Available Icons</div>
   <hr>
@@ -31,14 +54,23 @@
   </div>
 
   <div class="icon-demo">
-    {{#each entries as |entry|}}
-      <div class="entry">
-        <div class="title">
-          {{format-markdown entry.markdown }}
+    {{#each iconPacks as |iconPack|}}
+      <div class='icon-pack'>
+        <div class='name'>
+          Icon Pack: {{iconPack.name}}
         </div>
-        <div class="content" class="{{ backgroundColor }}">
-          {{frost-icon icon=entry.icon}}
-        </div>
+        <div class='icons'>
+          {{#each iconPack.icons as |icon|}}
+            <div class="entry">
+              <div class="title">
+                {{format-markdown icon.markdown}}
+              </div>
+              <div class="content" class="{{backgroundColor}}">
+                {{frost-icon icon=icon.name}}
+              </div>
+            </div>
+          {{/each}}
+         </div>
       </div>
     {{/each}}
   </div>
