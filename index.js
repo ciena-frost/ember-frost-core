@@ -2,13 +2,12 @@
 
 // 'use strict'
 
-const writeFile = require('broccoli-file-creator');
+const writeFile = require('broccoli-file-creator')
 const Funnel = require('broccoli-funnel')
 const mergeTrees = require('broccoli-merge-trees')
 const SVGStore = require('broccoli-svgstore')
 const fs = require('fs')
 const _ = require('lodash')
-const mkdirp = require("mkdirp")
 const path = require('path')
 
 module.exports = {
@@ -59,14 +58,14 @@ module.exports = {
 
     return iconNames
   },
-  
+
   // Present purely to allow programmatic access to the icon packs and icon names (for demo purposes)
   treeForAddon: function (tree) {
     var addonTree = this._super.treeForAddon.call(this, tree)
 
     var iconNames = {}
 
-    const iconPacks = _.chain(this.project.addonPackages)
+    _.chain(this.project.addonPackages)
       .pickBy((addonPackage) => {
         if (_.has(addonPackage.pkg, 'ember-frost-icon-pack')) {
           return true
@@ -80,38 +79,34 @@ module.exports = {
         iconNames[iconPackName] = this.flattenIcons([], '', addonIconPackPath)
       })
       .value()
-      
+
     const isAddon = this.project.isEmberCLIAddon()
-    
+
     const localIconPackName = _.get(this, 'app.options.iconPackOptions.name', isAddon ? 'dummy' : 'app')
     const localIconPackPath = path.join(this.project.root,
       _.get(this, 'app.options.iconPackOptions.path', isAddon ? 'tests/dummy/svgs' : 'svgs')
     )
-    
+
     // No icon pack path defined and an app = legacy case where the app icons must be merged into the 'frost' icon pack
-    const isLegacy = !_.has(this, 'app.options.iconPackOptions.path') && !isAddon;
-    
+    const isLegacy = !_.has(this, 'app.options.iconPackOptions.path') && !isAddon
+
     if (isLegacy && fs.existsSync(path.join(this.project.root, 'public/svgs'))) {
       iconNames['frost'] = _.concat(iconNames['frost'], this.flattenIcons([], '', path.join(this.project.root, 'public/svgs')))
     } else if (fs.existsSync(localIconPackPath)) {
       iconNames[localIconPackName] = this.flattenIcons([], '', localIconPackPath)
     }
-      
-    if (iconPacks.length === 0) {
-      return addonTree
-    }
 
-    const iconNameTree = writeFile('modules/ember-frost-core/icon-packs.js', "export default " + JSON.stringify(iconNames, null, 2))
+    const iconNameTree = writeFile('modules/ember-frost-core/icon-packs.js', 'export default ' + JSON.stringify(iconNames, null, 2))
 
     return mergeTrees([addonTree, iconNameTree], {overwrite: true})
   },
 
   treeForPublic: function (tree) {
     const isAddon = this.project.isEmberCLIAddon()
-    
+
     // No icon pack path defined and an app = legacy case where the app icons must be merged into the 'frost' icon pack
-    const isLegacy = !_.has(this, 'app.options.iconPackOptions.path') && !isAddon;
-    
+    const isLegacy = !_.has(this, 'app.options.iconPackOptions.path') && !isAddon
+
     const iconPacks = _.chain(this.project.addonPackages)
       .pickBy((addonPackage) => {
         if (_.has(addonPackage.pkg, 'ember-frost-icon-pack')) {
@@ -122,14 +117,14 @@ module.exports = {
         const iconPack = addonPackage.pkg['ember-frost-icon-pack']
         const iconPackPath = iconPack.path || 'svgs'
         const addonIconPackPath = path.join(addonPackage.path, iconPackPath)
-        
+
         var svgFunnel
         if (iconPack.name === 'frost' && isLegacy) {
           console.log('hi')
           svgFunnel = mergeTrees([
             new Funnel(addonIconPackPath, {
               include: [new RegExp(/\.svg$/)]
-            }), 
+            }),
             new Funnel(path.join(this.project.root, 'public/svgs'), {
               include: [new RegExp(/\.svg$/)]
             })
@@ -139,27 +134,23 @@ module.exports = {
             include: [new RegExp(/\.svg$/)]
           })
         }
-        
+
         return new SVGStore(svgFunnel, { outputFile: `/assets/icon-packs/${iconPack.name}.svg`, flatten: false })
       })
       .value()
-      
+
     const localIconPackName = _.get(this, 'app.options.iconPackOptions.name', isAddon ? 'dummy' : 'app')
     const localIconPackPath = path.join(this.project.root,
       _.get(this, 'app.options.iconPackOptions.path', isAddon ? 'tests/dummy/svgs' : 'svgs')
     )
-      
+
     if (!isLegacy && fs.existsSync(localIconPackPath)) {
       const svgFunnel = new Funnel(localIconPackPath, {
         include: [new RegExp(/\.svg$/)]
       })
       iconPacks.push(new SVGStore(svgFunnel, { outputFile: `/assets/icon-packs/${localIconPackName}.svg`, flatten: false }))
     }
-      
-    if (iconPacks.length === 0) {
-      return addonTree
-    }
-    
+
     return mergeTrees(iconPacks, {overwrite: true})
   }
 }

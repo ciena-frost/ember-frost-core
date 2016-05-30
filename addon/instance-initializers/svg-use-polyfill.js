@@ -1,6 +1,6 @@
-import svg4everybody from "npm:svg4everybody"
+import svg4everybody from 'npm:svg4everybody'
 
-export function initialize() {
+export function initialize () {
   svg4everybody()
 }
 

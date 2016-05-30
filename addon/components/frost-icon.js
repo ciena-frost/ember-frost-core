@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Ember from 'ember'
 import { PropTypes } from 'ember-prop-types'
 import layout from '../templates/components/frost-icon'
 import _ from 'lodash'
@@ -13,8 +13,8 @@ export default Ember.Component.extend({
     icon: PropTypes.string.isRequired
   },
   tagName: 'svg',
-  
-  didReceiveAttrs({newAttrs}) {
+
+  didReceiveAttrs ({newAttrs}) {
     deprecate(
       'nested icon paths have been deprecated in favor of flat icon packs',
       _.includes(newAttrs.icon, '/'),
@@ -25,8 +25,8 @@ export default Ember.Component.extend({
       }
     )
   },
-  
-  getDefaultProps() {
+
+  getDefaultProps () {
     return {
       pack: 'frost'
     }
