@@ -120,7 +120,6 @@ module.exports = {
 
         var svgFunnel
         if (iconPack.name === 'frost' && isLegacy) {
-          console.log('hi')
           svgFunnel = mergeTrees([
             new Funnel(addonIconPackPath, {
               include: [new RegExp(/\.svg$/)]
