@@ -60,6 +60,7 @@ module.exports = {
     return iconNames
   },
   
+  // Present purely to allow programmatic access to the icon packs and icon names (for demo purposes)
   treeForAddon: function (tree) {
     var addonTree = this._super.treeForAddon.call(this, tree)
 
