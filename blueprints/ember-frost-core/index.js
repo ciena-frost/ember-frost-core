@@ -18,6 +18,11 @@ module.exports = {
 
     return this.removePackagesFromProject(packagesToRemove)
       .then(() => {
+        return this.addPackagesToProject([
+          {name: 'svg4everybody', target: '^2.0.3'}
+        ])
+      })
+      .then(() => {
         return this.addBowerPackagesToProject([
           {name: 'lodash', target: '^4.10.0'},
           {name: 'perfect-scrollbar', target: '>=0.6.7 <2.0.0'}
@@ -26,6 +31,7 @@ module.exports = {
       .then(() => {
         return this.addAddonsToProject({
           packages: [
+            {name: 'ember-browserify', target: '^1.1.9'},
             {name: 'ember-computed-decorators', target: '>=0.2.2 <2.0.0'},
             {name: 'ember-lodash', target: '>=0.0.6 <2.0.0'},
             {name: 'ember-one-way-controls', target: '>=0.5.3 <2.0.0'},

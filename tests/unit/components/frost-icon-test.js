@@ -15,7 +15,7 @@ describeComponent(
     })
 
     it('does not wrap template with element', function () {
-      expect(component.tagName).to.equal('')
+      expect(component.tagName).to.equal('svg')
     })
   }
 )
