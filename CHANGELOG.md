@@ -1,3 +1,7 @@
+# 0.10.0
+
+Added the icon pack feature to `frost-icon`, see the documentation at http://ciena-frost.github.io/ember-frost-core/#/icons for details
+
 # 0.9.3
 
 Minor - updating path for frost guide.
