@@ -8,7 +8,7 @@
 | --------- | ---- | ----- | -----------
 | `priority` | `string` | `primary` | primary link - opens content in a new tab |
 |  |  | `secondary` | secondary link - opens content in the same tab |
-| `design` | `string` | `in-line` | custom link styling for in-line text, opens content in the same tab.  Should not be used with `priority` and `size`. |
+| `design` | `string` | `inline` | custom link styling for in-line text, opens content in the same tab.  Should not be used with `priority` and `size`. |
 |  | | `info-bar` | custom link styling for the info-bar context, opens content in the same tab.  Requires `icon` to be specified.  Should not be used with `priority` and `size`. |
 | `size` | `string` | `small` | small size link |
 |  |  | `medium` | medium size link |
@@ -66,7 +66,7 @@
 ### Design - in-line (font based on size)
 ```handlebars
 {{#frost-link 'link.min'
-  design='in-line'
+  design='inline'
 }}
   link
 {{/frost-link}}

@@ -1,5 +1,8 @@
 import Ember from 'ember'
 import layout from '../templates/components/frost-link'
+import _ from 'lodash'
+
+const { LinkComponent, deprecate } = Ember
 
 function addPriorityClass (priority, classes) {
   switch (priority) {
@@ -33,11 +36,24 @@ function addSizeClass (size, classes) {
 }
 
 function addDesignClass (design, classes) {
+  deprecate(
+    '\'in-line\' design style has been deprecated in favour of \'inline\'',
+    ! _.eq(design, 'in-line'),
+    {
+      id: 'frost-debug.deprecate-design-in-line-style',
+      until: '1.0.0',
+      url: 'http://ciena-frost.github.io/ember-frost-core/#/link'
+    }
+  )
+
   switch (design) {
     case 'info-bar':
       classes.push('info-bar')
       break
     case 'in-line':
+      classes.push('in-line')
+      break
+    case 'inline':
       classes.push('in-line')
       break
     default:
@@ -46,7 +62,7 @@ function addDesignClass (design, classes) {
   }
 }
 
-export default Ember.LinkComponent.extend({
+export default LinkComponent.extend({
   classNames: ['frost-link'],
 
   classNameBindings: [
