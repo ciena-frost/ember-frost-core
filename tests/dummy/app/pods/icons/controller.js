@@ -2,9 +2,9 @@ import Ember from 'ember'
 import iconPacks from 'ember-frost-core/icon-packs'
 import _ from 'lodash/lodash'
 
-const { computed } = Ember
+const { computed, Controller } = Ember
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   backgroundColors: [
     'bg-tile-color',
     'bg-content-color',

@@ -3,9 +3,9 @@ import { PropTypes } from 'ember-prop-types'
 import layout from '../templates/components/frost-icon'
 import _ from 'lodash'
 
-const { deprecate } = Ember
+const { Component, deprecate } = Ember
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: 'frost-icon',
   layout: layout,
   propTypes: {
