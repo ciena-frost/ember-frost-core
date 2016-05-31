@@ -38,7 +38,7 @@ function addSizeClass (size, classes) {
 function addDesignClass (design, classes) {
   deprecate(
     '\'in-line\' design style has been deprecated in favour of \'inline\'',
-    ! _.eq(design, 'in-line'),
+    !_.eq(design, 'in-line'),
     {
       id: 'frost-debug.deprecate-design-in-line-style',
       until: '1.0.0',
