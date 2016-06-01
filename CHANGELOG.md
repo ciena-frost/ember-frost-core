@@ -1,3 +1,7 @@
+# 0.11.1
+
+* **Fixed** `frost-loading` to work in more than just Firefox
+
 # 0.11.0
 Deprecating in-line style for link in favour of inline.
 
