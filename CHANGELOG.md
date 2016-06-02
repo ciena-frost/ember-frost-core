@@ -1,3 +1,7 @@
+# 0.11.2
+
+* **Added** correct font to normalize CSS.
+
 # 0.11.1
 
 * **Fixed** `frost-loading` to work in more than just Firefox
