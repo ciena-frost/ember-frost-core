@@ -1,3 +1,9 @@
+# 0.11.3
+
+* **Added** new `pack` property to `frost-button` which gets passed down to underlying `frost-icon`.
+* **Fixed** issue with button icons having wrong color.
+* **Updated** `frost-button` to use `ember-prop-types` for better property validation warnings.
+
 # 0.11.2
 
 * **Added** correct font to normalize CSS.
