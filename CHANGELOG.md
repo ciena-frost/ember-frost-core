@@ -1,3 +1,7 @@
+# 0.11.6
+
+Added a "more" svg to the frost icon pack
+
 # 0.11.5
 
 Fixed a broken build when a consuming app doesn't specify an application icon pack and doesn't contain the legacy `public/svgs` icons path
