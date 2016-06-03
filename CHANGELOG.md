@@ -1,3 +1,7 @@
+# 0.11.4
+
+Duplicated the icons in the `frost` icon pack - duplicates now exist in the legacy `frost/<icon>` nested paths and new `<icon>` flat path.  This allows icons from the `frost` icon pack to be migrated off the deprecated nested paths.  The nested duplicates will be removed in release 1.0.
+
 # 0.11.3
 
 * **Added** new `pack` property to `frost-button` which gets passed down to underlying `frost-icon`.
