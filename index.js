@@ -119,7 +119,7 @@ module.exports = {
         const addonIconPackPath = path.join(addonPackage.path, iconPackPath)
 
         var svgFunnel
-        if (iconPack.name === 'frost' && isLegacy) {
+        if (iconPack.name === 'frost' && isLegacy && fs.existsSync(path.join(this.project.root, 'public/svgs'))) {
           svgFunnel = mergeTrees([
             new Funnel(addonIconPackPath, {
               include: [new RegExp(/\.svg$/)]
