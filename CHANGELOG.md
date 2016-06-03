@@ -1,3 +1,8 @@
+# 0.11.7
+
+* **Fixed** size of reveal icon for `frost-password`.
+* **Updated** `frost-password` to use updated icon path for reveal icon.
+
 # 0.11.6
 
 Added a "more" svg to the frost icon pack
