@@ -10,7 +10,7 @@ export default Ember.Component.extend({
   isRevealerVisible: false,
   revealable: false,
   revealed: false,
-  revealIcon: 'frost/show',
+  revealIcon: 'show',
   type: 'password',
   tabindex: 0,
 
