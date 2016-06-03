@@ -477,6 +477,11 @@
 <symbol id="menu" viewBox="0 0 48 48">
 	<path class="base" d="M6 36h36v-4H6v4zm0-10h36v-4H6v4zm0-14v4h36v-4H6z"/>
 </symbol>
+<symbol id="more" viewBox="0 0 35 35">
+  <circle fill="#009EEF" cx="4.5" cy="17.5" r="4"/>
+  <circle fill="#009EEF" cx="17.5" cy="17.5" r="4"/>
+  <circle fill="#009EEF" cx="30.5" cy="17.5" r="4"/>
+</symbol>
 <symbol id="new-tab" viewBox="0 0 25 25">
 <path fill="#FFFFFF" d="M21,11v10H3V4h10V2H3.5C2.3,2,1,2.4,1,3.5v17.2C1,21.8,2.3,23,3.5,23h17.2c1.1,0,2.4-1.2,2.4-2.3V11H21z"/>
 <polygon fill="#FFFFFF" points="24,1 24,7 22,7 22,4.6 14.5,12.2 13,10.8 20.8,3 17,3 17,1 "/>
