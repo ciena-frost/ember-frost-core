@@ -52,7 +52,7 @@ module.exports = {
       if (fs.lstatSync(filePath).isDirectory()) {
         this.flattenIcons(iconNames, `${subDir}${subDir === '' ? '' : '/'}${fileName}`, filePath)
       } else if (fileName.endsWith('.svg')) {
-        iconNames.push(`${subDir}/${fileName.substr(0, fileName.length - 4)}`)
+        iconNames.push(`${subDir === '' ? '' : `${subDir}/`}${fileName.substr(0, fileName.length - 4)}`)
       }
     })
 
