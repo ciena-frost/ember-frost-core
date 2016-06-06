@@ -1,7 +1,7 @@
 <svg xmlns='http://www.w3.org/2000/svg' style='display: none'>
 <symbol id="add" viewBox="55 0 40 40">
-	<rect x="57.9" y="17.9" fill="#FFFFFF" width="33.3" height="4.1"/>
-	<rect x="72.5" y="3.3" fill="#FFFFFF" width="4.1" height="33.3"/>
+  <rect x="57.9" y="17.9" width="33.3" height="4.1"/>
+  <rect x="72.5" y="3.3" width="4.1" height="33.3"/>
 </symbol>
 <symbol id="app/company-strip" viewBox="0 0 5 375">
   <g>
@@ -120,19 +120,15 @@
 	<path class="base" d="M30.83 14.83L28 12 16 24l12 12 2.83-2.83L21.66 24z"/>
 </symbol>
 <symbol id="chevron" viewBox="0 0 35 35">
-  <g class="frost-svg-chevron">
-    <polygon points="13.5,17.6 27.8,32.2 25.1,35 8,17.6 8.2,17.4 10.7,14.8 25.3,0 28,2.8"/>
-    <polygon points="10.7,14.8 8.2,17.4 10.7,14.8"/>
-  </g>
+  <polygon points="13.5,17.6 27.8,32.2 25.1,35 8,17.6 8.2,17.4 10.7,14.8 25.3,0 28,2.8"/>
+  <polygon points="10.7,14.8 8.2,17.4 10.7,14.8"/>
 </symbol>
 <symbol id="close-circle" viewBox="0 0 30 30">
 	<circle fill="#FFFFFF" cx="15" cy="15" r="15"/>
-	<g class="frost-svg-close-circle">
-		<rect x="13.5" y="7" transform="matrix(0.7071 0.7071 -0.7071 0.7071 15 -6.2132)" width="3" height="15.9"/>
-		<rect x="7" y="13.5" transform="matrix(0.7071 0.7071 -0.7071 0.7071 15 -6.2132)" width="15.9" height="3"/>
-		<path d="M15,2c7.2,0,13,5.8,13,13s-5.8,13-13,13S2,22.2,2,15S7.8,2,15,2 M15,0C6.7,0,0,6.7,0,15s6.7,15,15,15
-		s15-6.7,15-15S23.3,0,15,0L15,0z"/>
-	</g>
+  <rect x="13.5" y="7" transform="matrix(0.7071 0.7071 -0.7071 0.7071 15 -6.2132)" width="3" height="15.9"/>
+  <rect x="7" y="13.5" transform="matrix(0.7071 0.7071 -0.7071 0.7071 15 -6.2132)" width="15.9" height="3"/>
+  <path d="M15,2c7.2,0,13,5.8,13,13s-5.8,13-13,13S2,22.2,2,15S7.8,2,15,2 M15,0C6.7,0,0,6.7,0,15s6.7,15,15,15
+  s15-6.7,15-15S23.3,0,15,0L15,0z"/>
 </symbol>
 <symbol id="close" viewBox="0 0 48 48">
 	<path class="base" d="M38 12.83L35.17 10 24 21.17 12.83 10 10 12.83 21.17 24 10 35.17 12.83 38 24 26.83 35.17 38 38 35.17 26.83 24z"/>
@@ -418,10 +414,8 @@
 	<line fill="none" stroke="#BABCBE" stroke-width="5" stroke-miterlimit="10" x1="32.6" y1="10.3" x2="4.4" y2="10.3"/>
 </symbol>
 <symbol id="link" viewBox="0 0 30 30">
-  <g class="frost-svg-link">
     <path d="M23,14v11H5V7h11V5H6C4.9,5,3,6.9,3,8v16c0,1.1,1.9,3,3,3h16c1.1,0,3-1.9,3-3V14H23z"/>
 	<polygon points="27,3 27,10 25,10 25,6.5 17.3,14.2 15.9,12.8 23.7,5 20,5 20,3 "/>
-  </g>
 </symbol>
 <symbol id="list-large" viewBox="0 0 10 10">
 	<g class="view-size-svg">
