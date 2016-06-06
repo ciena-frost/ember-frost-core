@@ -3,16 +3,21 @@ import { PropTypes } from 'ember-prop-types'
 import layout from '../templates/components/frost-icon'
 import _ from 'lodash'
 
-const { Component, deprecate } = Ember
+const { Component, computed, deprecate } = Ember
 
 export default Component.extend({
   classNames: 'frost-icon',
+  classNameBindings: ['iconClass'],
   layout: layout,
   propTypes: {
     pack: PropTypes.string,
     icon: PropTypes.string.isRequired
   },
   tagName: 'svg',
+  
+  iconClass: computed('icon', function() {
+    return `frost-icon-${this.get('pack')}-${this.get('icon')}`
+  }),
 
   didReceiveAttrs ({newAttrs}) {
     deprecate(

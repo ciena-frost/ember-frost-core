@@ -1,13 +1,11 @@
-.frost-icon {
-  .frost-icon-chevron {
-    fill: $frost-color-grey-5;
-  }
-
-  .frost-icon-close-circle {
-    fill: $frost-color-blue-1;
-  }
-
-  .frost-icon-link {
-  // No default fill - determined by the frost-link class
+svg.frost-icon {
+  fill: currentColor;
+  
+  // Frost icon pack default colors
+  &-frost {
+    &-add { color: $frost-color-white; }
+    &-chevron { color: $frost-color-grey-5; }
+    &-close-circle { color: $frost-color-blue-1; }
+    &-link { color: $frost-color-white; }
   }
 }
