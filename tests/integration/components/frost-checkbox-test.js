@@ -15,34 +15,20 @@ describeComponent(
       `)
 
       expect(
-        this.$('>:first-child').hasClass('frost-checkbox'),
-        'Has class "frost-checkbox"'
-      ).to.be.true
-
-      expect(
-        this.$('>:first-child').hasClass('small'),
+        this.$('.frost-checkbox').hasClass('small'),
         'Has class "small"'
       ).to.be.true
 
       expect(
-        this.$('>:first-child').find('label').hasClass('label'),
-        'Has class "label"'
-      ).to.be.true
-
-      expect(
-        this.$('>:first-child').find('label').prop('for'),
-        this.$('>:first-child').find('input').prop('id'),
+        this.$('.frost-checkbox').find('label').prop('for'),
+        this.$('.frost-checkbox').find('input').prop('id'),
         '"label for" property has the correct value'
       )
 
       expect(
-        this.$('>:first-child').find('label').attr('tabIndex'),
+        this.$('.frost-checkbox').find('label').attr('tabIndex'),
         'label tabindex set to "0"'
       ).to.eql('0')
-
-      expect(this.$('>:first-child').find('svg'),
-        'svg tag exists'
-      ).to.have.length(1)
     })
 
     it('sets size class correctly', function () {
@@ -53,14 +39,14 @@ describeComponent(
       `)
 
       expect(
-        this.$('>:first-child').hasClass('medium'),
+        this.$('.frost-checkbox').hasClass('medium'),
         'Has class "medium"'
       ).to.be.true
 
       this.set('size', 'large')
 
       expect(
-        this.$('>:first-child').hasClass('large'),
+        this.$('.frost-checkbox').hasClass('large'),
         'Has class "large"'
       ).to.be.true
     })
@@ -71,7 +57,7 @@ describeComponent(
       `)
 
       expect(
-        this.$('>:first-child').find('input').prop('checked'),
+        this.$('.frost-checkbox').find('input').prop('checked'),
         'Rendered input is not checked'
       ).to.be.false
 
@@ -80,7 +66,7 @@ describeComponent(
       `)
 
       expect(
-        this.$('>:first-child').find('input').prop('checked'),
+        this.$('.frost-checkbox').find('input').prop('checked'),
         'Rendered input is checked'
       ).to.be.true
     })
@@ -91,7 +77,7 @@ describeComponent(
       `)
 
       expect(
-        this.$('>:first-child').hasClass('error'),
+        this.$('.frost-checkbox').hasClass('error'),
         'Initially does not have class "error"'
       ).to.be.false
 
@@ -100,7 +86,7 @@ describeComponent(
       `)
 
       expect(
-        this.$('>:first-child').hasClass('error'),
+        this.$('.frost-checkbox').hasClass('error'),
         'Has class "error"'
       ).to.be.true
     })
@@ -111,7 +97,7 @@ describeComponent(
       `)
 
       expect(
-        this.$('>:first-child').find('input').prop('disabled'),
+        this.$('.frost-checkbox').find('input').prop('disabled'),
         'Rendered input is initially enabled'
       ).to.be.false
 
@@ -120,7 +106,7 @@ describeComponent(
       `)
 
       expect(
-        this.$('>:first-child').find('input').prop('disabled'),
+        this.$('.frost-checkbox').find('input').prop('disabled'),
         'Rendered input is disabled'
       ).to.be.true
     })
@@ -131,7 +117,7 @@ describeComponent(
       `)
 
       expect(
-        this.$('>:first-child').find('label').text().trim(),
+        this.$('.frost-checkbox').find('label').text().trim(),
         'The "label" property text is not set'
       ).to.eql('')
 
@@ -140,7 +126,7 @@ describeComponent(
       `)
 
       expect(
-        this.$('>:first-child').find('label').text().trim(),
+        this.$('.frost-checkbox').find('label').text().trim(),
         'The "label" property text was set'
       ).to.eql('lorem ipsum')
     })

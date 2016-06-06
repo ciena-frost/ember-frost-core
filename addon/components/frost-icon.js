@@ -3,10 +3,11 @@ import { PropTypes } from 'ember-prop-types'
 import layout from '../templates/components/frost-icon'
 import _ from 'lodash'
 
-const { Component, deprecate } = Ember
+const { Component, computed, deprecate } = Ember
 
 export default Component.extend({
   classNames: 'frost-icon',
+  classNameBindings: ['iconClass'],
   layout: layout,
   propTypes: {
     pack: PropTypes.string,
@@ -14,10 +15,14 @@ export default Component.extend({
   },
   tagName: 'svg',
 
+  iconClass: computed('icon', function () {
+    return `frost-icon-${this.get('pack')}-${this.get('icon')}`
+  }),
+
   didReceiveAttrs ({newAttrs}) {
     deprecate(
       'nested icon paths have been deprecated in favor of flat icon packs',
-      _.includes(newAttrs.icon, '/'),
+      !_.includes(_.get(newAttrs, 'icon.value'), '/'),
       {
         id: 'frost-debug.deprecate-nested-icon-paths',
         until: '1.0.0',
