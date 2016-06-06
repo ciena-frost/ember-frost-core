@@ -1,0 +1,9 @@
+<svg viewBox="0 0 30 30">
+	<circle fill="#FFFFFF" cx="15" cy="15" r="15"/>
+	<g class='frost-svg-close-circle'>
+		<rect x="13.5" y="7" transform="matrix(0.7071 0.7071 -0.7071 0.7071 15 -6.2132)" width="3" height="15.9"/>
+		<rect x="7" y="13.5" transform="matrix(0.7071 0.7071 -0.7071 0.7071 15 -6.2132)" width="15.9" height="3"/>
+		<path d="M15,2c7.2,0,13,5.8,13,13s-5.8,13-13,13S2,22.2,2,15S7.8,2,15,2 M15,0C6.7,0,0,6.7,0,15s6.7,15,15,15
+		s15-6.7,15-15S23.3,0,15,0L15,0z"/>
+	</g>
+</svg>

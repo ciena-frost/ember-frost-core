@@ -52,7 +52,7 @@ module.exports = {
       if (fs.lstatSync(filePath).isDirectory()) {
         this.flattenIcons(iconNames, `${subDir}${subDir === '' ? '' : '/'}${fileName}`, filePath)
       } else if (fileName.endsWith('.svg')) {
-        iconNames.push(`${subDir}/${fileName.substr(0, fileName.length - 4)}`)
+        iconNames.push(`${subDir === '' ? '' : `${subDir}/`}${fileName.substr(0, fileName.length - 4)}`)
       }
     })
 
@@ -119,7 +119,7 @@ module.exports = {
         const addonIconPackPath = path.join(addonPackage.path, iconPackPath)
 
         var svgFunnel
-        if (iconPack.name === 'frost' && isLegacy) {
+        if (iconPack.name === 'frost' && isLegacy && fs.existsSync(path.join(this.project.root, 'public/svgs'))) {
           svgFunnel = mergeTrees([
             new Funnel(addonIconPackPath, {
               include: [new RegExp(/\.svg$/)]

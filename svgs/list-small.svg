@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg 
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xml:space="preserve"
+  version="1.1" id="Layer_1"
+  viewBox="0 0 10 10"
+>
+  <g class="view-size-svg">
+    <rect x="0" y="0" width="10" height="1"/>
+    <rect x="0" y="2.25" width="10" height="1"/>
+    <rect x="0" y="4.5" width="10" height="1"/>
+    <rect x="0" y="6.75" width="10" height="1"/>
+    <rect x="0" y="9" width="10" height="1"/>
+  </g>
+</svg>
