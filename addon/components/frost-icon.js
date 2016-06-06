@@ -14,8 +14,8 @@ export default Component.extend({
     icon: PropTypes.string.isRequired
   },
   tagName: 'svg',
-  
-  iconClass: computed('icon', function() {
+
+  iconClass: computed('icon', function () {
     return `frost-icon-${this.get('pack')}-${this.get('icon')}`
   }),
 
