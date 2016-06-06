@@ -1,3 +1,9 @@
+# 0.11.8
+
+Fixed the deprecation notice test for nested icon paths
+Added CSS based default fills to some icons from the frost icon pack
+Fixed broken checkbox tests
+
 # 0.11.7
 
 * **Fixed** size of reveal icon for `frost-password`.
