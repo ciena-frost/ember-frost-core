@@ -17,7 +17,7 @@ export default Component.extend({
   didReceiveAttrs ({newAttrs}) {
     deprecate(
       'nested icon paths have been deprecated in favor of flat icon packs',
-      !_.includes(newAttrs.icon.value, '/'),
+      !_.includes(_.get(newAttrs, 'icon.value'), '/'),
       {
         id: 'frost-debug.deprecate-nested-icon-paths',
         until: '1.0.0',
