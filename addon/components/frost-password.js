@@ -10,8 +10,9 @@ export default Ember.Component.extend({
   isRevealerVisible: false,
   revealable: false,
   revealed: false,
-  revealIcon: 'frost/show',
+  revealIcon: 'show',
   type: 'password',
+  tabindex: 0,
 
   focusOut: Ember.on('focusOut', function () {
     this.set('isCapsOn', false)
@@ -40,7 +41,22 @@ export default Ember.Component.extend({
     return this.get('revealable') && this.get('isCapsOn') && this.get('isRevealerVisible')
   }),
 
+  _onFocus: Ember.on('focusIn', function (e) {
+    // If an onFocus handler is defined, call it
+    if (this.attrs.onFocus) {
+      this.attrs.onFocus()
+    }
+  }),
+
   actions: {
+    onBlur () {
+      const onBlur = this.get('onBlur')
+
+      if (onBlur) {
+        onBlur()
+      }
+    },
+
     onInput (args) {
       this.set('isRevealerVisible', args.value.length > 0)
       if (_.isFunction(this.get('onInput'))) {

@@ -49,5 +49,23 @@ describeComponent(
         expect(this.get('input-value')).to.eql('')
       })
     })
+
+    it('calls onBlur callback when focus is lost', function (done) {
+      this.on('test-action', function () {
+        done()
+      })
+
+      this.render(hbs`{{frost-textarea onBlur=(action "test-action")}}`)
+      this.$('textarea').focus().val('a').focusout()
+    })
+
+    // it('calls onFocus callback when focused', function (done) {
+    //   this.on('test-action', function () {
+    //     done()
+    //   })
+    //
+    //   this.render(hbs`{{frost-text onFocus=(action "test-action")}}`)
+    //   this.$('input').val('a').focusout().focus()
+    // })
   }
 )

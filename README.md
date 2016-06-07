@@ -30,6 +30,7 @@ The following components are available when you install ember-frost-core
 * [frost-link](frost-link.md)
 * [frost-loading](frost-loading.md)
 * [frost-password](frost-password.md)
+* [frost-scroll](frost-scroll.md)
 * [frost-select](frost-select.md)
 * [frost-text](frost-text.md)
 * [frost-textarea](frost-textarea.md)
@@ -42,7 +43,6 @@ git clone git@github.com:ciena-frost/ember-frost-core.git
 cd ember-frost-core
 npm install && bower install
 ```
-
 ### Development Server
 A dummy application for development is available under `ember-frost-core/tests/dummy`.
 To run the server run `ember server` (or `npm start`) from the root of the repository and

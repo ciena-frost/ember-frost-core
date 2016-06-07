@@ -8,6 +8,7 @@ export default Ember.Component.extend({
   layout: layout,
 
   showClear: false,
+  tabindex: 0,
 
   oninput: Ember.on('input', function (e) {
     if (_.isFunction(this.attrs['onInput'])) {
@@ -26,6 +27,13 @@ export default Ember.Component.extend({
     }
   }),
 
+  _onFocus: Ember.on('focusIn', function () {
+    // If an onFocus handler is defined, call it
+    if (this.attrs.onFocus) {
+      this.attrs.onFocus()
+    }
+  }),
+
   actions: {
     clear: function () {
       this.set('value', '')
@@ -33,6 +41,14 @@ export default Ember.Component.extend({
       this.$('textarea').val('')
       this.set('showClear', false)
       this.$('textarea').trigger('input')
+    },
+
+    onBlur () {
+      const onBlur = this.get('onBlur')
+
+      if (onBlur) {
+        onBlur()
+      }
     }
   }
 })

@@ -91,12 +91,50 @@
         }}
       </div>
     </div>
+    <div class="example">
+      <div class="title">tabindex</div>
+      <div class="demo">
+        {{frost-textarea
+          placeholder='Un-tabbable'
+          tabindex='-1'
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-textarea
+  placeholder='Un-tabbable'
+  tabindex='-1'
+}}
+  ```"
+        }}
+      </div>
+    </div>
 
   </div>
 
   <div class="section-title">Events</div>
   <hr>
   <div class="section">
+
+    <div class="example">
+      <div class="title">onFocus, onBlur</div>
+      <div class="demo">
+        {{frost-textarea
+          onBlur=(action "onBlurHandler")
+          onFocus=(action "onFocusHandler")
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-textarea
+  onBlur=(action 'onBlurHandler')
+  onFocus=(action 'onFocusHandler')
+}}
+```"
+        }}
+      </div>
+    </div>
+
     <div class="example">
       <div class="title">onInput</div>
       <div class="demo">
@@ -113,5 +151,6 @@
         }}
       </div>
     </div>
+
   </div>
 </div>

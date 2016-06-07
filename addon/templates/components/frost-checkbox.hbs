@@ -1,5 +1,4 @@
-{{one-way-input
-    type='checkbox'
+{{one-way-checkbox
     id=inputId
     class='input'
     checked=isChecked
@@ -7,7 +6,7 @@
     name=name
     update=(action 'input')
 }}
-<label for={{inputId}} class='label'>
+<label for={{inputId}} class='label' onBlur={{action 'onBlur'}} tabIndex=0>
   {{#if hasBlock}}
     {{yield}}
   {{else}}

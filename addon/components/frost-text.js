@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   layout: layout,
 
   showClear: false,
+  tabindex: 0,
 
   onChange: Ember.on('input', function (e) {
     const id = this.get('id')
@@ -25,8 +26,13 @@ export default Ember.Component.extend({
     }
   }),
 
-  onFocus: Ember.on('focusIn', function (e) {
+  _onFocus: Ember.on('focusIn', function (e) {
+    // Selects the text when the frost-text field is selected
     e.target.select()
+    // If an onFocus handler is defined, call it
+    if (this.attrs.onFocus) {
+      this.attrs.onFocus()
+    }
   }),
 
   didInitAttrs () {
@@ -41,6 +47,14 @@ export default Ember.Component.extend({
       this.$('input').val('')
       this.set('showClear', false)
       this.$('input').trigger('input')
+    },
+
+    onBlur () {
+      const onBlur = this.get('onBlur')
+
+      if (onBlur) {
+        onBlur()
+      }
     }
   }
 })

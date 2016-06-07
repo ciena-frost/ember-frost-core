@@ -1,3 +1,5 @@
+@import 'typography';
+
 /* Modified from normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
 /**
@@ -6,7 +8,7 @@
  *    without disabling user zoom.
  */
 html {
-  font-family: sans-serif; /* 1 */
+  font-family: $frost-font-family; /* 1 */
   -ms-text-size-adjust: 100%; /* 2 */
   -webkit-text-size-adjust: 100%; /* 2 */
   box-sizing: border-box;

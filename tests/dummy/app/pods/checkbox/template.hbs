@@ -154,6 +154,22 @@
   <div class='section'>
 
     <div class="example">
+      <div class="title">onBlur</div>
+      <div class="demo">
+        {{frost-checkbox onBlur=(action 'onBlurHandler')
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-checkbox
+  onBlur=(action 'onBlurHandler')
+}}
+```"
+        }}
+      </div>
+    </div>
+
+    <div class="example">
       <div class="title">onInput</div>
       <div class="demo">
         {{frost-checkbox onInput=(action 'onInputHandler')
@@ -168,6 +184,6 @@
         }}
       </div>
     </div>
-  </div>
 
+  </div>
 </div>

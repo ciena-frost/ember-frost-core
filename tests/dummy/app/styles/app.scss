@@ -95,6 +95,13 @@ hr {
   }
 }
 
+.dummy-body.scroll {
+  .example .snippet {
+    width: 800px;
+    margin: 15px 0 10px 0;
+  }
+}
+
 .dummy-body .title {
   padding-bottom: 10px;
   padding-top: 10px;
@@ -157,6 +164,11 @@ hr {
   flex-wrap: wrap;
   padding: 40px;
 
+  .icon-pack .name {
+    font-size: $frost-font-l;
+    border-bottom: 1px solid $frost-color-blue-1;
+  }
+
   .entry {
     display: inline-flex;
     flex-direction: column;
@@ -165,18 +177,7 @@ hr {
 
     .title {
       margin-bottom: 5px;
-    }
-
-    .content {
-      background-color: yellow;
-      //background: repeating-linear-gradient(
-      //  45deg,
-      //  rgba(0, 97, 250, 0.5),
-      //  rgba(0, 33, 245, 0.55) 5px,
-      //  rgba(12, 0, 240, 0.6) 5px,
-      //  rgba(17, 0, 235, 0.65) 5px
-      //);
-
+      font-size: $frost-font-m;
     }
 
     .frost-icon {
@@ -263,3 +264,17 @@ hr {
     @include selected-outline();
   }
 }
+
+.dummy-svg-huge {
+  width: 800px;
+  height: 800px;
+  > rect {
+  fill: red;
+  }
+}
+
+ .scroll-size {
+    width:800px;
+    height:400px;
+    border: 1px grey solid;
+  }

@@ -19,6 +19,7 @@ $frost-input-select-option-row-height: 35px;
   outline: none;
   position: relative;
   width: 200px;
+  background: $frost-select-container-background;
 
   .up-arrow {
     @include triangle-up($frost-select-container-background, 12px);
@@ -54,7 +55,7 @@ $frost-input-select-option-row-height: 35px;
     height: 100%;
     outline: none;
     overflow: hidden;
-    padding: 0 15px;
+    padding: 0 5px;
     text-overflow: ellipsis;
     white-space: nowrap;
     width: 75%;
@@ -75,7 +76,7 @@ $frost-input-select-option-row-height: 35px;
     display: inline-block;
     height: $frost-input-select-option-row-height;
     line-height: $frost-input-select-option-row-height;
-    padding: 0 15px;
+    padding: 0 5px;
     width: 100%;
     .frost-checkbox {
       input {
@@ -127,7 +128,7 @@ $frost-input-select-option-row-height: 35px;
 
 .frost-select.multi {
   li {
-    padding: 0 10px;
+    padding: 0 5px;
   }
 
   .multi-status {
@@ -137,7 +138,7 @@ $frost-input-select-option-row-height: 35px;
     justify-content: space-between;
     align-items: center;
     border-bottom: solid 5px $frost-color-lgrey-3;
-    padding: 10px;
+    padding: 5px;
     font-size: $frost-font-m;
 
     .number-selected {

@@ -94,6 +94,30 @@
       </div>
     </div>
 
+    <div class="example">
+      <div class="title">tabindex</div>
+      <div class="demo">
+        {{#frost-link 'link.min'
+          priority='primary'
+          size='small'
+          tabindex='-1'
+        }}
+          Primary
+        {{/frost-link}}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{#frost-link 'link.min'
+  priority='primary'
+  size='small'
+  tabindex='-1'
+}}
+  Primary
+{{/frost-link}}
+```"}}
+      </div>
+    </div>
+
   </div>
 
   <div class="section-title">Secondary</div>
@@ -190,6 +214,30 @@
       </div>
     </div>
 
+    <div class="example">
+      <div class="title">tabindex</div>
+      <div class="demo">
+        {{#frost-link 'link.min'
+          priority='secondary'
+          size='small'
+          tabindex='-1'
+        }}
+          Secondary
+        {{/frost-link}}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{#frost-link 'link.min'
+  priority='secondary'
+  size='small'
+  tabindex='-1'
+}}
+  Secondary
+{{/frost-link}}
+```"}}
+      </div>
+    </div>
+
   </div>
 
   <div class="section-title">Design</div>
@@ -203,7 +251,7 @@
           <span style="font-size: {{fontSize}}px">
             lorem
             {{#frost-link 'link.min'
-              design='in-line'
+              design='inline'
             }}
               link
             {{/frost-link}}
@@ -229,7 +277,7 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{#frost-link 'link.min'
-  design='in-line'
+  design='inline'
 }}
   link
 {{/frost-link}}
@@ -242,7 +290,7 @@
       <div class="demo">
         lorem
         {{#frost-link 'link.min'
-          design='in-line'
+          design='inline'
           disabled=true
         }}
           link
@@ -252,7 +300,7 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{#frost-link 'link.min'
-  design='in-line'
+  design='inline'
   disabled=true
 }}
   link

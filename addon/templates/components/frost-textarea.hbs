@@ -2,15 +2,17 @@
   autofocus=autofocus
   cols=cols
   disabled=disabled
+  focus-out=(action 'onBlur')
   form=form
   value=value
   placeholder=placeholder
   readonly=readonly
   rows=rows
   wrap=wrap
+  tabindex=tabindex
 }}
 {{#if showClear}}
-  {{#frost-button class='clear' type='icon' onClick=(action 'clear')}}
+  {{#frost-button class='clear' type='icon' tabIndex='-1' onClick=(action 'clear')}}
     {{frost-icon  icon='frost/close'}}
   {{/frost-button}}
 {{/if}}

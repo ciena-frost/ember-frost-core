@@ -1,22 +1,39 @@
 import Ember from 'ember'
-import _ from 'lodash/lodash'
-import svgs from 'ember-frost-core/svgs'
+import { PropTypes } from 'ember-prop-types'
 import layout from '../templates/components/frost-icon'
+import _ from 'lodash'
 
-export default Ember.Component.extend({
-  tagName: '',
+const { Component, computed, deprecate } = Ember
+
+export default Component.extend({
+  classNames: 'frost-icon',
+  classNameBindings: ['iconClass'],
   layout: layout,
+  propTypes: {
+    pack: PropTypes.string,
+    icon: PropTypes.string.isRequired
+  },
+  tagName: 'svg',
 
-  // TODO This is a pretty nasty way to inline svgs - let's look into a better way
-  svg: Ember.computed('icon', 'class', function () {
-    let svg = Ember.get(svgs, this.get('icon').replace(/\//g, '.'))
+  iconClass: computed('icon', function () {
+    return `frost-icon-${this.get('pack')}-${this.get('icon')}`
+  }),
 
-    if (_.isUndefined(svg)) {
-      Ember.assert('The svg ' + this.get('icon') + ' does not exist')
-    } else {
-      let classes = _.isString(this.get('class')) ? ' ' + this.get('class') : ''
-      svg = svg.replace('<svg', '<svg class="frost-icon' + classes + '"')
-      return new Ember.Handlebars.SafeString(svg)
+  didReceiveAttrs ({newAttrs}) {
+    deprecate(
+      'nested icon paths have been deprecated in favor of flat icon packs',
+      !_.includes(_.get(newAttrs, 'icon.value'), '/'),
+      {
+        id: 'frost-debug.deprecate-nested-icon-paths',
+        until: '1.0.0',
+        url: 'http://ciena-frost.github.io/ember-frost-core/#/icons'
+      }
+    )
+  },
+
+  getDefaultProps () {
+    return {
+      pack: 'frost'
     }
-  })
+  }
 })

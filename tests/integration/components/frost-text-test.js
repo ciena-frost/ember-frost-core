@@ -50,5 +50,24 @@ describeComponent(
         expect(this.get('input-value')).to.eql('')
       })
     })
+
+    it('calls onBlur callback when focus is lost', function (done) {
+      this.on('test-action', function () {
+        done()
+      })
+
+      this.render(hbs`{{frost-text onBlur=(action "test-action")}}`)
+      this.$('input').focus().val('a').focusout()
+    })
+
+    // it('calls onFocus callback when focused', function (done) {
+    //   this.on('test-action', function () {
+    //     done()
+    //   })
+    //
+    //   this.render(hbs`<div class="dummy"></div>{{frost-text onFocus=(action "test-action")}}`)
+    //   Ember.run(() => this.$('.dummy').focus())
+    //   Ember.run(() => this.$('input').focus().val('a'))
+    // })
   }
 )
