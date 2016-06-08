@@ -1,3 +1,7 @@
+# 0.11.9
+
+* **Added** `autofocus` property to `frost-select` component.
+
 # 0.11.8
 
 Fixed the deprecation notice test for nested icon paths
