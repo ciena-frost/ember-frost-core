@@ -1,3 +1,7 @@
+# 0.11.10
+
+* **Fixed** deprecation warning from Ember 2.6.0 to stop using `didInitAttrs` hook and instead use `init`.
+
 # 0.11.9
 
 * **Added** `autofocus` property to `frost-select` component.
