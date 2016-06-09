@@ -35,9 +35,12 @@ export default Ember.Component.extend({
     }
   }),
 
-  didInitAttrs () {
-    this.set('right', this.get('align') === 'right')
-    this.set('center', this.get('align') === 'center')
+  init () {
+    this._super(...arguments)
+    this.setProperties({
+      center: this.get('align') === 'center',
+      right: this.get('align') === 'right'
+    })
   },
 
   actions: {
