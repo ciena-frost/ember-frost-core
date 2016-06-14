@@ -1,5 +1,6 @@
 import _ from 'lodash'
 import Ember from 'ember'
+import computed from 'ember-computed-decorators'
 import layout from '../templates/components/frost-text'
 
 export default Ember.Component.extend({
@@ -7,8 +8,6 @@ export default Ember.Component.extend({
   classNames: ['frost-text'],
   classNameBindings: ['right', 'center'],
   layout: layout,
-
-  showClear: false,
   tabindex: 0,
 
   onChange: Ember.on('input', function (e) {
@@ -18,11 +17,6 @@ export default Ember.Component.extend({
 
     if (_.isFunction(onInput)) {
       onInput({id, value})
-    }
-    if (e.target.value.length > 0) {
-      this.set('showClear', true)
-    } else {
-      this.set('showClear', false)
     }
   }),
 
@@ -34,6 +28,11 @@ export default Ember.Component.extend({
       this.attrs.onFocus()
     }
   }),
+
+  @computed('value')
+  showClear (value) {
+    return Boolean(value)
+  },
 
   init () {
     this._super(...arguments)
@@ -48,7 +47,6 @@ export default Ember.Component.extend({
       this.set('value', '')
       this.$('input').focus()
       this.$('input').val('')
-      this.set('showClear', false)
       this.$('input').trigger('input')
     },
 
