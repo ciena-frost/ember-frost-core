@@ -1,3 +1,7 @@
+# 0.11.11
+
+* **Fixed** text input to stop showing clear button when consumer clears value programmatically.
+
 # 0.11.10
 
 * **Fixed** deprecation warning from Ember 2.6.0 to stop using `didInitAttrs` hook and instead use `init`.
