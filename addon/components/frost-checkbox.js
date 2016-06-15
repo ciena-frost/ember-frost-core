@@ -19,7 +19,6 @@ export default Component.extend({
   // Computed Properties
   // ==========================================================================
 
-  @readOnly
   @computed('checked')
   /**
    * Determine whether or not input should be checked
