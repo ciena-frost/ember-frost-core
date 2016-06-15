@@ -1,13 +1,78 @@
 import _ from 'lodash'
 import Ember from 'ember'
 const {Component} = Ember
-import computed from 'ember-computed-decorators'
+import computed, {readOnly} from 'ember-computed-decorators'
 
 export default Component.extend({
-  attributeBindings: ['align', 'autofocus', 'placeholder', 'disabled', 'readonly', 'value', 'type'],
+  // ==========================================================================
+  // Dependencies
+  // ==========================================================================
+
+  // ==========================================================================
+  // Properties
+  // ==========================================================================
+
+  attributeBindings: [
+    'align',
+    'autofocus',
+    'disabled',
+    'placeholder',
+    'readonly',
+    'type',
+    'value'
+  ],
   classNames: ['frost-text'],
-  classNameBindings: ['right', 'center'],
+  classNameBindings: [
+    'center',
+    'right'
+  ],
   tabindex: 0,
+
+  // ==========================================================================
+  // Computed Properties
+  // ==========================================================================
+
+  @readOnly
+  @computed('align')
+  /**
+   * Determine whether or not text alignment is center
+   * @param {[type]} align - text alignment
+   * @returns {Boolean} whether or not text alignment is center
+   */
+  center (align) {
+    return align === 'center'
+  },
+
+  @readOnly
+  @computed('align')
+  /**
+   * Determine whether or not text alignment is right
+   * @param {String} align - text alignment
+   * @returns {Boolean} whether or not text alignment is right
+   */
+  right (align) {
+    return align === 'right'
+  },
+
+  @readOnly
+  @computed('disabled', 'value')
+  /**
+   * Determine whether or not to show button for clearing out text field
+   * @param {Boolean} disabled - whether or not input is disabled
+   * @param {String} value - value of text field
+   * @returns {Boolean} whether or not to show button for clearing out text field
+   */
+  showClear (disabled, value) {
+    return !disabled && Boolean(value)
+  },
+
+  // ==========================================================================
+  // Functions
+  // ==========================================================================
+
+  // ==========================================================================
+  // Events
+  // ==========================================================================
 
   onChange: Ember.on('input', function (e) {
     const id = this.get('id')
@@ -28,18 +93,9 @@ export default Component.extend({
     }
   }),
 
-  @computed('value')
-  showClear (value) {
-    return Boolean(value)
-  },
-
-  init () {
-    this._super(...arguments)
-    this.setProperties({
-      center: this.get('align') === 'center',
-      right: this.get('align') === 'right'
-    })
-  },
+  // ==========================================================================
+  // Actions
+  // ==========================================================================
 
   actions: {
     clear: function () {

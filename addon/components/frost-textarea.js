@@ -1,13 +1,51 @@
+import _ from 'lodash'
 import Ember from 'ember'
 const {Component, run} = Ember
-import _ from 'lodash/lodash'
+import computed, {readOnly} from 'ember-computed-decorators'
 
 export default Component.extend({
-  classNames: ['frost-textarea'],
-  attributeBindings: ['autofocus', 'placeholder', 'disabled', 'readonly', 'cols', 'rows'],
+  // ==========================================================================
+  // Dependencies
+  // ==========================================================================
 
-  showClear: false,
+  // ==========================================================================
+  // Properties
+  // ==========================================================================
+
+  attributeBindings: [
+    'autofocus',
+    'cols',
+    'disabled',
+    'placeholder',
+    'readonly',
+    'rows'
+  ],
+  classNames: ['frost-textarea'],
   tabindex: 0,
+
+  // ==========================================================================
+  // Computed Properties
+  // ==========================================================================
+
+  @readOnly
+  @computed('disabled', 'value')
+  /**
+   * Determine whether or not to show button for clearing out text field
+   * @param {Boolean} disabled - whether or not input is disabled
+   * @param {String} value - value of text field
+   * @returns {Boolean} whether or not to show button for clearing out text field
+   */
+  showClear (disabled, value) {
+    return !disabled && Boolean(value)
+  },
+
+  // ==========================================================================
+  // Functions
+  // ==========================================================================
+
+  // ==========================================================================
+  // Events
+  // ==========================================================================
 
   oninput: Ember.on('input', function (e) {
     if (_.isFunction(this.attrs['onInput'])) {
@@ -18,12 +56,6 @@ export default Component.extend({
         })
       })
     }
-
-    if (e.target.value.length > 0) {
-      this.set('showClear', true)
-    } else {
-      this.set('showClear', false)
-    }
   }),
 
   _onFocus: Ember.on('focusIn', function () {
@@ -33,12 +65,15 @@ export default Component.extend({
     }
   }),
 
+  // ==========================================================================
+  // Actions
+  // ==========================================================================
+
   actions: {
     clear: function () {
       this.set('value', '')
       this.$('textarea').focus()
       this.$('textarea').val('')
-      this.set('showClear', false)
       this.$('textarea').trigger('input')
     },
 

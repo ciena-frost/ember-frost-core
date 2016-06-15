@@ -4,7 +4,6 @@ import computed, {readOnly} from 'ember-computed-decorators'
 import FrostSelect from './frost-select'
 
 export default FrostSelect.extend({
-
   // ==========================================================================
   // Dependencies
   // ==========================================================================
