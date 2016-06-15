@@ -1,18 +1,17 @@
 import Ember from 'ember'
+const {Component, run} = Ember
 import _ from 'lodash/lodash'
-import layout from '../templates/components/frost-textarea'
 
-export default Ember.Component.extend({
+export default Component.extend({
   classNames: ['frost-textarea'],
   attributeBindings: ['autofocus', 'placeholder', 'disabled', 'readonly', 'cols', 'rows'],
-  layout: layout,
 
   showClear: false,
   tabindex: 0,
 
   oninput: Ember.on('input', function (e) {
     if (_.isFunction(this.attrs['onInput'])) {
-      Ember.run.next(this, function () {
+      run.next(this, function () {
         this.attrs['onInput']({
           id: this.get('id'),
           value: e.target.value

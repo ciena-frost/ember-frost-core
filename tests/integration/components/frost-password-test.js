@@ -1,4 +1,5 @@
 import Ember from 'ember'
+const {run} = Ember
 import {expect} from 'chai'
 import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
@@ -31,8 +32,8 @@ describeComponent(
       })
 
       this.render(hbs`{{frost-password id="action" onInput=(action "test-action")}}`)
-      Ember.run(() => this.$('#action').val('a').trigger('input'))
-      Ember.run.next(this, () => {
+      run(() => this.$('#action').val('a').trigger('input'))
+      run.next(this, () => {
         expect(this.get('input-value')).to.eql('a')
       })
     })

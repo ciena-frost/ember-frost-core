@@ -1,3 +1,5 @@
+import Ember from 'ember'
+const {run} = Ember
 import {expect} from 'chai'
 import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
@@ -143,7 +145,7 @@ describeComponent(
       `)
       var input = this.$('input')
       input.trigger('input')
-      Ember.run.next(this, () => {
+      run.next(this, () => {
         expect(this.get('checkbox-value')).to.eql(true)
       })
     })

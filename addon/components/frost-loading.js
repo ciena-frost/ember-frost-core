@@ -1,7 +1,6 @@
 import Ember from 'ember'
-import layout from '../templates/components/frost-loading'
+const {Component} = Ember
 
-export default Ember.Component.extend({
-  layout,
+export default Component.extend({
   classNames: ['frost-loading']
 })

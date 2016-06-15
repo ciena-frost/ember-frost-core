@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import Ember from 'ember'
+const {Component} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
-import layout from '../templates/components/frost-select'
 
 // TODO: Add typedefs for items
 
@@ -29,7 +29,7 @@ const UP_KEY = 38
 const DOWN_KEY = 40
 const BACKSPACE_KEY = 8
 
-export default Ember.Component.extend({
+export default Component.extend({
 
   // ==========================================================================
   // Dependencies
@@ -47,7 +47,6 @@ export default Ember.Component.extend({
   error: false,
   hovered: -1,
   filter: undefined,
-  layout,
   maxListHeight: 400,
   tabIndex: -1,
   width: 200,

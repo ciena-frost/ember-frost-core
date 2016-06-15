@@ -6,7 +6,9 @@ import {afterEach, beforeEach, describe, it} from 'mocha'
 describeComponent(
   'frost-select',
   'FrostSelectComponent',
-  {},
+  {
+    unit: true
+  },
   function () {
     let component, sandbox
 
@@ -77,7 +79,7 @@ describeComponent(
 
           sandbox.stub(component, 'selectOptionByValue')
 
-          Ember.run(() => {
+          run(() => {
             component.didReceiveAttrs({
               newAttrs: {
                 data: {
