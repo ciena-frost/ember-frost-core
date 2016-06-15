@@ -10,7 +10,8 @@ function wait (callback) {
   run.later(callback)
 }
 
-const testTemplate = hbs`{{frost-multi-select onChange=onChange selected=selected data=data greeting=greeting selectedValue=selectedValue}}`
+const selectedTestTemplate = hbs`{{frost-multi-select onChange=onChange selected=selected data=data greeting=greeting}}`
+const selectedValueTestTemplate = hbs`{{frost-multi-select onChange=onChange data=data greeting=greeting selectedValue=selectedValue}}`
 
 let props = {
   onChange: sinon.spy(),
@@ -44,7 +45,7 @@ describeComponent(
       run(() => {
         this.setProperties(props)
       })
-      this.render(testTemplate)
+      this.render(selectedTestTemplate)
     })
 
     it('renders', function () {
@@ -135,6 +136,32 @@ describeComponent(
       })
     })
 
+    it('keeps the list open when a value is selected', function (done) {
+      this.$('.down-arrow').click()
+      this.$('.frost-select li:first-child').click()
+      wait(() => {
+        const isOpen = this.$('.frost-select').hasClass('open')
+        expect(isOpen).to.be.true
+        done()
+      })
+    })
+  }
+)
+
+describeComponent(
+  'frost-multi-select',
+  'Intergration: FrostMultiSelectComponent',
+  {
+    integration: true
+  },
+  function () {
+    beforeEach(function () {
+      run(() => {
+        this.setProperties(props)
+      })
+      this.render(selectedValueTestTemplate)
+    })
+
     it('allows for setting multiple values using the selectedValue attribute', function (done) {
       this.set('selectedValue', ['Lex Diamond', 'Tony Starks', 'Johnny Blaze'])
 
@@ -170,16 +197,6 @@ describeComponent(
         })
       })
     })
-
-    it('keeps the list open when a value is selected', function (done) {
-      this.$('.down-arrow').click()
-      this.$('.frost-select li:first-child').click()
-      wait(() => {
-        const isOpen = this.$('.frost-select').hasClass('open')
-        expect(isOpen).to.be.true
-        done()
-      })
-    })
   }
 )
 
@@ -196,7 +213,7 @@ describeComponent(
         this.setProperties(props)
       })
 
-      this.render(testTemplate)
+      this.render(selectedTestTemplate)
     })
 
     it('respects pre-selected values', function () {

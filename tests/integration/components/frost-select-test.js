@@ -8,12 +8,19 @@ import _ from 'lodash'
 import Ember from 'ember'
 const {run} = Ember
 
-const testTemplate = hbs`{{frost-select
+const selectedTestTemplate = hbs`{{frost-select
   data=data
   greeting=greeting
   onChange=onChange
   placeholder=placeholder
   selected=selected
+}}`
+
+const selectedValueTestTemplate = hbs`{{frost-select
+  data=data
+  greeting=greeting
+  onChange=onChange
+  placeholder=placeholder
   selectedValue=selVal
 }}`
 
@@ -76,7 +83,7 @@ describeComponent(
         greeting: 'Hola'
       }
       this.setProperties(props)
-      this.render(testTemplate)
+      this.render(selectedTestTemplate)
       dropDown = this.$('.frost-select')
     })
 
@@ -267,18 +274,6 @@ describeComponent(
       })
     })
 
-    it('sets the prompt and value from a component attribute', function (done) {
-      this.set('selVal', 'Tony Starks')
-
-      run.later(() => {
-        let input = this.$('.frost-select input')
-
-        expect(input.val()).to.be.eql('Ghostface')
-        expect(props.onChange.called).to.be.true
-        done()
-      })
-    })
-
     it('handles click outside of select', function (done) {
       this.$('.frost-select .down-arrow').click()
       run.later(() => {
@@ -304,6 +299,57 @@ describeComponent(
     it('supports placeholder', function () {
       const $input = this.$('.frost-select input')
       expect($input.attr('placeholder')).to.eql('Select something already')
+    })
+  }
+)
+
+describeComponent(
+  'frost-select',
+  'Integration: FrostSelectComponent',
+  {
+    integration: true
+  },
+  function () {
+    let props
+
+    beforeEach(function () {
+      props = {
+        onChange: sinon.spy(),
+        placeholder: 'Select something already',
+        data: [
+          {
+            value: 'Lex Diamond',
+            label: 'Raekwon'
+          },
+          {
+            value: 'Johnny Blaze',
+            label: 'Method Man'
+          },
+          {
+            value: 'Tony Starks',
+            label: 'Ghostface'
+          }
+        ],
+        greeting: 'Hola'
+      }
+      this.setProperties(props)
+      this.render(selectedValueTestTemplate)
+    })
+
+    it('renders', function () {
+      expect(this.$('.frost-select')).to.have.length(1)
+    })
+
+    it('sets the prompt and value from a component attribute', function (done) {
+      this.set('selVal', 'Tony Starks')
+
+      run.later(() => {
+        let input = this.$('.frost-select input')
+
+        expect(input.val()).to.be.eql('Ghostface')
+        expect(props.onChange.called).to.be.true
+        done()
+      })
     })
   }
 )
