@@ -1,3 +1,7 @@
+# 0.11.15
+
+* Cleaned up `frost-select` code to try and make more maintainable.
+
 # 0.11.14
 
 * **Fixed** issue with `isChecked` computed property of `frost-checkbox` being `readOnly`.
