@@ -1,22 +1,54 @@
-import Ember from 'ember'
-import { PropTypes } from 'ember-prop-types'
 import _ from 'lodash'
+import Ember from 'ember'
+const {Component, deprecate} = Ember
+import computed, {readOnly} from 'ember-computed-decorators'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
-const { Component, computed, deprecate } = Ember
+export default Component.extend(PropTypeMixin, {
+  // ==========================================================================
+  // Dependencies
+  // ==========================================================================
 
-export default Component.extend({
+  // ==========================================================================
+  // Properties
+  // ==========================================================================
+
   classNames: 'frost-icon',
   classNameBindings: ['iconClass'],
+  tagName: 'svg',
+
   propTypes: {
     pack: PropTypes.string,
     icon: PropTypes.string.isRequired
   },
-  tagName: 'svg',
 
-  iconClass: computed('icon', function () {
-    return `frost-icon-${this.get('pack')}-${this.get('icon')}`
-  }),
+  getDefaultProps () {
+    return {
+      pack: 'frost'
+    }
+  },
 
+  // ==========================================================================
+  // Computed Properties
+  // ==========================================================================
+
+  @readOnly
+  @computed('icon', 'pack')
+  /**
+   * Get class for icon
+   * @param {String} icon - icon to render
+   * @param {String} pack - pack to get icon from
+   * @returns {String} class for icon
+   */
+  iconClass (icon, pack) {
+    return `frost-icon-${pack}-${icon}`
+  },
+
+  // ==========================================================================
+  // Functions
+  // ==========================================================================
+
+  /* Ember.Component method */
   didReceiveAttrs ({newAttrs}) {
     deprecate(
       'nested icon paths have been deprecated in favor of flat icon packs',
@@ -27,11 +59,13 @@ export default Component.extend({
         url: 'http://ciena-frost.github.io/ember-frost-core/#/icons'
       }
     )
-  },
-
-  getDefaultProps () {
-    return {
-      pack: 'frost'
-    }
   }
+
+  // ==========================================================================
+  // Events
+  // ==========================================================================
+
+  // ==========================================================================
+  // Actions
+  // ==========================================================================
 })

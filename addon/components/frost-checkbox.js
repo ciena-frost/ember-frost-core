@@ -1,12 +1,25 @@
+import _ from 'lodash'
 import Ember from 'ember'
 const {Component, isEmpty, run} = Ember
-import computed from 'ember-computed-decorators'
-import _ from 'lodash/lodash'
+import computed, {readOnly} from 'ember-computed-decorators'
 
 export default Component.extend({
+  // ==========================================================================
+  // Dependencies
+  // ==========================================================================
+
+  // ==========================================================================
+  // Properties
+  // ==========================================================================
+
   classNames: ['frost-checkbox'],
   classNameBindings: ['sizeClass'],
 
+  // ==========================================================================
+  // Computed Properties
+  // ==========================================================================
+
+  @readOnly
   @computed('checked')
   /**
    * Determine whether or not input should be checked
@@ -17,6 +30,18 @@ export default Component.extend({
     return [null, undefined, false].indexOf(checked) === -1
   },
 
+  @computed('id')
+  /**
+   * Get input ID
+   * @param {String} id - ID to use for input
+   * @returns {String} input ID
+   */
+  inputId (id) {
+    id = id || this.elementId
+    return `${id}_input`
+  },
+
+  @readOnly
   @computed('size')
   /**
    * Get class for setting input size
@@ -26,6 +51,11 @@ export default Component.extend({
   sizeClass (size) {
     return size || 'small'
   },
+
+  // ==========================================================================
+  // Functions
+  // ==========================================================================
+
   keyPress (e) {
     if (e.keyCode === 32) {
       if (this.get('disabled') !== true) {
@@ -37,6 +67,8 @@ export default Component.extend({
       return false
     }
   },
+
+  /* Ember.Component method */
   didInsertElement () {
     if (this.get('autofocus')) {
       run.next('render', () => {
@@ -45,11 +77,9 @@ export default Component.extend({
     }
   },
 
-  @computed('id')
-  inputId (id) {
-    id = id || this.elementId
-    return `${id}_input`
-  },
+  // ==========================================================================
+  // Events
+  // ==========================================================================
 
   _onFocus: Ember.on('focusIn', function (e) {
     // If an onFocus handler is defined, call it
@@ -57,6 +87,10 @@ export default Component.extend({
       this.attrs.onFocus()
     }
   }),
+
+  // ==========================================================================
+  // Actions
+  // ==========================================================================
 
   actions: {
     onBlur () {

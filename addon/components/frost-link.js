@@ -1,38 +1,25 @@
-import Ember from 'ember'
 import _ from 'lodash'
+import Ember from 'ember'
+const {deprecate, LinkComponent, Logger} = Ember
+import computed, {readOnly} from 'ember-computed-decorators'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
-const {computed, deprecate, LinkComponent, Logger} = Ember
+const validDesigns = [
+  'info-bar',
+  'in-line',
+  'inline'
+]
 
-function addPriorityClass (priority, classes) {
-  switch (priority) {
-    case 'primary':
-      classes.push('primary')
-      break
-    case 'secondary':
-      classes.push('secondary')
-      break
-    default:
-      // no class to add for invalid priority
-      break
-  }
-}
+const validPriorities = [
+  'primary',
+  'secondary'
+]
 
-function addSizeClass (size, classes) {
-  switch (size) {
-    case 'small':
-      classes.push('small')
-      break
-    case 'medium':
-      classes.push('medium')
-      break
-    case 'large':
-      classes.push('large')
-      break
-    default:
-      // no class to add for invalid size
-      break
-  }
-}
+const validSizes = [
+  'large',
+  'medium',
+  'small'
+]
 
 function addDesignClass (design, classes) {
   deprecate(
@@ -50,8 +37,6 @@ function addDesignClass (design, classes) {
       classes.push('info-bar')
       break
     case 'in-line':
-      classes.push('in-line')
-      break
     case 'inline':
       classes.push('in-line')
       break
@@ -61,50 +46,91 @@ function addDesignClass (design, classes) {
   }
 }
 
-export default LinkComponent.extend({
-  classNames: ['frost-link'],
+export default LinkComponent.extend(PropTypeMixin, {
+  // ==========================================================================
+  // Dependencies
+  // ==========================================================================
 
-  classNameBindings: [
-    'disabled',
-    'extraClasses'
-  ],
+  // ==========================================================================
+  // Properties
+  // ==========================================================================
 
   attributeBindings: [
     'disabled'
   ],
-
-  priority: '',
-
-  icon: '',
-
-  size: '',
-
-  design: '',
-
-  text: '',
-
+  classNames: ['frost-link'],
+  classNameBindings: [
+    'disabled',
+    'extraClasses'
+  ],
   target: '',
 
-  extraClasses: computed('priority', function () {
+  propTypes: {
+    design: PropTypes.oneOf(validDesigns),
+    icon: PropTypes.string,
+    priority: PropTypes.oneOf(validPriorities),
+    size: PropTypes.oneOf(validSizes),
+    text: PropTypes.string
+  },
+
+  getDefaultProps () {
+    return {
+      design: '',
+      icon: '',
+      priority: '',
+      size: '',
+      text: ''
+    }
+  },
+
+  // ==========================================================================
+  // Computed Properties
+  // ==========================================================================
+
+  @readOnly
+  @computed('design', 'disabled', 'priority', 'size')
+  extraClasses (design, disabled, priority, size) {
     const classes = []
-    addDesignClass(this.get('design'), classes)
 
-    // only add size and priority if design has not been specified
-    if (classes.length === 0) {
-      addSizeClass(this.get('size'), classes)
-      addPriorityClass(this.get('priority'), classes)
+    addDesignClass(design, classes)
 
-      // primary link opens content in a new tab
-      if ((this.get('priority').indexOf('primary') > -1) && (this.get('disabled') === false)) {
-        this.set('target', '_blank')
-      }
-    } else {
+    if (classes.length !== 0) {
       // display warning when design property is used together with size and/or priority
-      if ((this.get('priority') !== '') || (this.get('size') !== '')) {
+      if (priority !== '' || size !== '') {
         Logger.warn('Warning: The `design` property takes precedence over `size` and `priority`.')
       }
+
+      return classes.join(' ')
+    }
+
+    if (validSizes.indexOf(size) !== -1) {
+      classes.push(size)
+    }
+
+    if (validPriorities.indexOf(priority) !== -1) {
+      classes.push(priority)
+    }
+
+    // primary link opens content in a new tab
+    if (
+      priority.indexOf('primary') > -1 &&
+      disabled === false
+    ) {
+      this.set('target', '_blank')
     }
 
     return classes.join(' ')
-  })
+  }
+
+  // ==========================================================================
+  // Functions
+  // ==========================================================================
+
+  // ==========================================================================
+  // Events
+  // ==========================================================================
+
+  // ==========================================================================
+  // Actions
+  // ==========================================================================
 })
