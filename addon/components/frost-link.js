@@ -2,7 +2,7 @@ import _ from 'lodash'
 import Ember from 'ember'
 const {deprecate, LinkComponent, Logger} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import {PropTypes} from 'ember-prop-types'
 
 const validDesigns = [
   'info-bar',
@@ -46,7 +46,7 @@ function addDesignClass (design, classes) {
   }
 }
 
-export default LinkComponent.extend(PropTypeMixin, {
+export default LinkComponent.extend({
   // ==========================================================================
   // Dependencies
   // ==========================================================================
