@@ -1,3 +1,8 @@
+# 0.11.14
+
+* **Fixed** issue with `isChecked` computed property of `frost-checkbox` being `readOnly`.
+* **Updated** `frost-select` to use `ember-prop-types`.
+
 # 0.11.13
 
 * **Added** section comments in components for *dependencies*, *properties*, *computed properties*, *functions*, *events*, and *actions*.
