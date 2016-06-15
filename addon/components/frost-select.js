@@ -273,6 +273,9 @@ export default Component.extend({
     const selectedChanged = isAttrDifferent(newAttrs, oldAttrs, 'selected')
     const selectedValueChanged = isAttrDifferent(newAttrs, oldAttrs, 'selectedValue')
 
+    // If frost-select instance is being reused by consumer but context is cleared make
+    // make sure to actually clear input (noticed when used in conjunction with dialog
+    // compoonents that don't destroy DOM when closed and re-opened)
     if ('selectedValue' in newAttrs && newAttrs.selectedValue.value === undefined) {
       this.selectOptionByValue(null)
       return
