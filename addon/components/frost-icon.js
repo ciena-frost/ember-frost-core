@@ -1,6 +1,5 @@
 import Ember from 'ember'
 import { PropTypes } from 'ember-prop-types'
-import layout from '../templates/components/frost-icon'
 import _ from 'lodash'
 
 const { Component, computed, deprecate } = Ember
@@ -8,7 +7,6 @@ const { Component, computed, deprecate } = Ember
 export default Component.extend({
   classNames: 'frost-icon',
   classNameBindings: ['iconClass'],
-  layout: layout,
   propTypes: {
     pack: PropTypes.string,
     icon: PropTypes.string.isRequired

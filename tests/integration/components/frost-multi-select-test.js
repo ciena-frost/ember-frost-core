@@ -4,9 +4,10 @@ import {beforeEach} from 'mocha'
 import sinon from 'sinon'
 import hbs from 'htmlbars-inline-precompile'
 import Ember from 'ember'
+const {run} = Ember
 
 function wait (callback) {
-  Ember.run.later(callback)
+  run.later(callback)
 }
 
 const testTemplate = hbs`{{frost-multi-select onChange=onChange selected=selected data=data greeting=greeting selectedValue=selectedValue}}`
@@ -40,7 +41,7 @@ describeComponent(
   function () {
     beforeEach(function () {
       props.selected = []
-      Ember.run(() => {
+      run(() => {
         this.setProperties(props)
       })
       this.render(testTemplate)
@@ -191,7 +192,7 @@ describeComponent(
   function () {
     beforeEach(function () {
       props.selected = [1, 2]
-      Ember.run(() => {
+      run(() => {
         this.setProperties(props)
       })
 

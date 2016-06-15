@@ -1,8 +1,9 @@
 import Ember from 'ember'
+const {computed, Controller} = Ember
 import _ from 'lodash'
 
-export default Ember.Controller.extend({
-  data: Ember.computed('data', 'search', function () {
+export default Controller.extend({
+  data: computed('data', 'search', function () {
     let result = this.model.map((record) => {
       return {
         label: record.get('label'),

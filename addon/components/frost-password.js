@@ -1,9 +1,8 @@
 import Ember from 'ember'
-import layout from '../templates/components/frost-password'
+const {Component, computed} = Ember
 import _ from 'lodash'
 
-export default Ember.Component.extend({
-  layout: layout,
+export default Component.extend({
   classNames: ['frost-password'],
   classNameBindings: ['revealable'],
   isCapsOn: false,
@@ -37,7 +36,7 @@ export default Ember.Component.extend({
     }
   }),
 
-  isCapsAndReveal: Ember.computed('isCapsOn', 'isRevealerVisible', 'revealable', function () {
+  isCapsAndReveal: computed('isCapsOn', 'isRevealerVisible', 'revealable', function () {
     return this.get('revealable') && this.get('isCapsOn') && this.get('isRevealerVisible')
   }),
 
@@ -66,7 +65,7 @@ export default Ember.Component.extend({
     toggleReveal () {
       this.toggleProperty('revealed')
       this.set('type', this.get('revealed') ? 'text' : 'password')
-      this.set('revealIcon', this.get('revealed') ? 'frost/hide' : 'frost/show')
+      this.set('revealIcon', this.get('revealed') ? 'hide' : 'show')
     }
   }
 })

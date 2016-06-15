@@ -1,8 +1,7 @@
 import Ember from 'ember'
-import layout from '../templates/components/frost-link'
 import _ from 'lodash'
 
-const { LinkComponent, deprecate } = Ember
+const {computed, deprecate, LinkComponent, Logger} = Ember
 
 function addPriorityClass (priority, classes) {
   switch (priority) {
@@ -86,9 +85,7 @@ export default LinkComponent.extend({
 
   target: '',
 
-  layout,
-
-  extraClasses: Ember.computed('priority', function () {
+  extraClasses: computed('priority', function () {
     const classes = []
     addDesignClass(this.get('design'), classes)
 
@@ -104,7 +101,7 @@ export default LinkComponent.extend({
     } else {
       // display warning when design property is used together with size and/or priority
       if ((this.get('priority') !== '') || (this.get('size') !== '')) {
-        Ember.Logger.warn('Warning: The `design` property takes precedence over `size` and `priority`.')
+        Logger.warn('Warning: The `design` property takes precedence over `size` and `priority`.')
       }
     }
 

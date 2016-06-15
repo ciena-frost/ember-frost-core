@@ -1,4 +1,6 @@
 import {expect} from 'chai'
+import Ember from 'ember'
+const {run} = Ember
 import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
 
@@ -30,8 +32,8 @@ describeComponent(
       })
 
       this.render(hbs`{{frost-textarea id="action" onInput=(action "test-action")}}`)
-      Ember.run(() => this.$('#action').val('a').trigger('input'))
-      Ember.run.next(this, () => {
+      run(() => this.$('#action').val('a').trigger('input'))
+      run.next(this, () => {
         expect(this.get('input-value')).to.eql('a')
       })
     })
@@ -43,9 +45,9 @@ describeComponent(
       })
 
       this.render(hbs`{{frost-textarea id="clearText" onInput=(action "test-action")}}`)
-      Ember.run(() => this.$('#clearText').val('a').trigger('input'))
-      Ember.run(() => this.$('#clearText .clear').click())
-      Ember.run.next(this, () => {
+      run(() => this.$('#clearText').val('a').trigger('input'))
+      run(() => this.$('#clearText .clear').click())
+      run.next(this, () => {
         expect(this.get('input-value')).to.eql('')
       })
     })

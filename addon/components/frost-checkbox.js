@@ -1,10 +1,9 @@
 import Ember from 'ember'
+const {Component, isEmpty, run} = Ember
 import computed from 'ember-computed-decorators'
-import layout from '../templates/components/frost-checkbox'
 import _ from 'lodash/lodash'
 
-export default Ember.Component.extend({
-  layout: layout,
+export default Component.extend({
   classNames: ['frost-checkbox'],
   classNameBindings: ['sizeClass'],
 
@@ -40,16 +39,17 @@ export default Ember.Component.extend({
   },
   didInsertElement () {
     if (this.get('autofocus')) {
-      Ember.run.next('render', () => {
+      run.next('render', () => {
         this.$('input').focus()
       })
     }
   },
 
-  inputId: Ember.computed('id', function () {
-    const id = this.get('id') || this.elementId
+  @computed('id')
+  inputId (id) {
+    id = id || this.elementId
     return `${id}_input`
-  }),
+  },
 
   _onFocus: Ember.on('focusIn', function (e) {
     // If an onFocus handler is defined, call it
@@ -71,7 +71,7 @@ export default Ember.Component.extend({
       let id = this.get('value')
       if (_.isFunction(this.attrs['onInput'])) {
         this.attrs['onInput']({
-          id: Ember.isEmpty(id) ? this.get('id') : id,
+          id: isEmpty(id) ? this.get('id') : id,
           value: this.$('input').prop('checked')
         })
       }

@@ -1,4 +1,5 @@
 import Ember from 'ember'
+const {run} = Ember
 import {expect} from 'chai'
 import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
@@ -31,8 +32,8 @@ describeComponent(
       })
 
       this.render(hbs`{{frost-text id="action" onInput=(action "test-action")}}`)
-      Ember.run(() => this.$('#action').val('a').trigger('input'))
-      Ember.run.next(this, () => {
+      run(() => this.$('#action').val('a').trigger('input'))
+      run.next(this, () => {
         expect(this.get('input-value')).to.eql('a')
       })
     })
@@ -44,9 +45,9 @@ describeComponent(
       })
 
       this.render(hbs`{{frost-text id="clearText" onInput=(action "test-action")}}`)
-      Ember.run(() => this.$('#clearText').val('a').trigger('input'))
-      Ember.run(() => this.$('#clearText .clear').click())
-      Ember.run.next(this, () => {
+      run(() => this.$('#clearText').val('a').trigger('input'))
+      run(() => this.$('#clearText .clear').click())
+      run.next(this, () => {
         expect(this.get('input-value')).to.eql('')
       })
     })
@@ -66,8 +67,8 @@ describeComponent(
     //   })
     //
     //   this.render(hbs`<div class="dummy"></div>{{frost-text onFocus=(action "test-action")}}`)
-    //   Ember.run(() => this.$('.dummy').focus())
-    //   Ember.run(() => this.$('input').focus().val('a'))
+    //   run(() => this.$('.dummy').focus())
+    //   run(() => this.$('input').focus().val('a'))
     // })
   }
 )

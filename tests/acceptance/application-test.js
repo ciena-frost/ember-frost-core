@@ -9,6 +9,7 @@ import {
 import { expect } from 'chai'
 import startApp from '../helpers/start-app'
 import Ember from 'ember'
+const {run} = Ember
 
 describe('Acceptance: Application', function () {
   let application
@@ -18,7 +19,7 @@ describe('Acceptance: Application', function () {
   })
 
   afterEach(function () {
-    Ember.run(application, 'destroy')
+    run(application, 'destroy')
   })
 
   it('can visit /', function () {

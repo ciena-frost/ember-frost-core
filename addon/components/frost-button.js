@@ -1,6 +1,5 @@
 import Ember from 'ember'
 const {Component, computed, Logger, ViewUtils} = Ember
-import layout from '../templates/components/frost-button'
 import _ from 'lodash/lodash'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
@@ -101,8 +100,6 @@ export default Component.extend(PropTypeMixin, {
     'tabIndex',
     'title'
   ],
-
-  layout,
 
   propTypes: {
     autofocus: PropTypes.bool,

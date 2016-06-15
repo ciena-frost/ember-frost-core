@@ -1,13 +1,12 @@
 import _ from 'lodash'
 import Ember from 'ember'
+const {Component} = Ember
 import computed from 'ember-computed-decorators'
-import layout from '../templates/components/frost-text'
 
-export default Ember.Component.extend({
+export default Component.extend({
   attributeBindings: ['align', 'autofocus', 'placeholder', 'disabled', 'readonly', 'value', 'type'],
   classNames: ['frost-text'],
   classNameBindings: ['right', 'center'],
-  layout: layout,
   tabindex: 0,
 
   onChange: Ember.on('input', function (e) {

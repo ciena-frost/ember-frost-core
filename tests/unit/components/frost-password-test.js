@@ -7,7 +7,11 @@ describeComponent(
   'frost-password',
   'FrostPasswordComponent',
   {
-    needs: ['component:frost-text']
+    needs: [
+      'component:frost-text',
+      'template:components/frost-text'
+    ],
+    unit: true
   },
   function () {
     let component
