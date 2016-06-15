@@ -1,3 +1,10 @@
+# 0.11.13
+
+* **Added** section comments in components for *dependencies*, *properties*, *computed properties*, *functions*, *events*, and *actions*.
+* **Fixed** bug where disabled text input with text could be cleared as clear icon was present when it shouldn't be.
+* **Updated** components to use `ember-computed-decorators`.
+* **Updated** `frost-icon` and `frost-link` to use `ember-prop-types`.
+
 # 0.11.12
 
 * **Added** `unit: true` to all unit tests to explicitly mark them as unit tests.
