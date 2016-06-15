@@ -13,30 +13,15 @@ let FrostComboBox = FrostSelect.extend({
     return className
   },
 
-  getValid (filter) {
-    let valid = []
+  filterItems (items, filter) {
+    const filteredItems = this._super(this.get('data'), filter)
 
-    this.get('data').forEach((record, index) => {
-      if (!filter || this.getLabel(record).toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
-        valid.push({
-          index,
-          value: record.value,
-          label: this.getLabel(record)
-        })
-      }
-    })
-
-    if (!valid.length) {
-      this.get('data').forEach((record, index) => {
-        valid.push({
-          index,
-          value: record.value,
-          label: this.getLabel(record)
-        })
-      })
+    // If no items match filter go ahead and return all items
+    if (filteredItems.length === 0) {
+      return this._super(this.get('data'), '')
     }
 
-    return valid
+    return filteredItems
   },
 
   select (index) {
