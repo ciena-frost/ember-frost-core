@@ -1,3 +1,9 @@
+# 0.11.12
+
+* **Added** `unit: true` to all unit tests to explicitly mark them as unit tests.
+* **Moved** templates to `app/` directory so consumers can override them if they wish.
+* Started using destructuring for Ember properties such as `const {Component} = Ember` instead of using `Ember.Component`.
+
 # 0.11.11
 
 * **Fixed** text input to stop showing clear button when consumer clears value programmatically.
