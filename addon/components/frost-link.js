@@ -3,6 +3,7 @@ import Ember from 'ember'
 const {deprecate, LinkComponent, Logger} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
+import layout from '../templates/components/frost-link'
 
 const validDesigns = [
   'info-bar',
@@ -63,6 +64,7 @@ export default LinkComponent.extend({
     'disabled',
     'extraClasses'
   ],
+  layout,
   target: '',
 
   propTypes: {

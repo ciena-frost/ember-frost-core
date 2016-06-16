@@ -2,6 +2,7 @@ import _ from 'lodash'
 import Ember from 'ember'
 const {Component} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
+import layout from '../templates/components/frost-text'
 
 export default Component.extend({
   // ==========================================================================
@@ -26,6 +27,7 @@ export default Component.extend({
     'center',
     'right'
   ],
+  layout,
   tabindex: 0,
 
   // ==========================================================================

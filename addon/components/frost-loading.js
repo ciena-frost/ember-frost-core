@@ -1,5 +1,6 @@
 import Ember from 'ember'
 const {Component} = Ember
+import layout from '../templates/components/frost-loading'
 
 export default Component.extend({
   // ==========================================================================
@@ -10,7 +11,8 @@ export default Component.extend({
   // Properties
   // ==========================================================================
 
-  classNames: ['frost-loading']
+  classNames: ['frost-loading'],
+  layout
 
   // ==========================================================================
   // Computed Properties

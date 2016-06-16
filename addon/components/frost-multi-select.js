@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import computed, {readOnly} from 'ember-computed-decorators'
-
 import FrostSelect from './frost-select'
+import layout from '../templates/components/frost-multi-select'
 
 export default FrostSelect.extend({
   // ==========================================================================
@@ -13,6 +13,7 @@ export default FrostSelect.extend({
   // ==========================================================================
 
   classNames: ['frost-select', 'multi'],
+  layout,
 
   // ==========================================================================
   // Computed Properties
