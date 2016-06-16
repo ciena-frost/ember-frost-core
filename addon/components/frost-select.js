@@ -266,16 +266,24 @@ export default Component.extend({
   },
 
   /* Ember.Component method */
-  didReceiveAttrs (attrs) {
+  didReceiveAttrs ({newAttrs, oldAttrs}) {
     this._super(...arguments)
 
-    const dataChanged = isAttrDifferent(attrs.newAttrs, attrs.oldAttrs, 'data')
-    const selectedChanged = isAttrDifferent(attrs.newAttrs, attrs.oldAttrs, 'selected')
-    const selectedValueChanged = isAttrDifferent(attrs.newAttrs, attrs.oldAttrs, 'selectedValue')
+    const dataChanged = isAttrDifferent(newAttrs, oldAttrs, 'data')
+    const selectedChanged = isAttrDifferent(newAttrs, oldAttrs, 'selected')
+    const selectedValueChanged = isAttrDifferent(newAttrs, oldAttrs, 'selectedValue')
 
-    if (selectedValueChanged || (dataChanged && _.get(attrs.newAttrs, 'selectedValue.value'))) {
-      this.selectOptionByValue(attrs.newAttrs.selectedValue.value)
-    } else if (selectedChanged || (dataChanged && _.get(attrs.newAttrs, 'selected.value'))) {
+    // If frost-select instance is being reused by consumer but context is cleared make
+    // make sure to actually clear input (noticed when used in conjunction with dialog
+    // compoonents that don't destroy DOM when closed and re-opened)
+    if ('selectedValue' in newAttrs && newAttrs.selectedValue.value === undefined) {
+      this.selectOptionByValue(null)
+      return
+    }
+
+    if (selectedValueChanged || (dataChanged && _.get(newAttrs, 'selectedValue.value'))) {
+      this.selectOptionByValue(newAttrs.selectedValue.value)
+    } else if (selectedChanged || (dataChanged && _.get(newAttrs, 'selected.value'))) {
       let selected = this.get('selected')
 
       if (_.isNumber(selected)) {
