@@ -1,3 +1,7 @@
+# 0.11.16
+
+* **Fixed** issue with `frost-select` and consumer clearing `selectedValue` but DOM not clearing input.
+
 # 0.11.15
 
 * Cleaned up `frost-select` code to try and make more maintainable.
