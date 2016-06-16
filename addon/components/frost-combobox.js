@@ -1,6 +1,9 @@
 import FrostSelect from './frost-select'
+import layout from '../templates/components/frost-combobox'
 
 let FrostComboBox = FrostSelect.extend({
+  layout,
+
   getLabel (item) {
     return item.value
   },

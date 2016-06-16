@@ -3,6 +3,7 @@ import Ember from 'ember'
 const {A, Component} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
+import layout from '../templates/components/frost-select'
 
 /**
  * @typedef {Object} Item
@@ -60,6 +61,7 @@ export default Component.extend({
   attributeBindings: ['tabIndex'],
   classNames: ['frost-select'],
   classNameBindings: ['focus', 'shouldOpen:open', 'disabled', 'hasError:error'],
+  layout,
 
   propTypes: {
     autofocus: PropTypes.bool,

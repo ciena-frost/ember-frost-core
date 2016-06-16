@@ -2,6 +2,7 @@ import _ from 'lodash'
 import Ember from 'ember'
 const {Component} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
+import layout from '../templates/components/frost-password'
 
 export default Component.extend({
   // ==========================================================================
@@ -16,6 +17,7 @@ export default Component.extend({
   classNameBindings: ['revealable'],
   isCapsOn: false,
   isRevealerVisible: false,
+  layout,
   revealable: false,
   revealed: false,
   revealIcon: 'show',

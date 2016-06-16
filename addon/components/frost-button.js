@@ -3,6 +3,7 @@ import Ember from 'ember'
 const {Component, Logger, ViewUtils} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
+import layout from '../templates/components/frost-button'
 
 /**
  * List of valid values to pass into `design` propery
@@ -75,6 +76,8 @@ export default Component.extend({
     'disabled',
     'extraClasses'
   ],
+
+  layout,
 
   tagName: 'button',
 

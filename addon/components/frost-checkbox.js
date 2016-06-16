@@ -2,6 +2,7 @@ import _ from 'lodash'
 import Ember from 'ember'
 const {Component, isEmpty, run} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
+import layout from '../templates/components/frost-checkbox'
 
 export default Component.extend({
   // ==========================================================================
@@ -14,6 +15,7 @@ export default Component.extend({
 
   classNames: ['frost-checkbox'],
   classNameBindings: ['sizeClass'],
+  layout,
 
   // ==========================================================================
   // Computed Properties
