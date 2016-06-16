@@ -1,3 +1,7 @@
+# 0.11.16
+
+Fixed the search icon's handle and fill color support
+
 # 0.11.15
 
 * Cleaned up `frost-select` code to try and make more maintainable.
