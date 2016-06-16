@@ -1,3 +1,7 @@
+# 0.11.17
+
+Reverted a move of component templates from the addon to app directory as this change broke downstream component extensions
+
 # 0.11.16
 
 * **Fixed** issue with `frost-select` and consumer clearing `selectedValue` but DOM not clearing input.
