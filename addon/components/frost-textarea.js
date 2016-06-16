@@ -2,6 +2,7 @@ import _ from 'lodash'
 import Ember from 'ember'
 const {Component, run} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
+import layout from '../templates/components/frost-textarea'
 
 export default Component.extend({
   // ==========================================================================
@@ -21,6 +22,7 @@ export default Component.extend({
     'rows'
   ],
   classNames: ['frost-textarea'],
+  layout,
   tabindex: 0,
 
   // ==========================================================================
