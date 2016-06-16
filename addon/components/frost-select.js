@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import Ember from 'ember'
-const {Component} = Ember
+const {A, Component} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
 
@@ -69,10 +69,18 @@ export default Component.extend({
     filter: PropTypes.string,
     hovered: PropTypes.number,
     maxListHeight: PropTypes.number,
-    selected: PropTypes.oneOfType(
+    selected: PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.number
-    ),
+    ]),
+    selectedValue: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.bool,
+      PropTypes.number,
+      PropTypes.null,
+      PropTypes.object,
+      PropTypes.string
+    ]),
     tabIndex: PropTypes.number,
     width: PropTypes.number
   },
@@ -84,6 +92,7 @@ export default Component.extend({
       error: false,
       hovered: -1,
       maxListHeight: 400,
+      selected: A([]),
       tabIndex: -1,
       width: 200
     }
@@ -250,20 +259,10 @@ export default Component.extend({
   // Functions
   // ==========================================================================
 
-  /* Ember.Component method */
-  init () {
-    this._super(...arguments)
-
-    if (this.get('selected') === undefined) {
-      this.set('selected', [])
-    }
-  },
-
   /** obvious */
   bindDropdownEvents () {
-    const _handleOutsideClick = handleOutsideClick.bind(this)
-    Ember.$(document).on('click', _handleOutsideClick)
-    this.set('handleOutsideClick', _handleOutsideClick)
+    this._handleOutsideClick = handleOutsideClick.bind(this)
+    Ember.$(document).on('click', this._handleOutsideClick)
   },
 
   /* Ember.Component method */
@@ -293,11 +292,6 @@ export default Component.extend({
   chooseHovered () {
     let displayItem = this.get('displayItems')[this.get('hovered')]
     this.select(displayItem.index)
-  },
-
-  // TODO: add jsdoc
-  click (event) {
-    // event.preventDefault()
   },
 
   // TODO: add jsdoc
@@ -332,8 +326,8 @@ export default Component.extend({
 
         return {
           index,
-          value: item.value,
-          label: this.getLabel(item)
+          label: this.getLabel(item),
+          value: item.value
         }
       })
       .filter((item) => item !== null)
@@ -507,11 +501,10 @@ export default Component.extend({
 
   /** obvious */
   unbindDropdownEvents () {
-    const _handleOutsideClick = this.get('handleOutsideClick')
-    Ember.$(document).off('click', _handleOutsideClick)
+    Ember.$(document).off('click', this._handleOutsideClick)
   },
 
-  /** Ember.willDestroyElement method */
+  /** Ember.Component method */
   willDestroyElement () {
     this.unbindDropdownEvents()
   },
