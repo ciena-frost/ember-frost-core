@@ -1,3 +1,7 @@
+# 0.11.18
+
+Added onEnter to frost-text so that actions can be triggered using the enter key when the input is in focus
+
 # 0.11.17
 
 Reverted a move of component templates from the addon to app directory as this change broke downstream component extensions
