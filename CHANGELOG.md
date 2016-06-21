@@ -1,3 +1,7 @@
+# 0.11.19
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
 # 0.11.18
 
 Added onEnter to frost-text so that actions can be triggered using the enter key when the input is in focus
