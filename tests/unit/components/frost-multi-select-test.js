@@ -6,7 +6,9 @@ import {beforeEach, describe, it} from 'mocha'
 describeComponent(
   'frost-multi-select',
   'FrostMultiSelectComponent',
-  {},
+  {
+    unit: true
+  },
   function () {
     let component
 

@@ -6,7 +6,9 @@ import {beforeEach, describe, it} from 'mocha'
 describeComponent(
   'frost-textarea',
   'FrostTextareaComponent',
-  {},
+  {
+    unit: true
+  },
   function () {
     let component
 

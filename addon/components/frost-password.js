@@ -1,34 +1,65 @@
-import Ember from 'ember'
-import layout from '../templates/components/frost-password'
 import _ from 'lodash'
+import Ember from 'ember'
+const {Component} = Ember
+import computed, {readOnly} from 'ember-computed-decorators'
+import layout from '../templates/components/frost-password'
 
-export default Ember.Component.extend({
-  layout: layout,
+export default Component.extend({
+  // ==========================================================================
+  // Dependencies
+  // ==========================================================================
+
+  // ==========================================================================
+  // Properties
+  // ==========================================================================
+
   classNames: ['frost-password'],
   classNameBindings: ['revealable'],
   isCapsOn: false,
   isRevealerVisible: false,
+  layout,
   revealable: false,
   revealed: false,
   revealIcon: 'show',
-  type: 'password',
   tabindex: 0,
+  type: 'password',
+
+  // ==========================================================================
+  // Computed Properties
+  // ==========================================================================
+
+  @readOnly
+  @computed('isCapsOn', 'isRevealerVisible', 'revealable')
+  isCapsAndReveal (isCapsOn, isRevealerVisible, revealable) {
+    return revealable && isCapsOn && isRevealerVisible
+  },
+
+  // ==========================================================================
+  // Functions
+  // ==========================================================================
+
+  // ==========================================================================
+  // Events
+  // ==========================================================================
 
   focusOut: Ember.on('focusOut', function () {
     this.set('isCapsOn', false)
   }),
+
   keyDown: Ember.on('keyDown', function (e) {
     var s = e || window.e
     if (this.get('isCapsOn') === false && (s.which === 20 || s.keyCode === 20)) {
       this.set('isCapsOn', true)
     }
   }),
+
   keyUp: Ember.on('keyUp', function (e) {
     var s = e || window.e
     if (this.get('isCapsOn') === true && (s.which === 20 || s.keyCode === 20)) {
       this.set('isCapsOn', false)
     }
   }),
+
   keyPressed: Ember.on('keyPress', function (e) {
     var s = String.fromCharCode(e.which || e.keyCode)   // IE support
     if ((s.toUpperCase() === s && s.toLowerCase() !== s && !e.shiftKey) ||
@@ -37,16 +68,16 @@ export default Ember.Component.extend({
     }
   }),
 
-  isCapsAndReveal: Ember.computed('isCapsOn', 'isRevealerVisible', 'revealable', function () {
-    return this.get('revealable') && this.get('isCapsOn') && this.get('isRevealerVisible')
-  }),
-
   _onFocus: Ember.on('focusIn', function (e) {
     // If an onFocus handler is defined, call it
     if (this.attrs.onFocus) {
       this.attrs.onFocus()
     }
   }),
+
+  // ==========================================================================
+  // Actions
+  // ==========================================================================
 
   actions: {
     onBlur () {
@@ -66,7 +97,7 @@ export default Ember.Component.extend({
     toggleReveal () {
       this.toggleProperty('revealed')
       this.set('type', this.get('revealed') ? 'text' : 'password')
-      this.set('revealIcon', this.get('revealed') ? 'frost/hide' : 'frost/show')
+      this.set('revealIcon', this.get('revealed') ? 'hide' : 'show')
     }
   }
 })

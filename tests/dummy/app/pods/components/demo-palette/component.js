@@ -1,5 +1,6 @@
 /* global $ */
 import Ember from 'ember'
+const {Component} = Ember
 
 function hex (x) {
   return parseInt(x).toString(16).slice(-2)
@@ -15,7 +16,7 @@ function rgb2hex (rgb) {
   return `#${hex(rgb[1])}${hex(rgb[2])}${hex(rgb[3])}`
 }
 
-export default Ember.Component.extend({
+export default Component.extend({
   didRender () {
     this.$('.swatch .content:nth-child(2)').each((i, el) => {
       const $el = $(el)

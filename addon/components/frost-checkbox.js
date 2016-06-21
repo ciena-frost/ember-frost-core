@@ -1,12 +1,25 @@
+import _ from 'lodash'
 import Ember from 'ember'
-import computed from 'ember-computed-decorators'
+const {Component, isEmpty, run} = Ember
+import computed, {readOnly} from 'ember-computed-decorators'
 import layout from '../templates/components/frost-checkbox'
-import _ from 'lodash/lodash'
 
-export default Ember.Component.extend({
-  layout: layout,
+export default Component.extend({
+  // ==========================================================================
+  // Dependencies
+  // ==========================================================================
+
+  // ==========================================================================
+  // Properties
+  // ==========================================================================
+
   classNames: ['frost-checkbox'],
   classNameBindings: ['sizeClass'],
+  layout,
+
+  // ==========================================================================
+  // Computed Properties
+  // ==========================================================================
 
   @computed('checked')
   /**
@@ -18,6 +31,18 @@ export default Ember.Component.extend({
     return [null, undefined, false].indexOf(checked) === -1
   },
 
+  @computed('id')
+  /**
+   * Get input ID
+   * @param {String} id - ID to use for input
+   * @returns {String} input ID
+   */
+  inputId (id) {
+    id = id || this.elementId
+    return `${id}_input`
+  },
+
+  @readOnly
   @computed('size')
   /**
    * Get class for setting input size
@@ -27,6 +52,11 @@ export default Ember.Component.extend({
   sizeClass (size) {
     return size || 'small'
   },
+
+  // ==========================================================================
+  // Functions
+  // ==========================================================================
+
   keyPress (e) {
     if (e.keyCode === 32) {
       if (this.get('disabled') !== true) {
@@ -38,18 +68,19 @@ export default Ember.Component.extend({
       return false
     }
   },
+
+  /* Ember.Component method */
   didInsertElement () {
     if (this.get('autofocus')) {
-      Ember.run.next('render', () => {
+      run.next('render', () => {
         this.$('input').focus()
       })
     }
   },
 
-  inputId: Ember.computed('id', function () {
-    const id = this.get('id') || this.elementId
-    return `${id}_input`
-  }),
+  // ==========================================================================
+  // Events
+  // ==========================================================================
 
   _onFocus: Ember.on('focusIn', function (e) {
     // If an onFocus handler is defined, call it
@@ -57,6 +88,10 @@ export default Ember.Component.extend({
       this.attrs.onFocus()
     }
   }),
+
+  // ==========================================================================
+  // Actions
+  // ==========================================================================
 
   actions: {
     onBlur () {
@@ -71,7 +106,7 @@ export default Ember.Component.extend({
       let id = this.get('value')
       if (_.isFunction(this.attrs['onInput'])) {
         this.attrs['onInput']({
-          id: Ember.isEmpty(id) ? this.get('id') : id,
+          id: isEmpty(id) ? this.get('id') : id,
           value: this.$('input').prop('checked')
         })
       }

@@ -1,9 +1,36 @@
 import _ from 'lodash'
 import Ember from 'ember'
+const {A, Component} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
+import {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-select'
 
-// TODO: Add typedefs for items
+/**
+ * @typedef {Object} Item
+ * @property {String} label - user friendly text for item
+ * @property {Boolean|Number|String|Object} value - value of item
+ */
+
+/**
+ * @typedef {Object} ListItem
+ * @property {String} className - className to apply to item's DOM
+ * @property {Number} index - location of item in list of items
+ * @property {String} label - user friendly text for item
+ * @property {Boolean|Number|String|Object} value - value of item
+ */
+
+/**
+ * Map of human readable keys to their key codes
+ * @type {Object}
+ */
+const keyCodes = {
+  backspace: 8,
+  down: 40,
+  enter: 13,
+  esc: 27,
+  up: 38,
+  tab: 9
+}
 
 // TODO: add jsdoc
 function isAttrDifferent (newAttrs, oldAttrs, attributeName) {
@@ -22,15 +49,7 @@ function handleOutsideClick (event) {
   }
 }
 
-const TAB_KEY = 9
-const ESC_KEY = 27
-const ENTER_KEY = 13
-const UP_KEY = 38
-const DOWN_KEY = 40
-const BACKSPACE_KEY = 8
-
-export default Ember.Component.extend({
-
+export default Component.extend({
   // ==========================================================================
   // Dependencies
   // ==========================================================================
@@ -40,17 +59,46 @@ export default Ember.Component.extend({
   // ==========================================================================
 
   attributeBindings: ['tabIndex'],
-  autofocus: false,
   classNames: ['frost-select'],
   classNameBindings: ['focus', 'shouldOpen:open', 'disabled', 'hasError:error'],
-  disabled: false,
-  error: false,
-  hovered: -1,
-  filter: undefined,
   layout,
-  maxListHeight: 400,
-  tabIndex: -1,
-  width: 200,
+
+  propTypes: {
+    autofocus: PropTypes.bool,
+    data: PropTypes.array,
+    disabled: PropTypes.bool,
+    error: PropTypes.bool,
+    filter: PropTypes.string,
+    hovered: PropTypes.number,
+    maxListHeight: PropTypes.number,
+    selected: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.number
+    ]),
+    selectedValue: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.bool,
+      PropTypes.number,
+      PropTypes.null,
+      PropTypes.object,
+      PropTypes.string
+    ]),
+    tabIndex: PropTypes.number,
+    width: PropTypes.number
+  },
+
+  getDefaultProps () {
+    return {
+      autofocus: false,
+      disabled: false,
+      error: false,
+      hovered: -1,
+      maxListHeight: 400,
+      selected: A([]),
+      tabIndex: -1,
+      width: 200
+    }
+  },
 
   // ==========================================================================
   // Computed Properties
@@ -59,40 +107,82 @@ export default Ember.Component.extend({
   @readOnly
 
   @computed('maxListHeight')
+  /**
+   * Get inline style for container
+   * Note: This must be a computed property rather than in a SASS file because the
+   * value is dependent on properties passed in by the consumer.
+   * @param {Number} maxListHeight - maximum height at which list should render
+   * @returns {String} container style
+   */
   containerStyle (maxListHeight) {
     return Ember.String.htmlSafe(`max-height: ${maxListHeight}px`)
   },
 
   @readOnly
+  @computed('data')
+  /**
+   * Create items from passed-in data
+   * @param {Array<Item>} data - the possible value data passed in
+   * @returns {Array<ListItem>} the items
+   */
+  items (data) {
+    return data.map((item, index) => {
+      return {
+        className: '',
+        index,
+        label: item.label,
+        value: item.value
+      }
+    })
+  },
+
+  @readOnly
   @computed('items', 'selected', 'hovered', 'filter')
   /**
-   * Get the display items
-   * @param {Object[]} items - the possible items
-   * @param {Number[]} selected - the array of selected indices
+   * Get items to display in UI
+   * @param {Array<ListItem>} items - the possible items
+   * @param {Array<Number>} selected - the array of selected indices
    * @param {Number} hovered - index currently being hovered over (or -1)
    * @param {String} filter - search filter
-   * @returns {Object[]} the display items
+   * @returns {Array<ListItem>} items to display
    */
   displayItems (items, selected, hovered, filter) {
-    const result = []
-    const valid = this.getValid(filter)
+    return this.filterItems(items, filter)
+      .map((item, index, list) => {
+        const classNames = []
+        const itemIsHovered = index === hovered || list.length === 1
+        const itemIsSelected = selected.indexOf(item.index) !== -1
 
-    valid.forEach((validItem, index, list) => {
-      let className = ''
-      if (selected.indexOf(validItem.index) !== -1) {
-        className += ' selected'
-        validItem.selected = true
-      }
+        if (itemIsSelected) {
+          classNames.push('selected')
+          item.selected = true
+        }
 
-      if (index === hovered || list.length === 1) {
-        className += ' hover'
-      }
+        if (itemIsHovered) {
+          classNames.push('hover')
+        }
 
-      validItem.className = className
-      result.push(validItem)
-    })
+        item.className = classNames.join(' ')
 
-    return result
+        return item
+      })
+  },
+
+  @readOnly
+  @computed('data', 'displayItems')
+  /**
+   * Flag for if the user has typed something that doesn't match any options
+   * @param {Array<Item>} data - all the possible items
+   * @param {Object[]} displayItems - the current items being displayed
+   * @returns {Boolean} true if in error state
+   */
+  invalidFilter (data, displayItems) {
+    return (
+      _.isArray(data) &&
+      _.isArray(displayItems) &&
+      data.length > 0 &&
+      displayItems.length === 0
+    )
   },
 
   @readOnly
@@ -106,36 +196,6 @@ export default Ember.Component.extend({
    */
   hasError (error, invalidFilter) {
     return error || invalidFilter
-  },
-
-  @readOnly
-  @computed('data', 'displayItems')
-  /**
-   * Flag for if the user has typed something that doesn't match any options
-   * @param {Object[]} data - all the possible items
-   * @param {Object[]} displayItems - the current items being displayed
-   * @returns {Boolean} true if in error state
-   */
-  invalidFilter (data, displayItems) {
-    return _.isArray(data) && (data.length > 0) && _.isArray(displayItems) && (displayItems.length === 0)
-  },
-
-  @readOnly
-  @computed('data')
-  /**
-   * Create items from passed-in data
-   * @param {Object[]} data - the possible value data passed in
-   * @returns {Object[]} the items
-   */
-  items (data) {
-    return data.map((item, index) => {
-      return {
-        label: item.label,
-        value: item.value,
-        index,
-        classNames: ''
-      }
-    })
   },
 
   @readOnly
@@ -201,33 +261,31 @@ export default Ember.Component.extend({
   // Functions
   // ==========================================================================
 
-  /* Ember.Component method */
-  init () {
-    this._super(...arguments)
-
-    if (this.get('selected') === undefined) {
-      this.set('selected', [])
-    }
-  },
-
   /** obvious */
   bindDropdownEvents () {
-    const _handleOutsideClick = handleOutsideClick.bind(this)
-    Ember.$(document).on('click', _handleOutsideClick)
-    this.set('handleOutsideClick', _handleOutsideClick)
+    this._handleOutsideClick = handleOutsideClick.bind(this)
+    Ember.$(document).on('click', this._handleOutsideClick)
   },
 
   /* Ember.Component method */
-  didReceiveAttrs (attrs) {
+  didReceiveAttrs ({newAttrs, oldAttrs}) {
     this._super(...arguments)
 
-    const dataChanged = isAttrDifferent(attrs.newAttrs, attrs.oldAttrs, 'data')
-    const selectedChanged = isAttrDifferent(attrs.newAttrs, attrs.oldAttrs, 'selected')
-    const selectedValueChanged = isAttrDifferent(attrs.newAttrs, attrs.oldAttrs, 'selectedValue')
+    const dataChanged = isAttrDifferent(newAttrs, oldAttrs, 'data')
+    const selectedChanged = isAttrDifferent(newAttrs, oldAttrs, 'selected')
+    const selectedValueChanged = isAttrDifferent(newAttrs, oldAttrs, 'selectedValue')
 
-    if (selectedValueChanged || (dataChanged && _.get(attrs.newAttrs, 'selectedValue.value'))) {
-      this.selectOptionByValue(attrs.newAttrs.selectedValue.value)
-    } else if (selectedChanged || (dataChanged && _.get(attrs.newAttrs, 'selected.value'))) {
+    // If frost-select instance is being reused by consumer but context is cleared make
+    // make sure to actually clear input (noticed when used in conjunction with dialog
+    // compoonents that don't destroy DOM when closed and re-opened)
+    if ('selectedValue' in newAttrs && newAttrs.selectedValue.value === undefined) {
+      this.selectOptionByValue(null)
+      return
+    }
+
+    if (selectedValueChanged || (dataChanged && _.get(newAttrs, 'selectedValue.value'))) {
+      this.selectOptionByValue(newAttrs.selectedValue.value)
+    } else if (selectedChanged || (dataChanged && _.get(newAttrs, 'selected.value'))) {
       let selected = this.get('selected')
 
       if (_.isNumber(selected)) {
@@ -247,11 +305,6 @@ export default Ember.Component.extend({
   },
 
   // TODO: add jsdoc
-  click (event) {
-    // event.preventDefault()
-  },
-
-  // TODO: add jsdoc
   closeList () {
     this.setProperties({open: false, filter: undefined, hovered: -1})
     this.inputElement().val(this.get('prompt'))
@@ -263,19 +316,31 @@ export default Ember.Component.extend({
     return item.label
   },
 
-  // TODO: add jsdoc
-  getValid (filter) {
-    let valid = []
-    this.get('items').forEach((item, index, list) => {
-      if (!filter || this.getLabel(item).toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
-        valid.push({
+  /**
+   * Get list of items with label matching filter
+   * @param {Array<ListItem>} items - items to filter
+   * @param {String} filter - filter to match items label against
+   * @returns {Array<ListItem>} filtered items
+   */
+  filterItems (items, filter) {
+    const lowerCaseFilter = (filter || '').toLowerCase()
+
+    return items
+      .map((item, index, list) => {
+        const lowerCaseLabel = (this.getLabel(item) || '').toLowerCase()
+        const labelMatchesFilter = lowerCaseLabel.indexOf(lowerCaseFilter) !== -1
+
+        if (filter && !labelMatchesFilter) {
+          return null
+        }
+
+        return {
           index,
-          value: item.value,
-          label: this.getLabel(item)
-        })
-      }
-    })
-    return valid
+          label: this.getLabel(item),
+          value: item.value
+        }
+      })
+      .filter((item) => item !== null)
   },
 
   // TODO: add jsdoc
@@ -317,7 +382,7 @@ export default Ember.Component.extend({
    */
   keyDown (event) {
     // if tab is pushed - close list
-    if (event.which === TAB_KEY) {
+    if (event.which === keyCodes.tab) {
       if (this.get('open')) {
         this.closeList()
       }
@@ -327,9 +392,8 @@ export default Ember.Component.extend({
   // TODO: add jsdoc
   keyUp (event) {
     switch (event.which) {
-
       // escape key or tab key, close the dropdown
-      case ESC_KEY:
+      case keyCodes.esc:
         event.stopPropagation()
         if (this.get('open')) {
           this.toggle(event)
@@ -337,18 +401,18 @@ export default Ember.Component.extend({
         break
 
       // enter + spacebar, choose selected
-      case ENTER_KEY:
+      case keyCodes.enter:
         this.chooseHovered()
         break
 
       // up arrow
-      case UP_KEY:
+      case keyCodes.up:
         event.preventDefault()
         this.hoverPrev()
         break
 
       // down arrow, open the dropdown if necessary, select next
-      case DOWN_KEY:
+      case keyCodes.down:
         event.preventDefault()
         if (!this.get('open')) {
           this.openList()
@@ -357,7 +421,7 @@ export default Ember.Component.extend({
         break
 
       // backspace
-      case BACKSPACE_KEY:
+      case keyCodes.backspace:
         event.preventDefault()
         if (!this.get('open')) {
           this.openList()
@@ -392,7 +456,8 @@ export default Ember.Component.extend({
 
   // TODO: add jsdoc
   search (term) {
-    let valid = this.getValid(term)
+    const items = this.get('items')
+    let valid = this.filterItems(items, term)
     let newProps = {filter: term, hovered: -1}
     this.setProperties(newProps)
     if (valid.length === 1) {
@@ -446,11 +511,10 @@ export default Ember.Component.extend({
 
   /** obvious */
   unbindDropdownEvents () {
-    const _handleOutsideClick = this.get('handleOutsideClick')
-    Ember.$(document).off('click', _handleOutsideClick)
+    Ember.$(document).off('click', this._handleOutsideClick)
   },
 
-  /** Ember.willDestroyElement method */
+  /** Ember.Component method */
   willDestroyElement () {
     this.unbindDropdownEvents()
   },
@@ -464,7 +528,6 @@ export default Ember.Component.extend({
   // ==========================================================================
 
   actions: {
-
     // TODO: add jsdoc
     onBlur (event) {
       this.set('focus', false)

@@ -1,3 +1,53 @@
+# 0.11.19
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.11.18
+
+Added onEnter to frost-text so that actions can be triggered using the enter key when the input is in focus
+
+# 0.11.17
+
+Reverted a move of component templates from the addon to app directory as this change broke downstream component extensions
+
+# 0.11.16
+
+* **Fixed** issue with `frost-select` and consumer clearing `selectedValue` but DOM not clearing input.
+
+# 0.11.15
+
+* Cleaned up `frost-select` code to try and make more maintainable.
+
+# 0.11.14
+
+* **Fixed** issue with `isChecked` computed property of `frost-checkbox` being `readOnly`.
+* **Updated** `frost-select` to use `ember-prop-types`.
+
+# 0.11.13
+
+* **Added** section comments in components for *dependencies*, *properties*, *computed properties*, *functions*, *events*, and *actions*.
+* **Fixed** bug where disabled text input with text could be cleared as clear icon was present when it shouldn't be.
+* **Updated** components to use `ember-computed-decorators`.
+* **Updated** `frost-icon` and `frost-link` to use `ember-prop-types`.
+
+# 0.11.12
+
+* **Added** `unit: true` to all unit tests to explicitly mark them as unit tests.
+* **Moved** templates to `app/` directory so consumers can override them if they wish.
+* Started using destructuring for Ember properties such as `const {Component} = Ember` instead of using `Ember.Component`.
+
+# 0.11.11
+
+* **Fixed** text input to stop showing clear button when consumer clears value programmatically.
+
+# 0.11.10
+
+* **Fixed** deprecation warning from Ember 2.6.0 to stop using `didInitAttrs` hook and instead use `init`.
+
+# 0.11.9
+
+* **Added** `autofocus` property to `frost-select` component.
+
 # 0.11.8
 
 Fixed the deprecation notice test for nested icon paths

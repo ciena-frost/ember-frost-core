@@ -3,11 +3,12 @@
   autofocus=autofocus
   disabled=disabled
   focus-out=(action 'onBlur')
+  insert-newline=onEnter
   value=value
   placeholder=placeholder
   tabindex=tabindex
   readonly=readonly}}
 {{#if showClear}}
-  {{!frost-icon class='clear' icon='frost/close'}}
+  {{!frost-icon class='clear' icon='close'}}
   <a class="clear" {{action "clear"}}>x</a>
 {{/if}}

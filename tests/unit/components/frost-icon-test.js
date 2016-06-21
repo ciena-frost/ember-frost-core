@@ -6,7 +6,9 @@ import {beforeEach, it} from 'mocha'
 describeComponent(
   'frost-icon',
   'FrostIconComponent',
-  {},
+  {
+    unit: true
+  },
   function () {
     let component
 

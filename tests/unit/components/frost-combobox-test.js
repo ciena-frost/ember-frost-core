@@ -6,7 +6,9 @@ import {beforeEach, describe, it} from 'mocha'
 describeComponent(
   'frost-combobox',
   'FrostComboboxComponent',
-  {},
+  {
+    unit: true
+  },
   function () {
     let component
 

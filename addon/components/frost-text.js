@@ -1,15 +1,80 @@
 import _ from 'lodash'
 import Ember from 'ember'
+const {Component} = Ember
+import computed, {readOnly} from 'ember-computed-decorators'
 import layout from '../templates/components/frost-text'
 
-export default Ember.Component.extend({
-  attributeBindings: ['align', 'autofocus', 'placeholder', 'disabled', 'readonly', 'value', 'type'],
-  classNames: ['frost-text'],
-  classNameBindings: ['right', 'center'],
-  layout: layout,
+export default Component.extend({
+  // ==========================================================================
+  // Dependencies
+  // ==========================================================================
 
-  showClear: false,
+  // ==========================================================================
+  // Properties
+  // ==========================================================================
+
+  attributeBindings: [
+    'align',
+    'autofocus',
+    'disabled',
+    'placeholder',
+    'readonly',
+    'type',
+    'value'
+  ],
+  classNames: ['frost-text'],
+  classNameBindings: [
+    'center',
+    'right'
+  ],
+  layout,
   tabindex: 0,
+
+  // ==========================================================================
+  // Computed Properties
+  // ==========================================================================
+
+  @readOnly
+  @computed('align')
+  /**
+   * Determine whether or not text alignment is center
+   * @param {[type]} align - text alignment
+   * @returns {Boolean} whether or not text alignment is center
+   */
+  center (align) {
+    return align === 'center'
+  },
+
+  @readOnly
+  @computed('align')
+  /**
+   * Determine whether or not text alignment is right
+   * @param {String} align - text alignment
+   * @returns {Boolean} whether or not text alignment is right
+   */
+  right (align) {
+    return align === 'right'
+  },
+
+  @readOnly
+  @computed('disabled', 'value')
+  /**
+   * Determine whether or not to show button for clearing out text field
+   * @param {Boolean} disabled - whether or not input is disabled
+   * @param {String} value - value of text field
+   * @returns {Boolean} whether or not to show button for clearing out text field
+   */
+  showClear (disabled, value) {
+    return !disabled && Boolean(value)
+  },
+
+  // ==========================================================================
+  // Functions
+  // ==========================================================================
+
+  // ==========================================================================
+  // Events
+  // ==========================================================================
 
   onChange: Ember.on('input', function (e) {
     const id = this.get('id')
@@ -18,11 +83,6 @@ export default Ember.Component.extend({
 
     if (_.isFunction(onInput)) {
       onInput({id, value})
-    }
-    if (e.target.value.length > 0) {
-      this.set('showClear', true)
-    } else {
-      this.set('showClear', false)
     }
   }),
 
@@ -35,17 +95,15 @@ export default Ember.Component.extend({
     }
   }),
 
-  didInitAttrs () {
-    this.set('right', this.get('align') === 'right')
-    this.set('center', this.get('align') === 'center')
-  },
+  // ==========================================================================
+  // Actions
+  // ==========================================================================
 
   actions: {
     clear: function () {
       this.set('value', '')
       this.$('input').focus()
       this.$('input').val('')
-      this.set('showClear', false)
       this.$('input').trigger('input')
     },
 

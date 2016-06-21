@@ -1,6 +1,6 @@
+import _ from 'lodash'
 import Ember from 'ember'
 import iconPacks from 'ember-frost-core/icon-packs'
-import _ from 'lodash/lodash'
 
 const { computed, Controller } = Ember
 
