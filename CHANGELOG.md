@@ -1,3 +1,11 @@
+# 0.12.0
+
+* added shield-full, shield-half icons
+![shield-full](https://cloud.githubusercontent.com/assets/4720276/16313287/68748978-392d-11e6-93ab-5d1e33829933.png)
+![shield-half](https://cloud.githubusercontent.com/assets/4720276/16313288/6874beac-392d-11e6-9ca6-bc39a0ce0a97.png)
+
+
+
 # 0.11.20
 * FIXED frost-textarea clear icon style to show it inside the text area
 
