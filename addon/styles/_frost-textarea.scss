@@ -50,9 +50,10 @@ $disabled-bg: $frost-color-input-disabled-bg;
 
   .clear {
     z-index: 1;
-    margin: 5px 0 0 -45px;
+    margin: 5px 0 0 -40px;
     width: 35px;
     > svg {
+      width: 26px;
       height: 26px;
       fill: $frost-color-grey-6;
       cursor: pointer;
