@@ -1,3 +1,7 @@
+# 0.13.0
+* **Added** `onKeyUp` property on `frost-text` that receives `keyUp` events from the inner `input`
+* **Added** `onKeyDown` property on `frost-text` that receives `keyDown` events from the inner `input`
+
 # 0.12.0
 
 * added shield-full, shield-half icons
