@@ -1,72 +1,72 @@
 {
   "name": "ember-frost-core",
-  "version": "0.11.19",
+  "version": "0.13.0",
   "description": "The library of core frost components",
   "frostGuideDirectories": [
     {
       "demoName": "checkbox",
       "frostGuideDirectory": "ui-components/button-controls/checkbox",
-      "readme": "frost-checkbox.md"
+      "readme": "docs/frost-checkbox.md"
     },
     {
       "demoName": "button",
       "frostGuideDirectory": "ui-components/button-controls/button",
-      "readme": "frost-button.md"
+      "readme": "docs/frost-button.md"
     },
     {
       "demoName": "icons",
       "frostGuideDirectory": "design-conventions/icons",
-      "readme": "frost-icons.md"
+      "readme": "docs/frost-icons.md"
     },
     {
       "demoName": "field",
       "frostGuideDirectory": "ui-components/input-fields/text-field",
-      "readme": "frost-text.md"
+      "readme": "docs/frost-text.md"
     },
     {
       "demoName": "password",
       "frostGuideDirectory": "ui-components/input-fields/password",
-      "readme": "frost-password.md"
+      "readme": "docs/frost-password.md"
     },
     {
       "demoName": "area",
       "frostGuideDirectory": "ui-components/input-fields/text-area",
-      "readme": "frost-textarea.md"
+      "readme": "docs/frost-textarea.md"
     },
     {
       "demoName": "link",
       "frostGuideDirectory": "ui-components/button-controls/link",
-      "readme": "frost-link.md"
+      "readme": "docs/frost-link.md"
     },
     {
       "demoName": "palette",
       "frostGuideDirectory": "design-conventions/colors",
-      "readme": "frost-css.md"
+      "readme": "docs/frost-css.md"
     },
     {
       "demoName": "typography",
       "frostGuideDirectory": "design-conventions/typography",
-      "readme": "frost-css.md"
+      "readme": "docs/frost-css.md"
     },
     {
       "demoName": "layout",
       "frostGuideDirectory": "design-conventions/layout",
-      "readme": "frost-css.md"
+      "readme": "docs/frost-css.md"
     },
     {
       "demoName": "loading",
       "frostGuideDirectory": "ui-components/indicator-controls/progress-indicators",
-      "readme": "frost-loading.md"
+      "readme": "docs/frost-loading.md"
     },
     {
       "demoName": "scroll",
       "frostGuideDirectory": "ui-components/content-views/scrollbar",
-      "readme": "frost-scroll.md"
+      "readme": "docs/frost-scroll.md"
     },
     {
       "demoName": "select",
       "frostGuideDirectory": "ui-components/content-views/select",
-      "readme": "frost-select.md"
+      "readme": "docs/frost-select.md"
     }
   ],
   "directories": {

@@ -1,3 +1,18 @@
+# 0.13.0
+* **Added** `onKeyUp` property on `frost-text` that receives `keyUp` events from the inner `input`
+* **Added** `onKeyDown` property on `frost-text` that receives `keyDown` events from the inner `input`
+
+# 0.12.0
+
+* added shield-full, shield-half icons
+![shield-full](https://cloud.githubusercontent.com/assets/4720276/16313287/68748978-392d-11e6-93ab-5d1e33829933.png)
+![shield-half](https://cloud.githubusercontent.com/assets/4720276/16313288/6874beac-392d-11e6-9ca6-bc39a0ce0a97.png)
+
+
+
+# 0.11.20
+* FIXED frost-textarea clear icon style to show it inside the text area
+
 # 0.11.19
 No CHANGELOG section found in Pull Request description.
 Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
