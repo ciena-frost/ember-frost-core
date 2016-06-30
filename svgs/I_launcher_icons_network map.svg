@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 50 50" enable-background="new 0 0 50 50" xml:space="preserve">
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="48.5358" y1="48.5355" x2="1.4648" y2="1.4645">
+	<stop  offset="0" style="stop-color:#00EFFF"/>
+	<stop  offset="0.8" style="stop-color:#009EEF"/>
+	<stop  offset="1" style="stop-color:#007FEF"/>
+</linearGradient>
+<path fill="url(#SVGID_1_)" d="M45,50H5c-2.8,0-5-2.2-5-5V5c0-2.8,2.2-5,5-5h40c2.8,0,5,2.2,5,5v40C50,47.8,47.8,50,45,50z"/>
+<path opacity="0.15" fill="#272425" d="M50,30.6V45c0,2.8-2.2,5-5,5H17.7L7.1,32.4L18,38l1,1l12-7h1l12,7V20.5L50,30.6z"/>
+<g>
+	<polygon opacity="0.25" fill="#FFFFFF" points="7.1,14.6 7.1,32.4 18,38 18,20 	"/>
+	<polygon opacity="0.25" fill="#FFFFFF" points="32,15 32,32 44,39 44,20.5 	"/>
+	<polygon opacity="0.25" fill="#FFFFFF" points="31,15 31,32 19,39 19,20 	"/>
+	<rect x="24" y="25" fill="#FFFFFF" width="3" height="3"/>
+	<rect x="20" y="29" fill="#FFFFFF" width="3" height="3"/>
+	<rect x="13" y="31" fill="#FFFFFF" width="3" height="3"/>
+	<rect x="28" y="29" fill="#FFFFFF" width="3" height="3"/>
+	<rect x="33" y="25" fill="#FFFFFF" width="3" height="3"/>
+	<rect x="38" y="31" fill="#FFFFFF" width="3" height="3"/>
+	<rect x="38" y="19" fill="#FFFFFF" width="3" height="3"/>
+	<rect x="33" y="19" fill="#FFFFFF" width="3" height="3"/>
+	<rect x="28" y="21" fill="#FFFFFF" width="3" height="3"/>
+	<rect x="10" y="19" fill="#FFFFFF" width="3" height="3"/>
+	<rect x="15" y="25" fill="#FFFFFF" width="3" height="3"/>
+	<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="12.1" y1="20.1" x2="16.9" y2="26.4"/>
+	<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="16.8" y1="26.6" x2="14.5" y2="32.6"/>
+	<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="14.8" y1="32.4" x2="21.4" y2="30.7"/>
+	<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="21.2" y1="30.7" x2="25.7" y2="26.6"/>
+	<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="25.7" y1="26.6" x2="30" y2="30.7"/>
+	<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="30" y1="30.7" x2="34.5" y2="26.6"/>
+	<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="34.5" y1="26.6" x2="39.3" y2="32.4"/>
+	<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="39.3" y1="20.2" x2="39.3" y2="32.4"/>
+	<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="34.5" y1="26.6" x2="34.5" y2="20.5"/>
+	<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="34.5" y1="20.5" x2="30" y2="22.1"/>
+	<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="30" y1="22.1" x2="25.6" y2="26.6"/>
+	<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="11" y1="20" x2="25.6" y2="26.6"/>
+	<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-miterlimit="10" x1="16" y1="26.5" x2="26" y2="26.5"/>
+</g>
+<path fill="#272425" d="M19.3,39.3"/>
+</svg>

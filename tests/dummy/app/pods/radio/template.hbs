@@ -1,0 +1,40 @@
+<div class="dummy-notification-container">
+  {{#each notifications as |notification|}}
+    {{notification-message notification=notification}}
+  {{/each}}
+</div>
+
+<div class='dummy-body checkbox'>
+
+  <div class="section-title">Default</div>
+  <hr>
+
+  <div class='section'>
+
+    <div class='example'>
+      <div class='demo'>
+        {{#frost-radio group=testGroup value='radio1' changed='changed'}}Radio 1{{/frost-radio}}
+        {{#frost-radio group=testGroup value='radio2' changed='changed'}}Radio 2{{/frost-radio}}
+        {{#frost-radio group=testGroup value='radio3' changed='changed'}}Radio 3{{/frost-radio}}
+      </div>
+      <div>
+        {{format-markdown "```handlebars
+  {{#frost-radio
+    group=testGroup
+    value='radio1'
+    changed='changed'}}Radio 1{{/frost-radio}}
+  {{#frost-radio
+    group=testGroup
+    value='radio2'
+    changed='changed'}}Radio 2{{/frost-radio}}
+  {{#frost-radio
+    group=testGroup
+    value='radio3'
+    changed='changed'}}Radio 3{{/frost-radio}}
+        ```"}}
+      </div>
+    </div>
+
+  </div>
+
+</div>

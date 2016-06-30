@@ -1,0 +1,25 @@
+{{#if hasBlock}}
+  <label class="ember-radio-button {{if checked 'checked'}} {{joinedClassNames}}" for={{radioId}}>
+    {{frost-radio-input
+        class=radioClass
+        id=radioId
+        disabled=disabled
+        name=name
+        required=required
+        group=group
+        value=value
+        changed="changed"}}
+
+    {{yield}}
+  </label>
+{{else}}
+  {{frost-radio-input
+      class=radioClass
+      id=radioId
+      disabled=disabled
+      name=name
+      required=required
+      group=group
+      value=value
+      changed="changed"}}
+{{/if}}
