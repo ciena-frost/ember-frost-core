@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 58 50" enable-background="new 0 0 58 50" xml:space="preserve">
+<g id="Layer_3_1_">
+	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="52.3698" y1="48.3698" x2="5.6979" y2="1.6979">
+		<stop  offset="0" style="stop-color:#68AACC"/>
+		<stop  offset="3.386081e-02" style="stop-color:#6799B3"/>
+		<stop  offset="1" style="stop-color:#2F4F69"/>
+	</linearGradient>
+	<path fill="url(#SVGID_1_)" d="M48.4,50H9.6C6.5,50,4,47.5,4,44.4V5.6C4.2,2.5,6.7,0,9.6,0h38.8C51.5,0,54,2.5,54,5.6v38.9
+		C54,47.5,51.5,50,48.4,50z"/>
+</g>
+<polygon opacity="0.15" fill="#272425" enable-background="new    " points="40.1,35.4 43.7,27.1 42.4,15.5 53.9,27.2 53.9,45.1 
+	53.7,46 53.5,46.4 53.1,47.3 52.6,48.1 51.7,48.9 50.4,49.5 48.7,50 31.8,50 17.1,36.6 29.8,40.5 "/>
+<g opacity="0.7">
+	<path fill="#E8E8E8" d="M29,10.8c7.8,0,14.2,6.3,14.2,14.2S36.8,39.2,29,39.2S14.8,32.8,14.8,25S21.2,10.8,29,10.8 M29,8.3
+		c-9.2,0-16.7,7.5-16.7,16.7S19.8,41.7,29,41.7S45.7,34.2,45.7,25S38.2,8.3,29,8.3L29,8.3z"/>
+</g>
+<path fill="#E8E8E8" d="M31.4,23.9c-0.2,0-0.5-0.1-0.7-0.2c-0.4-0.4-0.5-1-0.1-1.4l4.8-5.6c0.4-0.4,1-0.5,1.4-0.1
+	c0.4,0.4,0.5,1,0.1,1.4l-4.8,5.6C32,23.8,31.7,23.9,31.4,23.9z"/>
+<g>
+	<path fill="#E8E8E8" d="M29.4,23.5c0.8,0,1.5,0.7,1.5,1.5s-0.7,1.5-1.5,1.5s-1.5-0.7-1.5-1.5S28.6,23.5,29.4,23.5 M29.4,21.8
+		c-1.8,0-3.2,1.4-3.2,3.2s1.4,3.2,3.2,3.2s3.2-1.4,3.2-3.2S31.2,21.8,29.4,21.8L29.4,21.8z"/>
+</g>
+<path opacity="0.7" fill="#E8E8E8" enable-background="new    " d="M29,17c-0.6,0-1-0.4-1-1v-2.7c0-0.6,0.4-1,1-1s1,0.4,1,1V16
+	C30,16.6,29.5,17,29,17z"/>
+<path opacity="0.7" fill="#E8E8E8" enable-background="new    " d="M40.5,26h-2.6c-0.6,0-1-0.4-1-1s0.4-1,1-1h2.6c0.6,0,1,0.4,1,1
+	S41,26,40.5,26z"/>
+<path opacity="0.7" fill="#E8E8E8" enable-background="new    " d="M20.2,26h-2.7c-0.6,0-1-0.4-1-1s0.4-1,1-1h2.7c0.6,0,1,0.4,1,1
+	S20.8,26,20.2,26z"/>
+</svg>

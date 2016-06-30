@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="575 375 50 50" enable-background="new 575 375 50 50" xml:space="preserve">
+<g id="Layer_3_4_">
+	
+		<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="30.4606" y1="773.5394" x2="27.5445" y2="776.4554" gradientTransform="matrix(16 0 0 -16 136 12800)">
+		<stop  offset="0" style="stop-color:#00EFFF"/>
+		<stop  offset="0.8" style="stop-color:#009EEF"/>
+		<stop  offset="1" style="stop-color:#007FEF"/>
+	</linearGradient>
+	<path fill="url(#SVGID_1_)" d="M619.4,425h-38.8c-3.1,0-5.6-2.5-5.6-5.6v-38.8c0.2-3.1,2.7-5.6,5.6-5.6h38.8c3.1,0,5.6,2.5,5.6,5.6
+		v38.9C625,422.5,622.5,425,619.4,425z"/>
+	<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="585" y1="405.75" x2="625" y2="405.75">
+		<stop  offset="0" style="stop-color:#00EFFF"/>
+		<stop  offset="0.8" style="stop-color:#009EEF"/>
+		<stop  offset="1" style="stop-color:#007FEF"/>
+	</linearGradient>
+	<polygon opacity="0.15" fill="url(#SVGID_2_)" enable-background="new    " points="615,414.5 615,386.5 625,400 625,420.1 
+		624.8,421 624.7,421.4 624.2,422.3 623.8,423.1 622.8,423.9 621.5,424.5 619.8,425 598,425 585,414.5 	"/>
+</g>
+<g>
+	<rect x="585" y="386.5" opacity="0.4" fill="#FFFFFF" enable-background="new    " width="30" height="28"/>
+	<rect x="588" y="393.5" opacity="0.5" fill="#FFFFFF" enable-background="new    " width="4" height="18"/>
+	<rect x="598" y="393.5" opacity="0.5" fill="#FFFFFF" enable-background="new    " width="4" height="18"/>
+	<rect x="593" y="393.5" opacity="0.5" fill="#FFFFFF" enable-background="new    " width="4" height="18"/>
+	<rect x="603" y="393.5" opacity="0.5" fill="#FFFFFF" enable-background="new    " width="4" height="18"/>
+	<rect x="608" y="393.5" opacity="0.5" fill="#FFFFFF" enable-background="new    " width="4" height="18"/>
+	<circle opacity="0.5" fill="#FFFFFF" enable-background="new    " cx="610" cy="390.5" r="2"/>
+</g>
+<g id="ADD_NE">
+	<rect x="607.7" y="384.1" fill="#009EEF" width="9.5" height="10.1"/>
+	<g>
+		<path fill="#FFFFFF" d="M617.8,382.1h-10.6c-0.9,0-1.7,0.8-1.7,1.8v10.7c0,1,0.8,1.8,1.7,1.8h10.7c1,0,1.7-0.8,1.7-1.8v-10.8
+			C619.6,382.9,618.8,382.1,617.8,382.1z M617.1,390.4h-3.3v3.3h-2.5v-3.3H608v-2.5h3.3v-3.3h2.5v3.3h3.3V390.4z"/>
+	</g>
+</g>
+</svg>

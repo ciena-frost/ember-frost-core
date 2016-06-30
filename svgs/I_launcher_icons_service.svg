@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 150 150" enable-background="new 0 0 150 150" xml:space="preserve">
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="48.75" y1="105.25" x2="9.25" y2="144.75" gradientTransform="matrix(2.5862 0 0 -2.5862 0 398.2758)">
+	<stop  offset="0" style="stop-color:#00FF00"/>
+	<stop  offset="1" style="stop-color:#009245"/>
+</linearGradient>
+<polygon fill="url(#SVGID_1_)" points="37.5,139.7 0,75 37.5,10.3 112.5,10.3 150,75 112.5,139.7 "/>
+<polygon opacity="0.1" fill="#272425" enable-background="new    " points="109.9,38.8 102.6,42 91.8,53.1 70.3,77.2 38.7,77.2 
+	28.4,87.4 59.2,139.7 112.5,139.7 140.9,90.5 "/>
+<g>
+	<g opacity="0.75">
+		<g>
+			<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="101.1" y1="49.1" x2="101.1" y2="54.3"/>
+			
+				<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" stroke-dasharray="3,3" x1="101.1" y1="59.5" x2="101.1" y2="98.3"/>
+			<line fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" x1="101.1" y1="103.4" x2="101.1" y2="106"/>
+		</g>
+	</g>
+	<circle opacity="0.1" fill="#272425" cx="29.9" cy="74.9" r="12"/>
+	<circle fill="#FFFFFF" cx="28.4" cy="73.5" r="11.6"/>
+	
+		<line opacity="0.4" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" enable-background="new    " x1="28.7" y1="75" x2="57.2" y2="75"/>
+	
+		<line opacity="0.4" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10" enable-background="new    " x1="100.9" y1="40.1" x2="69.8" y2="74.5"/>
+	<rect x="91.8" y="29.7" fill="#C7FFCB" width="18.1" height="18.1"/>
+	<rect x="57.7" y="65.4" fill="#C7FFCB" width="18.1" height="18.1"/>
+	<circle opacity="0.1" fill="#272425" cx="101.9" cy="108.6" r="12"/>
+	<circle fill="#FFFFFF" cx="100.5" cy="107.2" r="11.6"/>
+</g>
+</svg>

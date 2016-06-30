@@ -8,6 +8,10 @@ export default [
     routeName: 'checkbox'
   },
   {
+    label: 'Radio',
+    routeName: 'radio'
+  },
+  {
     label: 'Color palette',
     routeName: 'palette'
   },
