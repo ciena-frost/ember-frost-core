@@ -145,6 +145,7 @@
     "ember-cli-htmlbars": "^1.0.1",
     "ember-cli-sass": "^5.2.0",
     "ember-prop-types": "^2.0.0",
+    "ember-radio-button": "^1.0.7",
     "lodash": "^4.13.1",
     "svg4everybody": "^2.0.3"
   },

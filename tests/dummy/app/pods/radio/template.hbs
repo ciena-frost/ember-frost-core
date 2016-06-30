@@ -1,0 +1,40 @@
+<div class="dummy-notification-container">
+{{#each notifications as |notification|}}
+  {{notification-message notification=notification}}
+{{/each}}
+</div>
+
+<div class='dummy-body checkbox'>
+
+  <div class="section-title">Default</div>
+  <hr>
+
+  <div class='section'>
+
+    <div class='example'>
+      <div class='demo'>
+        {{#each sampleList as |i|}}
+          {{#frost-radio-button
+            value=i
+            groupValue=groupName
+            changed='change'
+          }}{{i}}{{/frost-radio-button}}
+      {{/each}}
+      </div>
+      <div class='snippet'>
+        {{format-markdown
+"```handlebars
+{{#each sampleList as |i|}}
+  {{#frost-radio-button
+    value=i
+    groupValue=groupName
+    changed='change'
+  }}{{i}}
+  {{/frost-radio-button}}
+{{/each}}```"}}
+      </div>
+    </div>
+
+  </div>
+
+</div>
