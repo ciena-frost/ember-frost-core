@@ -1,3 +1,7 @@
+# 0.13.1
+
+- Changed selection by value to not fire the onChange event
+
 # 0.13.0
 * **Added** `onKeyUp` property on `frost-text` that receives `keyUp` events from the inner `input`
 * **Added** `onKeyDown` property on `frost-text` that receives `keyDown` events from the inner `input`
