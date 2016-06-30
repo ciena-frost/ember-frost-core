@@ -491,7 +491,7 @@ export default Component.extend({
     let valueIndex = _.findIndex(this.get('items'), (item) => _.isEqual(item.value, selectedValue))
 
     if (valueIndex >= 0) { // Make sure we actually found the value
-      this.select(valueIndex)
+      this.set('selected', [valueIndex])
     }
   },
 
