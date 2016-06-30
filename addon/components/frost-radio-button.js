@@ -1,5 +1,5 @@
-import Ember from 'ember';
-import layout from '../templates/components/frost-radio-button';
+import Ember from 'ember'
+import layout from '../templates/components/frost-radio-button'
 export default Ember.Component.extend({
   layout,
   actions: {
@@ -7,4 +7,4 @@ export default Ember.Component.extend({
       this.get('targetObject').send(this.get('changed'), value)
     }
   }
-});
+})

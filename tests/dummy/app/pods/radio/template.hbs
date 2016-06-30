@@ -6,7 +6,7 @@
 
 <div class='dummy-body checkbox'>
 
-  <div class="section-title">Default</div>
+  <div class="section-title">Frost Radio Button</div>
   <hr>
 
   <div class='section'>
@@ -30,8 +30,26 @@
     groupValue=groupName
     changed='change'
   }}{{i}}
+
   {{/frost-radio-button}}
 {{/each}}```"}}
+      </div>
+      <br/>
+      <div>
+        {{format-markdown "```handlebars
+export default Controller.extend({
+  sampleList: [1,2,3,4,5],
+  actions: {
+    change (value) {
+      this.notifications.addNotification({
+        message: `Value changed to ${value}`,
+        type: 'success',
+        autoClear: true,
+        clearDuration: 2000
+      })
+    }
+  }
+})```"}}
       </div>
     </div>
 
