@@ -1,21 +1,21 @@
-import Ember from 'ember';
+import Ember from 'ember'
 import {
   expect
 } from 'chai'
 import {
   describeComponent,
   it
-} from 'ember-mocha';
-import hbs from 'htmlbars-inline-precompile';
+} from 'ember-mocha'
+import hbs from 'htmlbars-inline-precompile'
 
 const {
   run
-} = Ember;
+} = Ember
 
 describeComponent('frost-radio-button', 'FrostRadioButtonComponent', {
   integration: true
-}, function() {
-  it('Action fires correctly', function() {
+}, function () {
+  it('Action fires correctly', function () {
     this.on('changed', (value) => {
       expect(value).to.equal('test')
     })
@@ -25,13 +25,13 @@ describeComponent('frost-radio-button', 'FrostRadioButtonComponent', {
           value='test'
           changed='changed'
       }}
-    `);
+    `)
 
     expect(this.$('input').prop('checked')).to.equal(false)
     run(() => {
-      this.$('input').trigger('click');
-    });
+      this.$('input').trigger('click')
+    })
     expect(this.$('input').prop('checked')).to.equal(true)
     expect(this.get('groupValue')).to.equal('test')
-  });
+  })
 })
