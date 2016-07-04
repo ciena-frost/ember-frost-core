@@ -2,16 +2,23 @@ import Ember from 'ember'
 import layout from '../templates/components/frost-radio-button'
 export default Ember.Component.extend({
   classNames: ['frost-radio-button'],
-  classNameBindings: ['disabled', 'required'],
+  classNameBindings: [
+    'checked',
+    'disabled',
+    'required'
+  ],
   attributeBindings: ['tabindex'],
   layout,
-  required: true,
+  required: false,
   disabled: false,
   tabindex: Ember.computed('disabled', function () {
     return this.get('disabled') ? -1 : 0
   }),
   group: Ember.computed.alias('parentView.id'),
   onChange: Ember.computed.alias('parentView.onChange'),
+  checked: Ember.computed('group', 'value', function () {
+    return this.get('group') === this.get('value')
+  }).readOnly(),
   init () {
     this._super(...arguments)
     Ember.assert(
@@ -23,7 +30,7 @@ export default Ember.Component.extend({
     )
   },
   actions: {
-    handleChange (value) {
+    onChange (value) {
       let handler = this.get('onChange')
       if (handler && typeof handler === 'function') {
         handler(value)

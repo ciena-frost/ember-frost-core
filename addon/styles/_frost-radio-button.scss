@@ -4,33 +4,25 @@
   &.disabled label {
     cursor: not-allowed;
   }
-  
-  label:not(.disabled) {
-    .ember-radio-button {
-      input {
-        display: none;
-      }
-      &.checked {
-        svg .inner {
-          fill: #009EEF;
-        }
-      }
-      svg {
-        vertical-align: text-top;
-        width: 20px;
-        height: 20px;
-        .inner {
-          transition: fill 0.2s ease-in-out;
-          fill: transparent;
-        }
-        .ring {
-          transition: fill 0.2s ease;
-          fill: #919395;
-        }
-      }
-
-    }
-
+  &.checked label:not(.disabled) svg .inner {
+    fill: #009EEF;
   }
-
+  label:not(.disabled) {
+    .frost-radio-button-input {
+      display: none;
+    }
+    svg {
+      vertical-align: text-top;
+      width: 20px;
+      height: 20px;
+      .inner {
+        transition: fill 0.2s ease-in-out;
+        fill: transparent;
+      }
+      .ring {
+        transition: fill 0.2s ease;
+        fill: #919395;
+      }
+    }
+  }
 }
