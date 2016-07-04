@@ -15,16 +15,19 @@ const {
 describeComponent('frost-radio-button', 'FrostRadioButtonComponent', {
   integration: true
 }, function () {
-  it('Action fires correctly', function () {
+  it('throws error when not created within group', function () {
+    expect(() => {
+      this.render(hbs`{{frost-radio-button}}`)
+    }).to.throw(/frost-radio-button/)
+  })
+  it('works as expected', function () {
     this.on('changed', (value) => {
       expect(value).to.equal('test')
     })
     this.render(hbs `
-      {{frost-radio-button
-          groupValue=groupValue
-          value='test'
-          changed='changed'
-      }}
+      {{#frost-radio-group onChange='changed' id=groupTest}}
+        {{frost-radio-button value='test'}}
+      {{/frost-radio-group}}
     `)
 
     expect(this.$('input').prop('checked')).to.equal(false)
@@ -32,6 +35,6 @@ describeComponent('frost-radio-button', 'FrostRadioButtonComponent', {
       this.$('input').trigger('click')
     })
     expect(this.$('input').prop('checked')).to.equal(true)
-    expect(this.get('groupValue')).to.equal('test')
+    expect(this.get('groupTest')).to.equal('test')
   })
 })
