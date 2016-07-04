@@ -23,7 +23,7 @@ export default Ember.Component.extend({
     if (this.get('group') !== value) {
       this.set('group', value)
       Ember.run.next(() => {
-        this.sendAction('onChange', this.get('value'))
+        this.sendAction('onChange', value)
       })
     }
   }
