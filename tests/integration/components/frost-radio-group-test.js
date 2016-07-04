@@ -1,10 +1,10 @@
 /* jshint expr:true */
-import { expect } from 'chai';
+import { expect } from 'chai'
 import {
   describeComponent,
   it
-} from 'ember-mocha';
-import hbs from 'htmlbars-inline-precompile';
+} from 'ember-mocha'
+import hbs from 'htmlbars-inline-precompile'
 
 describeComponent(
   'frost-radio-group',
@@ -12,10 +12,10 @@ describeComponent(
   {
     integration: true
   },
-  function() {
+  function () {
     it('renders', function () {
       this.render(hbs`{{frost-radio-group}}`)
       expect(this.$()).to.have.length(1)
-    });
+    })
   }
-);
+)
