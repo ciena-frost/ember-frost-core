@@ -15,7 +15,7 @@ const {
 describeComponent('frost-radio-button', 'FrostRadioButtonComponent', {
   integration: true
 }, function () {
-  it('throws error when not created within group', function () {
+  it('throws assertion errors', function () {
     expect(() => {
       this.render(hbs`{{frost-radio-button}}`)
     }).to.throw(/frost-radio-button/)
