@@ -7,7 +7,7 @@
 
     <div class='example'>
       <div class='demo'>
-        {{#frost-radio-group class='a' onChange='change' id='checkbox-group'}}
+        {{#frost-radio-group class='a' onChange=(action 'change' 'sample argument') id='checkbox-group'}}
           {{#each sampleList as |i|}}
             {{#frost-radio-button value=i}}
               Label for {{i}}
@@ -19,9 +19,9 @@
         {{format-markdown
 "```handlebars
 // id can be optionally specified, but acts as the group value for the checkboxes.
-{{#frost-radio-group class='custom-class' onChange='change' id='checkbox-group'}}
+// a class property can also be specified
+{{#frost-radio-group onChange=(action 'change' 'sample argument') id='checkbox-group'}}
   {{#each sampleList as |i|}}
-    // if the id of the parent frost-radio-group matches the value of the button, it becomes active
     {{#frost-radio-button value=i}}
       Label for {{i}}
     {{/frost-radio-button}}
@@ -33,9 +33,9 @@
 export default Controller.extend({
   sampleList: [1,2,3,4,5],
   actions: {
-    change (value) {
+    change () {
       this.notifications.addNotification({
-        message: `Value changed to ${value}`,
+        message: `Action recieved with arguments [${[].slice.call(arguments)}]`,
         type: 'success',
         autoClear: true,
         clearDuration: 2000

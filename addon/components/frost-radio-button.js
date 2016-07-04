@@ -24,7 +24,10 @@ export default Ember.Component.extend({
   },
   actions: {
     handleChange (value) {
-      this.get('targetObject').send(this.get('onChange'), value)
+      let handler = this.get('onChange')
+      if (handler && typeof handler === 'function') {
+        handler(value)
+      }
     }
   }
 })
