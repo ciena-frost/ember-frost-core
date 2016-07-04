@@ -13,9 +13,16 @@ export default Ember.Component.extend({
     'value'
   ],
   checked: Ember.computed('group', 'value', function () {
-    return this.get('group') === this.get('value')
+    let isChecked = this.get('group') === this.get('value')
+    this.parentView.set('checked', isChecked)
+    return isChecked
   }).readOnly(),
-
+  init () {
+    this._super(...arguments)
+    Ember.assert(
+      `${this.toString()} must be initialized in the yield block of 'frost-radio-button'`,
+      /frost-radio-button/.test(this.parentView.toString()))
+  },
   change () {
     this._super(...arguments)
     let value = this.get('value')

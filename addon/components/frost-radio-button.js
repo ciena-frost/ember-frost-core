@@ -16,9 +16,6 @@ export default Ember.Component.extend({
   }),
   group: Ember.computed.alias('parentView.id'),
   onChange: Ember.computed.alias('parentView.onChange'),
-  checked: Ember.computed('group', 'value', function () {
-    return this.get('group') === this.get('value')
-  }).readOnly(),
   init () {
     this._super(...arguments)
     Ember.assert(

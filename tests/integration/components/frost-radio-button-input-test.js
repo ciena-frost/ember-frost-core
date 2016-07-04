@@ -13,18 +13,10 @@ describeComponent(
     integration: true
   },
   function () {
-    it('renders', function () {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#frost-radio-button-input}}
-      //     template content
-      //   {{/frost-radio-button-input}}
-      // `);
-
-      this.render(hbs`{{frost-radio-button-input}}`)
-      expect(this.$()).to.have.length(1)
+    it('throws error when not in frost-radio-button', function () {
+      expect(() => {
+        this.render(hbs`{{frost-radio-button-input}}`)
+      }).to.throw(/frost-radio-button-input/)
     })
   }
 )
