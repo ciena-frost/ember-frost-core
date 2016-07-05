@@ -1,0 +1,51 @@
+<div class='dummy-body'>
+
+  <div class="section-title">Frost Radio Button</div>
+  <hr>
+
+  <div class='section'>
+
+    <div class='example'>
+      <div class='demo'>
+        {{#frost-radio-group class='a' onChange=(action 'change' 'sample argument') id='checkbox-group'}}
+          {{#each sampleList as |i|}}
+            {{#frost-radio-button value=i}}
+              Label for {{i}}
+            {{/frost-radio-button}}
+          {{/each}}
+        {{/frost-radio-group}}
+      </div>
+      <div style='padding-bottom:10px' class='snippet'>
+        {{format-markdown
+"```handlebars
+// id can be optionally specified, but acts as the group value for the checkboxes.
+// a class property can also be specified
+{{#frost-radio-group onChange=(action 'change' 'sample argument') id='checkbox-group'}}
+  {{#each sampleList as |i|}}
+    {{#frost-radio-button value=i}}
+      Label for {{i}}
+    {{/frost-radio-button}}
+  {{/each}}
+{{/frost-radio-group}}```"}}
+      </div>
+      <div>
+        {{format-markdown "```handlebars
+export default Controller.extend({
+  sampleList: [1,2,3,4,5],
+  actions: {
+    change () {
+      this.notifications.addNotification({
+        message: `Action recieved with arguments [${[].slice.call(arguments)}]`,
+        type: 'success',
+        autoClear: true,
+        clearDuration: 2000
+      })
+    }
+  }
+})```"}}
+      </div>
+    </div>
+
+  </div>
+
+</div>

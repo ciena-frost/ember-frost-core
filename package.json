@@ -77,7 +77,7 @@
     "build": "ember build",
     "start": "ember server",
     "test": "npm run lint && ember test",
-    "lint": "eslint *.js addon app blueprints config tests"
+    "lint": "eslint *.js addon app blueprints config tests --fix"
   },
   "repository": "git@github.com:ciena-frost/ember-frost-core.git",
   "engines": {
