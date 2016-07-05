@@ -8,7 +8,8 @@ export default Component.extend({
   attributeBindings: [
     'checked',
     'disabled',
-    'value'
+    'value',
+    'type'
   ],
   classNames: ['frost-radio-button-input'],
   tagName: 'input',
@@ -25,7 +26,7 @@ export default Component.extend({
       /frost-radio-button/.test(this.parentView.toString()))
   },
 
-  click (event) {
+  change (event) {
     if (this.onChange && typeof this.onChange === 'function') {
       const eventClone = Ember.$.Event(null, event)
       const targetClone = Ember.$.clone(event.target)
