@@ -1,37 +1,37 @@
 import Ember from 'ember'
+const {
+  Component,
+  computed
+} = Ember
 
-export default Ember.Component.extend({
-  tagName: 'input',
-  type: 'radio',
-  classNames: ['frost-radio-button-input'],
+export default Component.extend({
   attributeBindings: [
     'checked',
     'disabled',
-    'name',
-    'required',
-    'type',
     'value'
   ],
-  checked: Ember.computed('group', 'value', function () {
-    let isChecked = this.get('group') === this.get('value')
-    this.parentView.set('checked', isChecked)
-    return isChecked
-  }).readOnly(),
+  classNames: ['frost-radio-button-input'],
+  tagName: 'input',
+  type: 'radio',
+
+  checked: computed('groupValue', 'value', function () {
+    return this.get('groupValue') === this.get('value')
+  }),
+
   init () {
     this._super(...arguments)
     Ember.assert(
       `${this.toString()} must be initialized in the yield block of 'frost-radio-button'`,
       /frost-radio-button/.test(this.parentView.toString()))
   },
-  change () {
-    this._super(...arguments)
-    let value = this.get('value')
 
-    if (this.get('group') !== value) {
-      this.set('group', value)
-      Ember.run.next(() => {
-        this.sendAction('onChange', value)
-      })
+  click (event) {
+    if (this.onChange && typeof this.onChange === 'function') {
+      const eventClone = Ember.$.Event(null, event)
+      const targetClone = Ember.$.clone(event.target)
+      targetClone.id = this.groupId
+      eventClone.target = targetClone
+      this.onChange(eventClone)
     }
   }
 })

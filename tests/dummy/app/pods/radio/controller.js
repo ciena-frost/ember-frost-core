@@ -2,11 +2,17 @@ import Ember from 'ember'
 const {Controller} = Ember
 
 export default Controller.extend({
-  sampleList: [1, 2, 3, 4, 5],
+  sampleList: ['a', 'b', 'c', 'd', 'e'],
+
+  model: Ember.Object.create({
+    checkboxGroup: 'c'
+  }),
+
   actions: {
-    change () {
+    change (event) {
+      this.set(`model.${event.target.id}`, event.target.value)
       this.notifications.addNotification({
-        message: `Action recieved with arguments [${[].slice.call(arguments)}]`,
+        message: `Radio group ${event.target.id} value set to ${event.target.value}`,
         type: 'success',
         autoClear: true,
         clearDuration: 2000

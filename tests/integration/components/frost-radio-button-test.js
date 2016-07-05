@@ -20,21 +20,23 @@ describeComponent('frost-radio-button', 'FrostRadioButtonComponent', {
       this.render(hbs`{{frost-radio-button}}`)
     }).to.throw(/frost-radio-button/)
   })
+
   it('works as expected', function () {
-    this.on('changed', (value) => {
-      expect(value).to.equal('test')
+    this.on('changed', (event) => {
+      expect(event.target.id).to.equal('groupId')
+      expect(event.target.value).to.equal('testValue')
+      run.next(() => {
+        expect(this.$('input').prop('checked')).to.equal(true)
+      })
     })
+
     this.render(hbs `
-      {{#frost-radio-group onChange='changed' id=groupTest}}
-        {{frost-radio-button value='test'}}
+      {{#frost-radio-group onChange=(action 'changed') id='groupId'}}
+        {{frost-radio-button value='testValue'}}
       {{/frost-radio-group}}
     `)
 
     expect(this.$('input').prop('checked')).to.equal(false)
-    run(() => {
-      this.$('input').trigger('click')
-    })
-    expect(this.$('input').prop('checked')).to.equal(true)
-    expect(this.get('groupTest')).to.equal('test')
+    this.$('input').trigger('click')
   })
 })
