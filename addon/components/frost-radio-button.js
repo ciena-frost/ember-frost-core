@@ -50,19 +50,21 @@ export default Component.extend({
   keyPress (e) {
     e.preventDefault()
     e.stopPropagation()
-    
+
+    if (this.get('disabled') || this.get('groupValue') === this.get('value')) {
+      return
+    }
+
     let event = Ember.$.Event(null, e)
     let target = Ember.$.clone(Ember.$(e.target).find('input')[0])
     let change = this.get('onChange')
-   
+
     if (e.keyCode === 13) {
-      if (!this.get('disabled')) {
-        this.set('parentView.value', this.get('value'))
-        target.id = this.get('groupId')
-        event.target = target
-        if (change && typeof change === 'function') {
-          change(event)
-        }
+      this.set('parentView.value', this.get('value'))
+      target.id = this.get('groupId')
+      event.target = target
+      if (change && typeof change === 'function') {
+        change(event)
       }
     }
     return false
