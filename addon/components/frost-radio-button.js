@@ -54,13 +54,11 @@ export default Component.extend({
     )
   },
   keyPress (e) {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13 || e.keyCode === 32) {
       if (this.get('disabled') || this.get('groupValue') === this.get('value')) {
         return
       }
       let change = this.get('onChange')
-
-      this.set('parentView.value', this.get('value'))
       if (change && typeof change === 'function') {
         change(this._createEvent(e, Ember.$(e.target).find('input')[0]))
       }
