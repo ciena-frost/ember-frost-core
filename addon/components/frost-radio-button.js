@@ -46,5 +46,23 @@ export default Component.extend({
       `${this.toString()} must be initialized with a 'value' property`,
       this.get('value')
     )
+  },
+  keyPress (e) {
+    let event = Ember.$.Event(null, e)
+    let target = $.clone($(e.target).find('input')[0])
+    let change = this.get('onChange')
+    e.preventDefault()
+    e.stopPropagation()
+    if (e.keyCode === 13) {
+      if (!this.get('disabled')) {
+        this.set('parentView.value', this.get('value'))
+        target.id = this.get('groupId')
+        event.target = target
+        if (change && typeof change === 'function') {
+          change(event)
+        }
+      }
+    }
+    return false
   }
 })
