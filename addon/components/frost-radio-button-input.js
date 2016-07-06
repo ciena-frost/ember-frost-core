@@ -28,11 +28,7 @@ export default Component.extend({
 
   change (event) {
     if (this.onChange && typeof this.onChange === 'function') {
-      const eventClone = Ember.$.Event(null, event)
-      const targetClone = Ember.$.clone(event.target)
-      targetClone.id = this.groupId
-      eventClone.target = targetClone
-      this.onChange(eventClone)
+      this.onChange(this.parentView._createEvent(event, event.target))
     }
   }
 })

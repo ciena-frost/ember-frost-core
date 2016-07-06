@@ -36,7 +36,13 @@ export default Component.extend({
   tabindex: Ember.computed('disabled', function () {
     return this.get('disabled') ? -1 : 0
   }),
-
+  _createEvent (_event, _target) {
+    let event = Ember.$.Event(null, _event)
+    let target = Ember.$.clone(_target)
+    target.id = this.get('groupId')
+    event.target = target
+    return event
+  },
   init () {
     this._super(...arguments)
     Ember.assert(
@@ -48,25 +54,16 @@ export default Component.extend({
     )
   },
   keyPress (e) {
-    e.preventDefault()
-    e.stopPropagation()
-
-    if (this.get('disabled') || this.get('groupValue') === this.get('value')) {
-      return
-    }
-
-    let event = Ember.$.Event(null, e)
-    let target = Ember.$.clone(Ember.$(e.target).find('input')[0])
-    let change = this.get('onChange')
-
     if (e.keyCode === 13) {
+      if (this.get('disabled') || this.get('groupValue') === this.get('value')) {
+        return
+      }
+      let change = this.get('onChange')
+
       this.set('parentView.value', this.get('value'))
-      target.id = this.get('groupId')
-      event.target = target
       if (change && typeof change === 'function') {
-        change(event)
+        change(this._createEvent(e, Ember.$(e.target).find('input')[0]))
       }
     }
-    return false
   }
 })
