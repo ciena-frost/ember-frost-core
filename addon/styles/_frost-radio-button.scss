@@ -34,10 +34,13 @@
     fill: $frost-color-blue-1;
   }
 
-  &:hover:not(.disabled):not(.checked) label svg .inner {
-    fill: $frost-color-blue-4;
+  &:hover, &:focus {
+    &:not(.disabled):not(.checked) {
+      label svg .inner {
+        fill: $frost-color-blue-4;
+      }
+    }
   }
-
   &.disabled {
     label {
       color: $frost-color-grey-5;

@@ -36,7 +36,13 @@ export default Component.extend({
   tabindex: Ember.computed('disabled', function () {
     return this.get('disabled') ? -1 : 0
   }),
-
+  _createEvent (_event, _target) {
+    let event = Ember.$.Event(null, _event)
+    let target = Ember.$.clone(_target)
+    target.id = this.get('groupId')
+    event.target = target
+    return event
+  },
   init () {
     this._super(...arguments)
     Ember.assert(
@@ -46,5 +52,16 @@ export default Component.extend({
       `${this.toString()} must be initialized with a 'value' property`,
       this.get('value')
     )
+  },
+  keyPress (e) {
+    if (e.keyCode === 13 || e.keyCode === 32) {
+      if (this.get('disabled') || this.get('groupValue') === this.get('value')) {
+        return
+      }
+      let change = this.get('onChange')
+      if (change && typeof change === 'function') {
+        change(this._createEvent(e, Ember.$(e.target).find('input')[0]))
+      }
+    }
   }
 })
