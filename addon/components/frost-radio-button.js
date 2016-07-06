@@ -48,11 +48,13 @@ export default Component.extend({
     )
   },
   keyPress (e) {
+    e.preventDefault()
+    e.stopPropagation()
+    
     let event = Ember.$.Event(null, e)
     let target = Ember.$.clone(Ember.$(e.target).find('input')[0])
     let change = this.get('onChange')
-    e.preventDefault()
-    e.stopPropagation()
+   
     if (e.keyCode === 13) {
       if (!this.get('disabled')) {
         this.set('parentView.value', this.get('value'))
