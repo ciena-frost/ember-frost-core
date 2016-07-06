@@ -12,6 +12,13 @@ const {
   run
 } = Ember
 
+let changeEvent = function (event) {
+  expect(event.target.id).to.equal('groupId')
+  expect(event.target.value).to.equal('testValue')
+  run.next(() => {
+    expect(this.$('input').prop('checked')).to.equal(true)
+  })
+}
 describeComponent('frost-radio-button', 'FrostRadioButtonComponent', {
   integration: true
 }, function () {
@@ -20,16 +27,22 @@ describeComponent('frost-radio-button', 'FrostRadioButtonComponent', {
       this.render(hbs`{{frost-radio-button}}`)
     }).to.throw(/frost-radio-button/)
   })
+  it('is triggered by keypress', function () {
+    this.on('changed', changeEvent.bind(this))
+    this.render(hbs `
+      {{#frost-radio-group onChange=(action 'changed') id='groupId'}}
+        {{frost-radio-button value='testValue'}}
+      {{/frost-radio-group}}
+    `)
 
-  it('works as expected', function () {
-    this.on('changed', (event) => {
-      expect(event.target.id).to.equal('groupId')
-      expect(event.target.value).to.equal('testValue')
-      run.next(() => {
-        expect(this.$('input').prop('checked')).to.equal(true)
-      })
-    })
+    let event = Ember.$.Event('keypress')
+    event.keyCode = 13
 
+    expect(this.$('input').prop('checked')).to.equal(false)
+    this.$('.frost-radio-button').trigger(event)
+  })
+  it('is triggered by click', function () {
+    this.on('changed', changeEvent.bind(this))
     this.render(hbs `
       {{#frost-radio-group onChange=(action 'changed') id='groupId'}}
         {{frost-radio-button value='testValue'}}

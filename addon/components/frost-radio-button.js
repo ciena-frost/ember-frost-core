@@ -49,7 +49,7 @@ export default Component.extend({
   },
   keyPress (e) {
     let event = Ember.$.Event(null, e)
-    let target = $.clone($(e.target).find('input')[0])
+    let target = Ember.$.clone(Ember.$(e.target).find('input')[0])
     let change = this.get('onChange')
     e.preventDefault()
     e.stopPropagation()
