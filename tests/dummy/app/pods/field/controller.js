@@ -4,35 +4,33 @@ const {Controller} = Ember
 export default Controller.extend({
   error: true,
 
-  notify (message) {
-    this.notifications.addNotification({
-      message,
-      type: 'success',
-      autoClear: true,
-      clearDuration: 2000
-    })
-  },
-
   actions: {
-    handleBlur () {
-      this.notify('blur event')
+    onBlurHandler () {
+      this.notifications.addNotification({
+        message: 'blur event',
+        type: 'success',
+        autoClear: true,
+        clearDuration: 2000
+      })
     },
 
-    handleFocus () {
-      this.notify('focus event')
+    onFocusHandler () {
+      this.notifications.addNotification({
+        message: 'focus event',
+        type: 'success',
+        autoClear: true,
+        clearDuration: 2000
+      })
     },
 
-    handleInput (e) {
-      console.log('field value: ' + e.value)
-      this.notify(`value: "${e.value}"`)
-    },
-
-    handleKeyDown (e) {
-      this.notify(`key down: ${e.keyCode} "${e.key}"`)
-    },
-
-    handleKeyUp (e) {
-      this.notify(`key up: ${e.keyCode} "${e.key}"`)
+    onInputHandler (event) {
+      console.log('field value: ' + event.target.value)
+      this.notifications.addNotification({
+        message: `${event.target.id}: ${event.target.value}`,
+        type: 'success',
+        autoClear: true,
+        clearDuration: 2000
+      })
     }
   }
 })
