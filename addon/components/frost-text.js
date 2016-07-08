@@ -1,5 +1,5 @@
 import Ember from 'ember'
-import FrostComponent from '../mixins/frost-component'
+import FrostEvents from '../mixins/frost-events'
 import computed from 'ember-computed-decorators'
 
 const {
@@ -10,7 +10,7 @@ const {
   schedule
 } = Ember.run
 
-export default TextField.extend(FrostComponent, {
+export default TextField.extend(FrostEvents, {
   // == Properties =============================================================
   attributeBindings: [
     'style'

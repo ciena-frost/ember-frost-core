@@ -19,7 +19,7 @@ export default {
   'mouseEnter': ['onMouseEnter'],
   'mouseLeave': ['onMouseLeave'],
   'submit': ['onSubmit'],
-  'change': ['deprecateMessageTest', 'onChange'],
+  'change': ['onChange'],
   'input': ['onInput'],
   'dragStart': ['onDragStart'],
   'drag': ['onDrag'],

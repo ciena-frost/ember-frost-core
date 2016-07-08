@@ -1,12 +1,12 @@
 import Ember from 'ember'
-import FrostComponent from '../mixins/frost-component'
+import FrostEvents from '../mixins/frost-events'
 
 const {
   Component,
   computed
 } = Ember
 
-export default Component.extend(FrostComponent, {
+export default Component.extend(FrostEvents, {
   attributeBindings: [
     'checked',
     'disabled',
