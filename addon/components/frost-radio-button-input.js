@@ -1,10 +1,12 @@
 import Ember from 'ember'
+import FrostComponent from '../mixins/frost-component'
+
 const {
   Component,
   computed
 } = Ember
 
-export default Component.extend({
+export default Component.extend(FrostComponent, {
   attributeBindings: [
     'checked',
     'disabled',
@@ -14,13 +16,15 @@ export default Component.extend({
   classNames: ['frost-radio-button-input'],
   tagName: 'input',
   type: 'radio',
-
   checked: computed('groupValue', 'value', function () {
     return this.get('groupValue') === this.get('value')
   }),
 
+  excludeEvents: ['onChange'],
   init () {
+
     this._super(...arguments)
+
     Ember.assert(
       `${this.toString()} must be initialized in the yield block of 'frost-radio-button'`,
       /frost-radio-button/.test(this.parentView.toString()))

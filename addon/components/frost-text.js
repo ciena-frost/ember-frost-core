@@ -1,4 +1,7 @@
 import Ember from 'ember'
+import FrostComponent from '../mixins/frost-component'
+import computed from 'ember-computed-decorators'
+
 const {
   TextField
 } = Ember
@@ -6,8 +9,6 @@ const {
   next,
   schedule
 } = Ember.run
-import FrostComponent from './frost-component'
-import computed from 'ember-computed-decorators'
 
 export default TextField.extend(FrostComponent, {
   // == Properties =============================================================
