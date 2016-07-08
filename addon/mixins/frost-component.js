@@ -3,7 +3,8 @@ import events from '../utils/events'
 
 const {
   Mixin,
-  on
+  on,
+  deprecate
 } = Ember
 
 export default Mixin.create({
@@ -12,7 +13,7 @@ export default Mixin.create({
     Object.keys(events).forEach((event) => {
       events[event].forEach((frostEvent, i) => {
         if (this[frostEvent]) {
-          Ember.deprecate(`
+          deprecate(`
             Event handler '${frostEvent}' is deprecated.
             Please use '${events[event][0]}' event instead`,
             i === 0, {
