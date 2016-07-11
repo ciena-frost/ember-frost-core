@@ -1,3 +1,7 @@
+# 0.17.2
+
+Added ember-code-snippets to allow demo documentation to reference the code as the sample text.  Cleaned up the button demo as an example.
+
 # 0.17.1
 
 Fixed the text clear icon to only append to the DOM on insertion of the text field (was occurring on every render/re-render)
