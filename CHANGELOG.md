@@ -1,3 +1,7 @@
+# 0.17.1
+
+Fixed the text clear icon to only append to the DOM on insertion of the text field (was occurring on every render/re-render)
+
 # 0.17.0
 No CHANGELOG section found in Pull Request description.
 Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
