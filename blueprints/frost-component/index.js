@@ -21,7 +21,6 @@ module.exports = {
       ]
     }
   ],
-
   fileMapTokens: function() {
     return {
       __path__: function(options) {
@@ -47,12 +46,10 @@ module.exports = {
 
   normalizeEntityName: function(entityName) {
     entityName = normalizeEntityName(entityName);
-
     return validComponentName(entityName);
   },
-
   locals: function(options) {
-
+    options.originBlueprintName = 'component';
     var templatePath   = '';
     var importTemplate = '';
     var contents = '';
@@ -67,7 +64,7 @@ module.exports = {
       contents +=
         '\n\t// == Properties ============================================================='  +
         '\n\texcludeEvents: [],'  +
-        '\n\tclassNames: [\n\t\t' + options.entity.name + '\n\t],'  +
+        '\n\tclassNames: [\n\t\t\'' + options.entity.name + '\'\n\t],'  +
         '\n\tlayout,'             +
         '\n\tpropTypes: {},'
       contents +=
@@ -76,7 +73,6 @@ module.exports = {
           '\n\t\treturn {}'       +
         '\n\t}';
     }
-
     return {
       importTemplate,
       contents,
