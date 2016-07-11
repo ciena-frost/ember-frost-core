@@ -17,5 +17,14 @@ describeComponent(
       this.render(hbs`{{frost-text}}`)
       expect(this.$()).to.have.length(1)
     })
+
+    it('only renders the clear icon in insert', function() {
+      this.set('external', 'temp')
+      this.render(hbs`{{frost-text value=external}}`)
+      expect(this.$('.frost-text-clear')).to.have.length(1)
+
+      this.set('external', 'change')
+      expect(this.$('.frost-text-clear')).to.have.length(1)
+    })
   }
 )
