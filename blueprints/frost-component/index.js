@@ -55,7 +55,7 @@ module.exports = {
 
     var templatePath   = '';
     var importTemplate = '';
-    var contents       = '';
+    var contents = '';
     if (options.project.isEmberCLIAddon() || !options.inDummy) {
       if (options.pod) {
         templatePath   = './template';
@@ -64,10 +64,14 @@ module.exports = {
           'templates/components/' + stringUtil.dasherize(options.entity.name);
       }
       importTemplate   = 'import layout from \'' + templatePath + '\';\n';
-      contents         =
-        '\n\tlayout,'             +
+      contents +=
+        '\n\t// == Properties ============================================================='  +
         '\n\texcludeEvents: [],'  +
-        '\n\tpropTypes: {},'      +
+        '\n\tclassNames: [\n\t\t' + options.entity.name + '\n\t],'  +
+        '\n\tlayout,'             +
+        '\n\tpropTypes: {},'
+      contents +=
+        '\n\t// == Functions ============================================================='  +
         '\n\tgetDefaultProps () {'+
           '\n\t\treturn {}'       +
         '\n\t}';
