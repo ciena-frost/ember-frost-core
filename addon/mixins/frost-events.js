@@ -20,7 +20,7 @@ export default Mixin.create({
               id: this.toString(),
               until: '2.0.0'
             })
-          if (!exclude.includes(frostEvent)) {
+          if (exclude.indexOf(frostEvent) < 0) {
             this[event] = function (e) {
               this[frostEvent](...arguments)
             }
