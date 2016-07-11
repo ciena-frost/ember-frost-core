@@ -13,7 +13,13 @@ module.exports = function (defaults) {
       includePaths: [
         'addon/styles'
       ]
-    }
+    },
+    snippetPaths: [
+      'code-snippets'
+    ],
+    snippetSearchPaths: [
+      'tests/dummy'
+    ]
   })
 
   app.import('bower_components/sinonjs/sinon.js')
