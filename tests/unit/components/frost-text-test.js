@@ -7,7 +7,6 @@ import {
 import {
   beforeEach,
   afterEach,
-  describe,
   it
 } from 'mocha'
 
@@ -16,19 +15,19 @@ describeComponent(
   'FrostTextComponent', {
     unit: true
   },
-  function() {
+  function () {
     let component, sandbox
 
-    beforeEach(function() {
+    beforeEach(function () {
       component = this.subject()
       sandbox = sinon.sandbox.create()
     })
 
-    afterEach(function() {
+    afterEach(function () {
       sandbox.restore()
     })
 
-    it('includes className frost-text', function() {
+    it('includes className frost-text', function () {
       expect(component.classNames).to.include('frost-text')
     })
   }
