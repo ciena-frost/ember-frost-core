@@ -1,3 +1,27 @@
+# 0.17.0
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.16.0
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.15.0
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.14.1
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.14.0
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.13.1
+
+- Changed selection by value to not fire the onChange event
+
 # 0.13.0
 * **Added** `onKeyUp` property on `frost-text` that receives `keyUp` events from the inner `input`
 * **Added** `onKeyDown` property on `frost-text` that receives `keyDown` events from the inner `input`
