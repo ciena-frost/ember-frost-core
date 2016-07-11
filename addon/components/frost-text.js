@@ -1,152 +1,53 @@
 import Ember from 'ember'
-const {Component, deprecate} = Ember
-import computed, {readOnly} from 'ember-computed-decorators'
-import layout from '../templates/components/frost-text'
+import FrostEvents from '../mixins/frost-events'
+import computed from 'ember-computed-decorators'
 
-export default Component.extend({
-  // ==========================================================================
-  // Dependencies
-  // ==========================================================================
+const {
+  TextField
+} = Ember
+const {
+  next,
+  schedule
+} = Ember.run
 
-  // ==========================================================================
-  // Properties
-  // ==========================================================================
-
-  classNames: ['frost-text'],
-  classNameBindings: [
-    'center',
-    'right'
+export default TextField.extend(FrostEvents, {
+  // == Properties =============================================================
+  attributeBindings: [
+    'style'
   ],
-  layout,
-  tabindex: 0,
+  classNames: [
+    'frost-text'
+  ],
 
-  // ==========================================================================
-  // Computed Properties
-  // ==========================================================================
-
-  @readOnly
+  // == Computed properties ====================================================
   @computed('align')
-  /**
-   * Determine whether or not text alignment is center
-   * @param {[type]} align - text alignment
-   * @returns {Boolean} whether or not text alignment is center
-   */
-  center (align) {
-    return align === 'center'
+  style (align) {
+    return Ember.String.htmlSafe(`text-align: ${CSS.escape(align)}`)
   },
 
-  @readOnly
-  @computed('align')
-  /**
-   * Determine whether or not text alignment is right
-   * @param {String} align - text alignment
-   * @returns {Boolean} whether or not text alignment is right
-   */
-  right (align) {
-    return align === 'right'
+  // == Event hooks ============================================================
+
+  didRender () {
+    schedule('render', this, function () {
+      this.$().after(`
+        <svg class='frost-text-clear' fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          <path d="M0 0h24v24H0z" fill="none"/>
+        </svg>
+      `)
+      next(this, function () {
+        this.$().next().click(() => {
+          this.onClear()
+        })
+      })
+    })
   },
 
-  @readOnly
-  @computed('disabled', 'value')
-  /**
-   * Determine whether or not to show button for clearing out text field
-   * @param {Boolean} disabled - whether or not input is disabled
-   * @param {String} value - value of text field
-   * @returns {Boolean} whether or not to show button for clearing out text field
-   */
-  showClear (disabled, value) {
-    return !disabled && Boolean(value)
-  },
+  // == Functions ==============================================================
 
-  // ==========================================================================
-  // Functions
-  // ==========================================================================
-
-  // ==========================================================================
-  // Events
-  // ==========================================================================
-
-  /**
-   * Handle the focusIn event
-   * @param {Event} e - the focus-in event
-   */
-  focusIn (e) {
-    // Selects the text when the frost-text field is selected
-    e.target.select()
-
-    if (this.onFocus) {
-      deprecate('"onFocus" is deprecated and has been replaced with "onFocusIn"')
-      this.onFocus(e)
-    }
-
-    if (this.onFocusIn) {
-      this.onFocusIn(e)
-    }
-  },
-
-  /**
-   * Handle the focusOut event
-   * @param {Event} e - the focus-out event
-   */
-  focusOut (e) {
-    if (this.onBlur) {
-      deprecate('"onBlur" is deprecated and has been replaced with "onFocusOut"')
-      this.onBlur(e)
-    }
-
-    if (this.onFocusOut) {
-      this.onFocusOut(e)
-    }
-  },
-
-  /**
-   * Handle the input event
-   * @param {Event} e - the input event
-   */
-  input (e) {
-    const id = this.get('id')
-    const value = e.target.value
-
-    if (this.onInput) {
-      // FIXME: shouldn't this just pass out the event untouched? If we want to pass something else out
-      // we should probably provide another callback that isn't a built-in event -- ARM
-      this.onInput({id, value})
-    }
-  },
-
-  /**
-   * Handle the keyDown event
-   * @param {Event} e - the keyDown event
-   */
-  keyDown (e) {
-    if (this.onKeyDown) {
-      this.onKeyDown(e)
-    }
-  },
-
-  /**
-   * Handle the keyUp event
-   * @param {Event} e - the keyUp event
-   */
-  keyUp (e) {
-    if (this.onKeyUp) {
-      this.onKeyUp(e)
-    }
-  },
-
-  // ==========================================================================
-  // Actions
-  // ==========================================================================
-
-  actions: {
-    /**
-     * Clear the input
-     */
-    clear () {
-      this.set('value', '')
-      this.$('input').focus()
-      this.$('input').val('')
-      this.$('input').trigger('input')
-    }
+  onClear () {
+    this.$().focus()
+    this.$().val('')
+    this.$().trigger('input')
   }
 })
