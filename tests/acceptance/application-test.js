@@ -60,7 +60,7 @@ describe('Acceptance: Application', function () {
     this.timeout(5000)
     andThen(function () {
       expect(currentPath()).to.equal('icons')
-      return capture('icons', $('#ember-testing').width(), $('#ember-testing').height(), 0.00, true).then(function (data) {
+      return capture('icons', 1000, $('#ember-testing').height(), 0.00, true).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
@@ -73,7 +73,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('area')
-      return capture('area', $('#ember-testing').width(), $('#ember-testing').height()).then(function (data) {
+      return capture('area', 1000, $('#ember-testing').height()).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
@@ -86,7 +86,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('button')
-      return capture('button', $('#ember-testing').width(), $('#ember-testing').height()).then(function (data) {
+      return capture('button', 1000, $('#ember-testing').height()).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
@@ -99,7 +99,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('checkbox')
-      return capture('checkbox', $('#ember-testing').width(), $('#ember-testing').height()).then(function (data) {
+      return capture('checkbox', 1000, $('#ember-testing').height()).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
@@ -112,7 +112,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('field')
-      return capture('field', $('#ember-testing').width(), $('#ember-testing').height()).then(function (data) {
+      return capture('field', 1000, $('#ember-testing').height()).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
@@ -125,7 +125,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('password')
-      return capture('password', $('#ember-testing').width(), $('#ember-testing').height()).then(function (data) {
+      return capture('password', 1000, $('#ember-testing').height()).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
@@ -151,7 +151,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('link.index')
-      return capture('link', $('#ember-testing').width(), $('#ember-testing').height()).then(function (data) {
+      return capture('link', 1000, $('#ember-testing').height()).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
