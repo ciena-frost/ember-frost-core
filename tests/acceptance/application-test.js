@@ -13,7 +13,7 @@ const {run} = Ember
 
 describe('Acceptance: Application', function () {
   let application
-  this.timeout(5000)
+  this.timeout(10000)
   beforeEach(function () {
     application = startApp()
   })
