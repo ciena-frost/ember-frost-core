@@ -19,10 +19,11 @@ before_script:
 - sleep 3 # give xvfb some time to start
 script:
 - npm run lint
-- ember try:one $EMBER_TRY_SCENARIO --- ember test
+- ember try:one $EMBER_TRY_SCENARIO --- ember tva
 after_success:
 - .travis/publish-coverage.sh
 addons:
+  firefox: "latest"
   apt:
     sources:
     - ubuntu-toolchain-r-test
