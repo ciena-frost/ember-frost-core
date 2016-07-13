@@ -24,7 +24,8 @@ module.exports = {
     if (app) {
       app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'Roboto-Bold.woff2'), { destDir: 'assets/fonts' })
       app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'Roboto-Light.woff2'), { destDir: 'assets/fonts' })
-      app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'Roboto-LightItalic.woff2'), { destDir: 'assets/fonts' })
+      app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'Roboto-LightItalic.woff2'),
+       { destDir: 'assets/fonts' })
       app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'Roboto-Medium.woff2'), { destDir: 'assets/fonts' })
       app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'Roboto-Regular.woff2'), { destDir: 'assets/fonts' })
       app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'stylesheet.css'))
@@ -92,12 +93,14 @@ module.exports = {
     const isLegacy = !_.has(this, 'app.options.iconPackOptions.path') && !isAddon
 
     if (isLegacy && fs.existsSync(path.join(this.project.root, 'public/svgs'))) {
-      iconNames['frost'] = _.concat(iconNames['frost'], this.flattenIcons([], '', path.join(this.project.root, 'public/svgs')))
+      iconNames['frost'] = _.concat(iconNames['frost'], this.flattenIcons([], '',
+       path.join(this.project.root, 'public/svgs')))
     } else if (fs.existsSync(localIconPackPath)) {
       iconNames[localIconPackName] = this.flattenIcons([], '', localIconPackPath)
     }
 
-    const iconNameTree = writeFile('modules/ember-frost-core/icon-packs.js', 'export default ' + JSON.stringify(iconNames, null, 2))
+    const iconNameTree = writeFile('modules/ember-frost-core/icon-packs.js', 'export default ' +
+     JSON.stringify(iconNames, null, 2))
 
     return mergeTrees([addonTree, iconNameTree], {overwrite: true})
   },
@@ -148,7 +151,8 @@ module.exports = {
       const svgFunnel = new Funnel(localIconPackPath, {
         include: [new RegExp(/\.svg$/)]
       })
-      iconPacks.push(new SVGStore(svgFunnel, { outputFile: `/assets/icon-packs/${localIconPackName}.svg`, flatten: false }))
+      iconPacks.push(new SVGStore(svgFunnel, { outputFile: `/assets/icon-packs/${localIconPackName}.svg`,
+       flatten: false }))
     }
 
     return mergeTrees(iconPacks, {overwrite: true})

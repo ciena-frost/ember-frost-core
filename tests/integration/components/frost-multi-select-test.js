@@ -11,7 +11,9 @@ function wait (callback) {
 }
 
 const selectedTestTemplate = hbs`{{frost-multi-select onChange=onChange selected=selected data=data greeting=greeting}}`
+/* eslint-disable max-len */
 const selectedValueTestTemplate = hbs`{{frost-multi-select onChange=onChange data=data greeting=greeting selectedValue=selectedValue}}`
+/* eslint-enable max-len */
 
 let props = {
   onChange: sinon.spy(),
