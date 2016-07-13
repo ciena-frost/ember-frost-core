@@ -12,7 +12,9 @@
     "pretender": "^1.1.0",
     "sinonjs": "^1.17.1",
     "marked": "0.3.5",
-    "highlightjs": "^9.3.0"
+    "highlightjs": "^9.3.0",
+    "es6-promise": "^3.2.2",
+    "resemblejs": "^2.2.0"
   },
   "resolutions": {
     "ember": "2.5.1"

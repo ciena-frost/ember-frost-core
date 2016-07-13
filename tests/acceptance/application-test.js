@@ -1,4 +1,4 @@
-/* global visit, andThen, currentPath */
+/* global visit, andThen, currentPath, capture, $ */
 
 import {
   describe,
@@ -34,6 +34,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('palette')
+      return capture('palette', $('#ember-testing').width(), $('#ember-testing').height())
     })
   })
   it('can visit /typography', function () {
@@ -41,6 +42,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('typography')
+      return capture('typography', $('#ember-testing').width(), $('#ember-testing').height())
     })
   })
   it('can visit /icons', function () {
@@ -48,6 +50,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('icons')
+      return capture('icons', $('#ember-testing').width(), $('#ember-testing').height(), 0.00, true)
     })
   })
   it('can visit /area', function () {
@@ -55,6 +58,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('area')
+      return capture('area', $('#ember-testing').width(), $('#ember-testing').height())
     })
   })
   it('can visit /button', function () {
@@ -62,6 +66,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('button')
+      return capture('button', $('#ember-testing').width(), $('#ember-testing').height())
     })
   })
   it('can visit /checkbox', function () {
@@ -69,6 +74,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('checkbox')
+      return capture('checkbox', $('#ember-testing').width(), $('#ember-testing').height())
     })
   })
   it('can visit /field', function () {
@@ -76,6 +82,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('field')
+      return capture('field', $('#ember-testing').width(), $('#ember-testing').height())
     })
   })
   it('can visit /password', function () {
@@ -83,6 +90,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('password')
+      return capture('password', $('#ember-testing').width(), $('#ember-testing').height())
     })
   })
   it('can visit /layout', function () {
@@ -90,6 +98,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('layout')
+      return capture('layout', $('#ember-testing').width(), $('#ember-testing').height())
     })
   })
   it('can visit /link', function () {
@@ -97,6 +106,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('link.index')
+      return capture('link', $('#ember-testing').width(), $('#ember-testing').height())
     })
   })
 })
