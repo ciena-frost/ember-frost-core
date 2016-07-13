@@ -59,7 +59,7 @@ describe('Acceptance: Application', function () {
     visit('/icons')
     andThen(function () {
       expect(currentPath()).to.equal('icons')
-      return capture('icons', 1000, $('#ember-testing').height(), 0.00, true).then(function (data) {
+      return capture('icons', 1000, 6000, 0.00, true).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
