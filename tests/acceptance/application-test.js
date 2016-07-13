@@ -86,7 +86,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('button')
-      return capture('button', 1000, $('#ember-testing').height()).then(function (data) {
+      return capture('button', 1000, $('#ember-testing').height(), 0.00, true).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
