@@ -13,7 +13,7 @@ const {run} = Ember
 
 describe('Acceptance: Application', function () {
   let application
-
+  this.timeout(5000)
   beforeEach(function () {
     application = startApp()
   })
@@ -57,7 +57,6 @@ describe('Acceptance: Application', function () {
   })
   it('can visit /icons', function (done) {
     visit('/icons')
-    this.timeout(5000)
     andThen(function () {
       expect(currentPath()).to.equal('icons')
       return capture('icons', 1000, $('#ember-testing').height(), 0.00, true).then(function (data) {
