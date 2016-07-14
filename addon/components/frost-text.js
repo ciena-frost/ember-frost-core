@@ -24,6 +24,7 @@ export default TextField.extend(FrostEvents, {
     'frost-text'
   ],
   tabindex: 0,
+  $clearButton: null,
 
   // == Computed properties ====================================================
 
@@ -48,6 +49,7 @@ export default TextField.extend(FrostEvents, {
       })
 
       this.$().after(clearButton)
+      this.set('$clearButton', clearButton)
     })
   },
 
@@ -63,22 +65,22 @@ export default TextField.extend(FrostEvents, {
 
   showClear: observer('value', '_focused', function() {
     if (!this._focused) {
-      this.$().next('.frost-text-clear').css('opacity', 0)
+      this.get('$clearButton').css('opacity', 0)
       run.later(this, function() {
-        this.$().next('.frost-text-clear').css('pointer-events', 'none')
+        this.get('$clearButton').css('pointer-events', 'none')
       }, 200)
       return
     }
 
     if (isEmpty(this.value)) {
-      this.$().next('.frost-text-clear').css('opacity', 0)
+      this.get('$clearButton').css('opacity', 0)
       run.later(this, function() {
-        this.$().next('.frost-text-clear').css('pointer-events', 'none')
+        this.get('$clearButton').css('pointer-events', 'none')
       }, 200)
     } else {
-      this.$().next('.frost-text-clear').css('opacity', 1)
+      this.get('$clearButton').css('opacity', 1)
       run.later(this, function() {
-        this.$().next('.frost-text-clear').css('pointer-events', 'auto')
+        this.get('$clearButton').css('pointer-events', 'auto')
       }, 200)
     }
   }),
