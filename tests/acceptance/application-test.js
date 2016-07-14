@@ -150,7 +150,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('link.index')
-      return capture('link', 1000, $('#ember-testing').height()).then(function (data) {
+      capture('link', 1000, $('#ember-testing').height()).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
