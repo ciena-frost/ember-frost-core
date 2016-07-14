@@ -1,7 +1,4 @@
 import Ember from 'ember'
-import FrostEvents from '../mixins/frost-events'
-import computed from 'ember-computed-decorators'
-
 const {
   TextField,
   isEmpty,
@@ -10,6 +7,10 @@ const {
   run,
   $
 } = Ember
+import FrostEvents from '../mixins/frost-events'
+import computed from 'ember-computed-decorators'
+
+
 
 export default TextField.extend(FrostEvents, {
 
@@ -22,6 +23,7 @@ export default TextField.extend(FrostEvents, {
   classNames: [
     'frost-text'
   ],
+  tabindex: 0,
 
   // == Computed properties ====================================================
 

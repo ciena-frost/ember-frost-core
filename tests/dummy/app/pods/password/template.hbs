@@ -102,16 +102,16 @@
   <div class="section">
 
     <div class="example">
-      <div class="title">onBlur</div>
+      <div class="title">onFocusOut</div>
       <div class="demo">
         {{frost-password
-          onBlur=(action 'onBlurHandler')
+          onFocusOut=(action 'onBlurHandler')
         }}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-password
-  onBlur=(action 'onBlurHandler')
+  onFocusOut=(action 'onBlurHandler')
 }}
 ```"
         }}
