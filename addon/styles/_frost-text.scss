@@ -3,8 +3,8 @@ $border: 1px solid $frost-color-input-border;
 $color: $frost-color-input;
 $error-border: 1px solid $frost-color-input-error-border;
 $error-margin: 1px; // Note: margin + border width equals border width of focus state
-$focus-border: 2px solid $frost-color-input-focus-border;
-$hover-border: 1px solid $frost-color-input-focus-border;
+$focus-border: 1px solid $frost-color-input-focus-border;
+$hover-border: 1px solid $frost-color-input-hover-border;
 $focus-margin: 0;
 $disabled-border: 1px solid $frost-color-input-disabled-border;
 $disabled-bg: $frost-color-input-disabled-bg;
@@ -22,10 +22,10 @@ $padding: 0 19px 0 6px;
   margin: $margin;
   outline: none;
   padding: $padding;
+  transition: border 0.2s ease;
 
   &:focus {
     border: $focus-border;
-    margin: $margin;
   }
 
   &:read-only {
@@ -39,7 +39,6 @@ $padding: 0 19px 0 6px;
 
   &:hover:enabled:read-write:not(:focus) {
     border: $hover-border;
-    margin: $margin;
   }
 
   &.error {
@@ -49,9 +48,16 @@ $padding: 0 19px 0 6px;
 
   &-clear {
     position: relative;
-    left: -29px;
+    left: -35px;
     top: 7px;
+    opacity: 0;
     fill: $frost-color-grey-6;
     cursor: pointer;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+
+    &:focus {
+      outline: none;
+    }
   }
 }
