@@ -52,7 +52,6 @@ describeComponent('frost-radio-button', 'FrostRadioButtonComponent', {
 
     expect(this.$('input').prop('checked')).to.equal(false)
     this.$('input').trigger('click')
-    debugger
     return capture('radio-button', null, null, 0.00, true)
   })
 })
