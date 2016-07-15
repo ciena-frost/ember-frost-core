@@ -59,7 +59,7 @@ describe('Acceptance: Application', function () {
     visit('/icons')
     andThen(function () {
       expect(currentPath()).to.equal('icons')
-      capture('icons', 1000, 6000, 0.00, true).then(function (data) {
+      capture('icons', 1000, 6000, 0.00, null, true).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
@@ -85,7 +85,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('button')
-      capture('button', 1000, $('#ember-testing').height(), 0.00, true).then(function (data) {
+      capture('button', 1000, $('#ember-testing').height(), 0.00, null, true).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
