@@ -62,6 +62,7 @@ describeComponent(
     let props
     let dropDown
     beforeEach(function () {
+      this.test._timeout = 6000
       props = {
         selected: 1,
         onChange: sinon.spy(),
