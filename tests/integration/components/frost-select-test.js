@@ -61,7 +61,7 @@ describeComponent(
   function () {
     let props
     let dropDown
-
+    this.timeout(5000)
     beforeEach(function () {
       props = {
         selected: 1,
