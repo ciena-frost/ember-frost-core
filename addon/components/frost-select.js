@@ -4,6 +4,18 @@ const {A, Component} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-select'
+import redux from 'npm:redux'
+import {
+  selectItem,
+  hoverNext,
+  hoverPrev,
+  mouseHoverItem,
+  clickArrow,
+  updateSearchText
+} from '../actions/frost-select'
+
+import reducer from '../reducers/frost-select'
+
 
 /**
  * @typedef {Object} Item
