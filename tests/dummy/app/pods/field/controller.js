@@ -5,28 +5,27 @@ export default Controller.extend({
   error: true,
 
   actions: {
-    onBlurHandler () {
+    enter(value) {
       this.notifications.addNotification({
-        message: 'blur event',
+        message: `enter: ${value}`,
         type: 'success',
         autoClear: true,
         clearDuration: 2000
       })
     },
 
-    onFocusHandler () {
+    escape(value) {
       this.notifications.addNotification({
-        message: 'focus event',
+        message: `escape: ${value}`,
         type: 'success',
         autoClear: true,
         clearDuration: 2000
       })
     },
 
-    onInputHandler (event) {
-      console.log('field value: ' + event.target.value)
+    event(event) {
       this.notifications.addNotification({
-        message: `${event.target.id}: ${event.target.value}`,
+        message: `${event.type}: ${event.target.value}`,
         type: 'success',
         autoClear: true,
         clearDuration: 2000

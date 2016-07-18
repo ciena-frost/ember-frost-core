@@ -1,13 +1,15 @@
 // import _ from 'lodash'
 import Ember from 'ember'
 const {
+  Component,
   on,
   run
 } = Ember
-import FrostText from 'ember-frost-core/components/frost-text'
+import FrostEvents from '../mixins/frost-events'
+import layout from '../templates/components/frost-password'
 // import computed, {readOnly} from 'ember-computed-decorators'
 
-export default FrostText.extend({
+export default Component.extend(FrostEvents, {
 
   // == Properties ============================================================
 
@@ -15,8 +17,12 @@ export default FrostText.extend({
     'type'
   ],
   classNames: [
-    'frost-password'
+    'frost-password-input'
   ],
+  classNameBindings: [
+    'revealable'
+  ],
+  layout,
   revealable: false,
   revealed: false,
   type: 'password',
@@ -26,8 +32,6 @@ export default FrostText.extend({
   // == Events ================================================================
 
   didInsertElement() {
-    this._super(...arguments)
-
     if (this.revealable) {
       run.schedule('render', this, function () {
         const revealButton = $(`
@@ -46,6 +50,22 @@ export default FrostText.extend({
     }
 
     run.schedule('render', this, function() {
+      this.$().wrap(`<div class='frost-password'></div>`)
+
+      const clearButton = $(`
+        <svg class='frost-text-clear' tabindex=-1 fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+          <path d="M0 0h24v24H0z" fill="none"/>
+        </svg>
+      `)
+
+      clearButton.click(() => {
+        this.onClear()
+      })
+
+      this.$().after(clearButton)
+      this.set('$clearButton', clearButton)
+
       const capsLockWarning = $(`
         <span class='frost-password-caps-warning'>
           Caps on
@@ -54,6 +74,12 @@ export default FrostText.extend({
 
       this.get('$clearButton').after(capsLockWarning)
       this.set('$capsLockWarning', capsLockWarning)
+
+       const nativeCapsLockWarningOverlay = $(`
+        <span class='frost-password-native-caps-warning-overlay' />
+      `)
+
+      this.get('$capsLockWarning').after(nativeCapsLockWarningOverlay)
     })
   },
 

@@ -1,3 +1,49 @@
+<div>DOM events</div>
+{{frost-text
+  onChange=(action 'event')
+  onClick=(action 'event')
+  onContextMenu=(action 'event')
+  onDoubleClick=(action 'event')
+  onDrag=(action 'event')
+  onDragEnd=(action 'event')
+  onDragEnter=(action 'event')
+  onDragLeave=(action 'event')
+  onDragOver=(action 'event')
+  onDragStart=(action 'event')
+  onDrop=(action 'event')
+  onFocus=(action 'event')
+  onFocusIn=(action 'event')
+  onFocusOut=(action 'event')
+  onBlur=(action 'event')
+  onInput=(action 'event')
+  onKeyDown=(action 'event')
+  onKeyPress=(action 'event')
+  onKeyUp=(action 'event')
+  onMouseDown=(action 'event')
+  onMouseEnter=(action 'event')
+  onMouseLeave=(action 'event')
+  onMouseMove=(action 'event')
+  onMouseUp=(action 'event')
+  onSubmit=(action 'event')
+  onTouchCancel=(action 'event')
+  onTouchEnd=(action 'event')
+  onTouchMove=(action 'event')
+  onTouchStart=(action 'event')
+}}
+
+<div>Text support events</div>
+{{frost-text
+  onEnter=(action 'enter')
+  onEscape=(action 'escape')
+}}
+
+<div>Deprecated events</div>
+{{frost-text
+  onBlur=(action 'event')
+  onFocus=(action 'event')
+}}
+
+{{!--
 <div class="dummy-notification-container">
 {{#each notifications as |notification|}}
   {{notification-message notification=notification}}
@@ -183,3 +229,4 @@
 
   </div>
 </div>
+--}}
