@@ -1,15 +1,8 @@
-/* global visit, andThen, currentPath */
-
-import {
-  describe,
-  it,
-  beforeEach,
-  afterEach
-} from 'mocha'
-import { expect } from 'chai'
-import startApp from '../helpers/start-app'
 import Ember from 'ember'
 const {run} = Ember
+import {afterEach, beforeEach, describe, it} from 'mocha'
+import {expect} from 'chai'
+import startApp from '../helpers/start-app'
 
 describe('Acceptance: Application', function () {
   let application
