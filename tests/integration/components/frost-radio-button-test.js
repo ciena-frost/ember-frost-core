@@ -1,16 +1,8 @@
 import Ember from 'ember'
-import {
-  expect
-} from 'chai'
-import {
-  describeComponent,
-  it
-} from 'ember-mocha'
+const {run} = Ember
+import {expect} from 'chai'
+import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
-
-const {
-  run
-} = Ember
 
 let changeEvent = function (event) {
   expect(event.target.id).to.equal('groupId')
