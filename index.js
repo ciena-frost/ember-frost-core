@@ -92,7 +92,7 @@ module.exports = {
     // No icon pack path defined and an app = legacy case where the app icons must be merged into the 'frost' icon pack
     const isLegacy = !_.has(this, 'app.options.iconPackOptions.path') && !isAddon
 
-    const svgPath = path.join(this.project.root, 'publich/svgs')
+    const svgPath = path.join(this.project.root, 'public/svgs')
     if (isLegacy && fs.existsSync(svgPath)) {
       iconNames['frost'] = _.concat(iconNames['frost'], this.flattenIcons([], '', svgPath))
     } else if (fs.existsSync(localIconPackPath)) {
