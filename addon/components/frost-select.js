@@ -343,7 +343,6 @@ export default Component.extend({
 
       switch (state.lastAction) {
         case 'SELECT_HOVER':
-          break
         case 'SELECT_ITEM':
           const values = [state.baseItems[state.selectedItem]]
           if (this.get('onChange') && _.isFunction(this.get('onChange'))) {
