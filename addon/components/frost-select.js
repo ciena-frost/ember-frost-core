@@ -8,6 +8,7 @@ import Redux from 'npm:redux'
 import {
   selectItem,
   closeDropDown,
+  openDropDown,
   selectHover,
   moveHoverNext,
   moveHoverPrev,
@@ -243,7 +244,7 @@ export default Component.extend({
 
   // TODO: add jsdoc
   closeList () {
-    this.unbindDropdownEvents()
+    // this.unbindDropdownEvents()
   },
 
   // TODO: add jsdoc
@@ -300,20 +301,10 @@ export default Component.extend({
     }
   },
 
-  /* obvious */
-  openList () {
-    this.bindDropdownEvents()
-  },
-
   /** Handler for click outside of an element
    */
   onOutsideClick () {
     this.get('reduxStore').dispatch(closeDropDown())
-  },
-
-  // TODO: add jsdoc
-  select (index) {
-
   },
 
   // TODO: add jsdoc
@@ -334,18 +325,21 @@ export default Component.extend({
   init () {
     this._super(...arguments)
     const reduxStore = Redux.createStore(reducer, {
+      placeholder: this.get('placeholder'),
       baseItems: this.get('data'),
       error: this.get('error')
     })
 
     reduxStore.subscribe(() => {
       const state = reduxStore.getState()
-      this.setProperties(_.pick(state, [
+
+      const newProps = _.pick(state, [
         'open',
         'prompt',
         'disabled',
         'displayItems'
-      ]))
+      ])
+      this.setProperties(newProps)
 
       switch (state.lastAction) {
         case 'SELECT_HOVER':
@@ -374,6 +368,7 @@ export default Component.extend({
   actions: {
     // TODO: add jsdoc
     onBlur (event) {
+      event.preventDefault()
       this.set('focus', false)
 
       const onBlur = this.get('onBlur')
@@ -381,7 +376,7 @@ export default Component.extend({
       if (onBlur) {
         onBlur()
       }
-      this.get('reduxStore').dispatch(closeDropDown())
+      //this.get('reduxStore').dispatch(closeDropDown())
     },
 
     // TODO: add jsdoc
@@ -404,7 +399,7 @@ export default Component.extend({
 
     // TODO: add jsdoc
     onFocus () {
-      this.get('reduxStore').dispatch(updateSearchText(''))
+      this.get('reduxStore').dispatch(openDropDown)
       // If an onFocus event handler is defined, call it
       if (this.attrs.onFocus) {
         this.attrs.onFocus()
@@ -423,10 +418,12 @@ export default Component.extend({
 
     // TODO: add jsdoc
     onSelect (event) {
+      debugger
       event.stopPropagation()
       let target = event.currentTarget || event.target
       let index = parseInt(target.getAttribute('data-index'), 10)
       this.get('reduxStore').dispatch(selectItem(index))
+      return false
     }
   }
 })

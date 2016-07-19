@@ -6,6 +6,7 @@ export const HOVER_PREV = 'HOVER_PREV'
 export const MOUSE_HOVER = 'MOUSE_HOVER'
 export const SEARCH_TEXT = 'SEARCH_TEXT'
 export const CLOSE_DROPDOWN = 'CLOSE_DROPDOWN'
+export const OPEN_DROPDOWN = 'OPEN_DROPDOWN'
 export const RESET_DROPDOWN = 'RESET_DROPDOWN'
 export const SELECT_VALUE = 'SELECT_VALUE'
 
@@ -27,6 +28,8 @@ export function closeDropDown () {
     type: CLOSE_DROPDOWN
   }
 }
+
+export const  openDropDown = simpleAction (OPEN_DROPDOWN)
 
 export function clickArrow () {
   return {
