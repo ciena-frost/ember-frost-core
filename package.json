@@ -144,7 +144,11 @@
     "ember-browserify": "^1.1.9",
     "ember-cli-babel": "^5.1.5",
     "ember-cli-htmlbars": "^1.0.1",
+    "ember-cli-normalize-entity-name": "^1.0.0",
+    "ember-cli-path-utils": "^1.0.0",
     "ember-cli-sass": "^5.2.0",
+    "ember-cli-string-utils": "^1.0.0",
+    "ember-cli-valid-component-name": "^1.0.0",
     "ember-prop-types": "^2.0.0",
     "lodash": "^4.13.1",
     "svg4everybody": "^2.0.3"
