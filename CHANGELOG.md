@@ -1,3 +1,17 @@
+# 0.17.3
+ * **Fixes** a bug in `frost-select` where the options popover was closed whenever someone typed into the input (when `selectedValue` is passed in as props).
+ * **Updated** `eslint` within the project to `3.x`
+ * **Added** some linting rules for `mocha` (via an update to `eslint-config-frost-standard`)
+ * **Updated** `tests/` directory to no longer specify an `.eslintrc` with `globals` that shouldn't actually be globals.
+
+# 0.17.2
+
+Added ember-code-snippets to allow demo documentation to reference the code as the sample text.  Cleaned up the button demo as an example.
+
+# 0.17.1
+
+Fixed the text clear icon to only append to the DOM on insertion of the text field (was occurring on every render/re-render)
+
 # 0.17.0
 No CHANGELOG section found in Pull Request description.
 Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`

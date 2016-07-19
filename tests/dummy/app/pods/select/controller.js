@@ -22,7 +22,7 @@ export default Controller.extend({
   selectedIndex: 1,
   selectedIndices: [1, 2],
   preSelectedValue: 'Arthur Curry',
-  selectedValues: ['Arthur Curry', 'Adam Meadows'],
+  selectedValues: ['Arthur Curry', 'Ray Palmer'],
 
   actions: {
     onBlurHandler () {
