@@ -350,7 +350,6 @@ export default Component.extend({
           }
           break
       }
-      console.log(state)
     })
     reduxStore.dispatch(resetDropDown())
 
@@ -418,8 +417,8 @@ export default Component.extend({
 
     // TODO: add jsdoc
     onSelect (event) {
-      debugger
       event.stopPropagation()
+      alert(event)
       let target = event.currentTarget || event.target
       let index = parseInt(target.getAttribute('data-index'), 10)
       this.get('reduxStore').dispatch(selectItem(index))
