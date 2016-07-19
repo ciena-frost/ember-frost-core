@@ -1,28 +1,24 @@
 import Ember from 'ember'
-const {Controller} = Ember
+const {
+  Controller
+} = Ember
 
 export default Controller.extend({
   error: true,
 
   actions: {
-    enter(value) {
+    // BEGIN-SNIPPET text-support-events
+    support(type, value) {
       this.notifications.addNotification({
-        message: `enter: ${value}`,
+        message: `${type}: ${value}`,
         type: 'success',
         autoClear: true,
         clearDuration: 2000
       })
     },
+    // END-SNIPPET text-support-events
 
-    escape(value) {
-      this.notifications.addNotification({
-        message: `escape: ${value}`,
-        type: 'success',
-        autoClear: true,
-        clearDuration: 2000
-      })
-    },
-
+    // BEGIN-SNIPPET text-dom-events
     event(event) {
       this.notifications.addNotification({
         message: `${event.type}: ${event.target.value}`,
@@ -31,5 +27,6 @@ export default Controller.extend({
         clearDuration: 2000
       })
     }
+    // END-SNIPPET text-dom-events
   }
 })

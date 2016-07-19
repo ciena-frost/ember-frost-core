@@ -2,6 +2,8 @@
   autocapitalize=autocapitalize
   autocorrect=autocorrect
   autofocus=autofocus
+  class='frost-text-input'
+  classNameBindings='align'
   disabled=disabled
   form=form
   maxlength=maxlength
@@ -46,6 +48,10 @@
   escape-press=_eventProxy.escape-press
   insert-newline=_eventProxy.enter
 }}
+{{frost-text-clear
+  onClick=(action 'clear')
+}}
+
 {{!--
 {{#if showClear}}
   {{!frost-icon class='clear' icon='close'}}

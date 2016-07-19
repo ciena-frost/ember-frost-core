@@ -1,49 +1,3 @@
-<div>DOM events</div>
-{{frost-text
-  onChange=(action 'event')
-  onClick=(action 'event')
-  onContextMenu=(action 'event')
-  onDoubleClick=(action 'event')
-  onDrag=(action 'event')
-  onDragEnd=(action 'event')
-  onDragEnter=(action 'event')
-  onDragLeave=(action 'event')
-  onDragOver=(action 'event')
-  onDragStart=(action 'event')
-  onDrop=(action 'event')
-  onFocus=(action 'event')
-  onFocusIn=(action 'event')
-  onFocusOut=(action 'event')
-  onBlur=(action 'event')
-  onInput=(action 'event')
-  onKeyDown=(action 'event')
-  onKeyPress=(action 'event')
-  onKeyUp=(action 'event')
-  onMouseDown=(action 'event')
-  onMouseEnter=(action 'event')
-  onMouseLeave=(action 'event')
-  onMouseMove=(action 'event')
-  onMouseUp=(action 'event')
-  onSubmit=(action 'event')
-  onTouchCancel=(action 'event')
-  onTouchEnd=(action 'event')
-  onTouchMove=(action 'event')
-  onTouchStart=(action 'event')
-}}
-
-<div>Text support events</div>
-{{frost-text
-  onEnter=(action 'enter')
-  onEscape=(action 'escape')
-}}
-
-<div>Deprecated events</div>
-{{frost-text
-  onBlur=(action 'event')
-  onFocus=(action 'event')
-}}
-
-{{!--
 <div class="dummy-notification-container">
 {{#each notifications as |notification|}}
   {{notification-message notification=notification}}
@@ -58,7 +12,7 @@
     <div class="section">
       <div class="example">
         <div class="demo">
-          {{frost-text}}
+          {{frost-text value=model.default.value onInput=(action (mut model.default.value))}}
         </div>
         <div class="snippet">
           {{format-markdown "```handlebars
@@ -188,45 +142,87 @@
   <div class="section-title">Events</div>
   <hr>
   <div class='section'>
-
     <div class="example">
-      <div class="title">onFocus, onBlur</div>
+      <div class="title">DOM events</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET text-dom-events }}
         {{frost-text
-          onBlur=(action 'onBlurHandler')
-          onFocus=(action 'onFocusHandler')
+          onChange=(action 'event')
+          onClick=(action 'event')
+          onContextMenu=(action 'event')
+          onDoubleClick=(action 'event')
+          onDrag=(action 'event')
+          onDragEnd=(action 'event')
+          onDragEnter=(action 'event')
+          onDragLeave=(action 'event')
+          onDragOver=(action 'event')
+          onDragStart=(action 'event')
+          onDrop=(action 'event')
+          onFocusIn=(action 'event')
+          onFocusOut=(action 'event')
+          onInput=(action 'event')
+          onKeyDown=(action 'event')
+          onKeyPress=(action 'event')
+          onKeyUp=(action 'event')
+          onMouseDown=(action 'event')
+          onMouseEnter=(action 'event')
+          onMouseLeave=(action 'event')
+          onMouseMove=(action 'event')
+          onMouseUp=(action 'event')
+          onSubmit=(action 'event')
+          onTouchCancel=(action 'event')
+          onTouchEnd=(action 'event')
+          onTouchMove=(action 'event')
+          onTouchStart=(action 'event')
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-text
-  onBlur=(action 'onBlurHandler')
-  onFocus=(action 'onFocusHandler')
-}}
-    ```"
-        }}
+         <div>Template</div>
+        {{code-snippet name='text-dom-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='text-dom-events.js'}}
       </div>
     </div>
 
     <div class="example">
-      <div class="title">onInput</div>
+      <div class="title">Text support events</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET text-support-events }}
         {{frost-text
-          id='demo-input'
-          onInput=(action 'onInputHandler')
+          onEnter=(action 'support' 'enter')
+          onEscape=(action 'support' 'escape')
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-text
-  id='demo-input'
-  onInput=(action 'onInputHandler')
-}}
-```"
-        }}
+        <div>Template</div>
+        {{code-snippet name='text-support-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='text-support-events.js'}}
       </div>
     </div>
 
+    <div class="example">
+      <div class="title">Deprecated events</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET text-deprecated-events }}
+        {{frost-text
+          onBlur=(action 'event')
+          onFocus=(action 'event')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+         <div>Template</div>
+        {{code-snippet name='text-deprecated-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='text-dom-events.js'}}
+      </div>
+    </div>
   </div>
 </div>
---}}
+
