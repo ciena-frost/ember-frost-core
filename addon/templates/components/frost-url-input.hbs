@@ -1,0 +1,62 @@
+{{input
+  type=type
+  autofocus=autofocus
+  disabled=disabled
+  insert-newline=onEnter
+  value=value
+  placeholder=placeholder
+  tabindex=tabindex
+  readonly=readonly
+}}
+
+{{frost-button
+priority='primary'
+size='small'
+text='Test'
+  onClick=(action 'test' value)
+}}
+
+{{frost-button
+priority='secondary'
+size='small'
+text='Clear'
+onClick=(action 'clear')
+}}
+
+<div class="urlIcon">
+
+  {{#if urlFormatError}}
+    {{frost-icon
+    icon='warning'
+    }}
+    <div class="urlText">URL Format Error</div>
+  {{/if}}
+
+  {{#if isLoading}}
+    {{frost-icon
+    icon='loading/ring'
+    }}
+  {{/if}}
+
+  {{#if error}}
+    {{frost-icon
+    icon='notifications/error'
+    }}
+    <div class="urlText">Error</div>
+  {{/if}}
+  {{#if undetermined}}
+    {{frost-icon
+    icon='notifications/warning'
+    }}
+      <div class="urlText">Undetermined</div>
+  {{/if}}
+  {{#if success}}
+    {{frost-icon
+    icon='notifications/info'
+    }}
+    <div class="urlText">Success</div>
+  {{/if}}
+
+</div>
+
+

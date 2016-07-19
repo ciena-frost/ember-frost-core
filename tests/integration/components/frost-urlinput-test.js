@@ -7,24 +7,24 @@ import {
 import hbs from 'htmlbars-inline-precompile'
 
 describeComponent(
-  'frost-text',
+  'frost-url-input',
   'Integration: FrostTextComponent',
   {
     integration: true
   },
   function () {
     it('renders', function () {
-      this.render(hbs`{{frost-text}}`)
+      this.render(hbs`{{frost-url-input}}`)
       expect(this.$()).to.have.length(1)
     })
 
     it('only renders the clear icon in insert', function () {
       this.set('external', 'temp')
-      this.render(hbs`{{frost-text value=external}}`)
-      expect(this.$('.frost-text-clear')).to.have.length(1)
+      this.render(hbs`{{frost-url-input value=external}}`)
+      expect(this.$('.frost-url-input-clear')).to.have.length(1)
 
       this.set('external', 'change')
-      expect(this.$('.frost-text-clear')).to.have.length(1)
+      expect(this.$('.frost-url-input-clear')).to.have.length(1)
     })
   }
 )

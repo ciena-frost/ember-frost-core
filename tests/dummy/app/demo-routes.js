@@ -52,6 +52,10 @@ export default [
     routeName: 'field'
   },
   {
+    label: 'URL input field',
+    routeName: 'urlinput'
+  },
+  {
     label: 'Typography',
     routeName: 'typography'
   }
