@@ -1,21 +1,30 @@
-export const CLICK_ITEM = 'CLICK_ITEM'
+export const SELECT_ITEM = 'SELECT_ITEM'
 export const SELECT_HOVER = 'SELECT_HOVER'
 export const CLICK_ARROW = 'CLICK_ARROW'
 export const HOVER_NEXT = 'HOVER_NEXT'
 export const HOVER_PREV = 'HOVER_PREV'
 export const MOUSE_HOVER = 'MOUSE_HOVER'
 export const SEARCH_TEXT = 'SEARCH_TEXT'
+export const CLOSE_DROPDOWN = 'CLOSE_DROPDOWN'
+export const RESET_DROPDOWN = 'RESET_DROPDOWN'
+export const SELECT_VALUE = 'SELECT_VALUE'
 
-export function clickItem (itemIndex) {
+export function selectItem (itemIndex) {
   return {
     type: SELECT_ITEM,
     itemIndex
   }
 }
 
-export function selectHover(params) {
+export function selectHover () {
   return {
-    type: PRESS_ENTER
+    type: SELECT_HOVER
+  }
+}
+
+export function closeDropDown () {
+  return {
+    type: CLOSE_DROPDOWN
   }
 }
 
@@ -39,22 +48,35 @@ export function moveHoverPrev () {
 
 export function mouseHoverItem (itemIndex) {
   return {
-    MOUSE_HOVER,
+    type: MOUSE_HOVER,
     itemIndex
   }
 }
 
 export function updateSearchText (text) {
   return {
-    SEARCH_TEXT,
+    type: SEARCH_TEXT,
     text
   }
 }
 
-function simpleAction(action) {
-  return function (){
-    return {
-      type: action
+export function simpleAction (action) {
+  return {
+    get type () {
+      return action
     }
+  }
+}
+
+export function selectValue (value) {
+  return {
+    type: SELECT_VALUE,
+    value
+  }
+}
+
+export function resetDropDown () {
+  return {
+    type: RESET_DROPDOWN
   }
 }

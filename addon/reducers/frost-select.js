@@ -1,17 +1,22 @@
 import {
   SELECT_ITEM,
 	CLICK_ARROW,
+  CLOSE_DROPDOWN,
   SELECT_HOVER,
 	HOVER_NEXT,
 	HOVER_PREV,
 	MOUSE_HOVER,
-	SEARCH_TEXT
+	SEARCH_TEXT,
+  SELECT_VALUE,
+  RESET_DROPDOWN
 } from '../actions/frost-select'
 import _ from 'lodash'
-
+const SELECTED_CLASS = 'selected'
+const HOVERED_CLASS = 'hovered'
 const INITIAL_STATE = {
   placeholder: '',
   prompt: '',
+  error: false,
   disabled: false,
   open: false,
   filteredItems: [],
@@ -21,64 +26,159 @@ const INITIAL_STATE = {
   lastAction: null
 }
 
-function promptFromItem () {
-  
+function promptFromItem (baseItems, selectedItem) {
+  return baseItems[selectedItem].label
 }
 
-function close () {
+function close (state) {
+  let prompt = ''
 
+  // Set prompt
+  if (state.selectedItem !== null) {
+    prompt = promptFromItem(state.baseItems, state.selectedItem)
+  }
+
+  return {
+    prompt,
+    open: false
+  }
 }
 
-export function reducer (state, action) {
-  let nextState = {}
+function select (state, itemIndex) {
+  // Set selected value
+  let nextState = {
+    selectedItem: itemIndex,
+    filteredItems: state.baseItems,
+    baseItems: state.baseItems
+  }
+  // Close list
+  const closeState = close(nextState)
+
+  return _.assign(nextState, closeState)
+}
+
+function findIndexByValue (baseItems, itemValue) {
+  return _.findIndex(baseItems, (item) => _.isEqual(item.value, itemValue))
+}
+
+function setHover (state, itemIndex) {
+  const filteredItems = _.map(state.filteredItems, function (item) {
+    let className
+    if (item.index === itemIndex) {
+      className = HOVERED_CLASS
+    } else {
+      className = ''
+    }
+    return _.defaults({className}, item)
+  })
+  return {
+    open: true,
+    hoveredItem: itemIndex,
+    filteredItems
+  }
+}
+
+function filterItems ({baseItems, selectedItem, hovered}, text) {
+  const lowerCaseFilter = (text || '').toLowerCase()
+
+  return _.chain(baseItems)
+  .map(function (item, index, list) {
+    const lowerCaseLabel = (item.label || '').toLowerCase()
+    const labelMatchesFilter = lowerCaseLabel.indexOf(lowerCaseFilter) !== -1
+
+    if (text && !labelMatchesFilter) {
+      return null
+    }
+    const classNames = []
+    const itemIsHovered = index === hovered || list.length === 1
+    const itemIsSelected = selectedItem === item.index
+
+    if (itemIsSelected) {
+      classNames.push(SELECTED_CLASS)
+    }
+
+    if (itemIsHovered) {
+      classNames.push(HOVERED_CLASS)
+    }
+    const className = classNames.join(' ')
+
+    return {
+      className,
+      index,
+      label: item.label,
+      value: item.value
+    }
+  })
+  .filter() // Filters out undefined/null
+  .value()
+}
+
+export default function reducer (state, action) {
+  let nextState
   switch (action.type) {
     case SELECT_ITEM:
-      // Close list
-      nextState.open = false
-      // Set selected value
-      nextState.selectedItem = action.itemIndex
-      // Set prompt
-      nextState.filteredItems = state.baseItems
+      nextState = select(state, action.itemIndex)
+      break
+    case SELECT_HOVER:
+      nextState = select(state, state.selectedItem)
       break
     case CLICK_ARROW:
-      //Toggle 
-      nextState.open = !state.open
-      //Set prompt
+      // Toggle
+      nextState = state.open ? close(state) : {open: true}
+      break
+    case CLOSE_DROPDOWN:
+      nextState = close(state)
       break
     case HOVER_NEXT:
       // Set hover (hovered + 1)
+      let nextItem
       if (state.open === false) {
-        nextState.open = true
-        state.selectedItem = 0
+        nextState.selectedItem = 0
       } else {
         nextState.selectedItem = (state.selectedItem + 1) % state.displayItems.length
       }
+      nextState = setHover(state, nextItem)
       break
     case HOVER_PREV:
       // Set hover (hovered - 1)
-      let nextItem
+      let prevItem
       if (state.open === false) {
-        nextState.open = true
-        nextItem = -1
+        prevItem = -1
       } else {
-        nextItem = state.selectedItem - 1
+        prevItem = state.hoveredItem - 1
       }
       if (nextItem < 0) {
-        nextItem = state.displayItems.length - 1
+        prevItem = state.displayItems.length - 1
       }
+      nextState = setHover(state, prevItem)
       break
     case MOUSE_HOVER:
       // Set hover (mouse hovered index)
-      nextState.hoveredItem = action.itemIndex
+      nextState = setHover(state, action.itemIndex)
       break
     case SEARCH_TEXT:
-      nextState.open = true
+      nextState = {
+        open: true,
       // Set prompt
-      nextState.prompt = action.text
+        prompt: action.text,
       // Filter list
+        displayItems: filterItems(state, action.text)
+      }
+      break
+    case SELECT_VALUE:
+      const selectedIndex = findIndexByValue(state.baseItems, action.value)
+      nextState = select(state, selectedIndex)
+      break
+    case RESET_DROPDOWN:
+      nextState = _.clone(INITIAL_STATE)
+      nextState.baseItems = state.baseItems
+      break
+    case '@@redux/INIT':
+      nextState = {}
       break
     default:
-      nextState = state
+      nextState = {}
+      console.warn(`frost-select: Unrecognized action type "${action.type}"`)
   }
 
   nextState.lastAction = action.type

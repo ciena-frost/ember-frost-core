@@ -19,7 +19,7 @@ export default FrostSelect.extend({
   // Computed Properties
   // ==========================================================================
 
-  @readOnly
+
   @computed('selected')
   /**
    * Calculate the prompt based on what is selected
@@ -41,7 +41,6 @@ export default FrostSelect.extend({
     return prompt
   },
 
-  @readOnly
   @computed('selected')
   /**
    * Input should be disabled if anything is selected
