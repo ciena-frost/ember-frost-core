@@ -1,13 +1,13 @@
 /*
  Based on the textarea field, the URL input field consists of an input field and a button.
- The component is used to verify that teh provided URL is both valid and accessible.
+ The component is used to verify that the provided URL is both valid and accessible.
 
  After clicking the 'Test' button, the entered URL is loosely verified to be correctly formatted.
  An AJAX GET request is then sent (with JSONP to overcome cross-domain problems) to the destination URL.
  The response is checked with any status code between 100 and 500, except 404, deemed a success.
 
  Should MIME Checking be enabled and the Type set to 'Text',
- it is possible that an error be thrown when using Chrome
+ an error will be thrown when using the Chrome browser
  */
 
 import Ember from 'ember'
@@ -65,8 +65,6 @@ export default Component.extend({
       this.send('clear')
       this.set('isLoading', true)
 
-      let that = this
-
       // Not using Ember AJAX as it throws unrecoverable error when JSONP is not supported by the server
       $.ajax({
         url: host,
@@ -74,22 +72,22 @@ export default Component.extend({
         dataType: 'jsonp text',
         jsonp: false,
         timeout: 10000,
-        status: function (data) {
-          that.set('isLoading', false)
-          that.set('success', true)
+        status: (data) => {
+          this.set('isLoading', false)
+          this.set('success', true)
         },
-        error: function (e) {
-          that.set('isLoading', false)
+        error: (e) => {
+          this.set('isLoading', false)
 
           let httpStatusCode = e.status
           // JSONP not supported by server
 
           if (httpStatusCode === 404) {
-            that.set('error', true)
+            this.set('error', true)
           } else if ((httpStatusCode >= 100) && (httpStatusCode < 500)) {
-            that.set('success', true)
+            this.set('success', true)
           } else {
-            that.set('undetermined', true)
+            this.set('undetermined', true)
           }
         }
       })
@@ -104,6 +102,5 @@ export default Component.extend({
       this.$('text').val('')
       this.$('textarea').trigger('input')
     }
-
   }
 })

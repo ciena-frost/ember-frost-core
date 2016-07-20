@@ -1,4 +1,4 @@
-# frost-text
+# frost-url-input
 
  * [API](#api)
  * [Examples](#examples)
@@ -27,46 +27,46 @@
 
 ### Default
 ```handlebars
-{{frost-text}}
+{{frost-url-input}}
 ```
 
 ### Error
 ```handlebars
-{{frost-text
+{{frost-url-input
   class='error'
 }}
 ```
 ### Disabled
 ```handlebars
-{{frost-text
+{{frost-url-input
   disabled=true
 }}
 ```
 
 ### Focus
 ```handlebars
-{{frost-text
+{{frost-url-input
   autofocus=true
 }}
 ```
 
 ### Text alignment
 ```handlebars
-{{frost-text
+{{frost-url-input
   align='right'
 }}
 ```
 
 ### Text placeholder
 ```handlebars
-{{frost-text
+{{frost-url-input
   placeholder='basic field'
 }}
 ```
 
 ### Actions - onInput
 ```handlebars
-{{frost-text
+{{frost-url-input
   id="foo-bar"
   onInput=(action 'handleInput')
 }}
@@ -88,7 +88,7 @@ actions: {
 
 ### Actions - onBlur
 ```handlebars
-{{frost-text
+{{frost-url-input
   onBlur=(action 'handleBlur')
 }}
 ```
@@ -107,7 +107,7 @@ actions: {
 
 ### Actions - onFocus
 ```handlebars
-{{frost-text
+{{frost-url-input
   onFocus=(action 'handleFocus')
 }}
 ```
@@ -126,7 +126,7 @@ actions: {
 
 ### Actions - onKeyDown
 ```handlebars
-{{frost-text
+{{frost-url-input
   onKeyDown=(action 'handleKeyDown')
 }}
 ```
@@ -145,7 +145,7 @@ actions: {
 
 ### Actions - onKeyUp
 ```handlebars
-{{frost-text
+{{frost-url-input
   onKeyUp=(action 'handleKeyUp')
 }}
 ```

@@ -24,9 +24,9 @@
       "readme": "docs/frost-text.md"
     },
     {
-      "demoName": "urlinput",
+      "demoName": "url-input",
       "frostGuideDirectory": "ui-components/input-fields/url-input",
-      "readme": "docs/frost-urlinput.md"
+      "readme": "docs/frost-url-input.md"
     },
     {
       "demoName": "password",
