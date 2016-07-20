@@ -9,7 +9,6 @@ export const CLOSE_DROPDOWN = 'CLOSE_DROPDOWN'
 export const OPEN_DROPDOWN = 'OPEN_DROPDOWN'
 export const RESET_DROPDOWN = 'RESET_DROPDOWN'
 export const SELECT_VALUE = 'SELECT_VALUE'
-export const SET_VALUE = 'SET_VALUE'
 
 export function simpleAction (action) {
   return {
@@ -75,13 +74,6 @@ export function updateSearchText (text) {
 export function selectValue (value) {
   return {
     type: SELECT_VALUE,
-    value
-  }
-}
-
-export function setValue (value) {
-  return {
-    type: SET_VALUE,
     value
   }
 }

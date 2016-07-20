@@ -78,6 +78,12 @@ export default Component.extend({
   attributeBindings: ['tabIndex'],
   classNames: ['frost-select'],
   classNameBindings: ['focus', 'shouldOpen:open', 'disabled', 'hasError:error'],
+  stateProperties: [
+    'open',
+    'prompt',
+    'disabled',
+    'displayItems'
+  ],
   layout,
 
   propTypes: {
@@ -122,7 +128,6 @@ export default Component.extend({
   // ==========================================================================
 
   @readOnly
-
   @computed('maxListHeight')
   /**
    * Get inline style for container
@@ -243,11 +248,6 @@ export default Component.extend({
   },
 
   // TODO: add jsdoc
-  closeList () {
-    // this.unbindDropdownEvents()
-  },
-
-  // TODO: add jsdoc
   getValues () {
     const state = this.get('reduxStore').getState()
     return [state.baseItems[state.selectedItem].value]
@@ -322,20 +322,19 @@ export default Component.extend({
     this.unbindDropdownEvents()
   },
 
-  init () {
-    this._super(...arguments)
+  setUpReduxStore () {
     const reduxStore = Redux.createStore(reducer)
+    this.set('reduxStore', reduxStore)
+    return reduxStore
+  },
+
+  subscribe (reduxStore) {
     reduxStore.subscribe(() => {
       const state = reduxStore.getState()
 
       const wasOpen = this.get('open')
 
-      const newProps = _.pick(state, [
-        'open',
-        'prompt',
-        'disabled',
-        'displayItems'
-      ])
+      const newProps = _.pick(state, this.get('stateProperties'))
       // if (newProps.prompt === 'Raekwon') debugger
       this.setProperties(newProps)
 
@@ -363,7 +362,11 @@ export default Component.extend({
       selectedItem: _.isArray(selectedItem) ? selectedItem[0] : selectedItem,
       disabled: this.get('disabled')
     }))
-    this.set('reduxStore', reduxStore)
+  },
+
+  init () {
+    this._super(...arguments)
+    this.subscribe(this.setUpReduxStore())
   },
 
   // ==========================================================================
@@ -384,7 +387,7 @@ export default Component.extend({
       if (onBlur) {
         onBlur()
       }
-      this.get('reduxStore').dispatch(closeDropDown())
+      //this.get('reduxStore').dispatch(closeDropDown())
     },
 
     // TODO: add jsdoc

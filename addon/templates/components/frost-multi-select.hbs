@@ -16,20 +16,19 @@
 </div>
 <div class="drop-down-container">
   <div class="multi-status">
-    <span class="number-selected">{{selected.length}} selected</span>
+    <span class="number-selected">{{selectedItems.length}} selected</span>
     <span class="clear" tabIndex={-1} onClick={{action 'clearSelection'}}>Clear all</span>
   </div>
   <div class="list-container">
     <div class="up-arrow"></div>
-    <ul ref="container" style={{containerStyle}}>
+    <ul ref="container" style={{containerStyle}}>      
       {{#each displayItems as |item|}}
-        <li
-          class={{item.className}}
-          data-value={{item.value}}
-          data-index={{item.index}}
-          onClick={{action 'onSelect'}}
-          onMouseOver={{action 'onItemOver'}}
-        >
+        {{#frost-select-li
+          class=item.className
+          data=item
+          onSelect=(action 'onSelect')
+          onItemOver=(action 'onItemOver')
+        }}
           {{frost-checkbox
             checked=item.selected
             onInput=(action 'onCheck')
@@ -37,7 +36,7 @@
             value=item.index
           }}
           {{item.label}}
-        </li>
+        {{/frost-select-li}}
       {{/each}}
     </ul>
   </div>

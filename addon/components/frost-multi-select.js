@@ -2,6 +2,10 @@ import _ from 'lodash'
 import computed, {readOnly} from 'ember-computed-decorators'
 import FrostSelect from './frost-select'
 import layout from '../templates/components/frost-multi-select'
+import reducer from '../reducers/frost-multi-select'
+import {clearSelection} from '../actions/frost-multi-select'
+import Redux from 'npm:redux'
+
 
 export default FrostSelect.extend({
   // ==========================================================================
@@ -13,33 +17,18 @@ export default FrostSelect.extend({
   // ==========================================================================
 
   classNames: ['frost-select', 'multi'],
+  stateProperties: [
+    'open',
+    'prompt',
+    'disabled',
+    'displayItems',
+    'selectedItems'
+  ],
   layout,
 
   // ==========================================================================
   // Computed Properties
   // ==========================================================================
-
-
-  @computed('selected')
-  /**
-   * Calculate the prompt based on what is selected
-   * @param {Number[]} selected - the currently selected indices
-   * @returns {String} the prompt to display
-   */
-  prompt (selected) {
-    const filter = this.get('filter')
-    let prompt = ''
-
-    if (filter !== undefined) {
-      prompt = filter
-    } else if (selected.length < 3) {
-      prompt = this.getLabels().join(', ')
-    } else {
-      prompt = `${selected.length} items selected`
-    }
-
-    return prompt
-  },
 
   @computed('selected')
   /**
@@ -55,44 +44,6 @@ export default FrostSelect.extend({
   // ==========================================================================
   // Functions
   // ==========================================================================
-
-  /**
-   * @returns {String[]} the labels for all selected items
-   */
-  getLabels () {
-    return _.map(this.get('selected'), (selectedIndex) => {
-      return this.get('data')[selectedIndex].label
-    })
-  },
-
-  /**
-   * Select or de-select the given index
-   * @param {Number} index - the index to select
-   */
-  select (index) {
-    const selected = this.get('selected')
-
-    if (_.includes(selected, index)) {
-      const newSelected = _.without(selected, index)
-      this.set('selected', newSelected)
-    } else {
-      selected.push(index)
-      this.notifyPropertyChange('selected')
-    }
-
-    this.set('filter', undefined)
-    this.notifyOfChange(selected)
-  },
-
-  /**
-   * Perform a search (if not disabled)
-   * @param {String} term - the search term
-   */
-  search (term) {
-    if (!this.get('disableInput')) {
-      this._super(term)
-    }
-  },
 
   /**
    * Select a given option by value (rather than by index)
@@ -119,7 +70,20 @@ export default FrostSelect.extend({
     this.notifyOfChange(selected)
   },
 
-  // ==========================================================================
+  setUpReduxStore () {
+    const reduxStore = Redux.createStore(reducer)
+    this.set('reduxStore', reduxStore)
+    return reduxStore
+  },
+
+  getValues () {
+    const selected = this.get('selectedItems')
+    const state = this.get('reduxStore').getState()
+    return _.map(selected, (item) => {
+      return state.baseItems[item].value
+    })
+  },
+  // ===================================r=======================================
   // Events
   // ==========================================================================
 
@@ -140,6 +104,7 @@ export default FrostSelect.extend({
       const newSelection = []
       this.set('selected', newSelection)
       this.notifyOfChange(newSelection)
+      this.get('reduxStore').dispatch(clearSelection)
     }
   }
 })

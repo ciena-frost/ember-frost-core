@@ -94,7 +94,7 @@ function setHover (state, itemIndex) {
   }
 }
 
-function filterItems ({baseItems, selectedItem, hoveredIndex}, text) {
+export function filterItems ({baseItems, selectedItem, hoveredIndex}, text) {
   const lowerCaseFilter = (text || '').toLowerCase()
 
   return _.chain(baseItems)
