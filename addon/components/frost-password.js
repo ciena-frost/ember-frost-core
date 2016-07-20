@@ -1,3 +1,4 @@
+import computed from 'ember-computed-decorators'
 import Ember from 'ember'
 const {
   Component,
@@ -6,7 +7,6 @@ const {
 } = Ember
 import FrostEventsProxy from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-password'
-import computed from 'ember-computed-decorators'
 
 export default Component.extend(FrostEventsProxy, {
 
