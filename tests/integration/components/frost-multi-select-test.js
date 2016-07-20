@@ -1,10 +1,10 @@
+import Ember from 'ember'
+const {run} = Ember
 import {expect} from 'chai'
 import {describeComponent, it} from 'ember-mocha'
 import {beforeEach} from 'mocha'
 import sinon from 'sinon'
 import hbs from 'htmlbars-inline-precompile'
-import Ember from 'ember'
-const {run} = Ember
 
 function wait (callback) {
   run.later(callback)

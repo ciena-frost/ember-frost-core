@@ -1,4 +1,3 @@
-import computed from 'ember-computed-decorators'
 import Ember from 'ember'
 const {
   Component,
