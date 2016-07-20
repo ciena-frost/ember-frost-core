@@ -30,7 +30,7 @@ export default FrostSelect.extend({
   // Computed Properties
   // ==========================================================================
 
-  @computed('selected')
+  @computed('selectedItems',  'disabled')
   /**
    * Input should be disabled if anything is selected
    * @param {Number[]} selected - the selected indices
@@ -101,10 +101,8 @@ export default FrostSelect.extend({
      * Clear the selected property and notify parent of change
      */
     clearSelection () {
-      const newSelection = []
-      this.set('selected', newSelection)
-      this.notifyOfChange(newSelection)
       this.get('reduxStore').dispatch(clearSelection)
+      this.notifyOfChange()
     }
   }
 })

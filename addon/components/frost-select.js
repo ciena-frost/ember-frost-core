@@ -21,21 +21,6 @@ import {
 
 import reducer from '../reducers/frost-select'
 
-
-/**
- * @typedef {Object} Item
- * @property {String} label - user friendly text for item
- * @property {Boolean|Number|String|Object} value - value of item
- */
-
-/**
- * @typedef {Object} ListItem
- * @property {String} className - className to apply to item's DOM
- * @property {Number} index - location of item in list of items
- * @property {String} label - user friendly text for item
- * @property {Boolean|Number|String|Object} value - value of item
- */
-
 /**
  * Map of human readable keys to their key codes
  * @type {Object}
@@ -245,6 +230,8 @@ export default Component.extend({
 
       this.set('selected', selected)
     }
+
+    
   },
 
   // TODO: add jsdoc
@@ -293,10 +280,10 @@ export default Component.extend({
    * with the values of the currently selected indices
    * @param {Number[]} selected - the selected indices
    */
-  notifyOfChange (selected) {
+  notifyOfChange () {
     const onChange = this.get('onChange')
     if (onChange) {
-      const values = this.getValues(selected)
+      const values = this.getValues()
       onChange(values)
     }
   },
@@ -341,10 +328,7 @@ export default Component.extend({
       switch (state.lastAction) {
         case 'SELECT_HOVER':
         case 'SELECT_ITEM':
-          const values = this.getValues()
-          if (this.get('onChange') && _.isFunction(this.get('onChange'))) {
-            this.get('onChange')(values)
-          }
+          this.notifyOfChange()
           break
       }
       if (!wasOpen && newProps.open) {

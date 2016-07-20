@@ -2,10 +2,12 @@ import {
   SELECT_ITEM, 
   SELECT_HOVER, 
   CLOSE_DROPDOWN,
-  RESET_DROPDOWN 
+  RESET_DROPDOWN,
+  CLICK_ARROW
 } from '../actions/frost-select'
 import { CLEAR_SELECTION } from '../actions/frost-multi-select'
 import selectReducer, { filterItems } from './frost-select'
+import Ember from 'ember'
 
 function initialState () {
   return {
@@ -38,22 +40,39 @@ function promptFromItems (baseItems, selectedItems) {
   }
 }
 
-function close (state) {
+function close () {
   return {
     open: false,
     hoveredItem: null
   }
 }
+
+function updateDisplayItems (displayItems, selectedItems) {
+  _.each(displayItems, function (item) {
+    Ember.set(item, 'selected', selectedItems.indexOf(item.index) >= 0)
+  })
+  return displayItems
+}
+
 function selectItem (state, selectedItem) {
   let selectedItems
+  let displayItems
   if (state.selectedItems.indexOf(selectedItem) >= 0) {
-    selectedItems = _.without(state, selectedItem)
+    selectedItems = _.without(state.selectedItems, selectedItem)
   } else {
     selectedItems = _.clone(state.selectedItems)
     selectedItems.push(selectedItem)
   }
+  if (state.displayItems.length < state.baseItems.length) {
+    displayItems = _.map(state.baseItems, function ({label, value}, index) {
+      return { label, value, index }
+    }) 
+  } else {
+    displayItems = state.displayItems
+  }
   return {
-    selectedItems
+    selectedItems,
+    displayItems: updateDisplayItems(displayItems, selectedItems)
   }
 }
 
@@ -61,16 +80,23 @@ export default function reducer (state, action) {
   let nextState
   switch (action.type) {
     case SELECT_ITEM:
-    case SELECT_HOVER:
       nextState = selectItem(state, action.itemIndex)
       break
+    case SELECT_HOVER:
+      nextState = selectItem(state, state.hoveredItem)
+      break
     case CLEAR_SELECTION:
+      const selectedItems = []
       nextState = {
-        selectedItems: []
+        selectedItems,
+        displayItems: updateDisplayItems(state.displayItems, selectedItems)
       }
       break
     case CLOSE_DROPDOWN:
       nextState = close()
+      break
+    case CLICK_ARROW:
+      nextState = state.open ? close() : {open: true}
       break
     case RESET_DROPDOWN:
       nextState = _.assign(initialState(), _.pick(action.state, _.negate(_.isUndefined)))
@@ -81,12 +107,12 @@ export default function reducer (state, action) {
 
   if (nextState === undefined) {
     nextState = selectReducer(state, action)
+    nextState.displayItems = updateDisplayItems(nextState.displayItems, nextState.selectedItems)
   } else {
     nextState.lastAction = action.type
     nextState = _.defaults(nextState, state)
   }
-  if (nextState.prompt === undefined) {
-    nextState.prompt = promptFromItems(nextState.baseItems, nextState.selectedItems)
-  }
+  nextState.prompt = promptFromItems(nextState.baseItems, nextState.selectedItems)
+  
   return nextState
 }
