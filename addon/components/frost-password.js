@@ -17,77 +17,60 @@ export default Component.extend(FrostEventsProxy, {
     'frost-password'
   ],
   classNameBindings: [
+    'isCapsOn',
     'revealable'
   ],
+  isCapsOn: false,
   layout,
   revealable: false,
-  revealed: false,
-  $capsLockWarning: null,
+  isRevealed: false,
 
   // == Computed properties  ===================================================
 
-  @computed('revealed')
-  revealMessage(revealed) {
-    return revealed ? 'Hide' : 'Show'
+  @computed('isRevealed')
+  revealMessage(isRevealed) {
+    return isRevealed ? 'Hide' : 'Show'
   },
 
-  @computed('revealed')
-  type(revealed) {
-    return revealed ? 'text' : 'password'
+  @computed('isRevealed')
+  type(isRevealed) {
+    return isRevealed ? 'text' : 'password'
   },
 
-  // // == Events ================================================================
+  // == Events ================================================================
 
-  // didInsertElement() {
-  //     const capsLockWarning = $(`
-  //       <span class='frost-password-caps-warning'>
-  //         Caps on
-  //       </span>
-  //     `)
+  _focusOut: on('focusOut', function(event) {
+    // this._super(...arguments)
+    this.set('isCapsOn', false)
+  }),
 
-  //     this.get('$clearButton').after(capsLockWarning)
-  //     this.set('$capsLockWarning', capsLockWarning)
+  _keyDown: Ember.on('keyDown', function (e) {
+    var s = e || window.e
+    if (s.which === 20 || s.keyCode === 20) {
+      this.set('isCapsOn', true)
+    }
+  }),
 
-  //      const nativeCapsLockWarningOverlay = $(`
-  //       <span class='frost-password-native-caps-warning-overlay' />
-  //     `)
+  _keyPress: Ember.on('keyPress', function(event) {
+    const c = String.fromCharCode(event.which || event.keyCode)
+    if ((c.toUpperCase() === c && c.toLowerCase() !== c && !event.shiftKey) ||
+      (c.toUpperCase() !== c && c.toLowerCase() === c && event.shiftKey)) {
+        this.set('isCapsOn', true)
+    }
+  }),
 
-  //     this.get('$capsLockWarning').after(nativeCapsLockWarningOverlay)
-  //   })
-  // },
+  _keyUp: Ember.on('keyUp', function (e) {
+    var s = e || window.e
+    if (s.which === 20 || s.keyCode === 20) {
+      this.set('isCapsOn', false)
+    }
+  }),
 
-  // _focusOut: on('focusOut', function(event) {
-  //   this._super(...arguments)
-  //   this.get('$capsLockWarning').css('opacity', 0)
-  // }),
-
-  // _keyDown: Ember.on('keyDown', function (e) {
-  //   var s = e || window.e
-  //   if (s.which === 20 || s.keyCode === 20) {
-  //     this.get('$capsLockWarning').css('opacity', 1)
-  //   }
-  // }),
-
-  // _keyPress: Ember.on('keyPress', function(event) {
-  //   const c = String.fromCharCode(event.which || event.keyCode)
-  //   if ((c.toUpperCase() === c && c.toLowerCase() !== c && !event.shiftKey) ||
-  //     (c.toUpperCase() !== c && c.toLowerCase() === c && event.shiftKey)) {
-  //     this.get('$capsLockWarning').css('opacity', 1)
-  //   }
-  // }),
-
-  // _keyUp: Ember.on('keyUp', function (e) {
-  //   var s = e || window.e
-  //   if (s.which === 20 || s.keyCode === 20) {
-  //     this.get('$capsLockWarning').css('opacity', 0)
-  //   }
-  // }),
-
-  // == Actions ================================================================
+  // == Actions ===============================================================
 
   actions: {
     toggleReveal() {
-      this.toggleProperty('revealed')
+      this.toggleProperty('isRevealed')
       const $input = this.$('input').get(0)
       $input.focus()
       // Move the cursor to the end of the input
