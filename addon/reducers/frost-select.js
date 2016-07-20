@@ -1,3 +1,4 @@
+import Ember from 'ember'
 import {
   SELECT_ITEM,
 	CLICK_ARROW,
@@ -50,7 +51,7 @@ function select (state, itemIndex) {
   // Set selected value
   let nextState = {
     selectedItem: itemIndex,
-    displayItems: filterItems(state, ''),
+    displayItems: updateClassNames(filterItems(state, ''), null, itemIndex),
     baseItems: state.baseItems
   }
   // Close list
@@ -64,27 +65,32 @@ function findIndexByValue (baseItems, itemValue) {
 }
 
 function itemClassNames (index, hoveredItem, selectedItem, listLength) {
-    const classNames = []
+  const classNames = []
 
-    if (selectedItem === index || selectedItem === null) {
-      classNames.push(SELECTED_CLASS)
-    }
+  if (selectedItem === index) {
+    classNames.push(SELECTED_CLASS)
+  }
 
-    if (index === hoveredItem || listLength === 1) {
-      classNames.push(HOVERED_CLASS)
-    }
-    return classNames.join(' ')
+  if (index === hoveredItem || listLength === 1) {
+    classNames.push(HOVERED_CLASS)
+  }
+  return classNames.join(' ')
+}
+
+function updateClassNames (displayItems, hoveredItem, selectedItem) {
+  _.each(displayItems, function (item, index, list) {
+    const className = itemClassNames(item.index, hoveredItem, selectedItem, list.length)
+    Ember.set(item, 'className', className)
+  })
+  return displayItems
 }
 
 function setHover (state, itemIndex) {
-  const displayItems = _.map(state.displayItems, function (item, index, list) {
-    const className = itemClassNames(item.index, itemIndex, state.selectedItem, list.length)
-    return _.defaults({className}, item)
-  })
+  updateClassNames()
   return {
     open: true,
     hoveredItem: itemIndex,
-    displayItems
+    displayItems: updateClassNames(state.displayItems, itemIndex, state.selectedItem)
   }
 }
 
@@ -92,23 +98,25 @@ function filterItems ({baseItems, selectedItem, hoveredIndex}, text) {
   const lowerCaseFilter = (text || '').toLowerCase()
 
   return _.chain(baseItems)
-  .map(function (item, index, list) {
+  .map(function (item, index) {
     const lowerCaseLabel = (item.label || '').toLowerCase()
     const labelMatchesFilter = lowerCaseLabel.indexOf(lowerCaseFilter) !== -1
 
     if (text && !labelMatchesFilter) {
       return null
     }
-    const className = itemClassNames(index, hoveredIndex, selectedItem, list.length)
-
     return {
-      className,
       index,
       label: item.label,
       value: item.value
     }
   })
-  .filter() // Filters out undefined/null
+  .filter()// Filters out undefined/null
+  .map(function (item, index, list) {
+    const className = itemClassNames(index, hoveredIndex, selectedItem, list.length)
+    item.className = className
+    return item
+  })
   .value()
 }
 
@@ -172,16 +180,19 @@ export default function reducer (state, action) {
       break
     case SELECT_VALUE:
       const selectedIndex = findIndexByValue(state.baseItems, action.value)
-      if (selectedIndex >= 0) {        
+      if (selectedIndex >= 0) {
         nextState = select(state, selectedIndex)
       } else {
         nextState = {}
       }
       break
     case RESET_DROPDOWN:
-      nextState = _.clone(INITIAL_STATE)
-      nextState.baseItems = state.baseItems
+      nextState = _.assign(_.clone(INITIAL_STATE), _.pick(action.state, _.negate(_.isUndefined)))
+      nextState.baseItems = action.state.baseItems
       nextState.displayItems = filterItems(nextState, '')
+      if (nextState.selectedItem) {
+        nextState.prompt = promptFromItem(nextState.baseItems, nextState.selectedItem)
+      }
       break
     case '@@redux/INIT':
       nextState = {}

@@ -24,10 +24,9 @@
       {{#each displayItems as |item|}}
         {{#frost-select-li
           class=item.className
-          data-value=item.value
-          data-index=item.index
-          onClick=(action 'onSelect')
-          onMouseOver=(action 'onItemOver')
+          data=item
+          onSelect=(action 'onSelect')
+          onItemOver=(action 'onItemOver')
         }}
           {{item.label}}
         {{/frost-select-li}}

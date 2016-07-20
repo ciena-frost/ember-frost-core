@@ -9,6 +9,15 @@ export const CLOSE_DROPDOWN = 'CLOSE_DROPDOWN'
 export const OPEN_DROPDOWN = 'OPEN_DROPDOWN'
 export const RESET_DROPDOWN = 'RESET_DROPDOWN'
 export const SELECT_VALUE = 'SELECT_VALUE'
+export const SET_VALUE = 'SET_VALUE'
+
+export function simpleAction (action) {
+  return {
+    get type () {
+      return action
+    }
+  }
+}
 
 export function selectItem (itemIndex) {
   return {
@@ -29,7 +38,7 @@ export function closeDropDown () {
   }
 }
 
-export const  openDropDown = simpleAction (OPEN_DROPDOWN)
+export const openDropDown = simpleAction(OPEN_DROPDOWN)
 
 export function clickArrow () {
   return {
@@ -63,14 +72,6 @@ export function updateSearchText (text) {
   }
 }
 
-export function simpleAction (action) {
-  return {
-    get type () {
-      return action
-    }
-  }
-}
-
 export function selectValue (value) {
   return {
     type: SELECT_VALUE,
@@ -78,8 +79,16 @@ export function selectValue (value) {
   }
 }
 
-export function resetDropDown () {
+export function setValue (value) {
   return {
-    type: RESET_DROPDOWN
+    type: SET_VALUE,
+    value
+  }
+}
+
+export function resetDropDown (state) {
+  return {
+    type: RESET_DROPDOWN,
+    state
   }
 }

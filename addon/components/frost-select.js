@@ -248,10 +248,9 @@ export default Component.extend({
   },
 
   // TODO: add jsdoc
-  getValues (selected = this.get('selected')) {
-    return selected.map((selectedIndex) => {
-      return this.get('data')[selectedIndex].value
-    })
+  getValues () {
+    const state = this.get('reduxStore').getState()
+    return [state.baseItems[state.selectedItem].value]
   },
 
   // TODO: add jsdoc
@@ -260,11 +259,12 @@ export default Component.extend({
     switch (event.which) {
       // escape key or tab key, close the dropdown
       case keyCodes.esc:
-        event.stopPropagation()
         event.preventDefault()
         reduxStore.dispatch(closeDropDown())
         break
-
+      case keyCodes.tab:
+        //reduxStore.dispatch(closeDropDown())
+        break
       // enter + spacebar, choose selected
       case keyCodes.enter:
         reduxStore.dispatch(selectHover())
@@ -324,14 +324,11 @@ export default Component.extend({
 
   init () {
     this._super(...arguments)
-    const reduxStore = Redux.createStore(reducer, {
-      placeholder: this.get('placeholder'),
-      baseItems: this.get('data'),
-      error: this.get('error')
-    })
-
+    const reduxStore = Redux.createStore(reducer)
     reduxStore.subscribe(() => {
       const state = reduxStore.getState()
+
+      const wasOpen = this.get('open')
 
       const newProps = _.pick(state, [
         'open',
@@ -339,20 +336,33 @@ export default Component.extend({
         'disabled',
         'displayItems'
       ])
+      // if (newProps.prompt === 'Raekwon') debugger
       this.setProperties(newProps)
 
       switch (state.lastAction) {
         case 'SELECT_HOVER':
         case 'SELECT_ITEM':
-          const values = [state.baseItems[state.selectedItem]]
+          const values = this.getValues()
           if (this.get('onChange') && _.isFunction(this.get('onChange'))) {
             this.get('onChange')(values)
           }
           break
       }
+      if (!wasOpen && newProps.open) {
+        this.bindDropdownEvents()
+      } else if (wasOpen && !newProps.open) {
+        this.unbindDropdownEvents()
+      }
+      console.log(state)
     })
-    reduxStore.dispatch(resetDropDown())
-
+    const selectedItem = this.get('selected')
+    reduxStore.dispatch(resetDropDown({
+      placeholder: this.get('placeholder'),
+      baseItems: this.get('data'),
+      error: this.get('error'),
+      selectedItem: _.isArray(selectedItem) ? selectedItem[0] : selectedItem,
+      disabled: this.get('disabled')
+    }))
     this.set('reduxStore', reduxStore)
   },
 
@@ -367,7 +377,6 @@ export default Component.extend({
   actions: {
     // TODO: add jsdoc
     onBlur (event) {
-      event.preventDefault()
       this.set('focus', false)
 
       const onBlur = this.get('onBlur')
@@ -375,7 +384,7 @@ export default Component.extend({
       if (onBlur) {
         onBlur()
       }
-      //this.get('reduxStore').dispatch(closeDropDown())
+      this.get('reduxStore').dispatch(closeDropDown())
     },
 
     // TODO: add jsdoc
@@ -407,22 +416,14 @@ export default Component.extend({
     },
 
     // TODO: add jsdoc
-    onItemOver (event) {
-      event.stopImmediatePropagation()
-      let target = event.target
-      let index = parseInt(target.getAttribute('data-index'), 10)
-      this.get('reduxStore').dispatch(mouseHoverItem(index))
+    onItemOver (data) {
+      this.get('reduxStore').dispatch(mouseHoverItem(data.index))
       return false
     },
 
     // TODO: add jsdoc
-    onSelect (event) {
-      event.stopPropagation()
-      alert(event)
-      let target = event.currentTarget || event.target
-      let index = parseInt(target.getAttribute('data-index'), 10)
-      this.get('reduxStore').dispatch(selectItem(index))
-      return false
+    onSelect (data) {
+      this.get('reduxStore').dispatch(selectItem(data.index))
     }
   }
 })
