@@ -8,7 +8,7 @@ export default Controller.extend({
 
   actions: {
     // BEGIN-SNIPPET text-legacy-events
-    legacy(attrs) {
+    legacy (attrs) {
       this.notifications.addNotification({
         message: `id: ${attrs.id}, value: ${attrs.value}`,
         type: 'success',
@@ -19,7 +19,7 @@ export default Controller.extend({
     // END-SNIPPET text-legacy-events
 
     // BEGIN-SNIPPET text-support-events
-    support(type, value) {
+    support (type, value) {
       this.notifications.addNotification({
         message: `${type}: ${value}`,
         type: 'success',
@@ -30,7 +30,7 @@ export default Controller.extend({
     // END-SNIPPET text-support-events
 
     // BEGIN-SNIPPET text-dom-events
-    event(event) {
+    event (event) {
       this.notifications.addNotification({
         message: `${event.type}: ${event.target.value}`,
         type: 'success',

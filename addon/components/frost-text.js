@@ -3,9 +3,7 @@ import Ember from 'ember'
 const {
   Component,
   isPresent,
-  on,
-  run,
-  $
+  on
 } = Ember
 import {
   task,
@@ -36,23 +34,23 @@ export default Component.extend(FrostEventsProxy, {
   // == Computed properties  ===================================================
 
   @computed('value', '_focused')
-  isFocusedWithValue(value, _focused) {
+  isFocusedWithValue (value, _focused) {
     return this._focused && isPresent(this.value)
   },
 
   // == Events =================================================================
 
-  _focusIn: on('focusIn', function() {
+  _focusIn: on('focusIn', function () {
     this.set('_focused', true)
     this.get('_toggleClear').perform(this.get('isFocusedWithValue'))
   }),
 
-  _focusOut: on('focusOut', function(event) {
+  _focusOut: on('focusOut', function (event) {
     this.set('_focused', false)
     this.get('_toggleClear').perform(this.get('isFocusedWithValue'))
   }),
 
-  _input: on('input', function(event) {
+  _input: on('input', function (event) {
     this.get('_toggleClear').perform(this.get('isFocusedWithValue'))
   }),
 
@@ -79,19 +77,19 @@ export default Component.extend(FrostEventsProxy, {
   // To avoid this, we use the TextSupport 'key-up' event and
   // proxy the event to the keyUp handler.
   actions: {
-    clear() {
+    clear () {
       this.$('input').focus()
       this.$('input').val('')
       this.$('input').trigger('input')
     },
 
-    keyUp(value, event) {
+    keyUp (value, event) {
       if (Ember.isPresent(Ember.get(this, '_eventProxy.keyUp'))) {
         this._eventProxy.keyUp(event)
       }
     },
 
-    _onInput(event) {
+    _onInput (event) {
       if (Ember.isPresent(Ember.get(this, '_eventProxy.input'))) {
         if (!this.eventVersion) {
           this._eventProxy.input({

@@ -31,6 +31,6 @@ export default Component.extend(FrostEvents, {
     let assert = `${this.toString()} must be initialized in the yield block of 'frost-radio-button'`
     let cond = /frost-radio-button/.test(this.parentView.toString())
     Ember.assert(assert, cond)
-  },
+  }
 
 })

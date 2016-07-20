@@ -10,8 +10,20 @@ function wait (callback) {
   run.later(callback)
 }
 
-const selectedTestTemplate = hbs`{{frost-multi-select onChange=onChange selected=selected data=data greeting=greeting}}`
-const selectedValueTestTemplate = hbs`{{frost-multi-select onChange=onChange data=data greeting=greeting selectedValue=selectedValue}}`
+const selectedTestTemplate = hbs`
+  {{frost-multi-select
+    onChange=onChange
+    selected=selected
+    data=data
+    greeting=greeting}}
+`
+const selectedValueTestTemplate = hbs`
+  {{frost-multi-select
+    onChange=onChange
+    data=data
+    greeting=greeting
+    selectedValue=selectedValue}}
+`
 
 let props = {
   onChange: sinon.spy(),

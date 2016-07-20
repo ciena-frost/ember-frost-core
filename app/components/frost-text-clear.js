@@ -1,1 +1,1 @@
-export { default } from 'ember-frost-core/components/frost-text-clear';
+export { default } from 'ember-frost-core/components/frost-text-clear'

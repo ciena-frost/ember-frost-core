@@ -1,4 +1,3 @@
-// import _ from 'lodash'
 import Ember from 'ember'
 const {
   Component,
@@ -21,25 +20,26 @@ export default Component.extend(FrostEventsProxy, {
     'revealable'
   ],
   isCapsOn: false,
+  isRevealed: false,
   layout,
   revealable: false,
-  isRevealed: false,
+  tabindex: 0,
 
   // == Computed properties  ===================================================
 
   @computed('isRevealed')
-  revealMessage(isRevealed) {
+  revealMessage (isRevealed) {
     return isRevealed ? 'Hide' : 'Show'
   },
 
   @computed('isRevealed')
-  type(isRevealed) {
+  type (isRevealed) {
     return isRevealed ? 'text' : 'password'
   },
 
   // == Events ================================================================
 
-  _focusOut: on('focusOut', function(event) {
+  _focusOut: on('focusOut', function (event) {
     // this._super(...arguments)
     this.set('isCapsOn', false)
   }),
@@ -51,11 +51,11 @@ export default Component.extend(FrostEventsProxy, {
     }
   }),
 
-  _keyPress: Ember.on('keyPress', function(event) {
+  _keyPress: Ember.on('keyPress', function (event) {
     const c = String.fromCharCode(event.which || event.keyCode)
     if ((c.toUpperCase() === c && c.toLowerCase() !== c && !event.shiftKey) ||
       (c.toUpperCase() !== c && c.toLowerCase() === c && event.shiftKey)) {
-        this.set('isCapsOn', true)
+      this.set('isCapsOn', true)
     }
   }),
 
@@ -69,12 +69,12 @@ export default Component.extend(FrostEventsProxy, {
   // == Actions ===============================================================
 
   actions: {
-    toggleReveal() {
+    toggleReveal () {
       this.toggleProperty('isRevealed')
       const $input = this.$('input').get(0)
       $input.focus()
       // Move the cursor to the end of the input
-      run.next(this, function() {
+      run.next(this, function () {
         $input.selectionStart = $input.selectionEnd = 10000
       })
     }

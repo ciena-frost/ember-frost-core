@@ -1,12 +1,10 @@
 import Ember from 'ember'
 const {
-  deprecate,
-  isPresent,
-  warn
+  deprecate
 } = Ember
 
 export default {
-  addProperty: function(event, frostEvent) {
+  addProperty: function (event, frostEvent) {
     if (this[frostEvent]) {
       this[event] = () => {
         this[frostEvent](...arguments)
@@ -14,7 +12,7 @@ export default {
     }
   },
 
-  addProxy: function(event, frostEvent) {
+  addProxy: function (event, frostEvent) {
     if (!this._eventProxy) {
       this._eventProxy = {}
     }
@@ -22,14 +20,14 @@ export default {
     // Can't use => if we want to get ...arguments from the inner function
     const component = this
 
-    this._eventProxy[event] = function() {
+    this._eventProxy[event] = function () {
       if (component[frostEvent]) {
         component[frostEvent](...arguments)
       }
     }
   },
 
-  init: function(eventMap, add) {
+  init: function (eventMap, add) {
     Object.keys(eventMap).forEach((event) => {
       eventMap[event].forEach((frostEvent, i) => {
         if (this[frostEvent]) {
