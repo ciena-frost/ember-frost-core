@@ -18,12 +18,12 @@ export default Component.extend(FrostEvents, {
   excludeEvents: ['onChange'],
   tagName: 'input',
   type: 'radio',
-  
+
   // == Computed properties ====================================================
   checked: computed('groupValue', 'value', function () {
     return this.get('groupValue') === this.get('value')
   }),
-  
+
   // == Functions ==============================================================
   init () {
     this._super(...arguments)
@@ -32,9 +32,5 @@ export default Component.extend(FrostEvents, {
     let cond = /frost-radio-button/.test(this.parentView.toString())
     Ember.assert(assert, cond)
   },
-  change (event) {
-    if (this.onChange && typeof this.onChange === 'function') {
-      this.onChange(this.parentView._createEvent(event, event.target))
-    }
-  }
+
 })

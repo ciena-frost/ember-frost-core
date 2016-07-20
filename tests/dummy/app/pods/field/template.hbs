@@ -142,11 +142,30 @@
   <div class="section-title">Events</div>
   <hr>
   <div class='section'>
+    <div class='example'>
+      <div class='title'>Legacy events</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET text-legacy-events }}
+        {{frost-text
+          onInput=(action 'legacy')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+         <div>Template</div>
+        {{code-snippet name='text-legacy-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='text-legacy-events.js'}}
+      </div>
+    </div>
+
     <div class="example">
       <div class="title">DOM events</div>
       <div class="demo">
         {{! BEGIN-SNIPPET text-dom-events }}
         {{frost-text
+          eventVersion='2'
           onChange=(action 'event')
           onClick=(action 'event')
           onContextMenu=(action 'event')
@@ -191,6 +210,7 @@
       <div class="demo">
         {{! BEGIN-SNIPPET text-support-events }}
         {{frost-text
+          eventVersion='2'
           onEnter=(action 'support' 'enter')
           onEscape=(action 'support' 'escape')
         }}
@@ -210,6 +230,7 @@
       <div class="demo">
         {{! BEGIN-SNIPPET text-deprecated-events }}
         {{frost-text
+          eventVersion='2'
           onBlur=(action 'event')
           onFocus=(action 'event')
         }}

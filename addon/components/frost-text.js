@@ -26,6 +26,7 @@ export default Component.extend(FrostEventsProxy, {
     'isClearVisible',
     'isClearEnabled'
   ],
+  eventVersion: null, // TODO Deprecation message
   isClearEnabled: false, // TODO PropTypes
   isClearVisible: false, // TODO PropTypes
   layout,
@@ -87,6 +88,19 @@ export default Component.extend(FrostEventsProxy, {
     keyUp(value, event) {
       if (Ember.isPresent(Ember.get(this, '_eventProxy.keyUp'))) {
         this._eventProxy.keyUp(event)
+      }
+    },
+
+    _onInput(event) {
+      if (Ember.isPresent(Ember.get(this, '_eventProxy.input'))) {
+        if (!this.eventVersion) {
+          this._eventProxy.input({
+            id: this.get('elementId'),
+            value: event.target.value
+          })
+        } else if (this.eventVersion === '2') {
+          this._eventProxy.input(event)
+        }
       }
     }
   }

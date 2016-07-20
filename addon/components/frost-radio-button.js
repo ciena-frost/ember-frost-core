@@ -1,7 +1,8 @@
 import Ember from 'ember'
 const {
   Component,
-  computed
+  computed,
+  on
 } = Ember
 const {
   readOnly
@@ -63,5 +64,12 @@ export default Component.extend({
         change(this._createEvent(e, Ember.$(e.target).find('input')[0]))
       }
     }
-  }
+  },
+
+  _change: on('change', function(event) {
+    const onChange = this.get('onChange')
+    if (onChange && typeof onChange === 'function') {
+      onChange(this._createEvent(event, event.target))
+    }
+  })
 })
