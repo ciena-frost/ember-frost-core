@@ -6,6 +6,7 @@ const {
   run
 } = Ember
 import FrostEventsProxy from '../mixins/frost-events-proxy'
+import keycodes from '../utils/keycodes'
 import layout from '../templates/components/frost-password'
 
 export default Component.extend(FrostEventsProxy, {
@@ -40,13 +41,13 @@ export default Component.extend(FrostEventsProxy, {
   // == Events ================================================================
 
   _focusOut: on('focusOut', function (event) {
-    // this._super(...arguments)
     this.set('isCapsOn', false)
   }),
 
-  _keyDown: Ember.on('keyDown', function (e) {
-    var s = e || window.e
-    if (s.which === 20 || s.keyCode === 20) {
+  _keyDown: Ember.on('keyDown', function (event) {
+    debugger
+    const s = event || window.e
+    if (s.which === keycodes.CAPS_LOCK || s.keyCode === keycodes.CAPS_LOCK) {
       this.set('isCapsOn', true)
     }
   }),
@@ -61,7 +62,7 @@ export default Component.extend(FrostEventsProxy, {
 
   _keyUp: Ember.on('keyUp', function (e) {
     var s = e || window.e
-    if (s.which === 20 || s.keyCode === 20) {
+    if (s.which === keycodes.CAPS_LOCK || s.keyCode === keycodes.CAPS_LOCK) {
       this.set('isCapsOn', false)
     }
   }),
