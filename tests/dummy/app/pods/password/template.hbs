@@ -105,7 +105,6 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET password-dom-events }}
         {{frost-password
-          eventVersion='2'
           onChange=(action 'event')
           onClick=(action 'event')
           onContextMenu=(action 'event')
@@ -150,7 +149,6 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET password-support-events }}
         {{frost-password
-          eventVersion='2'
           onEnter=(action 'support' 'enter')
           onEscape=(action 'support' 'escape')
         }}
@@ -170,7 +168,6 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET password-deprecated-events }}
         {{frost-password
-          eventVersion='2'
           onBlur=(action 'event')
           onFocus=(action 'event')
         }}

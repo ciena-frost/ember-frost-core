@@ -1,4 +1,3 @@
-import computed from 'ember-computed-decorators'
 import Ember from 'ember'
 const {
   Component,
@@ -16,7 +15,6 @@ export default Component.extend(FrostEventsProxy, {
 
   // == Properties =============================================================
 
-  align: 'left', // TODO PropTypes
   classNames: [
     'frost-text'
   ],
@@ -24,49 +22,46 @@ export default Component.extend(FrostEventsProxy, {
     'isClearVisible',
     'isClearEnabled'
   ],
-  eventVersion: null, // TODO Deprecation message
-  isClearEnabled: false, // TODO PropTypes
-  isClearVisible: false, // TODO PropTypes
   layout,
-  tabindex: 0, // TODO PropTypes
-  type: 'text', // TODO PropTypes
 
-  // == Computed properties  ===================================================
-
-  @computed('value', '_focused')
-  isFocusedWithValue (value, _focused) {
-    return this._focused && isPresent(this.value)
-  },
+  // TODO PropTypes
+  align: 'left',
+  isClearEnabled: false,
+  isClearVisible: false,
+  tabindex: 0,
+  type: 'text',
 
   // == Events =================================================================
 
-  _focusIn: on('focusIn', function () {
-    this.set('_focused', true)
-    this.get('_toggleClear').perform(this.get('isFocusedWithValue'))
-  }),
-
-  _focusOut: on('focusOut', function (event) {
-    this.set('_focused', false)
-    this.get('_toggleClear').perform(this.get('isFocusedWithValue'))
-  }),
-
-  _input: on('input', function (event) {
-    this.get('_toggleClear').perform(this.get('isFocusedWithValue'))
+  _showClearEvent: on('focusIn', 'focusOut', 'input', function (event) {
+    const isFocused = event.type !== 'focusout'
+    this.get('_showClear').perform(isFocused)
   }),
 
   // == Tasks ==================================================================
 
-  _toggleClear: task(function * (isVisible) {
-    if (isVisible) {
-      this.setProperties({
-        isClearEnabled: true,
-        isClearVisible: true
-      })
-    } else {
-      this.set('isClearVisible', false)
-      yield timeout(200)
-      this.set('isClearEnabled', false)
+  _clear: task(function * () {
+    this.$('input')
+      .focus()
+      .val('')
+      .trigger('input')
+  }).restartable(),
+
+  _showClear: task(function * (isFocused) {
+    const showClear = isFocused && isPresent(this.get('value'))
+    if (this.get('isClearVisible') === showClear) {
+      return
     }
+
+    this.set('isClearVisible', showClear)
+
+    // If the clear button is clicked the focusOut event occurs before
+    // the click event, so delay disabling the clear so that the click
+    // can process first
+    if (!showClear) {
+      yield timeout(200) // Duration of the visibility animation
+    }
+    this.set('isClearEnabled', showClear)
   }).restartable(),
 
   // == Actions ================================================================
@@ -78,9 +73,7 @@ export default Component.extend(FrostEventsProxy, {
   // proxy the event to the keyUp handler.
   actions: {
     clear () {
-      this.$('input').focus()
-      this.$('input').val('')
-      this.$('input').trigger('input')
+      this.get('_clear').perform()
     },
 
     keyUp (value, event) {
@@ -91,14 +84,10 @@ export default Component.extend(FrostEventsProxy, {
 
     _onInput (event) {
       if (Ember.isPresent(Ember.get(this, '_eventProxy.input'))) {
-        if (!this.eventVersion) {
-          this._eventProxy.input({
-            id: this.get('elementId'),
-            value: event.target.value
-          })
-        } else if (this.eventVersion === '2') {
-          this._eventProxy.input(event)
-        }
+        // Add id and value for legacy support
+        event.id = this.get('elementId')
+        event.value = event.target.value
+        this._eventProxy.input(event)
       }
     }
   }

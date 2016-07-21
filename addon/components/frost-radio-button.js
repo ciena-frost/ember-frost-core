@@ -23,8 +23,8 @@ export default Component.extend({
   ],
   layout,
   // TODO PropTypes
-  required: false,
   disabled: false,
+  required: false,
 
   groupId: readOnly('parentView.id'),
   groupValue: readOnly('parentView.value'),

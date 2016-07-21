@@ -7,8 +7,7 @@ describeComponent(
   'FrostPasswordComponent',
   {
     needs: [
-      'component:frost-text',
-      'component:frost-text-clear'
+      'component:frost-text'
     ],
     unit: true
   },

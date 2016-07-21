@@ -1,1 +1,1 @@
-export { default } from 'ember-frost-core/utils/keycodes';
+export { default } from 'ember-frost-core/utils/keycodes'
