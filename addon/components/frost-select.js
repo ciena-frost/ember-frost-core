@@ -265,7 +265,14 @@ export default Component.extend({
     const state = this.get('reduxStore').getState()
     return [state.baseItems[state.selectedItem].value]
   },
-
+  keyDown (event) {
+    const reduxStore = this.get('reduxStore')
+    switch (event.which) {
+      case keyCodes.tab:
+        reduxStore.dispatch(closeDropDown())
+        break
+    }
+  },
   // TODO: add jsdoc
   keyUp (event) {
     const reduxStore = this.get('reduxStore')
@@ -274,9 +281,6 @@ export default Component.extend({
       case keyCodes.esc:
         event.preventDefault()
         reduxStore.dispatch(closeDropDown())
-        break
-      case keyCodes.tab:
-        //reduxStore.dispatch(closeDropDown())
         break
       // enter + spacebar, choose selected
       case keyCodes.enter:

@@ -13,8 +13,8 @@ import {
   RESET_DROPDOWN
 } from '../actions/frost-select'
 import _ from 'lodash'
-const SELECTED_CLASS = 'selected'
-const HOVERED_CLASS = 'hover'
+export const SELECTED_CLASS = 'selected'
+export const HOVERED_CLASS = 'hover'
 const INITIAL_STATE = {
   placeholder: '',
   prompt: '',

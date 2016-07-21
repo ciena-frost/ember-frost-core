@@ -216,8 +216,11 @@ describeComponent(
       this.render(selectedTestTemplate)
     })
 
-    it('respects pre-selected values', function () {
-      expect(this.$('.frost-select .selected')).to.have.length(2)
+    it('respects pre-selected values', function (done) {
+      run.later(() => {
+        expect(this.$('.frost-select .selected')).to.have.length(2)
+        done()
+      })
     })
   }
 )

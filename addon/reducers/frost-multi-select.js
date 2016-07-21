@@ -7,7 +7,11 @@ import {
   CLICK_ARROW
 } from '../actions/frost-select'
 import { CLEAR_SELECTION } from '../actions/frost-multi-select'
-import selectReducer, { filterItems } from './frost-select'
+import selectReducer, {
+  filterItems,
+  SELECTED_CLASS,
+  HOVERED_CLASS
+} from './frost-select'
 import Ember from 'ember'
 import _ from 'lodash'
 
@@ -49,9 +53,23 @@ function close () {
   }
 }
 
-function updateDisplayItems (displayItems, selectedItems) {
+function addClassNames (index, selected, hoveredItem) {
+  const className = []
+  if (index === hoveredItem) {
+    className.push(HOVERED_CLASS)
+  }
+  if (selected) {
+    className.push(SELECTED_CLASS)
+  }
+
+  return className.join(' ')
+}
+
+function updateDisplayItems (displayItems, selectedItems, hoveredItem) {
   _.each(displayItems, function (item) {
-    Ember.set(item, 'selected', selectedItems.indexOf(item.index) >= 0)
+    const selected = selectedItems.indexOf(item.index) >= 0
+    Ember.set(item, 'selected', selected)
+    Ember.set(item, 'className', addClassNames(item.index, selected, hoveredItem))
   })
   return displayItems
 }
@@ -74,7 +92,7 @@ function selectItem (state, selectedItem) {
   }
   return {
     selectedItems,
-    displayItems: updateDisplayItems(displayItems, selectedItems)
+    displayItems: updateDisplayItems(displayItems, selectedItems, state.hoveredItem)
   }
 }
 
@@ -108,7 +126,7 @@ export default function reducer (state, action) {
       const selectedItems = []
       nextState = {
         selectedItems,
-        displayItems: updateDisplayItems(state.displayItems, selectedItems)
+        displayItems: updateDisplayItems(state.displayItems, selectedItems, state.hoveredItem)
       }
       break
     case CLOSE_DROPDOWN:
@@ -120,13 +138,13 @@ export default function reducer (state, action) {
     case RESET_DROPDOWN:
       nextState = _.assign(initialState(), _.pick(action.state, _.negate(_.isUndefined)))
       nextState.baseItems = action.state.baseItems
-      nextState.displayItems = filterItems(nextState, '') || []
+      nextState.displayItems = updateDisplayItems(filterItems(nextState, '') || [], nextState.selectedItems, nextState.hoveredItem)
       break
   }
 
   if (nextState === undefined) {
     nextState = selectReducer(state, action)
-    nextState.displayItems = updateDisplayItems(nextState.displayItems, nextState.selectedItems)
+    nextState.displayItems = updateDisplayItems(nextState.displayItems, nextState.selectedItems, nextState.hoveredItem)
   } else {
     nextState.lastAction = action.type
     nextState = _.defaults(nextState, state)
