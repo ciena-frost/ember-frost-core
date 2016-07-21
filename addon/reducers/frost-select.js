@@ -187,15 +187,17 @@ export default function reducer (state, action) {
       }
       break
     case RESET_DROPDOWN:
-      nextState = _.assign(_.clone(INITIAL_STATE), _.pick(action.state, _.negate(_.isUndefined)))
-      nextState.baseItems = action.state.baseItems
+      nextState = _.defaults(_.pick(action.state, _.negate(_.isUndefined)), state)
+      if (_.isArray(nextState.selectedItem)) {
+        nextState.selectedItem = nextState.selectedItem[0]
+      }
       nextState.displayItems = filterItems(nextState, '')
       if (nextState.selectedItem) {
         nextState.prompt = promptFromItem(nextState.baseItems, nextState.selectedItem)
       }
       break
     case '@@redux/INIT':
-      nextState = {}
+      nextState = _.clone(INITIAL_STATE)
       break
     default:
       nextState = {}

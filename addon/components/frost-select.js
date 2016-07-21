@@ -34,6 +34,7 @@ const keyCodes = {
   tab: 9
 }
 
+const ATTR_MAP_DELIM = '->'
 // TODO: add jsdoc
 function isAttrDifferent (newAttrs, oldAttrs, attributeName) {
   let oldValue = _.get(oldAttrs, attributeName + '.value')
@@ -67,7 +68,15 @@ export default Component.extend({
     'open',
     'prompt',
     'disabled',
-    'displayItems'
+    'displayItems',
+    'error'
+  ],
+  stateAttributes: [
+    'disabled',
+    'data->baseItems',
+    'placeholder',
+    'error',
+    'selected->selectedItem'
   ],
   layout,
 
@@ -205,6 +214,27 @@ export default Component.extend({
   didReceiveAttrs ({newAttrs, oldAttrs}) {
     this._super(...arguments)
 
+    const stateAttrs = this.get('stateAttributes')
+
+    const reduxAttrs = _.chain(stateAttrs)
+    .map((attrName) => {
+      const split = _.filter(attrName.split(ATTR_MAP_DELIM))
+      let attrValue
+      if (split.length > 1) {
+        attrValue = this.get(split[0])
+        attrName = split[1]
+      } else {
+        attrValue = this.get(attrName)
+      }
+
+      return [attrName, attrValue]
+    })
+    .filter(([name, value]) => value !== undefined)
+    .zipObject()
+    .value()
+
+    this.get('reduxStore').dispatch(resetDropDown(reduxAttrs))
+
     const dataChanged = isAttrDifferent(newAttrs, oldAttrs, 'data')
     const selectedChanged = isAttrDifferent(newAttrs, oldAttrs, 'selected')
     const selectedValueChanged = isAttrDifferent(newAttrs, oldAttrs, 'selectedValue')
@@ -227,11 +257,7 @@ export default Component.extend({
       } else if (!_.isArray(selected)) {
         selected = []
       }
-
-      this.set('selected', selected)
     }
-
-    
   },
 
   // TODO: add jsdoc
@@ -322,7 +348,7 @@ export default Component.extend({
       const wasOpen = this.get('open')
 
       const newProps = _.pick(state, this.get('stateProperties'))
-      // if (newProps.prompt === 'Raekwon') debugger
+
       this.setProperties(newProps)
 
       switch (state.lastAction) {
@@ -338,14 +364,6 @@ export default Component.extend({
       }
       console.log(state)
     })
-    const selectedItem = this.get('selected')
-    reduxStore.dispatch(resetDropDown({
-      placeholder: this.get('placeholder'),
-      baseItems: this.get('data'),
-      error: this.get('error'),
-      selectedItem: _.isArray(selectedItem) ? selectedItem[0] : selectedItem,
-      disabled: this.get('disabled')
-    }))
   },
 
   init () {

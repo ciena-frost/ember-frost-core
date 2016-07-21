@@ -4,8 +4,8 @@ import FrostSelect from './frost-select'
 import layout from '../templates/components/frost-multi-select'
 import reducer from '../reducers/frost-multi-select'
 import {clearSelection} from '../actions/frost-multi-select'
+import {selectValue} from '../actions/frost-select'
 import Redux from 'npm:redux'
-
 
 export default FrostSelect.extend({
   // ==========================================================================
@@ -24,12 +24,19 @@ export default FrostSelect.extend({
     'displayItems',
     'selectedItems'
   ],
+  stateAttributes: [
+    'disabled',
+    'data->baseItems',
+    'placeholder',
+    'error',
+    'selected->selectedItems'
+  ],
   layout,
 
   // ==========================================================================
   // Computed Properties
   // ==========================================================================
-
+  @readOnly
   @computed('selectedItems',  'disabled')
   /**
    * Input should be disabled if anything is selected
@@ -44,31 +51,6 @@ export default FrostSelect.extend({
   // ==========================================================================
   // Functions
   // ==========================================================================
-
-  /**
-   * Select a given option by value (rather than by index)
-   * @param {Object} value - the value to select
-   */
-  selectOptionByValue (value) {
-    if (_.isUndefined(value)) {
-      return
-    }
-
-    if (!_.isArray(value)) {
-      value = [value]
-    }
-
-    const items = this.get('items')
-    const selected = value
-      .map((value) => {
-        return _.findIndex(items, (item) => _.isEqual(item.value, value))
-      })
-      .filter((val) => (val >= 0))
-
-    this.set('selected', selected)
-    this.set('filter', undefined)
-    this.notifyOfChange(selected)
-  },
 
   setUpReduxStore () {
     const reduxStore = Redux.createStore(reducer)

@@ -1,6 +1,7 @@
-import { 
-  SELECT_ITEM, 
-  SELECT_HOVER, 
+import {
+  SELECT_ITEM,
+  SELECT_HOVER,
+  SELECT_VALUE,
   CLOSE_DROPDOWN,
   RESET_DROPDOWN,
   CLICK_ARROW
@@ -8,6 +9,7 @@ import {
 import { CLEAR_SELECTION } from '../actions/frost-multi-select'
 import selectReducer, { filterItems } from './frost-select'
 import Ember from 'ember'
+import _ from 'lodash'
 
 function initialState () {
   return {
@@ -36,7 +38,7 @@ function promptFromItems (baseItems, selectedItems) {
       .map(item => baseItems[item].label)
       .join(', ').value()
   } else {
-    return`${selectedCount} items selected`
+    return `${selectedCount} items selected`
   }
 }
 
@@ -66,7 +68,7 @@ function selectItem (state, selectedItem) {
   if (state.displayItems.length < state.baseItems.length) {
     displayItems = _.map(state.baseItems, function ({label, value}, index) {
       return { label, value, index }
-    }) 
+    })
   } else {
     displayItems = state.displayItems
   }
@@ -74,6 +76,18 @@ function selectItem (state, selectedItem) {
     selectedItems,
     displayItems: updateDisplayItems(displayItems, selectedItems)
   }
+}
+
+function itemsFromValue (baseItems, value) {
+  if (!_.isArray(value)) {
+    value = [value]
+  }
+  return _.chain(value)
+  .map((value) => {
+    return _.findIndex(baseItems, (item) => _.isEqual(item.value, value))
+  })
+  .filter((val) => (val >= 0))
+  .value()
 }
 
 export default function reducer (state, action) {
@@ -84,6 +98,11 @@ export default function reducer (state, action) {
       break
     case SELECT_HOVER:
       nextState = selectItem(state, state.hoveredItem)
+      break
+    case SELECT_VALUE:
+      nextState = {
+        selectedItems: itemsFromValue(state.baseItems, action.value)
+      }
       break
     case CLEAR_SELECTION:
       const selectedItems = []
@@ -101,7 +120,7 @@ export default function reducer (state, action) {
     case RESET_DROPDOWN:
       nextState = _.assign(initialState(), _.pick(action.state, _.negate(_.isUndefined)))
       nextState.baseItems = action.state.baseItems
-      nextState.displayItems = filterItems(nextState, '')
+      nextState.displayItems = filterItems(nextState, '') || []
       break
   }
 
@@ -113,6 +132,7 @@ export default function reducer (state, action) {
     nextState = _.defaults(nextState, state)
   }
   nextState.prompt = promptFromItems(nextState.baseItems, nextState.selectedItems)
-  
+  delete nextState.selectedItem
+
   return nextState
 }
