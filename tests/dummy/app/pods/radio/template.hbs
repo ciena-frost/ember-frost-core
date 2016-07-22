@@ -7,7 +7,11 @@
 
     <div class='example'>
       <div class='demo'>
-        {{#frost-radio-group id='checkboxGroup' value=model.checkboxGroup onChange=(action 'change')}}
+        {{#frost-radio-group
+          id='checkboxGroup'
+          value=model.checkboxGroup
+          onChange=(action 'change')
+        }}
           {{#each sampleList as |i|}}
             {{#frost-radio-button value=i disabled=(eq i 'a')}}
               Label for {{i}}

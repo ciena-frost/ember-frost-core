@@ -28,7 +28,7 @@ describeComponent(
         })
       })
 
-      it('does not throw an error when onBlur action is triggered', function () {
+      it('does not error when onBlur action is triggered', function () {
         expect(function () {
           component.get('actions.onBlur').call(component)
         }).not.to.throw(Error)

@@ -1,139 +1,185 @@
-<div class="dummy-body password">
+<div class='dummy-body password'>
 
-  <div class="section-title">Default</div>
+  <div class='section-title'>Default</div>
   <hr>
-
-  <div class="section">
-    <div class="example">
-      <div class="demo">
+  <div class='section'>
+    <div class='example'>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET password }}
         {{frost-password}}
+        {{! END-SNIPPET }}
       </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-password}}
-```"
-        }}
+      <div class='snippet'>
+         {{code-snippet name='password.hbs'}}
       </div>
     </div>
   </div>
 
-
-  <div class="section-title">State</div>
+  <div class='section-title'>State</div>
   <hr>
-
-  <div class="section">
-
-  <div class="example">
-      <div class="title">error</div>
-      <div class="demo">
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>error</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET password-error }}
         {{frost-password
-          class="error"
+          class='error'
         }}
+        {{! END-SNIPPET }}
       </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-password
-  class='error'
-}}
-```"
-        }}
+      <div class='snippet'>
+        {{code-snippet name='password-error.hbs'}}
       </div>
-  </div>
+    </div>
 
-  <div class="example">
-      <div class="title">disabled</div>
-      <div class="demo">
+    <div class='example'>
+      <div class='title'>disabled</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET password-disabled }}
         {{frost-password
           disabled=true
         }}
+        {{! END-SNIPPET }}
       </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-password
-  disabled=true
-}}
-```"
-        }}
+      <div class='snippet'>
+        {{code-snippet name='password-disabled.hbs'}}
       </div>
     </div>
   </div>
 
-  <div class="section-title">Options</div>
+  <div class='section-title'>Options</div>
   <hr>
-
-  <div class="section">
-    <div class="example">
-      <div class="title">revealable</div>
-      <div class="demo">
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>revealable</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET password-revealable }}
         {{frost-password
           revealable=true
         }}
+        {{! END-SNIPPET }}
       </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-password
-  revealable=true
-}}
-```"
-        }}
+      <div class='snippet'>
+        {{code-snippet name='password-revealable.hbs'}}
       </div>
     </div>
-    <div class="example">
-      <div class="title">tabindex</div>
-      <div class="demo">
+
+    <div class='example'>
+      <div class='title'>tabindex</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET password-tabindex }}
         {{frost-password
           tabindex='-1'
         }}
+        {{! END-SNIPPET }}
       </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-password
-  tabindex='-1'
-}}
-```"
-        }}
+      <div class='snippet'>
+        {{code-snippet name='password-tabindex.hbs'}}
       </div>
     </div>
-</div>
+  </div>
 
-<div class="section-title">Events</div>
-<hr>
-
-  <div class="section">
-
-    <div class="example">
-      <div class="title">onBlur</div>
-      <div class="demo">
+  <div class='section-title'>Events</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Legacy events</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET password-legacy-events }}
         {{frost-password
-          onBlur=(action 'onBlurHandler')
+          onInput=(action 'legacy')
         }}
+        {{! END-SNIPPET }}
       </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-password
-  onBlur=(action 'onBlurHandler')
-}}
-```"
-        }}
+      <div class='snippet'>
+         <div>Template</div>
+        {{code-snippet name='password-legacy-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='password-legacy-events.js'}}
       </div>
     </div>
 
-    <div class="example">
-      <div class="title">onInput</div>
-      <div class="demo">
+    <div class='example'>
+      <div class='title'>DOM events</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET password-dom-events }}
         {{frost-password
-          onInput=(action 'onInputHandler')
+          onChange=(action 'event')
+          onClick=(action 'event')
+          onContextMenu=(action 'event')
+          onDoubleClick=(action 'event')
+          onDrag=(action 'event')
+          onDragEnd=(action 'event')
+          onDragEnter=(action 'event')
+          onDragLeave=(action 'event')
+          onDragOver=(action 'event')
+          onDragStart=(action 'event')
+          onDrop=(action 'event')
+          onFocusIn=(action 'event')
+          onFocusOut=(action 'event')
+          onInput=(action 'event')
+          onKeyDown=(action 'event')
+          onKeyPress=(action 'event')
+          onKeyUp=(action 'event')
+          onMouseDown=(action 'event')
+          onMouseEnter=(action 'event')
+          onMouseLeave=(action 'event')
+          onMouseMove=(action 'event')
+          onMouseUp=(action 'event')
+          onSubmit=(action 'event')
+          onTouchCancel=(action 'event')
+          onTouchEnd=(action 'event')
+          onTouchMove=(action 'event')
+          onTouchStart=(action 'event')
         }}
+        {{! END-SNIPPET }}
       </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-password
-  onInput=(action 'onInputHandler')
-}}
-```"
-        }}
+      <div class='snippet'>
+         <div>Template</div>
+        {{code-snippet name='password-dom-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='password-dom-events.js'}}
       </div>
     </div>
 
+    <div class='example'>
+      <div class='title'>Text support events</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET password-support-events }}
+        {{frost-password
+          onEnter=(action 'support' 'enter')
+          onEscape=(action 'support' 'escape')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        <div>Template</div>
+        {{code-snippet name='password-support-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='password-support-events.js'}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>Deprecated events</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET password-deprecated-events }}
+        {{frost-password
+          onBlur=(action 'event')
+          onFocus=(action 'event')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+         <div>Template</div>
+        {{code-snippet name='password-deprecated-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='password-dom-events.js'}}
+      </div>
+    </div>
   </div>
 </div>
