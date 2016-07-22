@@ -1,7 +1,4 @@
-//base
-
 .frost-toggle-button {
-  height: 35px;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -9,91 +6,79 @@
   &.disabled {
     opacity: 0.4;
   }
-}
 
-.frost-toggle {
-  display: none;
-}
+  .frost-toggle {
+    display: none;
 
+    &:checked {
 
-.frost-toggle-btn.frost-toggle-disabled {
-  cursor: not-allowed;
-}
+      +.frost-toggle-btn:after {
+        left: 50%;
+      }
 
-.frost-toggle-btn {
-  outline: 0;
-  display: flex;
-  position: relative;
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-}
-
-.frost-toggle-btn .frost-toggle-text {
-  flex: 1;
-  text-align: center;
-
-  &.off {
-    color: black;
+      +.frost-toggle.frost-toggle-btn {
+        background-color: $frost-color-lgrey-1;
+      }
+    }
   }
-  &.on {
-    color: white;
+
+  .frost-toggle-btn.frost-toggle-disabled {
+    cursor: not-allowed;
   }
-}
 
-.frost-toggle:checked .frost-toggle-text {
-  color: black;
-}
+  .frost-toggle-btn {
+    outline: 0;
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
 
-.frost-toggle-btn:after,
-.frost-toggle-btn:before {
-  position: absolute;
-  display: block;
-  content: "";
-  width: 40px;
-  height: 27px;
-  margin: 0 0 0 10px;
-}
+    &.frost-toggle {
+      background-color: $frost-color-blue-1;
+      transition: background-color 0.2s;
 
-.frost-toggle-btn:after {
-  left: 0;
-}
+      &.medium {
+        width: 115px;
+        height: 35px;
+        padding: 3px;
+        border-radius: 3px;
+      }
 
-.frost-toggle-btn:before {
-  display: none;
-}
+      &:after {
+        background-color: $frost-color-white;
+        transition: left 0.2s;
+        border-radius: 3px;
+      }
+    }
 
-.frost-toggle:checked + .frost-toggle-btn:after {
-  left: 50%;
-}
+    &:before,
+    &:after {
+      position: absolute;
+      display: block;
+      content: "";
+      width: 40px;
+      height: 27px;
+      margin: 0 0 0 10px;
+    }
 
-.frost-toggle-container {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  height: auto;
-  padding: 0 0.35rem;
-}
+    &:after {
+      left: 0;
+    }
+    &:before {
+      display: none;
+    }
 
-.frost-toggle.frost-toggle-btn {
-  padding: 0.16em 0.1em;
-  background-color: $frost-color-blue-1;
-  border-radius: 0.2em;
-  transition: background-color 0.2s;
-}
+    .frost-toggle-text {
+      flex: 1;
+      text-align: center;
 
-.frost-toggle:checked + .frost-toggle.frost-toggle-btn {
-  background-color: $frost-color-lgrey-1;
-}
-
-.frost-toggle.frost-toggle-btn:after {
-  background-color: $frost-color-white;
-  transition: left 0.2s;
-  border-radius: 3px;
-}
-
-.frost-toggle.medium {
-  width: 115px;
-  height: 35px;
-  padding: 3px;
+      &.off {
+        color: black;
+      }
+      &.on {
+        color: white;
+      }
+    }
+  }
 }
