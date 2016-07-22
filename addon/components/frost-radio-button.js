@@ -66,10 +66,10 @@ export default Component.extend({
     }
   },
 
-  _change: on('change', function (event) {
+  change(event) {
     const onChange = this.get('onChange')
     if (onChange && typeof onChange === 'function') {
       onChange(this._createEvent(event, event.target))
     }
-  })
+  }
 })

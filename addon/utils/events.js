@@ -5,7 +5,7 @@ const {
 
 export default {
   addProperty: function (event, frostEvent) {
-    if (this[frostEvent]) {
+    if (!this[event] && this[frostEvent]) {
       this[event] = () => {
         this[frostEvent](...arguments)
       }
