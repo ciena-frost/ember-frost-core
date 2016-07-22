@@ -213,7 +213,6 @@ export default Component.extend({
   /* Ember.Component method */
   didReceiveAttrs ({newAttrs, oldAttrs}) {
     this._super(...arguments)
-
     const stateAttrs = this.get('stateAttributes')
 
     const reduxAttrs = _.chain(stateAttrs)
@@ -242,7 +241,7 @@ export default Component.extend({
     // If frost-select instance is being reused by consumer but context is cleared make
     // make sure to actually clear input (noticed when used in conjunction with dialog
     // compoonents that don't destroy DOM when closed and re-opened)
-    if ('selectedValue' in newAttrs && newAttrs.selectedValue.value === undefined) {
+    if (selectedValueChanged && ('selectedValue' in newAttrs) && (newAttrs.selectedValue.value === undefined)) {
       this.selectOptionByValue(null)
       return
     }

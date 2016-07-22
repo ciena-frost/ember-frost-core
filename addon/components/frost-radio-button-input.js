@@ -18,12 +18,12 @@ export default Component.extend(FrostEvents, {
   excludeEvents: ['onChange'],
   tagName: 'input',
   type: 'radio',
-  
+
   // == Computed properties ====================================================
   checked: computed('groupValue', 'value', function () {
     return this.get('groupValue') === this.get('value')
   }),
-  
+
   // == Functions ==============================================================
   init () {
     this._super(...arguments)
