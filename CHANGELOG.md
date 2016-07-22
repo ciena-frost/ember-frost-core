@@ -1,3 +1,7 @@
+# 0.18.1
+
+* **Fixed** `frost-textarea`'s `onInput` handler to propagate change immediately to consumer rather than wait for another Ember run loop to pass.
+
 # 0.18.0
 
 ## Text/Password native event support
