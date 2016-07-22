@@ -44,37 +44,17 @@ export function selectItem (itemIndex) {
   }
 }
 
-export function selectHover () {
-  return {
-    type: SELECT_HOVER
-  }
-}
+export const selectHover = simpleAction(SELECT_HOVER)
 
-export function closeDropDown () {
-  return {
-    type: CLOSE_DROPDOWN
-  }
-}
+export const closeDropDown = simpleAction(CLOSE_DROPDOWN)
 
 export const openDropDown = simpleAction(OPEN_DROPDOWN)
 
-export function clickArrow () {
-  return {
-    type: CLICK_ARROW
-  }
-}
+export const clickArrow = simpleAction(CLICK_ARROW)
 
-export function moveHoverNext () {
-  return {
-    type: HOVER_NEXT
-  }
-}
+export const moveHoverNext = simpleAction(HOVER_NEXT)
 
-export function moveHoverPrev () {
-  return {
-    type: HOVER_PREV
-  }
-}
+export const moveHoverPrev = simpleAction(HOVER_PREV)
 
 /**
  * Sets the hovered item to a specified index
@@ -131,3 +111,4 @@ export function resetDropDown (state) {
     state
   }
 }
+

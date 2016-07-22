@@ -269,7 +269,7 @@ export default Component.extend({
     const reduxStore = this.get('reduxStore')
     switch (event.which) {
       case keyCodes.tab:
-        reduxStore.dispatch(closeDropDown())
+        reduxStore.dispatch(closeDropDown)
         break
     }
   },
@@ -280,23 +280,23 @@ export default Component.extend({
       // escape key or tab key, close the dropdown
       case keyCodes.esc:
         event.preventDefault()
-        reduxStore.dispatch(closeDropDown())
+        reduxStore.dispatch(closeDropDown)
         break
       // enter + spacebar, choose selected
       case keyCodes.enter:
-        reduxStore.dispatch(selectHover())
+        reduxStore.dispatch(selectHover)
         break
 
       // up arrow
       case keyCodes.up:
         event.preventDefault()
-        reduxStore.dispatch(moveHoverPrev())
+        reduxStore.dispatch(moveHoverPrev)
         break
 
       // down arrow, open the dropdown if necessary, select next
       case keyCodes.down:
         event.preventDefault()
-        reduxStore.dispatch(moveHoverNext())
+        reduxStore.dispatch(moveHoverNext)
         break
 
       // backspace
@@ -321,7 +321,7 @@ export default Component.extend({
   /** Handler for click outside of an element
    */
   onOutsideClick () {
-    this.get('reduxStore').dispatch(closeDropDown())
+    this.get('reduxStore').dispatch(closeDropDown)
   },
 
   // TODO: add jsdoc
@@ -366,7 +366,6 @@ export default Component.extend({
       } else if (wasOpen && !newProps.open) {
         this.unbindDropdownEvents()
       }
-      console.log(state)
     })
   },
 
@@ -393,7 +392,6 @@ export default Component.extend({
       if (onBlur) {
         onBlur()
       }
-      //this.get('reduxStore').dispatch(closeDropDown())
     },
 
     // TODO: add jsdoc
@@ -411,7 +409,7 @@ export default Component.extend({
     onClickArrow (event) {
       event.preventDefault()
       const reduxStore = this.get('reduxStore')
-      reduxStore.dispatch(clickArrow())
+      reduxStore.dispatch(clickArrow)
     },
 
     // TODO: add jsdoc

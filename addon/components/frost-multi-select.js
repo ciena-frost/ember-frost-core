@@ -4,7 +4,6 @@ import FrostSelect from './frost-select'
 import layout from '../templates/components/frost-multi-select'
 import reducer from '../reducers/frost-multi-select'
 import {clearSelection} from '../actions/frost-multi-select'
-import {selectValue} from '../actions/frost-select'
 import Redux from 'npm:redux'
 
 export default FrostSelect.extend({
