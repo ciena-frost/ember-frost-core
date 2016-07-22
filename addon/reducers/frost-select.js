@@ -261,13 +261,21 @@ export default function reducer (state, action) {
       nextState = setHover(state, action.itemIndex)
       break
     case SEARCH_TEXT:
+      let displayItems = filterItems(state, action.text)
+      let hoveredItem = null
+
+      if (displayItems.length === 1) {
+        hoveredItem = 0
+        displayItems = updateClassNames(displayItems, 0, state.selectedItem)
+      }
+
       nextState = {
         open: true,
       // Set prompt
         prompt: action.text,
       // Filter list
-        hoveredItem: null,
-        displayItems: filterItems(state, action.text)
+        hoveredItem,
+        displayItems
       }
       break
     case SELECT_VALUE:
