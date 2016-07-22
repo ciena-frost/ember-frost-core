@@ -1,0 +1,31 @@
+<span>
+    <input
+      id="input-{{elementId}}"
+      name={{name}}
+      type='checkbox'
+      checked={{checked}}
+      class='frost-toggle'
+      disabled={{disabled}}
+    >
+
+  <div
+    id="visual-{{elementId}}"
+    class="frost-toggle-btn {{themeClass}} {{size}}{{if disabled ' frost-toggle-disabled'}}"
+    for="input-{{elementId}}"
+  >
+  </div>
+</span>
+
+<input
+        value={{currentValue}}
+                oninput={{action (mut currentValue) value="target.value"}}
+>
+
+{{currentValue}}
+
+<div>
+    <input type="checkbox" checked={{checked}}>
+
+    {{checked}}
+
+</div>

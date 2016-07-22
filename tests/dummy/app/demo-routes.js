@@ -12,6 +12,10 @@ export default [
     routeName: 'radio'
   },
   {
+    label: 'Toggle',
+    routeName: 'toggle'
+  },
+  {
     label: 'Color palette',
     routeName: 'palette'
   },
