@@ -1,3 +1,30 @@
+# 0.18.0
+
+## Text/Password native event support
+- Mapped all available DOM events to Frost events (e.g. focusIn -> onFocusIn) see the demo for a full list
+- Event hooks respond with native DOM events instead of {id, value} object, this is still supported as a legacy usage, but please switch (no way to detect when the legacy attributes are used unfortunately)
+- Deprecated `onFocus` (replaced by `onFocusIn`)
+- Deprecated `onBlur` (replaced by `onFocusOut`)
+- Removed the `excludedEvents` property from the FrostEvents mixin, this is covered automatically when local events are present
+
+## Text/Password visual and behavioral updates
+- Added a new color (grey-7) to the palette for input borders
+- Updated the visuals and animation for hover, focus, clear and show/hide
+
+## Text/Password demo updates
+- Demos demonstrate legacy, native, text support and deprecated events
+- Updated the text/password demos to use snippets
+
+## New keycodes util
+- Added a keycodes enum for use in matching keycodes from keyboard events
+
+## Code cleanup
+- Integrated ember-concurrency for async behavior in text/password (clear text, show/hide password)
+- Text/password actions are fully run-loop compliant and clean up automatically on component destruction
+
+## Future
+- Moving towards dropping ember-one-way-controls from the dependency list (requires Ember 2.3.1+)
+
 # 0.17.3
  * **Fixes** a bug in `frost-select` where the options popover was closed whenever someone typed into the input (when `selectedValue` is passed in as props).
  * **Updated** `eslint` within the project to `3.x`
