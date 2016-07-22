@@ -195,9 +195,9 @@ describeComponent(
 
     it('filters the list when input is typed into', function () {
       run(() => {
-        let input = this.$('.frost-select input')
-        input.val('w')
-        input[0].oninput({target: input[0]})
+        this.$('.frost-select input').first()
+          .val('w')
+          .trigger('input')
       })
       let listItems = this.$('.frost-select li')
       expect(listItems.length).to.eql(1)
@@ -205,9 +205,9 @@ describeComponent(
 
     it('hovers the only available one if filter leaves one', function () {
       run(() => {
-        let input = this.$('.frost-select input')
-        input.val('w')
-        input[0].oninput({target: input[0]})
+        this.$('.frost-select input').first()
+          .val('w')
+          .trigger('input')
       })
 
       let listItems = this.$('.frost-select li')
