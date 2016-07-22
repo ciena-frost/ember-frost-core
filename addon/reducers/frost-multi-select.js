@@ -9,12 +9,48 @@ import {
 import { CLEAR_SELECTION } from '../actions/frost-multi-select'
 import selectReducer, {
   filterItems,
-  SELECTED_CLASS,
-  HOVERED_CLASS
+  itemClassNames
 } from './frost-select'
 import Ember from 'ember'
 import _ from 'lodash'
 
+/**
+ * A selectable item
+ * @typedef {Object} MultiSelectItem
+ * @property {any} value Value to use when the item is selected
+ * @property {string} label Display text of the item
+ */
+
+/**
+ * Item to display in the dropdown list of a frost-select component
+ * @typedef {Object} MultiSelectDisplayItem
+ * @property {any} value Value to use when the item is selected
+ * @property {string} label Display text of the item
+ * @property {number} index Index of the item in the main list
+ * @property {string} className CSS class string to apply to the item's element
+ * @property {boolean} selected True if this item is in the list of selected items
+ */
+
+/**
+ * A redux state object for a frost-multi-select component
+ * @typedef {Object} FrostMultiSelectState
+ * @property {string} placeholder Text to use as placeholder when no value is selected
+ * @property {string} prompt Text that reflects the current selected value
+ * @property {boolean} error True if this input is in an error state
+ * @property {boolean} disabled True if this input is disabled
+ * @property {boolean} open True if the dropdown menu of the current select is open
+ * @property {MultiSelectDisplayItem[]} displayItems Items to display and associated
+ * @property {MultiSelectItem[]} baseItems
+ * @property {number} hoveredItem
+ * @property {number[]} selectedItems
+ * @property {string} lastAction The name of the action
+ */
+
+/**
+ * Creates an object to use as the initial state of a multi-select-component
+ *
+ * @returns {FrostMultiSelectState} Inital state of the multi-select component
+ */
 function initialState () {
   return {
     placeholder: '',
@@ -30,6 +66,13 @@ function initialState () {
   }
 }
 
+/**
+ * Creates a prompt from the multi-select's selected items
+ *
+ * @param {SelectItem[]} baseItems The list of items we can select from
+ * @param {number[]} selectedItems A list of the indicies of the selected items
+ * @returns {string} A prompt to display
+ */
 function promptFromItems (baseItems, selectedItems) {
   if (selectedItems === null || selectedItems === undefined) {
     return ''
@@ -46,6 +89,11 @@ function promptFromItems (baseItems, selectedItems) {
   }
 }
 
+/**
+ * Creates a new closed state
+ *
+ * @returns {Object} A partial state object that is closed
+ */
 function close () {
   return {
     open: false,
@@ -53,27 +101,30 @@ function close () {
   }
 }
 
-function addClassNames (index, selected, hoveredItem) {
-  const className = []
-  if (index === hoveredItem) {
-    className.push(HOVERED_CLASS)
-  }
-  if (selected) {
-    className.push(SELECTED_CLASS)
-  }
-
-  return className.join(' ')
-}
-
+/**
+ * Update state of display items
+ *
+ * @param {MultiSelectDisplayItems} displayItems Display items to update
+ * @param {number[]} selectedItems List of indices of the selected items
+ * @param {number} hoveredItem Item that is currently hovered
+ * @returns {MultiSelectDisplayItem[]} The updated list of display items
+ */
 function updateDisplayItems (displayItems, selectedItems, hoveredItem) {
   _.each(displayItems, function (item) {
     const selected = selectedItems.indexOf(item.index) >= 0
     Ember.set(item, 'selected', selected)
-    Ember.set(item, 'className', addClassNames(item.index, selected, hoveredItem))
+    Ember.set(item, 'className', itemClassNames(item.index, selected, hoveredItem))
   })
   return displayItems
 }
 
+/**
+ * Create a new state object with a new selectedItem
+ *
+ * @param {FrostMultiSelectState} state Current multi-select component state
+ * @param {number} selectedItem Index of the item that was selected
+ * @returns {Object} New partial state object with updated display item list
+ */
 function selectItem (state, selectedItem) {
   let selectedItems
   let displayItems
@@ -96,6 +147,13 @@ function selectItem (state, selectedItem) {
   }
 }
 
+/**
+ * Find the indices of the given values.
+ *
+ * @param {MultiSelectItem[]} baseItems List of items in this component
+ * @param {(any[]|any)} value An array of values to select
+ * @returns {number[]} List of indices of the selected items
+ */
 function itemsFromValue (baseItems, value) {
   if (!_.isArray(value)) {
     value = [value]
@@ -108,6 +166,14 @@ function itemsFromValue (baseItems, value) {
   .value()
 }
 
+/**
+ * Reducer for the multi-select component
+ *
+ * @export
+ * @param {FrostMultiSelectState} state Current state of the component
+ * @param {object} action Action object containing a 'type' property speficying the type of action
+ * @returns {FrostMultiSelectState} The next state for the component
+ */
 export default function reducer (state, action) {
   let nextState
   switch (action.type) {

@@ -15,6 +15,7 @@ import {
 import _ from 'lodash'
 export const SELECTED_CLASS = 'selected'
 export const HOVERED_CLASS = 'hover'
+
 const INITIAL_STATE = {
   placeholder: '',
   prompt: '',
@@ -28,10 +29,52 @@ const INITIAL_STATE = {
   lastAction: null
 }
 
+/**
+ * A selectable item
+ * @typedef {Object} SelectItem
+ * @property {any} value Value to use when the item is selected
+ * @property {string} label Display text of the item
+ */
+
+/**
+ * Item to display in the dropdown list of a frost-select component
+ * @typedef {Object} SelectDisplayItem
+ * @property {any} value Value to use when the item is selected
+ * @property {string} label Display text of the item
+ * @property {number} index Index of the item in the main list
+ * @property {string} className CSS class string to apply to the item's element
+ */
+
+/**
+ * A redux state object for a frost-select component
+ * @typedef {Object} FrostSelectState
+ * @property {string} placeholder Text to use as placeholder when no value is selected
+ * @property {string} prompt Text that reflects the current selected value
+ * @property {boolean} error True if this input is in an error state
+ * @property {boolean} disabled True if this input is disabled
+ * @property {boolean} open True if the dropdown menu of the current select is open
+ * @property {SelectDisplayItem[]} displayItems Items to display and associated
+ * @property {SelectItem[]} baseItems
+ * @property {number} hoveredItem
+ * @property {number} selectedItem
+ * @property {string} lastAction
+ */
+
+/**
+ * Create a prompt based on the currently selected item
+ * @param {any} baseItems The complete list of items
+ * @param {number} selectedItem index of the selected item
+ * @returns {string} Calculated prompt for the selected item to display in input
+ */
 function promptFromItem (baseItems, selectedItem) {
   return baseItems[selectedItem].label
 }
 
+/**
+ * Close the select dropdown menu
+ * @param {FrostSelectState} state State to close
+ * @returns {object} Partial state object that is closed
+ */
 function close (state) {
   let prompt = ''
 
@@ -47,6 +90,12 @@ function close (state) {
   }
 }
 
+/**
+ * Select a item given its index in the master list of items (baseItems)
+ * @param {FrostSelectState} state
+ * @param {number} itemIndex Index of the item in baseItems that we want to select
+ * @returns {object} A new state object with the selected item
+ */
 function select (state, itemIndex) {
   // Set selected value
   let nextState = {
@@ -60,23 +109,44 @@ function select (state, itemIndex) {
   return _.assign(nextState, closeState)
 }
 
+/**
+ * Find the index on the item based on its value.
+ * @param {SelectItem[]} baseItems The list to search through
+ * @param {any} itemValue The value of the item we are looking for
+ * @returns {number} The index of the first item with the given value, or -1 if the list does not contain an object with the desired value
+ */
 function findIndexByValue (baseItems, itemValue) {
   return _.findIndex(baseItems, (item) => _.isEqual(item.value, itemValue))
 }
 
-function itemClassNames (index, hoveredItem, selectedItem, listLength) {
+/**
+ * Generates a CSS class string based on which item is hovered and which item is selected
+ * @export
+ * @param {number} index Index of the desired item
+ * @param {number} hoveredItem Index of the hovered item.
+ * @param {number} selectedItem Index of the selected item
+ * @returns {string} A CSS class name string for the item
+ */
+export function itemClassNames (index, hoveredItem, selectedItem) {
   const classNames = []
 
   if (selectedItem === index) {
     classNames.push(SELECTED_CLASS)
   }
 
-  if (index === hoveredItem || listLength === 1) {
+  if (index === hoveredItem) {
     classNames.push(HOVERED_CLASS)
   }
   return classNames.join(' ')
 }
 
+/**
+ * Updates the items in the display items list to have the correct CSS classnames
+ * @param {any} displayItems List of display items to update (NOTE: The items in this list are mutated by this function)
+ * @param {any} hoveredItem The item currently being hovered
+ * @param {any} selectedItem The item that is currently selected
+ * @returns {SelectDisplayItem[]} The transformed list of display items
+ */
 function updateClassNames (displayItems, hoveredItem, selectedItem) {
   _.each(displayItems, function (item, index, list) {
     const className = itemClassNames(item.index, hoveredItem, selectedItem, list.length)
@@ -85,8 +155,13 @@ function updateClassNames (displayItems, hoveredItem, selectedItem) {
   return displayItems
 }
 
+/**
+ * Set the hover state on a given item
+ * @param {FrostSelectState} state Current state of the frost-select component
+ * @param {number} itemIndex Index of the hovered item.
+ * @returns {Object} A partial state object with the new hovered items
+ */
 function setHover (state, itemIndex) {
-  updateClassNames()
   return {
     open: true,
     hoveredItem: itemIndex,
@@ -94,7 +169,14 @@ function setHover (state, itemIndex) {
   }
 }
 
-export function filterItems ({baseItems, selectedItem, hoveredIndex}, text) {
+/**
+ * Filter the base list of items by their label compared to a string
+ * @param  {object} state State object (must contain at least 'selectedItem', 'baseItems', and 'hoveredIndex' properties)
+ * @param  {string} text Text to filter the list by
+ * @returns {object[]} Items which meet the filtering requirement
+ */
+export function filterItems (state, text) {
+  const {baseItems, selectedItem, hoveredIndex} = state
   const lowerCaseFilter = (text || '').toLowerCase()
 
   return _.chain(baseItems)
@@ -119,7 +201,13 @@ export function filterItems ({baseItems, selectedItem, hoveredIndex}, text) {
   })
   .value()
 }
-
+/**
+ * Reducer for the frost-select component. Transitions the select's current state to the next state based on a given action.
+ * @export
+ * @param {FrostSelectState} state The current state of the select component
+ * @param {object} action Action object containing a 'type' property speficying the type of action
+ * @returns {object} Next state of the select
+ */
 export default function reducer (state, action) {
   let nextState
   switch (action.type) {
@@ -137,9 +225,13 @@ export default function reducer (state, action) {
       nextState = close(state)
       break
     case OPEN_DROPDOWN:
-      nextState = {
-        open: true
+      let hoverState
+      if ((action.itemIndex === undefined || action.itemIndex === null) && state.displayItems.length === 1) {
+        hoverState = setHover(state, 0)
       }
+      nextState = _.assign({
+        open: true
+      }, hoverState)
       break
     case HOVER_NEXT:
       // Set hover (hovered + 1)
