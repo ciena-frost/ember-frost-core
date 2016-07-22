@@ -1,63 +1,58 @@
 //base
+
+.frost-toggle-button {
+  height: 35px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  &.disabled {
+    opacity: 0.4;
+  }
+}
+
 .frost-toggle {
   display: none;
 }
 
-.frost-toggle,
-.frost-toggle:after,
-.frost-toggle:before,
-.frost-toggle *,
-.frost-toggle *:after,
-.frost-toggle *:before,
-.frost-toggle + .frost-toggle-btn {
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.frost-toggle::-moz-selection,
-.frost-toggle:after::-moz-selection,
-.frost-toggle:before::-moz-selection,
-.frost-toggle *::-moz-selection,
-.frost-toggle *:after::-moz-selection,
-.frost-toggle *:before::-moz-selection,
-.frost-toggle + .frost-toggle-btn::-moz-selection {
-  background: none;
-}
-
-.frost-toggle::selection,
-.frost-toggle:after::selection,
-.frost-toggle:before::selection,
-.frost-toggle *::selection,
-.frost-toggle *:after::selection,
-.frost-toggle *:before::selection,
-.frost-toggle + .frost-toggle-btn::selection {
-  background: none;
-}
 
 .frost-toggle-btn.frost-toggle-disabled {
   cursor: not-allowed;
 }
 
 .frost-toggle-btn {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
   outline: 0;
   display: flex;
-  flex-basis: 4em;
-  height: 2em;
   position: relative;
   cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+
+.frost-toggle-btn .frost-toggle-text {
+  flex: 1;
+  text-align: center;
+
+  &.off {
+    color: black;
+  }
+  &.on {
+    color: white;
+  }
+}
+
+.frost-toggle:checked .frost-toggle-text {
+  color: black;
 }
 
 .frost-toggle-btn:after,
 .frost-toggle-btn:before {
-  position: relative;
+  position: absolute;
   display: block;
   content: "";
-  width: 50%;
-  height: 100%;
+  width: 40px;
+  height: 27px;
+  margin: 0 0 0 10px;
 }
 
 .frost-toggle-btn:after {
@@ -72,12 +67,6 @@
   left: 50%;
 }
 
-.frost-toggle-component {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .frost-toggle-container {
   display: flex;
   flex-wrap: nowrap;
@@ -86,81 +75,25 @@
   padding: 0 0.35rem;
 }
 
-
-.frost-toggle-component .toggle-text {
-  display: flex;
-  cursor: pointer;
-}
-
-.frost-toggle-container.small {
-  width: 2.75rem;
-  font-size: 1.0rem;
-  padding: 0 0.25rem;
-}
-.frost-toggle-container.medium {
-  width: 3.75rem;
-  font-size: 1.0rem;
-}
-.frost-toggle-container.large {
-  width: 6rem;
-  font-size: 1.2rem;
-  padding: 0 0.5rem;
-}
-
-.frost-toggle-container label {
-  min-width: 100%;
-  max-width: 100%;
-}
-
-.frost-toggle-container .toggle-text.toggle-prefix {
-  padding-right: 0.25rem;
-}
-
-.frost-toggle-container .toggle-text.toggle-postfix {
-  padding-left: 0.25rem;
-}
-
-.frost-toggle-component label.off-label {
-  padding-right: 0.5rem;
-}
-.frost-toggle-component label.on-label {
-  padding-left: 0.5rem;
-}
-
-
-//default
-
-
-.frost-toggle-default.frost-toggle-btn {
+.frost-toggle.frost-toggle-btn {
   padding: 0.16em 0.1em;
-  background-color: #E7E7E7;
+  background-color: $frost-color-blue-1;
   border-radius: 0.2em;
   transition: background-color 0.2s;
 }
 
-.frost-toggle:checked + .frost-toggle-default.frost-toggle-btn {
-  background-color: #797979;
+.frost-toggle:checked + .frost-toggle.frost-toggle-btn {
+  background-color: $frost-color-lgrey-1;
 }
 
-.frost-toggle-default.frost-toggle-btn:after {
-  background-color: #FFFFFF;
+.frost-toggle.frost-toggle-btn:after {
+  background-color: $frost-color-white;
   transition: left 0.2s;
-  border-radius: 0.2em;
+  border-radius: 3px;
 }
 
-.frost-toggle-default.small {
-  width: 3em;
-  height: 1.6em;
-}
-
-.frost-toggle-default.medium {
-  width: 4em;
-  height: 2.1em;
+.frost-toggle.medium {
+  width: 115px;
+  height: 35px;
   padding: 3px;
-}
-
-.frost-toggle-default.large {
-  width: 4.7em;
-  height: 2.1em;
-  padding: 4px;
 }

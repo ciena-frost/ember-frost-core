@@ -1,13 +1,104 @@
-hello toggle
+<div class='dummy-notification-container'>
+  {{#each notifications as |notification|}}
+    {{notification-message notification=notification}}
+  {{/each}}
+</div>
 
-{{frost-toggle-button
-  name=1
-  theme='default'
-  value=v1
-  onClick=(action 'inputHandler')}}
+<div class='dummy-body button'>
+    <div class='section-title'>Toggle button</div>
+    <hr>
+    <div class='section'>
+        <div class='example'>
+            <div class='title'>action syntax</div>
+            <div class='demo'>
+              {{! BEGIN-SNIPPET button-primary-small }}
+              {{frost-toggle-button
+              onToggle=(action 'toggleHandler')}}
+              {{! END-SNIPPET }}
+            </div>
+            <div class='snippet'>
+              {{code-snippet name='button-primary-small.hbs'}}
+            </div>
+        </div>
 
-{{frost-toggle-button
-name=2
-theme='default'
-value='hello'
-onClick=(action 'inputHandler')}}
+        <div class='example'>
+            <div class='title'>mut syntax</div>
+            <div class='demo'>
+              {{! BEGIN-SNIPPET button-primary-medium }}
+              {{frost-toggle-button
+              toggled=isButtonToggled
+              onToggle=(mut isButtonToggled)
+              }}
+              {{! END-SNIPPET }}
+            </div>
+            <div class='snippet'>
+              {{code-snippet name='button-primary-medium.hbs'}}
+            </div>
+        </div>
+
+
+        <div class='example'>
+            <div class='title'>label</div>
+            <div class='demo'>
+              {{! BEGIN-SNIPPET button-primary-large }}
+              {{frost-toggle-button
+              onLabel='6500'
+              offLabel='5400'
+              onToggle=(action 'toggleHandler')
+              }}
+              {{! END-SNIPPET }}
+            </div>
+            <div class='snippet'>
+              {{code-snippet name='button-primary-large.hbs'}}
+            </div>
+        </div>
+
+        <div class='example'>
+            <div class='title'>value</div>
+            <div class='demo'>
+              {{! BEGIN-SNIPPET button-primary-disabled }}
+              {{frost-toggle-button
+              onValue='on Value'
+              offValue='off Value'
+              onToggle=(action 'toggleHandler')}}
+              {{! END-SNIPPET }}
+            </div>
+            <div class='snippet'>
+              {{code-snippet name='button-primary-disabled.hbs'}}
+            </div>
+        </div>
+
+        <div class='example'>
+            <div class='title'>label and value</div>
+            <div class='demo'>
+              {{! BEGIN-SNIPPET button-primary-disabled-1 }}
+              {{frost-toggle-button
+              onLabel='true'
+              offLabel='false'
+              onValue='on Value'
+              offValue='off Value'
+              onToggle=(action 'toggleHandler')}}
+              {{! END-SNIPPET }}
+            </div>
+            <div class='snippet'>
+              {{code-snippet name='button-primary-disabled-1.hbs'}}
+            </div>
+        </div>
+
+        <div class='example'>
+            <div class='title'>disabled</div>
+            <div class='demo'>
+              {{! BEGIN-SNIPPET button-primary-disabled-2 }}
+              {{frost-toggle-button
+              disabled=true
+              toggled=isButtonToggled2
+              onToggle=(mut isButtonToggled2)
+              }}
+              {{! END-SNIPPET }}
+            </div>
+            <div class='snippet'>
+              {{code-snippet name='button-primary-disabled-2.hbs'}}
+            </div>
+        </div>
+    </div>
+</div>

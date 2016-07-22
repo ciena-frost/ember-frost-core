@@ -3,9 +3,16 @@ const {Controller} = Ember
 
 export default Controller.extend({
 
+  isButtonToggled: false,
+
   actions: {
-    inputHandler(attrs) {
-      console.log(`logs checked: ${attrs.checked} value: ${attrs.value}`)
+    toggleHandler(attrs) {
+      this.notifications.addNotification({
+        message: `toggle state: ${attrs.toggled}. value: ${attrs.value}`,
+        type: 'success',
+        autoClear: true,
+        clearDuration: 2000
+      })
     }
   }
 

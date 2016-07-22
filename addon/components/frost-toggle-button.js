@@ -1,40 +1,68 @@
 import _ from 'lodash'
 import Ember from 'ember'
-const {Component, Logger, ViewUtils} = Ember
-import {PropTypes} from 'ember-prop-types'
+const {computed, Component, ViewUtils} = Ember
 import layout from '../templates/components/frost-toggle-button'
 
 export default Component.extend({
   layout: layout,
 
+  classNames: ['frost-toggle-button'],
+
+  attributeBindings: [
+    'toggled',
+    'disabled',
+    'value'
+  ],
+
+  classNameBindings: [
+    'disabled'
+  ],
+
   size: 'medium',
-  checked: false,
+  toggled: false,
 
   init() {
     this._super(...arguments);
 
-    const checked = this.checked;
-    if ((typeof checked === 'boolean' && checked === true ) ||
-      (typeof checked === 'string' && checked === 'true')) {
-      this.set('checked', true)
+    const toggled = this.toggled;
+    if ((typeof toggled === 'boolean' && toggled === true ) ||
+      (typeof toggled === 'string' && toggled === 'true')) {
+      this.set('toggled', true)
     }
   },
 
-  _value: Ember.computed('value', 'checked', function() {
-    if (!this.get('checked')) {
-      return
+  // UX requirement: label need hold the value
+  _onLabel: computed('onLabel', function() {
+    const onLabel = this.get('onLabel');
+    if (onLabel && typeof onLabel === 'string') {
+      return onLabel
     }
-    return this.get('value') || true
+    return true
   }),
 
-  themeClass: Ember.computed('theme', function () {
-    var theme = this.get('theme') || 'default';
+  _offLabel: computed('offLabel', function() {
+    const offLabel = this.get('offLabel');
+    if(offLabel && typeof offLabel === 'string') {
+      return offLabel
+    }
+    return false
+  }),
 
-    return 'frost-toggle-' + theme;
+  _onValue: computed('onValue', '_onLabel', function() {
+    const onValue = this.get('onValue')
+    return onValue ? onValue : this.get('_onLabel')
+  }),
+
+  _offValue: computed('offValue', '_offLabel', function() {
+    const offValue = this.get('offValue')
+    return offValue ? offValue : this.get('_offLabel')
+  }),
+
+  _value: computed('onValue', 'offValue', 'toggled', function() {
+    return this.get('toggled') ? this.get('_onValue') : this.get('_offValue')
   }),
 
   click(e) {
-
     if (!ViewUtils.isSimpleClick(event)) {
       return true
     }
@@ -42,15 +70,18 @@ export default Component.extend({
     e.stopPropagation();
     e.preventDefault();
 
-    this.toggleProperty('checked');
-    const checked = this.get('checked')
-    const action = 'onClick'
+    if(this.get('disabled')) {
+      return
+    }
+    this.toggleProperty('toggled');
+    const toggled = this.get('toggled')
+    const action = 'onToggle'
 
     if (this.attrs[action] && this.attrs[action].update) {
-      this.attrs[action].update(checked);
+      this.attrs[action].update(toggled);
       return true;
     } else if (this.attrs[action]) {
-      return this.attrs[action]({checked: checked, value: this.get('_value')});
+      return this.attrs[action]({toggled: toggled, value: this.get('_value')});
     }
   }
 })
