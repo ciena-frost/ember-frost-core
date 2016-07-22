@@ -4,6 +4,11 @@ import layout from '../templates/components/frost-toggle-button'
 import FrostEventsProxy from '../mixins/frost-events-proxy'
 
 export default Component.extend(FrostEventsProxy, {
+
+  // ==========================================================================
+  // Properties
+  // ==========================================================================
+
   layout: layout,
 
   classNames: ['frost-toggle-button'],
@@ -20,6 +25,10 @@ export default Component.extend(FrostEventsProxy, {
   size: 'medium',
   toggled: false,
 
+  // ==========================================================================
+  // Functions
+  // ==========================================================================
+
   init () {
     this._super(...arguments)
 
@@ -31,7 +40,11 @@ export default Component.extend(FrostEventsProxy, {
     }
   },
 
-  // UX requirement: label need hold the value
+  // ==========================================================================
+  // Computed Properties
+  // ==========================================================================
+
+  // UX requirement - label need hold the value
   _onLabel: computed('onLabel', function () {
     const onLabel = this.get('onLabel')
     if (onLabel && typeof onLabel === 'string') {
@@ -61,6 +74,10 @@ export default Component.extend(FrostEventsProxy, {
   _value: computed('onValue', 'offValue', 'toggled', function () {
     return this.get('toggled') ? this.get('_offValue') : this.get('_onValue')
   }),
+
+  // ==========================================================================
+  // Events
+  // ==========================================================================
 
   click (e) {
     if (!ViewUtils.isSimpleClick(e)) {
