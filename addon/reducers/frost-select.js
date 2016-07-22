@@ -92,7 +92,7 @@ function close (state) {
 
 /**
  * Select a item given its index in the master list of items (baseItems)
- * @param {FrostSelectState} state
+ * @param {FrostSelectState} state -
  * @param {number} itemIndex Index of the item in baseItems that we want to select
  * @returns {object} A new state object with the selected item
  */
