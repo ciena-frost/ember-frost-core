@@ -171,7 +171,9 @@ function setHover (state, itemIndex) {
 
 /**
  * Filter the base list of items by their label compared to a string
- * @param  {object} state State object (must contain at least 'selectedItem', 'baseItems', and 'hoveredIndex' properties)
+ * @param  {SelectItems[]} baseItems List of the items for this dropdown
+ * @param  {number} selectedItem INdex of the selected item
+ * @param  {number} hoveredIndex Index of the hovered item
  * @param  {string} text Text to filter the list by
  * @returns {object[]} Items which meet the filtering requirement
  */
