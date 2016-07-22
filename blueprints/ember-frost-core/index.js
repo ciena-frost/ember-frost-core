@@ -32,6 +32,7 @@ module.exports = {
         return this.addAddonsToProject({
           packages: [
             {name: 'ember-browserify', target: '^1.1.9'},
+            {name: 'ember-concurrency', target: '^0.7.8'},
             {name: 'ember-computed-decorators', target: '>=0.2.2 <2.0.0'},
             {name: 'ember-lodash', target: '>=0.0.6 <2.0.0'},
             {name: 'ember-one-way-controls', target: '>=0.5.3 <2.0.0'},
