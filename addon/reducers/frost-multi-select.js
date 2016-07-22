@@ -111,9 +111,14 @@ function close () {
  */
 function updateDisplayItems (displayItems, selectedItems, hoveredItem) {
   _.each(displayItems, function (item) {
-    const selected = selectedItems.indexOf(item.index) >= 0
+    let selected = false
+    let selectedIndex = null
+    if (selectedItems.indexOf(item.index) >= 0) {
+      selected = true
+      selectedIndex = item.index
+    }
     Ember.set(item, 'selected', selected)
-    Ember.set(item, 'className', itemClassNames(item.index, selected, hoveredItem))
+    Ember.set(item, 'className', itemClassNames(item.index, hoveredItem, selectedIndex))
   })
   return displayItems
 }
@@ -189,10 +194,8 @@ export default function reducer (state, action) {
       }
       break
     case CLEAR_SELECTION:
-      const selectedItems = []
       nextState = {
-        selectedItems,
-        displayItems: updateDisplayItems(state.displayItems, selectedItems, state.hoveredItem)
+        selectedItems: []
       }
       break
     case CLOSE_DROPDOWN:
@@ -202,21 +205,22 @@ export default function reducer (state, action) {
       nextState = state.open ? close() : {open: true}
       break
     case RESET_DROPDOWN:
-      nextState = _.assign(initialState(), _.pick(action.state, _.negate(_.isUndefined)))
-      nextState.baseItems = action.state.baseItems
-      nextState.displayItems = updateDisplayItems(
-        filterItems(nextState, '') || [], nextState.selectedItems, nextState.hoveredItem
-      )
+      nextState = _.defaults(_.pick(action.state, _.negate(_.isUndefined)), state)
+      nextState.displayItems =
+        filterItems(nextState.baseItems, nextState.selectedItem, nextState.hoveredItem, '') || []
+      break
+    case '@@redux/INIT':
+      nextState = initialState()
       break
   }
 
   if (nextState === undefined) {
     nextState = selectReducer(state, action)
-    nextState.displayItems = updateDisplayItems(nextState.displayItems, nextState.selectedItems, nextState.hoveredItem)
   } else {
     nextState.lastAction = action.type
     nextState = _.defaults(nextState, state)
   }
+  nextState.displayItems = updateDisplayItems(nextState.displayItems, nextState.selectedItems, nextState.hoveredItem)
   nextState.prompt = promptFromItems(nextState.baseItems, nextState.selectedItems)
   delete nextState.selectedItem
 

@@ -92,7 +92,7 @@ function close (state) {
 
 /**
  * Select a item given its index in the master list of items (baseItems)
- * @param {FrostSelectState} state -
+ * @param {FrostSelectState} state Current state of the component
  * @param {number} itemIndex Index of the item in baseItems that we want to select
  * @returns {object} A new state object with the selected item
  */
@@ -100,7 +100,7 @@ function select (state, itemIndex) {
   // Set selected value
   let nextState = {
     selectedItem: itemIndex,
-    displayItems: updateClassNames(filterItems(state, ''), null, itemIndex),
+    displayItems: updateClassNames(filterItems(state.baseItems, itemIndex, state.hoveredItem, ''), null, itemIndex),
     baseItems: state.baseItems
   }
   // Close list
@@ -175,8 +175,7 @@ function setHover (state, itemIndex) {
  * @param  {string} text Text to filter the list by
  * @returns {object[]} Items which meet the filtering requirement
  */
-export function filterItems (state, text) {
-  const {baseItems, selectedItem, hoveredIndex} = state
+export function filterItems (baseItems, selectedItem, hoveredIndex, text) {
   const lowerCaseFilter = (text || '').toLowerCase()
 
   return _.chain(baseItems)
@@ -261,8 +260,8 @@ export default function reducer (state, action) {
       nextState = setHover(state, action.itemIndex)
       break
     case SEARCH_TEXT:
-      let displayItems = filterItems(state, action.text)
       let hoveredItem = null
+      let displayItems = filterItems(state.baseItems, state.selectedItem, hoveredItem, action.text)
 
       if (displayItems.length === 1) {
         hoveredItem = 0
@@ -291,7 +290,7 @@ export default function reducer (state, action) {
       if (_.isArray(nextState.selectedItem)) {
         nextState.selectedItem = nextState.selectedItem[0]
       }
-      nextState.displayItems = filterItems(nextState, '')
+      nextState.displayItems = filterItems(nextState.baseItems, nextState.selectedItem, nextState.hoveredItem, '')
       if (nextState.selectedItem) {
         nextState.prompt = promptFromItem(nextState.baseItems, nextState.selectedItem)
       }
