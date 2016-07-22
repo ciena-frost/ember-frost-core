@@ -204,7 +204,9 @@ export default function reducer (state, action) {
     case RESET_DROPDOWN:
       nextState = _.assign(initialState(), _.pick(action.state, _.negate(_.isUndefined)))
       nextState.baseItems = action.state.baseItems
-      nextState.displayItems = updateDisplayItems(filterItems(nextState, '') || [], nextState.selectedItems, nextState.hoveredItem)
+      nextState.displayItems = updateDisplayItems(
+        filterItems(nextState, '') || [], nextState.selectedItems, nextState.hoveredItem
+      )
       break
   }
 

@@ -36,7 +36,7 @@ export default FrostSelect.extend({
   // Computed Properties
   // ==========================================================================
   @readOnly
-  @computed('selectedItems',  'disabled')
+  @computed('selectedItems', 'disabled')
   /**
    * Input should be disabled if anything is selected
    * @param {Number[]} selected - the selected indices
