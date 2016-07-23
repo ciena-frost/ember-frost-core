@@ -45,16 +45,16 @@ describeComponent(
       ;[0, 1].forEach((selectedIndex) => {
         describe(`when selected index is ${selectedIndex} and no previous selected index`, function () {
           beforeEach(function () {
+            const data = [
+              {label: 'Foo', value: 'foo'},
+              {label: 'Bar', value: 'bar'}
+            ]
             component.set('selected', selectedIndex)
-            sandbox.stub(component, 'set')
-
+            component.set('data', data)
             const attrs = {
               newAttrs: {
                 data: {
-                  value: [
-                    {label: 'Foo', value: 'foo'},
-                    {label: 'Bar', value: 'bar'}
-                  ]
+                  value: data
                 },
                 selected: {value: selectedIndex}
               }
@@ -64,8 +64,8 @@ describeComponent(
           })
 
           it('should set selected to expected', function () {
-            const args = component.set.lastCall.args
-            expect(args).to.eql(['selected', [selectedIndex]])
+            const state = component.get('reduxStore').getState()
+            expect(state.selectedItem).to.eql(selectedIndex)
           })
         })
       })
