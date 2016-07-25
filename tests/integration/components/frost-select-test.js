@@ -242,6 +242,13 @@ describeComponent(
       })
     })
 
+    it('unsets the value when the index is less than 0', function () {
+      run(() => {
+        this.set('selected', [-1])
+      })
+      expect(this.$('.frost-select .selected').length).to.eql(0)
+    })
+
     it('sets the prompt to the selected value when the drop down list is closed', function () {
       run(() => {
         let input = this.$('.frost-select input')

@@ -292,6 +292,9 @@ export default function reducer (state, action) {
       if (_.isArray(nextState.selectedItem)) {
         nextState.selectedItem = nextState.selectedItem[0]
       }
+      if (nextState.selectedItem < 0) {
+        nextState.selectedItem = null
+      }
       nextState.displayItems = filterItems(nextState.baseItems, nextState.selectedItem, nextState.hoveredItem, '')
       if (nextState.selectedItem) {
         nextState.prompt = promptFromItem(nextState.baseItems, nextState.selectedItem)
