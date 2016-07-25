@@ -1,3 +1,7 @@
+# 0.19.1
+
+* **Fixed** components that use `ember-prop-types` to work as expected in integration tests by explicitly consuming the `ember-prop-types` mixin instead of relying on the initializer which isn't executed in an integration test environment.
+
 # 0.19.0
 The select input widgets now use redux.
 
