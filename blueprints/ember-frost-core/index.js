@@ -19,7 +19,9 @@ module.exports = {
     return this.removePackagesFromProject(packagesToRemove)
       .then(() => {
         return this.addPackagesToProject([
-          {name: 'svg4everybody', target: '^2.0.3'}
+          {name: 'svg4everybody', target: '^2.0.3'},
+          {name: 'redux', target: '^3.4.0'},
+          {name: 'redux-thunk', target: '^2.0.1'}
         ])
       })
       .then(() => {
@@ -36,7 +38,8 @@ module.exports = {
             {name: 'ember-computed-decorators', target: '>=0.2.2 <2.0.0'},
             {name: 'ember-lodash', target: '>=0.0.6 <2.0.0'},
             {name: 'ember-one-way-controls', target: '>=0.5.3 <2.0.0'},
-            {name: 'ember-truth-helpers', target: '^1.0.0'}
+            {name: 'ember-truth-helpers', target: '^1.0.0'},
+            {name: 'ember-redux', target: '^1.0.0'}
           ]
         })
       })

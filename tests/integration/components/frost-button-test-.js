@@ -1,6 +1,7 @@
 import {expect} from 'chai'
 import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
+import {beforeEach} from 'mocha'
 
 describeComponent(
   'frost-button',
@@ -9,18 +10,16 @@ describeComponent(
     integration: true
   },
   function () {
-    it('renders', function () {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#frost-button}}
-      //     template content
-      //   {{/frost-button}}
-      // `);
+    beforeEach(function () {
+      this.render(hbs`{{frost-button icon="round-add"}}`)
+    })
 
-      this.render(hbs`{{frost-button}}`)
-      expect(this.$()).to.have.length(1)
+    it('renders as expected', function () {
+      expect(
+        this.$('.frost-icon-frost-round-add'),
+        'includes expected icon'
+      )
+        .to.have.length(1)
     })
   }
 )

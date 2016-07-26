@@ -5,7 +5,7 @@ export default function () {
     this.namespace = config.mirageNamespace
   }
 
-  this.get('/nodes', function (db) {
+  this.get('/nodes', function ({db}) {
     return {
       data: db.nodes
     }

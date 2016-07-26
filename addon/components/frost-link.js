@@ -2,7 +2,7 @@ import _ from 'lodash'
 import Ember from 'ember'
 const {deprecate, LinkComponent, Logger} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
-import {PropTypes} from 'ember-prop-types'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-link'
 
 const validDesigns = [
@@ -47,7 +47,7 @@ function addDesignClass (design, classes) {
   }
 }
 
-export default LinkComponent.extend({
+export default LinkComponent.extend(PropTypeMixin, {
   // ==========================================================================
   // Dependencies
   // ==========================================================================
