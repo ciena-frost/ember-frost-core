@@ -1,4 +1,5 @@
 /* global capture*/
+import _ from 'lodash'
 import Ember from 'ember'
 const {$, run} = Ember
 import {expect} from 'chai'
@@ -97,13 +98,15 @@ describeComponent(
       expect(this.$('.frost-select li').length).to.eql(props.data.length)
     })
 
-    it('opens when arrow clicked', () => {
+    it('opens when arrow clicked', (done) => {
       run(() => {
         this.$('.frost-select .down-arrow').click()
-        capture('drop-down-container', {targetElement: this.$('.drop-down-container')[0]}).then(function (params) {
-        }).catch(function (err) {
-          done(err)
-        })
+        run.later(() => {
+          capture('drop-down-container', {targetElement: $('.drop-down-container')[0]}).then(function (params) {
+          }).catch(function (err) {
+            done(err)
+          })
+        }, 1000)
       })
       expect(this.$('.frost-select').hasClass('open')).to.be.true
     })
