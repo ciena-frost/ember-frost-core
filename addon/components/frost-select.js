@@ -2,22 +2,24 @@ import _ from 'lodash'
 import Ember from 'ember'
 const {A, Component} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
-import {PropTypes} from 'ember-prop-types'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-select'
+import Redux from 'npm:redux'
+import {
+  selectItem,
+  closeDropDown,
+  openDropDown,
+  selectHover,
+  moveHoverNext,
+  moveHoverPrev,
+  mouseHoverItem,
+  clickArrow,
+  updateSearchText,
+  resetDropDown,
+  selectValue
+} from '../actions/frost-select'
 
-/**
- * @typedef {Object} Item
- * @property {String} label - user friendly text for item
- * @property {Boolean|Number|String|Object} value - value of item
- */
-
-/**
- * @typedef {Object} ListItem
- * @property {String} className - className to apply to item's DOM
- * @property {Number} index - location of item in list of items
- * @property {String} label - user friendly text for item
- * @property {Boolean|Number|String|Object} value - value of item
- */
+import reducer from '../reducers/frost-select'
 
 /**
  * Map of human readable keys to their key codes
@@ -32,6 +34,7 @@ const keyCodes = {
   tab: 9
 }
 
+const ATTR_MAP_DELIM = '->'
 // TODO: add jsdoc
 function isAttrDifferent (newAttrs, oldAttrs, attributeName) {
   let oldValue = _.get(oldAttrs, attributeName + '.value')
@@ -49,7 +52,7 @@ function handleOutsideClick (event) {
   }
 }
 
-export default Component.extend({
+export default Component.extend(PropTypeMixin, {
   // ==========================================================================
   // Dependencies
   // ==========================================================================
@@ -61,6 +64,20 @@ export default Component.extend({
   attributeBindings: ['tabIndex'],
   classNames: ['frost-select'],
   classNameBindings: ['focus', 'shouldOpen:open', 'disabled', 'hasError:error'],
+  stateProperties: [
+    'open',
+    'prompt',
+    'disabled',
+    'displayItems',
+    'error'
+  ],
+  stateAttributes: [
+    'disabled',
+    'data->baseItems',
+    'placeholder',
+    'error',
+    'selected->selectedItem'
+  ],
   layout,
 
   propTypes: {
@@ -105,7 +122,6 @@ export default Component.extend({
   // ==========================================================================
 
   @readOnly
-
   @computed('maxListHeight')
   /**
    * Get inline style for container
@@ -116,56 +132,6 @@ export default Component.extend({
    */
   containerStyle (maxListHeight) {
     return Ember.String.htmlSafe(`max-height: ${maxListHeight}px`)
-  },
-
-  @readOnly
-  @computed('data')
-  /**
-   * Create items from passed-in data
-   * @param {Array<Item>} data - the possible value data passed in
-   * @returns {Array<ListItem>} the items
-   */
-  items (data) {
-    return data.map((item, index) => {
-      return {
-        className: '',
-        index,
-        label: item.label,
-        value: item.value
-      }
-    })
-  },
-
-  @readOnly
-  @computed('items', 'selected', 'hovered', 'filter')
-  /**
-   * Get items to display in UI
-   * @param {Array<ListItem>} items - the possible items
-   * @param {Array<Number>} selected - the array of selected indices
-   * @param {Number} hovered - index currently being hovered over (or -1)
-   * @param {String} filter - search filter
-   * @returns {Array<ListItem>} items to display
-   */
-  displayItems (items, selected, hovered, filter) {
-    return this.filterItems(items, filter)
-      .map((item, index, list) => {
-        const classNames = []
-        const itemIsHovered = index === hovered || list.length === 1
-        const itemIsSelected = selected.indexOf(item.index) !== -1
-
-        if (itemIsSelected) {
-          classNames.push('selected')
-          item.selected = true
-        }
-
-        if (itemIsHovered) {
-          classNames.push('hover')
-        }
-
-        item.className = classNames.join(' ')
-
-        return item
-      })
   },
 
   @readOnly
@@ -196,29 +162,6 @@ export default Component.extend({
    */
   hasError (error, invalidFilter) {
     return error || invalidFilter
-  },
-
-  @readOnly
-  @computed('selected')
-  /**
-   * Build the prompt based on the selected item(s)
-   * @param {Number[]} selected - the selected indices
-   * @returns {String} the prompt
-   */
-  prompt (selected) {
-    const data = this.get('data')
-    const filter = this.get('filter')
-    let prompt = ''
-
-    if (filter !== undefined) {
-      prompt = filter
-    } else {
-      let selectedItem = data[selected[0]]
-      if (selectedItem) {
-        prompt = selectedItem.label
-      }
-    }
-    return prompt
   },
 
   @readOnly
@@ -270,6 +213,26 @@ export default Component.extend({
   /* Ember.Component method */
   didReceiveAttrs ({newAttrs, oldAttrs}) {
     this._super(...arguments)
+    const stateAttrs = this.get('stateAttributes')
+
+    const reduxAttrs = _.chain(stateAttrs)
+    .map((attrName) => {
+      const split = _.filter(attrName.split(ATTR_MAP_DELIM))
+      let attrValue
+      if (split.length > 1) {
+        attrValue = this.get(split[0])
+        attrName = split[1]
+      } else {
+        attrValue = this.get(attrName)
+      }
+
+      return [attrName, attrValue]
+    })
+    .filter(([name, value]) => value !== undefined)
+    .zipObject()
+    .value()
+
+    this.get('reduxStore').dispatch(resetDropDown(reduxAttrs))
 
     const dataChanged = isAttrDifferent(newAttrs, oldAttrs, 'data')
     const selectedChanged = isAttrDifferent(newAttrs, oldAttrs, 'selected')
@@ -278,7 +241,7 @@ export default Component.extend({
     // If frost-select instance is being reused by consumer but context is cleared make
     // make sure to actually clear input (noticed when used in conjunction with dialog
     // compoonents that don't destroy DOM when closed and re-opened)
-    if ('selectedValue' in newAttrs && newAttrs.selectedValue.value === undefined) {
+    if (selectedValueChanged && ('selectedValue' in newAttrs) && (newAttrs.selectedValue.value === undefined)) {
       this.selectOptionByValue(null)
       return
     }
@@ -293,139 +256,51 @@ export default Component.extend({
       } else if (!_.isArray(selected)) {
         selected = []
       }
-
-      this.set('selected', selected)
     }
   },
 
   // TODO: add jsdoc
-  chooseHovered () {
-    let displayItem = this.get('displayItems')[this.get('hovered')]
-    this.select(displayItem.index)
+  getValues () {
+    const state = this.get('reduxStore').getState()
+    return [state.baseItems[state.selectedItem].value]
   },
-
-  // TODO: add jsdoc
-  closeList () {
-    this.setProperties({open: false, filter: undefined, hovered: -1})
-    this.inputElement().val(this.get('prompt'))
-    this.unbindDropdownEvents()
-  },
-
-  // TODO: add jsdoc
-  getLabel (item) {
-    return item.label
-  },
-
-  /**
-   * Get list of items with label matching filter
-   * @param {Array<ListItem>} items - items to filter
-   * @param {String} filter - filter to match items label against
-   * @returns {Array<ListItem>} filtered items
-   */
-  filterItems (items, filter) {
-    const lowerCaseFilter = (filter || '').toLowerCase()
-
-    return items
-      .map((item, index, list) => {
-        const lowerCaseLabel = (this.getLabel(item) || '').toLowerCase()
-        const labelMatchesFilter = lowerCaseLabel.indexOf(lowerCaseFilter) !== -1
-
-        if (filter && !labelMatchesFilter) {
-          return null
-        }
-
-        return {
-          index,
-          label: this.getLabel(item),
-          value: item.value
-        }
-      })
-      .filter((item) => item !== null)
-  },
-
-  // TODO: add jsdoc
-  getValues (selected = this.get('selected')) {
-    return selected.map((selectedIndex) => {
-      return this.get('data')[selectedIndex].value
-    })
-  },
-
-  // TODO: add jsdoc
-  hoverNext () {
-    let hovered = this.get('hovered')
-    if (hovered === this.get('displayItems').length - 1) {
-      hovered = 0
-    } else {
-      hovered += 1
-    }
-    this.set('hovered', hovered)
-  },
-
-  // TODO: add jsdoc
-  hoverPrev () {
-    let hovered = this.get('hovered')
-    if (hovered === 0) {
-      hovered = this.get('displayItems').length - 1
-    } else {
-      hovered -= 1
-    }
-    this.set('hovered', hovered)
-  },
-
-  // TODO: add jsdoc
-  inputElement () {
-    return this.$('input')
-  },
-
-  /** Key down event handler
-   * @param {JQuery.Event} event - event object
-   */
   keyDown (event) {
-    // if tab is pushed - close list
-    if (event.which === keyCodes.tab) {
-      if (this.get('open')) {
-        this.closeList()
-      }
+    const reduxStore = this.get('reduxStore')
+    switch (event.which) {
+      case keyCodes.tab:
+        reduxStore.dispatch(closeDropDown)
+        break
     }
   },
-
   // TODO: add jsdoc
   keyUp (event) {
+    const reduxStore = this.get('reduxStore')
     switch (event.which) {
       // escape key or tab key, close the dropdown
       case keyCodes.esc:
-        event.stopPropagation()
-        if (this.get('open')) {
-          this.toggle(event)
-        }
+        event.preventDefault()
+        reduxStore.dispatch(closeDropDown)
         break
-
       // enter + spacebar, choose selected
       case keyCodes.enter:
-        this.chooseHovered()
+        reduxStore.dispatch(selectHover)
         break
 
       // up arrow
       case keyCodes.up:
         event.preventDefault()
-        this.hoverPrev()
+        reduxStore.dispatch(moveHoverPrev)
         break
 
       // down arrow, open the dropdown if necessary, select next
       case keyCodes.down:
         event.preventDefault()
-        if (!this.get('open')) {
-          this.openList()
-        }
-        this.hoverNext()
+        reduxStore.dispatch(moveHoverNext)
         break
 
       // backspace
       case keyCodes.backspace:
         event.preventDefault()
-        if (!this.get('open')) {
-          this.openList()
-        }
     }
   },
 
@@ -434,79 +309,23 @@ export default Component.extend({
    * with the values of the currently selected indices
    * @param {Number[]} selected - the selected indices
    */
-  notifyOfChange (selected) {
+  notifyOfChange () {
     const onChange = this.get('onChange')
     if (onChange) {
-      const values = this.getValues(selected)
+      const values = this.getValues()
       onChange(values)
     }
-  },
-
-  /* obvious */
-  openList () {
-    this.set('open', true)
-    this.bindDropdownEvents()
   },
 
   /** Handler for click outside of an element
    */
   onOutsideClick () {
-    this.closeList()
-  },
-
-  // TODO: add jsdoc
-  search (term) {
-    const items = this.get('items')
-    let valid = this.filterItems(items, term)
-    let newProps = {filter: term, hovered: -1}
-    this.setProperties(newProps)
-    if (valid.length === 1) {
-      this.hoverNext()
-    }
-  },
-
-  // TODO: add jsdoc
-  select (index) {
-    let selected = index === null ? [] : [index]
-    let values = this.getValues(selected)
-    this.set('selected', selected)
-
-    if (this.get('open')) {
-      this.closeList()
-    }
-
-    if (this.get('onChange') && _.isFunction(this.get('onChange'))) {
-      this.get('onChange')(values)
-    }
+    this.get('reduxStore').dispatch(closeDropDown)
   },
 
   // TODO: add jsdoc
   selectOptionByValue (selectedValue) {
-    if (selectedValue === null) {
-      this.select(null)
-      return
-    }
-
-    // Find index
-    let valueIndex = _.findIndex(this.get('items'), (item) => _.isEqual(item.value, selectedValue))
-
-    if (valueIndex >= 0) { // Make sure we actually found the value
-      this.set('selected', [valueIndex])
-    }
-  },
-
-  // TODO: add jsdoc
-  toggle (event) {
-    event.preventDefault()
-    if (this.get('shouldDisableDropDown')) {
-      return
-    }
-
-    if (this.get('open')) {
-      this.closeList()
-      return
-    }
-    this.openList()
+    this.get('reduxStore').dispatch(selectValue(selectedValue))
   },
 
   /** obvious */
@@ -517,6 +336,41 @@ export default Component.extend({
   /** Ember.Component method */
   willDestroyElement () {
     this.unbindDropdownEvents()
+  },
+
+  setUpReduxStore () {
+    const reduxStore = Redux.createStore(reducer)
+    this.set('reduxStore', reduxStore)
+    return reduxStore
+  },
+
+  subscribe (reduxStore) {
+    reduxStore.subscribe(() => {
+      const state = reduxStore.getState()
+
+      const wasOpen = this.get('open')
+
+      const newProps = _.pick(state, this.get('stateProperties'))
+
+      this.setProperties(newProps)
+
+      switch (state.lastAction) {
+        case 'SELECT_HOVER':
+        case 'SELECT_ITEM':
+          this.notifyOfChange()
+          break
+      }
+      if (!wasOpen && newProps.open) {
+        this.bindDropdownEvents()
+      } else if (wasOpen && !newProps.open) {
+        this.unbindDropdownEvents()
+      }
+    })
+  },
+
+  init () {
+    this._super(...arguments)
+    this.subscribe(this.setUpReduxStore())
   },
 
   // ==========================================================================
@@ -546,19 +400,20 @@ export default Component.extend({
       if (_.isFunction(onInput)) {
         onInput(target.value)
       } else {
-        this.search(target.value)
+        this.get('reduxStore').dispatch(updateSearchText(target.value))
       }
     },
 
     // TODO: add jsdoc
     onClickArrow (event) {
-      this.toggle(event)
+      event.preventDefault()
+      const reduxStore = this.get('reduxStore')
+      reduxStore.dispatch(clickArrow)
     },
 
     // TODO: add jsdoc
     onFocus () {
-      this.openList()
-      this.set('focus', true)
+      this.get('reduxStore').dispatch(openDropDown)
       // If an onFocus event handler is defined, call it
       if (this.attrs.onFocus) {
         this.attrs.onFocus()
@@ -567,20 +422,14 @@ export default Component.extend({
     },
 
     // TODO: add jsdoc
-    onItemOver (event) {
-      event.stopImmediatePropagation()
-      let target = event.target
-      let index = parseInt(target.getAttribute('data-index'), 10)
-      this.set('hovered', index)
+    onItemOver (data) {
+      this.get('reduxStore').dispatch(mouseHoverItem(data.index))
       return false
     },
 
     // TODO: add jsdoc
-    onSelect (event) {
-      event.stopPropagation()
-      let target = event.currentTarget || event.target
-      let index = parseInt(target.getAttribute('data-index'), 10)
-      this.select(index)
+    onSelect (data) {
+      this.get('reduxStore').dispatch(selectItem(data.index))
     }
   }
 })

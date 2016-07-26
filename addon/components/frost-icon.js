@@ -2,10 +2,10 @@ import _ from 'lodash'
 import Ember from 'ember'
 const {Component, deprecate} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
-import {PropTypes} from 'ember-prop-types'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-icon'
 
-export default Component.extend({
+export default Component.extend(PropTypeMixin, {
   // ==========================================================================
   // Dependencies
   // ==========================================================================

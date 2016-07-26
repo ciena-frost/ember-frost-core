@@ -1,19 +1,29 @@
+import Ember from 'ember'
+const {run} = Ember
 import {expect} from 'chai'
 import {describeComponent, it} from 'ember-mocha'
 import {beforeEach} from 'mocha'
 import sinon from 'sinon'
 import hbs from 'htmlbars-inline-precompile'
-import Ember from 'ember'
-const {run} = Ember
 
 function wait (callback) {
   run.later(callback)
 }
 
-const selectedTestTemplate = hbs`{{frost-multi-select onChange=onChange selected=selected data=data greeting=greeting}}`
-/* eslint-disable max-len */
-const selectedValueTestTemplate = hbs`{{frost-multi-select onChange=onChange data=data greeting=greeting selectedValue=selectedValue}}`
-/* eslint-enable max-len */
+const selectedTestTemplate = hbs`
+  {{frost-multi-select
+    onChange=onChange
+    selected=selected
+    data=data
+    greeting=greeting}}
+`
+const selectedValueTestTemplate = hbs`
+  {{frost-multi-select
+    onChange=onChange
+    data=data
+    greeting=greeting
+    selectedValue=selectedValue}}
+`
 
 let props = {
   onChange: sinon.spy(),
@@ -218,8 +228,11 @@ describeComponent(
       this.render(selectedTestTemplate)
     })
 
-    it('respects pre-selected values', function () {
-      expect(this.$('.frost-select .selected')).to.have.length(2)
+    it('respects pre-selected values', function (done) {
+      run.later(() => {
+        expect(this.$('.frost-select .selected')).to.have.length(2)
+        done()
+      })
     })
   }
 )

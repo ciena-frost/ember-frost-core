@@ -1,3 +1,51 @@
+# 0.19.2
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.19.1
+
+* **Fixed** components that use `ember-prop-types` to work as expected in integration tests by explicitly consuming the `ember-prop-types` mixin instead of relying on the initializer which isn't executed in an integration test environment.
+
+# 0.19.0
+The select input widgets now use redux.
+
+# 0.18.1
+
+* **Fixed** `frost-textarea`'s `onInput` handler to propagate change immediately to consumer rather than wait for another Ember run loop to pass.
+
+# 0.18.0
+
+## Text/Password native event support
+- Mapped all available DOM events to Frost events (e.g. focusIn -> onFocusIn) see the demo for a full list
+- Event hooks respond with native DOM events instead of {id, value} object, this is still supported as a legacy usage, but please switch (no way to detect when the legacy attributes are used unfortunately)
+- Deprecated `onFocus` (replaced by `onFocusIn`)
+- Deprecated `onBlur` (replaced by `onFocusOut`)
+- Removed the `excludedEvents` property from the FrostEvents mixin, this is covered automatically when local events are present
+
+## Text/Password visual and behavioral updates
+- Added a new color (grey-7) to the palette for input borders
+- Updated the visuals and animation for hover, focus, clear and show/hide
+
+## Text/Password demo updates
+- Demos demonstrate legacy, native, text support and deprecated events
+- Updated the text/password demos to use snippets
+
+## New keycodes util
+- Added a keycodes enum for use in matching keycodes from keyboard events
+
+## Code cleanup
+- Integrated ember-concurrency for async behavior in text/password (clear text, show/hide password)
+- Text/password actions are fully run-loop compliant and clean up automatically on component destruction
+
+## Future
+- Moving towards dropping ember-one-way-controls from the dependency list (requires Ember 2.3.1+)
+
+# 0.17.3
+ * **Fixes** a bug in `frost-select` where the options popover was closed whenever someone typed into the input (when `selectedValue` is passed in as props).
+ * **Updated** `eslint` within the project to `3.x`
+ * **Added** some linting rules for `mocha` (via an update to `eslint-config-frost-standard`)
+ * **Updated** `tests/` directory to no longer specify an `.eslintrc` with `globals` that shouldn't actually be globals.
+
 # 0.17.2
 
 Added ember-code-snippets to allow demo documentation to reference the code as the sample text.  Cleaned up the button demo as an example.

@@ -1,14 +1,7 @@
-import chai from 'chai'
-const expect = chai.expect
+import {expect} from 'chai'
 import sinon from 'sinon'
-import {
-  describeComponent
-} from 'ember-mocha'
-import {
-  beforeEach,
-  afterEach,
-  it
-} from 'mocha'
+import {describeComponent} from 'ember-mocha'
+import {afterEach, beforeEach, it} from 'mocha'
 
 describeComponent(
   'frost-text',

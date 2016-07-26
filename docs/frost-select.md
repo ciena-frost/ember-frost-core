@@ -7,7 +7,7 @@
 | Attribute       | Type | Value | Description |
 | --------------- | ---- | ----- | ----------- |
 | `data`          | `array` | `[{"label: "foo", "value": "bar"}]` |  An array of "label"/"value" key/value pairs representing the rows in the select drop-down. |
-| `selected`      | `number` or `array` | `1` or `[1, 2]` | The indices of the pre-selected values corresponding to values in the passed-in data. |
+| `selected`      | `number` or `array` | `1` or `[1, 2]` | The indices of the pre-selected values corresponding to values in the passed-in data. Passing negative values (e.g. `-1` or `[-1]`) to a single select will clear the current select state.|
 | `selectedValue` | `any`, `array` if using multi-select, `null` to clear | `'bar'` or `['bar', 'buzz']` | A value to choose in the drop down programmatically, or an array of values if using multi-select. Takes precedence over `selected` attribute. Passing `null` will clear the selected state. |
 | `disabled`      | `boolean` | `false` | **default** - normal select component |
 |      |  | `true` | disabled select component |

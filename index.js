@@ -22,13 +22,13 @@ module.exports = {
     this._super.included(app)
 
     if (app) {
-      app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'Roboto-Bold.woff2'), { destDir: 'assets/fonts' })
-      app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'Roboto-Light.woff2'), { destDir: 'assets/fonts' })
-      app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'Roboto-LightItalic.woff2'),
-       { destDir: 'assets/fonts' })
-      app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'Roboto-Medium.woff2'), { destDir: 'assets/fonts' })
-      app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'Roboto-Regular.woff2'), { destDir: 'assets/fonts' })
-      app.import(path.join('vendor', 'google', 'fonts', 'roboto', 'stylesheet.css'))
+      const robotoPath = path.join('vendor', 'google', 'fonts', 'roboto')
+      app.import(path.join(robotoPath, 'Roboto-Bold.woff2'), {destDir: 'assets/fonts'})
+      app.import(path.join(robotoPath, 'Roboto-Light.woff2'), {destDir: 'assets/fonts'})
+      app.import(path.join(robotoPath, 'Roboto-LightItalic.woff2'), {destDir: 'assets/fonts'})
+      app.import(path.join(robotoPath, 'Roboto-Medium.woff2'), {destDir: 'assets/fonts'})
+      app.import(path.join(robotoPath, 'Roboto-Regular.woff2'), {destDir: 'assets/fonts'})
+      app.import(path.join(robotoPath, 'stylesheet.css'))
     }
 
     if (typeof app.import === 'function') {
@@ -92,15 +92,15 @@ module.exports = {
     // No icon pack path defined and an app = legacy case where the app icons must be merged into the 'frost' icon pack
     const isLegacy = !_.has(this, 'app.options.iconPackOptions.path') && !isAddon
 
-    if (isLegacy && fs.existsSync(path.join(this.project.root, 'public/svgs'))) {
-      iconNames['frost'] = _.concat(iconNames['frost'], this.flattenIcons([], '',
-       path.join(this.project.root, 'public/svgs')))
+    const svgPath = path.join(this.project.root, 'public/svgs')
+    if (isLegacy && fs.existsSync(svgPath)) {
+      iconNames['frost'] = _.concat(iconNames['frost'], this.flattenIcons([], '', svgPath))
     } else if (fs.existsSync(localIconPackPath)) {
       iconNames[localIconPackName] = this.flattenIcons([], '', localIconPackPath)
     }
 
-    const iconNameTree = writeFile('modules/ember-frost-core/icon-packs.js', 'export default ' +
-     JSON.stringify(iconNames, null, 2))
+    const iconNameJson = JSON.stringify(iconNames, null, 2)
+    const iconNameTree = writeFile('modules/ember-frost-core/icon-packs.js', `export default ${iconNameJson}`)
 
     return mergeTrees([addonTree, iconNameTree], {overwrite: true})
   },
@@ -151,8 +151,10 @@ module.exports = {
       const svgFunnel = new Funnel(localIconPackPath, {
         include: [new RegExp(/\.svg$/)]
       })
-      iconPacks.push(new SVGStore(svgFunnel, { outputFile: `/assets/icon-packs/${localIconPackName}.svg`,
-       flatten: false }))
+      iconPacks.push(new SVGStore(svgFunnel, {
+        outputFile: `/assets/icon-packs/${localIconPackName}.svg`,
+        flatten: false
+      }))
     }
 
     return mergeTrees(iconPacks, {overwrite: true})

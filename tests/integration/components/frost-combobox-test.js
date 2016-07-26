@@ -1,7 +1,6 @@
-
 import {expect} from 'chai'
 import {describeComponent, it} from 'ember-mocha'
-import {beforeEach, afterEach} from 'mocha'
+import {afterEach, beforeEach} from 'mocha'
 import sinon from 'sinon'
 import hbs from 'htmlbars-inline-precompile'
 
