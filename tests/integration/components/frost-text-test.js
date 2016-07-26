@@ -18,7 +18,7 @@ describeComponent(
       expect(this.$()).to.have.length(1)
     })
 
-    it('only renders the clear icon in insert', function() {
+    it('only renders the clear icon in insert', function () {
       this.set('external', 'temp')
       this.render(hbs`{{frost-text value=external}}`)
       expect(this.$('.frost-text-clear')).to.have.length(1)

@@ -47,12 +47,13 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('typography')
-      capture('typography', {width: $('#ember-testing').width(), height: $('#ember-testing').height()}).then(function (data) {
-        console.log(arguments)
-        done()
-      }).catch(function (err) {
-        done(err)
-      })
+      capture('typography', {width: $('#ember-testing').width(),
+       height: $('#ember-testing').height()}).then(function (data) {
+         console.log(arguments)
+         done()
+       }).catch(function (err) {
+         done(err)
+       })
     })
   })
   it('can visit /icons', function (done) {
@@ -138,12 +139,13 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('layout')
-      capture('layout', {width: $('#ember-testing').width(), height: $('#ember-testing').height()}).then(function (data) {
-        console.log(arguments)
-        done()
-      }).catch(function (err) {
-        done(err)
-      })
+      capture('layout', {width: $('#ember-testing').width(),
+       height: $('#ember-testing').height()}).then(function (data) {
+         console.log(arguments)
+         done()
+       }).catch(function (err) {
+         done(err)
+       })
     })
   })
   it('can visit /link', function (done) {
