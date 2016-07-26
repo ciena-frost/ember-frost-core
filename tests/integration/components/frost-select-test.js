@@ -102,7 +102,7 @@ describeComponent(
       this.$('.frost-select .down-arrow').click()
       run.later(() => {
         expect(this.$('.frost-select').hasClass('open')).to.be.true
-        capture('drop-down-container', null, null, 0.00, this.$('.drop-down-container')[0]).then(function (params) {
+        capture('drop-down-container', {targetElement: this.$('.drop-down-container')[0]}).then(function (params) {
           done()
         }).catch(function (err) {
           done(err)
