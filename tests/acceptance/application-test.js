@@ -1,5 +1,4 @@
 /* global visit, andThen, currentPath, capture, $ */
-
 import {
   describe,
   it,
@@ -34,12 +33,13 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('palette')
-      capture('palette', $('#ember-testing').width(), $('#ember-testing').height()).then(function (data) {
-        console.log(arguments)
-        done()
-      }).catch(function (err) {
-        done(err)
-      })
+      capture('palette', {width: $('#ember-testing').width(),
+       height: $('#ember-testing').height()}).then(function (data) {
+         console.log(arguments)
+         done()
+       }).catch(function (err) {
+         done(err)
+       })
     })
   })
   it('can visit /typography', function (done) {
@@ -47,7 +47,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('typography')
-      capture('typography', $('#ember-testing').width(), $('#ember-testing').height()).then(function (data) {
+      capture('typography', {width: $('#ember-testing').width(), height: $('#ember-testing').height()}).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
@@ -59,7 +59,7 @@ describe('Acceptance: Application', function () {
     visit('/icons')
     andThen(function () {
       expect(currentPath()).to.equal('icons')
-      capture('icons', 1000, 6000, 0.00, null, true).then(function (data) {
+      capture('icons', {width: 1000, height: 6000, experimentalSvgs: true}).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
@@ -72,7 +72,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('area')
-      capture('area', 1000, $('#ember-testing').height()).then(function (data) {
+      capture('area', {width: 1000, height: $('#ember-testing').height()}).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
@@ -85,12 +85,13 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('button')
-      capture('button', 1000, $('#ember-testing').height(), 0.00, null, true).then(function (data) {
-        console.log(arguments)
-        done()
-      }).catch(function (err) {
-        done(err)
-      })
+      capture('button', {width: 1000, height: $('#ember-testing').height(),
+       experimentalSvgs: true}).then(function (data) {
+         console.log(arguments)
+         done()
+       }).catch(function (err) {
+         done(err)
+       })
     })
   })
   it('can visit /checkbox', function (done) {
@@ -98,7 +99,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('checkbox')
-      capture('checkbox', 1000, $('#ember-testing').height()).then(function (data) {
+      capture('checkbox', {width: 1000, height: $('#ember-testing').height()}).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
@@ -111,7 +112,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('field')
-      capture('field', 1000, $('#ember-testing').height()).then(function (data) {
+      capture('field', {width: 1000, height: $('#ember-testing').height()}).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
@@ -124,7 +125,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('password')
-      capture('password', 1000, $('#ember-testing').height()).then(function (data) {
+      capture('password', {width: 1000, height: $('#ember-testing').height()}).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
@@ -137,7 +138,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('layout')
-      capture('layout', $('#ember-testing').width(), $('#ember-testing').height()).then(function (data) {
+      capture('layout', {width: $('#ember-testing').width(), height: $('#ember-testing').height()}).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
@@ -150,7 +151,7 @@ describe('Acceptance: Application', function () {
 
     andThen(function () {
       expect(currentPath()).to.equal('link.index')
-      capture('link', 1000, $('#ember-testing').height()).then(function (data) {
+      capture('link', {width: 1000, height: $('#ember-testing').height()}).then(function (data) {
         console.log(arguments)
         done()
       }).catch(function (err) {
