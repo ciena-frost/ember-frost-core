@@ -103,6 +103,7 @@ describeComponent(
         this.$('.frost-select .down-arrow').click()
         run.later(() => {
           capture('drop-down-container', {targetElement: $('.drop-down-container')[0]}).then(function (params) {
+            done()
           }).catch(function (err) {
             done(err)
           })
