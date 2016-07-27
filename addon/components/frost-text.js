@@ -9,10 +9,10 @@ import {
   timeout
 } from 'ember-concurrency'
 import FrostEventsProxy from '../mixins/frost-events-proxy'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-text'
 
-export default Component.extend(FrostEventsProxy, {
-
+export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   // == Properties =============================================================
 
   classNames: [
@@ -24,12 +24,24 @@ export default Component.extend(FrostEventsProxy, {
   ],
   layout,
 
-  // TODO PropTypes
-  align: 'left',
-  isClearEnabled: false,
-  isClearVisible: false,
-  tabindex: 0,
-  type: 'text',
+  propTypes: {
+    align: PropTypes.string,
+    hook: PropTypes.string,
+    isClearEnabled: PropTypes.bool,
+    isClearVisible: PropTypes.bool,
+    tabindex: PropTypes.number,
+    type: PropTypes.string
+  },
+
+  getDefaultProps () {
+    return {
+      align: 'left',
+      isClearEnabled: false,
+      isClearVisible: false,
+      tabindex: 0,
+      type: 'text'
+    }
+  },
 
   // == Events =================================================================
 
