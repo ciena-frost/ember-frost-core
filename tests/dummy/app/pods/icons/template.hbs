@@ -7,6 +7,7 @@
       <div class="demo">
         {{!-- Using the legacy nested format until the feature is available and svgs can be moved --}}
         {{frost-icon
+          hook='myRoundIcon'
           icon='round-add'
         }}
       </div>
@@ -14,6 +15,7 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-icon
+  hook='myRoundIcon'
   icon='round-add'
 }}
 ```"}}
@@ -21,7 +23,7 @@
     </div>
 
   </div>
-  
+
   <div class="section-title">Icon pack</div>
   <hr>
   <div class="section">
@@ -45,7 +47,7 @@
     </div>
 
   </div>
-  
+
   <div class="section-title">Legacy (no icon pack, nested paths)</div>
   <hr>
   <div class="section">

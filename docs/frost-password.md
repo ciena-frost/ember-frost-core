@@ -12,6 +12,7 @@
 | `disabled` | `boolean` | `false` | **default** - basic password |
 | | | `true` | disable password |
 | `class` | `string` | `error` | sets password to error state |
+| `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `onInput` | `string` | `<action-name>` | triggers associated action when the input value is changed |
 
 ## Examples

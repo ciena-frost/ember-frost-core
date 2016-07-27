@@ -18,6 +18,7 @@
 | `autofocus` | `boolean` | `false` | **default** - basic link |
 |  |  | `true` | link in focus |
 | `icon` | `string` | `<icon-name>` | the name of a frost-icon |
+| `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 
 
 ## Examples
