@@ -36,7 +36,6 @@ export default Component.extend(PropTypeMixin, {
     return {
       autofocus: false,
       disabled: false,
-      readonly: false,
       tabindex: 0
     }
   },

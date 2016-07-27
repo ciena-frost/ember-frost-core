@@ -2,6 +2,7 @@ import {expect} from 'chai'
 import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
 import {beforeEach} from 'mocha'
+import {$hook, initialize} from 'ember-hook'
 
 describeComponent(
   'frost-button',
@@ -11,7 +12,8 @@ describeComponent(
   },
   function () {
     beforeEach(function () {
-      this.render(hbs`{{frost-button icon="round-add"}}`)
+      initialize()
+      this.render(hbs`{{frost-button hook='my-button' icon="round-add" text='Test'}}`)
     })
 
     it('renders as expected', function () {
@@ -20,6 +22,9 @@ describeComponent(
         'includes expected icon'
       )
         .to.have.length(1)
+
+        expect($hook('my-button').text().trim())
+         .to.equal('Test')
     })
   }
 )

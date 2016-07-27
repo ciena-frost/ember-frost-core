@@ -4,6 +4,7 @@
   disabled=disabled
   focus-out=(action 'onBlur')
   form=form
+  hook=(concat hook '-input')
   value=value
   placeholder=placeholder
   readonly=readonly
@@ -12,7 +13,14 @@
   tabindex=tabindex
 }}
 {{#if showClear}}
-  {{#frost-button class='clear' type='icon' tabIndex='-1' onClick=(action 'clear')}}
-    {{frost-icon  icon='close'}}
+  {{#frost-button
+    class='clear'
+    hook=(concat hook '-clear')
+    type='icon'
+    tabIndex='-1'
+    onClick=(action 'clear')}}
+    {{frost-icon
+      icon='close'
+    }}
   {{/frost-button}}
 {{/if}}

@@ -3,6 +3,7 @@ const {run} = Ember
 import {expect} from 'chai'
 import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
+import {$hook, initialize} from 'ember-hook'
 
 describeComponent(
   'frost-textarea',
@@ -11,6 +12,10 @@ describeComponent(
     integration: true
   },
   function () {
+    beforeEach(function () {
+      initialize()
+    })
+
     it('renders', function () {
       // Set any properties with this.set('myProperty', 'value')
       // Handle any actions with this.on('myAction', function (val) { ... })
@@ -69,5 +74,19 @@ describeComponent(
     //   this.render(hbs`{{frost-text onFocus=(action "test-action")}}`)
     //   this.$('input').val('a').focusout().focus()
     // })
+
+    it('hook attr grabs frost-textarea as expected', function () {
+      this.set('input-value', '')
+      this.on('test-action', function (attr) {
+        this.set('input-value', attr.value)
+      })
+      this.render(hbs`{{frost-textarea id="action" onInput=(action "test-action") hook='my-textarea'}}`)
+
+      expect($hook('my-textarea').hasClass('frost-textarea'))
+        .to.be.true
+
+      expect($hook('my-textarea-input').hasClass('ember-text-area'))
+        .to.be.true
+    })
   }
 )
