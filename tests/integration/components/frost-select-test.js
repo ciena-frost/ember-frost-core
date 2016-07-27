@@ -27,7 +27,8 @@ const keyCodes = {
   'up': 38,
   'down': 40,
   esc: 27,
-  tab: 9
+  tab: 9,
+  backspace: 8
 }
 
 function keyDown ($selection, keyCode) {
@@ -194,9 +195,9 @@ describeComponent(
 
     it('filters the list when input is typed into', function () {
       run(() => {
-        let input = this.$('.frost-select input')
-        input.val('w')
-        input[0].oninput({target: input[0]})
+        this.$('.frost-select input').first()
+          .val('w')
+          .trigger('input')
       })
       let listItems = this.$('.frost-select li')
       expect(listItems.length).to.eql(1)
@@ -204,9 +205,9 @@ describeComponent(
 
     it('hovers the only available one if filter leaves one', function () {
       run(() => {
-        let input = this.$('.frost-select input')
-        input.val('w')
-        input[0].oninput({target: input[0]})
+        this.$('.frost-select input').first()
+          .val('w')
+          .trigger('input')
       })
 
       let listItems = this.$('.frost-select li')
@@ -233,9 +234,19 @@ describeComponent(
       expect(component.hasClass('error')).to.be.true
     })
 
-    it('respects a pre-selected value', function () {
-      let component = this.$('.frost-select .selected')
-      expect(component.length).to.eql(1)
+    it('respects a pre-selected value', function (done) {
+      run.later(() => {
+        let component = this.$('.frost-select .selected')
+        expect(component.length).to.eql(1)
+        done()
+      })
+    })
+
+    it('unsets the value when the index is less than 0', function () {
+      run(() => {
+        this.set('selected', [-1])
+      })
+      expect(this.$('.frost-select .selected').length).to.eql(0)
     })
 
     it('sets the prompt to the selected value when the drop down list is closed', function () {
@@ -243,8 +254,8 @@ describeComponent(
         let input = this.$('.frost-select input')
         keyUp(dropDown, 'down')
         keyUp(dropDown, 13) // Enter key, select the item
-        input.val('')
-        keyUp(dropDown, 'down')
+        input.focus()
+        keyUp(dropDown, 'backspace')
         keyUp(dropDown, 'esc')
       })
 
@@ -262,7 +273,7 @@ describeComponent(
       expect(dropDown.hasClass('open')).to.be.false
     })
 
-    it('handles loosing focus by pressing tab', function () {
+    it('handles losing focus by pressing tab', function () {
       run(() => {
         this.$('.frost-select .down-arrow').click()
         keyDown(dropDown, 'tab')

@@ -22,8 +22,8 @@ export default Component.extend({
   ],
   layout,
   // TODO PropTypes
-  required: false,
   disabled: false,
+  required: false,
 
   groupId: readOnly('parentView.id'),
   groupValue: readOnly('parentView.value'),
@@ -62,6 +62,13 @@ export default Component.extend({
       if (change && typeof change === 'function') {
         change(this._createEvent(e, Ember.$(e.target).find('input')[0]))
       }
+    }
+  },
+
+  change (event) {
+    const onChange = this.get('onChange')
+    if (onChange && typeof onChange === 'function') {
+      onChange(this._createEvent(event, event.target))
     }
   }
 })

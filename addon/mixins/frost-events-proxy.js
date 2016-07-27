@@ -7,6 +7,6 @@ import events from '../utils/events'
 
 export default Mixin.create({
   initEvents: on('init', function () {
-    events.init.call(this, events.map, events.addProperty)
+    events.init.call(this, events.map, events.addProxy)
   })
 })
