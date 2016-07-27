@@ -8,178 +8,200 @@
 
   <div class="section-title">Default</div>
   <hr>
-
-    <div class="section">
-      <div class="example">
-        <div class="demo">
-          {{frost-text}}
-        </div>
-        <div class="snippet">
-          {{format-markdown "```handlebars
-{{frost-text}}
-  ```"
-          }}
-        </div>
+  <div class="section">
+    <div class="example">
+      <div class="demo">
+        {{! BEGIN-SNIPPET text }}
+        {{frost-text}}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='text.hbs'}}
       </div>
     </div>
-
+  </div>
 
   <div class="section-title">State</div>
   <hr>
-    <div class="section">
-      <div class="example">
-        <div class="title">error</div>
-        <div class="demo">
-          {{frost-text
-            class="error"
-          }}
-        </div>
-        <div class="snippet">
-          {{format-markdown "```handlebars
-{{frost-text
-  class='error'
-}}
-  ```"
-          }}
-        </div>
+  <div class="section">
+    <div class="example">
+      <div class="title">error</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET text-error }}
+        {{frost-text
+          class="error"
+        }}
+        {{! END-SNIPPET }}
       </div>
-
-      <div class="example">
-        <div class="title">disabled</div>
-        <div class="demo">
-          {{frost-text
-            disabled=true
-          }}
-        </div>
-        <div class="snippet">
-          {{format-markdown "```handlebars
-{{frost-text
-  disabled=true
-}}
-  ```"
-          }}
-        </div>
+      <div class="snippet">
+        {{code-snippet name='text-error.hbs'}}
       </div>
+    </div>
 
-      <div class="example">
-        <div class="title">disabled value</div>
-        <div class="demo">
-          {{frost-text
-            disabled=true
-            value="Read only text"
-          }}
-        </div>
-        <div class="snippet">
-          {{format-markdown "```handlebars
-{{frost-text
-  disabled=true
-  value='Read only text'
-}}
-    ```"
-}}
-        </div>
+    <div class="example">
+      <div class="title">disabled</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET text-disabled }}
+        {{frost-text
+          disabled=true
+          value="Disabled text"
+        }}
+        {{! END-SNIPPET }}
       </div>
-
+      <div class="snippet">
+        {{code-snippet name='text-disabled.hbs'}}
+      </div>
+    </div>
   </div>
 
   <div class="section-title">Options</div>
   <hr>
-
   <div class="section">
-      <div class="example">
-        <div class="title">placeholder</div>
-         <div class="demo">
-          {{frost-text
-            placeholder='basic field'
-          }}
-        </div>
-        <div class="snippet">
-          {{format-markdown "```handlebars
-{{frost-text
-  placeholder='basic field'
-}}
-    ```"
-          }}
-        </div>
+    <div class="example">
+      <div class="title">placeholder</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET text-placeholder }}
+        {{frost-text
+          placeholder='Placeholder'
+        }}
+        {{! END-SNIPPET }}
       </div>
-
-
-      <div class="example">
-        <div class="title">align</div>
-        <div class="demo">
-          {{frost-text
-            align='right'
-          }}
-        </div>
-        <div class="snippet">
-          {{format-markdown "```handlebars
-{{frost-text
-  align='right'
-}}
-    ```"
-          }}
-        </div>
+      <div class="snippet">
+        {{code-snippet name='text-placeholder.hbs'}}
       </div>
+    </div>
+
+    <div class="example">
+      <div class="title">align</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET text-align }}
+        {{frost-text
+          align='right'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='text-align.hbs'}}
+      </div>
+    </div>
   </div>
 
   <div class="example">
     <div class="title">tabindex</div>
     <div class="demo">
+      {{! BEGIN-SNIPPET text-tabindex }}
       {{frost-text
         tabindex='-1'
       }}
+      {{! END-SNIPPET }}
     </div>
     <div class="snippet">
-      {{format-markdown "```handlebars
-{{frost-text
-  tabindex='-1'
-}}
-```"
-      }}
+      {{code-snippet name='text-tabindex.hbs'}}
     </div>
   </div>
 
   <div class="section-title">Events</div>
   <hr>
   <div class='section'>
-
-    <div class="example">
-      <div class="title">onFocus, onBlur</div>
-      <div class="demo">
+    <div class='example'>
+      <div class='title'>Legacy events</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET text-legacy-events }}
         {{frost-text
-          onBlur=(action 'onBlurHandler')
-          onFocus=(action 'onFocusHandler')
+          onInput=(action 'legacy')
         }}
+        {{! END-SNIPPET }}
       </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-text
-  onBlur=(action 'onBlurHandler')
-  onFocus=(action 'onFocusHandler')
-}}
-    ```"
-        }}
+      <div class='snippet'>
+         <div>Template</div>
+        {{code-snippet name='text-legacy-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='text-legacy-events.js'}}
       </div>
     </div>
 
     <div class="example">
-      <div class="title">onInput</div>
+      <div class="title">DOM events</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET text-dom-events }}
         {{frost-text
-          id='demo-input'
-          onInput=(action 'onInputHandler')
+          onChange=(action 'event')
+          onClick=(action 'event')
+          onContextMenu=(action 'event')
+          onDoubleClick=(action 'event')
+          onDrag=(action 'event')
+          onDragEnd=(action 'event')
+          onDragEnter=(action 'event')
+          onDragLeave=(action 'event')
+          onDragOver=(action 'event')
+          onDragStart=(action 'event')
+          onDrop=(action 'event')
+          onFocusIn=(action 'event')
+          onFocusOut=(action 'event')
+          onInput=(action 'event')
+          onKeyDown=(action 'event')
+          onKeyPress=(action 'event')
+          onKeyUp=(action 'event')
+          onMouseDown=(action 'event')
+          onMouseEnter=(action 'event')
+          onMouseLeave=(action 'event')
+          onMouseMove=(action 'event')
+          onMouseUp=(action 'event')
+          onSubmit=(action 'event')
+          onTouchCancel=(action 'event')
+          onTouchEnd=(action 'event')
+          onTouchMove=(action 'event')
+          onTouchStart=(action 'event')
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-text
-  id='demo-input'
-  onInput=(action 'onInputHandler')
-}}
-```"
-        }}
+         <div>Template</div>
+        {{code-snippet name='text-dom-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='text-dom-events.js'}}
       </div>
     </div>
 
+    <div class="example">
+      <div class="title">Text support events</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET text-support-events }}
+        {{frost-text
+          onEnter=(action 'support' 'enter')
+          onEscape=(action 'support' 'escape')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        <div>Template</div>
+        {{code-snippet name='text-support-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='text-support-events.js'}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">Deprecated events</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET text-deprecated-events }}
+        {{frost-text
+          onBlur=(action 'event')
+          onFocus=(action 'event')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+         <div>Template</div>
+        {{code-snippet name='text-deprecated-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='text-dom-events.js'}}
+      </div>
+    </div>
   </div>
 </div>
+

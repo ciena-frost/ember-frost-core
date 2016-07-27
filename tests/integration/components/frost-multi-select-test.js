@@ -10,9 +10,20 @@ function wait (callback) {
   run.later(callback)
 }
 
-const selectedTestTemplate = hbs`{{frost-multi-select onChange=onChange selected=selected data=data greeting=greeting}}`
-const selectedValueTestTemplate =
-  hbs`{{frost-multi-select onChange=onChange data=data greeting=greeting selectedValue=selectedValue}}`
+const selectedTestTemplate = hbs`
+  {{frost-multi-select
+    onChange=onChange
+    selected=selected
+    data=data
+    greeting=greeting}}
+`
+const selectedValueTestTemplate = hbs`
+  {{frost-multi-select
+    onChange=onChange
+    data=data
+    greeting=greeting
+    selectedValue=selectedValue}}
+`
 
 let props = {
   onChange: sinon.spy(),
@@ -217,8 +228,11 @@ describeComponent(
       this.render(selectedTestTemplate)
     })
 
-    it('respects pre-selected values', function () {
-      expect(this.$('.frost-select .selected')).to.have.length(2)
+    it('respects pre-selected values', function (done) {
+      run.later(() => {
+        expect(this.$('.frost-select .selected')).to.have.length(2)
+        done()
+      })
     })
   }
 )

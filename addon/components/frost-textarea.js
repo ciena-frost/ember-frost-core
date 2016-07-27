@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import Ember from 'ember'
-const {Component, run} = Ember
+const {Component} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import layout from '../templates/components/frost-textarea'
 
@@ -50,12 +50,12 @@ export default Component.extend({
   // ==========================================================================
 
   oninput: Ember.on('input', function (e) {
-    if (_.isFunction(this.attrs['onInput'])) {
-      run.next(this, function () {
-        this.attrs['onInput']({
-          id: this.get('id'),
-          value: e.target.value
-        })
+    const onInput = this.attrs['onInput']
+
+    if (_.isFunction(onInput)) {
+      onInput({
+        id: this.get('id'),
+        value: e.target.value
       })
     }
   }),

@@ -1,51 +1,94 @@
 import Ember from 'ember'
-import FrostEvents from '../mixins/frost-events'
-import computed from 'ember-computed-decorators'
+const {
+  Component,
+  isPresent,
+  on
+} = Ember
+import {
+  task,
+  timeout
+} from 'ember-concurrency'
+import FrostEventsProxy from '../mixins/frost-events-proxy'
+import layout from '../templates/components/frost-text'
 
-const {TextField} = Ember
-const {next, schedule} = Ember.run
+export default Component.extend(FrostEventsProxy, {
 
-const svgNs = 'http://www.w3.org/2000/svg'
-const clearSvg = `
-  <svg class='frost-text-clear' fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="${svgNs}">
-    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-    <path d="M0 0h24v24H0z" fill="none"/>
-  </svg>
-`
-
-export default TextField.extend(FrostEvents, {
   // == Properties =============================================================
-  attributeBindings: [
-    'style'
-  ],
+
   classNames: [
     'frost-text'
   ],
+  classNameBindings: [
+    'isClearVisible',
+    'isClearEnabled'
+  ],
+  layout,
 
-  // == Computed properties ====================================================
-  @computed('align')
-  style (align) {
-    return Ember.String.htmlSafe(`text-align: ${CSS.escape(align)}`)
-  },
+  // TODO PropTypes
+  align: 'left',
+  isClearEnabled: false,
+  isClearVisible: false,
+  tabindex: 0,
+  type: 'text',
 
-  // == Event hooks ============================================================
+  // == Events =================================================================
 
-  didInsertElement () {
-    schedule('render', this, function () {
-      this.$().after(clearSvg)
-      next(this, function () {
-        this.$().next().click(() => {
-          this.onClear()
-        })
-      })
-    })
-  },
+  _showClearEvent: on('focusIn', 'focusOut', 'input', function (event) {
+    const isFocused = event.type !== 'focusout'
+    this.get('_showClear').perform(isFocused)
+  }),
 
-  // == Functions ==============================================================
+  // == Tasks ==================================================================
 
-  onClear () {
-    this.$().focus()
-    this.$().val('')
-    this.$().trigger('input')
+  _clear: task(function * () {
+    this.$('input')
+      .focus()
+      .val('')
+      .trigger('input')
+  }).restartable(),
+
+  _showClear: task(function * (isFocused) {
+    const showClear = isFocused && isPresent(this.get('value'))
+    if (this.get('isClearVisible') === showClear) {
+      return
+    }
+
+    this.set('isClearVisible', showClear)
+
+    // If the clear button is clicked the focusOut event occurs before
+    // the click event, so delay disabling the clear so that the click
+    // can process first
+    if (!showClear) {
+      yield timeout(200) // Duration of the visibility animation
+    }
+    this.set('isClearEnabled', showClear)
+  }).restartable(),
+
+  // == Actions ================================================================
+
+  // Setting 'keyUp' directly on the {{input}} helper overwrites
+  // Ember's TextSupport keyUp property, which means that other
+  // TextSupport events (i.e. 'enter' and 'escape') don't fire.
+  // To avoid this, we use the TextSupport 'key-up' event and
+  // proxy the event to the keyUp handler.
+  actions: {
+    clear () {
+      this.get('_clear').perform()
+    },
+
+    keyUp (value, event) {
+      if (Ember.isPresent(Ember.get(this, '_eventProxy.keyUp'))) {
+        this._eventProxy.keyUp(event)
+      }
+    },
+
+    _onInput (event) {
+      if (Ember.isPresent(Ember.get(this, '_eventProxy.input'))) {
+        // Add id and value for legacy support
+        event.id = this.get('elementId')
+        event.value = event.target.value
+        this._eventProxy.input(event)
+      }
+    }
   }
 })
