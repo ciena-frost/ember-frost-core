@@ -1,6 +1,7 @@
 <input
   class="trigger"
   disabled={{disableInput}}
+  data-test={{hook (concat hook '-input')}}
   onBlur={{action 'onBlur'}}
   onFocus={{action 'onFocus'}}
   onInput={{action 'onChange'}}
@@ -21,7 +22,7 @@
   </div>
   <div class="list-container">
     <div class="up-arrow"></div>
-    <ul ref="container" style={{containerStyle}}>      
+    <ul ref="container" style={{containerStyle}}>
       {{#each displayItems as |item|}}
         {{#frost-select-li
           class=item.className
