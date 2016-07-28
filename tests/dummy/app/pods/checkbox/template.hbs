@@ -33,12 +33,16 @@
   <div class='example'>
       <div class='title'>small</div>
       <div class='demo'>
-        {{frost-checkbox size='small'}}
+        {{frost-checkbox
+          hook='mySmallCheckbox'
+          size='small'
+        }}
       </div>
       <div class='snippet'>
         {{format-markdown
 "```handlebars
 {{frost-checkbox
+  hook='mySmallCheckbox'
   size='small'
 }}
 ```"}}

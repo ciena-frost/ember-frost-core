@@ -86,6 +86,7 @@ export default Component.extend(PropTypeMixin, {
     disabled: PropTypes.bool,
     error: PropTypes.bool,
     filter: PropTypes.string,
+    hook: PropTypes.string,
     hovered: PropTypes.number,
     maxListHeight: PropTypes.number,
     selected: PropTypes.oneOfType([

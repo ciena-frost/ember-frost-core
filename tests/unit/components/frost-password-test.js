@@ -1,6 +1,7 @@
 import {expect} from 'chai'
 import {describeComponent} from 'ember-mocha'
 import {beforeEach, it} from 'mocha'
+import {initialize} from 'ember-hook'
 
 describeComponent(
   'frost-password',
@@ -15,6 +16,7 @@ describeComponent(
     let component
 
     beforeEach(function () {
+      initialize()
       component = this.subject()
     })
 
@@ -24,13 +26,11 @@ describeComponent(
 
     it('defaults to zero tabindex', function () {
       expect(component.tabindex).to.equal(0)
-      expect(this.$('input').prop('tabindex')).to.equal(0)
     })
 
     it('passes tabindex to the underlying field', function () {
       component.set('tabindex', -1)
       expect(component.tabindex).to.equal(-1)
-      expect(this.$('input').prop('tabindex')).to.equal(-1)
     })
   }
 )

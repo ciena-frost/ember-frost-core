@@ -6,9 +6,12 @@ const {
 const {
   readOnly
 } = computed
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-radio-button'
 
-export default Component.extend({
+export default Component.extend(PropTypeMixin, {
+  // == Properties  ============================================================
+
   attributeBindings: [
     'tabindex'
   ],
@@ -21,9 +24,21 @@ export default Component.extend({
     'required'
   ],
   layout,
-  // TODO PropTypes
-  disabled: false,
-  required: false,
+
+  propTypes: {
+    hook: PropTypes.string,
+    disabled: PropTypes.bool,
+    required: PropTypes.bool
+  },
+
+  getDefaultProps () {
+    return {
+      disabled: false,
+      required: false
+    }
+  },
+
+  // == Computed properties  ===================================================
 
   groupId: readOnly('parentView.id'),
   groupValue: readOnly('parentView.value'),
@@ -36,6 +51,9 @@ export default Component.extend({
   tabindex: Ember.computed('disabled', function () {
     return this.get('disabled') ? -1 : 0
   }),
+
+  // == Functions ===============================================================
+
   _createEvent (_event, _target) {
     let event = Ember.$.Event(null, _event)
     let target = Ember.$.clone(_target)
@@ -43,6 +61,9 @@ export default Component.extend({
     event.target = target
     return event
   },
+
+  // == Events ===============================================================
+
   init () {
     this._super(...arguments)
     Ember.assert(
@@ -53,6 +74,7 @@ export default Component.extend({
       this.get('value')
     )
   },
+
   keyPress (e) {
     if (e.keyCode === 13 || e.keyCode === 32) {
       if (this.get('disabled') || this.get('groupValue') === this.get('value')) {
