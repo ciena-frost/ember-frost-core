@@ -2,7 +2,9 @@ import Ember from 'ember'
 const {run} = Ember
 import {expect} from 'chai'
 import {describeComponent, it} from 'ember-mocha'
+import {beforeEach} from 'mocha'
 import hbs from 'htmlbars-inline-precompile'
+import {$hook, initialize} from 'ember-hook'
 
 describeComponent(
   'frost-password',
@@ -11,6 +13,10 @@ describeComponent(
     integration: true
   },
   function () {
+    beforeEach(function () {
+      initialize()
+    })
+
     it('renders', function () {
       // Set any properties with this.set('myProperty', 'value')
       // Handle any actions with this.on('myAction', function (val) { ... })
@@ -45,6 +51,17 @@ describeComponent(
 
       this.render(hbs`{{frost-password onBlur=(action "test-action")}}`)
       this.$('input').focus().val('a').focusout()
+    })
+
+    it('hook attr grabs frost-password as expected', function () {
+      this.render(hbs`{{frost-password hook='my-password'}}`)
+
+      expect($hook('my-password').hasClass('frost-password'))
+        .to.be.true
+      expect($hook('my-password-text-input').hasClass('frost-text-input'))
+        .to.be.true
+      expect($hook('my-password-text-clear').hasClass('frost-text-clear'))
+        .to.be.true
     })
   }
 )

@@ -22,9 +22,11 @@ describeComponent(
         'includes expected icon'
       )
         .to.have.length(1)
+    })
 
-        expect($hook('my-button').text().trim())
-         .to.equal('Test')
+    it('hook attr works as expected', function () {
+      expect($hook('my-button').text().trim())
+        .to.equal('Test')
     })
   }
 )

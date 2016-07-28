@@ -2,6 +2,7 @@ import Ember from 'ember'
 const {run} = Ember
 import {expect} from 'chai'
 import {describeComponent, it} from 'ember-mocha'
+import {beforeEach} from 'mocha'
 import hbs from 'htmlbars-inline-precompile'
 import {$hook, initialize} from 'ember-hook'
 
