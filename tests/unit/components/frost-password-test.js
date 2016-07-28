@@ -26,15 +26,11 @@ describeComponent(
 
     it('defaults to zero tabindex', function () {
       expect(component.tabindex).to.equal(0)
-
-      // TODO why does this fail with 'A helper named 'hook' could not be found'?
-      // expect(this.$('input').prop('tabindex')).to.equal(0)
     })
 
     it('passes tabindex to the underlying field', function () {
       component.set('tabindex', -1)
       expect(component.tabindex).to.equal(-1)
-      // expect(this.$('input').prop('tabindex')).to.equal(-1)
     })
   }
 )

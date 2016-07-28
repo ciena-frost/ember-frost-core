@@ -63,5 +63,7 @@ describeComponent(
       expect($hook('my-password-text-clear').hasClass('frost-text-clear'))
         .to.be.true
     })
+
+    // TODO add tests for tabindex
   }
 )
