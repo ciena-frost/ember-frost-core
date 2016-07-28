@@ -58,9 +58,9 @@ describeComponent(
 
       expect($hook('my-password').hasClass('frost-password'))
         .to.be.true
-      expect($hook('my-password-text-input').hasClass('frost-text-input'))
+      expect($hook('my-password-input').hasClass('frost-text-input'))
         .to.be.true
-      expect($hook('my-password-text-clear').hasClass('frost-text-clear'))
+      expect($hook('my-password-clear').hasClass('frost-text-clear'))
         .to.be.true
     })
 

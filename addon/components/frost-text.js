@@ -29,6 +29,8 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     hook: PropTypes.string,
     isClearEnabled: PropTypes.bool,
     isClearVisible: PropTypes.bool,
+    isHookEmbedded: PropTypes.bool,
+    receivedHook: PropTypes.string,
     tabindex: PropTypes.number,
     type: PropTypes.string
   },
@@ -38,12 +40,21 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       align: 'left',
       isClearEnabled: false,
       isClearVisible: false,
+      isHookEmbedded: false,
       tabindex: 0,
       type: 'text'
     }
   },
 
   // == Events =================================================================
+
+  init () {
+    this._super(...arguments)
+    this.receivedHook = this.hook
+    if (this.get('isHookEmbedded')) {
+      this.hook = ''
+    }
+  },
 
   _showClearEvent: on('focusIn', 'focusOut', 'input', function (event) {
     const isFocused = event.type !== 'focusout'
