@@ -21,7 +21,6 @@ module.exports = {
       .then(() => {
         return this.addPackagesToProject([
           {name: 'svg4everybody', target: '^2.0.3'},
-          {name: 'lodash', target: '^4.14.1'}, // Used by this addons index.js
           {name: 'redux', target: '^3.4.0'},
           {name: 'redux-thunk', target: '^2.0.1'}
         ])
