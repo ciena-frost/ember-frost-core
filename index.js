@@ -7,8 +7,70 @@ const Funnel = require('broccoli-funnel')
 const mergeTrees = require('broccoli-merge-trees')
 const SVGStore = require('broccoli-svgstore')
 const fs = require('fs')
-const _ = require('lodash')
 const path = require('path')
+
+/**
+ * Creates an object composed of the object properties predicate returns truthy for. The predicate is invoked with two arguments: (value, key).
+ * @param {Object} object - the source object
+ * @param {Function} predicate - The function invoked per property
+ * @returns {Object} Returns the new object
+ */
+function pickBy (object, predicate) {
+  const result = {}
+
+  Object.keys(object).forEach((key) => {
+    const value = object[key]
+
+    if (predicate(value, key)) {
+      result[key] = value
+    }
+  })
+
+  return result
+}
+
+/**
+ * Gets the value at path of object. If the resolved value is undefined, the defaultValue is returned in its place
+ * @param {Object} object -  The object to query
+ * @param {String} path - The path of the property to get
+ * @param {*} defaultValue - The value returned for undefined resolved values
+ * @returns {*} Returns the resolved value
+ */
+function get (object, path, defaultValue) {
+  const segments = path.split('.')
+  var result = object
+
+  while (segments.length !== 0) {
+    if (isObject(result)) {
+      result = result[segments[0]]
+    } else {
+      result = undefined
+    }
+
+    segments.shift()
+  }
+
+  return result || defaultValue
+}
+
+/**
+ * Checks if path is a direct property of object.
+ * @param {Object} object - The object to query
+ * @param {String} path - The path to check
+ * @returns {Boolean} Returns true if path exists, else false
+ */
+function has (object, path) {
+  return get(object, path) !== undefined
+}
+
+/**
+ * Checks whether or not an object is a POJO
+ * @param {*} object - Object to check
+ * @returns {Boolean} Returns true if object is a POJO, else false
+ */
+function isObject (object) {
+  return object !== null && typeof object === 'object'
+}
 
 module.exports = {
   name: 'ember-frost-core',
@@ -67,34 +129,34 @@ module.exports = {
 
     var iconNames = {}
 
-    _.chain(this.project.addonPackages)
-      .pickBy((addonPackage) => {
-        if (_.has(addonPackage.pkg, 'ember-frost-icon-pack')) {
-          return true
-        }
-      })
-      .map((addonPackage) => {
+    var addonPackages = pickBy(this.project.addonPackages, (addonPackage) => {
+      return has(addonPackage.pkg, 'ember-frost-icon-pack')
+    })
+
+    for (var addonName in addonPackages) {
+      if (addonPackages.hasOwnProperty(addonName)) {
+        const addonPackage = addonPackages[addonName]
         const iconPack = addonPackage.pkg['ember-frost-icon-pack']
         const iconPackName = iconPack.name
         const iconPackPath = iconPack.path || 'svgs'
         const addonIconPackPath = path.join(addonPackage.path, iconPackPath)
         iconNames[iconPackName] = this.flattenIcons([], '', addonIconPackPath)
-      })
-      .value()
+      }
+    }
 
     const isAddon = this.project.isEmberCLIAddon()
 
-    const localIconPackName = _.get(this, 'app.options.iconPackOptions.name', isAddon ? 'dummy' : 'app')
+    const localIconPackName = get(this, 'app.options.iconPackOptions.name', isAddon ? 'dummy' : 'app')
     const localIconPackPath = path.join(this.project.root,
-      _.get(this, 'app.options.iconPackOptions.path', isAddon ? 'tests/dummy/svgs' : 'svgs')
+      get(this, 'app.options.iconPackOptions.path', isAddon ? 'tests/dummy/svgs' : 'svgs')
     )
 
     // No icon pack path defined and an app = legacy case where the app icons must be merged into the 'frost' icon pack
-    const isLegacy = !_.has(this, 'app.options.iconPackOptions.path') && !isAddon
+    const isLegacy = !has(this, 'app.options.iconPackOptions.path') && !isAddon
 
     const svgPath = path.join(this.project.root, 'public/svgs')
     if (isLegacy && fs.existsSync(svgPath)) {
-      iconNames['frost'] = _.concat(iconNames['frost'], this.flattenIcons([], '', svgPath))
+      iconNames['frost'] = iconNames['frost'].concat(this.flattenIcons([], '', svgPath))
     } else if (fs.existsSync(localIconPackPath)) {
       iconNames[localIconPackName] = this.flattenIcons([], '', localIconPackPath)
     }
@@ -109,42 +171,40 @@ module.exports = {
     const isAddon = this.project.isEmberCLIAddon()
 
     // No icon pack path defined and an app = legacy case where the app icons must be merged into the 'frost' icon pack
-    const isLegacy = !_.has(this, 'app.options.iconPackOptions.path') && !isAddon
+    const isLegacy = !has(this, 'app.options.iconPackOptions.path') && !isAddon
 
-    const iconPacks = _.chain(this.project.addonPackages)
-      .pickBy((addonPackage) => {
-        if (_.has(addonPackage.pkg, 'ember-frost-icon-pack')) {
-          return true
-        }
-      })
-      .map((addonPackage) => {
-        const iconPack = addonPackage.pkg['ember-frost-icon-pack']
-        const iconPackPath = iconPack.path || 'svgs'
-        const addonIconPackPath = path.join(addonPackage.path, iconPackPath)
+    const addonPackages = pickBy(this.project.addonPackages, (addonPackage) => {
+      return has(addonPackage.pkg, 'ember-frost-icon-pack')
+    })
 
-        var svgFunnel
-        if (iconPack.name === 'frost' && isLegacy && fs.existsSync(path.join(this.project.root, 'public/svgs'))) {
-          svgFunnel = mergeTrees([
-            new Funnel(addonIconPackPath, {
-              include: [new RegExp(/\.svg$/)]
-            }),
-            new Funnel(path.join(this.project.root, 'public/svgs'), {
-              include: [new RegExp(/\.svg$/)]
-            })
-          ])
-        } else {
-          svgFunnel = new Funnel(addonIconPackPath, {
+    const iconPacks = Object.keys(addonPackages).map((addonName) => {
+      const addonPackage = addonPackages[addonName]
+      const iconPack = addonPackage.pkg['ember-frost-icon-pack']
+      const iconPackPath = iconPack.path || 'svgs'
+      const addonIconPackPath = path.join(addonPackage.path, iconPackPath)
+
+      var svgFunnel
+      if (iconPack.name === 'frost' && isLegacy && fs.existsSync(path.join(this.project.root, 'public/svgs'))) {
+        svgFunnel = mergeTrees([
+          new Funnel(addonIconPackPath, {
+            include: [new RegExp(/\.svg$/)]
+          }),
+          new Funnel(path.join(this.project.root, 'public/svgs'), {
             include: [new RegExp(/\.svg$/)]
           })
-        }
+        ])
+      } else {
+        svgFunnel = new Funnel(addonIconPackPath, {
+          include: [new RegExp(/\.svg$/)]
+        })
+      }
 
-        return new SVGStore(svgFunnel, { outputFile: `/assets/icon-packs/${iconPack.name}.svg`, flatten: false })
-      })
-      .value()
+      return new SVGStore(svgFunnel, { outputFile: `/assets/icon-packs/${iconPack.name}.svg`, flatten: false })
+    })
 
-    const localIconPackName = _.get(this, 'app.options.iconPackOptions.name', isAddon ? 'dummy' : 'app')
+    const localIconPackName = get(this, 'app.options.iconPackOptions.name', isAddon ? 'dummy' : 'app')
     const localIconPackPath = path.join(this.project.root,
-      _.get(this, 'app.options.iconPackOptions.path', isAddon ? 'tests/dummy/svgs' : 'svgs')
+      get(this, 'app.options.iconPackOptions.path', isAddon ? 'tests/dummy/svgs' : 'svgs')
     )
 
     if (!isLegacy && fs.existsSync(localIconPackPath)) {
