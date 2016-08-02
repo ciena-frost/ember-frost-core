@@ -67,20 +67,19 @@ module.exports = {
 
     var iconNames = {}
 
-    _.chain(this.project.addonPackages)
-      .pickBy((addonPackage) => {
-        if (_.has(addonPackage.pkg, 'ember-frost-icon-pack')) {
-          return true
-        }
-      })
-      .map((addonPackage) => {
-        const iconPack = addonPackage.pkg['ember-frost-icon-pack']
-        const iconPackName = iconPack.name
-        const iconPackPath = iconPack.path || 'svgs'
-        const addonIconPackPath = path.join(addonPackage.path, iconPackPath)
-        iconNames[iconPackName] = this.flattenIcons([], '', addonIconPackPath)
-      })
-      .value()
+    var picked = _.pickBy(this.project.addonPackages, (addonPackage) => {
+      if (_.has(addonPackage.pkg, 'ember-frost-icon-pack')) {
+        return true
+      }
+    })
+
+    _.forEach(picked, (addonPackage) => {
+      const iconPack = addonPackage.pkg['ember-frost-icon-pack']
+      const iconPackName = iconPack.name
+      const iconPackPath = iconPack.path || 'svgs'
+      const addonIconPackPath = path.join(addonPackage.path, iconPackPath)
+      iconNames[iconPackName] = this.flattenIcons([], '', addonIconPackPath)
+    })
 
     const isAddon = this.project.isEmberCLIAddon()
 
@@ -111,36 +110,35 @@ module.exports = {
     // No icon pack path defined and an app = legacy case where the app icons must be merged into the 'frost' icon pack
     const isLegacy = !_.has(this, 'app.options.iconPackOptions.path') && !isAddon
 
-    const iconPacks = _.chain(this.project.addonPackages)
-      .pickBy((addonPackage) => {
-        if (_.has(addonPackage.pkg, 'ember-frost-icon-pack')) {
-          return true
-        }
-      })
-      .map((addonPackage) => {
-        const iconPack = addonPackage.pkg['ember-frost-icon-pack']
-        const iconPackPath = iconPack.path || 'svgs'
-        const addonIconPackPath = path.join(addonPackage.path, iconPackPath)
+    const picked = _.pickBy(this.project.addonPackages, (addonPackage) => {
+      if (_.has(addonPackage.pkg, 'ember-frost-icon-pack')) {
+        return true
+      }
+    })
 
-        var svgFunnel
-        if (iconPack.name === 'frost' && isLegacy && fs.existsSync(path.join(this.project.root, 'public/svgs'))) {
-          svgFunnel = mergeTrees([
-            new Funnel(addonIconPackPath, {
-              include: [new RegExp(/\.svg$/)]
-            }),
-            new Funnel(path.join(this.project.root, 'public/svgs'), {
-              include: [new RegExp(/\.svg$/)]
-            })
-          ])
-        } else {
-          svgFunnel = new Funnel(addonIconPackPath, {
+    const iconPacks = _.map(picked, (addonPackage) => {
+      const iconPack = addonPackage.pkg['ember-frost-icon-pack']
+      const iconPackPath = iconPack.path || 'svgs'
+      const addonIconPackPath = path.join(addonPackage.path, iconPackPath)
+
+      var svgFunnel
+      if (iconPack.name === 'frost' && isLegacy && fs.existsSync(path.join(this.project.root, 'public/svgs'))) {
+        svgFunnel = mergeTrees([
+          new Funnel(addonIconPackPath, {
+            include: [new RegExp(/\.svg$/)]
+          }),
+          new Funnel(path.join(this.project.root, 'public/svgs'), {
             include: [new RegExp(/\.svg$/)]
           })
-        }
+        ])
+      } else {
+        svgFunnel = new Funnel(addonIconPackPath, {
+          include: [new RegExp(/\.svg$/)]
+        })
+      }
 
-        return new SVGStore(svgFunnel, { outputFile: `/assets/icon-packs/${iconPack.name}.svg`, flatten: false })
-      })
-      .value()
+      return new SVGStore(svgFunnel, { outputFile: `/assets/icon-packs/${iconPack.name}.svg`, flatten: false })
+    })
 
     const localIconPackName = _.get(this, 'app.options.iconPackOptions.name', isAddon ? 'dummy' : 'app')
     const localIconPackPath = path.join(this.project.root,
