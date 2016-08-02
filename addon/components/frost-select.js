@@ -230,7 +230,7 @@ export default Component.extend(PropTypeMixin, {
       return [attrName, attrValue]
     })
     .filter(([name, value]) => value !== undefined)
-    .zipObject()
+    .fromPairs()
     .value()
 
     this.get('reduxStore').dispatch(resetDropDown(reduxAttrs))
