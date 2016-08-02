@@ -156,7 +156,7 @@ module.exports = {
 
     const svgPath = path.join(this.project.root, 'public/svgs')
     if (isLegacy && fs.existsSync(svgPath)) {
-      iconNames['frost'] = iconNames['frost'].concat(this.flattenIcons([], '', svgPath))
+      iconNames['frost'] = (iconNames['frost'] || []).concat(this.flattenIcons([], '', svgPath))
     } else if (fs.existsSync(localIconPackPath)) {
       iconNames[localIconPackName] = this.flattenIcons([], '', localIconPackPath)
     }
