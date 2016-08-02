@@ -1,3 +1,7 @@
+# 0.21.1
+
+* **Fixed** bug in `treeForAddon` that can affect consumers.
+
 # 0.21.0
 No CHANGELOG section found in Pull Request description.
 Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
