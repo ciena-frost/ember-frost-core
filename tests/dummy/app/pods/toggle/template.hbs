@@ -11,93 +11,148 @@
         <div class='example'>
             <div class='title'>action syntax</div>
             <div class='demo'>
-              {{! BEGIN-SNIPPET button-primary-small }}
-              {{frost-toggle-button
-              onToggle=(action 'toggleHandler')}}
+              {{! BEGIN-SNIPPET toggle-action }}
+              {{frost-toggle
+                value=value1
+                onClick=(action 'toggleHandler1')
+              }}
               {{! END-SNIPPET }}
             </div>
             <div class='snippet'>
-              {{code-snippet name='button-primary-small.hbs'}}
+              {{code-snippet name='toggle-action.hbs'}}
             </div>
         </div>
 
         <div class='example'>
             <div class='title'>mut syntax</div>
             <div class='demo'>
-              {{! BEGIN-SNIPPET button-primary-medium }}
-              {{frost-toggle-button
-              toggled=isButtonToggled
-              onToggle=(mut isButtonToggled)
+              {{! BEGIN-SNIPPET toggle-mut }}
+              {{frost-toggle
+                value=value2
+                onClick=(mut value2)
               }}
               {{! END-SNIPPET }}
             </div>
             <div class='snippet'>
-              {{code-snippet name='button-primary-medium.hbs'}}
+              {{code-snippet name='toggle-mut.hbs'}}
             </div>
         </div>
 
+        <div class='example'>
+            <div class='title'>action mut syntax</div>
+            <div class='demo'>
+              {{! BEGIN-SNIPPET toggle-action-mut }}
+              {{frost-toggle
+                value=value3
+                onClick=(action (mut value3) value="target.value")
+              }}
+              {{! END-SNIPPET }}
+            </div>
+            <div class='snippet'>
+              {{code-snippet name='toggle-action-mut.hbs'}}
+            </div>
+        </div>
 
         <div class='example'>
             <div class='title'>label</div>
             <div class='demo'>
-              {{! BEGIN-SNIPPET button-primary-large }}
-              {{frost-toggle-button
-              onLabel='6500'
-              offLabel='5400'
-              onToggle=(action 'toggleHandler')
+              {{! BEGIN-SNIPPET toggle-label }}
+              {{frost-toggle
+                value=value4
+                trueLabel='En'
+                falseLabel='Fr'
+                onClick=(action (mut value4) value="target.value")
               }}
               {{! END-SNIPPET }}
             </div>
             <div class='snippet'>
-              {{code-snippet name='button-primary-large.hbs'}}
+              {{code-snippet name='toggle-label.hbs'}}
             </div>
         </div>
 
         <div class='example'>
             <div class='title'>value</div>
             <div class='demo'>
-              {{! BEGIN-SNIPPET button-primary-disabled }}
-              {{frost-toggle-button
-              onValue='on Value'
-              offValue='off Value'
-              onToggle=(action 'toggleHandler')}}
+              {{! BEGIN-SNIPPET toggle-value }}
+              {{frost-toggle
+                value=value5
+                trueValue='true Value'
+                falseValue='false Value'
+                onClick=(action 'toggleHandler5')
+              }}
               {{! END-SNIPPET }}
             </div>
             <div class='snippet'>
-              {{code-snippet name='button-primary-disabled.hbs'}}
+              {{code-snippet name='toggle-value.hbs'}}
             </div>
         </div>
 
         <div class='example'>
             <div class='title'>label and value</div>
             <div class='demo'>
-              {{! BEGIN-SNIPPET button-primary-disabled-1 }}
-              {{frost-toggle-button
-              onLabel='true'
-              offLabel='false'
-              onValue='on Value'
-              offValue='off Value'
-              onToggle=(action 'toggleHandler')}}
+              {{! BEGIN-SNIPPET toggle-value-label }}
+              {{frost-toggle
+                value=value6
+                trueLabel='true'
+                falseLabel='false'
+                trueValue='on Value'
+                falseValue='off Value'
+                onClick=(action 'toggleHandler6')
+              }}
               {{! END-SNIPPET }}
             </div>
             <div class='snippet'>
-              {{code-snippet name='button-primary-disabled-1.hbs'}}
+              {{code-snippet name='toggle-value-label.hbs'}}
+            </div>
+        </div>
+
+        <div class='example'>
+            <div class='title'>toggled on init</div>
+            <div class='demo'>
+              {{! BEGIN-SNIPPET toggle-init }}
+              {{frost-toggle
+                value=value7
+                trueValue='trueValue'
+                falseValue='falseValue'
+                onClick=(action 'toggleHandler7')
+              }}
+              {{! END-SNIPPET }}
+            </div>
+            <div class='snippet'>
+              {{code-snippet name='toggle-init.hbs'}}
+            </div>
+        </div>
+
+        <div class='example'>
+            <div class='title'>value mapping</div>
+            <div class='demo'>
+              {{! BEGIN-SNIPPET toggle-mapping }}
+              {{frost-toggle
+              value=value8
+              trueValue='enable'
+              onClick=(mut value8)
+              }}
+              {{input value=value8}}
+              {{! END-SNIPPET }}
+            </div>
+            <div class='snippet'>
+              {{code-snippet name='toggle-mapping.hbs'}}
             </div>
         </div>
 
         <div class='example'>
             <div class='title'>disabled</div>
             <div class='demo'>
-              {{! BEGIN-SNIPPET button-primary-disabled-2 }}
-              {{frost-toggle-button
-              disabled=true
-              toggled=isButtonToggled2
-              onToggle=(mut isButtonToggled2)
+              {{! BEGIN-SNIPPET toggle-disabled }}
+              {{frost-toggle
+                value=value9
+                disabled=true
+                onClick=(mut value9)
               }}
               {{! END-SNIPPET }}
             </div>
             <div class='snippet'>
-              {{code-snippet name='button-primary-disabled-2.hbs'}}
+              {{code-snippet name='toggle-disabled.hbs'}}
             </div>
         </div>
     </div>
