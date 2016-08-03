@@ -148,7 +148,7 @@ export function itemClassNames (index, hoveredItem, selectedItem) {
  * @returns {SelectDisplayItem[]} The transformed list of display items
  */
 function updateClassNames (displayItems, hoveredItem, selectedItem) {
-  _.each(displayItems, function (item, index, list) {
+  _.forEach(displayItems, function (item, index, list) {
     const className = itemClassNames(item.index, hoveredItem, selectedItem, list.length)
     Ember.set(item, 'className', className)
   })
@@ -288,7 +288,7 @@ export default function reducer (state, action) {
       }
       break
     case RESET_DROPDOWN:
-      nextState = _.defaults(_.pick(action.state, _.negate(_.isUndefined)), state)
+      nextState = _.defaults(_.pickBy(action.state, _.negate(_.isUndefined)), state)
       if (_.isArray(nextState.selectedItem)) {
         nextState.selectedItem = nextState.selectedItem[0]
       }

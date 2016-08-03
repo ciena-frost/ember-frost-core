@@ -2,24 +2,27 @@ import _ from 'lodash'
 import Ember from 'ember'
 const {Component, isEmpty, run} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-checkbox'
 
-export default Component.extend({
-  // ==========================================================================
-  // Dependencies
-  // ==========================================================================
+export default Component.extend(PropTypeMixin, {
+  // == Dependencies ==========================================================
 
-  // ==========================================================================
-  // Properties
-  // ==========================================================================
+  // == Properties ============================================================
 
   classNames: ['frost-checkbox'],
   classNameBindings: ['sizeClass'],
   layout,
 
-  // ==========================================================================
-  // Computed Properties
-  // ==========================================================================
+  propTypes: {
+    hook: PropTypes.string
+  },
+
+  getDefaultProps () {
+    return {}
+  },
+
+  // == Computed properties  ===================================================
 
   @computed('checked')
   /**
@@ -53,9 +56,7 @@ export default Component.extend({
     return size || 'small'
   },
 
-  // ==========================================================================
-  // Functions
-  // ==========================================================================
+  // == Functions =============================================================
 
   keyPress (e) {
     if (e.keyCode === 32) {
@@ -78,9 +79,7 @@ export default Component.extend({
     }
   },
 
-  // ==========================================================================
-  // Events
-  // ==========================================================================
+  // == Events ================================================================
 
   _onFocus: Ember.on('focusIn', function (e) {
     // If an onFocus handler is defined, call it
@@ -89,9 +88,7 @@ export default Component.extend({
     }
   }),
 
-  // ==========================================================================
-  // Actions
-  // ==========================================================================
+  // == Actions ===============================================================
 
   actions: {
     onBlur () {

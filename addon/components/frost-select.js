@@ -86,6 +86,7 @@ export default Component.extend(PropTypeMixin, {
     disabled: PropTypes.bool,
     error: PropTypes.bool,
     filter: PropTypes.string,
+    hook: PropTypes.string,
     hovered: PropTypes.number,
     maxListHeight: PropTypes.number,
     selected: PropTypes.oneOfType([
@@ -229,7 +230,7 @@ export default Component.extend(PropTypeMixin, {
       return [attrName, attrValue]
     })
     .filter(([name, value]) => value !== undefined)
-    .zipObject()
+    .fromPairs()
     .value()
 
     this.get('reduxStore').dispatch(resetDropDown(reduxAttrs))

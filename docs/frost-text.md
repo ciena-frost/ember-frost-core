@@ -16,6 +16,7 @@
 | `disabled` | `boolean` | `false` | **default** - normal text field |
 | | | `true` | disabled text field |
 | `class` | `string` | `error` | sets text field to error state |
+| `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `onBlur` | `string` | `<action-name>` | triggers associated action when component loses focus |
 | `onInput` | `string` | `<action-name>` | triggers associated action when text is entered |
 | `onFocus` | `string` | `<action-name>` | triggers associated action when component receives focus |

@@ -1,5 +1,5 @@
 # frost-button <br />
-  
+
  * [API](#api)
  * [Examples](#examples)
 
@@ -20,6 +20,7 @@
 | |  | `true` | sets focus on button |
 | `disabled` | `boolean` | `false` | **default** - basic button |
 |  |  | `true` | disabled button |
+| `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `onClick` |`string` | `<action-name>` | triggers associated action when the button is clicked |
 
 

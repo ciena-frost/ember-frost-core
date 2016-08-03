@@ -20,6 +20,7 @@ export default Component.extend(PropTypeMixin, {
   tagName: 'svg',
 
   propTypes: {
+    hook: PropTypes.string,
     pack: PropTypes.string,
     icon: PropTypes.string.isRequired
   },

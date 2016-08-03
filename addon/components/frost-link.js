@@ -48,13 +48,9 @@ function addDesignClass (design, classes) {
 }
 
 export default LinkComponent.extend(PropTypeMixin, {
-  // ==========================================================================
-  // Dependencies
-  // ==========================================================================
+  // == Dependencies ==========================================================
 
-  // ==========================================================================
-  // Properties
-  // ==========================================================================
+  // == Properties ============================================================
 
   attributeBindings: [
     'disabled'
@@ -69,6 +65,7 @@ export default LinkComponent.extend(PropTypeMixin, {
 
   propTypes: {
     design: PropTypes.oneOf(validDesigns),
+    hook: PropTypes.string,
     icon: PropTypes.string,
     priority: PropTypes.oneOf(validPriorities),
     size: PropTypes.oneOf(validSizes),

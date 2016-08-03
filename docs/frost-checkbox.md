@@ -19,6 +19,7 @@ A check in a box, a checkbox
 | `disabled` | `boolean` | `false` | **default** - basic checkbox |
 |  |  | `true` | disabled checkbox |
 | `class` | `string` | `error` | sets checkbox to error state |
+| `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `onInput` |`string` | `<action-name>` | The action callback to call when the value of the checkbox changes as the user clicks |
 
 ## Examples

@@ -8,9 +8,10 @@ import {
   timeout
 } from 'ember-concurrency'
 import FrostEventsProxy from '../mixins/frost-events-proxy'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-password'
 
-export default Component.extend(FrostEventsProxy, {
+export default Component.extend(FrostEventsProxy, PropTypeMixin, {
 
   // == Properties ============================================================
 
@@ -20,10 +21,22 @@ export default Component.extend(FrostEventsProxy, {
   classNameBindings: [
     'revealable'
   ],
-  isRevealed: false,
   layout,
-  revealable: false,
-  tabindex: 0,
+
+  propTypes: {
+    hook: PropTypes.string,
+    isRevealed: PropTypes.bool,
+    revealable: PropTypes.bool,
+    tabindex: PropTypes.number
+  },
+
+  getDefaultProps () {
+    return {
+      isRevealed: false,
+      revealable: false,
+      tabindex: 0
+    }
+  },
 
   // == Computed properties  ===================================================
 

@@ -52,13 +52,9 @@ function addPriorityClass (priority, classes) {
 }
 
 export default Component.extend(PropTypeMixin, {
-  // ==========================================================================
-  // Dependencies
-  // ==========================================================================
+  // == Dependencies ==========================================================
 
-  // ==========================================================================
-  // Properties
-  // ==========================================================================
+  // == Properties ============================================================
 
   attributeBindings: [
     'autofocus',
@@ -85,6 +81,7 @@ export default Component.extend(PropTypeMixin, {
     autofocus: PropTypes.bool,
     design: PropTypes.string,
     disabled: PropTypes.bool,
+    hook: PropTypes.string,
     icon: PropTypes.string,
     pack: PropTypes.string,
     priority: PropTypes.string,
@@ -113,9 +110,7 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
-  // ==========================================================================
-  // Computed Properties
-  // ==========================================================================
+  // == Computed Properties ===================================================
 
   @readOnly
   @computed('icon', 'subtext', 'text')
@@ -214,13 +209,9 @@ export default Component.extend(PropTypeMixin, {
     return classes.join(' ')
   },
 
-  // ==========================================================================
-  // Functions
-  // ==========================================================================
+  // == Functions =============================================================
 
-  // ==========================================================================
-  // Events
-  // ==========================================================================
+  // == Events ================================================================
 
   onclick: Ember.on('click', function (event) {
     if (!ViewUtils.isSimpleClick(event)) {
@@ -239,7 +230,5 @@ export default Component.extend(PropTypeMixin, {
     }
   })
 
-  // ==========================================================================
-  // Actions
-  // ==========================================================================
+  // == Actions ===============================================================
 })
