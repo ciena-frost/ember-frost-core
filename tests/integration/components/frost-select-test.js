@@ -6,11 +6,9 @@ import {describeComponent, it} from 'ember-mocha'
 import {beforeEach, describe} from 'mocha'
 import sinon from 'sinon'
 import hbs from 'htmlbars-inline-precompile'
-import {$hook, initialize} from 'ember-hook'
 
 const selectedTestTemplate = hbs`{{frost-select
   data=data
-  hook=hook
   greeting=greeting
   onChange=onChange
   placeholder=placeholder
@@ -64,10 +62,7 @@ describeComponent(
     let dropDown
 
     beforeEach(function () {
-      initialize()
-
       props = {
-        hook: 'my-select',
         selected: 1,
         onChange: sinon.spy(),
         placeholder: 'Select something already',
@@ -98,25 +93,15 @@ describeComponent(
       expect(this.$('.frost-select')).to.have.length(1)
     })
 
-    it('hook grabs the select as expected', function () {
-      expect($hook('my-select').hasClass('frost-select')).to.be.true
-
-      expect($hook('my-select-input').prop('type')).to.be.eql('text')
-
-      expect($hook('my-select-list').find('li')).to.have.length(3)
-      
-      expect($hook('my-select-item-0')).to.have.length(1)
-    })
-
     it('lists all passed data records', function () {
-      expect($hook('my-select-list').find('li').length).to.eql(props.data.length)
+      expect(this.$('.frost-select li').length).to.eql(props.data.length)
     })
 
     it('opens when arrow clicked', () => {
       run(() => {
         this.$('.frost-select .down-arrow').click()
       })
-      expect($hook('my-select').hasClass('open')).to.be.true
+      expect(this.$('.frost-select').hasClass('open')).to.be.true
     })
 
     it('closes when down arrow clicked a second time', () => {
@@ -125,7 +110,7 @@ describeComponent(
         this.$('.frost-select .down-arrow').click()
       })
 
-      expect($hook('my-select').hasClass('open')).to.be.false
+      expect(this.$('.frost-select').hasClass('open')).to.be.false
     })
 
     // FIXME: figure out why test is failing
@@ -137,30 +122,26 @@ describeComponent(
     })*/
 
     it('highlights list items on mouse over', function () {
-      let listItem
       run(() => {
         this.$('.frost-select').click()
-        listItem = $hook('my-select-item-0')
+        let listItem = this.$('.frost-select li:first-child')
         listItem.mouseover()
       })
-      run.next(this, () => {
-        listItem = $hook('my-select-item-0')
-        expect(listItem.hasClass('hover')).to.be.true
-      })
+      let listItem = this.$('.frost-select li:first-child')
+      expect(listItem.hasClass('hover')).to.be.true
     })
 
     it('highlights list items when down-arrowed to', function () {
-
       run(() => {
-        let dropDown = $hook('my-select')
+        let dropDown = this.$('.frost-select')
         keyUp(dropDown, 'down')
       })
-      let listItem = $hook('my-select-item-0')
+      let listItem = this.$('.frost-select li:first-child')
       expect(listItem.hasClass('hover')).to.be.true
     })
 
     it('highlights list items when up-arrowed to', function () {
-      let dropDown = $hook('my-select')
+      let dropDown = this.$('.frost-select')
       run(() => {
         keyUp(dropDown, 'down')
         keyUp(dropDown, 'down')
@@ -172,12 +153,12 @@ describeComponent(
         keyUp(dropDown, 'up')
       })
 
-      let listItem = $hook('my-select-item-0')
+      let listItem = this.$('.frost-select li:first-child')
       expect(listItem.hasClass('hover')).to.be.true
     })
 
     it('closes when esc is pressed', function () {
-      let dropDown = $hook('my-select')
+      let dropDown = this.$('.frost-select')
 
       dropDown.click()
       keyUp(dropDown, 'esc')
@@ -198,45 +179,45 @@ describeComponent(
         keyUp(dropDown, 13)
       })
 
-      let dropDownInput = $hook('my-select-input')// this.$('.frost-select input')
+      let dropDownInput = this.$('.frost-select input')
       let value = dropDownInput.val()
       expect(value).to.eql(props.data[0].label)
     })
 
     it('selects the hovered item when it is clicked', function () {
       run(() => {
-        let listItem = $hook('my-select-item-0')
+        let listItem = this.$('.frost-select li:first-child')
         listItem.click()
       })
-      let listItem = $hook('my-select-item-0')
+      let listItem = this.$('.frost-select li:first-child')
       expect(listItem.hasClass('selected')).to.be.true
     })
 
     it('filters the list when input is typed into', function () {
       run(() => {
-        $hook('my-select-input').first()
+        this.$('.frost-select input').first()
           .val('w')
           .trigger('input')
       })
-      let listItems = $hook('my-select-list').find('li')
+      let listItems = this.$('.frost-select li')
       expect(listItems.length).to.eql(1)
     })
 
     it('hovers the only available one if filter leaves one', function () {
       run(() => {
-        $hook('my-select-input').first()
+        this.$('.frost-select input').first()
           .val('w')
           .trigger('input')
       })
 
-      let listItems = $hook('my-select-list').find('li')
+      let listItems = this.$('.frost-select li')
       expect(listItems.length).to.eql(1)
       expect(listItems.hasClass('hover')).to.be.true
     })
 
     it('calls the supplied callback when an item is selected', function () {
       run(() => {
-        let listItem = $hook('my-select-item-0')
+        let listItem = this.$('.frost-select li:first-child')
         listItem.click()
       })
       expect(props.onChange.called).to.be.true
@@ -244,7 +225,7 @@ describeComponent(
 
     it('goes into error state when something non-existant is typed', function () {
       run(() => {
-        let input = $hook('my-select-input')
+        let input = this.$('.frost-select input')
         this.$('.frost-select').addClass('open')
         input.val('zxcv').trigger('input')
       })
@@ -270,7 +251,7 @@ describeComponent(
 
     it('sets the prompt to the selected value when the drop down list is closed', function () {
       run(() => {
-        let input = $hook('my-select-input')
+        let input = this.$('.frost-select input')
         keyUp(dropDown, 'down')
         keyUp(dropDown, 13) // Enter key, select the item
         input.focus()
@@ -279,7 +260,7 @@ describeComponent(
       })
 
       let select = this.$('.frost-select')
-      let input = $hook('my-select-input')
+      let input = this.$('.frost-select input')
       expect(select.hasClass('open')).to.be.false
       expect(input.val()).to.eql('Raekwon')
     })
@@ -301,7 +282,7 @@ describeComponent(
     })
 
     it('supports placeholder', function () {
-      const $input = $hook('my-select-input')
+      const $input = this.$('.frost-select input')
       expect($input.attr('placeholder')).to.eql('Select something already')
     })
 
