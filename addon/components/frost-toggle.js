@@ -9,7 +9,7 @@ export default Component.extend(FrostEventsProxy, {
 
   // == Properties ============================================================
   attributeBindings: [
-    'toggled',
+    '_isToggled:toggled',
     'disabled'
   ],
   classNameBindings: [
@@ -18,7 +18,6 @@ export default Component.extend(FrostEventsProxy, {
   classNames: ['frost-toggle'],
   layout: layout,
   size: 'medium',
-  toggled: false,
 
   propTypes: {
     autofocus: PropTypes.bool,
