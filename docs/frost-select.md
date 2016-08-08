@@ -24,6 +24,9 @@ The select component is accessible using ember-hook with the top level hook name
 * List hook - `$hook('<hook-name>-list').find('li')`
 * List item hook - `$hook('<hook-name>-item-<index>')'`
 
+The multi-select component has all of the hooks listed above from the select component and adds one additional -
+* List checkbox item hook - `$hook('<hook-name>-checkbox-item-<index>')'`
+
 ## Examples
 Assuming the following data is available in the consuming context:
 ```javascript
