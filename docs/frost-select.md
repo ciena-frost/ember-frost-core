@@ -18,6 +18,11 @@
 | `onInput`      | `string` | `<action-name>` | The action callback to call when the value of the filter changes as the user types |
 | `placeholder` | `string` | | Placeholder text for when nothing is selected. |
 
+## Testing with ember-hook
+The select component is accessible using ember-hook with the top level hook name or you can access the internal components as well -
+* Input field hook - `$hook('<hook-name>-input')`
+* List hook - `$hook('<hook-name>-list').find('li')`
+* List item hook - `$hook('<hook-name>-item-<index>')'`
 
 ## Examples
 Assuming the following data is available in the consuming context:
