@@ -21,7 +21,7 @@
 ## Testing with ember-hook
 The select component is accessible using ember-hook with the top level hook name or you can access the internal components as well -
 * Input field hook - `$hook('<hook-name>-input')`
-* List hook - `$hook('<hook-name>-list').find('li')`
+* List hook - `$hook('<hook-name>-list')`
 * List item hook - `$hook('<hook-name>-item-<index>')'`
 
 The multi-select component has all of the hooks listed above from the select component and adds one additional -
