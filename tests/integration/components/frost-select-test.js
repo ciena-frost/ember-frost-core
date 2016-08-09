@@ -2,6 +2,7 @@ import _ from 'lodash'
 import Ember from 'ember'
 const {$, run} = Ember
 import {expect} from 'chai'
+import {$hook, initialize} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
 import {beforeEach, describe} from 'mocha'
 import sinon from 'sinon'
@@ -10,6 +11,7 @@ import hbs from 'htmlbars-inline-precompile'
 const selectedTestTemplate = hbs`{{frost-select
   data=data
   greeting=greeting
+  hook=hook
   onChange=onChange
   placeholder=placeholder
   selected=selected
@@ -62,7 +64,10 @@ describeComponent(
     let dropDown
 
     beforeEach(function () {
+      initialize()
+
       props = {
+        hook: 'my-select',
         selected: 1,
         onChange: sinon.spy(),
         placeholder: 'Select something already',
@@ -91,6 +96,16 @@ describeComponent(
 
     it('renders', function () {
       expect(this.$('.frost-select')).to.have.length(1)
+    })
+
+    it('hook grabs the select as expected', function () {
+      expect($hook('my-select').hasClass('frost-select')).to.be.true
+
+      expect($hook('my-select-input').prop('type')).to.be.eql('text')
+
+      expect($hook('my-select-list').find('li')).to.have.length(3)
+
+      expect($hook('my-select-item-0')).to.have.length(1)
     })
 
     it('lists all passed data records', function () {

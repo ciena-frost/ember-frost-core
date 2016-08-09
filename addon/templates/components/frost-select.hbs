@@ -3,6 +3,7 @@
   autofocus={{autofocus}}
   class="trigger"
   disabled={{disabled}}
+  data-test={{hook (concat hook '-input')}}
   onFocus={{action 'onFocus'}}
   onBlur={{action 'onBlur'}}
   onInput={{action 'onChange'}}
@@ -20,10 +21,11 @@
 <div class="drop-down-container">
   <div class="list-container">
     <div class="up-arrow"></div>
-    <ul ref="container" style={{containerStyle}}>
-      {{#each displayItems as |item|}}
+    <ul ref="container" style={{containerStyle}} data-test={{hook (concat hook '-list')}}>
+      {{#each displayItems as |item index|}}
         {{#frost-select-li
           class=item.className
+          hook=(concat hook '-item-' index)
           data=item
           onSelect=(action 'onSelect')
           onItemOver=(action 'onItemOver')
