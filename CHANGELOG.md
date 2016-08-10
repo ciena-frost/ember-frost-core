@@ -1,3 +1,9 @@
+# 0.22.1
+
+* **Updated** `ember-cli-sass`  to float on the major
+* **Updated** CHANGELOG.md file to remove Reviewable note.
+
+
 # 0.22.0
 
 * **Added** hooks for testing into frost-select and frost-multi-select
