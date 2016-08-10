@@ -4,16 +4,9 @@
 * **Added** tests to verify hooks in integration tests for frost-select and frost-multi-select
 * **Added** documentation on the hook usage for frost-select and frost-multi-select
 
-
 # 0.21.3
 
 * **Updated** temporarily restrict `ember-cli-sass` from going above version 5.4.0
-
-<!-- Reviewable:start -->
----
-This change is [<img src="https://reviewable.io/review_button.svg" height="34" align="absmiddle" alt="Reviewable"/>](https://reviewable.io/reviews/ciena-frost/ember-frost-core/162)
-<!-- Reviewable:end -->
-
 
 # 0.21.2
 No CHANGELOG section found in Pull Request description.
