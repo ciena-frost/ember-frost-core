@@ -1,6 +1,5 @@
-import _ from 'lodash'
 import Ember from 'ember'
-const {Component, Logger, ViewUtils} = Ember
+const {Component, Logger, typeOf, ViewUtils} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-button'
@@ -218,7 +217,7 @@ export default Component.extend(PropTypeMixin, {
       return true
     }
 
-    if (!this.get('disabled') && _.isFunction(this.attrs.onClick)) {
+    if (!this.get('disabled') && typeOf(this.attrs.onClick) === 'function') {
       this.attrs.onClick(this.get('id'))
     }
   }),

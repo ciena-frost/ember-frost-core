@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import Ember from 'ember'
 const {deprecate, LinkComponent, Logger} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
@@ -25,7 +24,7 @@ const validSizes = [
 function addDesignClass (design, classes) {
   deprecate(
     '\'in-line\' design style has been deprecated in favour of \'inline\'',
-    !_.eq(design, 'in-line'),
+    design !== 'in-line',
     {
       id: 'frost-debug.deprecate-design-in-line-style',
       until: '1.0.0',

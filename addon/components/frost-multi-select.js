@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import computed, {readOnly} from 'ember-computed-decorators'
 import FrostSelect from './frost-select'
 import layout from '../templates/components/frost-multi-select'
@@ -58,9 +57,9 @@ export default FrostSelect.extend({
   },
 
   getValues () {
-    const selected = this.get('selectedItems')
+    const selected = this.get('selectedItems') || []
     const state = this.get('reduxStore').getState()
-    return _.map(selected, (item) => {
+    return selected.map((item) => {
       return state.baseItems[item].value
     })
   },

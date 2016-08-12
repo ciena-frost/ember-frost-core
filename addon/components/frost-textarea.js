@@ -1,6 +1,5 @@
-import _ from 'lodash'
 import Ember from 'ember'
-const {Component} = Ember
+const {Component, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-textarea'
@@ -61,7 +60,7 @@ export default Component.extend(PropTypeMixin, {
   oninput: Ember.on('input', function (e) {
     const onInput = this.attrs['onInput']
 
-    if (_.isFunction(onInput)) {
+    if (typeOf(onInput) === 'function') {
       onInput({
         id: this.get('id'),
         value: e.target.value

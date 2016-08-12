@@ -1,4 +1,3 @@
-import _ from 'lodash'
 import Ember from 'ember'
 import iconPacks from 'ember-frost-core/icon-packs'
 
@@ -15,10 +14,10 @@ export default Controller.extend({
   ],
   backgroundColor: 'bg-tile-color',
   iconPacks: computed('iconPacks', () => {
-    return _.map(_.keys(iconPacks), (name) => {
+    return Object.keys(iconPacks).map((name) => {
       return {
-        name: _.capitalize(name),
-        icons: _.map(iconPacks[name], (icon) => {
+        name: Ember.String.capitalize(name),
+        icons: iconPacks[name].map((icon) => {
           return {
             name: icon,
             markdown: `\`${icon}\``

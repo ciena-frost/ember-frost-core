@@ -1,6 +1,5 @@
-import _ from 'lodash'
 import Ember from 'ember'
-const {$, run} = Ember
+const {$, run, typeOf} = Ember
 import {expect} from 'chai'
 import {$hook, initialize} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
@@ -34,7 +33,7 @@ const keyCodes = {
 }
 
 function keyDown ($selection, keyCode) {
-  if (_.isString(keyCode)) {
+  if (typeOf(keyCode) === 'string') {
     keyCode = keyCodes[keyCode]
   }
   let event = $.Event('keydown')
@@ -44,7 +43,7 @@ function keyDown ($selection, keyCode) {
 }
 
 function keyUp ($selection, keyCode) {
-  if (_.isString(keyCode)) {
+  if (typeOf(keyCode) === 'string') {
     keyCode = keyCodes[keyCode]
   }
   let event = $.Event('keyup')

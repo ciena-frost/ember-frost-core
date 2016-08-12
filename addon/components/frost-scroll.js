@@ -1,6 +1,5 @@
-import _ from 'lodash'
 import Ember from 'ember'
-const {Component, on, run} = Ember
+const {Component, on, run, typeOf} = Ember
 
 const scrollYEndContext = {
   name: 'on-scroll-y-end'
@@ -35,7 +34,7 @@ export default Component.extend({
       window.Ps.initialize(this.$()[0])
     })
 
-    if (_.isFunction(this.attrs['on-scroll-y-end'])) {
+    if (typeOf(this.attrs['on-scroll-y-end']) === 'function') {
       this.$().on('ps-y-reach-end', () => {
         run.debounce(scrollYEndContext, this.attrs['on-scroll-y-end'], debouncePeriod, true)
       })
