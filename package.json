@@ -158,7 +158,7 @@
   "ember-addon": {
     "after": [
       "ember-computed-decorators",
-      "ember-lodash-shim",
+      "ember-lodash",
       "ember-one-way-controls"
     ],
     "configPath": "tests/dummy/config"
