@@ -1,3 +1,7 @@
+# 0.22.2
+
+* **Removed** most uses of `lodash` methods in favor of ES6 and Ember methods.
+
 # 0.22.1
 
 * **Updated** `ember-cli-sass`  to float on the major
