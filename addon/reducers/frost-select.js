@@ -1,4 +1,5 @@
 import Ember from 'ember'
+const {assign} = Ember
 import {
   SELECT_ITEM,
 	CLICK_ARROW,
@@ -106,7 +107,7 @@ function select (state, itemIndex) {
   // Close list
   const closeState = close(nextState)
 
-  return _.assign(nextState, closeState)
+  return assign(nextState, closeState)
 }
 
 /**
@@ -148,7 +149,7 @@ export function itemClassNames (index, hoveredItem, selectedItem) {
  * @returns {SelectDisplayItem[]} The transformed list of display items
  */
 function updateClassNames (displayItems, hoveredItem, selectedItem) {
-  _.forEach(displayItems, function (item, index, list) {
+  (displayItems || []).forEach(function (item, index, list) {
     const className = itemClassNames(item.index, hoveredItem, selectedItem, list.length)
     Ember.set(item, 'className', className)
   })
@@ -230,7 +231,7 @@ export default function reducer (state, action) {
       if ((action.itemIndex === undefined || action.itemIndex === null) && state.displayItems.length === 1) {
         hoverState = setHover(state, 0)
       }
-      nextState = _.assign({
+      nextState = assign({
         open: true
       }, hoverState)
       break
@@ -289,7 +290,7 @@ export default function reducer (state, action) {
       break
     case RESET_DROPDOWN:
       nextState = _.defaults(_.pickBy(action.state, _.negate(_.isUndefined)), state)
-      if (_.isArray(nextState.selectedItem)) {
+      if (Array.isArray(nextState.selectedItem)) {
         nextState.selectedItem = nextState.selectedItem[0]
       }
       if (nextState.selectedItem < 0) {

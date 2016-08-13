@@ -1,6 +1,5 @@
-import _ from 'lodash'
 import Ember from 'ember'
-const {Component, deprecate} = Ember
+const {Component, deprecate, get} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-icon'
@@ -52,10 +51,12 @@ export default Component.extend(PropTypeMixin, {
   // ==========================================================================
 
   /* Ember.Component method */
-  didReceiveAttrs ({newAttrs}) {
+  didReceiveAttrs (attrs) {
+    const icon = get(attrs, 'newAttrs.icon.value') || ''
+
     deprecate(
       'nested icon paths have been deprecated in favor of flat icon packs',
-      !_.includes(_.get(newAttrs, 'icon.value'), '/'),
+      icon.indexOf('/') === -1,
       {
         id: 'frost-debug.deprecate-nested-icon-paths',
         until: '1.0.0',

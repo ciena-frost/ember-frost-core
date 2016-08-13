@@ -1,8 +1,7 @@
 import Ember from 'ember'
-const {Component} = Ember
+const {Component, typeOf} = Ember
 import layout from '../templates/components/frost-select-li'
 import FrostEvents from '../mixins/frost-events'
-import _ from 'lodash'
 
 export default Component.extend(FrostEvents, {
   tagName: 'li',
@@ -14,14 +13,14 @@ export default Component.extend(FrostEvents, {
     event.stopPropagation()
     const data = this.get('data')
     const onSelect = this.get('onSelect')
-    if (_.isFunction(onSelect)) {
+    if (typeOf(onSelect) === 'function') {
       onSelect(data)
     }
   },
   mouseEnter () {
     const data = this.get('data')
     const onItemOver = this.get('onItemOver')
-    if (_.isFunction(onItemOver)) {
+    if (typeOf(onItemOver) === 'function') {
       onItemOver(data)
     }
   }

@@ -160,7 +160,7 @@ function selectItem (state, selectedItem) {
  * @returns {number[]} List of indices of the selected items
  */
 function itemsFromValue (baseItems, value) {
-  if (!_.isArray(value)) {
+  if (!Array.isArray(value)) {
     value = [value]
   }
   return _.chain(value)
