@@ -81,6 +81,8 @@ module.exports = {
       this.app = app = app.app
     }
 
+    this.eachAddonInvoke('included', [app]);
+
     this._super.included(app)
 
     if (app) {
