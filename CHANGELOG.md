@@ -1,3 +1,13 @@
+# 0.23.1
+
+* **Updated** `ember-hook` dependency and blueprint to latest version
+
+<!-- Reviewable:start -->
+---
+This change is [<img src="https://reviewable.io/review_button.svg" height="34" align="absmiddle" alt="Reviewable"/>](https://reviewable.io/reviews/ciena-frost/ember-frost-core/172)
+<!-- Reviewable:end -->
+
+
 # 0.23.0
 
 * Added onScrollUp, onScrollDown, onScrollYStart, onScrollYEnd
