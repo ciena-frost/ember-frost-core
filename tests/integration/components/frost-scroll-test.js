@@ -34,7 +34,7 @@ describeComponent(
       expect(this.$()).to.have.length(1)
     })
 
-    describe('actions', function () {
+    describe.skip('actions', function () {
       beforeEach(function () {
         sandbox = sinon.sandbox.create()
 
