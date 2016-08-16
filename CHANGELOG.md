@@ -1,3 +1,7 @@
+# 0.24.0
+
+* Added a first-pass version of a frost component blueprint
+
 # 0.23.1
 
 * **Updated** `ember-hook` dependency and blueprint to latest version
