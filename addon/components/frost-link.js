@@ -127,7 +127,7 @@ export default LinkComponent.extend(PropTypeMixin, {
 
   // == Functions =============================================================
 
-  _clickAndInvoke(event) {
+  _clickAndInvoke (event) {
     if (this.onClick) {
       this.onClick()
     }
@@ -136,7 +136,7 @@ export default LinkComponent.extend(PropTypeMixin, {
 
   // == Events ================================================================
 
-  init() {
+  init () {
     this._super(...arguments)
 
     // Turn off the default _invoke on event and use _clickAndInvoke instead

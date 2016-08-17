@@ -7,9 +7,9 @@ export default Controller.extend({
 
   actions: {
     // BEGIN-SNIPPET pre-transition-action
-    preTransition() {
+    preTransition () {
       this.notifications.addNotification({
-        message: `Prior to transition...`,
+        message: 'Prior to transition...',
         type: 'success',
         autoClear: true,
         clearDuration: 2000

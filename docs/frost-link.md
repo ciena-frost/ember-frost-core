@@ -19,6 +19,7 @@
 |  |  | `true` | link in focus |
 | `icon` | `string` | `<icon-name>` | the name of a frost-icon |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
+| `onClick` |`string` | `<action-name>` | triggers associated action when the link is clicked prior to transition |
 
 
 ## Examples
