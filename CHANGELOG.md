@@ -1,3 +1,7 @@
+# 0.25.0
+
+* Added an `onClick` event to the `frost-link` component that is sent prior to transition
+
 # 0.24.0
 
 * Added a first-pass version of a frost component blueprint
