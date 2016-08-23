@@ -85,7 +85,6 @@ export default Component.extend(PropTypeMixin, {
     pack: PropTypes.string,
     priority: PropTypes.string,
     size: PropTypes.string,
-    subtext: PropTypes.string,
     text: PropTypes.string,
     title: PropTypes.string,
     type: PropTypes.string,
@@ -101,7 +100,6 @@ export default Component.extend(PropTypeMixin, {
       pack: 'frost',
       priority: '',
       size: '',
-      subtext: '',
       text: '',
       title: null,
       type: 'button',
@@ -112,55 +110,39 @@ export default Component.extend(PropTypeMixin, {
   // == Computed Properties ===================================================
 
   @readOnly
-  @computed('icon', 'subtext', 'text')
+  @computed('icon', 'text')
   /**
-   * Determine whether or not button is text only (no icon or subtext)
+   * Determine whether or not button is text only (no icon)
    * @param {String} icon - button icon
-   * @param {String} subtext - button subtext
    * @param {String} text - button text
-   * @returns {Boolean} whether or not button is text only (no icon or subtext)
+   * @returns {Boolean} whether or not button is text only (no icon)
    */
-  isTextOnly (icon, subtext, text) {
-    return text && !(icon || subtext)
+  isTextOnly (icon, text) {
+    return text && !icon
   },
 
   @readOnly
-  @computed('icon', 'subtext', 'text')
+  @computed('icon', 'text')
   /**
-   * Determine whether or not button is icon only (no text or subtext)
+   * Determine whether or not button is icon only (no text)
    * @param {String} icon - button icon
-   * @param {String} subtext - button subtext
    * @param {String} text - button text
-   * @returns {Boolean} whether or not button is icon only (no text or subtext)
+   * @returns {Boolean} whether or not button is icon only (no text)
    */
-  isIconOnly (icon, subtext, text) {
-    return icon && !(text || subtext)
+  isIconOnly (icon, text) {
+    return icon && !text
   },
 
   @readOnly
-  @computed('icon', 'subtext', 'text')
+  @computed('icon', 'text')
   /**
-   * Determine whether or not button contains icon and text but not subtext
+   * Determine whether or not button contains icon and text
    * @param {String} icon - button icon
-   * @param {String} subtext - button subtext
    * @param {String} text - button text
-   * @returns {Boolean} whether or not button contains icon and text but not subtext
+   * @returns {Boolean} whether or not button contains icon and text
    */
-  isIconAndText (icon, subtext, text) {
-    return icon && text && !subtext
-  },
-
-  @readOnly
-  @computed('icon', 'subtext', 'text')
-  /**
-   * Determine whether or not button is an info button
-   * @param {String} icon - button icon
-   * @param {String} subtext - button subtext
-   * @param {String} text - button text
-   * @returns {Boolean} whether or not button is info button
-   */
-  isInfo (icon, subtext, text) {
-    return icon && text && subtext
+  isIconAndText (icon, text) {
+    return icon && text
   },
 
   @readOnly
