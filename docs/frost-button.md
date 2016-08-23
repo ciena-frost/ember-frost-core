@@ -7,21 +7,25 @@
 
 | Attribute   | Type | Value | Description |
 | ----------- | ---- | ----- | ----------- |
+| `autofocus` | `boolean` | `false` | **default** - basic button |
+| |  | `true` | sets focus on button |
+| `design` | `string` | `info-bar` | custom button styling for the info-bar context.  Requires `icon` to be specified.  Should not be used with `priority` and `size`. |
+| `disabled` | `boolean` | `false` | **default** - basic button |
+|  |  | `true` | disabled button |
+| `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
+| `icon` | `string` | `<icon-name>` | name of a frost-icon |
+| `onClick` |`string` | `<action-name>` | triggers associated action when the button is clicked |
+| `pack` | `string` | `frost` | **default** - name of the icon pack |
 | `priority` | `string` | `primary` | primary action button |
 |  |  | `secondary` | secondary action button |
 |  |  | `tertiary` | tertiary action button |
-| `design` | `string` | `info-bar` | custom button styling for the info-bar context.  Requires `icon` to be specified.  Should not be used with `priority` and `size`. |
 | `size` | `string` | `small` | small size button |
 |  |  | `medium` | medium size button |
 |  |  | `large` | large size button |
 | `text` | `string` | `<button-text>` | text to display on the button |
-| `icon` | `string` | `<icon-name>` | the name of a frost-icon |
-| `autofocus` | `boolean` | `false` | **default** - basic button |
-| |  | `true` | sets focus on button |
-| `disabled` | `boolean` | `false` | **default** - basic button |
-|  |  | `true` | disabled button |
-| `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
-| `onClick` |`string` | `<action-name>` | triggers associated action when the button is clicked |
+| `title` | `string` | `<tooltip-text>` | tooltip text to display on hover |
+| `vertical` | `boolean` | `false` | **default** - set button text below the icon on an icon and text button |
+|  |  | `true` | sets the button text below the icon |
 
 
 ## Examples
