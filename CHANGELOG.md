@@ -1,3 +1,7 @@
+# 0.25.2
+
+* **Fixed** Ember badge in README to reflect correct version.
+
 # 0.25.1
 
 * **Fixed** addon so it works with older versions of Ember all the way back to Ember `2.1`.
