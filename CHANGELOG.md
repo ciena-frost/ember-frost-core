@@ -1,3 +1,7 @@
+# 0.25.1
+
+* **Fixed** addon so it works with older versions of Ember all the way back to Ember `2.1`.
+
 # 0.25.0
 
 * Added an `onClick` event to the `frost-link` component that is sent prior to transition
