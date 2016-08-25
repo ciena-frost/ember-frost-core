@@ -110,7 +110,7 @@ function close () {
  * @returns {MultiSelectDisplayItem[]} The updated list of display items
  */
 function updateDisplayItems (displayItems, selectedItems, hoveredItem) {
-  _.each(displayItems, function (item) {
+  _.forEach(displayItems, function (item) {
     let selected = false
     let selectedIndex = null
     if (selectedItems.indexOf(item.index) >= 0) {
@@ -160,7 +160,7 @@ function selectItem (state, selectedItem) {
  * @returns {number[]} List of indices of the selected items
  */
 function itemsFromValue (baseItems, value) {
-  if (!_.isArray(value)) {
+  if (!Array.isArray(value)) {
     value = [value]
   }
   return _.chain(value)
@@ -205,7 +205,7 @@ export default function reducer (state, action) {
       nextState = state.open ? close() : {open: true}
       break
     case RESET_DROPDOWN:
-      nextState = _.defaults(_.pick(action.state, _.negate(_.isUndefined)), state)
+      nextState = _.defaults(_.pickBy(action.state, _.negate(_.isUndefined)), state)
       nextState.displayItems =
         filterItems(nextState.baseItems, nextState.selectedItem, nextState.hoveredItem, '') || []
       break

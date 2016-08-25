@@ -1,17 +1,13 @@
-import _ from 'lodash'
 import Ember from 'ember'
-const {Component} = Ember
+const {Component, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-textarea'
 
-export default Component.extend({
-  // ==========================================================================
-  // Dependencies
-  // ==========================================================================
+export default Component.extend(PropTypeMixin, {
+  // == Dependencies ==========================================================
 
-  // ==========================================================================
-  // Properties
-  // ==========================================================================
+  // == Properties ============================================================
 
   attributeBindings: [
     'autofocus',
@@ -23,11 +19,27 @@ export default Component.extend({
   ],
   classNames: ['frost-textarea'],
   layout,
-  tabindex: 0,
 
-  // ==========================================================================
-  // Computed Properties
-  // ==========================================================================
+  propTypes: {
+    autofocus: PropTypes.bool,
+    cols: PropTypes.number,
+    disabled: PropTypes.bool,
+    hook: PropTypes.string,
+    placeholder: PropTypes.string,
+    readonly: PropTypes.bool,
+    rows: PropTypes.number,
+    tabindex: PropTypes.number
+  },
+
+  getDefaultProps () {
+    return {
+      autofocus: false,
+      disabled: false,
+      tabindex: 0
+    }
+  },
+
+  // == Computed Properties ===================================================
 
   @readOnly
   @computed('disabled', 'value')
@@ -41,18 +53,14 @@ export default Component.extend({
     return !disabled && Boolean(value)
   },
 
-  // ==========================================================================
-  // Functions
-  // ==========================================================================
+  // == Functions =============================================================
 
-  // ==========================================================================
-  // Events
-  // ==========================================================================
+  // == Events ================================================================
 
   oninput: Ember.on('input', function (e) {
     const onInput = this.attrs['onInput']
 
-    if (_.isFunction(onInput)) {
+    if (typeOf(onInput) === 'function') {
       onInput({
         id: this.get('id'),
         value: e.target.value
@@ -67,9 +75,7 @@ export default Component.extend({
     }
   }),
 
-  // ==========================================================================
-  // Actions
-  // ==========================================================================
+  // == Actions ===============================================================
 
   actions: {
     clear: function () {

@@ -1,6 +1,5 @@
 import Ember from 'ember'
 const {computed, Controller} = Ember
-import _ from 'lodash'
 
 export default Controller.extend({
   data: computed('data', 'search', function () {
@@ -11,7 +10,7 @@ export default Controller.extend({
       }
     })
     if (this.get('search')) {
-      let filteredResult = _.filter(result, (item) => {
+      let filteredResult = result.filter((item) => {
         return item.label.toLowerCase().indexOf(this.get('search').toLowerCase()) !== -1
       })
       result = filteredResult

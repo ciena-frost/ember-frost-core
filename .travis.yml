@@ -35,6 +35,7 @@ addons:
     - g++-4.8
 env:
   matrix:
+  - EMBER_TRY_SCENARIO=ember-2-1
   - EMBER_TRY_SCENARIO=default
   - EMBER_TRY_SCENARIO=ember-release
   - EMBER_TRY_SCENARIO=ember-beta

@@ -8,6 +8,7 @@
     <div class='example'>
       <div class='demo'>
         {{#frost-radio-group
+          hook='myCBGroup'
           id='checkboxGroup'
           value=model.checkboxGroup
           onChange=(action 'change')
@@ -24,7 +25,7 @@
 "```handlebars
 // id can be optionally specified, but acts as the group value for the checkboxes.
 // a class property can also be specified
-{{#frost-radio-group id='checkboxGroup' value=model.checkboxGroup onChange=(action 'change')}}
+{{#frost-radio-group id='checkboxGroup' hook='myCBGroup' value=model.checkboxGroup onChange=(action 'change')}}
   {{#each sampleList as |i|}}
     {{#frost-radio-button value=i disabled=(eq i 'a')}}
       Label for {{i}}
@@ -32,7 +33,7 @@
   {{/each}}
 {{/frost-radio-group}}```"}}
       </div>
-      <div>
+      <div style='padding-bottom:10px' class='snippet'>
         {{format-markdown "```handlebars
 import Ember from 'ember'
 const {Controller} = Ember

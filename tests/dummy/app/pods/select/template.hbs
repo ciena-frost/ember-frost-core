@@ -10,12 +10,14 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
         }}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
 }}
 ```"}}
       </div>
@@ -205,12 +207,14 @@
       <div class="demo">
         {{frost-multi-select
           data=data
+          hook='myMultiSelect'
         }}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
+  hook='myMultiSelect'
 }}
 ```"}}
       </div>

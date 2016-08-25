@@ -1,6 +1,7 @@
 import Ember from 'ember'
 const {run} = Ember
 import {expect} from 'chai'
+import {$hook, initialize} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
 import {beforeEach} from 'mocha'
 import sinon from 'sinon'
@@ -15,7 +16,9 @@ const selectedTestTemplate = hbs`
     onChange=onChange
     selected=selected
     data=data
-    greeting=greeting}}
+    greeting=greeting
+    hook=hook
+  }}
 `
 const selectedValueTestTemplate = hbs`
   {{frost-multi-select
@@ -26,6 +29,7 @@ const selectedValueTestTemplate = hbs`
 `
 
 let props = {
+  hook: 'my-multi-select',
   onChange: sinon.spy(),
   selected: [],
   data: [
@@ -53,6 +57,7 @@ describeComponent(
   },
   function () {
     beforeEach(function () {
+      initialize()
       props.selected = []
       run(() => {
         this.setProperties(props)
@@ -62,6 +67,18 @@ describeComponent(
 
     it('renders', function () {
       expect(this.$('.frost-select.multi')).to.have.length(1)
+    })
+
+    it('hook grabs the multi-select as expected', function () {
+      expect($hook('my-multi-select').hasClass('multi')).to.be.true
+
+      expect($hook('my-multi-select-input').prop('type')).to.be.eql('text')
+
+      expect($hook('my-multi-select-list').find('li')).to.have.length(3)
+
+      expect($hook('my-multi-select-item-0')).to.have.length(1)
+
+      expect($hook('my-multi-select-checkbox-item-0')).to.have.length(1)
     })
 
     it('shows a checkbox for each item', function () {

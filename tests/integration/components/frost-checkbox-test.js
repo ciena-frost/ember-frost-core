@@ -2,7 +2,9 @@ import Ember from 'ember'
 const {run} = Ember
 import {expect} from 'chai'
 import {describeComponent, it} from 'ember-mocha'
+import {beforeEach} from 'mocha'
 import hbs from 'htmlbars-inline-precompile'
+import {$hook, initialize} from 'ember-hook'
 
 describeComponent(
   'frost-checkbox',
@@ -11,6 +13,10 @@ describeComponent(
     integration: true
   },
   function () {
+    beforeEach(function () {
+      initialize()
+    })
+
     it('renders default values', function () {
       this.render(hbs`
         {{frost-checkbox}}
@@ -170,5 +176,19 @@ describeComponent(
     })
 
     // TODO: test onFocus once we can figure out how
+
+    it('hook attr usage grabs the checkbox correctly', function () {
+      this.render(hbs`
+        {{frost-checkbox checked=true hook='my-checkbox' label="lorem ipsum"}}
+      `)
+
+      expect($hook('my-checkbox').find('label').text().trim())
+       .to.eql('lorem ipsum')
+
+      expect(
+        $hook('my-checkbox').find('input').prop('checked'),
+        'Rendered input is checked'
+      ).to.be.true
+    })
   }
 )

@@ -15,6 +15,7 @@ a text area component
 | `disabled` | `boolean` | `false` | **default** - normal text area |
 | | | `true` | disabled text area |
 | `class` | `string` | `error` | sets text area to error state |
+| `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `onInput` | `string` |`<action-name>`| triggers associated action when text is entered |
 
 ## Examples

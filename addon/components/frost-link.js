@@ -1,6 +1,10 @@
-import _ from 'lodash'
 import Ember from 'ember'
-const {deprecate, LinkComponent, Logger} = Ember
+const {
+  LinkComponent,
+  Logger,
+  deprecate,
+  get
+} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-link'
@@ -25,7 +29,7 @@ const validSizes = [
 function addDesignClass (design, classes) {
   deprecate(
     '\'in-line\' design style has been deprecated in favour of \'inline\'',
-    !_.eq(design, 'in-line'),
+    design !== 'in-line',
     {
       id: 'frost-debug.deprecate-design-in-line-style',
       until: '1.0.0',
@@ -48,13 +52,8 @@ function addDesignClass (design, classes) {
 }
 
 export default LinkComponent.extend(PropTypeMixin, {
-  // ==========================================================================
-  // Dependencies
-  // ==========================================================================
 
-  // ==========================================================================
-  // Properties
-  // ==========================================================================
+  // == Component properties ==================================================
 
   attributeBindings: [
     'disabled'
@@ -67,12 +66,16 @@ export default LinkComponent.extend(PropTypeMixin, {
   layout,
   target: '',
 
+  // == State properties ======================================================
+
   propTypes: {
     design: PropTypes.oneOf(validDesigns),
+    hook: PropTypes.string,
     icon: PropTypes.string,
     priority: PropTypes.oneOf(validPriorities),
     size: PropTypes.oneOf(validSizes),
-    text: PropTypes.string
+    text: PropTypes.string,
+    onClick: PropTypes.func
   },
 
   getDefaultProps () {
@@ -85,9 +88,7 @@ export default LinkComponent.extend(PropTypeMixin, {
     }
   },
 
-  // ==========================================================================
-  // Computed Properties
-  // ==========================================================================
+  // == Computed properties ===================================================
 
   @readOnly
   @computed('design', 'disabled', 'priority', 'size')
@@ -122,17 +123,25 @@ export default LinkComponent.extend(PropTypeMixin, {
     }
 
     return classes.join(' ')
+  },
+
+  // == Functions =============================================================
+
+  _clickAndInvoke (event) {
+    if (this.onClick) {
+      this.onClick()
+    }
+  },
+
+  // == Events ================================================================
+
+  init () {
+    this._super(...arguments)
+
+    // Turn off the default _invoke on event and use _clickAndInvoke instead
+    let eventName = get(this, 'eventName')
+    this.off(eventName)
+    this.on(eventName, this, this._clickAndInvoke)
   }
 
-  // ==========================================================================
-  // Functions
-  // ==========================================================================
-
-  // ==========================================================================
-  // Events
-  // ==========================================================================
-
-  // ==========================================================================
-  // Actions
-  // ==========================================================================
 })

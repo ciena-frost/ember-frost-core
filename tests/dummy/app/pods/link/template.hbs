@@ -8,6 +8,7 @@
       <div class="title">small</div>
       <div class="demo">
         {{#frost-link 'link.min'
+          hook='mySmallLink'
           priority='primary'
           size='small'
         }}
@@ -17,6 +18,7 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{#frost-link 'link.min'
+  hook='mySmallLink'
   priority='primary'
   size='small'
 }}
@@ -357,6 +359,30 @@
 
 
   </div>
+
+  <div class="section-title">Advanced</div>
+  <hr>
+  <div class="section">
+
+    <div class="example">
+        <div class="title">Pre-transition onClick action</div>
+        <div class="demo">
+          {{! BEGIN-SNIPPET pre-transition-action }}
+          {{#frost-link 'link.min'
+            priority='secondary'
+            size='small'
+            onClick=(action 'preTransition')
+          }}
+            Watch for a notification
+          {{/frost-link}}
+          {{! END-SNIPPET }}
+        </div>
+        <div class="snippet">
+          {{code-snippet name='pre-transition-action.hbs'}}
+          {{code-snippet name='pre-transition-action.js'}}
+        </div>
+      </div>
+    </div>
 
   {{outlet}}
 </div>
