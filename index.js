@@ -81,6 +81,8 @@ module.exports = {
       this.app = app = app.app
     }
 
+    this.eachAddonInvoke('included', [app])
+
     this._super.included(app)
 
     if (app) {
@@ -93,9 +95,9 @@ module.exports = {
       app.import(path.join(robotoPath, 'stylesheet.css'))
     }
 
-    if (typeof app.import === 'function') {
-      app.import(app.bowerDirectory + '/perfect-scrollbar/js/perfect-scrollbar.js')
-      app.import(app.bowerDirectory + '/perfect-scrollbar/css/perfect-scrollbar.css')
+    if (typeof this.import === 'function' && app.bowerDirectory) {
+      this.import(app.bowerDirectory + '/perfect-scrollbar/js/perfect-scrollbar.js')
+      this.import(app.bowerDirectory + '/perfect-scrollbar/css/perfect-scrollbar.css')
     }
   },
 

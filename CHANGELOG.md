@@ -1,3 +1,66 @@
+# 0.25.3
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.25.2
+
+* **Fixed** Ember badge in README to reflect correct version.
+
+# 0.25.1
+
+* **Fixed** addon so it works with older versions of Ember all the way back to Ember `2.1`.
+
+# 0.25.0
+
+* Added an `onClick` event to the `frost-link` component that is sent prior to transition
+
+# 0.24.0
+
+* Added a first-pass version of a frost component blueprint
+
+# 0.23.1
+
+* **Updated** `ember-hook` dependency and blueprint to latest version
+
+<!-- Reviewable:start -->
+---
+This change is [<img src="https://reviewable.io/review_button.svg" height="34" align="absmiddle" alt="Reviewable"/>](https://reviewable.io/reviews/ciena-frost/ember-frost-core/172)
+<!-- Reviewable:end -->
+
+
+# 0.23.0
+
+* Added onScrollUp, onScrollDown, onScrollYStart, onScrollYEnd
+* Deprecated on-scroll-y-end in favor of onScrollYEnd
+
+# 0.22.3
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.22.2
+
+* **Removed** most uses of `lodash` methods in favor of ES6 and Ember methods.
+
+# 0.22.1
+
+* **Updated** `ember-cli-sass`  to float on the major
+* **Updated** CHANGELOG.md file to remove Reviewable note.
+
+
+# 0.22.0
+
+* **Added** hooks for testing into frost-select and frost-multi-select
+* **Added** tests to verify hooks in integration tests for frost-select and frost-multi-select
+* **Added** documentation on the hook usage for frost-select and frost-multi-select
+
+# 0.21.3
+
+* **Updated** temporarily restrict `ember-cli-sass` from going above version 5.4.0
+
+# 0.21.2
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
 # 0.21.1
 
 * **Fixed** bug in `treeForAddon` that can affect consumers.

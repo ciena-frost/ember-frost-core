@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import Ember from 'ember'
-const {A, Component} = Ember
+const {A, Component, get, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-select'
@@ -37,8 +37,12 @@ const keyCodes = {
 const ATTR_MAP_DELIM = '->'
 // TODO: add jsdoc
 function isAttrDifferent (newAttrs, oldAttrs, attributeName) {
-  let oldValue = _.get(oldAttrs, attributeName + '.value')
-  let newValue = _.get(newAttrs, attributeName + '.value')
+  newAttrs = newAttrs || {}
+  oldAttrs = oldAttrs || {}
+
+  let oldValue = get(oldAttrs, attributeName + '.value')
+  let newValue = get(newAttrs, attributeName + '.value')
+
   return newValue !== undefined && !_.isEqual(oldValue, newValue)
 }
 
@@ -145,8 +149,8 @@ export default Component.extend(PropTypeMixin, {
    */
   invalidFilter (data, displayItems) {
     return (
-      _.isArray(data) &&
-      _.isArray(displayItems) &&
+      Array.isArray(data) &&
+      Array.isArray(displayItems) &&
       data.length > 0 &&
       displayItems.length === 0
     )
@@ -213,6 +217,9 @@ export default Component.extend(PropTypeMixin, {
 
   /* Ember.Component method */
   didReceiveAttrs ({newAttrs, oldAttrs}) {
+    newAttrs = newAttrs || {}
+    oldAttrs = oldAttrs || {}
+
     this._super(...arguments)
     const stateAttrs = this.get('stateAttributes')
 
@@ -247,14 +254,14 @@ export default Component.extend(PropTypeMixin, {
       return
     }
 
-    if (selectedValueChanged || (dataChanged && _.get(newAttrs, 'selectedValue.value'))) {
+    if (selectedValueChanged || (dataChanged && get(newAttrs, 'selectedValue.value'))) {
       this.selectOptionByValue(newAttrs.selectedValue.value)
-    } else if (selectedChanged || (dataChanged && _.get(newAttrs, 'selected.value'))) {
+    } else if (selectedChanged || (dataChanged && get(newAttrs, 'selected.value'))) {
       let selected = this.get('selected')
 
-      if (_.isNumber(selected)) {
+      if (typeOf(selected) === 'number') {
         selected = [selected]
-      } else if (!_.isArray(selected)) {
+      } else if (!Array.isArray(selected)) {
         selected = []
       }
     }
@@ -398,7 +405,7 @@ export default Component.extend(PropTypeMixin, {
     onChange (event) {
       const target = event.currentTarget || event.target
       const onInput = this.get('onInput')
-      if (_.isFunction(onInput)) {
+      if (typeOf(onInput) === 'function') {
         onInput(target.value)
       } else {
         this.get('reduxStore').dispatch(updateSearchText(target.value))

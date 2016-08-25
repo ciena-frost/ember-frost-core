@@ -1,6 +1,5 @@
-import _ from 'lodash'
 import Ember from 'ember'
-const {Component, isEmpty, run} = Ember
+const {Component, isEmpty, run, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-checkbox'
@@ -101,7 +100,7 @@ export default Component.extend(PropTypeMixin, {
 
     input () {
       let id = this.get('value')
-      if (_.isFunction(this.attrs['onInput'])) {
+      if (typeOf(this.attrs['onInput']) === 'function') {
         this.attrs['onInput']({
           id: isEmpty(id) ? this.get('id') : id,
           value: this.$('input').prop('checked')
