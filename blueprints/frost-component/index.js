@@ -48,7 +48,10 @@ module.exports = {
     entityName = normalizeEntityName(entityName)
     return validComponentName(entityName)
   },
+
   locals: function (options) {
+    var dasherizedModuleName = options.entity.name
+    var classifiedModuleName = stringUtil.classify(options.entity.name)
     var templatePath = ''
     var importTemplate = ''
     var contents = ''
@@ -59,22 +62,11 @@ module.exports = {
         templatePath = pathUtil.getRelativeParentPath(options.entity.name) +
           'templates/components/' + stringUtil.dasherize(options.entity.name)
       }
-      importTemplate = 'import layout from \'' + templatePath + '\';\n'
-      contents +=
-        '\n\t// == Properties =============================================================' +
-        '\n\texcludeEvents: [],' +
-        '\n\tclassNames: [\n\t\t\'' + options.entity.name + '\'\n\t],' +
-        '\n\tlayout,' +
-        '\n\tpropTypes: {},'
-      contents +=
-        '\n\t// == Functions =============================================================' +
-        '\n\tgetDefaultProps () {' +
-          '\n\t\treturn {}' +
-        '\n\t}'
     }
     return {
-      importTemplate,
-      contents,
+      classifiedModuleName,
+      dasherizedModuleName,
+      templatePath,
       path: getPathOption(options)
     }
   }
