@@ -8,6 +8,7 @@ $frost-input-select-option-row-height: 35px;
   border-right: $size solid transparent;
   height: 0;
   width: 25px;
+  content: '';
 }
 
 .frost-select {
@@ -20,18 +21,6 @@ $frost-input-select-option-row-height: 35px;
   position: relative;
   width: 200px;
   background: $frost-select-container-background;
-
-  .up-arrow {
-    @include triangle-up($frost-select-container-background, 12px);
-    display: inline-block;
-    left: calc(50% - 15px);
-    overflow: visible;
-    pointer-events: none;
-    position: absolute;
-    right: 8px;
-    top: -10px;
-    z-index: 3;
-  }
 
   .drop-down-container {
     background: $frost-select-container-background;
@@ -46,6 +35,18 @@ $frost-input-select-option-row-height: 35px;
     transition: height .4s ease, opacity .2s ease;
     width: calc(100% + 2px);
     pointer-events: none;
+
+    .list-container {
+      position:relative;
+      &:before {
+        @include triangle-up($frost-select-container-background, 10px);
+        transform: translateX(-50%);
+        position: absolute;
+        left: 50%;
+        top: -10px;
+        z-index: -1;
+      }
+    }
   }
 
   input.trigger {

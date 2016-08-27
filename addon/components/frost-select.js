@@ -384,11 +384,17 @@ export default Component.extend(PropTypeMixin, {
   // ==========================================================================
   // Events
   // ==========================================================================
-
+  focusIn (event) {
+    this.get('reduxStore').dispatch(openDropDown)
+    // If an onFocus event handler is defined, call it
+    if (this.attrs.onFocus) {
+      this.attrs.onFocus(event)
+    }
+    return false
+  },
   // ==========================================================================
   // Actions
   // ==========================================================================
-
   actions: {
     // TODO: add jsdoc
     onBlur (event) {
@@ -418,17 +424,6 @@ export default Component.extend(PropTypeMixin, {
       const reduxStore = this.get('reduxStore')
       reduxStore.dispatch(clickArrow)
     },
-
-    // TODO: add jsdoc
-    onFocus () {
-      this.get('reduxStore').dispatch(openDropDown)
-      // If an onFocus event handler is defined, call it
-      if (this.attrs.onFocus) {
-        this.attrs.onFocus()
-      }
-      return false
-    },
-
     // TODO: add jsdoc
     onItemOver (data) {
       this.get('reduxStore').dispatch(mouseHoverItem(data.index))
