@@ -8,10 +8,11 @@ branches:
   - /^v[0-9\.]+/
 before_install:
 - npm config set spin false
-- npm install -g coveralls pr-bumper
+- npm install -g coveralls pr-bumper --ignore-scripts
 - pr-bumper check
 install:
-- npm install
+- npm install ember-cli-sass # NOTE: this requies scripts
+- npm install --ignore-scripts
 - bower install
 before_script:
 - "export DISPLAY=:99.0"
