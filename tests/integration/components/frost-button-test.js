@@ -1,8 +1,17 @@
 import {expect} from 'chai'
-import {$hook, initialize} from 'ember-hook'
-import {describeComponent, it} from 'ember-mocha'
+import {
+  $hook,
+  initialize
+} from 'ember-hook'
+import {
+  describeComponent,
+  it
+} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
-import {beforeEach, describe} from 'mocha'
+import {
+  beforeEach,
+  describe
+} from 'mocha'
 
 describeComponent(
   'frost-button',
