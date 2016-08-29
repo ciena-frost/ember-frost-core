@@ -335,7 +335,7 @@ describeComponent(
         }}
       `)
 
-      this.$('button').focusin()
+      this.$('button').trigger('focusin')
     })
   }
 )

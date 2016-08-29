@@ -50,6 +50,11 @@ describeComponent(
       ).to.be.false
 
       expect(
+        component.get('hook'),
+        'hook: "undefined"'
+      ).to.be.undefined
+
+      expect(
         component.get('icon'),
         'icon: ""'
       ).to.eql('')
