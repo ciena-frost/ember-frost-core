@@ -1,5 +1,7 @@
 import Ember from 'ember'
-const {assign} = Ember
+
+const assign = Ember.assign || Object.assign || Ember.merge
+
 import {
   SELECT_ITEM,
 	CLICK_ARROW,

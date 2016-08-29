@@ -1,3 +1,15 @@
+# 0.25.3
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.25.2
+
+* **Fixed** Ember badge in README to reflect correct version.
+
+# 0.25.1
+
+* **Fixed** addon so it works with older versions of Ember all the way back to Ember `2.1`.
+
 # 0.25.0
 
 * Added an `onClick` event to the `frost-link` component that is sent prior to transition

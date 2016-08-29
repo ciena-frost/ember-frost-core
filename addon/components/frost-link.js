@@ -131,7 +131,6 @@ export default LinkComponent.extend(PropTypeMixin, {
     if (this.onClick) {
       this.onClick()
     }
-    this._invoke(event)
   },
 
   // == Events ================================================================
