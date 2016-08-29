@@ -1,5 +1,5 @@
 import Ember from 'ember'
-const {Component, Logger, typeOf, ViewUtils} = Ember
+const {Component, isEmpty, Logger, typeOf, ViewUtils} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-button'
@@ -19,36 +19,10 @@ const validDesignClasses = [
  * @type {Array} valid `size` values
  */
 const validSizes = [
-  'extra-large',
   'large',
   'medium',
   'small'
 ]
-
-/**
- * Add the appropriate class for the given priority to the Array of classes
- * @param {String} priority - the priority to add
- * @param {String[]} classes - the classes to add the priority class to
- */
-function addPriorityClass (priority, classes) {
-  switch (priority) {
-    case 'confirm': // fallthrough
-    case 'primary':
-      classes.push('primary')
-      break
-    case 'normal': // fallthrough
-    case 'secondary':
-      classes.push('secondary')
-      break
-    case 'cancel': // fallthrough
-    case 'tertiary':
-      classes.push('tertiary')
-      break
-    default:
-      // no class to add for invalid priority
-      break
-  }
-}
 
 export default Component.extend(PropTypeMixin, {
   // == Dependencies ==========================================================
@@ -118,7 +92,7 @@ export default Component.extend(PropTypeMixin, {
    * @returns {Boolean} whether or not button is text only (no icon)
    */
   isTextOnly (icon, text) {
-    return text && !icon
+    return !isEmpty(text) && isEmpty(icon)
   },
 
   @readOnly
@@ -130,7 +104,7 @@ export default Component.extend(PropTypeMixin, {
    * @returns {Boolean} whether or not button is icon only (no text)
    */
   isIconOnly (icon, text) {
-    return icon && !text
+    return !isEmpty(icon) && isEmpty(text)
   },
 
   @readOnly
@@ -142,7 +116,7 @@ export default Component.extend(PropTypeMixin, {
    * @returns {Boolean} whether or not button contains icon and text
    */
   isIconAndText (icon, text) {
-    return icon && text
+    return !isEmpty(icon) && !isEmpty(text)
   },
 
   @readOnly
@@ -181,7 +155,7 @@ export default Component.extend(PropTypeMixin, {
       classes.push(size)
     }
 
-    addPriorityClass(priority, classes)
+    this.addPriorityClass(priority, classes)
 
     if (vertical) {
       classes.push('vertical')
@@ -191,6 +165,31 @@ export default Component.extend(PropTypeMixin, {
   },
 
   // == Functions =============================================================
+
+  /**
+   * Add the appropriate class for the given priority to the Array of classes
+   * @param {String} priority - the priority to add
+   * @param {String[]} classes - the classes to add the priority class to
+   */
+  addPriorityClass (priority, classes) {
+    switch (priority) {
+      case 'confirm': // fallthrough
+      case 'primary':
+        classes.push('primary')
+        break
+      case 'normal': // fallthrough
+      case 'secondary':
+        classes.push('secondary')
+        break
+      case 'cancel': // fallthrough
+      case 'tertiary':
+        classes.push('tertiary')
+        break
+      default:
+        // no class to add for invalid priority
+        break
+    }
+  },
 
   // == Events ================================================================
 

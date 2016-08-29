@@ -15,6 +15,16 @@ export default Controller.extend({
       })
     },
 
+    onFocusHandler () {
+      console.log('button focused')
+      this.notifications.addNotification({
+        message: 'Action sent',
+        type: 'success',
+        autoClear: true,
+        clearDuration: 2000
+      })
+    },
+
     /**
      * Toggle vertical rendering
      */

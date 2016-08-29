@@ -14,7 +14,8 @@
 |  |  | `true` | disabled button |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `icon` | `string` | `<icon-name>` | name of a frost-icon |
-| `onClick` |`string` | `<action-name>` | triggers associated action when the button is clicked |
+| `onClick` | `string` | `<action-name>` | triggers associated action when the button is clicked |
+| `onFocus` | `string` | `<action-name>` | triggers associated action when the button received focusin event |
 | `pack` | `string` | `frost` | **default** - name of the icon pack |
 | `priority` | `string` | `primary` | primary action button |
 |  |  | `secondary` | secondary action button |
@@ -141,6 +142,29 @@
 }}
 ```
 
+### Title
+
+```handlebars
+{{frost-button
+  priority='primary'
+  size='medium'
+  icon='frost/add'
+  title='This is a tooltip message'
+}}
+```
+
+### Vertical
+
+```handlebars
+{{frost-button
+  priority='tertiary'
+  size='small'
+  icon='frost/round-add'
+  text='Text'
+  vertical=true
+}}
+```
+
 ### Icon and Text
 
 ```handlebars
@@ -162,7 +186,7 @@
 }}
 ```
 
-### Events - onClick
+### Event - onClick
 
 ```handlebars
 {{frost-button
@@ -177,6 +201,25 @@
 actions: {
   onClickHandler () {
     console.log('button clicked')
+  }
+}
+```
+
+### Event - onFocus
+
+```handlebars
+{{frost-button
+  priority='primary'
+  size='medium'
+  text='Action'
+  onFocus=(action 'onFocusHandler')
+}}
+```
+
+```javascript
+actions: {
+  onFocusHandler () {
+    console.log('button focused')
   }
 }
 ```
