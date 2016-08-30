@@ -157,6 +157,7 @@
     "ember-cli-string-utils": "^1.0.0",
     "ember-cli-valid-component-name": "^1.0.0",
     "ember-prop-types": "^2.1.0",
+    "npm-install-security-check": "^1.0.0",
     "svg4everybody": "^2.0.3"
   },
   "ember-addon": {
