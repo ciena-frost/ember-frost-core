@@ -6,9 +6,8 @@ export default Controller.extend({
 
   actions: {
     onClickHandler () {
-      console.log('button clicked')
       this.notifications.addNotification({
-        message: 'Action sent',
+        message: 'Button clicked action sent',
         type: 'success',
         autoClear: true,
         clearDuration: 2000
@@ -16,9 +15,8 @@ export default Controller.extend({
     },
 
     onFocusHandler () {
-      console.log('button focused')
       this.notifications.addNotification({
-        message: 'Action sent',
+        message: 'Button focused action sent',
         type: 'success',
         autoClear: true,
         clearDuration: 2000

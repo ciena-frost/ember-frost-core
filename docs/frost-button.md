@@ -96,7 +96,7 @@
 {{frost-button
   priority='primary'
   size='small'
-  icon='frost/add'
+  icon='add'
 }}
 ```
 
@@ -106,7 +106,7 @@
 {{frost-button
   priority='primary'
   size='medium'
-  icon='frost/add'
+  icon='add'
 }}
 ```
 
@@ -116,7 +116,7 @@
 {{frost-button
   priority='primary'
   size='large'
-  icon='frost/add'
+  icon='add'
 }}
 ```
 
@@ -148,7 +148,7 @@
 {{frost-button
   priority='primary'
   size='medium'
-  icon='frost/add'
+  icon='add'
   title='This is a tooltip message'
 }}
 ```
@@ -159,7 +159,7 @@
 {{frost-button
   priority='tertiary'
   size='small'
-  icon='frost/round-add'
+  icon='round-add'
   text='Text'
   vertical=true
 }}
@@ -171,7 +171,7 @@
 {{frost-button
   priority='tertiary'
   size='small'
-  icon='frost/round-add'
+  icon='round-add'
   text='Text'
 }}
 ```
@@ -181,7 +181,7 @@
 ```handlebars
 {{frost-button
   design='info-bar'
-  icon='frost/infobar-find'
+  icon='infobar-find'
   text='Action'
 }}
 ```
