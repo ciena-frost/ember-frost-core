@@ -30,9 +30,9 @@ describeComponent(
       `)
 
       expect(
-        this.$('.frost-button').find(':first-child').hasClass('text'),
+        this.$('.text'),
         'Text button has the correct class'
-      ).to.be.true
+      ).to.have.length(1)
 
       expect(
         this.$('.frost-button').text().trim(),
@@ -46,9 +46,9 @@ describeComponent(
       `)
 
       expect(
-        this.$('.frost-button').find(':first-child').hasClass('icon'),
+        this.$('.icon'),
         'Icon button has the correct class'
-      ).to.be.true
+      ).to.have.length(1)
     })
 
     it('renders a text and icon button as expected', function () {
@@ -65,9 +65,9 @@ describeComponent(
       ).to.have.length(1)
 
       expect(
-        this.$('.frost-button').find(':first-child').hasClass('icon-text'),
+        this.$('.icon-text'),
         'Icon and Text button has the correct class'
-      ).to.be.true
+      ).to.have.length(1)
 
       expect(
         this.$('.frost-button').text().trim(),
