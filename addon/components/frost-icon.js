@@ -54,6 +54,7 @@ export default Component.extend(PropTypeMixin, {
   /* Ember.Component method */
   didReceiveAttrs (attrs) {
     const icon = get(attrs, 'newAttrs.icon.value') || ''
+
     deprecate(
       'nested icon paths have been deprecated in favor of flat icon packs',
       icon.indexOf('/') === -1,
