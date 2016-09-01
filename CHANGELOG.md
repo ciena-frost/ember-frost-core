@@ -1,3 +1,7 @@
+# 0.25.5
+
+* Updated the frost-component blueprint to reflect current best practices
+
 # 0.25.4
 
 * **Added** `npm-install-security-check` as a dependency to make consumers more security conscious.
