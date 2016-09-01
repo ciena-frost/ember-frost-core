@@ -26,6 +26,7 @@ export default Component.extend(PropTypeMixin, {
 
   getDefaultProps () {
     return {
+      icon: '',
       pack: 'frost'
     }
   },
