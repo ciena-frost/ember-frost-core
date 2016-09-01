@@ -22,7 +22,7 @@ describeComponent(
       initialize()
     })
 
-    it('renders default values', function () {
+    it('sets icon class', function () {
       this.render(hbs`
         {{frost-icon icon='round-add'}}
       `)
@@ -43,21 +43,7 @@ describeComponent(
 
       expect(
         this.$('.frost-icon').hasClass('frost-icon-test-round-add'),
-        'Icon class is set correctly.'
-      ).to.be.true
-    })
-
-    it('sets the hook property', function () {
-      this.render(hbs`
-        {{frost-icon
-          hook='my-icon'
-          icon='round-add'
-        }}
-      `)
-
-      expect(
-        $hook('my-icon').hasClass('frost-icon-frost-round-add'),
-        'Hook is set correctly'
+        'Icon class updates correctly when pack is set.'
       ).to.be.true
     })
   }
