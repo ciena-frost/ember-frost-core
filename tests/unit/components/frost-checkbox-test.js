@@ -174,7 +174,7 @@ describeComponent(
 
         expect(
           run(() => component.keyPress(eventTestObject)),
-          'stopPropagation() was called'
+          'keyPress() returned false'
         ).to.be.false
       })
 
