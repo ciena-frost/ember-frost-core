@@ -1,3 +1,7 @@
+# 0.25.6
+
+* Updated the button demo to demonstrate that disabled buttons don't fire actions
+
 # 0.25.5
 
 * Updated the frost-component blueprint to reflect current best practices
