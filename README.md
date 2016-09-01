@@ -36,7 +36,7 @@ The following components are available when you install ember-frost-core
 ```bash
 git clone git@github.com:ciena-frost/ember-frost-core.git
 cd ember-frost-core
-npm install && bower install
+npm install ember-cli-sass && npm install --ignore-scripts && bower install
 ```
 
 ### Development Server
