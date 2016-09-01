@@ -3,7 +3,7 @@ const { Component } = Ember
 import PropTypesMixin, { PropTypes } from 'ember-prop-types'
 import layout from '<%= templatePath %>'
 
-const <%= classifiedModuleName %> = Component.extend(PropTypesMixin, {
+export default Component.extend(PropTypesMixin, {
 
   // == Dependencies ==========================================================
 
@@ -30,5 +30,3 @@ const <%= classifiedModuleName %> = Component.extend(PropTypesMixin, {
   // == Actions ===============================================================
 
 })
-
-export default <%= classifiedModuleName %>

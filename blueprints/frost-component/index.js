@@ -51,10 +51,7 @@ module.exports = {
 
   locals: function (options) {
     var dasherizedModuleName = options.entity.name
-    var classifiedModuleName = stringUtil.classify(options.entity.name)
     var templatePath = ''
-    var importTemplate = ''
-    var contents = ''
     if (options.project.isEmberCLIAddon() || !options.inDummy) {
       if (options.pod) {
         templatePath = './template'
@@ -64,7 +61,6 @@ module.exports = {
       }
     }
     return {
-      classifiedModuleName,
       dasherizedModuleName,
       templatePath,
       path: getPathOption(options)
