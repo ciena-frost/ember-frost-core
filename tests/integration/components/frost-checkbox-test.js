@@ -5,12 +5,7 @@ import {
   describeComponent,
   it
 } from 'ember-mocha'
-import {beforeEach} from 'mocha'
 import hbs from 'htmlbars-inline-precompile'
-import {
-  $hook,
-  initialize
-} from 'ember-hook'
 import sinon from 'sinon'
 
 describeComponent(
@@ -20,10 +15,6 @@ describeComponent(
     integration: true
   },
   function () {
-    beforeEach(function () {
-      initialize()
-    })
-
     it('renders default values', function () {
       this.render(hbs`
         {{frost-checkbox}}

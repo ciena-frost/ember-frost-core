@@ -4,11 +4,6 @@ import {
   it
 } from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
-import {beforeEach} from 'mocha'
-import {
-  $hook,
-  initialize
-} from 'ember-hook'
 
 describeComponent(
   'frost-icon',
@@ -18,10 +13,6 @@ describeComponent(
   },
 
   function () {
-    beforeEach(function () {
-      initialize()
-    })
-
     it('sets icon class', function () {
       this.render(hbs`
         {{frost-icon icon='round-add'}}
