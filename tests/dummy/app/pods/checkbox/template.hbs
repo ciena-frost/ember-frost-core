@@ -151,6 +151,21 @@
       </div>
     </div>
 
+     <div class='example'>
+      <div class='title'>autofocus</div>
+      <div class='demo'>
+        {{frost-checkbox autofocus=true}}
+      </div>
+      <div class='snippet'>
+        {{format-markdown
+"```handlebars
+{{frost-checkbox
+  autofocus=true
+}}
+```"}}
+      </div>
+    </div>
+
     </div>
 
   <div class="section-title">Events</div>
@@ -167,6 +182,22 @@
         {{format-markdown "```handlebars
 {{frost-checkbox
   onBlur=(action 'onBlurHandler')
+}}
+```"
+        }}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">onFocus</div>
+      <div class="demo">
+        {{frost-checkbox onFocus=(action 'onFocusHandler')
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-checkbox
+  onFocus=(action 'onFocusHandler')
 }}
 ```"
         }}

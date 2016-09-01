@@ -14,8 +14,16 @@ export default Controller.extend({
       })
     },
 
+    onFocusHandler () {
+      this.notifications.addNotification({
+        message: 'focus event',
+        type: 'success',
+        autoClear: true,
+        clearDuration: 2000
+      })
+    },
+
     onInputHandler (attrs) {
-      console.log('checkbox value: ' + attrs.value)
       this.notifications.addNotification({
         message: "value: '" + attrs.value + "'",
         type: 'success',

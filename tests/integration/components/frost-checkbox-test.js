@@ -1,10 +1,17 @@
 import Ember from 'ember'
 const {run} = Ember
 import {expect} from 'chai'
-import {describeComponent, it} from 'ember-mocha'
+import {
+  describeComponent,
+  it
+} from 'ember-mocha'
 import {beforeEach} from 'mocha'
 import hbs from 'htmlbars-inline-precompile'
-import {$hook, initialize} from 'ember-hook'
+import {
+  $hook,
+  initialize
+} from 'ember-hook'
+import sinon from 'sinon'
 
 describeComponent(
   'frost-checkbox',
@@ -156,26 +163,59 @@ describeComponent(
       })
     })
 
-    // TODO: figure out why action is called more than once in test
-    it('calls onBlur callback when focus is lost', function (done) {
-      let called = false
+    it('calls onBlur callback when focus is lost', function () {
+      const externalActionSpy = sinon.spy()
 
-      this.on('test-action', function () {
-        if (!called) {
-          expect(
-            true,
-            'The onBlur closure action was called'
-          ).to.be.ok
-          called = true
-          done()
-        }
-      })
+      this.on('externalAction', externalActionSpy)
 
-      this.render(hbs`{{frost-checkbox onBlur=(action "test-action")}}`)
+      this.render(hbs`
+        {{frost-checkbox
+          onBlur=(action 'externalAction')
+        }}
+      `)
+
       this.$('label').trigger('blur')
+
+      expect(
+        externalActionSpy.called,
+        'onBlur closure action called'
+      ).to.be.true
     })
 
-    // TODO: test onFocus once we can figure out how
+    it('fires onFocus closure action', function () {
+      const externalActionSpy = sinon.spy()
+
+      this.on('externalAction', externalActionSpy)
+
+      this.render(hbs`
+        {{frost-checkbox
+          onFocus=(action 'externalAction')
+        }}
+      `)
+
+      this.$('input').trigger('focusin')
+
+      expect(
+        externalActionSpy.called,
+        'onFocus closure action called'
+      ).to.be.true
+    })
+
+    // https://github.com/juwara0/ember-frost-core/issues/1
+    it.skip('sets focus on render when autofocus is true', function () {
+      const focusSpy = sinon.spy($.prototype, 'focus')
+
+      this.render(hbs`
+        {{frost-checkbox
+          autofocus=true
+        }}
+      `)
+
+      expect(
+        focusSpy.called,
+        'autofocus is set'
+      ).to.be.true
+    })
 
     it('hook attr usage grabs the checkbox correctly', function () {
       this.render(hbs`

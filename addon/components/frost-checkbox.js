@@ -1,6 +1,6 @@
 import Ember from 'ember'
 const {Component, isEmpty, run, typeOf} = Ember
-import computed, {readOnly} from 'ember-computed-decorators'
+import computed from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-checkbox'
 
@@ -10,28 +10,29 @@ export default Component.extend(PropTypeMixin, {
   // == Properties ============================================================
 
   classNames: ['frost-checkbox'],
-  classNameBindings: ['sizeClass'],
+  classNameBindings: ['size'],
   layout,
 
   propTypes: {
-    hook: PropTypes.string
+    autofocus: PropTypes.bool,
+    checked: PropTypes.bool,
+    disabled: PropTypes.bool,
+    hook: PropTypes.string,
+    label: PropTypes.string,
+    size: PropTypes.string
   },
 
   getDefaultProps () {
-    return {}
+    return {
+      autofocus: false,
+      checked: false,
+      disabled: false,
+      label: '',
+      size: 'small'
+    }
   },
 
   // == Computed properties  ===================================================
-
-  @computed('checked')
-  /**
-   * Determine whether or not input should be checked
-   * @param {Boolean|null|undefined} checked - desired checked state
-   * @returns {Boolean} whether or not input should be checked
-   */
-  isChecked (checked) {
-    return [null, undefined, false].indexOf(checked) === -1
-  },
 
   @computed('id')
   /**
@@ -42,17 +43,6 @@ export default Component.extend(PropTypeMixin, {
   inputId (id) {
     id = id || this.elementId
     return `${id}_input`
-  },
-
-  @readOnly
-  @computed('size')
-  /**
-   * Get class for setting input size
-   * @param {String} size - desired size
-   * @returns {String} size class (defaults to small if not provided)
-   */
-  sizeClass (size) {
-    return size || 'small'
   },
 
   // == Functions =============================================================
