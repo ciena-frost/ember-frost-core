@@ -1,13 +1,32 @@
 import Ember from 'ember'
-import FrostEvents from 'ember-frost-core/mixins/frost-events'
-import {
-  PropTypes
-} from 'ember-prop-types'
+const { Component } = Ember
+import PropTypesMixin, { PropTypes } from 'ember-prop-types'
+import layout from '<%= templatePath %>'
 
-const {
-  Component
-} = Ember
+export default Component.extend(PropTypesMixin, {
 
-<%= importTemplate %>
-export default Component.extend(FrostEvents, {<%= contents %>
+  // == Dependencies ==========================================================
+
+  // == Component properties ==================================================
+
+  layout,
+
+  // == State properties ======================================================
+
+  propTypes: {
+    hook: PropTypes.string
+  },
+
+  getDefaultProps () {
+    return {
+      hook: '<%= dasherizedModuleName %>'
+    }
+  }
+
+  // == Functions =============================================================
+
+  // == Events ================================================================
+
+  // == Actions ===============================================================
+
 })
