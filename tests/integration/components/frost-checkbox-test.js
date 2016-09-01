@@ -173,7 +173,7 @@ describeComponent(
       ).to.be.true
     })
 
-    it('fires onFocus closure action', function () {
+    it('calls onFocus closure action', function () {
       const externalActionSpy = sinon.spy()
 
       this.on('externalAction', externalActionSpy)

@@ -106,7 +106,7 @@ describeComponent(
       })
     })
 
-    describe('keyPress', function () {
+    describe('keyPress()', function () {
       const preventDefaultSpy = sinon.spy()
       const stopPropagationSpy = sinon.spy()
 
@@ -127,7 +127,7 @@ describeComponent(
 
         expect(
           $('input').prop('checked'),
-          'keyPress set checked state'
+          'keyPress() sets checked state'
         ).to.be.true
       })
 
@@ -143,7 +143,7 @@ describeComponent(
 
         expect(
           $('input').prop('checked'),
-          'keyPress checked state is not set'
+          'keyPress() did not set checked state'
         ).to.be.false
       })
 
