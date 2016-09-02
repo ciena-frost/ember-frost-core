@@ -61,17 +61,11 @@ describeComponent(
         component.get('hook'),
         'hook: "undefined"'
       ).to.be.undefined
-    })
-
-    it('sets dependent keys correctly', function () {
-      const inputIdDependentKeys = [
-        'id'
-      ]
 
       expect(
-        component.inputId._dependentKeys,
-        'Dependent keys are correct for inputId()'
-      ).to.eql(inputIdDependentKeys)
+        component.get('inputId'),
+        'inputId: "null"'
+      ).to.not.be.null
     })
 
     it('has the expected Mixins', function () {
@@ -81,22 +75,19 @@ describeComponent(
       ).to.be.true
     })
 
-    it('sets the inputId', function () {
-      const testId = 99
+    it('_setInputId() concatenates elmenentId to "_input"', function () {
+      const testInputId = component.get('elementId')
 
-      run(() => component.set('id', testId))
+      component._setInputId()
 
       expect(
-        component.get('inputId'),
-        'inputId method sets input id'
-      ).to.eql('99_input')
+        component.get('inputId')
+      ).to.eql(`${testInputId}_input`)
     })
 
     describe('when onBlur property is omitted', function () {
       beforeEach(function () {
-        run(() => {
-          component.set('onBlur', undefined)
-        })
+        run(() => component.set('onBlur', undefined))
       })
 
       it('does not throw an error when onBlur action is triggered', function () {
@@ -123,7 +114,7 @@ describeComponent(
       it('sets state to checked', function () {
         this.render()
 
-        run(() => component.keyPress(eventTestObject))
+        component.keyPress(eventTestObject)
 
         expect(
           $('input').prop('checked'),
@@ -136,10 +127,9 @@ describeComponent(
 
         this.render()
 
-        run(() => {
-          component.set('disabled', disabled)
-          component.keyPress(eventTestObject)
-        })
+        run(() => component.set('disabled', disabled))
+
+        component.keyPress(eventTestObject)
 
         expect(
           $('input').prop('checked'),
@@ -150,7 +140,7 @@ describeComponent(
       it('calls preventDefault', function () {
         this.render()
 
-        run(() => component.keyPress(eventTestObject))
+        component.keyPress(eventTestObject)
 
         expect(
           preventDefaultSpy.called,
@@ -161,7 +151,7 @@ describeComponent(
       it('calls stopPropogation', function () {
         this.render()
 
-        run(() => component.keyPress(eventTestObject))
+        component.keyPress(eventTestObject)
 
         expect(
           stopPropagationSpy.called,
@@ -173,7 +163,7 @@ describeComponent(
         this.render()
 
         expect(
-          run(() => component.keyPress(eventTestObject)),
+          component.keyPress(eventTestObject),
           'keyPress() returned false'
         ).to.be.false
       })
@@ -183,7 +173,7 @@ describeComponent(
 
         this.render()
 
-        run(() => component.keyPress(eventTestObject))
+        component.keyPress(eventTestObject)
 
         expect(
           spy.args[0].join(),

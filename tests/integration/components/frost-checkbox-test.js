@@ -6,6 +6,7 @@ import {
   it
 } from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
+import {describe} from 'mocha'
 import sinon from 'sinon'
 
 describeComponent(
@@ -27,8 +28,9 @@ describeComponent(
 
       expect(
         this.$('.frost-checkbox').find('label').prop('for'),
-        this.$('.frost-checkbox').find('input').prop('id'),
         '"label for" property has the correct value'
+      ).to.eql(
+        this.$('.frost-checkbox').find('input').prop('id')
       )
 
       expect(
@@ -154,6 +156,56 @@ describeComponent(
       })
     })
 
+    describe('calls onInput closure action', function () {
+      it('has an object with id set to value', function () {
+        const externalActionSpy = sinon.spy()
+        const testValue = 'test'
+
+        this.set('testValue', testValue)
+
+        this.on('externalAction', externalActionSpy)
+
+        this.render(hbs`
+          {{frost-checkbox
+            onInput=(action 'externalAction')
+            value=testValue
+          }}
+        `)
+
+        this.$('input').trigger('click')
+
+        expect(
+          externalActionSpy.calledWith({
+            id: testValue,
+            value: true
+          }),
+          'onInput() is called with id set to value'
+        ).to.be.true
+      })
+
+      it('has an object with id set to elementId', function () {
+        const externalActionSpy = sinon.spy()
+
+        this.on('externalAction', externalActionSpy)
+
+        this.render(hbs`
+          {{frost-checkbox
+            onInput=(action 'externalAction')
+          }}
+        `)
+
+        this.$('input').trigger('click')
+
+        expect(
+          externalActionSpy.calledWith({
+            id: this.$('.frost-checkbox').prop('id'),
+            value: true
+          }),
+          'onInput() is called with id set to value'
+        ).to.be.true
+      })
+    })
+
     it('calls onBlur callback when focus is lost', function () {
       const externalActionSpy = sinon.spy()
 
@@ -194,7 +246,7 @@ describeComponent(
 
     // https://github.com/juwara0/ember-frost-core/issues/1
     it.skip('sets focus on render when autofocus is true', function () {
-      const focusSpy = sinon.spy($.prototype, 'focus')
+      const focusSpy = sinon.spy(this.$.prototype, 'focus')
 
       this.render(hbs`
         {{frost-checkbox
@@ -206,6 +258,8 @@ describeComponent(
         focusSpy.called,
         'autofocus is set'
       ).to.be.true
+
+      this.$.prototype.focus.restore()
     })
   }
 )
