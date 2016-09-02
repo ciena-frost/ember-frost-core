@@ -212,20 +212,35 @@ export default Component.extend(PropTypeMixin, {
 
   // == Events ================================================================
 
+  init () {
+    this._super(...arguments)
+
+    if (this.hash) {
+      Object.keys(this.hash).forEach((key) => {
+        const value = this.get(`hash.${key}`)
+        if (Ember.typeOf(value) === 'function') {
+          Ember.defineProperty(this, key, undefined, value)
+        } else {
+          Ember.defineProperty(this, key, Ember.computed.alias(`hash.${key}`))
+        }
+      })
+    }
+  },
+
   onclick: Ember.on('click', function (event) {
     if (!ViewUtils.isSimpleClick(event)) {
       return true
     }
 
-    if (!this.get('disabled') && typeOf(this.attrs.onClick) === 'function') {
-      this.attrs.onClick(this.get('id'))
+    if (!this.get('disabled') && typeOf(this.onClick) === 'function') {
+      this.onClick(this.get('id'))
     }
   }),
 
   _onFocus: Ember.on('focusIn', function (e) {
     // If an onFocus handler is defined, call it
-    if (this.attrs.onFocus) {
-      this.attrs.onFocus()
+    if (this.onFocus) {
+      this.onFocus()
     }
   })
 
