@@ -1,3 +1,4 @@
+/*global capture*/
 import Ember from 'ember'
 const {run} = Ember
 import {expect} from 'chai'
@@ -43,5 +44,6 @@ describeComponent('frost-radio-button', 'FrostRadioButtonComponent', {
 
     expect(this.$('input').prop('checked')).to.equal(false)
     this.$('input').trigger('click')
+    return capture('radio-button', { experimentalSvgs: true })
   })
 })

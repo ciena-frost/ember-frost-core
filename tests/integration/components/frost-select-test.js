@@ -1,3 +1,4 @@
+/* global capture*/
 import Ember from 'ember'
 const {$, run, typeOf} = Ember
 import {expect} from 'chai'
@@ -61,8 +62,8 @@ describeComponent(
   function () {
     let props
     let dropDown
-
     beforeEach(function () {
+      this.test._timeout = 6000
       initialize()
 
       props = {
@@ -111,9 +112,16 @@ describeComponent(
       expect(this.$('.frost-select li').length).to.eql(props.data.length)
     })
 
-    it('opens when arrow clicked', () => {
+    it('opens when arrow clicked', (done) => {
       run(() => {
         this.$('.frost-select .down-arrow').click()
+        run.later(() => {
+          capture('drop-down-container', {targetElement: $('.drop-down-container')[0]}).then(function (params) {
+            done()
+          }).catch(function (err) {
+            done(err)
+          })
+        }, 1000)
       })
       expect(this.$('.frost-select').hasClass('open')).to.be.true
     })
