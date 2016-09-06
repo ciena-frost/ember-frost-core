@@ -336,7 +336,6 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   /** Handler for click outside of an element
    */
   onOutsideClick () {
-    set(this, 'open', false)
     get(this, 'reduxStore').dispatch(closeDropDown)
   },
 
