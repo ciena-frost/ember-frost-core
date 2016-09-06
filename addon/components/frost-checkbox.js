@@ -1,6 +1,5 @@
 import Ember from 'ember'
 const {Component, isEmpty, run, typeOf} = Ember
-import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-checkbox'
 
@@ -10,52 +9,47 @@ export default Component.extend(PropTypeMixin, {
   // == Properties ============================================================
 
   classNames: ['frost-checkbox'],
-  classNameBindings: ['sizeClass'],
+  classNameBindings: ['size'],
   layout,
 
   propTypes: {
-    hook: PropTypes.string
+    autofocus: PropTypes.bool,
+    checked: PropTypes.bool,
+    disabled: PropTypes.bool,
+    hook: PropTypes.string,
+    inputId: PropTypes.string,
+    label: PropTypes.string,
+    size: PropTypes.string
   },
 
   getDefaultProps () {
-    return {}
+    return {
+      autofocus: false,
+      checked: false,
+      disabled: false,
+      inputId: null,
+      label: '',
+      size: 'small'
+    }
   },
 
   // == Computed properties  ===================================================
 
-  @computed('checked')
-  /**
-   * Determine whether or not input should be checked
-   * @param {Boolean|null|undefined} checked - desired checked state
-   * @returns {Boolean} whether or not input should be checked
-   */
-  isChecked (checked) {
-    return [null, undefined, false].indexOf(checked) === -1
-  },
-
-  @computed('id')
-  /**
-   * Get input ID
-   * @param {String} id - ID to use for input
-   * @returns {String} input ID
-   */
-  inputId (id) {
-    id = id || this.elementId
-    return `${id}_input`
-  },
-
-  @readOnly
-  @computed('size')
-  /**
-   * Get class for setting input size
-   * @param {String} size - desired size
-   * @returns {String} size class (defaults to small if not provided)
-   */
-  sizeClass (size) {
-    return size || 'small'
-  },
-
   // == Functions =============================================================
+
+  /* Ember.Component method */
+  didInsertElement () {
+    if (this.get('autofocus')) {
+      run.next('render', () => {
+        this.$('input').focus()
+      })
+    }
+  },
+
+  init () {
+    this._super(...arguments)
+    this._setInputId()
+  },
 
   keyPress (e) {
     if (e.keyCode === 32) {
@@ -69,12 +63,14 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
-  /* Ember.Component method */
-  didInsertElement () {
-    if (this.get('autofocus')) {
-      run.next('render', () => {
-        this.$('input').focus()
-      })
+  /**
+   * Set unique inputId that will be set on label and input element
+   * @private
+   * @returns {undefined}
+   */
+  _setInputId () {
+    if (!this.get('inputId')) {
+      this.set('inputId', `${this.get('elementId')}_input`)
     }
   },
 
@@ -102,7 +98,7 @@ export default Component.extend(PropTypeMixin, {
       let id = this.get('value')
       if (typeOf(this.attrs['onInput']) === 'function') {
         this.attrs['onInput']({
-          id: isEmpty(id) ? this.get('id') : id,
+          id: isEmpty(id) ? this.get('elementId') : id,
           value: this.$('input').prop('checked')
         })
       }
