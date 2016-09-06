@@ -4,14 +4,13 @@
   class="trigger"
   disabled={{disabled}}
   data-test={{hook (concat hook '-input')}}
-  onBlur={{action 'onBlur'}}
   onInput={{action 'onChange'}}
   placeholder={{placeholder}}
   type="text"
   value={{prompt}}
 >
 
-<div class="down-arrow" onClick={{action 'onClickArrow'}}>
+<div class="down-arrow">
   <svg viewBox="0 0 15 15">
     <polygon points="7.5,11.4 1.1,5 2.5,3.6 7.5,8.6 12.5,3.6 13.9,5"/>
   </svg>

@@ -43,18 +43,14 @@ $frost-input-select-option-row-height: 35px;
     transition: opacity .2s ease;
     width: calc(100% + 2px);
     pointer-events: none;
-
-    .list-container {
-      position:relative;
-      &:before {
-        @include triangle-up($frost-select-container-background, 10px, 15px);
-        transform: translateX(-50%);
-        position: absolute;
-        left: 50%;
-        top: -10px;
-        z-index: -1;
-        -webkit-filter: drop-shadow(0 -2px 2px rgba(0,0,0,.15));
-      }
+    &:before {
+      @include triangle-up($frost-select-container-background, 10px, 15px);
+      transform: translateX(-50%);
+      position: absolute;
+      left: 50%;
+      top: -10px;
+      z-index: -1;
+      -webkit-filter: drop-shadow(0 -2px 2px rgba(0,0,0,.15));
     }
   }
 
@@ -117,7 +113,7 @@ $frost-input-select-option-row-height: 35px;
     right: 10px;
     top: 7px;
     width: 20px;
-
+    pointer-events: none;
     polygon {
       fill: $frost-select-indicator;
     }

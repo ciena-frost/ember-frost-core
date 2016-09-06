@@ -134,19 +134,20 @@
   <div class="section">
 
     <div class="example">
-      <div class="title">onBlur</div>
+      <div class="title">Focus States</div>
       <div class="demo">
         {{frost-select
           data=data
-          onBlur=(action 'onBlurHandler')
+          onFocusIn=(action 'onFocusInHandler')
+          onFocusOut=(action 'onFocusOutHandler')
         }}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-select
   data=data
-  onBlur=(action 'onBlurHandler')
-}}
+  onFocusIn=(action 'onFocusInHandler')
+  onFocusOut=(action 'onFocusOutHandler')}}
 ```"}}
       </div>
     </div>
@@ -332,18 +333,22 @@
   <div class="section">
 
     <div class="example">
-      <div class="title">onBlur</div>
+      <div class="title">Focus States</div>
       <div class="demo">
         {{frost-multi-select
           data=data
-          onBlur=(action 'onBlurHandler')
+          onFocusIn=(action 'onFocusInHandler')
+          onBlur=(action 'onFocusOutHandler')
+          onFocusOut=(action 'onFocusOutHandler')
         }}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
-  onBlur=(action 'onBlurHandler')
+  onFocusIn=(action 'onFocusInHandler')
+  onBlur=(action 'onFocusOutHandler')
+  onFocusOut=(action 'onFocusOutHandler')
 }}
 ```"}}
       </div>

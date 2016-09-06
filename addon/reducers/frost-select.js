@@ -219,6 +219,7 @@ export default function reducer (state, action) {
       nextState = select(state, action.itemIndex)
       break
     case SELECT_HOVER:
+      console.log(state)
       nextState = select(state, state.hoveredItem)
       break
     case CLICK_ARROW:

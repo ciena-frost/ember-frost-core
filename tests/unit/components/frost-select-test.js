@@ -27,20 +27,6 @@ describeComponent(
       expect(component.classNames).to.include('frost-select')
     })
 
-    describe('when onBlur property is omitted', function () {
-      beforeEach(function () {
-        run(() => {
-          component.set('onBlur', undefined)
-        })
-      })
-
-      it('should not throw an error when onBlur action is triggered', function () {
-        expect(function () {
-          component.get('actions.onBlur').call(component)
-        }).not.to.throw(Error)
-      })
-    })
-
     describe('.didReceiveAttrs()', function () {
       ;[0, 1].forEach((selectedIndex) => {
         describe(`when selected index is ${selectedIndex} and no previous selected index`, function () {

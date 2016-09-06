@@ -1,8 +1,16 @@
 import _ from 'lodash'
 import Ember from 'ember'
-const {A, Component, get, typeOf} = Ember
+const {
+  A: EmberArray,
+  Component,
+  get,
+  set,
+  typeOf
+ } = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import FrostEventsProxy from '../mixins/frost-events-proxy'
+
 import layout from '../templates/components/frost-select'
 import Redux from 'npm:redux'
 import {
@@ -56,7 +64,7 @@ function handleOutsideClick (event) {
   }
 }
 
-export default Component.extend(PropTypeMixin, {
+export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   // ==========================================================================
   // Dependencies
   // ==========================================================================
@@ -67,7 +75,7 @@ export default Component.extend(PropTypeMixin, {
 
   attributeBindings: ['tabIndex'],
   classNames: ['frost-select'],
-  classNameBindings: ['focus', 'shouldOpen:open', 'disabled', 'hasError:error'],
+  classNameBindings: ['shouldOpen:focus', 'shouldOpen:open', 'disabled', 'hasError:error'],
   stateProperties: [
     'open',
     'prompt',
@@ -116,7 +124,7 @@ export default Component.extend(PropTypeMixin, {
       error: false,
       hovered: -1,
       maxListHeight: 400,
-      selected: A([]),
+      selected: EmberArray(),
       tabIndex: -1,
       width: 200
     }
@@ -221,17 +229,17 @@ export default Component.extend(PropTypeMixin, {
     oldAttrs = oldAttrs || {}
 
     this._super(...arguments)
-    const stateAttrs = this.get('stateAttributes')
+    const stateAttrs = get(this, 'stateAttributes')
 
     const reduxAttrs = _.chain(stateAttrs)
     .map((attrName) => {
       const split = _.filter(attrName.split(ATTR_MAP_DELIM))
       let attrValue
       if (split.length > 1) {
-        attrValue = this.get(split[0])
+        attrValue = get(this, split[0])
         attrName = split[1]
       } else {
-        attrValue = this.get(attrName)
+        attrValue = get(this, attrName)
       }
 
       return [attrName, attrValue]
@@ -240,7 +248,7 @@ export default Component.extend(PropTypeMixin, {
     .fromPairs()
     .value()
 
-    this.get('reduxStore').dispatch(resetDropDown(reduxAttrs))
+    get(this, 'reduxStore').dispatch(resetDropDown(reduxAttrs))
 
     const dataChanged = isAttrDifferent(newAttrs, oldAttrs, 'data')
     const selectedChanged = isAttrDifferent(newAttrs, oldAttrs, 'selected')
@@ -257,7 +265,7 @@ export default Component.extend(PropTypeMixin, {
     if (selectedValueChanged || (dataChanged && get(newAttrs, 'selectedValue.value'))) {
       this.selectOptionByValue(newAttrs.selectedValue.value)
     } else if (selectedChanged || (dataChanged && get(newAttrs, 'selected.value'))) {
-      let selected = this.get('selected')
+      let selected = get(this, 'selected')
 
       if (typeOf(selected) === 'number') {
         selected = [selected]
@@ -269,11 +277,11 @@ export default Component.extend(PropTypeMixin, {
 
   // TODO: add jsdoc
   getValues () {
-    const state = this.get('reduxStore').getState()
+    const state = get(this, 'reduxStore').getState()
     return [state.baseItems[state.selectedItem].value]
   },
   keyDown (event) {
-    const reduxStore = this.get('reduxStore')
+    const reduxStore = get(this, 'reduxStore')
     switch (event.which) {
       case keyCodes.tab:
         reduxStore.dispatch(closeDropDown)
@@ -282,7 +290,7 @@ export default Component.extend(PropTypeMixin, {
   },
   // TODO: add jsdoc
   keyUp (event) {
-    const reduxStore = this.get('reduxStore')
+    const reduxStore = get(this, 'reduxStore')
     switch (event.which) {
       // escape key or tab key, close the dropdown
       case keyCodes.esc:
@@ -318,7 +326,7 @@ export default Component.extend(PropTypeMixin, {
    * @param {Number[]} selected - the selected indices
    */
   notifyOfChange () {
-    const onChange = this.get('onChange')
+    const onChange = get(this, 'onChange')
     if (onChange) {
       const values = this.getValues()
       onChange(values)
@@ -328,12 +336,13 @@ export default Component.extend(PropTypeMixin, {
   /** Handler for click outside of an element
    */
   onOutsideClick () {
-    this.get('reduxStore').dispatch(closeDropDown)
+    set(this, 'open', false)
+    get(this, 'reduxStore').dispatch(closeDropDown)
   },
 
   // TODO: add jsdoc
   selectOptionByValue (selectedValue) {
-    this.get('reduxStore').dispatch(selectValue(selectedValue))
+    get(this, 'reduxStore').dispatch(selectValue(selectedValue))
   },
 
   /** obvious */
@@ -348,7 +357,7 @@ export default Component.extend(PropTypeMixin, {
 
   setUpReduxStore () {
     const reduxStore = Redux.createStore(reducer)
-    this.set('reduxStore', reduxStore)
+    set(this, 'reduxStore', reduxStore)
     return reduxStore
   },
 
@@ -356,9 +365,7 @@ export default Component.extend(PropTypeMixin, {
     reduxStore.subscribe(() => {
       const state = reduxStore.getState()
 
-      const wasOpen = this.get('open')
-
-      const newProps = _.pick(state, this.get('stateProperties'))
+      const newProps = _.pick(state, get(this, 'stateProperties'))
 
       this.setProperties(newProps)
 
@@ -368,6 +375,8 @@ export default Component.extend(PropTypeMixin, {
           this.notifyOfChange()
           break
       }
+      const wasOpen = get(this, 'open')
+
       if (!wasOpen && newProps.open) {
         this.bindDropdownEvents()
       } else if (wasOpen && !newProps.open) {
@@ -385,54 +394,47 @@ export default Component.extend(PropTypeMixin, {
   // Events
   // ==========================================================================
   focusIn (event) {
-    this.get('reduxStore').dispatch(openDropDown)
-    // If an onFocus event handler is defined, call it
-    if (this.attrs.onFocus) {
-      this.attrs.onFocus(event)
+    get(this, 'reduxStore').dispatch(openDropDown)
+
+    const onFocusIn = get(this, '_eventProxy.focusIn')
+
+    if (onFocusIn) {
+      onFocusIn(event)
     }
-    return false
+  },
+  focusOut (event) {
+    get(this, 'reduxStore').dispatch(closeDropDown)
+
+    const onFocusOut = get(this, '_eventProxy.focusOut')
+
+    if (onFocusOut) {
+      onFocusOut(event)
+    }
   },
   // ==========================================================================
   // Actions
   // ==========================================================================
   actions: {
     // TODO: add jsdoc
-    onBlur (event) {
-      this.set('focus', false)
-
-      const onBlur = this.get('onBlur')
-
-      if (onBlur) {
-        onBlur()
-      }
-    },
-
-    // TODO: add jsdoc
     onChange (event) {
       const target = event.currentTarget || event.target
-      const onInput = this.get('onInput')
+
+      const onInput = get(this, 'onInput')
       if (typeOf(onInput) === 'function') {
         onInput(target.value)
       } else {
-        this.get('reduxStore').dispatch(updateSearchText(target.value))
+        get(this, 'reduxStore').dispatch(updateSearchText(target.value))
       }
-    },
-
-    // TODO: add jsdoc
-    onClickArrow (event) {
-      event.preventDefault()
-      const reduxStore = this.get('reduxStore')
-      reduxStore.dispatch(clickArrow)
     },
     // TODO: add jsdoc
     onItemOver (data) {
-      this.get('reduxStore').dispatch(mouseHoverItem(data.index))
+      get(this, 'reduxStore').dispatch(mouseHoverItem(data.index))
       return false
     },
 
     // TODO: add jsdoc
     onSelect (data) {
-      this.get('reduxStore').dispatch(selectItem(data.index))
+      get(this, 'reduxStore').dispatch(selectItem(data.index))
     }
   }
 })

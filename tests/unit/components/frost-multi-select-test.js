@@ -20,19 +20,5 @@ describeComponent(
     it('includes className frost-select', function () {
       expect(component.classNames).to.include('frost-select')
     })
-
-    describe('when onBlur property is omitted', function () {
-      beforeEach(function () {
-        run(() => {
-          component.set('onBlur', undefined)
-        })
-      })
-
-      it('does not error when onBlur action is triggered', function () {
-        expect(function () {
-          component.get('actions.onBlur').call(component)
-        }).not.to.throw(Error)
-      })
-    })
   }
 )

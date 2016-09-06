@@ -24,9 +24,17 @@ export default Controller.extend({
   selectedValues: ['Arthur Curry', 'Ray Palmer'],
 
   actions: {
-    onBlurHandler () {
+    onFocusOutHandler () {
       this.notifications.addNotification({
-        message: 'blur event',
+        message: 'onFocusOut event',
+        type: 'success',
+        autoClear: true,
+        clearDuration: 2000
+      })
+    },
+    onFocusInHandler () {
+      this.notifications.addNotification({
+        message: 'onFocusIn event',
         type: 'success',
         autoClear: true,
         clearDuration: 2000
