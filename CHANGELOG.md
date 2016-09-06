@@ -1,3 +1,15 @@
+# 0.25.6
+
+* Updated the button demo to demonstrate that disabled buttons don't fire actions
+
+# 0.25.5
+
+* Updated the frost-component blueprint to reflect current best practices
+
+# 0.25.4
+
+* **Added** `npm-install-security-check` as a dependency to make consumers more security conscious.
+
 # 0.25.3
 No CHANGELOG section found in Pull Request description.
 Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
