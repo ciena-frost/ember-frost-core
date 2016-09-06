@@ -19,9 +19,9 @@ describeComponent(
       `)
 
       expect(
-        this.$('.frost-icon').hasClass('frost-icon-frost-round-add'),
+        this.$('.frost-icon-frost-round-add'),
         'Icon class is set correctly.'
-      ).to.be.true
+      ).to.have.length(1)
     })
 
     it('sets the pack property', function () {
@@ -33,9 +33,9 @@ describeComponent(
       `)
 
       expect(
-        this.$('.frost-icon').hasClass('frost-icon-test-round-add'),
+        this.$('.frost-icon-test-round-add'),
         'Icon class updates correctly when pack is set.'
-      ).to.be.true
+      ).to.have.length(1)
     })
   }
 )

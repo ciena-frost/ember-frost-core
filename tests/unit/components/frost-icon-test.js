@@ -1,4 +1,6 @@
 import {expect} from 'chai'
+import Ember from 'ember'
+const {run} = Ember
 import {describeComponent} from 'ember-mocha'
 import {
   beforeEach,
@@ -6,7 +8,6 @@ import {
   it
 } from 'mocha'
 import PropTypeMixin from 'ember-prop-types'
-import { run } from 'Ember'
 
 describeComponent(
   'frost-icon',
