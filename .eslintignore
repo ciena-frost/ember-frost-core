@@ -3,3 +3,4 @@ dist/**/*
 node_modules/**/*
 tmp/**/*
 blueprints/frost-component/files/**/*
+tests/integration/components/frost-scroll-test.js

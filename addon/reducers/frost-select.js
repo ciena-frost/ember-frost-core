@@ -147,10 +147,11 @@ export function itemClassNames (index, hoveredItem, selectedItem) {
 }
 
 /**
- * Updates the items in the display items list to have the correct CSS classnames
- * @param {any} displayItems List of display items to update (NOTE: The items in this list are mutated by this function)
- * @param {any} hoveredItem The item currently being hovered
- * @param {any} selectedItem The item that is currently selected
+ * Updates the items in the display items list to have the correct CSS classes
+ * @param {any} displayed List of display items to update
+ *  (NOTE: The items in this list are mutated by this function)
+ * @param {any} hovered The item currently being hovered
+ * @param {any} selected The item that is currently selected
  * @returns {SelectDisplayItem[]} The transformed list of display items
  */
 function updateClassNames (displayed = [], hovered, selected) {
@@ -222,11 +223,8 @@ export default function reducer (state, action) {
       nextState = select(state, action.itemIndex)
       break
     case SELECT_HOVER:
-      var {
-        hoveredItem
-      } = state
-      nextState = !isEmpty(hoveredItem)
-        ? select(state, hoveredItem) : state
+      nextState = !isEmpty(state.hoveredItem)
+        ? select(state, state.hoveredItem) : state
       break
     case CLICK_ARROW:
       // Toggle
