@@ -399,7 +399,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
 
       const el = this.$('input')
       if (!el.is(':focus')) {
-        this.$('input').focus()
+        el.focus()
       }
     })
   },
