@@ -1,5 +1,8 @@
 import Ember from 'ember'
-
+const {
+  isEmpty,
+  set
+} = Ember
 const assign = Ember.assign || Object.assign || Ember.merge
 
 import {
@@ -150,12 +153,12 @@ export function itemClassNames (index, hoveredItem, selectedItem) {
  * @param {any} selectedItem The item that is currently selected
  * @returns {SelectDisplayItem[]} The transformed list of display items
  */
-function updateClassNames (displayItems, hoveredItem, selectedItem) {
-  (displayItems || []).forEach(function (item, index, list) {
-    const className = itemClassNames(item.index, hoveredItem, selectedItem, list.length)
-    Ember.set(item, 'className', className)
+function updateClassNames (displayed = [], hovered, selected) {
+  displayed.forEach((item, index, list) => {
+    const className = itemClassNames(item.index, hovered, selected, list.length)
+    set(item, 'className', className)
   })
-  return displayItems
+  return displayed
 }
 
 /**
@@ -219,7 +222,11 @@ export default function reducer (state, action) {
       nextState = select(state, action.itemIndex)
       break
     case SELECT_HOVER:
-      nextState = select(state, state.hoveredItem)
+      var {
+        hoveredItem
+      } = state
+      nextState = !isEmpty(hoveredItem)
+        ? select(state, hoveredItem) : state
       break
     case CLICK_ARROW:
       // Toggle

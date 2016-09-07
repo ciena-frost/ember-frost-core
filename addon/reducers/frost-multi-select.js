@@ -12,6 +12,9 @@ import selectReducer, {
   itemClassNames
 } from './frost-select'
 import Ember from 'ember'
+const {
+  isEmpty
+} = Ember
 import _ from 'lodash'
 
 /**
@@ -186,7 +189,12 @@ export default function reducer (state, action) {
       nextState = selectItem(state, action.itemIndex)
       break
     case SELECT_HOVER:
-      nextState = selectItem(state, state.hoveredItem)
+      var {
+        hoveredItem
+      } = state
+      nextState = !isEmpty(hoveredItem)
+        ? selectItem(state, hoveredItem)
+        : state
       break
     case SELECT_VALUE:
       nextState = {

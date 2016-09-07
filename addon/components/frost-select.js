@@ -2,6 +2,9 @@ import _ from 'lodash'
 import Ember from 'ember'
 const {
   A: EmberArray,
+  String: {
+    htmlSafe
+  },
   Component,
   get,
   set,
@@ -149,7 +152,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   @readOnly
   @computed('maxListHeight')
   containerStyle (maxListHeight) {
-    return Ember.String.htmlSafe(`max-height: ${maxListHeight}px`)
+    return htmlSafe(`max-height: ${maxListHeight}px`)
   },
 
   /**
@@ -213,7 +216,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   @readOnly
   @computed('width')
   style (width) {
-    return `width: ${width}px`
+    return htmlSafe(`width: ${width}px`)
   },
 
   // ==========================================================================
@@ -295,7 +298,6 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       // escape key or tab key, close the dropdown
       case keyCodes.esc:
         event.preventDefault()
-
         reduxStore.dispatch(closeDropDown)
         break
       // enter + spacebar, choose selected
@@ -376,7 +378,6 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
           this.notifyOfChange()
           break
       }
-
       if (!wasOpen && newProps.open) {
         this.bindDropdownEvents()
       } else if (wasOpen && !newProps.open) {
