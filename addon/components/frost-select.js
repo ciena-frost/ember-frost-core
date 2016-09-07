@@ -75,7 +75,12 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
 
   attributeBindings: ['tabIndex'],
   classNames: ['frost-select'],
-  classNameBindings: ['shouldOpen:focus', 'shouldOpen:open', 'disabled', 'hasError:error'],
+  classNameBindings: [
+    'shouldOpen:focus',
+    'shouldOpen:open',
+    'disabled',
+    'hasError:error'
+  ],
   stateProperties: [
     'open',
     'prompt',
@@ -133,9 +138,6 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   // ==========================================================================
   // Computed Properties
   // ==========================================================================
-
-  @readOnly
-  @computed('maxListHeight')
   /**
    * Get inline style for container
    * Note: This must be a computed property rather than in a SASS file because the
@@ -143,18 +145,20 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
    * @param {Number} maxListHeight - maximum height at which list should render
    * @returns {String} container style
    */
+  @readOnly
+  @computed('maxListHeight')
   containerStyle (maxListHeight) {
     return Ember.String.htmlSafe(`max-height: ${maxListHeight}px`)
   },
 
-  @readOnly
-  @computed('data', 'displayItems')
   /**
    * Flag for if the user has typed something that doesn't match any options
    * @param {Array<Item>} data - all the possible items
    * @param {Object[]} displayItems - the current items being displayed
    * @returns {Boolean} true if in error state
    */
+  @readOnly
+  @computed('data', 'displayItems')
   invalidFilter (data, displayItems) {
     return (
       Array.isArray(data) &&
@@ -163,9 +167,6 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       displayItems.length === 0
     )
   },
-
-  @readOnly
-  @computed('error', 'invalidFilter')
   /**
    * Computed flag for if consumer flagged us as having an error, or if the user has typed
    * something bad.
@@ -173,12 +174,11 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
    * @param {Boolean} invalidFilter - true if the user has typed something that doesn't match an option
    * @returns {Boolean} true if either error condition occured
    */
+  @readOnly
+  @computed('error', 'invalidFilter')
   hasError (error, invalidFilter) {
     return error || invalidFilter
   },
-
-  @readOnly
-  @computed('invalidFilter', 'shouldDisableDropDown', 'open')
   /**
    * Determine if drop-down should open
    * @param {Boolean} invalidFilter - did the user goof?
@@ -186,29 +186,31 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
    * @param {Boolean} open - TODO: what is this?
    * @returns {Boolean} true if we should open
    */
+  @readOnly
+  @computed('invalidFilter', 'shouldDisableDropDown', 'open')
   shouldOpen (invalidFilter, shouldDisableDropDown, open) {
     return !invalidFilter && !shouldDisableDropDown && open
   },
 
-  @readOnly
-  @computed('invalidFilter', 'disabled')
   /**
    * Determine if we should disable opening the drop-down
    * @param {Boolean} invalidFilter - did the user goof?
    * @param {Boolean} disabled - are we in a disabled state?
    * @returns {Boolean} true if opening should be disabled
    */
+  @readOnly
+  @computed('invalidFilter', 'disabled')
   shouldDisableDropDown (invalidFilter, disabled) {
     return invalidFilter || disabled
   },
 
-  @readOnly
-  @computed('width')
   /**
    * Compute the style attribute based on width
    * @param {Number} width - the width property
    * @returns {String} the computed style attribute
    */
+  @readOnly
+  @computed('width')
   style (width) {
     return `width: ${width}px`
   },
@@ -224,10 +226,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   },
 
   /* Ember.Component method */
-  didReceiveAttrs ({newAttrs, oldAttrs}) {
-    newAttrs = newAttrs || {}
-    oldAttrs = oldAttrs || {}
-
+  didReceiveAttrs ({newAttrs = {}, oldAttrs = {}}) {
     this._super(...arguments)
     const stateAttrs = get(this, 'stateAttributes')
 
@@ -392,6 +391,17 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   // ==========================================================================
   // Events
   // ==========================================================================
+  click () {
+    const reduxStore = get(this, 'reduxStore')
+    const {
+      lastAction
+    } = reduxStore.getState()
+    if (lastAction !== 'OPEN_DROPDOWN' && lastAction !== 'CLICK_ARROW') {
+      reduxStore.dispatch(openDropDown)
+    } else {
+      reduxStore.getState().lastAction = null
+    }
+  },
   focusIn (event) {
     get(this, 'reduxStore').dispatch(openDropDown)
 
@@ -424,6 +434,10 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       } else {
         get(this, 'reduxStore').dispatch(updateSearchText(target.value))
       }
+    },
+    onClickArrow (event) {
+      event.preventDefault()
+      get(this, 'reduxStore').dispatch(clickArrow)
     },
     // TODO: add jsdoc
     onItemOver (data) {

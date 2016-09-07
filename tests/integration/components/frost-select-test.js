@@ -281,10 +281,12 @@ describeComponent(
 
     it('handles click outside of select', function () {
       run(() => {
-        this.$('.frost-select .down-arrow').click()
+        this.$('.frost-select down-arrow').click()
         this.$().click()
       })
-      expect(dropDown.hasClass('open')).to.be.false
+      let select = this.$('.frost-select')
+
+      expect(select.hasClass('open')).to.be.false
     })
 
     it('handles losing focus by pressing tab', function () {

@@ -139,7 +139,7 @@
         {{frost-select
           data=data
           onFocusIn=(action 'onFocusInHandler')
-          onFocusOut=(action 'onFocusOutHandler')
+          onFocusOut=(action 'onFocusOutHandler' 'hip way to do events')
         }}
       </div>
       <div class="snippet">
@@ -147,7 +147,27 @@
 {{frost-select
   data=data
   onFocusIn=(action 'onFocusInHandler')
-  onFocusOut=(action 'onFocusOutHandler')}}
+  onFocusOut=(action 'onFocusOutHandler' 'hip way to do events')
+}}
+```"}}
+      </div>
+    </div>
+    <div class="example">
+      <div class="title">Deprecated Events</div>
+      <div class="demo">
+        {{frost-select
+          data=data
+          onFocusIn=(action 'onFocusInHandler')
+          onBlur=(action 'onFocusOutHandler' 'deprecated')
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-select
+  data=data
+  onFocusIn=(action 'onFocusInHandler')
+  onBlur=(action 'onFocusOutHandler' 'deprecated')
+}}
 ```"}}
       </div>
     </div>
@@ -338,8 +358,7 @@
         {{frost-multi-select
           data=data
           onFocusIn=(action 'onFocusInHandler')
-          onBlur=(action 'onFocusOutHandler')
-          onFocusOut=(action 'onFocusOutHandler')
+          onFocusOut=(action 'onFocusOutHandler' 'hip way to do it')
         }}
       </div>
       <div class="snippet">
@@ -347,8 +366,24 @@
 {{frost-multi-select
   data=data
   onFocusIn=(action 'onFocusInHandler')
-  onBlur=(action 'onFocusOutHandler')
-  onFocusOut=(action 'onFocusOutHandler')
+  onFocusOut=(action 'onFocusOutHandler' 'hip way to do it')
+}}
+```"}}
+      </div>
+    </div>
+    <div class="example">
+      <div class="title">Deprecated Events</div>
+      <div class="demo">
+        {{frost-multi-select
+          data=data
+          onBlur=(action 'onFocusOutHandler' 'deprecated way to do it')
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-multi-select
+  data=data
+  onBlur=(action 'onFocusOutHandler' 'deprecated way to do it')
 }}
 ```"}}
       </div>

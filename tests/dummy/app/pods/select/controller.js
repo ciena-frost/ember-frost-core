@@ -24,9 +24,9 @@ export default Controller.extend({
   selectedValues: ['Arthur Curry', 'Ray Palmer'],
 
   actions: {
-    onFocusOutHandler () {
+    onFocusOutHandler (e) {
       this.notifications.addNotification({
-        message: 'onFocusOut event',
+        message: `onFocusOut event ${e}`,
         type: 'success',
         autoClear: true,
         clearDuration: 2000
