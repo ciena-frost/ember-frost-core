@@ -1,9 +1,11 @@
 <input
-  autocomplete=false
+  autocomplete='false'
   autofocus={{autofocus}}
   class="trigger"
   disabled={{disabled}}
   data-test={{hook (concat hook '-input')}}
+  onFocus={{action 'onFocusIn'}}
+  onBlur={{action 'onFocusOut'}}
   onInput={{action 'onChange'}}
   placeholder={{placeholder}}
   type="text"

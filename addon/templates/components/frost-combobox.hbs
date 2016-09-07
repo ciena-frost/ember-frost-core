@@ -1,8 +1,10 @@
 <input
   class="trigger"
+  onInput={{action "onChange"}}
+  onFocus={{action 'onFocusIn'}}
+  onBlur={{action 'onFocusOut'}}
   type="text"
   value={{prompt}}
-  onInput={{action "onChange"}}
 >
 <div class="down-arrow">
     <svg viewBox='0 0 15 15'>

@@ -3,6 +3,8 @@
   disabled={{disableInput}}
   data-test={{hook (concat hook '-input')}}
   onInput={{action 'onChange'}}
+  onFocus={{action 'onFocusIn'}}
+  onBlur={{action 'onFocusOut'}}
   placeholder={{placeholder}}
   type="text"
   value={{prompt}}

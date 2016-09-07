@@ -5,6 +5,7 @@ const {
   Component,
   get,
   set,
+  run,
   typeOf
  } = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
@@ -221,7 +222,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
 
   /** obvious */
   bindDropdownEvents () {
-    this._handleOutsideClick = handleOutsideClick.bind(this)
+    this._handleOutsideClick = run.bind(this, handleOutsideClick)
     Ember.$(document).on('click', this._handleOutsideClick)
   },
 
@@ -267,9 +268,9 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       let selected = get(this, 'selected')
 
       if (typeOf(selected) === 'number') {
-        selected = [selected]
+        selected = EmberArray([selected])
       } else if (!Array.isArray(selected)) {
-        selected = []
+        selected = EmberArray()
       }
     }
   },
@@ -294,6 +295,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       // escape key or tab key, close the dropdown
       case keyCodes.esc:
         event.preventDefault()
+
         reduxStore.dispatch(closeDropDown)
         break
       // enter + spacebar, choose selected
@@ -362,6 +364,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   subscribe (reduxStore) {
     reduxStore.subscribe(() => {
       const state = reduxStore.getState()
+      const wasOpen = get(this, 'open')
 
       const newProps = _.pick(state, get(this, 'stateProperties'))
 
@@ -373,7 +376,6 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
           this.notifyOfChange()
           break
       }
-      const wasOpen = get(this, 'open')
 
       if (!wasOpen && newProps.open) {
         this.bindDropdownEvents()
@@ -392,38 +394,36 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   // Events
   // ==========================================================================
   click () {
-    const reduxStore = get(this, 'reduxStore')
-    const {
-      lastAction
-    } = reduxStore.getState()
-    if (lastAction !== 'OPEN_DROPDOWN' && lastAction !== 'CLICK_ARROW') {
-      reduxStore.dispatch(openDropDown)
-    } else {
-      reduxStore.getState().lastAction = null
-    }
-  },
-  focusIn (event) {
-    get(this, 'reduxStore').dispatch(openDropDown)
+    run.scheduleOnce('sync', this, function () {
+      get(this, 'reduxStore').dispatch(openDropDown)
 
-    const onFocusIn = get(this, '_eventProxy.focusIn')
-
-    if (onFocusIn) {
-      onFocusIn(event)
-    }
-  },
-  focusOut (event) {
-    get(this, 'reduxStore').dispatch(closeDropDown)
-
-    const onFocusOut = get(this, '_eventProxy.focusOut')
-
-    if (onFocusOut) {
-      onFocusOut(event)
-    }
+      const el = this.$('input')
+      if (!el.is(':focus')) {
+        this.$('input').focus()
+      }
+    })
   },
   // ==========================================================================
   // Actions
   // ==========================================================================
   actions: {
+    onFocusIn (event) {
+      get(this, 'reduxStore').dispatch(openDropDown)
+
+      const onFocusIn = get(this, '_eventProxy.focusIn')
+
+      if (onFocusIn) {
+        onFocusIn(event)
+      }
+      return false
+    },
+    onFocusOut (event) {
+      const onFocusOut = get(this, '_eventProxy.focusOut')
+
+      if (onFocusOut) {
+        onFocusOut(event)
+      }
+    },
     // TODO: add jsdoc
     onChange (event) {
       const target = event.currentTarget || event.target
@@ -437,6 +437,8 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     },
     onClickArrow (event) {
       event.preventDefault()
+      event.stopPropagation()
+
       get(this, 'reduxStore').dispatch(clickArrow)
     },
     // TODO: add jsdoc
