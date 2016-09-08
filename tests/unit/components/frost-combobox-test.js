@@ -30,7 +30,7 @@ describeComponent(
 
       it('does not throw an error when onBlur action is triggered', function () {
         expect(function () {
-          component.get('actions.onBlur').call(component)
+          component.get('actions.onFocusOut').call(component)
         }).not.to.throw(Error)
       })
     })

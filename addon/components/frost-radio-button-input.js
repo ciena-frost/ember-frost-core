@@ -1,13 +1,14 @@
 import Ember from 'ember'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-import FrostEvents from '../mixins/frost-events'
 
 const {
   Component,
-  computed
+  computed: {
+    alias
+  }
 } = Ember
 
-export default Component.extend(FrostEvents, PropTypeMixin, {
+export default Component.extend(PropTypeMixin, {
   // == Properties =============================================================
   attributeBindings: [
     'checked',
@@ -15,15 +16,15 @@ export default Component.extend(FrostEvents, PropTypeMixin, {
     'value',
     'type'
   ],
-  classNames: ['frost-radio-button-input'],
-  excludeEvents: ['onChange'],
+  classNames: [
+    'frost-radio-button-input'
+  ],
   tagName: 'input',
 
   propTypes: {
     checked: PropTypes.bool,
     disabled: PropTypes.bool,
     hook: PropTypes.string,
-    value: PropTypes.bool,
     type: PropTypes.string
   },
 
@@ -35,17 +36,15 @@ export default Component.extend(FrostEvents, PropTypeMixin, {
   },
 
   // == Computed properties ====================================================
-  checked: computed('groupValue', 'value', function () {
-    return this.get('groupValue') === this.get('value')
-  }),
+
+  checked: alias('parentView.checked'),
 
   // == Functions ==============================================================
-  init () {
+  didInsertElement () {
     this._super(...arguments)
 
-    let assert = `${this.toString()} must be initialized in the yield block of 'frost-radio-button'`
+    let assert = `${this.toString()} must exist inside 'frost-radio-button'`
     let cond = /frost-radio-button/.test(this.parentView.toString())
     Ember.assert(assert, cond)
   }
-
 })

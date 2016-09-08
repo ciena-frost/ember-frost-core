@@ -2,12 +2,13 @@
 $frost-input-text-height: 35px;
 $frost-input-select-option-row-height: 35px;
 
-@mixin triangle-up($color, $size) {
+@mixin triangle-up($color, $size, $width) {
   border-bottom: $size solid $color;
   border-left: $size solid transparent;
   border-right: $size solid transparent;
   height: 0;
-  width: 25px;
+  width: $width;
+  content: '';
 }
 
 .frost-select {
@@ -20,19 +21,15 @@ $frost-input-select-option-row-height: 35px;
   position: relative;
   width: 200px;
   background: $frost-select-container-background;
-
-  .up-arrow {
-    @include triangle-up($frost-select-container-background, 12px);
-    display: inline-block;
-    left: calc(50% - 15px);
-    overflow: visible;
-    pointer-events: none;
-    position: absolute;
-    right: 8px;
-    top: -10px;
-    z-index: 3;
+  li {
+    border-bottom: solid 1px #F5F6F7;
+    color: #7b7f7f;
+    font-weight: 200;
+    height: 35px;
+    line-height: 35px;
+    padding: 0 10px;
+    width: 100%;
   }
-
   .drop-down-container {
     background: $frost-select-container-background;
     border: 1px solid $frost-color-lgrey-3;
@@ -43,9 +40,18 @@ $frost-input-select-option-row-height: 35px;
     opacity: 0;
     position: absolute;
     top: calc(100% + 10px);
-    transition: height .4s ease, opacity .2s ease;
+    transition: opacity .2s ease;
     width: calc(100% + 2px);
     pointer-events: none;
+    &:before {
+      @include triangle-up($frost-select-container-background, 10px, 15px);
+      transform: translateX(-50%);
+      position: absolute;
+      left: 50%;
+      top: -10px;
+      z-index: -1;
+      -webkit-filter: drop-shadow(0 -2px 2px rgba(0,0,0,.15));
+    }
   }
 
   input.trigger {
@@ -107,7 +113,6 @@ $frost-input-select-option-row-height: 35px;
     right: 10px;
     top: 7px;
     width: 20px;
-
     polygon {
       fill: $frost-select-indicator;
     }
@@ -122,6 +127,8 @@ $frost-input-select-option-row-height: 35px;
     pointer-events: auto;
     ul {
       height: auto;
+      box-shadow: 0 2px 6px 2px rgba(0,0,0,.2);
+      border-radius: 4px;
     }
   }
 }

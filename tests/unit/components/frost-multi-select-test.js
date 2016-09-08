@@ -5,8 +5,8 @@ import {describeComponent} from 'ember-mocha'
 import {beforeEach, describe, it} from 'mocha'
 
 describeComponent(
-  'frost-multi-select',
-  'FrostMultiSelectComponent',
+  'frost-combobox',
+  'FrostComboboxComponent',
   {
     unit: true
   },
@@ -28,9 +28,9 @@ describeComponent(
         })
       })
 
-      it('does not error when onBlur action is triggered', function () {
+      it('does not throw an error when onBlur action is triggered', function () {
         expect(function () {
-          component.get('actions.onBlur').call(component)
+          component.get('actions.onFocusOut').call(component)
         }).not.to.throw(Error)
       })
     })

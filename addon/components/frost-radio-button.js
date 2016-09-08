@@ -1,13 +1,14 @@
 import Ember from 'ember'
 const {
   Component,
-  computed
+  get,
+  set,
+  typeOf
 } = Ember
-const {
-  readOnly
-} = computed
+
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-radio-button'
+import computed from 'ember-computed-decorators'
 
 export default Component.extend(PropTypeMixin, {
   // == Properties  ============================================================
@@ -39,57 +40,82 @@ export default Component.extend(PropTypeMixin, {
   },
 
   // == Computed properties  ===================================================
-
-  groupId: readOnly('parentView.id'),
-  groupValue: readOnly('parentView.value'),
-  onChange: readOnly('parentView.onChange'),
-
-  checked: computed('groupValue', 'value', function () {
-    return this.get('groupValue') === this.get('value')
-  }),
-
-  tabindex: Ember.computed('disabled', function () {
-    return this.get('disabled') ? -1 : 0
-  }),
+  @computed('parentView.id')
+  groupId: {
+    get (id) {
+      return id
+    },
+    set (value) {
+      set(this, 'parentView.id', value)
+    }
+  },
+  @computed('parentView.value')
+  groupValue: {
+    get (value) {
+      return value
+    },
+    set (value) {
+      set(this, 'parentView.value', value)
+    }
+  },
+  @computed('parentView.onChange')
+  onChange: {
+    get (onChange) {
+      return onChange
+    },
+    set (value) {
+      set(this, 'parentView.onChange', value)
+    }
+  },
+  @computed('parentView.value', 'value')
+  checked (groupValue, value) {
+    return groupValue === value
+  },
+  @computed('disabled')
+  tabindex (disabled) {
+    return disabled ? -1 : 0
+  },
 
   // == Functions ===============================================================
 
   _createEvent (_event, _target) {
-    let event = Ember.$.Event(null, _event)
+    let event = Ember.$.Event(this, null, _event)
     let target = Ember.$.clone(_target)
-    target.id = this.get('groupId')
+    target.id = get(this, 'groupId')
     event.target = target
     return event
   },
 
   // == Events ===============================================================
 
-  init () {
+  didInsertElement () {
     this._super(...arguments)
     Ember.assert(
-      `${this.toString()} must be initialized in the yield block of 'frost-radio-group'`,
-      /frost-radio-group/.test(this.parentView.toString()))
+      `${this.toString()} must be initialized inside of 'frost-radio-group'`,
+      /frost-radio-group/.test(get(this, 'parentView').toString()))
     Ember.assert(
       `${this.toString()} must be initialized with a 'value' property`,
-      this.get('value')
+      get(this, 'value')
     )
   },
-
+  // fix for Ember 2.8 on application destroy
+  willDestroyElement () {
+    set(this, 'parentView', null)
+  },
   keyPress (e) {
     if (e.keyCode === 13 || e.keyCode === 32) {
-      if (this.get('disabled') || this.get('groupValue') === this.get('value')) {
+      if (get(this, 'disabled') || get(this, 'checked')) {
         return
       }
-      let change = this.get('onChange')
-      if (change && typeof change === 'function') {
-        change(this._createEvent(e, Ember.$(e.target).find('input')[0]))
+      const onChange = get(this, 'onChange')
+      if (typeOf(onChange) === 'function') {
+        onChange(this._createEvent(e, this.$(e.target).find('input')[0]))
       }
     }
   },
-
   change (event) {
-    const onChange = this.get('onChange')
-    if (onChange && typeof onChange === 'function') {
+    const onChange = get(this, 'onChange')
+    if (typeOf(onChange) === 'function') {
       onChange(this._createEvent(event, event.target))
     }
   }

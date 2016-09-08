@@ -134,18 +134,39 @@
   <div class="section">
 
     <div class="example">
-      <div class="title">onBlur</div>
+      <div class="title">Focus States</div>
       <div class="demo">
         {{frost-select
           data=data
-          onBlur=(action 'onBlurHandler')
+          onFocusIn=(action 'onFocusInHandler')
+          onFocusOut=(action 'onFocusOutHandler' 'hip way to do events')
         }}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-select
   data=data
-  onBlur=(action 'onBlurHandler')
+  onFocusIn=(action 'onFocusInHandler')
+  onFocusOut=(action 'onFocusOutHandler' 'hip way to do events')
+}}
+```"}}
+      </div>
+    </div>
+    <div class="example">
+      <div class="title">Deprecated Events</div>
+      <div class="demo">
+        {{frost-select
+          data=data
+          onFocusIn=(action 'onFocusInHandler')
+          onBlur=(action 'onFocusOutHandler' 'deprecated')
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-select
+  data=data
+  onFocusIn=(action 'onFocusInHandler')
+  onBlur=(action 'onFocusOutHandler' 'deprecated')
 }}
 ```"}}
       </div>
@@ -332,18 +353,37 @@
   <div class="section">
 
     <div class="example">
-      <div class="title">onBlur</div>
+      <div class="title">Focus States</div>
       <div class="demo">
         {{frost-multi-select
           data=data
-          onBlur=(action 'onBlurHandler')
+          onFocusIn=(action 'onFocusInHandler')
+          onFocusOut=(action 'onFocusOutHandler' 'hip way to do it')
         }}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
-  onBlur=(action 'onBlurHandler')
+  onFocusIn=(action 'onFocusInHandler')
+  onFocusOut=(action 'onFocusOutHandler' 'hip way to do it')
+}}
+```"}}
+      </div>
+    </div>
+    <div class="example">
+      <div class="title">Deprecated Events</div>
+      <div class="demo">
+        {{frost-multi-select
+          data=data
+          onBlur=(action 'onFocusOutHandler' 'deprecated way to do it')
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-multi-select
+  data=data
+  onBlur=(action 'onFocusOutHandler' 'deprecated way to do it')
 }}
 ```"}}
       </div>

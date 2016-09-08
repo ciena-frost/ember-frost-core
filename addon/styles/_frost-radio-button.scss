@@ -1,54 +1,52 @@
 .frost-radio-group {
-  cursor: pointer;
-}
+  .frost-radio-button {
+    outline: 0;
+    margin: 2px;
 
-.frost-radio-button {
-  padding: 2px;
-  outline: 0;
+    label {
+      cursor: pointer;
 
-  label {
-    cursor: pointer;
+      svg {
+        width: 20px;
+        height: 20px;
+        vertical-align: text-top;
 
-    svg {
-      width: 20px;
-      height: 20px;
-      vertical-align: text-top;
+        .inner {
+          transition: fill 0.2s ease;
+          fill: transparent;
+        }
 
-      .inner {
-        transition: fill 0.2s ease;
-        fill: transparent;
+        .ring {
+          transition: fill 0.2s ease;
+          fill: $frost-color-grey-5;
+        }
+      }
+    }
+
+    .frost-radio-button-input {
+      display: none;
+    }
+
+    &.checked:not(.disabled) label svg .inner {
+      fill: $frost-color-blue-1;
+    }
+
+    &:hover, &:focus {
+      &:not(.disabled):not(.checked) {
+        label svg .inner {
+          fill: $frost-color-blue-4;
+        }
+      }
+    }
+    &.disabled {
+      label {
+        color: $frost-color-grey-5;
+        cursor: default;
       }
 
-      .ring {
-        transition: fill 0.2s ease;
+      &.checked label svg .inner {
         fill: $frost-color-grey-5;
       }
-    }
-  }
-
-  .frost-radio-button-input {
-    display: none;
-  }
-
-  &.checked:not(.disabled) label svg .inner {
-    fill: $frost-color-blue-1;
-  }
-
-  &:hover, &:focus {
-    &:not(.disabled):not(.checked) {
-      label svg .inner {
-        fill: $frost-color-blue-4;
-      }
-    }
-  }
-  &.disabled {
-    label {
-      color: $frost-color-grey-5;
-      cursor: default;
-    }
-
-    &.checked label svg .inner {
-      fill: $frost-color-grey-5;
     }
   }
 }

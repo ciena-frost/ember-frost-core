@@ -1,8 +1,20 @@
 import _ from 'lodash'
 import Ember from 'ember'
-const {A, Component, get, typeOf} = Ember
+const {
+  A: EmberArray,
+  String: {
+    htmlSafe
+  },
+  Component,
+  get,
+  set,
+  run,
+  typeOf
+ } = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import FrostEventsProxy from '../mixins/frost-events-proxy'
+
 import layout from '../templates/components/frost-select'
 import Redux from 'npm:redux'
 import {
@@ -56,7 +68,7 @@ function handleOutsideClick (event) {
   }
 }
 
-export default Component.extend(PropTypeMixin, {
+export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   // ==========================================================================
   // Dependencies
   // ==========================================================================
@@ -67,7 +79,12 @@ export default Component.extend(PropTypeMixin, {
 
   attributeBindings: ['tabIndex'],
   classNames: ['frost-select'],
-  classNameBindings: ['focus', 'shouldOpen:open', 'disabled', 'hasError:error'],
+  classNameBindings: [
+    'shouldOpen:focus',
+    'shouldOpen:open',
+    'disabled',
+    'hasError:error'
+  ],
   stateProperties: [
     'open',
     'prompt',
@@ -116,7 +133,7 @@ export default Component.extend(PropTypeMixin, {
       error: false,
       hovered: -1,
       maxListHeight: 400,
-      selected: A([]),
+      selected: EmberArray(),
       tabIndex: -1,
       width: 200
     }
@@ -125,9 +142,6 @@ export default Component.extend(PropTypeMixin, {
   // ==========================================================================
   // Computed Properties
   // ==========================================================================
-
-  @readOnly
-  @computed('maxListHeight')
   /**
    * Get inline style for container
    * Note: This must be a computed property rather than in a SASS file because the
@@ -135,18 +149,20 @@ export default Component.extend(PropTypeMixin, {
    * @param {Number} maxListHeight - maximum height at which list should render
    * @returns {String} container style
    */
+  @readOnly
+  @computed('maxListHeight')
   containerStyle (maxListHeight) {
-    return Ember.String.htmlSafe(`max-height: ${maxListHeight}px`)
+    return htmlSafe(`max-height: ${maxListHeight}px`)
   },
 
-  @readOnly
-  @computed('data', 'displayItems')
   /**
    * Flag for if the user has typed something that doesn't match any options
    * @param {Array<Item>} data - all the possible items
    * @param {Object[]} displayItems - the current items being displayed
    * @returns {Boolean} true if in error state
    */
+  @readOnly
+  @computed('data', 'displayItems')
   invalidFilter (data, displayItems) {
     return (
       Array.isArray(data) &&
@@ -155,9 +171,6 @@ export default Component.extend(PropTypeMixin, {
       displayItems.length === 0
     )
   },
-
-  @readOnly
-  @computed('error', 'invalidFilter')
   /**
    * Computed flag for if consumer flagged us as having an error, or if the user has typed
    * something bad.
@@ -165,12 +178,11 @@ export default Component.extend(PropTypeMixin, {
    * @param {Boolean} invalidFilter - true if the user has typed something that doesn't match an option
    * @returns {Boolean} true if either error condition occured
    */
+  @readOnly
+  @computed('error', 'invalidFilter')
   hasError (error, invalidFilter) {
     return error || invalidFilter
   },
-
-  @readOnly
-  @computed('invalidFilter', 'shouldDisableDropDown', 'open')
   /**
    * Determine if drop-down should open
    * @param {Boolean} invalidFilter - did the user goof?
@@ -178,31 +190,33 @@ export default Component.extend(PropTypeMixin, {
    * @param {Boolean} open - TODO: what is this?
    * @returns {Boolean} true if we should open
    */
+  @readOnly
+  @computed('invalidFilter', 'shouldDisableDropDown', 'open')
   shouldOpen (invalidFilter, shouldDisableDropDown, open) {
     return !invalidFilter && !shouldDisableDropDown && open
   },
 
-  @readOnly
-  @computed('invalidFilter', 'disabled')
   /**
    * Determine if we should disable opening the drop-down
    * @param {Boolean} invalidFilter - did the user goof?
    * @param {Boolean} disabled - are we in a disabled state?
    * @returns {Boolean} true if opening should be disabled
    */
+  @readOnly
+  @computed('invalidFilter', 'disabled')
   shouldDisableDropDown (invalidFilter, disabled) {
     return invalidFilter || disabled
   },
 
-  @readOnly
-  @computed('width')
   /**
    * Compute the style attribute based on width
    * @param {Number} width - the width property
    * @returns {String} the computed style attribute
    */
+  @readOnly
+  @computed('width')
   style (width) {
-    return `width: ${width}px`
+    return htmlSafe(`width: ${width}px`)
   },
 
   // ==========================================================================
@@ -211,27 +225,24 @@ export default Component.extend(PropTypeMixin, {
 
   /** obvious */
   bindDropdownEvents () {
-    this._handleOutsideClick = handleOutsideClick.bind(this)
+    this._handleOutsideClick = run.bind(this, handleOutsideClick)
     Ember.$(document).on('click', this._handleOutsideClick)
   },
 
   /* Ember.Component method */
-  didReceiveAttrs ({newAttrs, oldAttrs}) {
-    newAttrs = newAttrs || {}
-    oldAttrs = oldAttrs || {}
-
+  didReceiveAttrs ({newAttrs = {}, oldAttrs = {}}) {
     this._super(...arguments)
-    const stateAttrs = this.get('stateAttributes')
+    const stateAttrs = get(this, 'stateAttributes')
 
     const reduxAttrs = _.chain(stateAttrs)
     .map((attrName) => {
       const split = _.filter(attrName.split(ATTR_MAP_DELIM))
       let attrValue
       if (split.length > 1) {
-        attrValue = this.get(split[0])
+        attrValue = get(this, split[0])
         attrName = split[1]
       } else {
-        attrValue = this.get(attrName)
+        attrValue = get(this, attrName)
       }
 
       return [attrName, attrValue]
@@ -240,7 +251,7 @@ export default Component.extend(PropTypeMixin, {
     .fromPairs()
     .value()
 
-    this.get('reduxStore').dispatch(resetDropDown(reduxAttrs))
+    get(this, 'reduxStore').dispatch(resetDropDown(reduxAttrs))
 
     const dataChanged = isAttrDifferent(newAttrs, oldAttrs, 'data')
     const selectedChanged = isAttrDifferent(newAttrs, oldAttrs, 'selected')
@@ -257,23 +268,23 @@ export default Component.extend(PropTypeMixin, {
     if (selectedValueChanged || (dataChanged && get(newAttrs, 'selectedValue.value'))) {
       this.selectOptionByValue(newAttrs.selectedValue.value)
     } else if (selectedChanged || (dataChanged && get(newAttrs, 'selected.value'))) {
-      let selected = this.get('selected')
+      let selected = get(this, 'selected')
 
       if (typeOf(selected) === 'number') {
-        selected = [selected]
+        selected = EmberArray([selected])
       } else if (!Array.isArray(selected)) {
-        selected = []
+        selected = EmberArray()
       }
     }
   },
 
   // TODO: add jsdoc
   getValues () {
-    const state = this.get('reduxStore').getState()
+    const state = get(this, 'reduxStore').getState()
     return [state.baseItems[state.selectedItem].value]
   },
   keyDown (event) {
-    const reduxStore = this.get('reduxStore')
+    const reduxStore = get(this, 'reduxStore')
     switch (event.which) {
       case keyCodes.tab:
         reduxStore.dispatch(closeDropDown)
@@ -282,7 +293,7 @@ export default Component.extend(PropTypeMixin, {
   },
   // TODO: add jsdoc
   keyUp (event) {
-    const reduxStore = this.get('reduxStore')
+    const reduxStore = get(this, 'reduxStore')
     switch (event.which) {
       // escape key or tab key, close the dropdown
       case keyCodes.esc:
@@ -318,7 +329,7 @@ export default Component.extend(PropTypeMixin, {
    * @param {Number[]} selected - the selected indices
    */
   notifyOfChange () {
-    const onChange = this.get('onChange')
+    const onChange = get(this, 'onChange')
     if (onChange) {
       const values = this.getValues()
       onChange(values)
@@ -328,12 +339,12 @@ export default Component.extend(PropTypeMixin, {
   /** Handler for click outside of an element
    */
   onOutsideClick () {
-    this.get('reduxStore').dispatch(closeDropDown)
+    get(this, 'reduxStore').dispatch(closeDropDown)
   },
 
   // TODO: add jsdoc
   selectOptionByValue (selectedValue) {
-    this.get('reduxStore').dispatch(selectValue(selectedValue))
+    get(this, 'reduxStore').dispatch(selectValue(selectedValue))
   },
 
   /** obvious */
@@ -348,17 +359,16 @@ export default Component.extend(PropTypeMixin, {
 
   setUpReduxStore () {
     const reduxStore = Redux.createStore(reducer)
-    this.set('reduxStore', reduxStore)
+    set(this, 'reduxStore', reduxStore)
     return reduxStore
   },
 
   subscribe (reduxStore) {
     reduxStore.subscribe(() => {
       const state = reduxStore.getState()
+      const wasOpen = get(this, 'open')
 
-      const wasOpen = this.get('open')
-
-      const newProps = _.pick(state, this.get('stateProperties'))
+      const newProps = _.pick(state, get(this, 'stateProperties'))
 
       this.setProperties(newProps)
 
@@ -384,60 +394,63 @@ export default Component.extend(PropTypeMixin, {
   // ==========================================================================
   // Events
   // ==========================================================================
+  click () {
+    run.scheduleOnce('sync', this, function () {
+      get(this, 'reduxStore').dispatch(openDropDown)
 
+      const el = this.$('input')
+      if (!el.is(':focus')) {
+        el.focus()
+      }
+    })
+  },
   // ==========================================================================
   // Actions
   // ==========================================================================
-
   actions: {
-    // TODO: add jsdoc
-    onBlur (event) {
-      this.set('focus', false)
+    onFocusIn (event) {
+      get(this, 'reduxStore').dispatch(openDropDown)
 
-      const onBlur = this.get('onBlur')
+      const onFocusIn = get(this, '_eventProxy.focusIn')
 
-      if (onBlur) {
-        onBlur()
-      }
-    },
-
-    // TODO: add jsdoc
-    onChange (event) {
-      const target = event.currentTarget || event.target
-      const onInput = this.get('onInput')
-      if (typeOf(onInput) === 'function') {
-        onInput(target.value)
-      } else {
-        this.get('reduxStore').dispatch(updateSearchText(target.value))
-      }
-    },
-
-    // TODO: add jsdoc
-    onClickArrow (event) {
-      event.preventDefault()
-      const reduxStore = this.get('reduxStore')
-      reduxStore.dispatch(clickArrow)
-    },
-
-    // TODO: add jsdoc
-    onFocus () {
-      this.get('reduxStore').dispatch(openDropDown)
-      // If an onFocus event handler is defined, call it
-      if (this.attrs.onFocus) {
-        this.attrs.onFocus()
+      if (onFocusIn) {
+        onFocusIn(event)
       }
       return false
     },
+    onFocusOut (event) {
+      const onFocusOut = get(this, '_eventProxy.focusOut')
 
+      if (onFocusOut) {
+        onFocusOut(event)
+      }
+    },
+    // TODO: add jsdoc
+    onChange (event) {
+      const target = event.currentTarget || event.target
+
+      const onInput = get(this, 'onInput')
+      if (typeOf(onInput) === 'function') {
+        onInput(target.value)
+      } else {
+        get(this, 'reduxStore').dispatch(updateSearchText(target.value))
+      }
+    },
+    onClickArrow (event) {
+      event.preventDefault()
+      event.stopPropagation()
+
+      get(this, 'reduxStore').dispatch(clickArrow)
+    },
     // TODO: add jsdoc
     onItemOver (data) {
-      this.get('reduxStore').dispatch(mouseHoverItem(data.index))
+      get(this, 'reduxStore').dispatch(mouseHoverItem(data.index))
       return false
     },
 
     // TODO: add jsdoc
     onSelect (data) {
-      this.get('reduxStore').dispatch(selectItem(data.index))
+      get(this, 'reduxStore').dispatch(selectItem(data.index))
     }
   }
 })
