@@ -44,8 +44,8 @@ export default LinkComponent.extend(PropTypeMixin, {
 
   /*
     The Link component provides and sets default values for:
-    disabled - className and attributeBindings
-    tabindex - attributeBindings
+    disabled: false - className and attributeBindings
+    tabindex: null - attributeBindings
     target: null
    */
 
@@ -78,16 +78,15 @@ export default LinkComponent.extend(PropTypeMixin, {
   // == Computed properties ===================================================
 
   @readOnly
-  @computed('design', 'disabled', 'priority', 'size')
+  @computed('design', 'priority', 'size')
   /**
    * Get extra classes for links based on link's settings
    * @param {String} design - link design
-   * @param {String} disabled - whether or not link disabled property is set
    * @param {String} priority - link priority
    * @param {String} size - link size
    * @returns {String} extra classNames
    */
-  extraClasses (design, disabled, priority, size) {
+  extraClasses (design, priority, size) {
     const classes = []
 
     this.addDesignClass(design, classes)
@@ -116,7 +115,7 @@ export default LinkComponent.extend(PropTypeMixin, {
 
   /**
    * Sets correct classes to be added to the classNames array
-   * @param {String} design button design type
+   * @param {String} design link design type
    * @param {Array} classes the classes to be added to the classNames array for the component
    * @returns {undefined}
    */

@@ -35,6 +35,11 @@ describeComponent(
       ).to.eql('')
 
       expect(
+        component.get('disabled'),
+        'disabled: false'
+      ).to.be.false
+
+      expect(
         component.get('hook'),
         'hook: "undefined"'
       ).to.be.undefined
@@ -53,6 +58,16 @@ describeComponent(
         component.get('size'),
         'size: ""'
       ).to.eql('')
+
+      expect(
+        component.get('target'),
+        'target: null'
+      ).to.be.null
+
+      expect(
+        component.get('tabindex'),
+        'tabindex: null'
+      ).to.be.null
     })
 
     it('has the expected Mixins', function () {
@@ -65,7 +80,6 @@ describeComponent(
     it('sets dependent keys correctly', function () {
       const extraClassesDependentKeys = [
         'design',
-        'disabled',
         'priority',
         'size'
       ]
