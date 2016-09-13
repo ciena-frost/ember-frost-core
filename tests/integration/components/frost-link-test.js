@@ -5,8 +5,6 @@ import {
 } from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
 import {
-  afterEach,
-  beforeEach,
   describe
 } from 'mocha'
 import sinon from 'sinon'
@@ -20,31 +18,49 @@ describeComponent(
   function () {
     it('renders default values', function () {
       this.render(hbs`
-        {{#frost-link 'test'}}
-          Yielded content
-        {{/frost-link}}
+        {{frost-link 'title' 'testRoute'}}
       `)
 
       expect(
         this.$('.frost-link'),
         'has the correct class'
       ).to.have.length(1)
+    })
+
+    it('yields content', function () {
+      this.render(hbs`
+        {{#frost-link 'testRoute'}}
+          Yielded title
+        {{/frost-link}}
+      `)
 
       expect(
         this.$('.frost-link').text().trim(),
         'Yields content'
-      ).to.eql('Yielded content')
+      ).to.eql('Yielded title')
+    })
+
+    it('sets the link title', function () {
+      const title = 'Title'
+
+      this.set('title', title)
+
+      this.render(hbs`
+        {{frost-link title 'testRoute'}}
+      `)
+
+      expect(
+        this.$('.frost-link').text().trim(),
+        'Link title is set'
+      ).to.eql('Title')
     })
 
     describe('Priority property', function () {
       it('has primary class set', function () {
         this.render(hbs`
-          {{#frost-link
-            'test'
+          {{frost-link 'title' 'testRoute'
             priority='primary'
           }}
-            Yielded content
-          {{/frost-link}}
         `)
 
         expect(
@@ -55,12 +71,9 @@ describeComponent(
 
       it('has secondary class set', function () {
         this.render(hbs`
-          {{#frost-link
-            'test'
+          {{frost-link 'title' 'testRoute'
             priority='secondary'
           }}
-            Yielded content
-          {{/frost-link}}
         `)
 
         expect(
@@ -73,12 +86,9 @@ describeComponent(
     describe('Size property', function () {
       it('has small class set', function () {
         this.render(hbs`
-          {{#frost-link
-            'test'
+          {{frost-link 'title' 'testRoute'
             size='small'
           }}
-            Yielded content
-          {{/frost-link}}
         `)
 
         expect(
@@ -89,12 +99,9 @@ describeComponent(
 
       it('has medium class set', function () {
         this.render(hbs`
-          {{#frost-link
-            'test'
+          {{frost-link 'title' 'testRoute'
             size='medium'
           }}
-            Yielded content
-          {{/frost-link}}
         `)
 
         expect(
@@ -105,12 +112,9 @@ describeComponent(
 
       it('has large class set', function () {
         this.render(hbs`
-          {{#frost-link
-            'test'
+          {{frost-link 'title' 'testRoute'
             size='large'
           }}
-            Yielded content
-          {{/frost-link}}
         `)
 
         expect(
@@ -123,8 +127,7 @@ describeComponent(
     describe('Design property', function () {
       it('has info-bar class set', function () {
         this.render(hbs`
-          {{#frost-link
-            'test'
+          {{#frost-link 'testRoute'
             design='info-bar'
           }}
             Yielded content
@@ -139,8 +142,7 @@ describeComponent(
 
       it('has inline class set', function () {
         this.render(hbs`
-          {{#frost-link
-            'test'
+          {{#frost-link 'testRoute'
             design='inline'
           }}
             Yielded content
@@ -156,12 +158,9 @@ describeComponent(
 
     it('sets disabled property', function () {
       this.render(hbs`
-        {{#frost-link
-            'test'
+        {{frost-link 'title' 'testRoute'
             disabled=true
-          }}
-            Yielded content
-          {{/frost-link}}
+        }}
       `)
 
       expect(
@@ -171,24 +170,18 @@ describeComponent(
     })
 
     it('sets icon property', function () {
-      const design = 'info-bar'
-      const icon = 'infobar-find'
+      const priority = 'primary'
 
-      this.set('design', design)
-      this.set('icon', icon)
+      this.set('priority', priority)
 
       this.render(hbs`
-        {{#frost-link
-            'test'
-            icon=icon
-            design=design
-          }}
-            Yielded content
-          {{/frost-link}}
+        {{frost-link 'title' 'testRoute'
+            priority=priority
+        }}
       `)
 
       expect(
-        this.$('.frost-icon-frost-infobar-find'),
+        this.$('.frost-icon-frost-new-tab'),
         'icon property is set'
       ).to.have.length(1)
     })
@@ -199,11 +192,9 @@ describeComponent(
       this.on('externalAction', externalActionSpy)
 
       this.render(hbs`
-        {{#frost-link
+        {{frost-link
           onClick=(action 'externalAction')
         }}
-          Yielded content
-        {{/frost-link}}
       `)
 
       this.$('a').trigger('click')

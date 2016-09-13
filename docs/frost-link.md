@@ -27,48 +27,40 @@
 
 ### Primary - small
 ```handlebars
-{{#frost-link 'route name'
+{{frost-link 'link title' 'route name'
   priority='primary'
   size='small'
 }}
-  Primary
-{{/frost-link}}
 ```
 
 ### Primary - medium
 ```handlebars
-{{#frost-link 'route name'
+{{frost-link 'link title' 'route name'
   priority='primary'
   size='medium'
 }}
-  Primary
-{{/frost-link}}
 ```
 
 ### Secondary - large
 ```handlebars
-{{#frost-link 'route name'
+{{frost-link 'link title' 'route name'
   priority='secondary'
   size='large'
 }}
-  Secondary
-{{/frost-link}}
 ```
 
 ### Disabled
 ```handlebars
-{{#frost-link 'route name'
+{{frost-link 'link title' 'route name'
   priority='primary'
   size='small'
   disabled=true
 }}
-  Primary
-{{/frost-link}}
 ```
 
 ### Design - in-line (font based on size)
 ```handlebars
-{{#frost-link 'link.min'
+{{#frost-link 'route name'
   design='inline'
 }}
   link

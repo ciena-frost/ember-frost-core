@@ -63,6 +63,7 @@ export default LinkComponent.extend(PropTypeMixin, {
     icon: PropTypes.string,
     priority: PropTypes.oneOf(validPriorities),
     size: PropTypes.oneOf(validSizes),
+    linkTitle: PropTypes.string,
     onClick: PropTypes.func
   },
 
@@ -71,7 +72,8 @@ export default LinkComponent.extend(PropTypeMixin, {
       design: '',
       icon: '',
       priority: '',
-      size: ''
+      size: '',
+      linkTitle: ''
     }
   },
 

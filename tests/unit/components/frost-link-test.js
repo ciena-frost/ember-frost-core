@@ -65,6 +65,11 @@ describeComponent(
       ).to.be.null
 
       expect(
+        component.get('linkTitle'),
+        'linkTitle: ""'
+      ).to.eql('')
+
+      expect(
         component.get('tabindex'),
         'tabindex: null'
       ).to.be.null
