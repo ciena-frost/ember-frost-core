@@ -1,5 +1,12 @@
 import Ember from 'ember'
-const {Component, isEmpty, Logger, typeOf, ViewUtils} = Ember
+const {
+  Component,
+  get,
+  isEmpty,
+  Logger,
+  typeOf,
+  ViewUtils
+} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-button'
@@ -52,13 +59,13 @@ export default Component.extend(PropTypeMixin, {
 
   propTypes: {
     autofocus: PropTypes.bool,
-    design: PropTypes.string,
+    design: PropTypes.oneOf(validDesignClasses),
     disabled: PropTypes.bool,
     hook: PropTypes.string,
     icon: PropTypes.string,
     pack: PropTypes.string,
     priority: PropTypes.string,
-    size: PropTypes.string,
+    size: PropTypes.oneOf(validSizes),
     text: PropTypes.string,
     title: PropTypes.string,
     type: PropTypes.string,
@@ -198,8 +205,8 @@ export default Component.extend(PropTypeMixin, {
       return true
     }
 
-    if (!this.get('disabled') && typeOf(this.attrs.onClick) === 'function') {
-      this.attrs.onClick(this.get('id'))
+    if (!get(this, 'disabled') && typeOf(this.attrs.onClick) === 'function') {
+      this.attrs.onClick(get(this, 'id'))
     }
   }),
 

@@ -1,5 +1,12 @@
 import Ember from 'ember'
-const {Component, isEmpty, run, typeOf} = Ember
+const {
+  Component,
+  get,
+  isEmpty,
+  run,
+  set,
+  typeOf
+} = Ember
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-checkbox'
 
@@ -39,7 +46,7 @@ export default Component.extend(PropTypeMixin, {
 
   /* Ember.Component method */
   didInsertElement () {
-    if (this.get('autofocus')) {
+    if (get(this, 'autofocus')) {
       run.next('render', () => {
         this.$('input').focus()
       })
@@ -53,7 +60,7 @@ export default Component.extend(PropTypeMixin, {
 
   keyPress (e) {
     if (e.keyCode === 32) {
-      if (this.get('disabled') !== true) {
+      if (get(this, 'disabled') !== true) {
         this.$('input').prop('checked', !this.$('input').prop('checked'))
         this.send('input')
       }
@@ -69,8 +76,8 @@ export default Component.extend(PropTypeMixin, {
    * @returns {undefined}
    */
   _setInputId () {
-    if (!this.get('inputId')) {
-      this.set('inputId', `${this.get('elementId')}_input`)
+    if (!get(this, 'inputId')) {
+      set(this, 'inputId', `${get(this, 'elementId')}_input`)
     }
   },
 
@@ -87,7 +94,7 @@ export default Component.extend(PropTypeMixin, {
 
   actions: {
     onBlur () {
-      const onBlur = this.get('onBlur')
+      const onBlur = get(this, 'onBlur')
 
       if (onBlur) {
         onBlur()
@@ -95,10 +102,10 @@ export default Component.extend(PropTypeMixin, {
     },
 
     input () {
-      let id = this.get('value')
+      let id = get(this, 'value')
       if (typeOf(this.attrs['onInput']) === 'function') {
         this.attrs['onInput']({
-          id: isEmpty(id) ? this.get('elementId') : id,
+          id: isEmpty(id) ? get(this, 'elementId') : id,
           value: this.$('input').prop('checked')
         })
       }

@@ -3,7 +3,8 @@ const {
   LinkComponent,
   Logger,
   deprecate,
-  get
+  get,
+  set
 } = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
@@ -119,7 +120,7 @@ export default LinkComponent.extend(PropTypeMixin, {
       priority.indexOf('primary') > -1 &&
       disabled === false
     ) {
-      this.set('target', '_blank')
+      set(this, 'target', '_blank')
     }
 
     return classes.join(' ')
