@@ -397,7 +397,7 @@ export default Component.extend(PropTypeMixin, {
       const onBlur = this.get('onBlur')
 
       if (onBlur) {
-        onBlur()
+        onBlur(event)
       }
     },
 
