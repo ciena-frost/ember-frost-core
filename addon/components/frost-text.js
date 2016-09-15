@@ -32,7 +32,22 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     isHookEmbedded: PropTypes.bool,
     receivedHook: PropTypes.string,
     tabindex: PropTypes.number,
-    type: PropTypes.string
+    type: PropTypes.string,
+
+
+    // Setting these as part of establishing an inital value
+    autocapitalize: PropTypes.bool,
+    autofocus: PropTypes.bool,
+    autocorrect: PropTypes.bool,
+    form: PropTypes.string,
+    maxlength: PropTypes.string,
+    placeholder: PropTypes.string,
+    readonly: PropTypes.bool,
+    required: PropTypes.bool,
+    selectionDirection: PropTypes.string,
+    spellcheck: PropTypes.bool,
+    value: PropTypes.string,
+    title: PropTypes.string
   },
 
   getDefaultProps () {
@@ -42,7 +57,21 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       isClearVisible: false,
       isHookEmbedded: false,
       tabindex: 0,
-      type: 'text'
+      type: 'text',
+
+      // Setting these as part of establishing an initial value
+      autocapitalize: null,
+      autocorrect: null,
+      autofocus: null,
+      form: null,
+      maxlength: null,
+      placeholder: null,
+      readonly: null,
+      required: null,
+      selectionDirection: null,
+      spellcheck: null,
+      value: null,
+      title: null,
     }
   },
 

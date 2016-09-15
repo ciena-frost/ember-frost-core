@@ -12,7 +12,6 @@
 | `placeholder` | `string` | `<text>` | placeholder text |
 | `autofocus` |`boolean` | `false` | **default** - normal text field |
 | | | `true` | text field in focus |
-| | | `center` | center align text input |
 | `disabled` | `boolean` | `false` | **default** - normal text field |
 | | | `true` | disabled text field |
 | `class` | `string` | `error` | sets text field to error state |
