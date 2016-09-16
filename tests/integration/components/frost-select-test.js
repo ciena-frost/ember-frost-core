@@ -111,29 +111,27 @@ describeComponent(
       expect(this.$('.frost-select li').length).to.eql(props.data.length)
     })
 
-    it('opens when arrow clicked', () => {
-      run(() => {
+    it('opens when arrow clicked', function () {
+      run(function () {
         this.$('.frost-select .down-arrow').click()
       })
       expect(this.$('.frost-select').hasClass('open')).to.be.true
     })
 
-    it('closes when down arrow clicked a second time', () => {
-      run(() => {
+    it('closes when down arrow clicked a second time', function () {
+      run(function () {
         this.$('.frost-select .down-arrow').click()
         this.$('.frost-select .down-arrow').click()
       })
 
       expect(this.$('.frost-select').hasClass('open')).to.be.false
     })
-
-    // FIXME: figure out why test is failing
-    /* it('opens when focused', function () {
-      run(() => {
+    it('opens when focused', function () {
+      run(function () {
         this.$('.frost-select input').focus()
       })
       expect(this.$('.frost-select').hasClass('open')).to.be.true
-    })*/
+    })
 
     it('highlights list items on mouse over', function () {
       run(() => {
