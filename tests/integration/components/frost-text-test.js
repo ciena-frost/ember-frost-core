@@ -1,9 +1,10 @@
+import Ember from 'ember'
+const {run} = Ember
 import {expect} from 'chai'
 import {describeComponent, it} from 'ember-mocha'
 import {beforeEach} from 'mocha'
 import hbs from 'htmlbars-inline-precompile'
 import {$hook, initialize} from 'ember-hook'
-import wait from 'ember-test-helpers/wait'
 
 describeComponent(
 	'frost-text',
@@ -106,14 +107,14 @@ describeComponent(
           'autofocus class is set'
         ).to.eql('disabled')
     })
-    
+
 		it('only renders the clear icon in insert', function () {
       this.render(hbs`
         {{frost-text
           hook='test'
         }}
       `)
-      return wait().then(() => {
+      run(() => {
         this.$('input').val('hello')
         this.$('input').trigger('input')
       })
@@ -121,6 +122,11 @@ describeComponent(
       expect(
         $hook('test').hasClass('is-clear-visible'),
         'class "is-clear-visible" is set'
+      ).to.be.true
+
+      expect(
+        $hook('test').hasClass('is-clear-enabled'),
+        'class "is-clear-enabled" is set'
       ).to.be.true
 		})
 
