@@ -1,3 +1,6 @@
+# 0.25.7
+* Pass event to select's onBlur action
+
 # 0.25.6
 
 * Updated the button demo to demonstrate that disabled buttons don't fire actions
