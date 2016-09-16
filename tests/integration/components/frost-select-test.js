@@ -111,14 +111,14 @@ describeComponent(
       expect(this.$('.frost-select li').length).to.eql(props.data.length)
     })
 
-    it('opens when arrow clicked', () => {
+    it('opens when arrow clicked', function () {
       run(() => {
         this.$('.frost-select .down-arrow').click()
       })
       expect(this.$('.frost-select').hasClass('open')).to.be.true
     })
 
-    it('closes when down arrow clicked a second time', () => {
+    it('closes when down arrow clicked a second time', function () {
       run(() => {
         this.$('.frost-select .down-arrow').click()
         this.$('.frost-select .down-arrow').click()
