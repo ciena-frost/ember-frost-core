@@ -111,7 +111,6 @@ describeComponent(
 		it('only renders the clear icon in insert', function () {
       this.render(hbs`
         {{frost-text
-          hook='test'
         }}
       `)
       run(() => {
@@ -120,12 +119,12 @@ describeComponent(
       })
 
       expect(
-        $hook('test').hasClass('is-clear-visible'),
+        this.$('.frost-text').hasClass('is-clear-visible'),
         'class "is-clear-visible" is set'
       ).to.be.true
 
       expect(
-        $hook('test').hasClass('is-clear-enabled'),
+        this.$('.frost-text').hasClass('is-clear-enabled'),
         'class "is-clear-enabled" is set'
       ).to.be.true
 		})
