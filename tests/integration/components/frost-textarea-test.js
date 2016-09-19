@@ -18,8 +18,14 @@ describeComponent(
     })
 
     it('renders', function () {
-      this.render(hbs`{{frost-textarea}}`)
-      expect(this.$()).to.have.length(1)
+      this.render(hbs`
+        {{frost-textarea}}
+      `)
+
+      expect(
+        this.$(),
+        'class frost-textarea is set'
+      ).to.have.length(1)
     })
 
     it('action is fired on input', function () {
