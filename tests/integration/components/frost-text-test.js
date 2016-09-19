@@ -114,19 +114,19 @@ describeComponent(
         }}
       `)
       run(() => {
-        this.$('input').val('hello')
+        this.$('input').val('test')
         this.$('input').trigger('input')
       })
 
-      expect(
-        this.$('.frost-text').hasClass('is-clear-visible'),
-        'class "is-clear-visible" is set'
-      ).to.be.true
+        expect(
+          this.$('.frost-text').hasClass('is-clear-visible'),
+          'class "is-clear-visible" is set'
+        ).to.be.true
 
-      expect(
-        this.$('.frost-text').hasClass('is-clear-enabled'),
-        'class "is-clear-enabled" is set'
-      ).to.be.true
+        expect(
+          this.$('.frost-text').hasClass('is-clear-enabled'),
+          'class "is-clear-enabled" is set'
+        ).to.be.true
 		})
 
     it('calls onFocus closure action', function () {
@@ -135,7 +135,7 @@ describeComponent(
       this.on('externalAction', externalActionSpy)
 
       this.render(hbs`
-        {{frost-checkbox
+        {{frost-text
           focusIn=(action 'externalAction')
         }}
       `)

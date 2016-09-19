@@ -23,68 +23,120 @@ describeComponent(
       `)
 
       expect(
-        this.$(),
-        'class frost-textarea is set'
-      ).to.have.length(1)
+        this.$('textarea').attr('tabindex'),
+        'tabindex is set'
+      ).to.be.eql('0')
     })
 
-    it('action is fired on input', function () {
-      this.set('input-value', '')
-      this.on('test-action', function (attr) {
-        this.set('input-value', attr.value)
+    it('calls onInput closure action', function () {
+      const externalActionSpy = sinon.spy()
+
+      this.on('externalAction', externalActionSpy)
+
+      this.render(hbs`
+        {{frost-textarea
+          onInput=(action 'externalAction')
+        }}
+      `)
+
+      run(()=>{
+        this.$('textarea').val('test').trigger('input')
       })
 
-      this.render(hbs`{{frost-textarea id="action" onInput=(action "test-action")}}`)
-      run(() => this.$('#action').val('a').trigger('input'))
-      run.next(this, () => {
-        expect(this.get('input-value')).to.eql('a')
-      })
+      expect(
+        externalActionSpy.called,
+        'onInput closure action called'
+      ).to.be.true
     })
-
+    
     it('textarea cleared on button click', function () {
       this.set('input-value', '')
       this.on('test-action', function (attr) {
         this.set('input-value', attr.value)
       })
 
-      this.render(hbs`{{frost-textarea id="clearText" onInput=(action "test-action")}}`)
-      run(() => this.$('#clearText').val('a').trigger('input'))
-      run(() => this.$('#clearText .clear').click())
-      run.next(this, () => {
-        expect(this.get('input-value')).to.eql('')
-      })
+      this.render(hbs`{{frost-textarea hook="test" onInput=(action "test-action")}}`)
+      run(() => $hook('test-input').val('test').trigger('input'))
+
+      expect(this.get('input-value')).to.eql('test')
+
+      run(() => $hook('test-clear').click())
+      
+      expect(this.get('input-value')).to.eql('')
     })
 
-    it('calls onBlur callback when focus is lost', function (done) {
-      this.on('test-action', function () {
-        done()
+    it('calls onBlur callback when focus is lost', function () {
+      const externalActionSpy = sinon.spy()
+
+      this.on('externalAction', externalActionSpy)
+
+      this.render(hbs`
+        {{frost-textarea
+          onBlur=(action 'externalAction')
+        }}
+      `)
+
+      run(()=>{
+        this.$('textarea').focus().focusout()
       })
 
-      this.render(hbs`{{frost-textarea onBlur=(action "test-action")}}`)
-      this.$('textarea').focus().val('a').focusout()
+      expect(
+        externalActionSpy.called,
+        'onBlur closure action called'
+      ).to.be.true
     })
 
-    // it('calls onFocus callback when focused', function (done) {
-    //   this.on('test-action', function () {
-    //     done()
+    it('calls onFocus callback when focused', function () {
+      const externalActionSpy = sinon.spy()
+
+      this.on('externalAction', externalActionSpy)
+
+      this.render(hbs`
+        {{frost-textarea
+          onFocus=(action 'externalAction')
+        }}
+      `)
+
+      run(()=>{
+        this.$('textarea').trigger('focusin')
+      })
+
+      expect(
+        externalActionSpy.called,
+        'onFocus closure action called'
+      ).to.be.true
+    })
+
+    // it('hook attr grabs frost-textarea as expected', function () {
+    //   this.set('input-value', '')
+    //   this.on('test-action', function (attr) {
+    //     this.set('input-value', attr.value)
     //   })
-    //
-    //   this.render(hbs`{{frost-text onFocus=(action "test-action")}}`)
-    //   this.$('input').val('a').focusout().focus()
+    //   this.render(hbs`{{frost-textarea id="action" onInput=(action "test-action") hook='my-textarea'}}`)
+
+    //   expect($hook('my-textarea').hasClass('frost-textarea'))
+    //     .to.be.true
+
+    //   expect($hook('my-textarea-input').hasClass('ember-text-area'))
+    //     .to.be.true
     // })
 
     it('hook attr grabs frost-textarea as expected', function () {
-      this.set('input-value', '')
-      this.on('test-action', function (attr) {
-        this.set('input-value', attr.value)
-      })
-      this.render(hbs`{{frost-textarea id="action" onInput=(action "test-action") hook='my-textarea'}}`)
+      this.render(hbs`
+        {{frost-textarea 
+          hook='my-textarea'
+        }}
+      `)
 
-      expect($hook('my-textarea').hasClass('frost-textarea'))
-        .to.be.true
+      expect(
+        $hook('my-textarea').hasClass('frost-textarea'),
+        'default hook is set'
+      ).to.be.true
 
-      expect($hook('my-textarea-input').hasClass('ember-text-area'))
-        .to.be.true
+      expect(
+        $hook('my-textarea-input').hasClass('ember-text-area'),
+        'input hook is set'
+      ).to.be.true
     })
   }
 )
