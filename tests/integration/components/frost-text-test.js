@@ -175,7 +175,7 @@ describeComponent(
           hook='test'
         }}
 			`)
-      //debugger
+
 			expect(
 				$hook('test').hasClass('error'),
 				'error class is set'
