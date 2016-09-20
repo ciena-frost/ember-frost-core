@@ -85,27 +85,5 @@ describeComponent(
         }).not.to.throw(Error)
       })
     })
-
-    // describe('when keyUp is triggered', function () {
-    //   console.log('target test get run')
-
-    //   beforeEach(function () {
-    //     console.log('before each run')
-    //     run(() => component.set('onKeyUp', function() {
-    //       console.log('onKeyUp function triggered.')
-    //     }))
-    //   })
-
-    //   it('._eventProxy.keyUp is called when keyUp action is triggered', function () {
-    //     const keyUpSpy = sinon.spy(component._eventProxy, 'keyUp')
-
-    //     //run(() => )
-
-    //     expect(
-    //       keyUpSpy.called,
-    //       '_eventProxy.keyUp function is called'
-    //     ).to.be.true
-    //   })
-    // })
   }
 )
