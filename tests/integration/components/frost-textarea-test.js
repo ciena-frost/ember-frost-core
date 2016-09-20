@@ -28,6 +28,24 @@ describeComponent(
       ).to.be.eql('0')
     })
 
+    it('hook attr grabs frost-textarea as expected', function () {
+      this.render(hbs`
+        {{frost-textarea 
+          hook='my-textarea'
+        }}
+      `)
+
+      expect(
+        $hook('my-textarea').hasClass('frost-textarea'),
+        'default hook is set'
+      ).to.be.true
+
+      expect(
+        $hook('my-textarea-input').hasClass('ember-text-area'),
+        'input hook is set'
+      ).to.be.true
+    })
+    
     it('calls onInput closure action', function () {
       const externalActionSpy = sinon.spy()
 
@@ -120,23 +138,5 @@ describeComponent(
     //   expect($hook('my-textarea-input').hasClass('ember-text-area'))
     //     .to.be.true
     // })
-
-    it('hook attr grabs frost-textarea as expected', function () {
-      this.render(hbs`
-        {{frost-textarea 
-          hook='my-textarea'
-        }}
-      `)
-
-      expect(
-        $hook('my-textarea').hasClass('frost-textarea'),
-        'default hook is set'
-      ).to.be.true
-
-      expect(
-        $hook('my-textarea-input').hasClass('ember-text-area'),
-        'input hook is set'
-      ).to.be.true
-    })
   }
 )
