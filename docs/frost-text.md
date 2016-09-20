@@ -7,21 +7,20 @@
 
 | Attribute | Type | Value | Description |
 | --------- | ---- | ----- | ----------- |
-| `value` | `string` | `<value-text>` | text to be displayed in text field |
 | `align` |`string` | `right` | right align text input |
-| `placeholder` | `string` | `<text>` | placeholder text |
 | `autofocus` |`boolean` | `false` | **default** - normal text field |
 | | | `true` | text field in focus |
+| `class` | `string` | `error` | sets text field to error state |
 | `disabled` | `boolean` | `false` | **default** - normal text field |
 | | | `true` | disabled text field |
-| `class` | `string` | `error` | sets text field to error state |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
+| `placeholder` | `string` | `<text>` | placeholder text |
+| `value` | `string` | `<value-text>` | text to be displayed in text field |
 | `onBlur` | `string` | `<action-name>` | triggers associated action when component loses focus |
 | `onInput` | `string` | `<action-name>` | triggers associated action when text is entered |
 | `onFocus` | `string` | `<action-name>` | triggers associated action when component receives focus |
 | `onKeyDown` | `string` | `<action-name>` | triggers associated action when component receive a `keydown` event |
 | `onKeyUp` | `string` | `<action-name>` | triggers associated action when component receive a `keyup` event |
-
 
 ## Examples
 
