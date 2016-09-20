@@ -52,6 +52,24 @@
         }}
       </div>
     </div>
+    <div class="example">
+      <div class="title">readonly</div>
+      <div class="demo">
+        {{frost-textarea
+          value='readonly'
+          readonly=true
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-textarea
+  value='readonly'
+  readonly=true
+}}
+```"
+        }}
+      </div>
+    </div>
 
   </div>
 
@@ -105,6 +123,38 @@
 {{frost-textarea
   placeholder='Un-tabbable'
   tabindex='-1'
+}}
+  ```"
+        }}
+      </div>
+    </div>
+    <div class="example">
+    <div class="title">autofocus</div>
+      <div class="demo">
+        {{frost-textarea
+          autofocus=true
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-textarea
+  autofocus=true
+}}
+  ```"
+        }}
+      </div>
+    </div>
+    <div class="example">
+      <div class="title">value</div>
+      <div class="demo">
+        {{frost-textarea
+          value='value'
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-textarea
+  value=value
 }}
   ```"
         }}
