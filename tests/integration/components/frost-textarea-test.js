@@ -25,10 +25,114 @@ describeComponent(
       expect(
         this.$('textarea').attr('tabindex'),
         'tabindex is set'
-      ).to.be.eql('0')
+      ).to.eql('0')
     })
 
-    it('hook attr grabs frost-textarea as expected', function () {
+    it('sets tabindex', function() {
+      this.render(hbs`
+        {{frost-textarea
+          tabindex='-1'
+        }}
+      `)
+
+      expect(
+        this.$('textarea').attr('tabindex'),
+        'tabindex is set to "-1"'
+      ).to.eql('-1')
+    })
+
+    it('sets disabled property', function () {
+      this.render(hbs`
+        {{frost-textarea
+          disabled=true
+        }}
+     `)
+
+      expect(
+        this.$('textarea').attr('disabled'),
+        'disabled attribute is set'
+      ).to.eql('disabled')
+    })
+
+    it('sets autofocus property', function () {
+      this.render(hbs`
+        {{frost-textarea
+          autofocus=true
+        }}
+     `)
+
+      expect(
+        this.$('textarea').attr('autofocus'),
+        'autofocus attribute is set'
+      ).to.eql('autofocus')
+    })
+
+    it('sets cols property', function () {
+      this.render(hbs`
+        {{frost-textarea
+          cols='0'
+        }}
+     `)
+
+      expect(
+        this.$('textarea').attr('cols'),
+        'cols attribute is set to 0'
+      ).to.eql('0')
+    })
+
+    it('sets rows property', function () {
+      this.render(hbs`
+        {{frost-textarea
+          rows='0'
+        }}
+     `)
+
+      expect(
+        this.$('textarea').attr('rows'),
+        'rows attribute is set to 0'
+      ).to.eql('0')
+    })
+
+    it('sets placeholder property', function () {
+      this.render(hbs`
+        {{frost-textarea
+          placeholder='placeholder'
+        }}
+     `)
+
+      expect(
+        this.$('textarea').attr('placeholder'),
+        'placeholder attribute is set'
+      ).to.eql('placeholder')
+    })
+
+    it('sets readonly property', function () {
+      this.render(hbs`
+        {{frost-textarea
+          readonly=true
+        }}
+     `)
+
+      expect(
+        this.$('textarea').attr('readonly'),
+        'readonly attribute is set'
+      ).to.eql('readonly')
+    })
+
+    it('sets value', function () {
+      this.render(hbs`
+        {{frost-textarea
+          value='Test'
+        }}
+     `)
+
+      expect(
+        this.$('textarea').val(),
+        'value is set'
+      ).to.eql('Test')
+    })
+
+    it('hook attr grabs frost-textarea-input as expected', function () {
       this.render(hbs`
         {{frost-textarea 
           hook='my-textarea'
@@ -36,51 +140,59 @@ describeComponent(
       `)
 
       expect(
-        $hook('my-textarea').hasClass('frost-textarea'),
-        'default hook is set'
-      ).to.be.true
-
-      expect(
         $hook('my-textarea-input').hasClass('ember-text-area'),
         'input hook is set'
       ).to.be.true
     })
+
+    it('hook attr grabs frost-textarea-clear as expected', function () {
+      this.render(hbs`
+        {{frost-textarea 
+          hook='my-textarea'
+          value='Test'
+        }}
+      `)
+
+      expect(
+        $hook('my-textarea-clear').hasClass('frost-text-clear'),
+        'clear hook is set'
+      ).to.be.true
+    })
     
-    it('calls onInput closure action', function () {
+    it('calls onFocus closure action', function () {
       const externalActionSpy = sinon.spy()
 
       this.on('externalAction', externalActionSpy)
 
       this.render(hbs`
         {{frost-textarea
-          onInput=(action 'externalAction')
+          onFocus=(action 'externalAction')
         }}
       `)
 
       run(()=>{
-        this.$('textarea').val('test').trigger('input')
+        this.$('textarea').trigger('focusin')
       })
 
       expect(
         externalActionSpy.called,
-        'onInput closure action called'
+        'onFocus closure action called'
       ).to.be.true
     })
-    
+
     it('textarea cleared on button click', function () {
-      this.set('input-value', '')
-      this.on('test-action', function (attr) {
-        this.set('input-value', attr.value)
-      })
 
-      this.render(hbs`{{frost-textarea hook="test" onInput=(action "test-action")}}`)
-      run(() => $hook('test-input').val('test').trigger('input'))
+      this.render(hbs`
+        {{frost-textarea 
+          value="Test"
+        }}
+      `)
 
-      expect(this.get('input-value')).to.eql('test')
-
-      run(() => $hook('test-clear').click())
+      run(() => this.$('.frost-text-clear').click())
       
-      expect(this.get('input-value')).to.eql('')
+      expect(
+        this.$('textarea').val()
+      ).to.eql('')
     })
 
     it('calls onBlur callback when focus is lost', function () {
@@ -125,18 +237,25 @@ describeComponent(
       ).to.be.true
     })
 
-    // it('hook attr grabs frost-textarea as expected', function () {
-    //   this.set('input-value', '')
-    //   this.on('test-action', function (attr) {
-    //     this.set('input-value', attr.value)
-    //   })
-    //   this.render(hbs`{{frost-textarea id="action" onInput=(action "test-action") hook='my-textarea'}}`)
+    it('calls onInput closure action', function () {
+      const externalActionSpy = sinon.spy()
 
-    //   expect($hook('my-textarea').hasClass('frost-textarea'))
-    //     .to.be.true
+      this.on('externalAction', externalActionSpy)
 
-    //   expect($hook('my-textarea-input').hasClass('ember-text-area'))
-    //     .to.be.true
-    // })
+      this.render(hbs`
+        {{frost-textarea
+          onInput=(action 'externalAction')
+        }}
+      `)
+
+      run(()=>{
+        this.$('textarea').val('test').trigger('input')
+      })
+
+      expect(
+        externalActionSpy.called,
+        'onInput closure action called'
+      ).to.be.true
+    })
   }
 )

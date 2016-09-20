@@ -7,16 +7,19 @@ a text area component
 ## API
 | Attribute | Type | Value | Description |
 | --------- | ---- | ----- | ----------- |
-| `value` | `string` |`<value-text>`| text to be displayed in text area |
-| `cols` | `integer` |`<num-of-cols>`| number of columns for text area |
-| `rows` | `integer` |`<num-of-rows>`| number of rows for text area |
 | `autofocus` | `boolean` |`false`| **default** - normal text area |
 |  |  |`true`| text area in focus |
+| `class` | `string` | `error` | sets text area to error state |
+| `cols` | `integer` |`<num-of-cols>`| number of columns for text area |
 | `disabled` | `boolean` | `false` | **default** - normal text area |
 | | | `true` | disabled text area |
-| `class` | `string` | `error` | sets text area to error state |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `onInput` | `string` |`<action-name>`| triggers associated action when text is entered |
+| `readonly` | `boolean` | `false` | **default** - basic textarea |
+| | | `true` | the user cannot modify the value |
+| `rows` | `integer` |`<num-of-rows>`| number of rows for text area |
+| `tabindex` | `string` | `<tabindex-value>` | the tabindex value |
+| `value` | `string` |`<value-text>`| text to be displayed in text area |
 
 ## Examples
 

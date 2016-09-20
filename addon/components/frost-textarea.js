@@ -1,5 +1,11 @@
 import Ember from 'ember'
-const {Component, typeOf} = Ember
+const {
+  Component,
+  get, 
+  isEmpty,
+  set,
+  typeOf
+} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-textarea'
@@ -8,34 +14,36 @@ export default Component.extend(PropTypeMixin, {
   // == Dependencies ==========================================================
 
   // == Properties ============================================================
-
-  attributeBindings: [
-    'autofocus',
-    'cols',
-    'disabled',
-    'placeholder',
-    'readonly',
-    'rows'
-  ],
   classNames: ['frost-textarea'],
   layout,
 
   propTypes: {
     autofocus: PropTypes.bool,
-    cols: PropTypes.number,
+    cols: PropTypes.string,
     disabled: PropTypes.bool,
+    form: PropTypes.string,
     hook: PropTypes.string,
     placeholder: PropTypes.string,
     readonly: PropTypes.bool,
-    rows: PropTypes.number,
-    tabindex: PropTypes.number
+    rows: PropTypes.string,
+    tabindex: PropTypes.string,
+    value: PropTypes.string,
+    wrap: PropTypes.string
   },
 
   getDefaultProps () {
     return {
       autofocus: false,
       disabled: false,
-      tabindex: 0
+      tabindex: '0',
+
+      cols: null,
+      form: null,
+      rows: null,
+      placeholder: null,
+      readonly: null,
+      wrap: null,
+      value: null
     }
   },
 
@@ -50,7 +58,7 @@ export default Component.extend(PropTypeMixin, {
    * @returns {Boolean} whether or not to show button for clearing out text field
    */
   showClear (disabled, value) {
-    return !disabled && Boolean(value)
+    return !disabled && !isEmpty(value)
   },
 
   // == Functions =============================================================
@@ -62,7 +70,7 @@ export default Component.extend(PropTypeMixin, {
 
     if (typeOf(onInput) === 'function') {
       onInput({
-        id: this.get('id'),
+        id: get(this, 'id'),
         value: e.target.value
       })
     }
@@ -79,14 +87,14 @@ export default Component.extend(PropTypeMixin, {
 
   actions: {
     clear: function () {
-      this.set('value', '')
+      set(this, 'value', '')
       this.$('textarea').focus()
       this.$('textarea').val('')
       this.$('textarea').trigger('input')
     },
 
     onBlur () {
-      const onBlur = this.get('onBlur')
+      const onBlur = get(this, 'onBlur')
 
       if (onBlur) {
         onBlur()

@@ -2,6 +2,7 @@ import {expect} from 'chai'
 import Ember from 'ember'
 const {run} = Ember
 import {describeComponent} from 'ember-mocha'
+import PropTypeMixin from 'ember-prop-types'
 import {beforeEach, describe, it} from 'mocha'
 
 describeComponent(
@@ -35,7 +36,49 @@ describeComponent(
       expect(
         component.get('tabindex'),
         'tabindex: 0'
-      ).to.equal(0)
+      ).to.be.eql('0')
+
+      expect(
+        component.get('cols'),
+        'cols: null'
+      ).to.be.null
+
+      expect(
+        component.get('rows'),
+        'rows: null'
+      ).to.be.null
+
+      expect(
+        component.get('placeholder'),
+        'placeholder: null'
+      ).to.be.null
+
+      expect(
+        component.get('readonly'),
+        'readonly: null'
+      ).to.be.null
+
+      expect(
+        component.get('wrap'),
+        'wrap: null'
+      ).to.be.null
+
+      expect(
+        component.get('form'),
+        'form: null'
+      ).to.be.null
+
+      expect(
+        component.get('value'),
+        'value: null'
+      ).to.be.null
+    })
+
+    it('has the expect Mixins', function (){
+      expect(
+        PropTypeMixin.detect(component),
+        'PropTypeMixin Mixin is present'
+      ).to.be.true
     })
 
     describe('when onBlur property is omitted', function () {
@@ -63,6 +106,18 @@ describeComponent(
         this.$('textarea').prop('tabindex'),
         'tabindex: -1'
       ).to.equal(-1)
+    })
+
+    it('sets dependent keys correctly', function () {
+      const showClearDependentKeys = [
+        'disabled',
+        'value'
+      ]
+
+      expect(
+        component.showClear._dependentKeys,
+        'Dependent keys are correct for showClear()'
+      ).to.eql(showClearDependentKeys)
     })
 
     describe('"showClear" computed property', function () {
