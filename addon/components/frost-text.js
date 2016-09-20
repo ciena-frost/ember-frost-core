@@ -31,7 +31,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     isClearVisible: PropTypes.bool,
     isHookEmbedded: PropTypes.bool,
     receivedHook: PropTypes.string,
-    tabindex: PropTypes.number,
+    tabindex: PropTypes.string,
     type: PropTypes.string,
 
 
@@ -56,7 +56,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       isClearEnabled: false,
       isClearVisible: false,
       isHookEmbedded: false,
-      tabindex: 0,
+      tabindex: '0',
       type: 'text',
 
       // Setting these as part of establishing an initial value
@@ -70,8 +70,8 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       required: null,
       selectionDirection: null,
       spellcheck: null,
-      value: null,
       title: null,
+      value: null,
     }
   },
 

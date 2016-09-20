@@ -52,7 +52,7 @@ describeComponent(
       expect(
         component.get('tabindex'),
         'tabindex: 0'
-      ).to.equal(0)
+      ).to.be.eql('0')
 
       expect(
         component.get('type'),
@@ -65,9 +65,7 @@ describeComponent(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
       ).to.be.true
-    })
 
-    it('has the expect FrostEventsProxy', function (){
       expect(
         FrostEventsProxy.detect(component),
         'FrostEventsProxy is present'
