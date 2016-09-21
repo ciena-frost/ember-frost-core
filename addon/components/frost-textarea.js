@@ -15,6 +15,7 @@ export default Component.extend(PropTypeMixin, {
 
   // == Properties ============================================================
   classNames: ['frost-textarea'],
+  classNameBindings: ['showClear:is-clear-visible'],
   layout,
 
   propTypes: {

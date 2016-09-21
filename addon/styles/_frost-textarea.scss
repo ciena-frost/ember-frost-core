@@ -6,8 +6,8 @@ $disabled-border: 1px solid $frost-color-input-disabled-border;
 $disabled-bg: $frost-color-input-disabled-bg;
 
 .frost-textarea {
-  display: flex;
-  align-items: flex-start;
+  display: block;
+  position: relative;
   &.error > textarea {
     border: $error-border;
     color: $frost-color-danger;
@@ -48,17 +48,13 @@ $disabled-bg: $frost-color-input-disabled-bg;
     box-shadow: none;
   }
 
-  .clear {
-    z-index: 1;
-    margin: 5px 0 0 -40px;
-    width: 35px;
-    > svg {
-      width: 26px;
-      height: 26px;
-      fill: $frost-color-grey-6;
-      cursor: pointer;
-     }
-
+  &.is-clear-visible .frost-text-clear {
+    opacity: 1;
   }
 
+  .frost-text-clear {
+    cursor: pointer;
+    pointer-events: auto;
+    right: 136px;
+  }
 }
