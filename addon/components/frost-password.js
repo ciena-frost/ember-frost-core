@@ -26,8 +26,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
 
   /*
     At this time the following attributes are passed through to frost-text which
-    in turn passes them into {{input}}. These attributes are *NOT* being exposed
-    as part of the public API for this component, however they are being set to
+    in turn passes them into {{input}}. These attributes are being set
     here because the base {{input}} never sets them and therefore they are
     still undefined.
 
