@@ -15,6 +15,8 @@
 | | | `true` | disabled text field |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `placeholder` | `string` | `<text>` | placeholder text |
+| `readonly` | `boolean` | `false` | **default** - basic textarea |
+| | | `true` | the user cannot modify the value |
 | `value` | `string` | `<value-text>` | text to be displayed in text field |
 | `onBlur` | `string` | `<action-name>` | triggers associated action when component loses focus |
 | `onInput` | `string` | `<action-name>` | triggers associated action when text is entered |
