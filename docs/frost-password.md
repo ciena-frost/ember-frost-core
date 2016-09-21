@@ -6,14 +6,28 @@
 ## API
 | Attribute | Type | Value | Description |
 | --------- | ---- | ----- | ----------- |
-| `value` | `string` | `<value-text>` | text to be displayed in password |
-| `revealable` | `boolean` | `false` | **default** - basic password |
-| | | `true` | reveals password text |
+| `autofocus` | `boolean` | `false` | **default** - basic password |
+| | | `true` | password field in focus |
+| `class` | `string` | `error` | sets password to error state |
 | `disabled` | `boolean` | `false` | **default** - basic password |
 | | | `true` | disable password |
-| `class` | `string` | `error` | sets password to error state |
+| `form` | `string` | `<form-owner>` | form element that this is associated with (its form owner) |
 | `hook` | `string` | `<hook-name>` | name used for testing with ember-hook |
-| `onInput` | `string` | `<action-name>` | triggers associated action when the input value is changed |
+| `maxlength` | `string` | `<maxlength-value>` | maximum number of characters a user can enter |
+| `placeholder` | `string` | `<text>` | placeholder text |
+| `readonly` | `boolean` | `false` | **default** - basic password |
+| | | `true` | the user cannot modify the value |
+| `required` |  `boolean` | `false` | **default** - basic password |
+| | | `true` | password field is required |
+| `revealable` | `boolean` | `false` | **default** - basic password |
+| | | `true` | reveals password text |
+| `tabindex` | `string` | `<tabindex-value>` | the tabindex value |
+| `title` | `string` | `<tooltip-text>` | tooltip text to display on hover |
+| `value` | `string` | `<value-text>` | text to be displayed in password |
+
+### Event Handlers
+A comprehensive list of [HTML event handlers](frost-events.md) are available to choose from based on your needs.
+
 
 ## Testing with ember-hook
 The password component is accessible using ember-hook with the top level hook name or you can access the internal components as well -
@@ -50,12 +64,4 @@ The password component is accessible using ember-hook with the top level hook na
 {{frost-password
   onInput=(action 'onInputHandler')
 }}
-```
-
-```javascript
-actions: {
-  onInputHandler () {
-    console.log('password value: ' + attrs.value)
-  }
-}
 ```

@@ -1,7 +1,8 @@
 import computed from 'ember-computed-decorators'
 import Ember from 'ember'
 const {
-  Component
+  Component,
+  get
 } = Ember
 import {
   task,
@@ -23,18 +24,58 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   ],
   layout,
 
+  /*
+    At this time the following attributes are passed through to frost-text which
+    in turn passes them into {{input}}. These attributes are being set
+    here because the base {{input}} never sets them and therefore they are
+    still undefined.
+
+    autofocus
+    form
+    maxlength
+    placeholder
+    readonly
+    required
+    selectionDirection
+    title
+   */
+
   propTypes: {
+    disabled: PropTypes.bool,
     hook: PropTypes.string,
     isRevealed: PropTypes.bool,
     revealable: PropTypes.bool,
-    tabindex: PropTypes.number
+    tabindex: PropTypes.string,
+    value: PropTypes.string,
+
+    // Setting these as part of establishing an inital value
+    autofocus: PropTypes.bool,
+    form: PropTypes.string,
+    maxlength: PropTypes.string,
+    placeholder: PropTypes.string,
+    readonly: PropTypes.bool,
+    required: PropTypes.bool,
+    selectionDirection: PropTypes.string,
+    title: PropTypes.string
   },
 
   getDefaultProps () {
     return {
+      disabled: false,
       isRevealed: false,
       revealable: false,
-      tabindex: 0
+      tabindex: '0',
+      value: null,
+
+      // Setting these as part of establishing an initial value
+      autofocus: false,
+      form: null,
+      maxlength: null,
+      placeholder: null,
+      readonly: false,
+      required: false,
+      selectionDirection: 'none',
+      title: null
     }
   },
 
@@ -75,7 +116,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
 
   actions: {
     toggleReveal () {
-      this.get('_toggleReveal').perform()
+      get(this, '_toggleReveal').perform()
     }
   }
 })
