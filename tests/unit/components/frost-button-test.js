@@ -2,7 +2,7 @@ import {expect} from 'chai'
 import {describeComponent} from 'ember-mocha'
 import {beforeEach, afterEach, it, describe} from 'mocha'
 
-describeComponent.only(
+describeComponent(
   'frost-button',
   'FrostButtonComponent',
   {
