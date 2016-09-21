@@ -58,6 +58,11 @@ describeComponent(
         component.get('type'),
         'type: text'
       ).to.be.eql('text')
+
+      expect(
+        component.get('readonly'),
+        'readonly: false'
+      ).to.be.false
     })
 
     it('has the expect Mixins', function (){

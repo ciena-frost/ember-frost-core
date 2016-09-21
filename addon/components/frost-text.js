@@ -56,6 +56,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       isClearEnabled: false,
       isClearVisible: false,
       isHookEmbedded: false,
+      readonly: false,
       tabindex: '0',
       type: 'text',
 
@@ -66,7 +67,6 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       form: null,
       maxlength: null,
       placeholder: null,
-      readonly: null,
       required: null,
       selectionDirection: null,
       spellcheck: null,
@@ -100,7 +100,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   }).restartable(),
 
   _showClear: task(function * (isFocused) {
-    const showClear = isFocused && isPresent(this.get('value'))
+    const showClear = isFocused && isPresent(this.get('value')) && !this.get('readonly')
     if (this.get('isClearVisible') === showClear) {
       return
     }

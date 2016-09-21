@@ -74,7 +74,7 @@ describeComponent(
 
       expect(
         this.$('input').attr('autofocus'),
-        'autofocus class is set'
+        'autofocus attribute is set'
       ).to.eql('autofocus')
     })
 
@@ -104,8 +104,21 @@ describeComponent(
 
       expect(
         this.$('input').attr('disabled'),
-        'autofocus class is set'
+        'autofocus attribute is set'
       ).to.eql('disabled')
+    })
+
+    it('set readonly property', function() {
+      this.render(hbs`
+        {{frost-text
+          readonly=true
+        }}
+      `)
+
+      expect(
+        this.$('input').attr('readonly'),
+        'autofocus attribute is set'
+      ).to.eql('readonly')
     })
 
     it('only renders the clear icon in insert', function () {
