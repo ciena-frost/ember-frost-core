@@ -62,6 +62,21 @@ describeComponent(
 
       this.register('template:mock-component', mockComponentTemplate)
       this.register('component:mock-component', mockComponent)
+
+      // Create mock component to test the text support events
+      const textSupportComponentTemplate = hbs`
+        {{input
+          escape-press=_eventProxy.escape-press
+          insert-newline=_eventProxy.enter
+        }}
+      `
+
+      const textSupportComponent = Component.extend(FrostEventsProxy, {
+        layoutName: 'text-support'
+      })
+
+      this.register('template:text-support', textSupportComponentTemplate)
+      this.register('component:text-support', textSupportComponent)
     })
 
     describe('Event types', function () {
@@ -118,58 +133,39 @@ describeComponent(
       })
     })
 
-    it('calls onEscape closure action', function () {
-      const externalActionSpy = sinon.spy()
+    /* trigger pressing the `escape` or the `enter` key
+     *
+     * keypress doesn't seem to be handled consistently between browsers so using
+     *  keyup since it is consistent. Specifying `which: <keycode>` instead of the
+     *  `keyCode: <keycode>` did not work though.
+     *
+     * http://stackoverflow.com/questions/1160008/which-keycode-for-escape-key-with-jquery/28502629#28502629
+     */
+    describe('Text support event types', function () {
+      const eventTypes = [
+        {in: 'onEscape', out: '27'},
+        {in: 'onEnter', out: '13'}
+      ]
 
-      this.on('externalAction', externalActionSpy)
+      eventTypes.forEach((test) => {
+        it(`calls ${test.in} closure action`, function () {
+          const externalActionSpy = sinon.spy()
+          const template = Ember.Handlebars.compile(`
+            {{text-support ${test.in}=(action 'externalAction')}}
+          `)
 
-      this.render(hbs`
-        {{frost-text
-          onEscape=(action 'externalAction')
-        }}
-      `)
+          this.on('externalAction', externalActionSpy)
 
-      /* trigger pressing the `escape` key
-       *
-       * keypress doesn't seem to be handled consistently between browsers so using
-       *  keyup since it is consistent. Specifying `which: 27` instead of the `keyCode: 27`
-       *  did not work though.
-       *
-       * http://stackoverflow.com/questions/1160008/which-keycode-for-escape-key-with-jquery/28502629#28502629
-       */
-      this.$('input').trigger({ type: 'keyup', keyCode: 27 })
+          this.render(template)
 
-      expect(
-        externalActionSpy.called,
-        'onEscape closure action called'
-      ).to.be.true
-    })
+          this.$('input').trigger({ type: 'keyup', keyCode: `${test.out}` })
 
-    it('calls onEnter closure action', function () {
-      const externalActionSpy = sinon.spy()
-
-      this.on('externalAction', externalActionSpy)
-
-      this.render(hbs`
-        {{frost-text
-          onEnter=(action 'externalAction')
-        }}
-      `)
-
-      /* trigger pressing the `enter` key
-       *
-       * keypress doesn't seem to be handled consistently between browsers so using
-       *  keyup since it is consistent. Specifying `which: 27` instead of the `keyCode: 27`
-       *  did not work though.
-       *
-       * http://stackoverflow.com/questions/1160008/which-keycode-for-escape-key-with-jquery/28502629#28502629
-       */
-      this.$('input').trigger({ type: 'keyup', keyCode: 13 })
-
-      expect(
-        externalActionSpy.called,
-        'onEnter closure action called'
-      ).to.be.true
+          expect(
+            externalActionSpy.called,
+            `${test.in} closure action called`
+          ).to.true
+        })
+      })
     })
   }
 )
