@@ -210,6 +210,18 @@ export default Component.extend(PropTypeMixin, {
 
   // == Functions =============================================================
 
+  _getOnClickHandler () {
+    if (typeOf(this.attrs.onClick) === 'function') {
+      return this.attrs.onClick
+    }
+    // For the case when handler is passed from component property and converted
+    // into mutable cell
+    if (typeOf(this.attrs.onClick) === 'object' &&
+      typeOf(this.attrs.onClick.value) === 'function') {
+      return this.attrs.onClick.value
+    }
+  },
+
   // == Events ================================================================
 
   onclick: Ember.on('click', function (event) {
@@ -217,8 +229,9 @@ export default Component.extend(PropTypeMixin, {
       return true
     }
 
-    if (!this.get('disabled') && typeOf(this.attrs.onClick) === 'function') {
-      this.attrs.onClick(this.get('id'))
+    const onClickHandler = this._getOnClickHandler()
+    if (onClickHandler && !this.get('disabled')) {
+      onClickHandler(this.get('id'))
     }
   }),
 
