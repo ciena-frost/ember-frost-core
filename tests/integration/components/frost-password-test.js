@@ -252,7 +252,7 @@ describeComponent(
 
       expect(
         this.$('.frost-password').find('input').val(),
-        'disabled class is set'
+        'value is set'
       ).to.eql('test value')
     })
   }
