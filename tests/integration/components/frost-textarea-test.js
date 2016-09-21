@@ -154,7 +154,7 @@ describeComponent(
       `)
 
       expect(
-        $hook('my-textarea-clear').hasClass('frost-text-clear'),
+        $hook('my-textarea-clear').hasClass('frost-textarea-clear'),
         'clear hook is set'
       ).to.be.true
     })
@@ -188,7 +188,7 @@ describeComponent(
         }}
       `)
 
-      run(() => this.$('.frost-text-clear').click())
+      run(() => this.$('.frost-textarea-clear').click())
       
       expect(
         this.$('textarea').val()

@@ -55,8 +55,8 @@ describeComponent(
 
       expect(
         component.get('readonly'),
-        'readonly: null'
-      ).to.be.null
+        'readonly: false'
+      ).to.be.false
 
       expect(
         component.get('wrap'),
@@ -111,6 +111,7 @@ describeComponent(
     it('sets dependent keys correctly', function () {
       const showClearDependentKeys = [
         'disabled',
+        'readonly',
         'value'
       ]
 
@@ -121,13 +122,15 @@ describeComponent(
     })
 
     describe('"showClear" computed property', function () {
-      it('is set to "true" when "disabled" is set to false and "value" exist', function () {
+      it('is set to "true" when "disabled" is set to false and "value" exist and "readonly" is set to false', function () {
         const disabled = false
         const value = "value"
+        const readonly = false
 
         run(() => {
           component.set('disabled', disabled)
           component.set('value', value)
+          component.set('readonly', readonly)
         })
 
         expect(
@@ -136,13 +139,15 @@ describeComponent(
         ).to.be.true
       })
 
-      it('is set to "false" when "disabled" is set to true and "value" exist', function () {
+      it('is set to "false" when "disabled" is set to true and "value" exist and "readonly" is set to false', function () {
         const disabled = true
         const value = "value"
+        const readonly = false
 
         run(() => {
           component.set('disabled', disabled)
           component.set('value', value)
+          component.set('readonly', readonly)
         })
 
         expect(
@@ -151,11 +156,13 @@ describeComponent(
         ).to.be.false
       })
       
-      it('is set to "false" when "disabled" is set to false and "value" deos not exist', function () {
+      it('is set to "false" when "disabled" is set to false and "value" deos not exist and "readonly" is set to false', function () {
         const disabled = false
+        const readonly = false
         
         run(() => {
           component.set('disabled', disabled)
+          component.set('readonly', readonly)
         })
 
         expect(
@@ -164,11 +171,77 @@ describeComponent(
         ).to.be.false
       })
 
-      it('is set to "false" when "disabled" is set to true and "value" deos not exist', function () {
+      it('is set to "false" when "disabled" is set to true and "value" deos not exist and "readonly" is set to false', function () {
         const disabled = true
-        
+        const readonly = false
+
         run(() => {
           component.set('disabled', disabled)
+          component.set('readonly', readonly)
+        })
+
+        expect(
+          component.get('showClear'),
+          'showClear: false'
+        ).to.be.false
+      })
+
+      it('is set to "false" when "disabled" is set to true and "value" deos not exist and "readonly" is set to true', function () {
+        const disabled = true
+        const readonly = true
+
+        run(() => {
+          component.set('disabled', disabled)
+          component.set('readonly', readonly)
+        })
+
+        expect(
+          component.get('showClear'),
+          'showClear: false'
+        ).to.be.false
+      })
+
+      it('is set to "false" when "disabled" is set to true and "value" exist and "readonly" is set to true', function () {
+        const disabled = true
+        const value = "value"
+        const readonly = true
+
+        run(() => {
+          component.set('disabled', disabled)
+          component.set('value', value)
+          component.set('readonly', readonly)
+        })
+
+        expect(
+          component.get('showClear'),
+          'showClear: false'
+        ).to.be.false
+      })
+
+      it('is set to "false" when "disabled" is set to false and "value" deos not exist and "readonly" is set to true', function () {
+        const disabled = false
+        const readonly = true
+
+        run(() => {
+          component.set('disabled', disabled)
+          component.set('readonly', readonly)
+        })
+
+        expect(
+          component.get('showClear'),
+          'showClear: false'
+        ).to.be.false
+      })
+
+      it('is set to "false" when "disabled" is set to false and "value" exist and "readonly" is set to true', function () {
+        const disabled = false
+        const value = "value"
+        const readonly = true
+
+        run(() => {
+          component.set('disabled', disabled)
+          component.set('value', value)
+          component.set('readonly', readonly)
         })
 
         expect(

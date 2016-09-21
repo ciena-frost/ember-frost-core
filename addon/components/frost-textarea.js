@@ -15,7 +15,6 @@ export default Component.extend(PropTypeMixin, {
 
   // == Properties ============================================================
   classNames: ['frost-textarea'],
-  classNameBindings: ['showClear:is-clear-visible'],
   layout,
 
   propTypes: {
@@ -37,12 +36,12 @@ export default Component.extend(PropTypeMixin, {
       autofocus: false,
       disabled: false,
       tabindex: '0',
+      readonly: false,
 
       cols: null,
       form: null,
       rows: null,
       placeholder: null,
-      readonly: null,
       wrap: null,
       value: null
     }
@@ -51,15 +50,16 @@ export default Component.extend(PropTypeMixin, {
   // == Computed Properties ===================================================
 
   @readOnly
-  @computed('disabled', 'value')
+  @computed('disabled', 'readonly', 'value')
   /**
    * Determine whether or not to show button for clearing out text field
    * @param {Boolean} disabled - whether or not input is disabled
+   * @param {Boolean} readonly - whether or not input is readonly
    * @param {String} value - value of text field
    * @returns {Boolean} whether or not to show button for clearing out text field
    */
-  showClear (disabled, value) {
-    return !disabled && !isEmpty(value)
+  showClear (disabled, readonly, value) {
+    return !disabled && !isEmpty(value) && !readonly
   },
 
   // == Functions =============================================================
