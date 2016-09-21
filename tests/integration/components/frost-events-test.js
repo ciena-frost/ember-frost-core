@@ -24,7 +24,6 @@ describeComponent(
     beforeEach(function () {
       const mockComponentTemplate = hbs`
         {{input
-          class="testAttrs"
           change=_eventProxy.change
           click=_eventProxy.click
           contextMenu=_eventProxy.contextMenu
