@@ -25,6 +25,9 @@
 | | | `true` | the user cannot modify the value |
 | `required` |  `boolean` | `false` | **default** - basic password |
 | | | `true` | password field is required |
+| `spellcheck` | `string` | `false` | **default** - normal text field |
+| | | `true` | spelling and grammar are checked |
+| | | `default` | defer to default behavior |
 | `tabindex` | `string` | `<tabindex-value>` | the tabindex value |
 | `title` | `string` | `<tooltip-text>` | tooltip text to display on hover |
 | `value` | `string` | `<value-text>` | text to be displayed in text field |
