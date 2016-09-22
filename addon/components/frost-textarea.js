@@ -38,6 +38,7 @@ export default Component.extend(PropTypeMixin, {
       readonly: false,
       tabindex: '0',
 
+      // Setting these as part of establishing an initial value
       cols: null,
       form: null,
       rows: null,

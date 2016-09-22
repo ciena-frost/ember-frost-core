@@ -23,21 +23,6 @@ describeComponent(
       `)
 
       expect(
-        this.$('textarea').attr('autofocus'),
-        'autofocus is set'
-      ).to.be.false
-
-      expect(
-        this.$('textarea').attr('disabled'),
-        'disabled is set'
-      ).to.be.false
-
-      expect(
-        this.$('textarea').attr('readonly'),
-        'readonly is set'
-      ).to.be.false
-
-      expect(
         this.$('textarea').attr('tabindex'),
         'tabindex is set'
       ).to.eql('0')
