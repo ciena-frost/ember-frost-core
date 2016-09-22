@@ -1,6 +1,6 @@
 {
   "name": "ember-frost-core",
-  "version": "0.25.7",
+  "version": "0.26.0",
   "description": "The library of core frost components",
   "frostGuideDirectories": [
     {

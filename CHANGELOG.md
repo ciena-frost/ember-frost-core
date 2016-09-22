@@ -1,3 +1,7 @@
+# 0.26.0
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
 # 0.25.7
 * Pass event to select's onBlur action
 
