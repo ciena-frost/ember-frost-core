@@ -1,7 +1,7 @@
 import Ember from 'ember'
 const {
   Component,
-  get, 
+  get,
   isEmpty,
   set,
   typeOf
@@ -35,8 +35,8 @@ export default Component.extend(PropTypeMixin, {
     return {
       autofocus: false,
       disabled: false,
-      tabindex: '0',
       readonly: false,
+      tabindex: '0',
 
       cols: null,
       form: null,

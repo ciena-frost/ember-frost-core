@@ -21,7 +21,7 @@ describeComponent(
     it('includes className frost-textarea', function () {
       expect(component.classNames).to.include('frost-textarea')
     })
-    
+
     it('sets default property values correctly', function () {
       expect(
         component.get('autofocus'),
@@ -74,7 +74,7 @@ describeComponent(
       ).to.be.null
     })
 
-    it('has the expect Mixins', function (){
+    it('has the expect Mixins', function () {
       expect(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
@@ -122,9 +122,9 @@ describeComponent(
     })
 
     describe('"showClear" computed property', function () {
-      it('is set to "true" when "disabled" is set to false and "value" exist and "readonly" is set to false', function () {
+      it('is set to "true" when disabled=false, value exist and readonly=false', function () {
         const disabled = false
-        const value = "value"
+        const value = 'value'
         const readonly = false
 
         run(() => {
@@ -139,9 +139,9 @@ describeComponent(
         ).to.be.true
       })
 
-      it('is set to "false" when "disabled" is set to true and "value" exist and "readonly" is set to false', function () {
+      it('is set to "false" when disabled=true, value exist and readonly=false', function () {
         const disabled = true
-        const value = "value"
+        const value = 'value'
         const readonly = false
 
         run(() => {
@@ -155,11 +155,11 @@ describeComponent(
           'showClear: false'
         ).to.be.false
       })
-      
-      it('is set to "false" when "disabled" is set to false and "value" deos not exist and "readonly" is set to false', function () {
+
+      it('is set to "false" when disabled=false, value does not exist and readonly=false', function () {
         const disabled = false
         const readonly = false
-        
+
         run(() => {
           component.set('disabled', disabled)
           component.set('readonly', readonly)
@@ -171,7 +171,7 @@ describeComponent(
         ).to.be.false
       })
 
-      it('is set to "false" when "disabled" is set to true and "value" deos not exist and "readonly" is set to false', function () {
+      it('is set to "false" when disabled=true, value does not exist and readonly=false', function () {
         const disabled = true
         const readonly = false
 
@@ -186,7 +186,7 @@ describeComponent(
         ).to.be.false
       })
 
-      it('is set to "false" when "disabled" is set to true and "value" deos not exist and "readonly" is set to true', function () {
+      it('is set to "false" when disabled=true, value does not exist and readonly=true', function () {
         const disabled = true
         const readonly = true
 
@@ -201,9 +201,9 @@ describeComponent(
         ).to.be.false
       })
 
-      it('is set to "false" when "disabled" is set to true and "value" exist and "readonly" is set to true', function () {
+      it('is set to "false" when disabled=true, value exist and readonly=true', function () {
         const disabled = true
-        const value = "value"
+        const value = 'value'
         const readonly = true
 
         run(() => {
@@ -218,7 +218,7 @@ describeComponent(
         ).to.be.false
       })
 
-      it('is set to "false" when "disabled" is set to false and "value" deos not exist and "readonly" is set to true', function () {
+      it('is set to "false" when disabled=false, value does not exist and readonly=true', function () {
         const disabled = false
         const readonly = true
 
@@ -233,9 +233,9 @@ describeComponent(
         ).to.be.false
       })
 
-      it('is set to "false" when "disabled" is set to false and "value" exist and "readonly" is set to true', function () {
+      it('is set to "false" when disabled=false, value exist and readonly=true', function () {
         const disabled = false
-        const value = "value"
+        const value = 'value'
         const readonly = true
 
         run(() => {
