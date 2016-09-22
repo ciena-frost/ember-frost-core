@@ -51,8 +51,6 @@ describeComponent(
           touchEnd=_eventProxy.touchEnd
           touchMove=_eventProxy.touchMove
           touchStart=_eventProxy.touchStart
-          escape-press=_eventProxy.escape-press
-          insert-newline=_eventProxy.enter
         }}
       `
 
