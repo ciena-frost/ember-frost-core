@@ -88,8 +88,8 @@ describeComponent(
 
       expect(
         component.get('spellcheck'),
-        'spellcheck: false'
-      ).to.be.false
+        'spellcheck: none'
+      ).to.eql('none')
 
       expect(
         component.get('tabindex'),
