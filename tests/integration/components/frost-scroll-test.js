@@ -23,8 +23,6 @@ describeComponent(
     integration: true
   },
   function () {
-    let sandbox
-
     beforeEach(function () {
       initialize()
     })
@@ -34,47 +32,80 @@ describeComponent(
       expect(this.$()).to.have.length(1)
     })
 
-    describe.skip('actions', function () {
-      beforeEach(function () {
-        sandbox = sinon.sandbox.create()
+    it('onScrollUp closure action is called', function () {
+      const externalActionSpy = sinon.spy()
 
-        this.setProperties({
-          onScrollUp: sinon.spy(),
-          onScrollDown: sinon.spy(),
-          onScrollYStart: sinon.spy(),
-          onScrollYEnd: sinon.spy()
-        })
+      this.on('externalAction', externalActionSpy)
 
-        this.render(hbs`{{frost-scroll hook='scroll'}}`)
-      })
+      this.render(hbs`
+        {{frost-scroll
+          onScrollUp=(action 'externalAction')
+        }}
+      `)
 
-      afterEach(function () {
-        sandbox.restore()
-      })
+      this.$('.frost-scroll').trigger('ps-scroll-up')
 
-      it('sends onScrollUp action when scrolling up', function () {
-        // TODO figure out how to simulate scrolling
-        $hook('scroll')
-        expect(this.get('onScrollUp').called).to.be.true
-      })
+      expect(
+        externalActionSpy.called,
+        'onScrollUp closure action called on ps-scroll-up'
+      ).to.be.true
+    })
 
-      it('sends onScrollDown action when scrolling down', function () {
-        // TODO figure out how to simulate scrolling
-        $hook('scroll')
-        expect(this.get('onScrollDown').called).to.be.true
-      })
+    it('onScrollDown closure action is called', function () {
+      const externalActionSpy = sinon.spy()
 
-      it('sends onScrollYStart action when scrolled to top', function () {
-        // TODO figure out how to simulate scrolling
-        $hook('scroll')
-        expect(this.get('onScrollYStart').called).to.be.true
-      })
+      this.on('externalAction', externalActionSpy)
 
-      it('sends onScrollYEnd action when scrolled to bottom', function () {
-        // TODO figure out how to simulate scrolling
-        $hook('scroll')
-        expect(this.get('onScrollUp').called).to.be.true
-      })
+      this.render(hbs`
+        {{frost-scroll
+          onScrollDown=(action 'externalAction')
+        }}
+      `)
+
+      this.$('.frost-scroll').trigger('ps-scroll-down')
+
+      expect(
+        externalActionSpy.called,
+        'onScrollDown closure action called on ps-scroll-down'
+      ).to.be.true
+    })
+
+    it('onScrollYStart closure action is called', function () {
+      const externalActionSpy = sinon.spy()
+
+      this.on('externalAction', externalActionSpy)
+
+      this.render(hbs`
+        {{frost-scroll
+          onScrollYStart=(action 'externalAction')
+        }}
+      `)
+
+      this.$('.frost-scroll').trigger('ps-y-reach-start')
+
+      expect(
+        externalActionSpy.called,
+        'onScrollYStart closure action called on ps-y-reach-start'
+      ).to.be.true
+    })
+
+    it('onScrollYEnd closure action is called', function () {
+      const externalActionSpy = sinon.spy()
+
+      this.on('externalAction', externalActionSpy)
+
+      this.render(hbs`
+        {{frost-scroll
+          onScrollYEnd=(action 'externalAction')
+        }}
+      `)
+
+      this.$('.frost-scroll').trigger('ps-y-reach-end')
+
+      expect(
+        externalActionSpy.called,
+        'onScrollYEnd closure action called on ps-y-reach-end'
+      ).to.be.true
     })
   }
 )
