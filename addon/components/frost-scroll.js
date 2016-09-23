@@ -34,6 +34,12 @@ export default Component.extend(PropTypeMixin, {
     this._unregisterEvents()
   },
 
+  /**
+   * Setup the perfect-scrollbar plugin and events
+   *
+   * @private
+   * @returns {undefined}
+   */
   _setupPerfectScroll () {
     const debouncePeriod = 150
 
@@ -80,6 +86,12 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
+  /**
+   * Remove perfect-scrollbar plugin and events
+   *
+   * @private
+   * @returns {undefined}
+   */
   _unregisterEvents () {
     window.Ps.destroy(this.$()[0])
 
@@ -99,5 +111,4 @@ export default Component.extend(PropTypeMixin, {
       this.$().off('ps-y-reach-end')
     }
   }
-
 })
