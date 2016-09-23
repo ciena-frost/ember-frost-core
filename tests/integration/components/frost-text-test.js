@@ -93,9 +93,13 @@ describeComponent(
     })
 
     it('sets autofocus property', function () {
+      const autofocus = 'true'
+
+      this.set('autofocus', autofocus)
+
       this.render(hbs`
           {{frost-text
-            autofocus=true
+            autofocus=autofocus
           }}
       `)
 
@@ -196,9 +200,12 @@ describeComponent(
     })
 
     it('set spellcheck property', function () {
+      const spellcheck = 'true'
+
+      this.set('spellcheck', spellcheck)
       this.render(hbs`
         {{frost-text
-          spellcheck='true'
+          spellcheck=spellcheck
         }}
       `)
 
@@ -250,7 +257,7 @@ describeComponent(
         }}
       `)
 
-      run(() => this.$('input').focus().val('').trigger('input'))
+      this.$('input').focus().val('').trigger('input')
 
       expect(
         this.$('input').val()
@@ -290,7 +297,7 @@ describeComponent(
 
       expect(
         externalActionSpy.called,
-        'onKeyDown closure action called'
+        'onKeyUp closure action called'
       ).to.be.true
     })
 
@@ -322,7 +329,7 @@ describeComponent(
 
       expect(
         externalActionSpy.args[0][0].value,
-        'onInput closure action called with an object that contains the id'
+        'onInput closure action called with an object that contains the value'
       ).to.eql(testObj.value)
     })
   }

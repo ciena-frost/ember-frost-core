@@ -63,7 +63,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       readonly: false,
       required: false,
       selectionDirection: 'none',
-      spellcheck: 'none',
+      spellcheck: 'false',
       tabindex: '0',
       type: 'text',
 

@@ -1,8 +1,6 @@
 import {expect} from 'chai'
 import Ember from 'ember'
-const {
-  run
-} = Ember
+const {run} = Ember
 import sinon from 'sinon'
 import {describeComponent} from 'ember-mocha'
 import {
@@ -50,7 +48,7 @@ describeComponent(
         component.get('autocorrect'),
         'autocorrect: off'
       ).to.be.eql('off')
-      
+
       expect(
         component.get('autofocus'),
         'autofocus: false'
@@ -88,8 +86,8 @@ describeComponent(
 
       expect(
         component.get('spellcheck'),
-        'spellcheck: none'
-      ).to.eql('none')
+        'spellcheck: false'
+      ).to.eql('false')
 
       expect(
         component.get('tabindex'),

@@ -24,7 +24,7 @@
 | `readonly` | `boolean` | `false` | **default** - basic textarea |
 | | | `true` | the user cannot modify the value |
 | `required` |  `boolean` | `false` | **default** - basic password |
-| | | `true` | password field is required |
+| | | `true` | text field is required |
 | `spellcheck` | `string` | `false` | **default** - normal text field |
 | | | `true` | spelling and grammar are checked |
 | | | `default` | defer to default behavior |
