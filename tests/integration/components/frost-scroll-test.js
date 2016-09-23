@@ -1,18 +1,9 @@
 /* jshint expr:true */
 import { expect } from 'chai'
 import {
-  describeComponent
-} from 'ember-mocha'
-import {
-  afterEach,
-  beforeEach,
-  describe,
+  describeComponent,
   it
-} from 'mocha'
-import {
-  $hook,
-  initialize
-} from 'ember-hook'
+} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
 import sinon from 'sinon'
 
@@ -23,10 +14,6 @@ describeComponent(
     integration: true
   },
   function () {
-    beforeEach(function () {
-      initialize()
-    })
-
     it('renders', function () {
       this.render(hbs`{{frost-scroll}}`)
       expect(this.$()).to.have.length(1)
