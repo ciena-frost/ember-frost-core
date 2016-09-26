@@ -12,11 +12,9 @@ import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
 export default Component.extend(PropTypeMixin, {
 
-  // == Component properties ==================================================
+  // == Properties ============================================================
 
   classNames: ['frost-scroll'],
-
-  // == State properties ======================================================
 
   propTypes: {
     hook: PropTypes.string

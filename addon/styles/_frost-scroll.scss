@@ -1,9 +1,11 @@
 .frost-scroll  {
   position: relative;
   overflow: hidden;
+
+  &.full {
+    width: 100%;
+    height: 100%;
+  }
 }
 
-.frost-scroll.full {
-  width: 100%;
-  height: 100%;
-}
+

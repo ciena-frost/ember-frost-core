@@ -7,6 +7,7 @@
       <div class="demo scroll-size">
         {{! BEGIN-SNIPPET scroll }}
         {{#frost-scroll class='full'
+          hook='myScroll'
           onScrollUp=(action 'onScrollUp')
           onScrollDown=(action 'onScrollDown')
           onScrollYStart=(action 'onScrollYStart')
@@ -21,6 +22,9 @@
       <div class='snippet'>
         <div>Template</div>
         {{code-snippet name='scroll.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='scroll-controller.js'}}
       </div>
     </div>
 

@@ -14,9 +14,14 @@ describeComponent(
     integration: true
   },
   function () {
-    it('renders', function () {
-      this.render(hbs`{{frost-scroll}}`)
-      expect(this.$()).to.have.length(1)
+    it('renders default values', function () {
+      this.render(hbs`
+        {{frost-scroll class='full'}}
+      `)
+      expect(
+        this.$('.frost-scroll').hasClass('full'),
+        'has class full'
+      ).to.be.true
     })
 
     it('onScrollUp closure action is called', function () {
