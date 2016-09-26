@@ -14,7 +14,7 @@ describeComponent(
     integration: true
   },
   function () {
-    it('renders default values', function () {
+    it('sets full class correctly', function () {
       this.render(hbs`
         {{frost-scroll class='full'}}
       `)

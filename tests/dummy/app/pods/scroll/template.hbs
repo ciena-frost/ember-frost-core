@@ -8,6 +8,25 @@
         {{! BEGIN-SNIPPET scroll }}
         {{#frost-scroll class='full'
           hook='myScroll'
+        }}
+          {{frost-icon icon='add' class='dummy-svg-huge'}}
+        {{/frost-scroll}}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        <div>Template</div>
+        {{code-snippet name='scroll.hbs'}}
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Events</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="demo scroll-size">
+        {{! BEGIN-SNIPPET scroll-events }}
+        {{#frost-scroll class='full'
           onScrollUp=(action 'onScrollUp')
           onScrollDown=(action 'onScrollDown')
           onScrollYStart=(action 'onScrollYStart')
@@ -18,15 +37,13 @@
         {{/frost-scroll}}
         {{! END-SNIPPET }}
       </div>
-
       <div class='snippet'>
         <div>Template</div>
-        {{code-snippet name='scroll.hbs'}}
+        {{code-snippet name='scroll-events.hbs'}}
         <br>
         <div>Controller</div>
         {{code-snippet name='scroll-controller.js'}}
       </div>
     </div>
-
   </div>
 </div>
