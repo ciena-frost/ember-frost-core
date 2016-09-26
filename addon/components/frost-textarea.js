@@ -43,8 +43,8 @@ export default Component.extend(PropTypeMixin, {
       form: null,
       rows: null,
       placeholder: null,
-      wrap: null,
-      value: null
+      value: null,
+      wrap: 'soft'
     }
   },
 

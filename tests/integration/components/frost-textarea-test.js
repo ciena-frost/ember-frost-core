@@ -1,5 +1,3 @@
-import Ember from 'ember'
-const {run} = Ember
 import {expect} from 'chai'
 import {describeComponent, it} from 'ember-mocha'
 import {beforeEach} from 'mocha'
@@ -68,48 +66,63 @@ describeComponent(
     })
 
     it('sets cols property', function () {
+      const cols = '0'
+
+      this.set('cols', cols)
+
       this.render(hbs`
         {{frost-textarea
-          cols='0'
+          cols=cols
         }}
      `)
 
       expect(
         this.$('textarea').attr('cols'),
-        'cols attribute is set to 0'
+        'cols attribute is set'
       ).to.eql('0')
     })
 
     it('sets tabindex', function () {
+      const tabindex = '-1'
+
+      this.set('tabindex', tabindex)
+
       this.render(hbs`
         {{frost-textarea
-          tabindex='-1'
+          tabindex=tabindex
         }}
       `)
 
       expect(
         this.$('textarea').attr('tabindex'),
-        'tabindex is set to "-1"'
+        'tabindex is set'
       ).to.eql('-1')
     })
 
     it('sets rows property', function () {
+      const rows = '0'
+
+      this.set('rows', rows)
       this.render(hbs`
         {{frost-textarea
-          rows='0'
+          rows=rows
         }}
      `)
 
       expect(
         this.$('textarea').attr('rows'),
-        'rows attribute is set to 0'
+        'rows attribute is set'
       ).to.eql('0')
     })
 
     it('sets placeholder property', function () {
+      const placeholder = 'placeholder'
+
+      this.set('placeholder', placeholder)
+
       this.render(hbs`
         {{frost-textarea
-          placeholder='placeholder'
+          placeholder=placeholder
         }}
      `)
 
@@ -120,9 +133,13 @@ describeComponent(
     })
 
     it('sets value', function () {
+      const value = 'Test'
+
+      this.set('value', value)
+
       this.render(hbs`
         {{frost-textarea
-          value='Test'
+          value=value
         }}
      `)
 
@@ -162,11 +179,11 @@ describeComponent(
     it('textarea cleared on button click', function () {
       this.render(hbs`
         {{frost-textarea 
-          value="Test"
+          value='Test'
         }}
       `)
 
-      run(() => this.$('.frost-textarea-clear').click())
+      this.$('.frost-textarea-clear').click()
 
       expect(
         this.$('textarea').val()

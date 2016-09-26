@@ -6,7 +6,7 @@ $disabled-border: 1px solid $frost-color-input-disabled-border;
 $disabled-bg: $frost-color-input-disabled-bg;
 
 .frost-textarea {
-  display: block;
+  display: inline-block;
   position: relative;
   &.error > textarea {
     border: $error-border;
@@ -57,7 +57,7 @@ $disabled-bg: $frost-color-input-disabled-bg;
     position: absolute;
     width: 23px;
     height: 23px;
-    right: 136px;
+    right: 5px;
     top: 7px;
     fill: $frost-color-grey-6;
     cursor: pointer;

@@ -60,8 +60,8 @@ describeComponent(
 
       expect(
         component.get('wrap'),
-        'wrap: null'
-      ).to.be.null
+        'wrap: soft'
+      ).to.be.eql('soft')
 
       expect(
         component.get('form'),
@@ -95,19 +95,6 @@ describeComponent(
       })
     })
 
-    it('passes tabindex to the underlying field', function () {
-      component.set('tabindex', -1)
-      expect(
-        component.tabindex,
-        'tabindex: -1'
-      ).to.equal(-1)
-
-      expect(
-        this.$('textarea').prop('tabindex'),
-        'tabindex: -1'
-      ).to.equal(-1)
-    })
-
     it('sets dependent keys correctly', function () {
       const showClearDependentKeys = [
         'disabled',
@@ -122,7 +109,7 @@ describeComponent(
     })
 
     describe('"showClear" computed property', function () {
-      it('is set to "true" when disabled=false, value exist and readonly=false', function () {
+      it('is set to "true" when disabled=false, value exists and readonly=false', function () {
         const disabled = false
         const value = 'value'
         const readonly = false
@@ -139,7 +126,7 @@ describeComponent(
         ).to.be.true
       })
 
-      it('is set to "false" when disabled=true, value exist and readonly=false', function () {
+      it('is set to "false" when disabled=true, value exists and readonly=false', function () {
         const disabled = true
         const value = 'value'
         const readonly = false
@@ -201,7 +188,7 @@ describeComponent(
         ).to.be.false
       })
 
-      it('is set to "false" when disabled=true, value exist and readonly=true', function () {
+      it('is set to "false" when disabled=true, value exists and readonly=true', function () {
         const disabled = true
         const value = 'value'
         const readonly = true
@@ -233,7 +220,7 @@ describeComponent(
         ).to.be.false
       })
 
-      it('is set to "false" when disabled=false, value exist and readonly=true', function () {
+      it('is set to "false" when disabled=false, value exists and readonly=true', function () {
         const disabled = false
         const value = 'value'
         const readonly = true
