@@ -1,6 +1,7 @@
 import Ember from 'ember'
 const {Controller} = Ember
 
+// BEGIN-SNIPPET radio-controller
 export default Controller.extend({
   sampleList: ['a', 'b', 'c', 'd', 'e'],
 
@@ -20,3 +21,4 @@ export default Controller.extend({
     }
   }
 })
+// END-SNIPPET radio-controller

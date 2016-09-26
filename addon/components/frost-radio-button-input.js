@@ -16,14 +16,13 @@ export default Component.extend(FrostEvents, PropTypeMixin, {
     'type'
   ],
   classNames: ['frost-radio-button-input'],
-  excludeEvents: ['onChange'],
   tagName: 'input',
 
   propTypes: {
     checked: PropTypes.bool,
     disabled: PropTypes.bool,
     hook: PropTypes.string,
-    value: PropTypes.bool,
+    value: PropTypes.string,
     type: PropTypes.string
   },
 

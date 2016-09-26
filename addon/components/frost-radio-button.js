@@ -26,8 +26,8 @@ export default Component.extend(PropTypeMixin, {
   layout,
 
   propTypes: {
-    hook: PropTypes.string,
     disabled: PropTypes.bool,
+    hook: PropTypes.string,
     required: PropTypes.bool
   },
 
@@ -66,6 +66,10 @@ export default Component.extend(PropTypeMixin, {
 
   init () {
     this._super(...arguments)
+    this._setupAssertions()
+  },
+
+  _setupAssertions () {
     Ember.assert(
       `${this.toString()} must be initialized in the yield block of 'frost-radio-group'`,
       /frost-radio-group/.test(this.parentView.toString()))
