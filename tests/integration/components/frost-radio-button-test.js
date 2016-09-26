@@ -1,5 +1,3 @@
-import Ember from 'ember'
-const {run} = Ember
 import {expect} from 'chai'
 import {
   describeComponent,
@@ -9,13 +7,6 @@ import hbs from 'htmlbars-inline-precompile'
 import {describe} from 'mocha'
 import sinon from 'sinon'
 
-let changeEvent = function (event) {
-  expect(event.target.id).to.equal('groupId')
-  expect(event.target.value).to.equal('testValue')
-  run.next(() => {
-    expect(this.$('input').prop('checked')).to.equal(true)
-  })
-}
 describeComponent(
   'frost-radio-button',
   'Integration: FrostRadioButtonComponent',
@@ -32,33 +23,6 @@ describeComponent(
         },
         'assertion thrown when used without frost-radio-group'
       ).to.throw(/frost-radio-button/)
-    })
-
-    it('is triggered by keypress', function () {
-      this.on('changed', changeEvent.bind(this))
-      this.render(hbs `
-        {{#frost-radio-group onChange=(action 'changed') id='groupId'}}
-          {{frost-radio-button value='testValue'}}
-        {{/frost-radio-group}}
-      `)
-
-      let event = Ember.$.Event('keypress')
-      event.keyCode = 13
-
-      expect(this.$('input').prop('checked')).to.equal(false)
-      this.$('.frost-radio-button').trigger(event)
-    })
-
-    it('is triggered by click', function () {
-      this.on('changed', changeEvent.bind(this))
-      this.render(hbs `
-        {{#frost-radio-group onChange=(action 'changed') id='groupId'}}
-          {{frost-radio-button value='testValue'}}
-        {{/frost-radio-group}}
-      `)
-
-      expect(this.$('input').prop('checked')).to.equal(false)
-      this.$('input').trigger('click')
     })
 
     describe('onChange closure action', function () {
