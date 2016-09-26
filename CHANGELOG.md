@@ -1,3 +1,6 @@
+# 0.27.0
+ * **Added** frost-toggle-button component and dummy example.
+
 # 0.26.0
 No CHANGELOG section found in Pull Request description.
 Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
