@@ -223,7 +223,7 @@ export default Component.extend(PropTypeMixin, {
     this._super(...arguments)
     const stateAttrs = this.get('stateAttributes')
 
-    const reduxAttrs = _.chain(stateAttrs)
+    let reduxAttrs = _.chain(stateAttrs)
     .map((attrName) => {
       const split = _.filter(attrName.split(ATTR_MAP_DELIM))
       let attrValue
@@ -240,15 +240,18 @@ export default Component.extend(PropTypeMixin, {
     .fromPairs()
     .value()
 
-    this.get('reduxStore').dispatch(resetDropDown(reduxAttrs))
-
     const dataChanged = isAttrDifferent(newAttrs, oldAttrs, 'data')
     const selectedChanged = isAttrDifferent(newAttrs, oldAttrs, 'selected')
     const selectedValueChanged = isAttrDifferent(newAttrs, oldAttrs, 'selectedValue')
 
+    if (!(selectedChanged || selectedValueChanged)) {
+      reduxAttrs = _.omit(reduxAttrs, ['selectedItem', 'selectedItems'])
+    }
+    this.get('reduxStore').dispatch(resetDropDown(reduxAttrs))
+
     // If frost-select instance is being reused by consumer but context is cleared make
     // make sure to actually clear input (noticed when used in conjunction with dialog
-    // compoonents that don't destroy DOM when closed and re-opened)
+    // components that don't destroy DOM when closed and re-opened)
     if (selectedValueChanged && ('selectedValue' in newAttrs) && (newAttrs.selectedValue.value === undefined)) {
       this.selectOptionByValue(null)
       return
