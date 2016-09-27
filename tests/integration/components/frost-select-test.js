@@ -339,22 +339,6 @@ describeComponent(
         let input = this.$('.frost-select input')
         expect(input.val()).to.be.eql('Ghostface')
       })
-
-      it('keeps prompt on attrib change', function () {
-        run(() => {
-          this.set('selVal', 'Tony Starks')
-        })
-        // TODO: This test is supposed to catch a bug where a redraw
-        // clears the prompt displayed in the input
-        // But it doesn't demonstrate the problem
-        // Probably some ordering or run loop issue
-        run(() => {
-          this.set('greeting', 'Bonjour')
-        })
-
-        let input = this.$('.frost-select input')
-        expect(input.val()).to.be.eql('Ghostface')
-      })
     })
   }
 )
