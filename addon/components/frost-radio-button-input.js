@@ -29,7 +29,8 @@ export default Component.extend(FrostEvents, PropTypeMixin, {
     return {
       disabled: false,
       groupValue: null,
-      type: 'radio'
+      type: 'radio',
+      value: null
     }
   },
 

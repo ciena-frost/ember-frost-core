@@ -74,6 +74,18 @@ describeComponent(
         'value'
       ]
 
+      const groupIdDependentKeys = [
+        'parentView.id'
+      ]
+
+      const groupValueDependentKeys = [
+        'parentView.value'
+      ]
+
+      const onChangeDependentKeys = [
+        'parentView.onChange'
+      ]
+
       const tabindexDependentKeys = [
         'disabled'
       ]
@@ -82,6 +94,21 @@ describeComponent(
         component.checked._dependentKeys,
         'Dependent keys are correct for checked()'
       ).to.eql(checkedDependentKeys)
+
+      expect(
+        component.groupId._dependentKeys,
+        'Dependent keys are correct for groupId()'
+      ).to.eql(groupIdDependentKeys)
+
+      expect(
+        component.groupValue._dependentKeys,
+        'Dependent keys are correct for groupValue()'
+      ).to.eql(groupValueDependentKeys)
+
+      expect(
+        component.onChange._dependentKeys,
+        'Dependent keys are correct for onChange()'
+      ).to.eql(onChangeDependentKeys)
 
       expect(
         component.tabindex._dependentKeys,

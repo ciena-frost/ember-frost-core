@@ -9,6 +9,23 @@ describeComponent(
     integration: true
   },
   function () {
+    it('renders default values', function () {
+      this.set('_setupAssertions', function () {
+        return
+      })
+
+      this.render(hbs`
+        {{frost-radio-button-input
+          _setupAssertions=_setupAssertions
+        }}
+      `)
+
+      expect(
+        this.$('.frost-radio-button-input').attr('type'),
+        'type is set'
+      ).to.eql('radio')
+    })
+
     it('throws error when not in frost-radio-button', function () {
       expect(
         () => {
