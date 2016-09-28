@@ -25,6 +25,53 @@ describeComponent(
       ).to.throw(/frost-radio-button/)
     })
 
+    it('sets checked property', function () {
+      this.render(hbs`
+        {{#frost-radio-group
+          value='testValue'
+        }}
+          {{frost-radio-button value='testValue'}}
+        {{/frost-radio-group}}
+      `)
+
+      expect(
+        this.$('.frost-radio-button').hasClass('checked'),
+        'checked class is set'
+      ).to.be.true
+    })
+
+    it('sets disabled property', function () {
+      this.render(hbs`
+        {{#frost-radio-group}}
+          {{frost-radio-button
+            disabled=true
+            value='testValue'
+          }}
+        {{/frost-radio-group}}
+      `)
+
+      expect(
+        this.$('.frost-radio-button').hasClass('disabled'),
+        'disabled class is set'
+      ).to.be.true
+    })
+
+    it('sets required property', function () {
+      this.render(hbs`
+        {{#frost-radio-group}}
+          {{frost-radio-button
+            required=true
+            value='testValue'
+          }}
+        {{/frost-radio-group}}
+      `)
+
+      expect(
+        this.$('.frost-radio-button').hasClass('required'),
+        'required class is set'
+      ).to.be.true
+    })
+
     describe('onChange closure action', function () {
       it('is called on keypress', function () {
         const externalActionSpy = sinon.spy()
@@ -91,7 +138,7 @@ describeComponent(
 
       expect(
         externalActionSpy.args[0][0].target.id,
-        'onChange closure action called on click'
+        '_createEvent() added groupId'
       ).to.eql(id)
     })
   }

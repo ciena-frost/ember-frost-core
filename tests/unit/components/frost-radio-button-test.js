@@ -42,7 +42,7 @@ describeComponent(
 
       expect(
         component.get('disabled'),
-        'disabled: "false"'
+        'disabled: false'
       ).to.be.false
 
       expect(
@@ -51,8 +51,13 @@ describeComponent(
       ).to.be.false
 
       expect(
+        component.get('tabindex'),
+        'tabindex: "0"'
+      ).to.eql('0')
+
+      expect(
         component.get('hook'),
-        'hook: "undefined"'
+        'hook: undefined'
       ).to.be.undefined
     })
 
@@ -69,6 +74,18 @@ describeComponent(
         'value'
       ]
 
+      const groupIdDependentKeys = [
+        'parentView.id'
+      ]
+
+      const groupValueDependentKeys = [
+        'parentView.value'
+      ]
+
+      const onChangeDependentKeys = [
+        'parentView.onChange'
+      ]
+
       const tabindexDependentKeys = [
         'disabled'
       ]
@@ -77,6 +94,21 @@ describeComponent(
         component.checked._dependentKeys,
         'Dependent keys are correct for checked()'
       ).to.eql(checkedDependentKeys)
+
+      expect(
+        component.groupId._dependentKeys,
+        'Dependent keys are correct for groupId()'
+      ).to.eql(groupIdDependentKeys)
+
+      expect(
+        component.groupValue._dependentKeys,
+        'Dependent keys are correct for groupValue()'
+      ).to.eql(groupValueDependentKeys)
+
+      expect(
+        component.onChange._dependentKeys,
+        'Dependent keys are correct for onChange()'
+      ).to.eql(onChangeDependentKeys)
 
       expect(
         component.tabindex._dependentKeys,
@@ -111,30 +143,17 @@ describeComponent(
           'checked: false'
         ).to.be.false
       })
+    })
 
-      describe('"tabindex" computed property', function () {
-        it('tabindex is set to "-1" when "disabled" is set to true', function () {
-          const disabled = true
+    it('"tabindex" set to "-1" when "disabled" is set to true', function () {
+      const disabled = true
 
-          run(() => component.set('disabled', disabled))
+      run(() => component.set('disabled', disabled))
 
-          expect(
-            component.get('tabindex'),
-            'tabindex: -1'
-          ).to.eql('-1')
-        })
-
-        it('tabindex is set to "0" when "disabled" is set to false', function () {
-          const disabled = false
-
-          run(() => component.set('disabled', disabled))
-
-          expect(
-            component.get('tabindex'),
-            'tabindex: 0'
-          ).to.eql('0')
-        })
-      })
+      expect(
+        component.get('tabindex'),
+        'tabindex: -1'
+      ).to.eql('-1')
     })
   }
 )

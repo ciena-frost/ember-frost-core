@@ -28,13 +28,15 @@ export default Component.extend(PropTypeMixin, {
   propTypes: {
     disabled: PropTypes.bool,
     hook: PropTypes.string,
-    required: PropTypes.bool
+    required: PropTypes.bool,
+    value: PropTypes.string
   },
 
   getDefaultProps () {
     return {
       disabled: false,
-      required: false
+      required: false,
+      value: null
     }
   },
 
@@ -49,7 +51,7 @@ export default Component.extend(PropTypeMixin, {
   }),
 
   tabindex: Ember.computed('disabled', function () {
-    return this.get('disabled') ? -1 : 0
+    return this.get('disabled') ? '-1' : '0'
   }),
 
   // == Functions ===============================================================

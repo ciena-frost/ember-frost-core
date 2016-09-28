@@ -1,11 +1,10 @@
 import Ember from 'ember'
+const {
+  Component
+} = Ember
+import computed from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import FrostEvents from '../mixins/frost-events'
-
-const {
-  Component,
-  computed
-} = Ember
 
 export default Component.extend(FrostEvents, PropTypeMixin, {
   // == Properties =============================================================
@@ -29,19 +28,32 @@ export default Component.extend(FrostEvents, PropTypeMixin, {
   getDefaultProps () {
     return {
       disabled: false,
-      type: 'radio'
+      groupValue: null,
+      type: 'radio',
+      value: null
     }
   },
 
   // == Computed properties ====================================================
-  checked: computed('groupValue', 'value', function () {
-    return this.get('groupValue') === this.get('value')
-  }),
+
+  @computed('groupValue', 'value')
+  /**
+   * Determine checked state
+   * @param {String} groupValue - which radio button in the group is set
+   * @param {String} value - is this radio button selected
+   * @returns {Boolean} whether this radio button is checked
+   */
+  checked (groupValue, value) {
+    return groupValue === value
+  },
 
   // == Functions ==============================================================
   init () {
     this._super(...arguments)
+    this._setupAssertions()
+  },
 
+  _setupAssertions () {
     let assert = `${this.toString()} must be initialized in the yield block of 'frost-radio-button'`
     let cond = /frost-radio-button/.test(this.parentView.toString())
     Ember.assert(assert, cond)
