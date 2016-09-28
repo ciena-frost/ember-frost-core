@@ -34,12 +34,12 @@ describeComponent(
     it('sets default property values correctly', function () {
       expect(
         component.get('checked'),
-        'checked: "false"'
+        'checked: false'
       ).to.be.false
 
       expect(
         component.get('disabled'),
-        'disabled: "false"'
+        'disabled: false'
       ).to.be.false
 
       expect(
@@ -49,17 +49,17 @@ describeComponent(
 
       expect(
         component.get('hook'),
-        'hook: "undefined"'
+        'hook: undefined'
       ).to.be.undefined
 
       expect(
         component.get('tagName'),
-        'tagName: input'
+        'tagName: "input"'
       ).to.eql('input')
 
       expect(
         component.get('type'),
-        'type: radio'
+        'type: "radio"'
       ).to.eql('radio')
 
       expect(
@@ -87,7 +87,7 @@ describeComponent(
       ).to.eql(checkedDependentKeys)
     })
 
-    it('"checked" computed property set to true when "groupValue" is equal to "value"', function () {
+    it('"checked" set to true when "groupValue" is equal to "value"', function () {
       const groupValue = 'testValue'
 
       run(() => component.set('groupValue', groupValue))
