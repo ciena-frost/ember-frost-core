@@ -7,10 +7,15 @@ export default Ember.Component.extend(PropTypeMixin, {
   layout,
 
   propTypes: {
-    hook: PropTypes.string
+    hook: PropTypes.string,
+    id: PropTypes.string,
+    value: PropTypes.string
   },
 
   getDefaultProps () {
-    return {}
+    return {
+      id: null,
+      value: null
+    }
   }
 })
