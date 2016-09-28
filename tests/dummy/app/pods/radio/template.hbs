@@ -9,8 +9,8 @@
         {{! BEGIN-SNIPPET radio }}
         {{#frost-radio-group
           hook='myCBGroup'
-          id='checkboxGroup'
-          value=model.checkboxGroup
+          id='radioGroup'
+          value=model.radioGroup
           onChange=(action 'change')
         }}
           {{#each sampleList as |i|}}
@@ -23,7 +23,7 @@
       </div>
       <div style='padding-top:15px' class='snippet'>
         <div>Template</div>
-        // id can be optionally specified, but acts as the group value for the checkboxes.
+        // id can be optionally specified, but acts as the group value for the radio buttons.
         // a class property can also be specified
         {{code-snippet name='radio.hbs'}}
         <br>

@@ -31,7 +31,7 @@ export default Controller.extend({
   sampleList: ['a', 'b', 'c', 'd', 'e'],
 
   model: Ember.Object.create({
-    checkboxGroup: 'c'
+    radioGroup: 'c'
   })
 })
 ```
@@ -39,8 +39,8 @@ export default Controller.extend({
 ### Default
 ```handlebars
 {{#frost-radio-group
-  id='checkboxGroup'
-  value=model.checkboxGroup
+  id='radioGroup'
+  value=model.radioGroup
 }}
   {{#each sampleList as |i|}}
     {{#frost-radio-button value=i}}
@@ -53,8 +53,8 @@ export default Controller.extend({
 ### Disabled
 ```handlebars
 {{#frost-radio-group
-  id='checkboxGroup'
-  value=model.checkboxGroup
+  id='radioGroup'
+  value=model.radioGroup
 }}
   {{#each sampleList as |i|}}
     {{#frost-radio-button value=i disabled=(eq i 'a')}}
@@ -67,8 +67,8 @@ export default Controller.extend({
 ### Required
 ```handlebars
 {{#frost-radio-group
-  id='checkboxGroup'
-  value=model.checkboxGroup
+  id='radioGroup'
+  value=model.radioGroup
 }}
   {{#each sampleList as |i|}}
     {{#frost-radio-button value=i required=(eq i 'a')}}
@@ -81,8 +81,8 @@ export default Controller.extend({
 ### Events - onChange
 ```handlebars
 {{#frost-radio-group
-  id='checkboxGroup'
-  value=model.checkboxGroup
+  id='radioGroup'
+  value=model.radioGroup
   onChange=(action 'change')
 }}
   {{#each sampleList as |i|}}

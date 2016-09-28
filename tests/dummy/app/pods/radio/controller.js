@@ -6,7 +6,7 @@ export default Controller.extend({
   sampleList: ['a', 'b', 'c', 'd', 'e'],
 
   model: Ember.Object.create({
-    checkboxGroup: 'c'
+    radioGroup: 'c'
   }),
 
   actions: {
