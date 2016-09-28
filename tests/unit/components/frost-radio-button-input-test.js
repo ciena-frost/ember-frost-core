@@ -6,7 +6,6 @@ import {describeComponent} from 'ember-mocha'
 import PropTypeMixin from 'ember-prop-types'
 import {
   beforeEach,
-  describe,
   it
 } from 'mocha'
 
@@ -88,28 +87,15 @@ describeComponent(
       ).to.eql(checkedDependentKeys)
     })
 
-    describe('"checked" computed property', function () {
-      it('is set to true when "groupValue" is equal to "value"', function () {
-        const groupValue = 'testValue'
+    it('"checked" computed property set to true when "groupValue" is equal to "value"', function () {
+      const groupValue = 'testValue'
 
-        run(() => component.set('groupValue', groupValue))
+      run(() => component.set('groupValue', groupValue))
 
-        expect(
-          component.get('checked'),
-          'checked: true'
-        ).to.be.true
-      })
-
-      it('is set to false when "groupValue" is NOT equal to "value"', function () {
-        const groupValue = 'differentTestValue'
-
-        run(() => component.set('groupValue', groupValue))
-
-        expect(
-          component.get('checked'),
-          'checked: false'
-        ).to.be.false
-      })
+      expect(
+        component.get('checked'),
+        'checked: true'
+      ).to.be.true
     })
   }
 )
