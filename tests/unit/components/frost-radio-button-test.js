@@ -1,10 +1,14 @@
 /* jshint expr:true */
 import { expect } from 'chai'
 import Ember from 'ember'
+const {
+  run
+} = Ember
 import { describeComponent } from 'ember-mocha'
+import PropTypeMixin from 'ember-prop-types'
 import {
   beforeEach,
-  // describe,
+  describe,
   it
 } from 'mocha'
 
@@ -12,9 +16,6 @@ describeComponent(
   'frost-radio-button',
   'Unit: FrostRadioButtonComponent',
   {
-    // needs: [
-    //   'component:frost-radio-group'
-    // ],
     unit: true
   },
   function () {
@@ -53,6 +54,87 @@ describeComponent(
         component.get('hook'),
         'hook: "undefined"'
       ).to.be.undefined
+    })
+
+    it('has the expect Mixins', function () {
+      expect(
+        PropTypeMixin.detect(component),
+        'PropTypeMixin Mixin is present'
+      ).to.be.true
+    })
+
+    it('sets dependent keys correctly', function () {
+      const checkedDependentKeys = [
+        'groupValue',
+        'value'
+      ]
+
+      const tabindexDependentKeys = [
+        'disabled'
+      ]
+
+      expect(
+        component.checked._dependentKeys,
+        'Dependent keys are correct for checked()'
+      ).to.eql(checkedDependentKeys)
+
+      expect(
+        component.tabindex._dependentKeys,
+        'Dependent keys are correct for tabindex()'
+      ).to.eql(tabindexDependentKeys)
+    })
+
+    describe('"checked" computed property', function () {
+      const parentView = Ember.Object.create({
+        'value': 'testValue'
+      })
+
+      it('is set to true when "groupValue" is equal to "value"', function () {
+        run(() => component.set('parentView', parentView))
+
+        expect(
+          component.get('checked'),
+          'checked: true'
+        ).to.be.true
+      })
+
+      it('is set to false when "groupValue" is NOT equal to "value"', function () {
+        const value = 'newTestValue'
+
+        run(() => {
+          component.set('parentView', parentView)
+          component.set('value', value)
+        })
+
+        expect(
+          component.get('checked'),
+          'checked: false'
+        ).to.be.false
+      })
+
+      describe('"tabindex" computed property', function () {
+        it('tabindex is set to "-1" when "disabled" is set to true', function () {
+          const disabled = true
+
+          run(() => component.set('disabled', disabled))
+
+          expect(
+            component.get('tabindex'),
+            'tabindex: -1'
+          ).to.eql('-1')
+        })
+
+        it('tabindex is set to "0" when "disabled" is set to false', function () {
+          const disabled = false
+
+          run(() => component.set('disabled', disabled))
+
+          expect(
+            component.get('tabindex'),
+            'tabindex: 0'
+          ).to.eql('0')
+        })
+      })
     })
   }
 )
