@@ -21,9 +21,9 @@
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `maxlength` | `string` | `<maxlength-value>` | maximum number of characters a user can enter |
 | `placeholder` | `string` | `<text>` | placeholder text |
-| `readonly` | `boolean` | `false` | **default** - basic textarea |
+| `readonly` | `boolean` | `false` | **default** - normal text field |
 | | | `true` | the user cannot modify the value |
-| `required` |  `boolean` | `false` | **default** - basic password |
+| `required` |  `boolean` | `false` | **default** - normal text field |
 | | | `true` | text field is required |
 | `spellcheck` | `string` | `false` | **default** - normal text field |
 | | | `true` | spelling and grammar are checked |
