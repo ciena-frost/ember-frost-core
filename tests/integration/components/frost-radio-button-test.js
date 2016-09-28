@@ -91,7 +91,7 @@ describeComponent(
 
       expect(
         externalActionSpy.args[0][0].target.id,
-        'onChange closure action called on click'
+        '_createEvent() added groupId'
       ).to.eql(id)
     })
   }
