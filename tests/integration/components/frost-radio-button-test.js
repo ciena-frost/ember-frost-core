@@ -70,5 +70,29 @@ describeComponent(
         ).to.be.true
       })
     })
+
+    it('calls with _createEvent() function', function () {
+      const externalActionSpy = sinon.spy()
+      const id = 'myTestGroupId'
+
+      this.set('id', id)
+      this.on('externalAction', externalActionSpy)
+
+      this.render(hbs`
+        {{#frost-radio-group
+          id=id
+          onChange=(action 'externalAction')
+        }}
+          {{frost-radio-button value='testValue'}}
+        {{/frost-radio-group}}
+      `)
+
+      this.$('input').trigger('click')
+
+      expect(
+        externalActionSpy.args[0][0].target.id,
+        'onChange closure action called on click'
+      ).to.eql(id)
+    })
   }
 )
