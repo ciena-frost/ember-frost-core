@@ -112,7 +112,7 @@
           onChange=(action 'change')
         }}
           {{#each sampleList5 as |i|}}
-            {{#frost-radio-button size='small' value=i disabled=(eq i 'a')}}
+            {{#frost-radio-button value=i disabled=(eq i 'a')}}
               Label for {{i}}
             {{/frost-radio-button}}
           {{/each}}
