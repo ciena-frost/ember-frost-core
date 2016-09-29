@@ -56,6 +56,22 @@ describeComponent(
       ).to.be.true
     })
 
+    it('sets error class', function () {
+      this.render(hbs`
+        {{#frost-radio-group}}
+          {{frost-radio-button
+            class='error'
+            value='testValue'
+          }}
+        {{/frost-radio-group}}
+      `)
+
+      expect(
+        this.$('.frost-radio-button').hasClass('error'),
+        'error class is set'
+      ).to.be.true
+    })
+
     it('sets required property', function () {
       this.render(hbs`
         {{#frost-radio-group}}

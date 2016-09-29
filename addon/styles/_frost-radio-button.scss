@@ -9,8 +9,10 @@ $error-border: 1px solid $frost-color-input-error-border;
   outline: 0;
 
   &.error {
-    > .label::before {
-      border: $error-border;
+    svg {
+      .ring {
+        fill: $frost-color-input-error-border
+      }
     }
   }
 
