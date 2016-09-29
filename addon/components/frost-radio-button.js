@@ -1,11 +1,11 @@
 import Ember from 'ember'
 const {
   Component,
-  computed
+  computed: {
+    readOnly
+  }
 } = Ember
-const {
-  readOnly
-} = computed
+import computed from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-radio-button'
 
@@ -21,7 +21,8 @@ export default Component.extend(PropTypeMixin, {
   classNameBindings: [
     'checked',
     'disabled',
-    'required'
+    'required',
+    'size'
   ],
   layout,
 
@@ -29,6 +30,7 @@ export default Component.extend(PropTypeMixin, {
     disabled: PropTypes.bool,
     hook: PropTypes.string,
     required: PropTypes.bool,
+    size: PropTypes.string,
     value: PropTypes.string
   },
 
@@ -36,6 +38,7 @@ export default Component.extend(PropTypeMixin, {
     return {
       disabled: false,
       required: false,
+      size: 'small',
       value: null
     }
   },
@@ -46,9 +49,16 @@ export default Component.extend(PropTypeMixin, {
   groupValue: readOnly('parentView.value'),
   onChange: readOnly('parentView.onChange'),
 
-  checked: computed('groupValue', 'value', function () {
-    return this.get('groupValue') === this.get('value')
-  }),
+  @computed('groupValue', 'value')
+  /**
+   * Determine checked state
+   * @param {String} groupValue - which radio button in the group is set
+   * @param {String} value - is this radio button selected
+   * @returns {Boolean} whether this radio button is checked
+   */
+  checked (groupValue, value) {
+    return groupValue === value
+  },
 
   tabindex: Ember.computed('disabled', function () {
     return this.get('disabled') ? '-1' : '0'

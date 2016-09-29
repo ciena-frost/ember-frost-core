@@ -1,20 +1,18 @@
 <div class='dummy-body'>
-
-  <div class="section-title">Frost Radio Button</div>
+  <div class="section-title">Default</div>
   <hr>
-
   <div class='section'>
     <div class='example'>
       <div class='demo'>
-        {{! BEGIN-SNIPPET radio }}
+        {{! BEGIN-SNIPPET radio-default }}
         {{#frost-radio-group
           hook='myCBGroup'
-          id='radioGroup'
-          value=model.radioGroup
+          id='radioGroup1'
+          value=model.radioGroup1
           onChange=(action 'change')
         }}
-          {{#each sampleList as |i|}}
-            {{#frost-radio-button value=i disabled=(eq i 'a')}}
+          {{#each sampleList1 as |i|}}
+            {{#frost-radio-button value=i}}
               Label for {{i}}
             {{/frost-radio-button}}
           {{/each}}
@@ -23,13 +21,130 @@
       </div>
       <div style='padding-top:15px' class='snippet'>
         <div>Template</div>
-        // id can be optionally specified, but acts as the group value for the radio buttons.
-        // a class property can also be specified
-        {{code-snippet name='radio.hbs'}}
+        {{code-snippet name='radio-default.hbs'}}
         <br>
         <div>Controller</div>
         {{code-snippet name='radio-controller.js'}}
       </div>
     </div>
   </div>
+
+  <div class="section-title">Size</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>small</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET radio-small }}
+        {{#frost-radio-group
+          id='radioGroup2'
+          value=model.radioGroup2
+          onChange=(action 'change')
+        }}
+          {{#each sampleList2 as |i|}}
+            {{#frost-radio-button size='small' value=i}}
+              Label for {{i}}
+            {{/frost-radio-button}}
+          {{/each}}
+        {{/frost-radio-group}}
+        {{! END-SNIPPET }}
+      </div>
+      <div style='padding-top:15px' class='snippet'>
+        {{code-snippet name='radio-small.hbs'}}
+      </div>
+    </div>
+  
+    <div class='example'>
+      <div class='title'>medium</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET radio-medium }}
+        {{#frost-radio-group
+          id='radioGroup3'
+          value=model.radioGroup3
+          onChange=(action 'change')
+        }}
+          {{#each sampleList3 as |i|}}
+            {{#frost-radio-button size='medium' value=i}}
+              Label for {{i}}
+            {{/frost-radio-button}}
+          {{/each}}
+        {{/frost-radio-group}}
+        {{! END-SNIPPET }}
+      </div>
+      <div style='padding-top:15px' class='snippet'>
+        {{code-snippet name='radio-medium.hbs'}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>large</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET radio-large }}
+        {{#frost-radio-group
+          id='radioGroup4'
+          value=model.radioGroup4
+          onChange=(action 'change')
+        }}
+          {{#each sampleList4 as |i|}}
+            {{#frost-radio-button size='large' value=i}}
+              Label for {{i}}
+            {{/frost-radio-button}}
+          {{/each}}
+        {{/frost-radio-group}}
+        {{! END-SNIPPET }}
+      </div>
+      <div style='padding-top:15px' class='snippet'>
+        {{code-snippet name='radio-large.hbs'}}
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">State</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>disabled</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET radio-disabled }}
+        {{#frost-radio-group
+          id='radioGroup5'
+          value=model.radioGroup5
+          onChange=(action 'change')
+        }}
+          {{#each sampleList5 as |i|}}
+            {{#frost-radio-button size='small' value=i disabled=(eq i 'a')}}
+              Label for {{i}}
+            {{/frost-radio-button}}
+          {{/each}}
+        {{/frost-radio-group}}
+        {{! END-SNIPPET }}
+      </div>
+      <div style='padding-top:15px' class='snippet'>
+        {{code-snippet name='radio-disabled.hbs'}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>error</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET radio-error }}
+        {{#frost-radio-group
+          id='radioGroup6'
+          value=model.radioGroup6
+          onChange=(action 'change')
+        }}
+          {{#each sampleList6 as |i|}}
+            {{#frost-radio-button class='error' value=i}}
+              Label for {{i}}
+            {{/frost-radio-button}}
+          {{/each}}
+        {{/frost-radio-group}}
+        {{! END-SNIPPET }}
+      </div>
+      <div style='padding-top:15px' class='snippet'>
+        {{code-snippet name='radio-error.hbs'}}
+      </div>
+    </div>
+  </div>
+
 </div>

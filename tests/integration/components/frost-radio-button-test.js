@@ -72,6 +72,66 @@ describeComponent(
       ).to.be.true
     })
 
+    it('sets size property', function () {
+      const size = 'small'
+
+      this.set('size', size)
+
+      this.render(hbs`
+        {{#frost-radio-group}}
+          {{frost-radio-button
+            size=size
+            value='testValue'
+          }}
+        {{/frost-radio-group}}
+      `)
+
+      expect(
+        this.$('.frost-radio-button').hasClass('small'),
+        'small class is set'
+      ).to.be.true
+    })
+
+    it('sets size property', function () {
+      const size = 'medium'
+
+      this.set('size', size)
+
+      this.render(hbs`
+        {{#frost-radio-group}}
+          {{frost-radio-button
+            size=size
+            value='testValue'
+          }}
+        {{/frost-radio-group}}
+      `)
+
+      expect(
+        this.$('.frost-radio-button').hasClass('medium'),
+        'medium class is set'
+      ).to.be.true
+    })
+
+    it('sets size property', function () {
+      const size = 'large'
+
+      this.set('size', size)
+
+      this.render(hbs`
+        {{#frost-radio-group}}
+          {{frost-radio-button
+            size=size
+            value='testValue'
+          }}
+        {{/frost-radio-group}}
+      `)
+
+      expect(
+        this.$('.frost-radio-button').hasClass('large'),
+        'large class is set'
+      ).to.be.true
+    })
+
     it('sets required property', function () {
       this.render(hbs`
         {{#frost-radio-group}}

@@ -16,9 +16,13 @@
 | --------- | ---- | ----- | ----------- |
 | `disabled` | `boolean` | `false` | **default** - basic radio button |
 | | | `true` | disable radio button |
+| `class` | `string` | `error` | sets radio button to error state |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `required` |  `boolean` | `false` | **default** - basic radio button |
 | | | `true` | radio button is required |
+| `size` | `string` | `small` | **default** - small size radio button |
+|  | | `medium` | medium size radio button |
+|  |  | `large` | large size radio button |
 | `value` | `string` | `<value>` | value of the radio button |
 
 ### Event Handlers
@@ -58,6 +62,20 @@ export default Controller.extend({
 }}
   {{#each sampleList as |i|}}
     {{#frost-radio-button value=i disabled=(eq i 'a')}}
+      Label for {{i}}
+    {{/frost-radio-button}}
+  {{/each}}
+{{/frost-radio-group}}
+```
+
+### Error
+```handlebars
+{{#frost-radio-group
+  id='radioGroup'
+  value=model.radioGroup
+}}
+  {{#each sampleList as |i|}}
+    {{#frost-radio-button class='error' value=i}}
       Label for {{i}}
     {{/frost-radio-button}}
   {{/each}}

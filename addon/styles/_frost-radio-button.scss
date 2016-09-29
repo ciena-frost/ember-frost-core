@@ -16,14 +16,48 @@ $error-border: 1px solid $frost-color-input-error-border;
     }
   }
 
-  label {
-    cursor: pointer;
+  &.small {
+    > .label::before  {
+      width: 20px;
+      height: 20px;
+    }
 
     svg {
       width: 20px;
       height: 20px;
-      vertical-align: text-top;
+    }
 
+  }
+
+  &.medium {
+    > .label::before {
+      width: 25px;
+      height: 25px;
+    }
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  &.large {
+    > .label::before {
+      width: 30px;
+      height: 30px;
+    }
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  label {
+    cursor: pointer;
+    svg {
+      vertical-align: middle;
+      margin-right: 5px;
       .inner {
         transition: fill 0.2s ease;
         fill: transparent;

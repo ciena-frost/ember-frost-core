@@ -59,6 +59,11 @@ describeComponent(
         component.get('hook'),
         'hook: undefined'
       ).to.be.undefined
+
+      expect(
+        component.get('size'),
+        'size: small'
+      ).to.eql('small')
     })
 
     it('has the expect Mixins', function () {

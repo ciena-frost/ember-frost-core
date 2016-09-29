@@ -3,10 +3,20 @@ const {Controller} = Ember
 
 // BEGIN-SNIPPET radio-controller
 export default Controller.extend({
-  sampleList: ['a', 'b', 'c', 'd', 'e'],
+  sampleList1: ['a', 'b', 'c', 'd', 'e'],
+  sampleList2: ['a', 'b', 'c', 'd', 'e'],
+  sampleList3: ['a', 'b', 'c', 'd', 'e'],
+  sampleList4: ['a', 'b', 'c', 'd', 'e'],
+  sampleList5: ['a', 'b', 'c', 'd', 'e'],
+  sampleList6: ['a', 'b', 'c', 'd', 'e'],
 
   model: Ember.Object.create({
-    radioGroup: 'c'
+    radioGroup1: 'a',
+    radioGroup2: 'b',
+    radioGroup3: 'c',
+    radioGroup4: 'd',
+    radioGroup5: 'b',
+    radioGroup6: 'a'
   }),
 
   actions: {
