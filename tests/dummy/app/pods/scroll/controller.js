@@ -1,6 +1,7 @@
 import Ember from 'ember'
 const {Controller} = Ember
 
+// BEGIN-SNIPPET scroll-controller
 export default Controller.extend({
   actions: {
     onScrollUp () {
@@ -49,3 +50,5 @@ export default Controller.extend({
     }
   }
 })
+// END-SNIPPET scroll-controller
+
