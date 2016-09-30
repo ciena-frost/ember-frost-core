@@ -45,13 +45,13 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     hook: PropTypes.string,
     isRevealed: PropTypes.bool,
     revealable: PropTypes.bool,
-    tabindex: PropTypes.string,
+    tabindex: PropTypes.number,
     value: PropTypes.string,
 
     // Setting these as part of establishing an inital value
     autofocus: PropTypes.bool,
     form: PropTypes.string,
-    maxlength: PropTypes.string,
+    maxlength: PropTypes.number,
     placeholder: PropTypes.string,
     readonly: PropTypes.bool,
     required: PropTypes.bool,
@@ -64,7 +64,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       disabled: false,
       isRevealed: false,
       revealable: false,
-      tabindex: '0',
+      tabindex: 0,
       value: null,
 
       // Setting these as part of establishing an initial value

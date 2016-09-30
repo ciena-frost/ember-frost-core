@@ -30,12 +30,12 @@ describeComponent(
       `)
 
       expect(
-        this.$('.frost-password').find('input').attr('tabIndex'),
-        'input tabindex set to "0"'
-      ).to.eql('0')
+        this.$('.frost-password').find('input').prop('tabIndex'),
+        'input tabindex set to 0'
+      ).to.eql(0)
 
       expect(
-        this.$('.frost-password').find('input').attr('type'),
+        this.$('.frost-password').find('input').prop('type'),
         'type set to "password"'
       ).to.eql('password')
 
@@ -53,9 +53,9 @@ describeComponent(
      `)
 
       expect(
-        this.$('.frost-password').find('input').attr('autofocus'),
+        this.$('.frost-password').find('input').prop('autofocus'),
         'autofocus is set'
-      ).to.eql('autofocus')
+      ).to.be.true
     })
 
     it('sets disabled property', function () {
@@ -66,9 +66,9 @@ describeComponent(
      `)
 
       expect(
-        this.$('.frost-password').find('input').attr('disabled'),
+        this.$('.frost-password').find('input').prop('disabled'),
         'disabled is set'
-      ).to.eql('disabled')
+      ).to.be.true
     })
 
     describe('hook property', function () {
@@ -106,7 +106,7 @@ describeComponent(
     })
 
     it('sets maxlength property', function () {
-      const maxlength = '30'
+      const maxlength = 30
 
       this.set('maxlength', maxlength)
 
@@ -117,9 +117,9 @@ describeComponent(
      `)
 
       expect(
-        this.$('.frost-password').find('input').attr('maxlength'),
+        this.$('.frost-password').find('input').prop('maxlength'),
         'maxlength is set'
-      ).to.eql('30')
+      ).to.eql(maxlength)
     })
 
     it('sets placeholder property', function () {
@@ -134,9 +134,9 @@ describeComponent(
      `)
 
       expect(
-        this.$('.frost-password').find('input').attr('placeholder'),
+        this.$('.frost-password').find('input').prop('placeholder'),
         'placeholder is set'
-      ).to.eql('Enter your password')
+      ).to.eql(placeholder)
     })
 
     it('sets readonly property', function () {
@@ -147,9 +147,9 @@ describeComponent(
      `)
 
       expect(
-        this.$('.frost-password').find('input').attr('readonly'),
+        this.$('.frost-password').find('input').prop('readonly'),
         'readonly is set'
-      ).to.eql('readonly')
+      ).to.be.true
     })
 
     it('sets required property', function () {
@@ -160,9 +160,9 @@ describeComponent(
      `)
 
       expect(
-        this.$('.frost-password').find('input').attr('required'),
+        this.$('.frost-password').find('input').prop('required'),
         'required is set'
-      ).to.eql('required')
+      ).to.be.true
     })
 
     describe('revealable property', function () {
@@ -199,14 +199,14 @@ describeComponent(
         ).to.eql('Hide')
 
         expect(
-        this.$('.frost-password').find('input').attr('type'),
+        this.$('.frost-password').find('input').prop('type'),
         'type set to "text"'
       ).to.eql('text')
       })
     })
 
     it('sets tabindex property', function () {
-      const tabindex = '-1'
+      const tabindex = -1
 
       this.set('tabindex', tabindex)
 
@@ -217,9 +217,9 @@ describeComponent(
      `)
 
       expect(
-        this.$('.frost-password').find('input').attr('tabindex'),
+        this.$('.frost-password').find('input').prop('tabindex'),
         'tabindex is set'
-      ).to.eql('-1')
+      ).to.eql(tabindex)
     })
 
     it('sets title property', function () {
@@ -234,9 +234,9 @@ describeComponent(
      `)
 
       expect(
-        this.$('.frost-password').find('input').attr('title'),
+        this.$('.frost-password').find('input').prop('title'),
         'title is set'
-      ).to.eql('Enter your password')
+      ).to.eql(title)
     })
 
     it('sets value property', function () {
@@ -253,7 +253,7 @@ describeComponent(
       expect(
         this.$('.frost-password').find('input').val(),
         'value is set'
-      ).to.eql('test value')
+      ).to.eql(value)
     })
   }
 )
