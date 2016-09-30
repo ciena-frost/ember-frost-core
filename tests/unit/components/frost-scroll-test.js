@@ -22,7 +22,7 @@ describeComponent(
       component = this.subject()
     })
 
-    it('includes className frost-radio-button', function () {
+    it('includes className frost-scroll', function () {
       expect(component.classNames).to.include('frost-scroll')
     })
 
@@ -59,7 +59,7 @@ describeComponent(
 
       spyOff.reset()
 
-      component.trigger('willClearRender')
+      component.trigger('willDestroyElement')
 
       expect(
         spyOff.calledWith("ps-scroll-up"), // eslint-disable-line
@@ -89,7 +89,7 @@ describeComponent(
 
       spyOff.reset()
 
-      component.trigger('willClearRender')
+      component.trigger('willDestroyElement')
 
       expect(
         spyOff.calledWith("ps-scroll-down"), // eslint-disable-line
@@ -119,7 +119,7 @@ describeComponent(
 
       spyOff.reset()
 
-      component.trigger('willClearRender')
+      component.trigger('willDestroyElement')
 
       expect(
         spyOff.calledWith("ps-y-reach-start"), // eslint-disable-line
@@ -149,7 +149,7 @@ describeComponent(
 
       spyOff.reset()
 
-      component.trigger('willClearRender')
+      component.trigger('willDestroyElement')
 
       expect(
         spyOff.calledWith("ps-y-reach-end"), // eslint-disable-line

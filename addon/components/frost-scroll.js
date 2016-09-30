@@ -27,7 +27,7 @@ export default Component.extend(PropTypeMixin, {
     this._setupPerfectScroll()
   },
 
-  willClearRender () {
+  willDestroyElement () {
     this._super(...arguments)
     this._unregisterEvents()
   },

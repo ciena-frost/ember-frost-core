@@ -14,16 +14,6 @@ describeComponent(
     integration: true
   },
   function () {
-    it('sets full class correctly', function () {
-      this.render(hbs`
-        {{frost-scroll class='full'}}
-      `)
-      expect(
-        this.$('.frost-scroll').hasClass('full'),
-        'has class full'
-      ).to.be.true
-    })
-
     it('onScrollUp closure action is called', function () {
       const externalActionSpy = sinon.spy()
 
