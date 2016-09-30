@@ -34,9 +34,9 @@ describeComponent(
       )
 
       expect(
-        this.$('.frost-checkbox').find('label').attr('tabIndex'),
-        'label tabindex set to "0"'
-      ).to.eql('0')
+        this.$('.frost-checkbox').find('label').prop('tabIndex'),
+        'label tabindex set to 0'
+      ).to.eql(0)
     })
 
     it('sets size class correctly', function () {
