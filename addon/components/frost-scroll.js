@@ -2,7 +2,6 @@ import Ember from 'ember'
 const {
   Component,
   deprecate,
-  on,
   run: {
     debounce,
     scheduleOnce
@@ -11,15 +10,11 @@ const {
 } = Ember
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
-const debouncePeriod = 150
-
 export default Component.extend(PropTypeMixin, {
 
-  // == Component properties ==================================================
+  // == Properties ============================================================
 
   classNames: ['frost-scroll'],
-
-  // == State properties ======================================================
 
   propTypes: {
     hook: PropTypes.string
@@ -27,7 +22,25 @@ export default Component.extend(PropTypeMixin, {
 
   // == Events ================================================================
 
-  initializeScroll: on('didInsertElement', function () {
+  didInsertElement () {
+    this._super(...arguments)
+    this._setupPerfectScroll()
+  },
+
+  willDestroyElement () {
+    this._super(...arguments)
+    this._unregisterEvents()
+  },
+
+  /**
+   * Setup the perfect-scrollbar plugin and events
+   *
+   * @private
+   * @returns {undefined}
+   */
+  _setupPerfectScroll () {
+    const debouncePeriod = 150
+
     scheduleOnce('afterRender', this, () => {
       window.Ps.initialize(this.$()[0])
     })
@@ -69,6 +82,31 @@ export default Component.extend(PropTypeMixin, {
         debounce(this, this['on-scroll-y-end'], debouncePeriod, true)
       })
     }
-  })
+  },
 
+  /**
+   * Remove perfect-scrollbar plugin and events
+   *
+   * @private
+   * @returns {undefined}
+   */
+  _unregisterEvents () {
+    window.Ps.destroy(this.$()[0])
+
+    if (typeOf(this.onScrollUp) === 'function') {
+      this.$().off('ps-scroll-up')
+    }
+
+    if (typeOf(this.onScrollDown) === 'function') {
+      this.$().off('ps-scroll-down')
+    }
+
+    if (typeOf(this.onScrollYStart) === 'function') {
+      this.$().off('ps-y-reach-start')
+    }
+
+    if (typeOf(this.onScrollYEnd) === 'function') {
+      this.$().off('ps-y-reach-end')
+    }
+  }
 })

@@ -90,8 +90,8 @@ describeComponent(
 
       expect(
         component.get('tabindex'),
-        'tabindex: "0"'
-      ).to.eql('0')
+        'tabindex: 0'
+      ).to.eql(0)
 
       expect(
         component.get('title'),
