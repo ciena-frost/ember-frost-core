@@ -15,8 +15,6 @@
 | `onClick` |`string` | `<action-name>` | triggers associated action when the link is clicked prior to transition |
 | `priority` | `string` | `primary` | primary link - opens content in a new tab |
 |  |  | `secondary` | secondary link - opens content in the same tab |
-
-
 | `size` | `string` | `small` | small size link |
 |  |  | `medium` | medium size link |
 |  |  | `large` | large size link |
