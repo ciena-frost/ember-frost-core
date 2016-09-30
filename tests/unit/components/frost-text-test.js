@@ -1,16 +1,16 @@
 import {expect} from 'chai'
-import Ember from 'ember'
 const {run} = Ember
-import sinon from 'sinon'
+import Ember from 'ember'
+import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import {describeComponent} from 'ember-mocha'
+import PropTypeMixin from 'ember-prop-types'
 import {
   afterEach,
   beforeEach,
   describe,
   it
 } from 'mocha'
-import PropTypeMixin from 'ember-prop-types'
-import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
+import sinon from 'sinon'
 
 describeComponent(
   'frost-text',
@@ -87,7 +87,7 @@ describeComponent(
       expect(
         component.get('spellcheck'),
         'spellcheck: false'
-      ).to.eql('false')
+      ).to.be.false
 
       expect(
         component.get('tabindex'),

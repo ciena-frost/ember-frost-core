@@ -46,7 +46,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     readonly: PropTypes.bool,
     required: PropTypes.bool,
     selectionDirection: PropTypes.string,
-    spellcheck: PropTypes.string,
+    spellcheck: PropTypes.bool,
     value: PropTypes.string,
     title: PropTypes.string
   },
@@ -63,7 +63,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       readonly: false,
       required: false,
       selectionDirection: 'none',
-      spellcheck: 'false',
+      spellcheck: false,
       tabindex: '0',
       type: 'text',
 

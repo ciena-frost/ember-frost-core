@@ -61,7 +61,7 @@ describeComponent(
       `)
 
       expect(
-        this.$('input').hasClass('right'),
+        this.$('input').hasClass(align),
         'class "right" is set'
       ).to.be.true
     })
@@ -93,13 +93,9 @@ describeComponent(
     })
 
     it('sets autofocus property', function () {
-      const autofocus = 'true'
-
-      this.set('autofocus', autofocus)
-
       this.render(hbs`
           {{frost-text
-            autofocus=autofocus
+            autofocus=true
           }}
       `)
 
@@ -107,6 +103,19 @@ describeComponent(
         this.$('input').attr('autofocus'),
         'autofocus attribute is set'
       ).to.eql('autofocus')
+    })
+
+    it('set disabled property', function () {
+      this.render(hbs`
+        {{frost-text
+          disabled=true
+        }}
+      `)
+
+      expect(
+        this.$('input').attr('disabled'),
+        'disabled attribute is set'
+      ).to.eql('disabled')
     })
 
     it('sets maxlength property', function () {
@@ -123,7 +132,7 @@ describeComponent(
       expect(
         this.$('input').attr('maxlength'),
         'maxlength is set'
-      ).to.eql('30')
+      ).to.eql(maxlength)
     })
 
     it('sets placeholder property', function () {
@@ -140,7 +149,7 @@ describeComponent(
       expect(
         this.$('input').attr('placeholder'),
         'placeholder is set'
-      ).to.eql('Enter here')
+      ).to.eql(placeholder)
     })
 
     it('sets value property', function () {
@@ -157,20 +166,7 @@ describeComponent(
       expect(
         this.$('input').val(),
         'value is set'
-      ).to.eql('Testing')
-    })
-
-    it('set disabled property', function () {
-      this.render(hbs`
-        {{frost-text
-          disabled=true
-        }}
-      `)
-
-      expect(
-        this.$('input').attr('disabled'),
-        'disabled attribute is set'
-      ).to.eql('disabled')
+      ).to.eql(value)
     })
 
     it('set readonly property', function () {
@@ -200,12 +196,9 @@ describeComponent(
     })
 
     it('set spellcheck property', function () {
-      const spellcheck = 'true'
-
-      this.set('spellcheck', spellcheck)
       this.render(hbs`
         {{frost-text
-          spellcheck=spellcheck
+          spellcheck=true
         }}
       `)
 
@@ -215,27 +208,20 @@ describeComponent(
       ).to.eql('true')
     })
 
-    it('sets error class', function () {
-      const error = 'error'
-
-      this.set('error', error)
-
-      this.render(hbs`
-        {{frost-text
-          class=error
-        }}
-      `)
-
-      expect(
-        this.$('.frost-text').hasClass('error'),
-        'error class is set'
-      ).to.be.true
-    })
-
     it('only renders the clear icon in insert', function () {
       this.render(hbs`
         {{frost-text}}
       `)
+
+      expect(
+        this.$('.frost-text').hasClass('is-clear-visible'),
+        'class "is-clear-visible" is not set'
+      ).to.be.false
+
+      expect(
+        this.$('.frost-text').hasClass('is-clear-enabled'),
+        'class "is-clear-enabled" is not set'
+      ).to.be.false
 
       run(() => this.$('input').val('Test').trigger('input'))
 
@@ -250,17 +236,19 @@ describeComponent(
       ).to.be.true
     })
 
-    it('text cleared on button click', function () {
+    it('runs clear() which clears the input value', function () {
       this.render(hbs`
-        {{frost-text
-          value="Test"
-        }}
+        {{frost-text}}
       `)
 
-      this.$('input').focus().val('').trigger('input')
+      run(() => {
+        this.$('input').val('Test').trigger('input')
+        this.$('.frost-text-clear').trigger('click')
+      })
 
       expect(
-        this.$('input').val()
+        this.$('input').val(),
+        'input value cleared'
       ).to.eql('')
     })
 
@@ -317,20 +305,15 @@ describeComponent(
 
       this.$('input').trigger('input')
 
-      const testObj = {
-        id: this.$('.frost-text').attr('id'),
-        value: testValue
-      }
-
       expect(
         externalActionSpy.args[0][0].id,
         'onInput closure action called with an object that contains the id'
-      ).to.eql(testObj.id)
+      ).to.eql(this.$('.frost-text').attr('id'))
 
       expect(
         externalActionSpy.args[0][0].value,
         'onInput closure action called with an object that contains the value'
-      ).to.eql(testObj.value)
+      ).to.eql(testValue)
     })
   }
 )
