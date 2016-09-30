@@ -24,12 +24,18 @@ const selectedValueTestTemplate = hbs`{{frost-select
   selectedValue=selVal
 }}`
 
+const undefinedValueTestTemplate = hbs`{{frost-select
+  data=data
+  onChange=onChange
+}}`
+
 const keyCodes = {
-  'up': 38,
-  'down': 40,
+  backspace: 8,
+  down: 40,
+  enter: 13,
   esc: 27,
   tab: 9,
-  backspace: 8
+  up: 38
 }
 
 function keyDown ($selection, keyCode) {
@@ -60,7 +66,7 @@ describeComponent(
   },
   function () {
     let props
-    let dropDown
+    let $dropDown, $input
 
     beforeEach(function () {
       initialize()
@@ -90,7 +96,8 @@ describeComponent(
         this.setProperties(props)
         this.render(selectedTestTemplate)
       })
-      dropDown = this.$('.frost-select')
+      $dropDown = this.$('.frost-select')
+      $input = this.$('.frost-select input')
     })
 
     it('renders', function () {
@@ -181,16 +188,16 @@ describeComponent(
     })
 
     it('closes when blurred', () => {
-      keyUp(dropDown, 27)
-      expect(dropDown.hasClass('open')).to.be.false
+      keyUp($dropDown, 27)
+      expect($dropDown.hasClass('open')).to.be.false
 
-      expect(dropDown)
+      expect($dropDown)
     })
 
     it('selects the hovered item when enter is pressed', function () {
       run(() => {
-        keyUp(dropDown, 40)
-        keyUp(dropDown, 13)
+        keyUp($dropDown, 40)
+        keyUp($dropDown, 13)
       })
 
       let dropDownInput = this.$('.frost-select input')
@@ -265,12 +272,11 @@ describeComponent(
 
     it('sets the prompt to the selected value when the drop down list is closed', function () {
       run(() => {
-        let input = this.$('.frost-select input')
-        keyUp(dropDown, 'down')
-        keyUp(dropDown, 13) // Enter key, select the item
-        input.focus()
-        keyUp(dropDown, 'backspace')
-        keyUp(dropDown, 'esc')
+        keyUp($dropDown, 'down')
+        keyUp($dropDown, keyCodes.enter)
+        $input.focus()
+        keyUp($dropDown, 'backspace')
+        keyUp($dropDown, 'esc')
       })
 
       let select = this.$('.frost-select')
@@ -284,20 +290,56 @@ describeComponent(
         this.$('.frost-select .down-arrow').click()
         this.$().click()
       })
-      expect(dropDown.hasClass('open')).to.be.false
+      expect($dropDown.hasClass('open')).to.be.false
     })
 
     it('handles losing focus by pressing tab', function () {
       run(() => {
         this.$('.frost-select .down-arrow').click()
-        keyDown(dropDown, 'tab')
+        keyDown($dropDown, 'tab')
       })
-      expect(dropDown.hasClass('open')).to.be.false
+      expect($dropDown.hasClass('open')).to.be.false
     })
 
     it('supports placeholder', function () {
       const $input = this.$('.frost-select input')
       expect($input.attr('placeholder')).to.eql('Select something already')
+    })
+
+    describe('when pressing enter to select a new item', function () {
+      beforeEach(function () {
+        keyUp($dropDown, 'down')
+        keyUp($dropDown, keyCodes.enter)
+      })
+      it('should display the selected item label', function () {
+        expect($input.val()).to.eql('Raekwon')
+      })
+    })
+
+    describe('when pressing enter after selecting an item', function () {
+      beforeEach(function () {
+        keyUp($dropDown, 'down')
+        keyUp($dropDown, 'down')
+        keyUp($dropDown, 'down')
+        keyUp($dropDown, keyCodes.enter)
+        keyUp($dropDown, keyCodes.enter)
+      })
+      it('should keep the correct label', function () {
+        expect($input.val()).to.eql('Ghostface')
+      })
+    })
+
+    describe('when pressing enter without a selected item', function () {
+      beforeEach(function () {
+        this.render(undefinedValueTestTemplate)
+        $dropDown = this.$('.frost-select')
+        $input = this.$('.frost-select input')
+        $dropDown.click()
+        keyUp($dropDown, keyCodes.enter)
+      })
+      it('should not display a label', function () {
+        expect($input.val()).to.eql('')
+      })
     })
 
     describe('when passing in selected value', function () {
@@ -325,6 +367,8 @@ describeComponent(
         }
         this.setProperties(props)
         this.render(selectedValueTestTemplate)
+        $dropDown = this.$('.frost-select')
+        $input = this.$('.frost-select input')
       })
 
       it('renders', function () {
@@ -336,8 +380,7 @@ describeComponent(
           this.set('selVal', 'Tony Starks')
         })
 
-        let input = this.$('.frost-select input')
-        expect(input.val()).to.be.eql('Ghostface')
+        expect($input.val()).to.be.eql('Ghostface')
       })
     })
   }
