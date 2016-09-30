@@ -21,7 +21,7 @@ describeComponent(
       `)
 
       expect(
-        this.$('.frost-radio-button-input').attr('type'),
+        this.$('.frost-radio-button-input').prop('type'),
         'type is set'
       ).to.eql('radio')
     })
@@ -50,9 +50,9 @@ describeComponent(
       `)
 
       expect(
-        this.$('.frost-radio-button-input').attr('disabled'),
+        this.$('.frost-radio-button-input').prop('disabled'),
         'disabled class is set'
-      ).to.eql('disabled')
+      ).to.be.true
     })
 
     it('sets value property', function () {
