@@ -342,6 +342,28 @@ describeComponent(
       })
     })
 
+    describe('when re-rendering with different data', function () {
+      beforeEach(function () {
+        this.render(undefinedValueTestTemplate)
+        $dropDown = this.$('.frost-select')
+        $input = this.$('.frost-select input')
+        // Make selection
+        keyUp($dropDown, 'down')
+        keyUp($dropDown, 'down')
+        keyUp($dropDown, 'enter')
+        // Now re-render with only that option
+        this.set('data', [
+          {
+            value: 'Johnny Blaze',
+            label: 'Method Man'
+          }
+        ])
+      })
+      it('should display the still-valid selection', function () {
+        expect($input.val()).to.eql('Method Man')
+      })
+    })
+
     describe('when passing in selected value', function () {
       let props
       beforeEach(function () {
