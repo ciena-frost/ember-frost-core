@@ -73,7 +73,7 @@ describeComponent(
       expect(
         this.$('.frost-radio-button-input').prop('value'),
         'value is set'
-      ).to.eql('test value')
+      ).to.eql(value)
     })
 
     it('sets checked property', function () {

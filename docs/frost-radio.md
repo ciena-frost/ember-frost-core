@@ -8,8 +8,8 @@
 | Attribute | Type | Value | Description |
 | --------- | ---- | ----- | ----------- |
 | `id` | `string` | `<group-name>` | acts as the group id |
-| `value` | `string` | `<group-value>` | default checked radio button |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
+| `value` | `string` | `<group-value>` | default checked radio button |
 
 ### radio-button
 | Attribute | Type | Value | Description |

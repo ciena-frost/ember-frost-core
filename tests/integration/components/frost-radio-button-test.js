@@ -56,80 +56,66 @@ describeComponent(
       ).to.be.true
     })
 
-    it('sets error class', function () {
-      this.render(hbs`
-        {{#frost-radio-group}}
-          {{frost-radio-button
-            class='error'
-            value='testValue'
-          }}
-        {{/frost-radio-group}}
-      `)
+    describe('Size property', function () {
+      it('has small class set', function () {
+        const size = 'small'
 
-      expect(
-        this.$('.frost-radio-button').hasClass('error'),
-        'error class is set'
-      ).to.be.true
-    })
+        this.set('size', size)
 
-    it('sets size property', function () {
-      const size = 'small'
+        this.render(hbs`
+          {{#frost-radio-group}}
+            {{frost-radio-button
+              size=size
+              value='testValue'
+            }}
+          {{/frost-radio-group}}
+        `)
 
-      this.set('size', size)
+        expect(
+          this.$('.frost-radio-button').hasClass(size),
+          'small class is set'
+        ).to.be.true
+      })
 
-      this.render(hbs`
-        {{#frost-radio-group}}
-          {{frost-radio-button
-            size=size
-            value='testValue'
-          }}
-        {{/frost-radio-group}}
-      `)
+      it('has medium class set', function () {
+        const size = 'medium'
 
-      expect(
-        this.$('.frost-radio-button').hasClass('small'),
-        'small class is set'
-      ).to.be.true
-    })
+        this.set('size', size)
 
-    it('sets size property', function () {
-      const size = 'medium'
+        this.render(hbs`
+          {{#frost-radio-group}}
+            {{frost-radio-button
+              size=size
+              value='testValue'
+            }}
+          {{/frost-radio-group}}
+        `)
 
-      this.set('size', size)
+        expect(
+          this.$('.frost-radio-button').hasClass(size),
+          'medium class is set'
+        ).to.be.true
+      })
 
-      this.render(hbs`
-        {{#frost-radio-group}}
-          {{frost-radio-button
-            size=size
-            value='testValue'
-          }}
-        {{/frost-radio-group}}
-      `)
+      it('has large class set', function () {
+        const size = 'large'
 
-      expect(
-        this.$('.frost-radio-button').hasClass('medium'),
-        'medium class is set'
-      ).to.be.true
-    })
+        this.set('size', size)
 
-    it('sets size property', function () {
-      const size = 'large'
+        this.render(hbs`
+          {{#frost-radio-group}}
+            {{frost-radio-button
+              size=size
+              value='testValue'
+            }}
+          {{/frost-radio-group}}
+        `)
 
-      this.set('size', size)
-
-      this.render(hbs`
-        {{#frost-radio-group}}
-          {{frost-radio-button
-            size=size
-            value='testValue'
-          }}
-        {{/frost-radio-group}}
-      `)
-
-      expect(
-        this.$('.frost-radio-button').hasClass('large'),
-        'large class is set'
-      ).to.be.true
+        expect(
+          this.$('.frost-radio-button').hasClass(size),
+          'large class is set'
+        ).to.be.true
+      })
     })
 
     it('sets required property', function () {
@@ -194,7 +180,7 @@ describeComponent(
       })
     })
 
-    it('calls with _createEvent() function', function () {
+    it('calls _createEvent() which sets the target id ', function () {
       const externalActionSpy = sinon.spy()
       const id = 'myTestGroupId'
 
