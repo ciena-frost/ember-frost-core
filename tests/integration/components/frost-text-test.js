@@ -225,8 +225,25 @@ describeComponent(
 
       expect(
         this.$('input').prop('tabindex'),
-        'spellcheck attribute is set'
+        'tabindex attribute is set'
       ).to.eql(tabindex)
+    })
+
+    it('set title property', function () {
+      const title = 'title'
+
+      this.set('title', title)
+
+      this.render(hbs`
+        {{frost-text
+          title=title
+        }}
+      `)
+
+      expect(
+        this.$('input').prop('title'),
+        'title attribute is set'
+      ).to.eql(title)
     })
 
     it('only renders the clear icon in insert', function () {
@@ -329,7 +346,7 @@ describeComponent(
       expect(
         externalActionSpy.args[0][0].id,
         'onInput closure action called with an object that contains the id'
-      ).to.eql(this.$('.frost-text').attr('id'))
+      ).to.eql(this.$('.frost-text').prop('id'))
 
       expect(
         externalActionSpy.args[0][0].value,
