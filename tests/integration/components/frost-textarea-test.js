@@ -21,9 +21,9 @@ describeComponent(
       `)
 
       expect(
-        this.$('textarea').attr('tabindex'),
+        this.$('textarea').prop('tabindex'),
         'tabindex is set'
-      ).to.eql('0')
+      ).to.eql(0)
     })
 
     it('sets autofocus property', function () {
@@ -34,9 +34,9 @@ describeComponent(
      `)
 
       expect(
-        this.$('textarea').attr('autofocus'),
+        this.$('textarea').prop('autofocus'),
         'autofocus attribute is set'
-      ).to.eql('autofocus')
+      ).to.be.true
     })
 
     it('sets disabled property', function () {
@@ -47,9 +47,9 @@ describeComponent(
      `)
 
       expect(
-        this.$('textarea').attr('disabled'),
+        this.$('textarea').prop('disabled'),
         'disabled attribute is set'
-      ).to.eql('disabled')
+      ).to.be.true
     })
 
     it('sets readonly property', function () {
@@ -60,13 +60,13 @@ describeComponent(
      `)
 
       expect(
-        this.$('textarea').attr('readonly'),
+        this.$('textarea').prop('readonly'),
         'readonly attribute is set'
-      ).to.eql('readonly')
+      ).to.be.true
     })
 
     it('sets cols property', function () {
-      const cols = '0'
+      const cols = 20
 
       this.set('cols', cols)
 
@@ -77,13 +77,13 @@ describeComponent(
      `)
 
       expect(
-        this.$('textarea').attr('cols'),
+        this.$('textarea').prop('cols'),
         'cols attribute is set'
-      ).to.eql('0')
+      ).to.eql(cols)
     })
 
     it('sets tabindex', function () {
-      const tabindex = '-1'
+      const tabindex = -1
 
       this.set('tabindex', tabindex)
 
@@ -94,15 +94,16 @@ describeComponent(
       `)
 
       expect(
-        this.$('textarea').attr('tabindex'),
+        this.$('textarea').prop('tabindex'),
         'tabindex is set'
-      ).to.eql('-1')
+      ).to.eql(tabindex)
     })
 
     it('sets rows property', function () {
-      const rows = '0'
+      const rows = 20
 
       this.set('rows', rows)
+
       this.render(hbs`
         {{frost-textarea
           rows=rows
@@ -110,9 +111,9 @@ describeComponent(
      `)
 
       expect(
-        this.$('textarea').attr('rows'),
+        this.$('textarea').prop('rows'),
         'rows attribute is set'
-      ).to.eql('0')
+      ).to.eql(rows)
     })
 
     it('sets placeholder property', function () {
@@ -127,9 +128,9 @@ describeComponent(
      `)
 
       expect(
-        this.$('textarea').attr('placeholder'),
+        this.$('textarea').prop('placeholder'),
         'placeholder attribute is set'
-      ).to.eql('placeholder')
+      ).to.eql(placeholder)
     })
 
     it('sets value', function () {
@@ -146,7 +147,7 @@ describeComponent(
       expect(
         this.$('textarea').val(),
         'value is set'
-      ).to.eql('Test')
+      ).to.eql(value)
     })
 
     it('hook attr grabs frost-textarea-input as expected', function () {

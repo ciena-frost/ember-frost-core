@@ -36,7 +36,7 @@ describeComponent(
       expect(
         component.get('tabindex'),
         'tabindex: 0'
-      ).to.be.eql('0')
+      ).to.be.eql(0)
 
       expect(
         component.get('cols'),

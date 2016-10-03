@@ -19,14 +19,14 @@ export default Component.extend(PropTypeMixin, {
 
   propTypes: {
     autofocus: PropTypes.bool,
-    cols: PropTypes.string,
+    cols: PropTypes.number,
     disabled: PropTypes.bool,
     form: PropTypes.string,
     hook: PropTypes.string,
     placeholder: PropTypes.string,
     readonly: PropTypes.bool,
-    rows: PropTypes.string,
-    tabindex: PropTypes.string,
+    rows: PropTypes.number,
+    tabindex: PropTypes.number,
     value: PropTypes.string,
     wrap: PropTypes.string
   },
@@ -36,7 +36,7 @@ export default Component.extend(PropTypeMixin, {
       autofocus: false,
       disabled: false,
       readonly: false,
-      tabindex: '0',
+      tabindex: 0,
 
       // Setting these as part of establishing an initial value
       cols: null,
