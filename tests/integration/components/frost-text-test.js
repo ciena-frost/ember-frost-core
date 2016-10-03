@@ -194,9 +194,9 @@ describeComponent(
       `)
 
       expect(
-        this.$('input').attr('required'),
+        this.$('input').prop('required'),
         'required attribute is set'
-      ).to.eql('required')
+      ).to.be.true
     })
 
     it('set spellcheck property', function () {
@@ -207,9 +207,26 @@ describeComponent(
       `)
 
       expect(
-        this.$('input').attr('spellcheck'),
+        this.$('input').prop('spellcheck'),
         'spellcheck attribute is set'
-      ).to.eql('true')
+      ).to.be.true
+    })
+
+    it('set tabindex property', function () {
+      const tabindex = -1
+
+      this.set('tabindex', tabindex)
+
+      this.render(hbs`
+        {{frost-text
+          tabindex=tabindex
+        }}
+      `)
+
+      expect(
+        this.$('input').prop('tabindex'),
+        'spellcheck attribute is set'
+      ).to.eql(tabindex)
     })
 
     it('only renders the clear icon in insert', function () {
