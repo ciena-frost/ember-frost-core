@@ -179,7 +179,7 @@ describeComponent(
 
 describeComponent(
   'frost-multi-select',
-  'Intergration: FrostMultiSelectComponent',
+  'Integration: FrostMultiSelectComponent',
   {
     integration: true
   },
@@ -199,6 +199,20 @@ describeComponent(
 
         expect(input.val()).to.eql('3 items selected')
         expect(props.onChange.called).to.be.true
+        done()
+      })
+    })
+
+    it('keeps prompt on rerender', function (done) {
+      this.set('selectedValue', ['Tony Starks'])
+      // A bug would cause the prompt to clear on a rerender
+      // We trigger one here by changing a dummy attribute
+      this.set('greeting', 'Bonjour')
+
+      wait(() => {
+        let input = this.$('.frost-select .trigger')
+
+        expect(input.val()).to.eql('Ghostface')
         done()
       })
     })

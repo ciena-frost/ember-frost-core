@@ -29,6 +29,7 @@ addons:
     - ubuntu-toolchain-r-test
     packages:
     - g++-4.8
+  firefox: "latest"
 env:
   matrix:
   - EMBER_TRY_SCENARIO=ember-2-1
