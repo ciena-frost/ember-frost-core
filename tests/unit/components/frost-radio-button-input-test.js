@@ -4,6 +4,7 @@ import Ember from 'ember'
 const {run} = Ember
 import {describeComponent} from 'ember-mocha'
 import PropTypeMixin from 'ember-prop-types'
+import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import {
   beforeEach,
   it
@@ -61,14 +62,14 @@ describeComponent(
         component.get('type'),
         'type: "radio"'
       ).to.eql('radio')
-
-      expect(
-        component.get('value'),
-        'value: testValue'
-      ).to.eql('testValue')
     })
 
     it('has the expected Mixins', function () {
+      expect(
+        FrostEventsProxy.detect(component),
+        'FrostEventsProxy Mixin is present'
+      ).to.be.true
+
       expect(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'

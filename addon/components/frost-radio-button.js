@@ -61,7 +61,7 @@ export default Component.extend(PropTypeMixin, {
   },
 
   tabindex: Ember.computed('disabled', function () {
-    return this.get('disabled') ? '-1' : '0'
+    return this.get('disabled') ? -1 : 0
   }),
 
   // == Functions ===============================================================

@@ -52,8 +52,8 @@ describeComponent(
 
       expect(
         component.get('tabindex'),
-        'tabindex: "0"'
-      ).to.eql('0')
+        'tabindex: 0'
+      ).to.eql(0)
 
       expect(
         component.get('hook'),
@@ -136,11 +136,9 @@ describeComponent(
       })
 
       it('is set to false when "groupValue" is NOT equal to "value"', function () {
-        const value = 'newTestValue'
-
         run(() => {
           component.set('parentView', parentView)
-          component.set('value', value)
+          component.set('value', 'newTestValue')
         })
 
         expect(
@@ -151,14 +149,12 @@ describeComponent(
     })
 
     it('"tabindex" set to "-1" when "disabled" is set to true', function () {
-      const disabled = true
-
-      run(() => component.set('disabled', disabled))
+      run(() => component.set('disabled', true))
 
       expect(
         component.get('tabindex'),
         'tabindex: -1'
-      ).to.eql('-1')
+      ).to.eql(-1)
     })
   }
 )

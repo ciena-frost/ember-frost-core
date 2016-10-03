@@ -77,11 +77,8 @@ describeComponent(
     })
 
     it('sets checked property', function () {
-      const groupValue = 'testValue'
-      const value = 'testValue'
-
-      this.set('groupValue', groupValue)
-      this.set('value', value)
+      this.set('groupValue', 'testValue')
+      this.set('value', 'testValue')
       this.set('_setupAssertions', function () {
         return
       })
