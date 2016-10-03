@@ -5,12 +5,10 @@ import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import {describeComponent} from 'ember-mocha'
 import PropTypeMixin from 'ember-prop-types'
 import {
-  afterEach,
   beforeEach,
   describe,
   it
 } from 'mocha'
-import sinon from 'sinon'
 
 describeComponent(
   'frost-text',
@@ -18,15 +16,10 @@ describeComponent(
     unit: true
   },
   function () {
-    let component, sandbox
+    let component
 
     beforeEach(function () {
       component = this.subject()
-      sandbox = sinon.sandbox.create()
-    })
-
-    afterEach(function () {
-      sandbox.restore()
     })
 
     it('includes className frost-text', function () {
