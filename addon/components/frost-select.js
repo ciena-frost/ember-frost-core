@@ -244,7 +244,7 @@ export default Component.extend(PropTypeMixin, {
     const selectedChanged = isAttrDifferent(newAttrs, oldAttrs, 'selected')
     const selectedValueChanged = isAttrDifferent(newAttrs, oldAttrs, 'selectedValue')
 
-    if (!(selectedChanged || selectedValueChanged)) {
+    if (!(selectedChanged || selectedValueChanged || dataChanged)) {
       reduxAttrs = _.omit(reduxAttrs, ['selectedItem', 'selectedItems'])
     }
     this.get('reduxStore').dispatch(resetDropDown(reduxAttrs))
