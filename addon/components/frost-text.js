@@ -33,7 +33,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     isClearVisible: PropTypes.bool,
     isHookEmbedded: PropTypes.bool,
     receivedHook: PropTypes.string,
-    tabindex: PropTypes.string,
+    tabindex: PropTypes.number,
     type: PropTypes.string,
 
     // Setting these as part of establishing an inital value
@@ -41,7 +41,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     autofocus: PropTypes.bool,
     autocorrect: PropTypes.string,
     form: PropTypes.string,
-    maxlength: PropTypes.string,
+    maxlength: PropTypes.number,
     placeholder: PropTypes.string,
     readonly: PropTypes.bool,
     required: PropTypes.bool,
@@ -64,7 +64,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       required: false,
       selectionDirection: 'none',
       spellcheck: false,
-      tabindex: '0',
+      tabindex: 0,
       type: 'text',
 
       // Setting these as part of establishing an initial value

@@ -24,12 +24,12 @@ describeComponent(
       `)
 
       expect(
-        this.$('input').attr('tabindex'),
+        this.$('input').prop('tabindex'),
         'tabindex is set'
-      ).to.eql('0')
+      ).to.eql(0)
 
       expect(
-        this.$('input').attr('type'),
+        this.$('input').prop('type'),
         'type is set'
       ).to.eql('text')
 
@@ -69,14 +69,14 @@ describeComponent(
     it('sets autocapitalize property', function () {
       this.render(hbs`
           {{frost-text
-            autocapitalize='on'
+            autocapitalize='sentences'
           }}
       `)
 
       expect(
-        this.$('input').attr('autocapitalize'),
+        this.$('input').prop('autocapitalize'),
         'autocapitalize attribute is set'
-      ).to.eql('on')
+      ).to.eql('sentences')
     })
 
     it('sets autocorrect property', function () {
@@ -87,7 +87,7 @@ describeComponent(
       `)
 
       expect(
-        this.$('input').attr('autocorrect'),
+        this.$('input').prop('autocorrect'),
         'autocorrect attribute is set'
       ).to.eql('on')
     })
@@ -100,9 +100,9 @@ describeComponent(
       `)
 
       expect(
-        this.$('input').attr('autofocus'),
+        this.$('input').prop('autofocus'),
         'autofocus attribute is set'
-      ).to.eql('autofocus')
+      ).to.be.true
     })
 
     it('set disabled property', function () {
@@ -113,13 +113,13 @@ describeComponent(
       `)
 
       expect(
-        this.$('input').attr('disabled'),
+        this.$('input').prop('disabled'),
         'disabled attribute is set'
-      ).to.eql('disabled')
+      ).to.be.true
     })
 
     it('sets maxlength property', function () {
-      const maxlength = '30'
+      const maxlength = 30
 
       this.set('maxlength', maxlength)
 
@@ -130,7 +130,7 @@ describeComponent(
      `)
 
       expect(
-        this.$('input').attr('maxlength'),
+        this.$('input').prop('maxlength'),
         'maxlength is set'
       ).to.eql(maxlength)
     })
@@ -147,7 +147,7 @@ describeComponent(
      `)
 
       expect(
-        this.$('input').attr('placeholder'),
+        this.$('input').prop('placeholder'),
         'placeholder is set'
       ).to.eql(placeholder)
     })
@@ -177,9 +177,9 @@ describeComponent(
       `)
 
       expect(
-        this.$('input').attr('readonly'),
+        this.$('input').prop('readonly'),
         'readonly attribute is set'
-      ).to.eql('readonly')
+      ).to.be.true
     })
 
     it('set required property', function () {
