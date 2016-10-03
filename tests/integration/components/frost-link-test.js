@@ -52,7 +52,7 @@ describeComponent(
       expect(
         this.$('.frost-link').text().trim(),
         'Link title is set'
-      ).to.eql('Title')
+      ).to.eql(title)
     })
 
     describe('Priority property', function () {
