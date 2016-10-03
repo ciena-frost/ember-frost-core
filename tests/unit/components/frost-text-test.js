@@ -41,8 +41,8 @@ describeComponent(
 
       expect(
         component.get('autocapitalize'),
-        'autocapitalize: none'
-      ).to.be.eql('none')
+        'autocapitalize: off'
+      ).to.be.eql('off')
 
       expect(
         component.get('autocorrect'),

@@ -54,7 +54,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   getDefaultProps () {
     return {
       align: 'left',
-      autocapitalize: 'none',
+      autocapitalize: 'off',
       autocorrect: 'off',
       autofocus: false,
       isClearEnabled: false,

@@ -10,7 +10,9 @@
 | `align` |`string` | `left` | **default** left align text input |
 | | | `right` | right align text input |
 | `autocapitalize` |`string` | `off` | **default** - normal text field |
-| | `on` | text will be automatically capitalized (supported by Chrome and iOS Safari Mobile) |
+| | `characters` | characters will be automatically capitalized (supported by Chrome and iOS Safari Mobile) |
+| | `sentences` | sentences will be automatically capitalized (supported by Chrome and iOS Safari Mobile) |
+| | `words` | words will be automatically capitalized (supported by Chrome and iOS Safari Mobile) |
 | `autocorrect` |`string` | `off` | **default** - normal text field |
 | | `on` | text will be automatically autocorrected (supported by Safari) |
 | `autofocus` |`boolean` | `false` | **default** - normal text field |
