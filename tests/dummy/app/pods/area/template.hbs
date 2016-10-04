@@ -86,8 +86,8 @@
       <div class="demo">
         {{! BEGIN-SNIPPET textarea-cols&rows }}
         {{frost-textarea
-          cols='80'
-          rows='6'
+          cols=80
+          rows=6
         }}
         {{! END-SNIPPET }}
       </div>
@@ -102,7 +102,7 @@
         {{! BEGIN-SNIPPET textarea-tabindex }}
         {{frost-textarea
           placeholder='Un-tabbable'
-          tabindex='-1'
+          tabindex=-1
         }}
         {{! END-SNIPPET }}
       </div>
@@ -148,8 +148,8 @@
       <div class="demo">
         {{! BEGIN-SNIPPET textarea-onFocus&onBlur }}
         {{frost-textarea
-          onBlur=(action 'onBlurHandler')
           onFocus=(action 'onFocusHandler')
+          onBlur=(action 'onBlurHandler')
         }}
         {{! END-SNIPPET }}
       </div>

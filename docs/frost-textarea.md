@@ -10,16 +10,17 @@ a text area component
 | `autofocus` | `boolean` |`false`| **default** - normal text area |
 |  |  |`true`| text area in focus |
 | `class` | `string` | `error` | sets text area to error state |
-| `cols` | `string` |`<num-of-cols>`| number of columns for text area |
+| `cols` | `number` |`<num-of-cols>`| number of columns for text area |
 | `disabled` | `boolean` | `false` | **default** - normal text area |
 | | | `true` | disabled text area |
 | `form` | `string` | `<form-owner>` | form element that this is associated with (its form owner) |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `onInput` | `string` |`<action-name>`| triggers associated action when text is entered |
+| `placeholder` | `string` | `<text>` | placeholder text |
 | `readonly` | `boolean` | `false` | **default** - basic textarea |
 | | | `true` | the user cannot modify the value |
-| `rows` | `string` |`<num-of-rows>`| number of rows for text area |
-| `tabindex` | `string` | `<tabindex-value>` | the tabindex value |
+| `rows` | `number` |`<num-of-rows>`| number of rows for text area |
+| `tabindex` | `number` | `<tabindex-value>` | the tabindex value |
 | `value` | `string` |`<value-text>`| text to be displayed in text area |
 | `wrap` | `string` | `soft` | **default** - normal text area |
 | | | `hard` | text wrap setting |
