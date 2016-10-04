@@ -3,6 +3,7 @@ const {
   Component,
   get,
   isEmpty,
+  on,
   set,
   typeOf
 } = Ember
@@ -67,7 +68,7 @@ export default Component.extend(PropTypeMixin, {
 
   // == Events ================================================================
 
-  oninput: Ember.on('input', function (e) {
+  oninput: on('input', function (e) {
     const onInput = this.attrs['onInput']
 
     if (typeOf(onInput) === 'function') {
@@ -78,7 +79,7 @@ export default Component.extend(PropTypeMixin, {
     }
   }),
 
-  _onFocus: Ember.on('focusIn', function () {
+  _onFocus: on('focusIn', function () {
     // If an onFocus handler is defined, call it
     if (this.attrs.onFocus) {
       this.attrs.onFocus()

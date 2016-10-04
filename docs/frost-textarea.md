@@ -10,14 +10,14 @@ a text area component
 | `autofocus` | `boolean` |`false`| **default** - normal text area |
 |  |  |`true`| text area in focus |
 | `class` | `string` | `error` | sets text area to error state |
-| `cols` | `number` |`<num-of-cols>`| number of columns for text area |
+| `cols` | `number` |`<num-of-columns>`| number of columns for text area |
 | `disabled` | `boolean` | `false` | **default** - normal text area |
 | | | `true` | disabled text area |
 | `form` | `string` | `<form-owner>` | form element that this is associated with (its form owner) |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `onInput` | `string` |`<action-name>`| triggers associated action when text is entered |
 | `placeholder` | `string` | `<text>` | placeholder text |
-| `readonly` | `boolean` | `false` | **default** - basic textarea |
+| `readonly` | `boolean` | `false` | **default** - basic text area |
 | | | `true` | the user cannot modify the value |
 | `rows` | `number` |`<num-of-rows>`| number of rows for text area |
 | `tabindex` | `number` | `<tabindex-value>` | the tabindex value |
@@ -55,19 +55,11 @@ a text area component
 ### Size - cols and rows
 ```handlebars
 {{frost-textarea
-  cols='80' rows='6'}}
+  cols=80 rows=6}}
 ```
 
 ### Events - onInput
 ```handlebars
 {{frost-textarea
   onInput=(action 'onInputHandler')}}
-```
-
-```javascript
-actions: {
-  onInputHandler () {
-    console.log('text area value: ' + attrs.value)
-  }
-}
 ```
