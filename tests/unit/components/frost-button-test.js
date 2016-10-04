@@ -462,5 +462,53 @@ describeComponent(
         ).to.include('tertiary')
       })
     })
+
+    describe('._getOnClickHandler()', function () {
+      beforeEach(function () {
+        component.attrs = {}
+      })
+
+      afterEach(function () {
+        component.attrs = null
+      })
+
+      it('returns handler when onClick attribute is a function', function () {
+        component.attrs.onClick = function () {}
+
+        expect(
+          component._getOnClickHandler(),
+          'onClick() is returned'
+        ).to.be.a('function')
+      })
+
+      it('returns handler when onClick attribute is an mutable cell object', function () {
+        component.attrs.onClick = {
+          value: function () {}
+        }
+
+        expect(
+          component._getOnClickHandler(),
+          'onClick() is returned'
+        ).to.be.a('function')
+      })
+
+      it('doesn\'t return handler when onClick is empty', function () {
+        component.attrs.onClick = undefined
+
+        expect(
+          component._getOnClickHandler(),
+          'onClick() is not returned'
+        ).to.be.an('undefined')
+      })
+
+      it('doesn\'t return handler when onClick is empty object', function () {
+        component.attrs.onClick = {}
+
+        expect(
+          component._getOnClickHandler(),
+          'onClick() is not returned'
+        ).to.be.an('undefined')
+      })
+    })
   }
 )
