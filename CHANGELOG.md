@@ -1,3 +1,7 @@
+# 0.27.3
+
+* The unselected text in the `frost-select` drop down menu is now a darker color.
+
 # 0.27.2
 
 * Pressing enter to select an item when there is no item hovered will no longer reset the selected value or cause an error
