@@ -4,7 +4,7 @@ import Ember from 'ember'
 const {run} = Ember
 import {describeComponent} from 'ember-mocha'
 import PropTypeMixin from 'ember-prop-types'
-import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
+import FrostEvents from 'ember-frost-core/mixins/frost-events'
 import {
   beforeEach,
   it
@@ -66,8 +66,8 @@ describeComponent(
 
     it('has the expected Mixins', function () {
       expect(
-        FrostEventsProxy.detect(component),
-        'FrostEventsProxy Mixin is present'
+        FrostEvents.detect(component),
+        'FrostEvents Mixin is present'
       ).to.be.true
 
       expect(
