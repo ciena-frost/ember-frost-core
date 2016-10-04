@@ -15,6 +15,8 @@ a text area component
 | | | `true` | disabled text area |
 | `form` | `string` | `<form-owner>` | form element that this is associated with (its form owner) |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
+| `onBlur` | `string` | `<action-name>` | triggers associated action when the text area loses focus |
+| `onFocus` | `string` | `<action-name>` | triggers associated action when the text area receives focusin event |
 | `onInput` | `string` |`<action-name>`| triggers associated action when text is entered |
 | `placeholder` | `string` | `<text>` | placeholder text |
 | `readonly` | `boolean` | `false` | **default** - basic text area |
@@ -62,4 +64,16 @@ a text area component
 ```handlebars
 {{frost-textarea
   onInput=(action 'onInputHandler')}}
+```
+
+### Events - onBlur
+```handlebars
+{{frost-textarea
+  onBlur=(action 'onBlurHandler')}}
+```
+
+### Events - onFocus
+```handlebars
+{{frost-textarea
+  onFocus=(action 'onFocusHandler')}}
 ```

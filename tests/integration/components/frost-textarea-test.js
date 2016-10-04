@@ -3,6 +3,7 @@ import {$hook, initialize} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
 import {beforeEach} from 'mocha'
+import sinon from 'sinon'
 
 describeComponent(
   'frost-textarea',
@@ -148,6 +149,63 @@ describeComponent(
         this.$('textarea').val(),
         'value is set'
       ).to.eql(value)
+    })
+
+    it('calls onFocus closure action', function () {
+      const externalActionSpy = sinon.spy()
+
+      this.on('externalAction', externalActionSpy)
+
+      this.render(hbs`
+        {{frost-textarea
+          onFocus=(action 'externalAction')
+        }}
+      `)
+
+      this.$('textarea').trigger('focusin')
+
+      expect(
+        externalActionSpy.called,
+        'onFocus closure action called'
+      ).to.be.true
+    })
+
+    it('calls onInput closure action', function () {
+      const externalActionSpy = sinon.spy()
+
+      this.on('externalAction', externalActionSpy)
+
+      this.render(hbs`
+        {{frost-textarea
+          onInput=(action 'externalAction')
+        }}
+      `)
+
+      this.$('textarea').trigger('input')
+
+      expect(
+        externalActionSpy.called,
+        'onInput closure action called'
+      ).to.be.true
+    })
+
+    it('calls onBlur closure action', function () {
+      const externalActionSpy = sinon.spy()
+
+      this.on('externalAction', externalActionSpy)
+
+      this.render(hbs`
+        {{frost-textarea
+          onBlur=(action 'externalAction')
+        }}
+      `)
+
+      this.$('textarea').trigger('focusout')
+
+      expect(
+        externalActionSpy.called,
+        'onBlur closure action called'
+      ).to.be.true
     })
 
     it('hook attr grabs frost-textarea-input as expected', function () {

@@ -7,7 +7,7 @@ import {beforeEach, describe, it} from 'mocha'
 
 describeComponent(
   'frost-textarea',
-  'Unit: FrostTextareaComponent',
+  'Unit: FrostTextAreaComponent',
   {
     unit: true
   },
@@ -83,15 +83,16 @@ describeComponent(
 
     describe('when onBlur property is omitted', function () {
       beforeEach(function () {
-        run(() => {
-          component.set('onBlur', undefined)
-        })
+        run(() => component.set('onBlur', undefined))
       })
 
       it('does not throw an error when onBlur action is triggered', function () {
-        expect(function () {
-          component.get('actions.onBlur').call(component)
-        }).not.to.throw(Error)
+        expect(
+          function () {
+            component.get('actions.onBlur').call(component)
+            'error not triggered by onBlur()'
+          },
+        ).not.to.throw(Error)
       })
     })
 
@@ -110,14 +111,10 @@ describeComponent(
 
     describe('"showClear" computed property', function () {
       it('is set to "true" when disabled=false, value exists and readonly=false', function () {
-        const disabled = false
-        const value = 'value'
-        const readonly = false
-
         run(() => {
-          component.set('disabled', disabled)
-          component.set('value', value)
-          component.set('readonly', readonly)
+          component.set('disabled', false)
+          component.set('value', 'value')
+          component.set('readonly', false)
         })
 
         expect(
@@ -127,14 +124,10 @@ describeComponent(
       })
 
       it('is set to "false" when disabled=true, value exists and readonly=false', function () {
-        const disabled = true
-        const value = 'value'
-        const readonly = false
-
         run(() => {
-          component.set('disabled', disabled)
-          component.set('value', value)
-          component.set('readonly', readonly)
+          component.set('disabled', true)
+          component.set('value', 'value')
+          component.set('readonly', false)
         })
 
         expect(
@@ -144,12 +137,9 @@ describeComponent(
       })
 
       it('is set to "false" when disabled=false, value does not exist and readonly=false', function () {
-        const disabled = false
-        const readonly = false
-
         run(() => {
-          component.set('disabled', disabled)
-          component.set('readonly', readonly)
+          component.set('disabled', false)
+          component.set('readonly', false)
         })
 
         expect(
@@ -159,12 +149,9 @@ describeComponent(
       })
 
       it('is set to "false" when disabled=true, value does not exist and readonly=false', function () {
-        const disabled = true
-        const readonly = false
-
         run(() => {
-          component.set('disabled', disabled)
-          component.set('readonly', readonly)
+          component.set('disabled', true)
+          component.set('readonly', false)
         })
 
         expect(
@@ -174,12 +161,9 @@ describeComponent(
       })
 
       it('is set to "false" when disabled=true, value does not exist and readonly=true', function () {
-        const disabled = true
-        const readonly = true
-
         run(() => {
-          component.set('disabled', disabled)
-          component.set('readonly', readonly)
+          component.set('disabled', true)
+          component.set('readonly', true)
         })
 
         expect(
@@ -189,14 +173,10 @@ describeComponent(
       })
 
       it('is set to "false" when disabled=true, value exists and readonly=true', function () {
-        const disabled = true
-        const value = 'value'
-        const readonly = true
-
         run(() => {
-          component.set('disabled', disabled)
-          component.set('value', value)
-          component.set('readonly', readonly)
+          component.set('disabled', true)
+          component.set('value', 'value')
+          component.set('readonly', true)
         })
 
         expect(
@@ -206,12 +186,9 @@ describeComponent(
       })
 
       it('is set to "false" when disabled=false, value does not exist and readonly=true', function () {
-        const disabled = false
-        const readonly = true
-
         run(() => {
-          component.set('disabled', disabled)
-          component.set('readonly', readonly)
+          component.set('disabled', false)
+          component.set('readonly', true)
         })
 
         expect(
@@ -221,14 +198,10 @@ describeComponent(
       })
 
       it('is set to "false" when disabled=false, value exists and readonly=true', function () {
-        const disabled = false
-        const value = 'value'
-        const readonly = true
-
         run(() => {
-          component.set('disabled', disabled)
-          component.set('value', value)
-          component.set('readonly', readonly)
+          component.set('disabled', false)
+          component.set('value', 'value')
+          component.set('readonly', true)
         })
 
         expect(
