@@ -12,6 +12,7 @@ import {
   beforeEach,
   describe
 } from 'mocha'
+import sinon from 'sinon'
 
 describeComponent(
   'frost-button',
@@ -242,9 +243,9 @@ describeComponent(
       `)
 
       expect(
-        this.$('.frost-button').attr('autofocus'),
+        this.$('.frost-button').prop('autofocus'),
         'autofocus class is set'
-      ).to.eql('autofocus')
+      ).to.be.true
     })
 
     it('sets disabled property', function () {
@@ -258,9 +259,9 @@ describeComponent(
       `)
 
       expect(
-        this.$('.frost-button').attr('disabled'),
+        this.$('.frost-button').prop('disabled'),
         'disabled class is set'
-      ).to.eql('disabled')
+      ).to.be.true
     })
 
     it('sets title property', function () {
@@ -274,7 +275,7 @@ describeComponent(
       `)
 
       expect(
-        this.$('.frost-button').attr('title'),
+        this.$('.frost-button').prop('title'),
         'title class is set'
       ).to.eql('This is a button')
     })
@@ -296,14 +297,10 @@ describeComponent(
       ).to.be.true
     })
 
-    it('fires onClick closure action', function (done) {
-      this.on('externalAction', function () {
-        expect(
-          true,
-          'onClick closure action called'
-        ).to.be.ok
-        done()
-      })
+    it('fires onClick closure action', function () {
+      const externalActionSpy = sinon.spy()
+
+      this.on('externalAction', externalActionSpy)
 
       this.render(hbs`
         {{frost-button
@@ -315,16 +312,17 @@ describeComponent(
       `)
 
       this.$('button').click()
+
+      expect(
+        externalActionSpy.called,
+        'onClick closure action called'
+      ).to.be.true
     })
 
-    it('fires onFocus closure action', function (done) {
-      this.on('externalAction', function () {
-        expect(
-          true,
-          'onFocus closure action called'
-        ).to.be.ok
-        done()
-      })
+    it('fires onFocus closure action', function () {
+      const externalActionSpy = sinon.spy()
+
+      this.on('externalAction', externalActionSpy)
 
       this.render(hbs`
         {{frost-button
@@ -336,6 +334,11 @@ describeComponent(
       `)
 
       this.$('button').trigger('focusin')
+
+      expect(
+        externalActionSpy.called,
+        'onFocus closure action called'
+      ).to.be.true
     })
   }
 )

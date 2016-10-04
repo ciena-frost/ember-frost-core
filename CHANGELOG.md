@@ -1,3 +1,22 @@
+# 0.27.2
+
+* Pressing enter to select an item when there is no item hovered will no longer reset the selected value or cause an error
+* Changing select data after a selection has been made will no longer cause an error.
+
+# 0.27.1
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.27.0
+ * **Added** frost-toggle-button component and dummy example.
+
+# 0.26.0
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.25.7
+* Pass event to select's onBlur action
+
 # 0.25.6
 
 * Updated the button demo to demonstrate that disabled buttons don't fire actions

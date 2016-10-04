@@ -1,8 +1,10 @@
 import Ember from 'ember'
 const {
   Component,
+  get,
   isPresent,
-  on
+  on,
+  set
 } = Ember
 import {
   task,
@@ -34,13 +36,12 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     tabindex: PropTypes.number,
     type: PropTypes.string,
 
-
     // Setting these as part of establishing an inital value
-    autocapitalize: PropTypes.bool,
+    autocapitalize: PropTypes.string,
     autofocus: PropTypes.bool,
-    autocorrect: PropTypes.bool,
+    autocorrect: PropTypes.string,
     form: PropTypes.string,
-    maxlength: PropTypes.string,
+    maxlength: PropTypes.number,
     placeholder: PropTypes.string,
     readonly: PropTypes.bool,
     required: PropTypes.bool,
@@ -53,25 +54,25 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   getDefaultProps () {
     return {
       align: 'left',
+      autocapitalize: 'off',
+      autocorrect: 'off',
+      autofocus: false,
       isClearEnabled: false,
       isClearVisible: false,
       isHookEmbedded: false,
+      readonly: false,
+      required: false,
+      selectionDirection: 'none',
+      spellcheck: false,
       tabindex: 0,
       type: 'text',
 
       // Setting these as part of establishing an initial value
-      autocapitalize: null,
-      autocorrect: null,
-      autofocus: null,
       form: null,
       maxlength: null,
       placeholder: null,
-      readonly: null,
-      required: null,
-      selectionDirection: null,
-      spellcheck: null,
-      value: null,
       title: null,
+      value: null
     }
   },
 
@@ -80,14 +81,14 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   init () {
     this._super(...arguments)
     this.receivedHook = this.hook
-    if (this.get('isHookEmbedded')) {
+    if (get(this, 'isHookEmbedded')) {
       this.hook = ''
     }
   },
 
   _showClearEvent: on('focusIn', 'focusOut', 'input', function (event) {
     const isFocused = event.type !== 'focusout'
-    this.get('_showClear').perform(isFocused)
+    get(this, '_showClear').perform(isFocused)
   }),
 
   // == Tasks ==================================================================
@@ -100,12 +101,12 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   }).restartable(),
 
   _showClear: task(function * (isFocused) {
-    const showClear = isFocused && isPresent(this.get('value'))
-    if (this.get('isClearVisible') === showClear) {
+    const showClear = isFocused && isPresent(get(this, 'value')) && !get(this, 'readonly')
+    if (get(this, 'isClearVisible') === showClear) {
       return
     }
 
-    this.set('isClearVisible', showClear)
+    set(this, 'isClearVisible', showClear)
 
     // If the clear button is clicked the focusOut event occurs before
     // the click event, so delay disabling the clear so that the click
@@ -113,7 +114,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     if (!showClear) {
       yield timeout(200) // Duration of the visibility animation
     }
-    this.set('isClearEnabled', showClear)
+    set(this, 'isClearEnabled', showClear)
   }).restartable(),
 
   // == Actions ================================================================
@@ -125,19 +126,19 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   // proxy the event to the keyUp handler.
   actions: {
     clear () {
-      this.get('_clear').perform()
+      get(this, '_clear').perform()
     },
 
     keyUp (value, event) {
-      if (Ember.isPresent(Ember.get(this, '_eventProxy.keyUp'))) {
+      if (isPresent(get(this, '_eventProxy.keyUp'))) {
         this._eventProxy.keyUp(event)
       }
     },
 
     _onInput (event) {
-      if (Ember.isPresent(Ember.get(this, '_eventProxy.input'))) {
+      if (isPresent(get(this, '_eventProxy.input'))) {
         // Add id and value for legacy support
-        event.id = this.get('elementId')
+        event.id = get(this, 'elementId')
         event.value = event.target.value
         this._eventProxy.input(event)
       }
