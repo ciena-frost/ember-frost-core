@@ -1,9 +1,13 @@
 import Ember from 'ember'
 const {
+  $,
+  assert,
   Component,
   computed: {
     readOnly
-  }
+  },
+  get,
+  typeOf
 } = Ember
 import computed from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
@@ -60,16 +64,22 @@ export default Component.extend(PropTypeMixin, {
     return groupValue === value
   },
 
-  tabindex: Ember.computed('disabled', function () {
-    return this.get('disabled') ? -1 : 0
-  }),
+  @computed('disabled')
+  /**
+   * Determine tabindex value
+   * @param {Boolean} disabled - is this button disabled
+   * @returns {Number} the tabindex value
+   */
+  tabindex (disabled) {
+    return disabled ? -1 : 0
+  },
 
   // == Functions ===============================================================
 
   _createEvent (_event, _target) {
-    let event = Ember.$.Event(null, _event)
-    let target = Ember.$.clone(_target)
-    target.id = this.get('groupId')
+    let event = $.Event(null, _event)
+    let target = $.clone(_target)
+    target.id = get(this, 'groupId')
     event.target = target
     return event
   },
@@ -82,30 +92,30 @@ export default Component.extend(PropTypeMixin, {
   },
 
   _setupAssertions () {
-    Ember.assert(
+    assert(
       `${this.toString()} must be initialized in the yield block of 'frost-radio-group'`,
       /frost-radio-group/.test(this.parentView.toString()))
-    Ember.assert(
+    assert(
       `${this.toString()} must be initialized with a 'value' property`,
-      this.get('value')
+      get(this, 'value')
     )
   },
 
   keyPress (e) {
     if (e.keyCode === 13 || e.keyCode === 32) {
-      if (this.get('disabled') || this.get('groupValue') === this.get('value')) {
+      if (get(this, 'disabled') || get(this, 'groupValue') === get(this, 'value')) {
         return
       }
-      let change = this.get('onChange')
-      if (change && typeof change === 'function') {
-        change(this._createEvent(e, Ember.$(e.target).find('input')[0]))
+      let change = get(this, 'onChange')
+      if (change && typeOf(change === 'function')) {
+        change(this._createEvent(e, $(e.target).find('input')[0]))
       }
     }
   },
 
   change (event) {
-    const onChange = this.get('onChange')
-    if (onChange && typeof onChange === 'function') {
+    const onChange = get(this, 'onChange')
+    if (onChange && typeOf(onChange === 'function')) {
       onChange(this._createEvent(event, event.target))
     }
   }

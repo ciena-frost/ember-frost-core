@@ -1,5 +1,6 @@
 import Ember from 'ember'
 const {
+  assert,
   Component
 } = Ember
 import computed from 'ember-computed-decorators'
@@ -54,9 +55,8 @@ export default Component.extend(FrostEvents, PropTypeMixin, {
   },
 
   _setupAssertions () {
-    let assert = `${this.toString()} must be initialized in the yield block of 'frost-radio-button'`
+    let message = `${this.toString()} must be initialized in the yield block of 'frost-radio-button'`
     let cond = /frost-radio-button/.test(this.parentView.toString())
-    Ember.assert(assert, cond)
+    assert(message, cond)
   }
-
 })
