@@ -57,23 +57,27 @@ a text area component
 ### Size - cols and rows
 ```handlebars
 {{frost-textarea
-  cols=80 rows=6}}
+  cols=80 rows=6
+}}
 ```
 
 ### Events - onInput
 ```handlebars
 {{frost-textarea
-  onInput=(action 'onInputHandler')}}
+  onInput=(action 'onInputHandler')
+}}
 ```
 
 ### Events - onBlur
 ```handlebars
 {{frost-textarea
-  onBlur=(action 'onBlurHandler')}}
+  onBlur=(action 'onBlurHandler')
+}}
 ```
 
 ### Events - onFocus
 ```handlebars
 {{frost-textarea
-  onFocus=(action 'onFocusHandler')}}
+  onFocus=(action 'onFocusHandler')
+}}
 ```
