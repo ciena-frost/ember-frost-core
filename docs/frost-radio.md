@@ -26,6 +26,10 @@
 | | | `large` | large size radio button |
 | `value` | `string` | `<value>` | value of the radio button |
 
+## Testing with ember-hook
+The radio-group and radio-button components are accessible using ember-hook with the top level hook name or you can access the input on the radio-button -
+* Input field hook - `<hook-name>-input`
+
 
 ## Examples
 

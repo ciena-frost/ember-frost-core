@@ -6,13 +6,13 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET radio-default }}
         {{#frost-radio-group
-          hook='myCBGroup'
+          hook='myRBGroup'
           id='radioGroup1'
           value=model.radioGroup1
           onChange=(action 'change')
         }}
-          {{#each sampleList1 as |i|}}
-            {{#frost-radio-button value=i}}
+          {{#each sampleList1 as |i index|}}
+            {{#frost-radio-button hook=(concat 'myRBGroup-radio-button-' index) value=i}}
               Label for {{i}}
             {{/frost-radio-button}}
           {{/each}}

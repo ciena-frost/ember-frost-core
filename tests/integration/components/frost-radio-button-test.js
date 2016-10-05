@@ -1,10 +1,17 @@
 import {expect} from 'chai'
 import {
+  $hook,
+  initialize
+} from 'ember-hook'
+import {
   describeComponent,
   it
 } from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
-import {describe} from 'mocha'
+import {
+  beforeEach,
+  describe
+} from 'mocha'
 import sinon from 'sinon'
 
 describeComponent(
@@ -14,6 +21,10 @@ describeComponent(
     integration: true
   },
   function () {
+    beforeEach(function () {
+      initialize()
+    })
+
     it('throws assertion errors', function () {
       expect(
         () => {
@@ -23,21 +34,59 @@ describeComponent(
         },
         'assertion thrown when used without frost-radio-group'
       ).to.throw(/frost-radio-button/)
-    })
-
-    it('sets checked property', function () {
-      this.render(hbs`
-        {{#frost-radio-group
-          value='testValue'
-        }}
-          {{frost-radio-button value='testValue'}}
-        {{/frost-radio-group}}
-      `)
 
       expect(
-        this.$('.frost-radio-button').hasClass('checked'),
-        'checked class is set'
-      ).to.be.true
+        () => {
+          this.render(hbs`
+            {{#frost-radio-group
+            value='testValue'
+          }}
+            {{frost-radio-button}}
+          {{/frost-radio-group}}
+          `)
+        },
+        'assertion thrown when radio-button used without setting a value'
+      ).to.throw(/initialized with a 'value'/)
+    })
+
+    describe('Checked property', function () {
+      it('sets checked property', function () {
+        this.render(hbs`
+          {{#frost-radio-group
+            value='testValue'
+          }}
+            {{frost-radio-button value='testValue'}}
+          {{/frost-radio-group}}
+        `)
+
+        expect(
+          this.$('.frost-radio-button').hasClass('checked'),
+          'checked class is set'
+        ).to.be.true
+
+        expect(
+          this.$('.frost-radio-button-input').prop('checked'),
+          'checked is set'
+        ).to.be.true
+      })
+
+      it('does not set checked property', function () {
+        this.render(hbs`
+          {{#frost-radio-group}}
+            {{frost-radio-button value='testValue'}}
+          {{/frost-radio-group}}
+        `)
+
+        expect(
+          this.$('.frost-radio-button').hasClass('checked'),
+          'checked class is set'
+        ).to.be.false
+
+        expect(
+          this.$('.frost-radio-button-input').prop('checked'),
+          'checked is set'
+        ).to.be.false
+      })
     })
 
     it('sets disabled property', function () {
@@ -54,6 +103,27 @@ describeComponent(
         this.$('.frost-radio-button').hasClass('disabled'),
         'disabled class is set'
       ).to.be.true
+
+      expect(
+        this.$('.frost-radio-button-input').prop('disabled'),
+        'disabled class is set'
+      ).to.be.true
+    })
+
+    it('sets hook property on input tag', function () {
+      this.render(hbs`
+        {{#frost-radio-group}}
+          {{frost-radio-button
+            hook='my-radio-button'
+            value='testValue'
+          }}
+        {{/frost-radio-group}}
+      `)
+
+      expect(
+          $hook('my-radio-button-input').hasClass('frost-radio-button-input'),
+          'input hook is set'
+        ).to.be.true
     })
 
     describe('Size property', function () {
@@ -132,6 +202,38 @@ describeComponent(
         this.$('.frost-radio-button').hasClass('required'),
         'required class is set'
       ).to.be.true
+    })
+
+    it('sets type to "radio"', function () {
+      this.render(hbs`
+        {{#frost-radio-group}}
+          {{frost-radio-button value='testValue'}}
+        {{/frost-radio-group}}
+      `)
+
+      expect(
+        this.$('.frost-radio-button-input').prop('type'),
+        'type is set to radio'
+      ).to.eql('radio')
+    })
+
+    it('sets value property', function () {
+      const value = 'test value'
+
+      this.set('value', value)
+
+      this.render(hbs`
+        {{#frost-radio-group}}
+          {{frost-radio-button
+            value=value
+          }}
+        {{/frost-radio-group}}
+      `)
+
+      expect(
+        this.$('.frost-radio-button-input').prop('value'),
+        'value is set'
+      ).to.eql(value)
     })
 
     describe('onChange closure action', function () {
