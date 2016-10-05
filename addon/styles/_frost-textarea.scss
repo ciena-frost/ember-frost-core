@@ -6,7 +6,7 @@ $disabled-border: 1px solid $frost-color-input-disabled-border;
 $disabled-bg: $frost-color-input-disabled-bg;
 
 .frost-textarea {
-  display: inline-block;
+  display: flex;
   position: relative;
   &.error > textarea {
     border: $error-border;
@@ -48,16 +48,11 @@ $disabled-bg: $frost-color-input-disabled-bg;
     box-shadow: none;
   }
 
-  &.is-clear-visible .frost-text-clear {
-    opacity: 1;
-  }
-
   .frost-textarea-clear {
-    display: inline-block;
-    position: absolute;
+    position: relative;
     width: 23px;
     height: 23px;
-    right: 5px;
+    right: 26px;
     top: 7px;
     fill: $frost-color-grey-6;
     cursor: pointer;

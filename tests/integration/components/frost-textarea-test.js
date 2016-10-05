@@ -16,7 +16,7 @@ describeComponent(
       initialize()
     })
 
-    it('renders', function () {
+    it('renders default values', function () {
       this.render(hbs`
         {{frost-textarea}}
       `)
@@ -236,11 +236,19 @@ describeComponent(
     })
 
     it('textarea cleared on button click', function () {
+      const value = 'Test'
+
+      this.set('value', value)
+
       this.render(hbs`
         {{frost-textarea 
-          value='Test'
+          value=value
         }}
       `)
+
+      expect(
+        this.$('textarea').val()
+      ).to.eql(value)
 
       this.$('.frost-textarea-clear').click()
 
