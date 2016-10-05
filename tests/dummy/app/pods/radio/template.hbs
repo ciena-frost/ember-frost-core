@@ -145,5 +145,27 @@
         {{code-snippet name='radio-error.hbs'}}
       </div>
     </div>
+
+    <div class='example'>
+      <div class='title'>required</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET radio-required }}
+        {{#frost-radio-group
+          id='radioGroup7'
+          value=model.radioGroup7
+          onChange=(action 'change')
+        }}
+          {{#each sampleList7 as |i|}}
+            {{#frost-radio-button value=i required=true}}
+              Label for {{i}}
+            {{/frost-radio-button}}
+          {{/each}}
+        {{/frost-radio-group}}
+        {{! END-SNIPPET }}
+      </div>
+      <div style='padding-top:15px' class='snippet'>
+        {{code-snippet name='radio-required.hbs'}}
+      </div>
+    </div>
   </div>
 </div>

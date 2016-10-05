@@ -202,6 +202,11 @@ describeComponent(
         this.$('.frost-radio-button').hasClass('required'),
         'required class is set'
       ).to.be.true
+
+      expect(
+        this.$('.frost-radio-button-input').prop('required'),
+        'required class is set'
+      ).to.be.true
     })
 
     it('sets type to "radio"', function () {

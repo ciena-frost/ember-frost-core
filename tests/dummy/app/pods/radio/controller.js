@@ -9,6 +9,7 @@ export default Controller.extend({
   sampleList4: ['a', 'b', 'c', 'd', 'e'],
   sampleList5: ['a', 'b', 'c', 'd', 'e'],
   sampleList6: ['a', 'b', 'c', 'd', 'e'],
+  sampleList7: ['a', 'b', 'c', 'd', 'e'],
 
   model: Ember.Object.create({
     radioGroup1: 'a',
@@ -16,7 +17,8 @@ export default Controller.extend({
     radioGroup3: 'c',
     radioGroup4: 'd',
     radioGroup5: 'b',
-    radioGroup6: 'a'
+    radioGroup6: 'a',
+    radioGroup7: 'b'
   }),
 
   actions: {
