@@ -57,9 +57,5 @@ $disabled-bg: $frost-color-input-disabled-bg;
     fill: $frost-color-grey-6;
     cursor: pointer;
     transition: opacity 0.2s ease;
-
-    &:focus {
-      outline: none;
-    }
   }
 }
