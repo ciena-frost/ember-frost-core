@@ -89,9 +89,7 @@ describeComponent(
     })
 
     it('"checked" set to true when "groupValue" is equal to "value"', function () {
-      const groupValue = 'testValue'
-
-      run(() => component.set('groupValue', groupValue))
+      run(() => component.set('groupValue', 'testValue'))
 
       expect(
         component.get('checked'),

@@ -135,7 +135,29 @@ describeComponent(
     })
 
     describe('onChange closure action', function () {
-      it('is called on keypress', function () {
+      it('is called on keypress of "enter"', function () {
+        const externalActionSpy = sinon.spy()
+
+        this.on('externalAction', externalActionSpy)
+
+        this.render(hbs`
+          {{#frost-radio-group
+            id='groupId'
+            onChange=(action 'externalAction')
+          }}
+            {{frost-radio-button value='testValue'}}
+          {{/frost-radio-group}}
+        `)
+
+        this.$('.frost-radio-button').trigger({ type: 'keypress', keyCode: 13 })
+
+        expect(
+          externalActionSpy.called,
+          'onChange closure action called on keypress "enter"'
+        ).to.be.true
+      })
+
+      it('is called on keypress of "spacebar"', function () {
         const externalActionSpy = sinon.spy()
 
         this.on('externalAction', externalActionSpy)
@@ -153,7 +175,7 @@ describeComponent(
 
         expect(
           externalActionSpy.called,
-          'onChange closure action called on keypress'
+          'onChange closure action called on keypress "spacebar"'
         ).to.be.true
       })
 

@@ -7,26 +7,25 @@
 ### radio-group
 | Attribute | Type | Value | Description |
 | --------- | ---- | ----- | ----------- |
-| `id` | `string` | `<group-name>` | acts as the group id |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
+| `id` | `string` | `<group-name>` | acts as the group id |
+| `onChange` | `string` |`<action-name>`| triggers associated action on change or keypress of space/enter |
 | `value` | `string` | `<group-value>` | default checked radio button |
 
 ### radio-button
 | Attribute | Type | Value | Description |
 | --------- | ---- | ----- | ----------- |
+| `class` | `string` | `error` | sets radio button to error state |
 | `disabled` | `boolean` | `false` | **default** - basic radio button |
 | | | `true` | disable radio button |
-| `class` | `string` | `error` | sets radio button to error state |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `required` |  `boolean` | `false` | **default** - basic radio button |
 | | | `true` | radio button is required |
 | `size` | `string` | `small` | **default** - small size radio button |
-|  | | `medium` | medium size radio button |
-|  |  | `large` | large size radio button |
+| | | `medium` | medium size radio button |
+| | | `large` | large size radio button |
 | `value` | `string` | `<value>` | value of the radio button |
 
-### Event Handlers
-A comprehensive list of [HTML event handlers](frost-events.md) are available to choose from based on your needs.
 
 ## Examples
 
