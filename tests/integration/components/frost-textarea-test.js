@@ -1,4 +1,6 @@
 import {expect} from 'chai'
+import Ember from 'ember'
+const {run} = Ember
 import {$hook, initialize} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
@@ -25,6 +27,16 @@ describeComponent(
         this.$('textarea').prop('tabindex'),
         'tabindex is set'
       ).to.eql(0)
+
+      expect(
+        this.$('textarea').hasClass('frost-textarea-input'),
+        'class "frost-textarea-input" is set'
+      ).to.be.true
+
+      expect(
+        this.$('.frost-textarea-clear'),
+        'class "frost-textarea-clear" is set'
+      ).to.have.length(1)
     })
 
     it('sets autofocus property', function () {
@@ -235,26 +247,112 @@ describeComponent(
       ).to.be.true
     })
 
-    it('textarea cleared on button click', function () {
-      const value = 'Test'
+    it('only renders the clear icon in insert', function () {
+      this.render(hbs`
+        {{frost-textarea}}
+      `)
 
-      this.set('value', value)
+      expect(
+        this.$('.frost-textarea').hasClass('is-clear-visible'),
+        'class "is-clear-visible" is not set'
+      ).to.be.false
+
+      expect(
+        this.$('.frost-textarea').hasClass('is-clear-enabled'),
+        'class "is-clear-enabled" is not set'
+      ).to.be.false
+
+      run(() => this.$('textarea').val('Test').trigger('input'))
+
+      expect(
+        this.$('.frost-textarea').hasClass('is-clear-visible'),
+        'class "is-clear-visible" is set'
+      ).to.be.true
+
+      expect(
+        this.$('.frost-textarea').hasClass('is-clear-enabled'),
+        'class "is-clear-enabled" is set'
+      ).to.be.true
+    })
+
+    it('runs clear() which clears the input value', function () {
+      this.render(hbs`
+        {{frost-textarea}}
+      `)
+
+      run(() => {
+        this.$('textarea').val('Test').trigger('input')
+        this.$('.frost-textarea-clear').trigger('click')
+      })
+
+      expect(
+        this.$('textarea').val(),
+        'input value cleared'
+      ).to.eql('')
+    })
+
+    it('hook attr grabs frost-textarea as expected', function () {
+      this.render(hbs`
+          {{frost-textarea
+            hook='my-text'
+          }}
+      `)
+
+      expect(
+        $hook('my-text-input').hasClass('frost-textarea-input'),
+        'input hook is set'
+      ).to.be.true
+
+      expect(
+        $hook('my-text-clear').hasClass('frost-textarea-clear'),
+        'clear hook is set'
+      ).to.be.true
+    })
+
+    it('calls onKeyUp closure action', function () {
+      const externalActionSpy = sinon.spy()
+
+      this.on('externalAction', externalActionSpy)
 
       this.render(hbs`
-        {{frost-textarea 
+        {{frost-textarea
+          onKeyUp=(action 'externalAction')
+        }}
+      `)
+
+      this.$('textarea').trigger('keyup')
+
+      expect(
+        externalActionSpy.called,
+        'onKeyUp closure action called'
+      ).to.be.true
+    })
+
+    it('calls onInput closure action', function () {
+      const externalActionSpy = sinon.spy()
+      const testValue = 'Test'
+
+      this.set('value', testValue)
+      this.on('externalAction', externalActionSpy)
+
+      this.render(hbs`
+        {{frost-textarea
+          onInput=(action "externalAction")
           value=value
         }}
       `)
 
-      expect(
-        this.$('textarea').val()
-      ).to.eql(value)
-
-      this.$('.frost-textarea-clear').click()
+      this.$('textarea').trigger('input')
 
       expect(
-        this.$('textarea').val()
-      ).to.eql('')
+        externalActionSpy.args[0][0].id,
+        'onInput closure action called with an object that contains the id'
+      ).to.eql(this.$('.frost-textarea').prop('id'))
+
+      expect(
+        externalActionSpy.args[0][0].value,
+        'onInput closure action called with an object that contains the value'
+      ).to.eql(testValue)
     })
   }
 )

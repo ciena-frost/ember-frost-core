@@ -15,9 +15,6 @@ a text area component
 | | | `true` | disabled text area |
 | `form` | `string` | `<form-owner>` | form element that this is associated with (its form owner) |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
-| `onBlur` | `string` | `<action-name>` | triggers associated action when the text area loses focus |
-| `onFocus` | `string` | `<action-name>` | triggers associated action when the text area receives focusin event |
-| `onInput` | `string` |`<action-name>`| triggers associated action when text is entered |
 | `placeholder` | `string` | `<text>` | placeholder text |
 | `readonly` | `boolean` | `false` | **default** - basic text area |
 | | | `true` | the user cannot modify the value |
@@ -26,6 +23,10 @@ a text area component
 | `value` | `string` |`<value-text>`| text to be displayed in text area |
 | `wrap` | `string` | `soft` | **default** - normal text area |
 | | | `hard` | text wrap setting |
+
+### Event Handlers
+A comprehensive list of [HTML event handlers](frost-events.md) are available to choose from based on your needs.
+
 
 ## Examples
 
@@ -61,23 +62,23 @@ a text area component
 }}
 ```
 
-### Events - onInput
+### Actions - onInput
 ```handlebars
 {{frost-textarea
   onInput=(action 'onInputHandler')
 }}
 ```
 
-### Events - onBlur
+### Actions - onFocusOut
 ```handlebars
 {{frost-textarea
-  onBlur=(action 'onBlurHandler')
+  onFocusOut=(action 'onBlurHandler')
 }}
 ```
 
-### Events - onFocus
+### Actions - onFocusIn
 ```handlebars
 {{frost-textarea
-  onFocus=(action 'onFocusHandler')
+  onFocusIn=(action 'onFocusHandler')
 }}
 ```

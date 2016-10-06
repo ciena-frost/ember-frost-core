@@ -12,50 +12,59 @@ $disabled-bg: $frost-color-input-disabled-bg;
     border: $error-border;
     color: $frost-color-danger;
   }
+}
 
-  > textarea {
-    padding: 5px;
-    padding-right: 30px;
-    border: $border;
-    font-size: $frost-font-s;
-    color: $frost-color-grey-1;
-    resize: none;
+.frost-textarea-input {
+  padding: 5px;
+  padding-right: 30px;
+  border: $border;
+  font-size: $frost-font-s;
+  color: $frost-color-grey-1;
+  resize: none;
 
+  &:disabled {
+    border: $disabled-border;
+    background-color: $disabled-bg;
+  }
 
-    &:disabled {
-      border: $disabled-border;
-      background: $disabled-bg;
-    }
+  &:focus {
+    margin: -1px;
+    border: $focus-border;
+    outline: none;
+  }
 
-    &:focus {
-      margin: -1px;
-      border: $focus-border;
-      outline: none;
-    }
-
-    &:hover:enabled:read-write:not(:focus) {
+  &:hover:enabled:read-write:not(:focus) {
       border: $hover-border;
       outline: none;
-    }
-
-    &:read-only {
-      border: none;
-      cursor: default;
-    }
   }
 
-  .frost-button:focus {
-    box-shadow: none;
+  &:read-only {
+    border: none;
+    cursor: default;
   }
+}
 
-  .frost-textarea-clear {
-    position: relative;
-    width: 23px;
-    height: 23px;
-    right: 26px;
-    top: 7px;
-    fill: $frost-color-grey-6;
-    cursor: pointer;
-    transition: opacity 0.2s ease;
+.frost-textarea-clear {
+  position: relative;
+  width: 23px;
+  height: 23px;
+  right: 26px;
+  top: 7px;
+  opacity: 0;
+  fill: $frost-color-grey-6;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+
+  &:focus {
+    outline: none;
   }
+}
+
+.frost-textarea.is-clear-visible .frost-textarea-clear {
+  opacity: 1;
+}
+
+.frost-textarea.is-clear-enabled .frost-textarea-clear {
+  cursor: pointer;
+  pointer-events: auto;
 }

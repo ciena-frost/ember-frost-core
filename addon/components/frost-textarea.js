@@ -2,20 +2,29 @@ import Ember from 'ember'
 const {
   Component,
   get,
-  isEmpty,
+  isPresent,
   on,
-  set,
-  typeOf
+  set
 } = Ember
-import computed, {readOnly} from 'ember-computed-decorators'
+import {
+  task,
+  timeout
+} from 'ember-concurrency'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import FrostEventsProxy from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-textarea'
 
-export default Component.extend(PropTypeMixin, {
+export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   // == Dependencies ==========================================================
 
   // == Properties ============================================================
-  classNames: ['frost-textarea'],
+  classNames: [
+    'frost-textarea'
+  ],
+  classNameBindings: [
+    'isClearVisible',
+    'isClearEnabled'
+  ],
   layout,
 
   propTypes: {
@@ -24,6 +33,10 @@ export default Component.extend(PropTypeMixin, {
     disabled: PropTypes.bool,
     form: PropTypes.string,
     hook: PropTypes.string,
+    isClearEnabled: PropTypes.bool,
+    isClearVisible: PropTypes.bool,
+    isHookEmbedded: PropTypes.bool,
+    receivedHook: PropTypes.string,
     placeholder: PropTypes.string,
     readonly: PropTypes.bool,
     rows: PropTypes.number,
@@ -35,6 +48,9 @@ export default Component.extend(PropTypeMixin, {
   getDefaultProps () {
     return {
       autofocus: false,
+      isClearEnabled: false,
+      isClearVisible: false,
+      isHookEmbedded: false,
       disabled: false,
       readonly: false,
       tabindex: 0,
@@ -49,58 +65,71 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
-  // == Computed Properties ===================================================
+  // // == Events ================================================================
 
-  @readOnly
-  @computed('disabled', 'readonly', 'value')
-  /**
-   * Determine whether or not to show button for clearing out text field
-   * @param {Boolean} disabled - whether or not input is disabled
-   * @param {Boolean} readonly - whether or not input is readonly
-   * @param {String} value - value of text field
-   * @returns {Boolean} whether or not to show button for clearing out text field
-   */
-  showClear (disabled, readonly, value) {
-    return !disabled && !isEmpty(value) && !readonly
+  init () {
+    this._super(...arguments)
+    this.receivedHook = this.hook
+    if (get(this, 'isHookEmbedded')) {
+      this.hook = ''
+    }
   },
 
-  // == Functions =============================================================
-
-  // == Events ================================================================
-
-  oninput: on('input', function (e) {
-    const onInput = this.attrs['onInput']
-
-    if (typeOf(onInput) === 'function') {
-      onInput({
-        id: get(this, 'id'),
-        value: e.target.value
-      })
-    }
+  _showClearEvent: on('focusIn', 'focusOut', 'input', function (event) {
+    const isFocused = event.type !== 'focusout'
+    get(this, '_showClear').perform(isFocused)
   }),
 
-  _onFocus: on('focusIn', function () {
-    // If an onFocus handler is defined, call it
-    if (this.attrs.onFocus) {
-      this.attrs.onFocus()
+  // == Tasks ==================================================================
+
+  _clear: task(function * () {
+    this.$('textarea')
+      .focus()
+      .val('')
+      .trigger('input')
+  }).restartable(),
+
+  _showClear: task(function * (isFocused) {
+    const showClear = isFocused && isPresent(get(this, 'value')) && !get(this, 'readonly')
+    if (get(this, 'isClearVisible') === showClear) {
+      return
     }
-  }),
+
+    set(this, 'isClearVisible', showClear)
+
+    // If the clear button is clicked the focusOut event occurs before
+    // the click event, so delay disabling the clear so that the click
+    // can process first
+    if (!showClear) {
+      yield timeout(200) // Duration of the visibility animation
+    }
+    set(this, 'isClearEnabled', showClear)
+  }).restartable(),
 
   // == Actions ===============================================================
 
   actions: {
-    clear: function () {
-      set(this, 'value', '')
-      this.$('textarea').focus()
-      this.$('textarea').val('')
-      this.$('textarea').trigger('input')
+    clear () {
+      get(this, '_clear').perform()
     },
 
-    onBlur () {
-      const onBlur = get(this, 'onBlur')
+    // Setting 'keyUp' directly on the {{input}} helper overwrites
+    // Ember's TextSupport keyUp property, which means that other
+    // TextSupport events (i.e. 'enter' and 'escape') don't fire.
+    // To avoid this, we use the TextSupport 'key-up' event and
+    // proxy the event to the keyUp handler.
+    keyUp (value, event) {
+      if (isPresent(get(this, '_eventProxy.keyUp'))) {
+        this._eventProxy.keyUp(event)
+      }
+    },
 
-      if (onBlur) {
-        onBlur()
+    _onInput (event) {
+      if (isPresent(get(this, '_eventProxy.input'))) {
+        // Add id and value for legacy support
+        event.id = get(this, 'elementId')
+        event.value = event.target.value
+        this._eventProxy.input(event)
       }
     }
   }

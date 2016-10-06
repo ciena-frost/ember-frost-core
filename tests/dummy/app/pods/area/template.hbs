@@ -1,4 +1,10 @@
-<div class="dummy-body textarea">
+<div class="dummy-notification-container">
+{{#each notifications as |notification|}}
+  {{notification-message notification=notification}}
+{{/each}}
+</div>
+
+<div class="dummy-body textarea area">
 
   <div class="section-title">Default</div>
   <hr>
@@ -142,35 +148,87 @@
 
   <div class="section-title">Events</div>
   <hr>
-  <div class="section">
+  <div class='section'>
     <div class="example">
-      <div class="title">onFocus, onBlur</div>
+      <div class="title">DOM events</div>
       <div class="demo">
-        {{! BEGIN-SNIPPET textarea-onFocus&onBlur }}
+        {{! BEGIN-SNIPPET textarea-dom-events }}
         {{frost-textarea
-          onFocus=(action 'onFocusHandler')
-          onBlur=(action 'onBlurHandler')
+          onChange=(action 'event')
+          onClick=(action 'event')
+          onContextMenu=(action 'event')
+          onDoubleClick=(action 'event')
+          onDrag=(action 'event')
+          onDragEnd=(action 'event')
+          onDragEnter=(action 'event')
+          onDragLeave=(action 'event')
+          onDragOver=(action 'event')
+          onDragStart=(action 'event')
+          onDrop=(action 'event')
+          onFocusIn=(action 'event')
+          onFocusOut=(action 'event')
+          onInput=(action 'event')
+          onKeyDown=(action 'event')
+          onKeyPress=(action 'event')
+          onKeyUp=(action 'event')
+          onMouseDown=(action 'event')
+          onMouseEnter=(action 'event')
+          onMouseLeave=(action 'event')
+          onMouseMove=(action 'event')
+          onMouseUp=(action 'event')
+          onSubmit=(action 'event')
+          onTouchCancel=(action 'event')
+          onTouchEnd=(action 'event')
+          onTouchMove=(action 'event')
+          onTouchStart=(action 'event')
         }}
         {{! END-SNIPPET }}
       </div>
       <div class="snippet">
-        {{code-snippet name='textarea-onFocus&onBlur.hbs'}}
+         <div>Template</div>
+        {{code-snippet name='textarea-dom-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='textarea-dom-events.js'}}
       </div>
     </div>
 
     <div class="example">
-      <div class="title">onInput</div>
+      <div class="title">Textarea support events</div>
       <div class="demo">
-        {{! BEGIN-SNIPPET textarea-onInput }}
+        {{! BEGIN-SNIPPET textarea-support-events }}
         {{frost-textarea
-          onInput=(action 'onInputHandler')
+          onEnter=(action 'support' 'enter')
+          onEscape=(action 'support' 'escape')
         }}
         {{! END-SNIPPET }}
       </div>
       <div class="snippet">
-      {{code-snippet name='textarea-onInput.hbs'}}
+        <div>Template</div>
+        {{code-snippet name='textarea-support-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='textarea-support-events.js'}}
       </div>
     </div>
-    
+
+    <div class="example">
+      <div class="title">Deprecated events</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET textarea-deprecated-events }}
+        {{frost-textarea
+          onBlur=(action 'event')
+          onFocus=(action 'event')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+         <div>Template</div>
+        {{code-snippet name='textarea-deprecated-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='textarea-dom-events.js'}}
+      </div>
+    </div>
   </div>
 </div>

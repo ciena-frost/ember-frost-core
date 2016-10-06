@@ -4,32 +4,26 @@ const {Controller} = Ember
 export default Controller.extend({
 
   actions: {
-    onBlurHandler () {
+    // BEGIN-SNIPPET textarea-support-events
+    support (type, value) {
       this.notifications.addNotification({
-        message: 'blur event',
+        message: `${type}: ${value}`,
         type: 'success',
         autoClear: true,
         clearDuration: 2000
       })
     },
+    // END-SNIPPET textarea-support-events
 
-    onFocusHandler () {
+    // BEGIN-SNIPPET textarea-dom-events
+    event (event) {
       this.notifications.addNotification({
-        message: 'focus event',
-        type: 'success',
-        autoClear: true,
-        clearDuration: 2000
-      })
-    },
-
-    onInputHandler (attrs) {
-      console.log('text area value: ' + attrs.value)
-      this.notifications.addNotification({
-        message: 'value: " ' + attrs.value + "'",
+        message: `${event.type}: ${event.target.value}`,
         type: 'success',
         autoClear: true,
         clearDuration: 2000
       })
     }
+    // END-SNIPPET textarea-dom-events
   }
 })
