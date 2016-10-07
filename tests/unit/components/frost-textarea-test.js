@@ -55,11 +55,6 @@ describeComponent(
       ).to.be.false
 
       expect(
-        component.get('isHookEmbedded'),
-        'isHookEmbedded: false'
-      ).to.be.false
-
-      expect(
         component.get('placeholder'),
         'placeholder: null'
       ).to.be.null

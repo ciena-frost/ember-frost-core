@@ -35,8 +35,6 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     hook: PropTypes.string,
     isClearEnabled: PropTypes.bool,
     isClearVisible: PropTypes.bool,
-    isHookEmbedded: PropTypes.bool,
-    receivedHook: PropTypes.string,
     placeholder: PropTypes.string,
     readonly: PropTypes.bool,
     rows: PropTypes.number,
@@ -50,7 +48,6 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       autofocus: false,
       isClearEnabled: false,
       isClearVisible: false,
-      isHookEmbedded: false,
       disabled: false,
       readonly: false,
       tabindex: 0,
@@ -69,10 +66,6 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
 
   init () {
     this._super(...arguments)
-    this.receivedHook = this.hook
-    if (get(this, 'isHookEmbedded')) {
-      this.hook = ''
-    }
   },
 
   _showClearEvent: on('focusIn', 'focusOut', 'input', function (event) {
