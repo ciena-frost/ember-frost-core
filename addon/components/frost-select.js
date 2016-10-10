@@ -217,6 +217,7 @@ export default Component.extend(PropTypeMixin, {
     Ember.$(document).on('click', this._handleOutsideClick)
   },
 
+  /* eslint-disable complexity */
   /* Ember.Component method */
   didReceiveAttrs ({newAttrs, oldAttrs}) {
     newAttrs = newAttrs || {}
@@ -271,6 +272,7 @@ export default Component.extend(PropTypeMixin, {
       }
     }
   },
+  /* eslint-enable complexity */
 
   // TODO: add jsdoc
   getValues () {
@@ -285,6 +287,7 @@ export default Component.extend(PropTypeMixin, {
         break
     }
   },
+  /* eslint-disable complexity */
   // TODO: add jsdoc
   keyUp (event) {
     const reduxStore = this.get('reduxStore')
@@ -316,6 +319,7 @@ export default Component.extend(PropTypeMixin, {
         event.preventDefault()
     }
   },
+  /* eslint-enable complexity */
 
   /**
    * Notify parent of currently selected values by calling the onChange callback

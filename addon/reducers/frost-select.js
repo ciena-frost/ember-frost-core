@@ -205,6 +205,7 @@ export function filterItems (baseItems, selectedItem, hoveredIndex, text) {
   })
   .value()
 }
+/* eslint-disable complexity */
 /**
  * Reducer for the frost-select component. Transitions the select's current state to the next state based on a given action.
  * @export
@@ -318,3 +319,4 @@ export default function reducer (state, action) {
 
   return _.defaults(nextState, state)
 }
+/* eslint-enable complexity */
