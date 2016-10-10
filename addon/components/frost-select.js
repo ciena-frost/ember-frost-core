@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import Ember from 'ember'
-const {A, Component, get, typeOf} = Ember
+const {A, Component, get, run, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-select'
@@ -365,7 +365,9 @@ export default Component.extend(PropTypeMixin, {
 
       const newProps = _.pick(state, this.get('stateProperties'))
 
-      this.setProperties(newProps)
+      run(() => {
+        this.setProperties(newProps)
+      })
 
       switch (state.lastAction) {
         case 'SELECT_HOVER':

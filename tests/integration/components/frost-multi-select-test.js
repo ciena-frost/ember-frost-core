@@ -73,7 +73,7 @@ describeComponent(
 
     describe('when opened', function () {
       beforeEach(function () {
-        return $hook('my-multi-select').find('.down-arrow').click()
+        $hook('my-multi-select').find('.down-arrow').click()
       })
 
       it('hook grabs the multi-select as expected', function () {

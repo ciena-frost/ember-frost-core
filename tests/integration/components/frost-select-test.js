@@ -208,8 +208,9 @@ describeComponent(
           let listItem = $hook('my-select-list').find('li:first-child')
           listItem.click()
         })
-        let listItem = $hook('my-select-list').find('li:first-child')
-        expect(listItem.hasClass('selected')).to.be.true
+        let dropDownInput = this.$('.frost-select input')
+        let value = dropDownInput.val()
+        expect(value).to.eql(props.data[0].label)
       })
 
       it('filters the list when input is typed into', function () {
