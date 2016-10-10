@@ -43,7 +43,7 @@ function isAttrDifferent (newAttrs, oldAttrs, attributeName) {
   let oldValue = get(oldAttrs, attributeName + '.value')
   let newValue = get(newAttrs, attributeName + '.value')
 
-  return newValue !== undefined && !_.isEqual(oldValue, newValue)
+  return !_.isEqual(oldValue, newValue)
 }
 
 /** Hook for handling outside element click
