@@ -290,7 +290,9 @@ export default function reducer (state, action) {
       if (selectedIndex >= 0) {
         nextState = select(state, selectedIndex)
       } else {
-        nextState = {}
+        nextState = {
+          prompt: ''
+        }
       }
       break
     case RESET_DROPDOWN:

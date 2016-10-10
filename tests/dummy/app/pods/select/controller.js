@@ -21,8 +21,9 @@ export default Controller.extend({
   selectedIndex: 1,
   selectedIndices: [1, 2],
   preSelectedValue: 'Arthur Curry',
+  preSelectedValueForClearing: 'Arthur Curry',
   selectedValues: ['Arthur Curry', 'Ray Palmer'],
-
+  clearSelectedValue: false,
   actions: {
     onBlurHandler () {
       this.notifications.addNotification({
@@ -41,6 +42,7 @@ export default Controller.extend({
         clearDuration: 2000
       })
     },
+
     onInputHandler (filterValue) {
       this.notifications.addNotification({
         message: 'Handling input: ' + filterValue,
@@ -49,6 +51,14 @@ export default Controller.extend({
         clearDuration: 2000
       })
       this.set('search', filterValue)
+    },
+
+    onClearSelect (event) {
+      this.set('preSelectedValueForClearing', '')
+    },
+
+    onChangeClearable (value) {
+      this.set('preSelectedValueForClearing', value[0])
     }
   }
 })

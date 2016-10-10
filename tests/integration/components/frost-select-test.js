@@ -140,7 +140,7 @@ describeComponent(
         this.$('.frost-select input').focus()
       })
       expect(this.$('.frost-select').hasClass('open')).to.be.true
-    })*/
+    }) */
 
     it('highlights list items on mouse over', function () {
       run(() => {
@@ -403,6 +403,14 @@ describeComponent(
         })
 
         expect($input.val()).to.be.eql('Ghostface')
+      })
+
+      it('clears when selectedValue is set to empty string', function () {
+        this.set('selVal', '')
+        this.render(selectedTestTemplate)
+        return run.later(() => {
+          expect($input.val()).to.be.eql('')
+        })
       })
     })
   }

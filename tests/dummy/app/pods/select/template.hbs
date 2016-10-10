@@ -23,6 +23,35 @@
       </div>
     </div>
 
+    <div class="example">
+      <div class="title">clearing</div>
+      <i>works by setting the property being passed as 'selectedValue' to an empty string<br/></i>
+      <div class="demo">
+        {{log preSelectedValueForClearing}}
+        {{frost-select
+          data=data
+          hook='mySelect'
+          selectedValue=preSelectedValueForClearing
+          onChange=(action 'onChangeClearable')
+        }}
+        {{frost-button text='Clear'
+          onClick=(action 'onClearSelect')
+          priority='secondary'
+          size='small'
+          text='Clear'
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-select
+  data=data
+  hook='mySelect'
+  selectedValue=preSelectedValueForClearing
+}}
+```"}}
+      </div>
+    </div>
+
   </div>
 
   <div class="section-title">Options</div>
