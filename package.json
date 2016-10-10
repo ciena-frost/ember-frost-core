@@ -117,6 +117,7 @@
     "ember-concurrency": "0.7.8",
     "ember-data": "^2.5.3",
     "ember-disable-proxy-controllers": "^1.0.1",
+    "ember-elsewhere": "0.4.1",
     "ember-export-application-global": "^1.0.4",
     "ember-hook": "1.3.1",
     "ember-load-initializers": "^0.5.0",

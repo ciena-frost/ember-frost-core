@@ -65,7 +65,7 @@ export default Component.extend(PropTypeMixin, {
   // Properties
   // ==========================================================================
 
-  attributeBindings: ['tabIndex'],
+  attributeBindings: ['href', 'tabIndex'],
   classNames: ['frost-select'],
   classNameBindings: ['focus', 'shouldOpen:open', 'disabled', 'hasError:error'],
   stateProperties: [
@@ -93,6 +93,7 @@ export default Component.extend(PropTypeMixin, {
     hook: PropTypes.string,
     hovered: PropTypes.number,
     maxListHeight: PropTypes.number,
+    renderTarget: PropTypes.string,
     selected: PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.number
@@ -116,8 +117,9 @@ export default Component.extend(PropTypeMixin, {
       error: false,
       hovered: -1,
       maxListHeight: 400,
+      renderTarget: 'frost-select',
       selected: A([]),
-      tabIndex: -1,
+      tabIndex: 0,
       width: 200
     }
   },
@@ -384,6 +386,10 @@ export default Component.extend(PropTypeMixin, {
     this.subscribe(this.setUpReduxStore())
   },
 
+  didInsertElement () {
+    this.set('element', this.$())
+  },
+
   // ==========================================================================
   // Events
   // ==========================================================================
@@ -416,7 +422,7 @@ export default Component.extend(PropTypeMixin, {
     },
 
     // TODO: add jsdoc
-    onClickArrow (event) {
+    toggle (event) {
       event.preventDefault()
       const reduxStore = this.get('reduxStore')
       reduxStore.dispatch(clickArrow)

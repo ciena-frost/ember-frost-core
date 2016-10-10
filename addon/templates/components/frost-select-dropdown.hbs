@@ -1,0 +1,29 @@
+<div class='up-arrow' />
+{{#if multiselect}}
+  <div class='multi-status'>
+    <span class='number-selected'>{{selectedItems.length}} selected</span>
+    <span class='clear' tabIndex={-1} onClick={{action onClear}}>Clear all</span>
+  </div>
+{{/if}}
+<ul>
+  {{#each items as |item index|}}
+    {{#frost-select-li
+      class=item.className
+      hook=(concat hook '-item-' index)
+      data=item
+      onSelect=onSelect
+      onItemOver=onItemOver
+    }}
+      {{#if multiselect}}
+        {{frost-checkbox
+          checked=item.selected
+          hook=(concat hook '-checkbox-item-' index)
+          onInput=onCheck
+          size='medium'
+          value=item.index
+        }}
+      {{/if}}
+      {{item.label}}
+    {{/frost-select-li}}
+  {{/each}}
+</ul>
