@@ -412,6 +412,14 @@ describeComponent(
 
         expect($input.val()).to.be.eql('Ghostface')
       })
+
+      it('clears when selectedValue is set to empty string', function () {
+        this.set('selVal', '')
+        this.render(selectedTestTemplate)
+        return run.later(() => {
+          expect($input.val()).to.be.eql('')
+        })
+      })
     })
   }
 )

@@ -43,7 +43,7 @@ function isAttrDifferent (newAttrs, oldAttrs, attributeName) {
   let oldValue = get(oldAttrs, attributeName + '.value')
   let newValue = get(newAttrs, attributeName + '.value')
 
-  return newValue !== undefined && !_.isEqual(oldValue, newValue)
+  return !_.isEqual(oldValue, newValue)
 }
 
 /** Hook for handling outside element click
@@ -255,7 +255,11 @@ export default Component.extend(PropTypeMixin, {
     // If frost-select instance is being reused by consumer but context is cleared make
     // make sure to actually clear input (noticed when used in conjunction with dialog
     // components that don't destroy DOM when closed and re-opened)
-    if (selectedValueChanged && ('selectedValue' in newAttrs) && (newAttrs.selectedValue.value === undefined)) {
+    if (
+      selectedValueChanged &&
+      ('selectedValue' in newAttrs) &&
+      (newAttrs.selectedValue.value === undefined || newAttrs.selectedValue.value === '')
+    ) {
       this.selectOptionByValue(null)
       return
     }
