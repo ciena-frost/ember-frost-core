@@ -1,29 +1,36 @@
-<div class='up-arrow' />
-{{#if multiselect}}
-  <div class='multi-status'>
-    <span class='number-selected'>{{selectedItems.length}} selected</span>
-    <span class='clear' tabIndex={-1} onClick={{action onClear}}>Clear all</span>
-  </div>
-{{/if}}
-<ul>
-  {{#each items as |item index|}}
-    {{#frost-select-li
-      class=item.className
-      hook=(concat receivedHook '-item-' index)
-      data=item
-      onSelect=onSelect
-      onItemOver=onItemOver
-    }}
-      {{#if multiselect}}
-        {{frost-checkbox
-          checked=item.selected
-          hook=(concat receivedHook '-checkbox-item-' index)
-          onInput=onCheck
-          size='medium'
-          value=item.index
-        }}
-      {{/if}}
-      {{item.label}}
-    {{/frost-select-li}}
-  {{/each}}
-</ul>
+<div class='frost-select-overlay' />
+<div
+  class='frost-select-dropdown'
+  hook={{concat receivedHook '-list'}}
+  style={{listStyle}}
+>
+  <div class='up-arrow' />
+  {{#if multiselect}}
+    <div class='multi-status'>
+      <span class='number-selected'>{{selectedItems.length}} selected</span>
+      <span class='clear' tabIndex={-1} onClick={{action onClear}}>Clear all</span>
+    </div>
+  {{/if}}
+  <ul>
+    {{#each items as |item index|}}
+      {{#frost-select-li
+        class=item.className
+        hook=(concat receivedHook '-item-' index)
+        data=item
+        onSelect=onSelect
+        onItemOver=onItemOver
+      }}
+        {{#if multiselect}}
+          {{frost-checkbox
+            checked=item.selected
+            hook=(concat receivedHook '-checkbox-item-' index)
+            onInput=onCheck
+            size='medium'
+            value=item.index
+          }}
+        {{/if}}
+        {{item.label}}
+      {{/frost-select-li}}
+    {{/each}}
+  </ul>
+</div>

@@ -88,6 +88,15 @@ $frost-input-select-option-row-height: 35px;
   }
 }
 
+.frost-select-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9001;
+}
+
 .frost-select-dropdown {
   position: absolute;
   height: auto;
@@ -100,7 +109,7 @@ $frost-input-select-option-row-height: 35px;
   box-shadow: 0 2px 7px 3px transparentize($frost-select-container-shadow, .4);
   margin-bottom: 1em;
   transition: height .4s ease, opacity .2s ease;
-  z-index: 9001;
+  z-index: 9002;
 
   ul {
     margin: 0;

@@ -9,9 +9,8 @@ const BORDER_HEIGHT = 1
 const UP_ARROW_HEIGHT = 10
 
 export default Component.extend(PropTypeMixin, {
-  attributeBindings: ['style'],
-  classNames: ['frost-select-dropdown'],
   layout,
+  tagName: '',
 
   PropTypes: {
     element: PropTypes.object.isRequired,
@@ -36,14 +35,8 @@ export default Component.extend(PropTypeMixin, {
   },
 
   @readOnly
-  @computed('receivedHook')
-  hook (receivedHook) {
-    return `${receivedHook}-list`
-  },
-
-  @readOnly
   @computed('left', 'top', 'width')
-  style (left, top, width) {
+  listStyle (left, top, width) {
     const style = [
       `left:${left}px`,
       `top:${top}px`,
