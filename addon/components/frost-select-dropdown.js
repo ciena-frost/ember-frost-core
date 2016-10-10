@@ -15,13 +15,13 @@ export default Component.extend(PropTypeMixin, {
 
   PropTypes: {
     element: PropTypes.object.isRequired,
-    hook: PropTypes.string.isRequired,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     left: PropTypes.number,
     onCheck: PropTypes.func,
     onClear: PropTypes.func,
     onItemOver: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
+    receivedHook: PropTypes.string.isRequired,
     selected: PropTypes.arrayOf(PropTypes.number).isRequired,
     top: PropTypes.number,
     width: PropTypes.number
@@ -33,6 +33,12 @@ export default Component.extend(PropTypeMixin, {
       top: 0,
       width: 0
     }
+  },
+
+  @readOnly
+  @computed('receivedHook')
+  hook (receivedHook) {
+    return `${receivedHook}-list`
   },
 
   @readOnly
