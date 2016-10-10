@@ -22,7 +22,7 @@ export default Component.extend(PropTypeMixin, {
     onItemOver: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
     receivedHook: PropTypes.string.isRequired,
-    selected: PropTypes.arrayOf(PropTypes.number).isRequired,
+    selectedItems: PropTypes.arrayOf(PropTypes.number),
     top: PropTypes.number,
     width: PropTypes.number
   },
