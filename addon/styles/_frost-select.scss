@@ -100,6 +100,7 @@ $frost-input-select-option-row-height: 35px;
   box-shadow: 0 2px 7px 3px transparentize($frost-select-container-shadow, .4);
   margin-bottom: 1em;
   transition: height .4s ease, opacity .2s ease;
+  z-index: 9001;
 
   ul {
     margin: 0;
