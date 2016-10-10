@@ -422,7 +422,7 @@ export default Component.extend(PropTypeMixin, {
     },
 
     // TODO: add jsdoc
-    toggle (event) {
+    onClickArrow (event) {
       event.preventDefault()
       const reduxStore = this.get('reduxStore')
       reduxStore.dispatch(clickArrow)

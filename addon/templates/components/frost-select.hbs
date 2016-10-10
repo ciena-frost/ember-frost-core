@@ -1,12 +1,20 @@
-{{frost-text
-  disabled=true
-  hook=(concat hook '-input')
-  value=prompt
-}}
+<input
+  autocomplete=false
+  autofocus={{autofocus}}
+  class="trigger"
+  disabled={{disabled}}
+  data-test={{hook (concat hook '-input')}}
+  onFocus={{action 'onFocus'}}
+  onBlur={{action 'onBlur'}}
+  onInput={{action 'onChange'}}
+  placeholder={{placeholder}}
+  type="text"
+  value={{prompt}}
+>
 
-<div class='down-arrow' onClick={{action 'toggle'}}>
-  <svg viewBox='0 0 15 15'>
-    <polygon points='7.5,11.4 1.1,5 2.5,3.6 7.5,8.6 12.5,3.6 13.9,5' />
+<div class="down-arrow" onClick={{action 'onClickArrow'}}>
+  <svg viewBox="0 0 15 15">
+    <polygon points="7.5,11.4 1.1,5 2.5,3.6 7.5,8.6 12.5,3.6 13.9,5" />
   </svg>
 </div>
 

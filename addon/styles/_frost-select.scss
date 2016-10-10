@@ -26,12 +26,7 @@ $frost-input-select-option-row-height: 35px;
     border: $focus-border;
   }
 
-  .frost-text {
-    width: 100%;
-    height: 100%;
-  }
-
-  .frost-text-input {
+  input.trigger {
     background: none;
     border: 0;
     color: $frost-color-input;
