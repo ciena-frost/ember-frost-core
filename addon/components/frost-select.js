@@ -65,7 +65,7 @@ export default Component.extend(PropTypeMixin, {
   // Properties
   // ==========================================================================
 
-  attributeBindings: ['href', 'tabIndex'],
+  attributeBindings: ['tabIndex'],
   classNames: ['frost-select'],
   classNameBindings: ['focus', 'shouldOpen:open', 'disabled', 'hasError:error'],
   stateProperties: [
@@ -119,7 +119,7 @@ export default Component.extend(PropTypeMixin, {
       maxListHeight: 400,
       renderTarget: 'frost-select',
       selected: A([]),
-      tabIndex: 0,
+      tabIndex: -1,
       width: 200
     }
   },
