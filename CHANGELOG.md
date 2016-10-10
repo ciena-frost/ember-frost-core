@@ -1,3 +1,6 @@
+# 0.27.4
+* select value and prompt is now clearable by setting the 'selectedValue' property to an empty string in the consuming context
+
 # 0.27.3
 
 * The unselected text in the `frost-select` drop down menu is now a darker color.
