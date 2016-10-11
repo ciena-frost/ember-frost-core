@@ -1,3 +1,9 @@
+# 0.28.0
+
+* **Added** [ember-elsewhere](https://github.com/ef4/ember-elsewhere) as a new dependency.
+* **Changed** `frost-select` and `frost-multi-select` to render dropdown elsewhere in the DOM, using `ember-elsewhere`, in order to make them more flexible.
+* **Changed** minimum Ember version from `2.1` to `2.3` since `ember-elsewhere` doesn't appear to work on versions prior to `2.3`.
+
 # 0.27.4
 * select value and prompt is now clearable by setting the 'selectedValue' property to an empty string in the consuming context
 
