@@ -27,6 +27,7 @@ export default Component.extend(PropTypeMixin, {
 
   // == Events ================================================================
 
+  /* eslint-disable complexity */
   initializeScroll: on('didInsertElement', function () {
     scheduleOnce('afterRender', this, () => {
       window.Ps.initialize(this.$()[0])
@@ -70,5 +71,6 @@ export default Component.extend(PropTypeMixin, {
       })
     }
   })
+  /* eslint-enable complexity */
 
 })

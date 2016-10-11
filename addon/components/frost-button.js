@@ -25,6 +25,7 @@ const validSizes = [
   'small'
 ]
 
+/* eslint-disable complexity */
 /**
  * Add the appropriate class for the given priority to the Array of classes
  * @param {String} priority - the priority to add
@@ -49,6 +50,7 @@ function addPriorityClass (priority, classes) {
       break
   }
 }
+/* eslint-enable complexity */
 
 export default Component.extend(PropTypeMixin, {
   // == Dependencies ==========================================================
@@ -163,6 +165,7 @@ export default Component.extend(PropTypeMixin, {
     return icon && text && subtext
   },
 
+  /* eslint-disable complexity */
   @readOnly
   @computed('design', 'icon', 'priority', 'size', 'text', 'vertical')
   /**
@@ -207,6 +210,7 @@ export default Component.extend(PropTypeMixin, {
 
     return classes.join(' ')
   },
+  /* eslint-enable complexity */
 
   // == Functions =============================================================
 

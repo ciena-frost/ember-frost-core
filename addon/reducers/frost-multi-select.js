@@ -171,6 +171,7 @@ function itemsFromValue (baseItems, value) {
   .value()
 }
 
+/* eslint-disable complexity */
 /**
  * Reducer for the multi-select component
  *
@@ -226,3 +227,4 @@ export default function reducer (state, action) {
 
   return nextState
 }
+/* eslint-enable complexity */

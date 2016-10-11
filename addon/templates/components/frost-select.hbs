@@ -18,22 +18,15 @@
   </svg>
 </div>
 
-<div class="drop-down-container">
-  <div class="list-container">
-    <div class="up-arrow"></div>
-    <ul ref="container" style={{containerStyle}} data-test={{hook (concat hook '-list')}}>
-      {{#each displayItems as |item index|}}
-        {{#frost-select-li
-          class=item.className
-          hook=(concat hook '-item-' index)
-          data=item
-          onSelect=(action 'onSelect')
-          onItemOver=(action 'onItemOver')
-        }}
-          {{item.label}}
-        {{/frost-select-li}}
-      {{/each}}
-    </ul>
-  </div>
-</div>
-{{yield}}
+{{#if open}}
+  {{to-elsewhere
+    named=renderTarget
+    send=(component 'frost-select-dropdown'
+      element=element
+      items=displayItems
+      onItemOver=(action 'onItemOver')
+      onSelect=(action 'onSelect')
+      receivedHook=hook
+    )
+  }}
+{{/if}}

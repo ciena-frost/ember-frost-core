@@ -75,6 +75,7 @@ export default Component.extend(PropTypeMixin, {
     )
   },
 
+  /* eslint-disable complexity */
   keyPress (e) {
     if (e.keyCode === 13 || e.keyCode === 32) {
       if (this.get('disabled') || this.get('groupValue') === this.get('value')) {
@@ -86,6 +87,7 @@ export default Component.extend(PropTypeMixin, {
       }
     }
   },
+  /* eslint-enable complexity */
 
   change (event) {
     const onChange = this.get('onChange')
