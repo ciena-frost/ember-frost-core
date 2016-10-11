@@ -8,10 +8,11 @@ $disabled-bg: $frost-color-input-disabled-bg;
 .frost-textarea {
   display: flex;
   position: relative;
-  
+
   &.error .frost-textarea-input {
     border: $error-border;
     margin: $error-margin;
+    color: $frost-color-danger;
 
     &:hover:enabled:read-write:not(:focus) {
       border: $error-border;
