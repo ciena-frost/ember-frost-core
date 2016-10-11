@@ -117,6 +117,7 @@ $frost-input-select-option-row-height: 35px;
   box-shadow: 0 2px 7px 3px transparentize($frost-select-container-shadow, .4);
   transition: height .4s ease, opacity .2s ease;
   z-index: 9002;
+  overflow-y: auto;
 
   ul {
     margin: 0;
@@ -179,28 +180,22 @@ $frost-input-select-option-row-height: 35px;
       text-decoration: none;
     }
   }
+}
 
-  .down-arrow {
-    @include triangle-down($frost-select-container-background, 12px);
-    display: inline-block;
-    left: calc(50% - 15px);
-    overflow: visible;
-    pointer-events: none;
-    position: absolute;
-    right: 8px;
-    bottom: -10px;
-    z-index: 3;
-  }
+.frost-select-down-arrow {
+  @include triangle-down($frost-select-container-background, 12px);
+  display: inline-block;
+  overflow: visible;
+  pointer-events: none;
+  position: fixed;
+  z-index: 9003;
+}
 
-  .up-arrow {
-    @include triangle-up($frost-select-container-background, 12px);
-    display: inline-block;
-    left: calc(50% - 15px);
-    overflow: visible;
-    pointer-events: none;
-    position: absolute;
-    right: 8px;
-    top: -10px;
-    z-index: 3;
-  }
+.frost-select-up-arrow {
+  @include triangle-up($frost-select-container-background, 12px);
+  display: inline-block;
+  overflow: visible;
+  pointer-events: none;
+  position: fixed;
+  z-index: 9003;
 }

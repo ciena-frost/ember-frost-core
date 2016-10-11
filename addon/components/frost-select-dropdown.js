@@ -6,16 +6,19 @@ import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-select-dropdown'
 
 const BORDER_HEIGHT = 1
-const UP_ARROW_HEIGHT = 10
+const ARROW_HEIGHT = 10
+const WINDOW_SPACE = 20
 
 export default Component.extend(PropTypeMixin, {
   layout,
   tagName: '',
 
   PropTypes: {
+    bottom: PropTypes.number,
     element: PropTypes.object.isRequired,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     left: PropTypes.number,
+    maxHeight: PropTypes.number,
     onCheck: PropTypes.func,
     onClear: PropTypes.func,
     onItemOver: PropTypes.func.isRequired,
@@ -28,15 +31,17 @@ export default Component.extend(PropTypeMixin, {
 
   getDefaultProps () {
     return {
+      bottom: 0,
       left: 0,
+      maxHeight: 0,
       top: 0,
       width: 0
     }
   },
 
   @readOnly
-  @computed('bottom', 'left', 'top', 'width')
-  listStyle (bottom, left, top, width) {
+  @computed('bottom', 'left', 'maxHeight', 'top', 'width')
+  listStyle (bottom, left, maxHeight, top, width) {
     if (bottom !== 'auto') {
       bottom = `${bottom}px`
     }
@@ -48,12 +53,29 @@ export default Component.extend(PropTypeMixin, {
     const style = [
       `bottom:${bottom}`,
       `left:${left}px`,
+      `max-height:${maxHeight}px`,
       `top:${top}`,
       `width:${width}px`
     ]
       .join(';')
 
     return Ember.String.htmlSafe(style)
+  },
+
+  @readOnly
+  @computed('bottom', 'left', 'top', 'width')
+  arrowStyle (bottom, left, top, width) {
+    const style = [
+      `left:${left + (width - ARROW_HEIGHT) / 2}px`
+    ]
+
+    if (bottom === 'auto') {
+      style.push(`top:${top - ARROW_HEIGHT + BORDER_HEIGHT}px`)
+    } else {
+      style.push(`bottom:${bottom - ARROW_HEIGHT - BORDER_HEIGHT}px`)
+    }
+
+    return Ember.String.htmlSafe(style.join(';'))
   },
 
   _getElementDimensionsAndPosition ($element) {
@@ -73,7 +95,7 @@ export default Component.extend(PropTypeMixin, {
   },
 
   _positionAboveInput (top) {
-    const bottom = $(window).height() - top + $(document).scrollTop() + UP_ARROW_HEIGHT + BORDER_HEIGHT
+    const bottom = $(window).height() - top + $(document).scrollTop() + ARROW_HEIGHT + BORDER_HEIGHT
 
     if (bottom === this.get('bottom')) {
       return {}
@@ -81,6 +103,7 @@ export default Component.extend(PropTypeMixin, {
 
     return {
       bottom,
+      maxHeight: $(window).height() - bottom - WINDOW_SPACE,
       top: 'auto'
     }
   },
@@ -88,7 +111,7 @@ export default Component.extend(PropTypeMixin, {
   _positionBelowInput (height, top) {
     // Make sure dropdown is rendered below input and we leave space for arrow
     // that connects dropdown to input
-    top = top + height + UP_ARROW_HEIGHT + BORDER_HEIGHT - $(document).scrollTop()
+    top = top + height + ARROW_HEIGHT + BORDER_HEIGHT - $(document).scrollTop()
 
     if (top === this.get('top')) {
       return {}
@@ -96,6 +119,7 @@ export default Component.extend(PropTypeMixin, {
 
     return {
       bottom: 'auto',
+      maxHeight: $(window).height() - top - WINDOW_SPACE,
       top
     }
   },

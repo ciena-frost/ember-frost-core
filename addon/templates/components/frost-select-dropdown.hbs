@@ -1,12 +1,10 @@
 <div class='frost-select-overlay' />
+<div class={{if (eq top 'auto') 'frost-select-down-arrow' 'frost-select-up-arrow'}} style={{arrowStyle}} />
 <div
   class='frost-select-dropdown'
   data-test={{hook (concat receivedHook '-list')}}
   style={{listStyle}}
 >
-  {{#if (eq bottom 'auto')}}
-    <div class='up-arrow' />
-  {{/if}}
   {{#if multiselect}}
     <div class='multi-status'>
       <span class='number-selected'>{{selectedItems.length}} selected</span>
@@ -35,7 +33,4 @@
       {{/frost-select-li}}
     {{/each}}
   </ul>
-  {{#if (eq top 'auto')}}
-    <div class='down-arrow' />
-  {{/if}}
 </div>
