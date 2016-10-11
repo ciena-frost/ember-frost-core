@@ -7,6 +7,7 @@ import layout from '../templates/components/frost-select-dropdown'
 
 const BORDER_HEIGHT = 1
 const ARROW_HEIGHT = 10
+const ARROW_WIDTH = 25
 const WINDOW_SPACE = 20
 
 export default Component.extend(PropTypeMixin, {
@@ -66,7 +67,7 @@ export default Component.extend(PropTypeMixin, {
   @computed('bottom', 'left', 'top', 'width')
   arrowStyle (bottom, left, top, width) {
     const style = [
-      `left:${left + (width - ARROW_HEIGHT) / 2}px`
+      `left:${left + (width - ARROW_WIDTH) / 2}px`
     ]
 
     if (bottom === 'auto') {
