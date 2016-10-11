@@ -101,6 +101,8 @@ export default Component.extend(PropTypeMixin, {
   },
 
   _updatePosition ($element) {
+    $element = $element.first()
+
     const {center, height, left, top, width} = this._getElementDimensionsAndPosition($element)
     const windowCenterX = $(window).height() / 2 + $(document).scrollTop()
     const props = (
@@ -121,8 +123,11 @@ export default Component.extend(PropTypeMixin, {
   },
 
   didReceiveAttrs (attrs) {
-    const $element = get(attrs, 'newAttrs.element.value').first()
-    this._updatePosition($element)
+    const $element = get(attrs, 'newAttrs.element.value')
+
+    if ($element) {
+      this._updatePosition($element)
+    }
   },
 
   didInsertElement () {
@@ -130,7 +135,7 @@ export default Component.extend(PropTypeMixin, {
       const $element = get(this.attrs, 'element.value')
 
       if ($element) {
-        this._updatePosition($element.first())
+        this._updatePosition($element)
       }
     }
 
