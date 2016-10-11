@@ -62,12 +62,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     }
   },
 
-  // // == Events ================================================================
-
-  init () {
-    this._super(...arguments)
-  },
-
+  // == Events ================================================================
   _showClearEvent: on('focusIn', 'focusOut', 'input', function (event) {
     const isFocused = event.type !== 'focusout'
     get(this, '_showClear').perform(isFocused)
