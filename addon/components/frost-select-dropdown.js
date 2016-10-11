@@ -1,5 +1,5 @@
 import Ember from 'ember'
-const {Component} = Ember
+const {Component, get} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
@@ -48,15 +48,8 @@ export default Component.extend(PropTypeMixin, {
   },
 
   /* eslint-disable complexity */
-  didReceiveAttrs () {
-    const elements = this.get('element')
-
-    if (!elements || elements.length === 0) {
-      return
-    }
-
-    const element = elements.first()
-
+  didReceiveAttrs (attrs) {
+    const element = get(attrs, 'newAttrs.element.value').first()
     const offset = element.offset()
     const props = {}
     const left = offset.left
