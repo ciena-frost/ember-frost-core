@@ -73,7 +73,7 @@ export default Component.extend(PropTypeMixin, {
   },
 
   _positionAboveInput (top) {
-    const bottom = $(window).height() - top + $(document).scrollTop()
+    const bottom = $(window).height() - top + $(document).scrollTop() + UP_ARROW_HEIGHT + BORDER_HEIGHT
 
     if (bottom === this.get('bottom')) {
       return {}

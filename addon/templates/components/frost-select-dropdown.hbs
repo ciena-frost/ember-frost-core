@@ -4,7 +4,9 @@
   data-test={{hook (concat receivedHook '-list')}}
   style={{listStyle}}
 >
-  <div class='up-arrow' />
+  {{#if (eq bottom 'auto')}}
+    <div class='up-arrow' />
+  {{/if}}
   {{#if multiselect}}
     <div class='multi-status'>
       <span class='number-selected'>{{selectedItems.length}} selected</span>
@@ -33,4 +35,7 @@
       {{/frost-select-li}}
     {{/each}}
   </ul>
+  {{#if (eq top 'auto')}}
+    <div class='down-arrow' />
+  {{/if}}
 </div>

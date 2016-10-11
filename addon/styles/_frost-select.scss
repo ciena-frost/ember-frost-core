@@ -3,6 +3,14 @@ $focus-border: 1px solid $frost-color-input-focus-border;
 $frost-input-text-height: 35px;
 $frost-input-select-option-row-height: 35px;
 
+@mixin triangle-down($color, $size) {
+  border-top: $size solid $color;
+  border-left: $size solid transparent;
+  border-right: $size solid transparent;
+  height: 0;
+  width: 25px;
+}
+
 @mixin triangle-up($color, $size) {
   border-bottom: $size solid $color;
   border-left: $size solid transparent;
@@ -107,7 +115,6 @@ $frost-input-select-option-row-height: 35px;
   border: 1px solid $frost-color-lgrey-3;
   border-radius: 3px;
   box-shadow: 0 2px 7px 3px transparentize($frost-select-container-shadow, .4);
-  margin-bottom: 1em;
   transition: height .4s ease, opacity .2s ease;
   z-index: 9002;
 
@@ -171,6 +178,18 @@ $frost-input-select-option-row-height: 35px;
       float: right;
       text-decoration: none;
     }
+  }
+
+  .down-arrow {
+    @include triangle-down($frost-select-container-background, 12px);
+    display: inline-block;
+    left: calc(50% - 15px);
+    overflow: visible;
+    pointer-events: none;
+    position: absolute;
+    right: 8px;
+    bottom: -10px;
+    z-index: 3;
   }
 
   .up-arrow {
