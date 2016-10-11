@@ -47,8 +47,16 @@ export default Component.extend(PropTypeMixin, {
     return Ember.String.htmlSafe(style)
   },
 
+  /* eslint-disable complexity */
   didReceiveAttrs () {
-    const element = this.get('element').first()
+    const elements = this.get('element')
+
+    if (!elements || elements.length === 0) {
+      return
+    }
+
+    const element = elements.first()
+
     const offset = element.offset()
     const props = {}
     const left = offset.left
@@ -71,4 +79,5 @@ export default Component.extend(PropTypeMixin, {
       this.setProperties(props)
     }
   }
+  /* eslint-enable complexity */
 })

@@ -250,6 +250,24 @@ describeComponent(
           done()
         })
       })
+
+      it('goes into error state when something non-existant is typed', function () {
+        let input = this.$('.frost-select input')
+        input.val('zxcv').trigger('input')
+        let component = this.$('.frost-select')
+        expect(component.hasClass('open')).to.be.false
+        expect(component.hasClass('error')).to.be.true
+      })
+
+      it('handles click outside of select', function () {
+        this.$().click()
+        expect($dropDown.hasClass('open')).to.be.false
+      })
+
+      it('handles losing focus by pressing tab', function () {
+        keyDown($dropDown, 'tab')
+        expect($dropDown.hasClass('open')).to.be.false
+      })
     })
 
     // FIXME: figure out why test is failing
@@ -259,17 +277,6 @@ describeComponent(
       })
       expect(this.$('.frost-select').hasClass('open')).to.be.true
     })*/
-
-    it('goes into error state when something non-existant is typed', function () {
-      run(() => {
-        let input = this.$('.frost-select input')
-        this.$('.frost-select').addClass('open')
-        input.val('zxcv').trigger('input')
-      })
-      let component = this.$('.frost-select')
-      expect(component.hasClass('open')).to.be.false
-      expect(component.hasClass('error')).to.be.true
-    })
 
     it('unsets the value when the index is less than 0', function () {
       run(() => {
@@ -291,22 +298,6 @@ describeComponent(
       let input = this.$('.frost-select input')
       expect(select.hasClass('open')).to.be.false
       expect(input.val()).to.eql('Raekwon')
-    })
-
-    it('handles click outside of select', function () {
-      run(() => {
-        this.$('.frost-select .down-arrow').click()
-        this.$().click()
-      })
-      expect($dropDown.hasClass('open')).to.be.false
-    })
-
-    it('handles losing focus by pressing tab', function () {
-      run(() => {
-        this.$('.frost-select .down-arrow').click()
-        keyDown($dropDown, 'tab')
-      })
-      expect($dropDown.hasClass('open')).to.be.false
     })
 
     it('supports placeholder', function () {
