@@ -1,16 +1,16 @@
-import {afterEach, beforeEach, describe, it} from 'mocha'
 import {expect} from 'chai'
+import {after, before, beforeEach, describe, it} from 'mocha'
 import destroyApp from '../helpers/destroy-app'
 import startApp from '../helpers/start-app'
 
 describe('Acceptance: Application', function () {
   let application
 
-  beforeEach(function () {
+  before(function () {
     application = startApp()
   })
 
-  afterEach(function () {
+  after(function () {
     destroyApp(application)
   })
 
@@ -19,7 +19,7 @@ describe('Acceptance: Application', function () {
       return visit('/')
     })
 
-    it('redirects to /demo', function () {
+    it('redirects correct route', function () {
       expect(currentPath()).to.equal('demo')
     })
   })
@@ -41,7 +41,7 @@ describe('Acceptance: Application', function () {
           return visit(`/${path}`)
         })
 
-        it('does not redirect', function () {
+        it('renders correct route', function () {
           expect(currentPath()).to.equal(path)
         })
       })
