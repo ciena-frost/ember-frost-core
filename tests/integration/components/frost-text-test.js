@@ -292,7 +292,7 @@ describeComponent(
 
     it('hook attr grabs frost-text as expected', function () {
       this.render(hbs`
-          {{frost-text 
+          {{frost-text
             hook='my-text'
           }}
       `)

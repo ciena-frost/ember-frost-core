@@ -87,37 +87,11 @@ A comprehensive list of [HTML event handlers](frost-events.md) are available to 
 }}
 ```
 
-```javascript
-actions: {
-  /**
-   * Handle the input event
-   * @param {Object} e - the event
-   * @param {String} e.value - the value of the input
-   * @param {String} e.id - the id that was passed into the component
-   */
-  handleInput (e) {
-    console.log(`id: ${e.id}, value: ${e.value}`)
-  }
-}
-```
-
 ### Actions - onBlur
 ```handlebars
 {{frost-text
   onBlur=(action 'handleBlur')
 }}
-```
-
-```javascript
-actions: {
-  /**
-   * Handle the blur event
-   * @param {Event} e - the original focus-out event
-   */
-  handleBlur (e) {
-    console.log('Input blurred: ', e)
-  }
-}
 ```
 
 ### Actions - onFocus
@@ -127,18 +101,6 @@ actions: {
 }}
 ```
 
-```javascript
-actions: {
-  /**
-   * Handle the focus event
-   * @param {Event} e - the original focus-in event
-   */
-  handleFocus (e) {
-    console.log('Input focused: ', e)
-  }
-}
-```
-
 ### Actions - onKeyDown
 ```handlebars
 {{frost-text
@@ -146,33 +108,9 @@ actions: {
 }}
 ```
 
-```javascript
-actions: {
-  /**
-   * Handle the key-down event
-   * @param {Event} e - the original key-down event
-   */
-  handleKeyDown (e) {
-    console.log(`keyDown: keyCode: ${e.keyCode} key: ${e.key}`)
-  }
-}
-```
-
 ### Actions - onKeyUp
 ```handlebars
 {{frost-text
   onKeyUp=(action 'handleKeyUp')
 }}
-```
-
-```javascript
-actions: {
-  /**
-   * Handle the key-up event
-   * @param {Event} e - the original key-up event
-   */
-  handleKeyUp (e) {
-    console.log(`keyUp: keyCode: ${e.keyCode} key: ${e.key}`)
-  }
-}
 ```
