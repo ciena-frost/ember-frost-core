@@ -1,6 +1,7 @@
 import Ember from 'ember'
 const {$, Component, get, run} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
+import {task, timeout} from 'ember-concurrency'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
 import layout from '../templates/components/frost-select-dropdown'
@@ -126,26 +127,6 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
-  _startUpdating () {
-    const now = Date.now()
-
-    // Stop updating 250 ms after user interactions stop
-    if (now - this._lastInteraction > 250) {
-      this._isUpdating = null
-      return
-    }
-
-    this._isUpdating = true
-
-    const $element = get(this.attrs, '$element.value')
-
-    if ($element) {
-      this._updatePosition($element)
-    }
-
-    run.later(this._startUpdating.bind(this), FPS)
-  },
-
   _updatePosition ($element) {
     $element = $element.first()
 
@@ -172,6 +153,22 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
+  updateTask: task(function * () {
+    this._isUpdating = true
+
+    while (Date.now() - this._lastInteraction < 250) {
+      const $element = get(this.attrs, '$element.value')
+
+      if ($element) {
+        this._updatePosition($element)
+      }
+
+      yield timeout(FPS)
+    }
+
+    this._isUpdating = false
+  }),
+
   didReceiveAttrs (attrs) {
     const $element = get(attrs, 'newAttrs.$element.value')
 
@@ -185,7 +182,7 @@ export default Component.extend(PropTypeMixin, {
       this._lastInteraction = Date.now()
 
       if (!this._isUpdating) {
-        this._startUpdating()
+        this.get('updateTask').perform()
       }
     }
 
