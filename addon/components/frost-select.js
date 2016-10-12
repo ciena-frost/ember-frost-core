@@ -397,7 +397,7 @@ export default Component.extend(PropTypeMixin, {
   },
 
   didInsertElement () {
-    this.set('element', this.$())
+    this.set('$element', this.$())
   },
 
   // ==========================================================================

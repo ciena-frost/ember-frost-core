@@ -1,6 +1,7 @@
 import Ember from 'ember'
 const {$, Component, get} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
+import {task, timeout} from 'ember-concurrency'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
 import layout from '../templates/components/frost-select-dropdown'
@@ -8,6 +9,7 @@ import layout from '../templates/components/frost-select-dropdown'
 const BORDER_HEIGHT = 1
 const ARROW_HEIGHT = 10
 const ARROW_WIDTH = 25
+const FPS = 1000 / 60 // Update at 60 frames per second
 const WINDOW_SPACE = 20
 
 export default Component.extend(PropTypeMixin, {
@@ -15,8 +17,8 @@ export default Component.extend(PropTypeMixin, {
   tagName: '',
 
   PropTypes: {
+    $element: PropTypes.object.isRequired,
     bottom: PropTypes.number,
-    element: PropTypes.object.isRequired,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     left: PropTypes.number,
     maxHeight: PropTypes.number,
@@ -142,13 +144,33 @@ export default Component.extend(PropTypeMixin, {
       props.width = width
     }
 
-    if (Object.keys(props).length !== 0) {
+    if (
+      Object.keys(props).length !== 0 &&
+      !this.get('isDestroyed') &&
+      !this.get('isDestroying')
+    ) {
       this.setProperties(props)
     }
   },
 
+  updateTask: task(function * () {
+    this._isUpdating = true
+
+    while (Date.now() - this._lastInteraction < 250) {
+      const $element = get(this.attrs, '$element.value')
+
+      if ($element) {
+        this._updatePosition($element)
+      }
+
+      yield timeout(FPS)
+    }
+
+    this._isUpdating = false
+  }),
+
   didReceiveAttrs (attrs) {
-    const $element = get(attrs, 'newAttrs.element.value')
+    const $element = get(attrs, 'newAttrs.$element.value')
 
     if ($element) {
       this._updatePosition($element)
@@ -157,10 +179,10 @@ export default Component.extend(PropTypeMixin, {
 
   didInsertElement () {
     this._updateHandler = () => {
-      const $element = get(this.attrs, 'element.value')
+      this._lastInteraction = Date.now()
 
-      if ($element) {
-        this._updatePosition($element)
+      if (!this._isUpdating) {
+        this.get('updateTask').perform()
       }
     }
 
