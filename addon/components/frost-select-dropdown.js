@@ -1,5 +1,5 @@
 import Ember from 'ember'
-const {$, Component, get} = Ember
+const {$, Component, get, run} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
@@ -8,6 +8,7 @@ import layout from '../templates/components/frost-select-dropdown'
 const BORDER_HEIGHT = 1
 const ARROW_HEIGHT = 10
 const ARROW_WIDTH = 25
+const FPS = 1000 / 60 // Update at 60 frames per second
 const WINDOW_SPACE = 20
 
 export default Component.extend(PropTypeMixin, {
@@ -15,8 +16,8 @@ export default Component.extend(PropTypeMixin, {
   tagName: '',
 
   PropTypes: {
+    $element: PropTypes.object.isRequired,
     bottom: PropTypes.number,
-    element: PropTypes.object.isRequired,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     left: PropTypes.number,
     maxHeight: PropTypes.number,
@@ -125,6 +126,26 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
+  _startUpdating () {
+    const now = Date.now()
+
+    // Stop updating 250 ms after user interactions stop
+    if (now - this._lastInteraction > 250) {
+      this._isUpdating = null
+      return
+    }
+
+    this._isUpdating = true
+
+    const $element = get(this.attrs, '$element.value')
+
+    if ($element) {
+      this._updatePosition($element)
+    }
+
+    run.later(this._startUpdating.bind(this), FPS)
+  },
+
   _updatePosition ($element) {
     $element = $element.first()
 
@@ -142,13 +163,17 @@ export default Component.extend(PropTypeMixin, {
       props.width = width
     }
 
-    if (Object.keys(props).length !== 0) {
+    if (
+      Object.keys(props).length !== 0 &&
+      !this.get('isDestroyed') &&
+      !this.get('isDestroying')
+    ) {
       this.setProperties(props)
     }
   },
 
   didReceiveAttrs (attrs) {
-    const $element = get(attrs, 'newAttrs.element.value')
+    const $element = get(attrs, 'newAttrs.$element.value')
 
     if ($element) {
       this._updatePosition($element)
@@ -157,10 +182,10 @@ export default Component.extend(PropTypeMixin, {
 
   didInsertElement () {
     this._updateHandler = () => {
-      const $element = get(this.attrs, 'element.value')
+      this._lastInteraction = Date.now()
 
-      if ($element) {
-        this._updatePosition($element)
+      if (!this._isUpdating) {
+        this._startUpdating()
       }
     }
 
