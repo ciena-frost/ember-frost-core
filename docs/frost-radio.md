@@ -27,8 +27,10 @@
 | `value` | `string` | `<value>` | value of the radio button |
 
 ## Testing with ember-hook
-The radio-group and radio-button components are accessible using ember-hook with the top level hook name or you can access the input on the radio-button -
-* Input field hook - `<hook-name>-input`
+If a hook is set on radio-group, a concatenated hook will be created as follows:
+* Radio group hook - `<hook-name>`
+* Radio button hook - `<hook-name>-button-<value-of-radio-button>`
+* Input field hook - `<hook-name>--button-<value-of-radio-button>-input`
 
 
 ## Examples

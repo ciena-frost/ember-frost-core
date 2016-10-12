@@ -26,6 +26,11 @@ describeComponent(
 
     it('sets default property values correctly', function () {
       expect(
+        component.get('hook'),
+        'hook: undefined'
+      ).to.be.undefined
+
+      expect(
         component.get('id'),
         'id: null'
       ).to.be.null

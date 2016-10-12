@@ -25,7 +25,7 @@ describeComponent(
       initialize()
     })
 
-    it('throws assertion errors', function () {
+    it('throws assertion error', function () {
       expect(
         () => {
           this.render(hbs`
@@ -34,19 +34,6 @@ describeComponent(
         },
         'assertion thrown when used without frost-radio-group'
       ).to.throw(/frost-radio-button/)
-
-      expect(
-        () => {
-          this.render(hbs`
-            {{#frost-radio-group
-            value='testValue'
-          }}
-            {{frost-radio-button}}
-          {{/frost-radio-group}}
-          `)
-        },
-        'assertion thrown when radio-button used without setting a value'
-      ).to.throw(/initialized with a 'value'/)
     })
 
     describe('Checked property', function () {
@@ -110,20 +97,44 @@ describeComponent(
       ).to.be.true
     })
 
-    it('sets hook property on input tag', function () {
-      this.render(hbs`
-        {{#frost-radio-group}}
-          {{frost-radio-button
-            hook='my-radio-button'
-            value='testValue'
-          }}
-        {{/frost-radio-group}}
-      `)
+    describe('Hook property', function () {
+      it('sets when passed into radio-button', function () {
+        this.render(hbs`
+          {{#frost-radio-group}}
+            {{frost-radio-button
+              hook='my-radio-button'
+              value='testValue'
+            }}
+          {{/frost-radio-group}}
+        `)
 
-      expect(
+        expect(
           $hook('my-radio-button-input').hasClass('frost-radio-button-input'),
           'input hook is set'
         ).to.be.true
+      })
+
+      it('sets when passed into radio-group', function () {
+        this.render(hbs`
+          {{#frost-radio-group
+            hook='my-radio-group'
+          }}
+            {{frost-radio-button
+              value='testValue'
+            }}
+          {{/frost-radio-group}}
+        `)
+
+        expect(
+          $hook('my-radio-group-button-testValue').hasClass('frost-radio-button'),
+          'radio button hook is set'
+        ).to.be.true
+
+        expect(
+          $hook('my-radio-group-button-testValue-input').hasClass('frost-radio-button-input'),
+          'input hook is set'
+        ).to.be.true
+      })
     })
 
     describe('Size property', function () {

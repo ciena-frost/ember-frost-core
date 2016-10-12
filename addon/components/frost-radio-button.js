@@ -35,7 +35,7 @@ export default Component.extend(PropTypeMixin, {
     hook: PropTypes.string,
     required: PropTypes.bool,
     size: PropTypes.string,
-    value: PropTypes.string
+    value: PropTypes.string.isRequired
   },
 
   getDefaultProps () {
@@ -52,6 +52,7 @@ export default Component.extend(PropTypeMixin, {
   groupId: readOnly('parentView.id'),
   groupValue: readOnly('parentView.value'),
   onChange: readOnly('parentView.onChange'),
+  radioGroupHook: readOnly('parentView.hook'),
 
   @computed('groupValue', 'value')
   /**
@@ -62,6 +63,19 @@ export default Component.extend(PropTypeMixin, {
    */
   checked (groupValue, value) {
     return groupValue === value
+  },
+
+  @computed('radioGroupHook', 'value')
+  /**
+   * Determine hook name for radio-button
+   * @param {String} radioGroupHook - radio group's hook name
+   * @param {String} value - radio button's value
+   * @returns {String} the concatenated hook name
+   */
+  hook (radioGroupHook, value) {
+    if (radioGroupHook) {
+      return `${radioGroupHook}-button-${value}`
+    }
   },
 
   @computed('disabled')
@@ -95,20 +109,16 @@ export default Component.extend(PropTypeMixin, {
     assert(
       `${this.toString()} must be initialized in the yield block of 'frost-radio-group'`,
       /frost-radio-group/.test(this.parentView.toString()))
-    assert(
-      `${this.toString()} must be initialized with a 'value' property`,
-      get(this, 'value')
-    )
   },
 
-  keyPress (e) {
-    if (e.keyCode === 13 || e.keyCode === 32) {
+  keyPress (event) {
+    if (event.keyCode === 13 || event.keyCode === 32) {
       if (get(this, 'disabled') || get(this, 'groupValue') === get(this, 'value')) {
         return
       }
-      let change = get(this, 'onChange')
-      if (change && typeOf(change === 'function')) {
-        change(this._createEvent(e, $(e.target).find('input')[0]))
+      const onChange = get(this, 'onChange')
+      if (onChange && typeOf(onChange === 'function')) {
+        onChange(this._createEvent(event, $(event.target).find('input')[0]))
       }
     }
   },
