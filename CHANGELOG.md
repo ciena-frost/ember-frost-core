@@ -1,3 +1,7 @@
+# 0.28.3
+
+* **Fixed** `frost-multi-select`.
+
 # 0.28.2
 
 * **Updated** `frost-select` dropdown to update at 60 fps and stop using `element` property as it causes conflicts in Ember 2.9 beta 3.
