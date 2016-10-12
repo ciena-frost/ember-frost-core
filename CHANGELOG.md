@@ -1,3 +1,7 @@
+# 0.28.1
+
+* **Added** `frost-select-outlet` and documented it.
+
 # 0.28.0
 
 * **Added** [ember-elsewhere](https://github.com/ef4/ember-elsewhere) as a new dependency.
