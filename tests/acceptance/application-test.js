@@ -1,7 +1,6 @@
-import Ember from 'ember'
-const {run} = Ember
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import {expect} from 'chai'
+import destroyApp from '../helpers/destroy-app'
 import startApp from '../helpers/start-app'
 
 describe('Acceptance: Application', function () {
@@ -12,83 +11,48 @@ describe('Acceptance: Application', function () {
   })
 
   afterEach(function () {
-    run(application, 'destroy')
+    destroyApp(application)
   })
 
-  it('can visit /', function () {
-    visit('/')
+  describe('visit /', function () {
+    beforeEach(function () {
+      return visit('/')
+    })
 
-    andThen(function () {
+    it('redirects to /demo', function () {
       expect(currentPath()).to.equal('demo')
     })
   })
-  it('can visit /palette', function () {
-    visit('/palette')
 
-    andThen(function () {
-      expect(currentPath()).to.equal('palette')
+  ;[
+    'area',
+    'button',
+    'checkbox',
+    'field',
+    'icons',
+    'layout',
+    'palette',
+    'password',
+    'typography'
+  ]
+    .forEach((path) => {
+      describe(`visit /${path}`, function () {
+        beforeEach(function () {
+          return visit(`/${path}`)
+        })
+
+        it('does not redirect', function () {
+          expect(currentPath()).to.equal(path)
+        })
+      })
     })
-  })
-  it('can visit /typography', function () {
-    visit('/typography')
 
-    andThen(function () {
-      expect(currentPath()).to.equal('typography')
+  describe('visit /link', function () {
+    beforeEach(function () {
+      return visit('/link')
     })
-  })
-  it('can visit /icons', function () {
-    visit('/icons')
 
-    andThen(function () {
-      expect(currentPath()).to.equal('icons')
-    })
-  })
-  it('can visit /area', function () {
-    visit('/area')
-
-    andThen(function () {
-      expect(currentPath()).to.equal('area')
-    })
-  })
-  it('can visit /button', function () {
-    visit('/button')
-
-    andThen(function () {
-      expect(currentPath()).to.equal('button')
-    })
-  })
-  it('can visit /checkbox', function () {
-    visit('/checkbox')
-
-    andThen(function () {
-      expect(currentPath()).to.equal('checkbox')
-    })
-  })
-  it('can visit /field', function () {
-    visit('/field')
-
-    andThen(function () {
-      expect(currentPath()).to.equal('field')
-    })
-  })
-  it('can visit /password', function () {
-    visit('/password')
-
-    andThen(function () {
-      expect(currentPath()).to.equal('password')
-    })
-  })
-  it('can visit /layout', function () {
-    visit('/layout')
-
-    andThen(function () {
-      expect(currentPath()).to.equal('layout')
-    })
-  })
-  it('can visit /link', function () {
-    visit('/link')
-
-    andThen(function () {
+    it('renders correct route', function () {
       expect(currentPath()).to.equal('link.index')
     })
   })
