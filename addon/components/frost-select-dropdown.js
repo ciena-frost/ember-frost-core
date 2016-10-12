@@ -1,5 +1,5 @@
 import Ember from 'ember'
-const {$, Component, get, run} = Ember
+const {$, Component, get} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
