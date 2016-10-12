@@ -12,7 +12,7 @@ function wait (callback) {
 }
 
 const selectedTestTemplate = hbs`
-  {{from-elsewhere name='frost-select'}}
+  {{frost-select-outlet}}
   {{frost-multi-select
     onChange=onChange
     selected=selected
@@ -22,7 +22,7 @@ const selectedTestTemplate = hbs`
   }}
 `
 const selectedValueTestTemplate = hbs`
-  {{from-elsewhere name='frost-select'}}
+  {{frost-select-outlet}}
   {{frost-multi-select
     onChange=onChange
     data=data

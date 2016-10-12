@@ -8,7 +8,7 @@ import sinon from 'sinon'
 import hbs from 'htmlbars-inline-precompile'
 
 const selectedTestTemplate = hbs`
-  {{from-elsewhere name='frost-select'}}
+  {{frost-select-outlet}}
   {{frost-select
     data=data
     greeting=greeting
@@ -20,7 +20,7 @@ const selectedTestTemplate = hbs`
 `
 
 const selectedValueTestTemplate = hbs`
-  {{from-elsewhere name='frost-select'}}
+  {{frost-select-outlet}}
   {{frost-select
     data=data
     hook=hook
@@ -32,7 +32,7 @@ const selectedValueTestTemplate = hbs`
 `
 
 const undefinedValueTestTemplate = hbs`
-  {{from-elsewhere name='frost-select'}}
+  {{frost-select-outlet}}
   {{frost-select
     data=data
     hook=hook
