@@ -1,3 +1,7 @@
+# 0.28.4
+
+* **Fixed** width of following inputs to match: `frost-password`, `frost-select`, and `frost-text`.
+
 # 0.28.3
 
 * **Fixed** `frost-multi-select`.
