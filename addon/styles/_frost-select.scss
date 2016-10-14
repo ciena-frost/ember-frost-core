@@ -24,10 +24,9 @@ $frost-input-select-option-row-height: 35px;
   cursor: pointer;
   display: inline-block;
   height: $frost-input-text-height;
-  min-width: 125px;
+  min-width: 175px;
   outline: none;
   position: relative;
-  width: 200px;
   background: $frost-select-container-background;
 
   &:focus {
