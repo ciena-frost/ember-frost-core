@@ -4,7 +4,7 @@ module.exports = function (environment) {
     modulePrefix: 'dummy',
     podModulePrefix: 'dummy/pods',
     environment: environment,
-    rootURL: '/',
+    baseURL: '/',
     locationType: 'hash',
     EmberENV: {
       FEATURES: {
@@ -43,7 +43,7 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
-    ENV.rootURL = '/ember-frost-core'
+    ENV.baseURL = '/ember-frost-core'
     ENV.isDemo = true
     ENV.mirageNamespace = 'https://ciena-frost.github.io'
     ENV['ember-cli-mirage'] = {

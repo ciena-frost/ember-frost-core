@@ -13,7 +13,9 @@ function rgb2hex (rgb) {
 
   rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/)
 
-  return `#${hex(rgb[1])}${hex(rgb[2])}${hex(rgb[3])}`
+  return hex(rgb[1]) === '0'
+    ? `#00${hex(rgb[2])}${hex(rgb[3])}`
+    : `#${hex(rgb[1])}${hex(rgb[2])}${hex(rgb[3])}`
 }
 
 export default Component.extend({

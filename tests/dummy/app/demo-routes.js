@@ -8,14 +8,6 @@ export default [
     routeName: 'checkbox'
   },
   {
-    label: 'Radio',
-    routeName: 'radio'
-  },
-  {
-    label: 'Toggle',
-    routeName: 'toggle'
-  },
-  {
     label: 'Color palette',
     routeName: 'palette'
   },
@@ -28,16 +20,20 @@ export default [
     routeName: 'layout'
   },
   {
-    label: 'Loading',
-    routeName: 'loading'
-  },
-  {
     label: 'Link',
     routeName: 'link'
   },
   {
+    label: 'Loading',
+    routeName: 'loading'
+  },
+  {
     label: 'Password',
     routeName: 'password'
+  },
+  {
+    label: 'Radio',
+    routeName: 'radio'
   },
   {
     label: 'Scroll',
@@ -54,6 +50,10 @@ export default [
   {
     label: 'Text input field',
     routeName: 'field'
+  },
+  {
+    label: 'Toggle',
+    routeName: 'toggle'
   },
   {
     label: 'Typography',
