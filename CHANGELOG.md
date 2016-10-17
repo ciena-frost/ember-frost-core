@@ -1,3 +1,7 @@
+# 0.28.7
+
+* **Fixed** input margins and borders to match.
+
 # 0.28.6
  
 * **Fixed** notifications for the dummy app.
