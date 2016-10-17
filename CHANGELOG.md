@@ -1,3 +1,7 @@
+# 0.28.5
+
+* **Added** some test helpers for consumers to use in their tests.
+
 # 0.28.4
 
 * **Fixed** width of following inputs to match: `frost-password`, `frost-select`, and `frost-text`.
