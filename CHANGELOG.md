@@ -1,3 +1,6 @@
+# 0.28.8
+* Fixed issue #120 
+
 # 0.28.7
 
 * **Fixed** input margins and borders to match.
