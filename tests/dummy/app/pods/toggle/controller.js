@@ -2,18 +2,20 @@ import Ember from 'ember'
 const {Controller} = Ember
 
 export default Controller.extend({
+  notifications: Ember.inject.service('notification-messages'),
+
   // used for initial togged button
   value7: 'trueValue',
   // used for value mapping
   value8: 'enable',
 
   fireNotification: function (e) {
-    this.notifications.addNotification({
-      message: `toggle state: ${e.target.state}. value: ${e.target.value}`,
-      type: 'success',
-      autoClear: true,
-      clearDuration: 2000
-    })
+    this.get('notifications').success(
+      `toggle state: ${e.target.state}. value: ${e.target.value}`, {
+        autoClear: true,
+        clearDuration: 2000
+      }
+    )
   },
 
   actions: {
