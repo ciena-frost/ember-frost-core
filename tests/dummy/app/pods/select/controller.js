@@ -2,6 +2,8 @@ import Ember from 'ember'
 const {computed, Controller} = Ember
 
 export default Controller.extend({
+  notifications: Ember.inject.service('notification-messages'),
+
   data: computed('data', 'search', function () {
     let result = this.model.map((record) => {
       return {
@@ -26,27 +28,21 @@ export default Controller.extend({
   clearSelectedValue: false,
   actions: {
     onBlurHandler () {
-      this.notifications.addNotification({
-        message: 'blur event',
-        type: 'success',
+      this.get('notifications').success('blur event', {
         autoClear: true,
         clearDuration: 2000
       })
     },
 
     onChangeHandler (values) {
-      this.notifications.addNotification({
-        message: 'User selected: ' + values,
-        type: 'success',
+      this.get('notifications').success('User selected: ' + values, {
         autoClear: true,
         clearDuration: 2000
       })
     },
 
     onInputHandler (filterValue) {
-      this.notifications.addNotification({
-        message: 'Handling input: ' + filterValue,
-        type: 'success',
+      this.get('notifications').success('Handling input: ' + filterValue, {
         autoClear: true,
         clearDuration: 2000
       })
