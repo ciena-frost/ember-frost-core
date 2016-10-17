@@ -1,3 +1,7 @@
+# 0.28.6
+ 
+* **Fixed** notifications for the dummy app.
+
 # 0.28.5
 
 * **Added** some test helpers for consumers to use in their tests.
