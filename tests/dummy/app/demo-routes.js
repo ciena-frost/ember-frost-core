@@ -58,5 +58,9 @@ export default [
   {
     label: 'Typography',
     routeName: 'typography'
+  },
+  {
+    label: 'Helpers',
+    routeName: 'helpers'
   }
 ]
