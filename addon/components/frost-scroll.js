@@ -33,28 +33,40 @@ export default Component.extend(PropTypeMixin, {
       window.Ps.initialize(this.$()[0])
     })
 
+    this._legacyScrollYEndHandler = () => {
+      debounce(this, this['on-scroll-y-end'], debouncePeriod, true)
+    }
+
+    this._scrollDownHandler = () => {
+      debounce(this, this.onScrollDown, debouncePeriod, true)
+    }
+
+    this._scrollUpHandler = () => {
+      debounce(this, this.onScrollUp, debouncePeriod, true)
+    }
+
+    this._scrollYEndHandler = () => {
+      debounce(this, this.onScrollYEnd, debouncePeriod, true)
+    }
+
+    this._scrollYStartHandler = () => {
+      debounce(this, this.onScrollYStart, debouncePeriod, true)
+    }
+
     if (typeOf(this.onScrollUp) === 'function') {
-      this.$().on('ps-scroll-up', () => {
-        debounce(this, this.onScrollUp, debouncePeriod, true)
-      })
+      this.$().on('ps-scroll-up', this._scrollUpHandler)
     }
 
     if (typeOf(this.onScrollDown) === 'function') {
-      this.$().on('ps-scroll-down', () => {
-        debounce(this, this.onScrollDown, debouncePeriod, true)
-      })
+      this.$().on('ps-scroll-down', this._scrollDownHandler)
     }
 
     if (typeOf(this.onScrollYStart) === 'function') {
-      this.$().on('ps-y-reach-start', () => {
-        debounce(this, this.onScrollYStart, debouncePeriod, true)
-      })
+      this.$().on('ps-y-reach-start', this._scrollYStartHandler)
     }
 
     if (typeOf(this.onScrollYEnd) === 'function') {
-      this.$().on('ps-y-reach-end', () => {
-        debounce(this, this.onScrollYEnd, debouncePeriod, true)
-      })
+      this.$().on('ps-y-reach-end', this._scrollYEndHandler)
     }
 
     if (typeOf(this.attrs['on-scroll-y-end']) === 'function') {
@@ -66,11 +78,16 @@ export default Component.extend(PropTypeMixin, {
           url: 'http://ciena-frost.github.io/ember-frost-core/#/scroll'
         }
       )
-      this.$().on('ps-y-reach-end', () => {
-        debounce(this, this['on-scroll-y-end'], debouncePeriod, true)
-      })
+      this.$().on('ps-y-reach-end', this._legacyScrollYEndHandler)
     }
-  })
+  }),
   /* eslint-enable complexity */
 
+  cleanup: on('willDestroyElement', function () {
+    this.$().off('ps-scroll-down', this._scrollDownHandler)
+    this.$().off('ps-scroll-up', this._scrollUpHandler)
+    this.$().off('ps-y-reach-end', this._legacyScrollYEndHandler)
+    this.$().off('ps-y-reach-end', this._scrollYEndHandler)
+    this.$().off('ps-y-reach-start', this._scrollYStartHandler)
+  })
 })
