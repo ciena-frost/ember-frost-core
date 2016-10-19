@@ -1,3 +1,7 @@
+# 0.29.1
+
+* **Fixed** issue where events weren't being unbound on component destruction.
+
 # 0.29.0
 No CHANGELOG section found in Pull Request description.
 Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
