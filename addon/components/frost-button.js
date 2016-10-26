@@ -126,6 +126,7 @@ export default Component.extend(PropTypeMixin, {
     return !isEmpty(icon) && !isEmpty(text)
   },
 
+  /* eslint-disable complexity */
   @readOnly
   @computed('design', 'icon', 'priority', 'size', 'text', 'vertical')
   /**
@@ -170,6 +171,7 @@ export default Component.extend(PropTypeMixin, {
 
     return classes.join(' ')
   },
+  /* eslint-enable complexity */
 
   // == Functions =============================================================
 

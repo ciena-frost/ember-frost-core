@@ -12,8 +12,11 @@ function rgb2hex (rgb) {
   }
 
   rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/)
+  const hexResult = rgb.slice(1)
+    .map((value) => value === '0' ? '00' : hex(value))
+    .join('')
 
-  return `#${hex(rgb[1])}${hex(rgb[2])}${hex(rgb[3])}`
+  return `#${hexResult}`
 }
 
 export default Component.extend({

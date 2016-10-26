@@ -1,0 +1,15 @@
+dl {
+  dd {
+    margin: 10px 0 10px 10px;
+    font-style: italic;
+  }
+
+  dt {
+    span {
+      padding: 2px 4px;
+      border-radius: 3px;
+      background: $frost-color-night-3;
+      color: $frost-color-white;
+    }
+  }
+}

@@ -4,6 +4,7 @@
 @import 'layout';
 @import 'highlight';
 @import 'button';
+@import 'helpers';
 
 .dummy-notification-container {
   position: fixed;
@@ -48,7 +49,7 @@ hr {
 .dummy-body.text-input.field {
   .example .snippet {
     min-width: 305px;
-    margin: 15px 0 10px 0;
+    margin: 15px 20px 10px 0;
   }
 }
 
@@ -150,6 +151,8 @@ hr {
     .demo {
       display: block;
       vertical-align: top;
+      margin-right: 20px;
+
       > .frost-icon {
         width: 40px;
         height: 40px;

@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import Ember from 'ember'
-const {A, Component, get, typeOf} = Ember
+const {A, Component, get, run, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-select'
@@ -43,7 +43,7 @@ function isAttrDifferent (newAttrs, oldAttrs, attributeName) {
   let oldValue = get(oldAttrs, attributeName + '.value')
   let newValue = get(newAttrs, attributeName + '.value')
 
-  return newValue !== undefined && !_.isEqual(oldValue, newValue)
+  return !_.isEqual(oldValue, newValue)
 }
 
 /** Hook for handling outside element click
@@ -93,6 +93,7 @@ export default Component.extend(PropTypeMixin, {
     hook: PropTypes.string,
     hovered: PropTypes.number,
     maxListHeight: PropTypes.number,
+    renderTarget: PropTypes.string,
     selected: PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.number
@@ -116,6 +117,7 @@ export default Component.extend(PropTypeMixin, {
       error: false,
       hovered: -1,
       maxListHeight: 400,
+      renderTarget: 'frost-select',
       selected: A([]),
       tabIndex: -1,
       width: 200
@@ -215,6 +217,7 @@ export default Component.extend(PropTypeMixin, {
     Ember.$(document).on('click', this._handleOutsideClick)
   },
 
+  /* eslint-disable complexity */
   /* Ember.Component method */
   didReceiveAttrs ({newAttrs, oldAttrs}) {
     newAttrs = newAttrs || {}
@@ -252,7 +255,11 @@ export default Component.extend(PropTypeMixin, {
     // If frost-select instance is being reused by consumer but context is cleared make
     // make sure to actually clear input (noticed when used in conjunction with dialog
     // components that don't destroy DOM when closed and re-opened)
-    if (selectedValueChanged && ('selectedValue' in newAttrs) && (newAttrs.selectedValue.value === undefined)) {
+    if (
+      selectedValueChanged &&
+      ('selectedValue' in newAttrs) &&
+      (newAttrs.selectedValue.value === undefined || newAttrs.selectedValue.value === '')
+    ) {
       this.selectOptionByValue(null)
       return
     }
@@ -269,6 +276,7 @@ export default Component.extend(PropTypeMixin, {
       }
     }
   },
+  /* eslint-enable complexity */
 
   // TODO: add jsdoc
   getValues () {
@@ -283,6 +291,7 @@ export default Component.extend(PropTypeMixin, {
         break
     }
   },
+  /* eslint-disable complexity */
   // TODO: add jsdoc
   keyUp (event) {
     const reduxStore = this.get('reduxStore')
@@ -314,6 +323,7 @@ export default Component.extend(PropTypeMixin, {
         event.preventDefault()
     }
   },
+  /* eslint-enable complexity */
 
   /**
    * Notify parent of currently selected values by calling the onChange callback
@@ -363,7 +373,9 @@ export default Component.extend(PropTypeMixin, {
 
       const newProps = _.pick(state, this.get('stateProperties'))
 
-      this.setProperties(newProps)
+      run(() => {
+        this.setProperties(newProps)
+      })
 
       switch (state.lastAction) {
         case 'SELECT_HOVER':
@@ -382,6 +394,10 @@ export default Component.extend(PropTypeMixin, {
   init () {
     this._super(...arguments)
     this.subscribe(this.setUpReduxStore())
+  },
+
+  didInsertElement () {
+    this.set('$element', this.$())
   },
 
   // ==========================================================================

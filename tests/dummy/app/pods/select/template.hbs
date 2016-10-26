@@ -1,6 +1,24 @@
 <div class="dummy-body select">
   <div class="section-header">frost-select</div>
 
+  <p>In order to use this component you must provide an outlet for it to render the dropdown in like so:</p>
+
+  <div class="snippet">
+    {{format-markdown "```handlebars
+{{frost-select-outlet}}
+```"}}
+  </div>
+
+  <p>In the event you want to render different selects in different outlets you may also used named outlets like so:</p>
+
+  <div class="snippet">
+    {{format-markdown "```handlebars
+{{frost-select-outlet name='foo-bar'}}
+…
+{{frost-select renderTarget='foo-bar' …}}
+```"}}
+  </div>
+
   <div class="section-title">Content</div>
   <hr>
   <div class="section">
@@ -18,6 +36,35 @@
 {{frost-select
   data=data
   hook='mySelect'
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">clearing</div>
+      <i>works by setting the property being passed as 'selectedValue' to an empty string<br/></i>
+      <div class="demo">
+        {{log preSelectedValueForClearing}}
+        {{frost-select
+          data=data
+          hook='mySelect'
+          selectedValue=preSelectedValueForClearing
+          onChange=(action 'onChangeClearable')
+        }}
+        {{frost-button text='Clear'
+          onClick=(action 'onClearSelect')
+          priority='secondary'
+          size='small'
+          text='Clear'
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-select
+  data=data
+  hook='mySelect'
+  selectedValue=preSelectedValueForClearing
 }}
 ```"}}
       </div>

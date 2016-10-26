@@ -1,3 +1,55 @@
+# 0.29.1
+
+* **Fixed** issue where events weren't being unbound on component destruction.
+
+# 0.29.0
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.28.8
+* Fixed issue #120 
+
+# 0.28.7
+
+* **Fixed** input margins and borders to match.
+
+# 0.28.6
+ 
+* **Fixed** notifications for the dummy app.
+
+# 0.28.5
+
+* **Added** some test helpers for consumers to use in their tests.
+
+# 0.28.4
+
+* **Fixed** width of following inputs to match: `frost-password`, `frost-select`, and `frost-text`.
+
+# 0.28.3
+
+* **Fixed** `frost-multi-select`.
+
+# 0.28.2
+
+* **Updated** `frost-select` dropdown to update at 60 fps and stop using `element` property as it causes conflicts in Ember 2.9 beta 3.
+
+# 0.28.1
+
+* **Added** `frost-select-outlet` and documented it.
+
+# 0.28.0
+
+* **Added** [ember-elsewhere](https://github.com/ef4/ember-elsewhere) as a new dependency.
+* **Changed** `frost-select` and `frost-multi-select` to render dropdown elsewhere in the DOM, using `ember-elsewhere`, in order to make them more flexible.
+* **Changed** minimum Ember version from `2.1` to `2.3` since `ember-elsewhere` doesn't appear to work on versions prior to `2.3`.
+
+# 0.27.4
+* select value and prompt is now clearable by setting the 'selectedValue' property to an empty string in the consuming context
+
+# 0.27.3
+
+* The unselected text in the `frost-select` drop down menu is now a darker color.
+
 # 0.27.2
 
 * Pressing enter to select an item when there is no item hovered will no longer reset the selected value or cause an error
