@@ -1,11 +1,10 @@
-import _ from 'lodash'
 import Ember from 'ember'
-const {Component, deprecate} = Ember
+const {Component, deprecate, get} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
-import {PropTypes} from 'ember-prop-types'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-icon'
 
-export default Component.extend({
+export default Component.extend(PropTypeMixin, {
   // ==========================================================================
   // Dependencies
   // ==========================================================================
@@ -20,6 +19,7 @@ export default Component.extend({
   tagName: 'svg',
 
   propTypes: {
+    hook: PropTypes.string,
     pack: PropTypes.string,
     icon: PropTypes.string.isRequired
   },
@@ -51,10 +51,12 @@ export default Component.extend({
   // ==========================================================================
 
   /* Ember.Component method */
-  didReceiveAttrs ({newAttrs}) {
+  didReceiveAttrs (attrs) {
+    const icon = get(attrs, 'newAttrs.icon.value') || ''
+
     deprecate(
       'nested icon paths have been deprecated in favor of flat icon packs',
-      !_.includes(_.get(newAttrs, 'icon.value'), '/'),
+      icon.indexOf('/') === -1,
       {
         id: 'frost-debug.deprecate-nested-icon-paths',
         until: '1.0.0',

@@ -3,6 +3,7 @@
   autofocus={{autofocus}}
   class="trigger"
   disabled={{disabled}}
+  data-test={{hook (concat hook '-input')}}
   onFocus={{action 'onFocus'}}
   onBlur={{action 'onBlur'}}
   onInput={{action 'onChange'}}
@@ -17,22 +18,15 @@
   </svg>
 </div>
 
-<div class="drop-down-container">
-  <div class="list-container">
-    <div class="up-arrow"></div>
-    <ul ref="container" style={{containerStyle}}>
-      {{#each displayItems as |item|}}
-        <li
-          class={{item.className}}
-          data-value={{item.value}}
-          data-index={{item.index}}
-          onClick={{action 'onSelect'}}
-          onMouseOver={{action 'onItemOver'}}
-        >
-          {{item.label}}
-        </li>
-      {{/each}}
-    </ul>
-  </div>
-</div>
-{{yield}}
+{{#if open}}
+  {{to-elsewhere
+    named=renderTarget
+    send=(component 'frost-select-dropdown'
+      $element=$element
+      items=displayItems
+      onItemOver=(action 'onItemOver')
+      onSelect=(action 'onSelect')
+      receivedHook=hook
+    )
+  }}
+{{/if}}

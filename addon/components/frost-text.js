@@ -1,117 +1,116 @@
-import _ from 'lodash'
 import Ember from 'ember'
-const {Component} = Ember
-import computed, {readOnly} from 'ember-computed-decorators'
+const {
+  Component,
+  isPresent,
+  on
+} = Ember
+import {
+  task,
+  timeout
+} from 'ember-concurrency'
+import FrostEventsProxy from '../mixins/frost-events-proxy'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-text'
 
-export default Component.extend({
-  // ==========================================================================
-  // Dependencies
-  // ==========================================================================
+export default Component.extend(FrostEventsProxy, PropTypeMixin, {
+  // == Properties =============================================================
 
-  // ==========================================================================
-  // Properties
-  // ==========================================================================
-
-  attributeBindings: [
-    'align',
-    'autofocus',
-    'disabled',
-    'placeholder',
-    'readonly',
-    'type',
-    'value'
+  classNames: [
+    'frost-text'
   ],
-  classNames: ['frost-text'],
   classNameBindings: [
-    'center',
-    'right'
+    'isClearVisible',
+    'isClearEnabled'
   ],
   layout,
-  tabindex: 0,
 
-  // ==========================================================================
-  // Computed Properties
-  // ==========================================================================
-
-  @readOnly
-  @computed('align')
-  /**
-   * Determine whether or not text alignment is center
-   * @param {[type]} align - text alignment
-   * @returns {Boolean} whether or not text alignment is center
-   */
-  center (align) {
-    return align === 'center'
+  propTypes: {
+    align: PropTypes.string,
+    hook: PropTypes.string,
+    isClearEnabled: PropTypes.bool,
+    isClearVisible: PropTypes.bool,
+    isHookEmbedded: PropTypes.bool,
+    receivedHook: PropTypes.string,
+    tabindex: PropTypes.number,
+    type: PropTypes.string
   },
 
-  @readOnly
-  @computed('align')
-  /**
-   * Determine whether or not text alignment is right
-   * @param {String} align - text alignment
-   * @returns {Boolean} whether or not text alignment is right
-   */
-  right (align) {
-    return align === 'right'
-  },
-
-  @readOnly
-  @computed('disabled', 'value')
-  /**
-   * Determine whether or not to show button for clearing out text field
-   * @param {Boolean} disabled - whether or not input is disabled
-   * @param {String} value - value of text field
-   * @returns {Boolean} whether or not to show button for clearing out text field
-   */
-  showClear (disabled, value) {
-    return !disabled && Boolean(value)
-  },
-
-  // ==========================================================================
-  // Functions
-  // ==========================================================================
-
-  // ==========================================================================
-  // Events
-  // ==========================================================================
-
-  onChange: Ember.on('input', function (e) {
-    const id = this.get('id')
-    const value = e.target.value
-    const onInput = this.get('onInput')
-
-    if (_.isFunction(onInput)) {
-      onInput({id, value})
+  getDefaultProps () {
+    return {
+      align: 'left',
+      isClearEnabled: false,
+      isClearVisible: false,
+      isHookEmbedded: false,
+      tabindex: 0,
+      type: 'text'
     }
+  },
+
+  // == Events =================================================================
+
+  init () {
+    this._super(...arguments)
+    this.receivedHook = this.hook
+    if (this.get('isHookEmbedded')) {
+      this.hook = ''
+    }
+  },
+
+  _showClearEvent: on('focusIn', 'focusOut', 'input', function (event) {
+    const isFocused = event.type !== 'focusout'
+    this.get('_showClear').perform(isFocused)
   }),
 
-  _onFocus: Ember.on('focusIn', function (e) {
-    // Selects the text when the frost-text field is selected
-    e.target.select()
-    // If an onFocus handler is defined, call it
-    if (this.attrs.onFocus) {
-      this.attrs.onFocus()
+  // == Tasks ==================================================================
+
+  _clear: task(function * () {
+    this.$('input')
+      .focus()
+      .val('')
+      .trigger('input')
+  }).restartable(),
+
+  _showClear: task(function * (isFocused) {
+    const showClear = isFocused && isPresent(this.get('value'))
+    if (this.get('isClearVisible') === showClear) {
+      return
     }
-  }),
 
-  // ==========================================================================
-  // Actions
-  // ==========================================================================
+    this.set('isClearVisible', showClear)
 
+    // If the clear button is clicked the focusOut event occurs before
+    // the click event, so delay disabling the clear so that the click
+    // can process first
+    if (!showClear) {
+      yield timeout(200) // Duration of the visibility animation
+    }
+    this.set('isClearEnabled', showClear)
+  }).restartable(),
+
+  // == Actions ================================================================
+
+  // Setting 'keyUp' directly on the {{input}} helper overwrites
+  // Ember's TextSupport keyUp property, which means that other
+  // TextSupport events (i.e. 'enter' and 'escape') don't fire.
+  // To avoid this, we use the TextSupport 'key-up' event and
+  // proxy the event to the keyUp handler.
   actions: {
-    clear: function () {
-      this.set('value', '')
-      this.$('input').focus()
-      this.$('input').val('')
-      this.$('input').trigger('input')
+    clear () {
+      this.get('_clear').perform()
     },
 
-    onBlur () {
-      const onBlur = this.get('onBlur')
+    keyUp (value, event) {
+      if (Ember.isPresent(Ember.get(this, '_eventProxy.keyUp'))) {
+        this._eventProxy.keyUp(event)
+      }
+    },
 
-      if (onBlur) {
-        onBlur()
+    _onInput (event) {
+      if (Ember.isPresent(Ember.get(this, '_eventProxy.input'))) {
+        // Add id and value for legacy support
+        event.id = this.get('elementId')
+        event.value = event.target.value
+        this._eventProxy.input(event)
       }
     }
   }

@@ -1,4 +1,5 @@
-const expect = chai.expect
+import {expect} from 'chai'
+import Ember from 'ember'
 const {run} = Ember
 import {describeComponent} from 'ember-mocha'
 import {beforeEach, describe, it} from 'mocha'
@@ -27,7 +28,7 @@ describeComponent(
         })
       })
 
-      it('does not throw an error when onBlur action is triggered', function () {
+      it('does not error when onBlur action is triggered', function () {
         expect(function () {
           component.get('actions.onBlur').call(component)
         }).not.to.throw(Error)

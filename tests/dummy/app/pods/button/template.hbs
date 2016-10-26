@@ -1,53 +1,38 @@
-<div class="dummy-notification-container">
-{{#each notifications as |notification|}}
-  {{notification-message notification=notification}}
-{{/each}}
-</div>
-
-
 <div class='dummy-body button'>
 
-  <div class="section-title">Primary</div>
+  <div class='section-title'>Primary</div>
   <hr>
   <div class='section'>
-
     <div class='example'>
       <div class='title'>small</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-primary-small }}
         {{frost-button
+          hook='mySmallButton'
           priority='primary'
           size='small'
           text='Text'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='primary'
-  size='small'
-  text='Text'
-}}
-```"}}
+        {{code-snippet name='button-primary-small.hbs'}}
       </div>
     </div>
 
     <div class='example'>
       <div class='title'>medium</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-primary-medium }}
         {{frost-button
           priority='primary'
           size='medium'
           text='Text'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='primary'
-  size='medium'
-  text='Text'
-}}
-```"}}
+        {{code-snippet name='button-primary-medium.hbs'}}
       </div>
     </div>
 
@@ -55,88 +40,71 @@
     <div class='example'>
       <div class='title'>large</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-primary-large }}
         {{frost-button
           priority='primary'
           size='large'
           text='Text'
+          onClick=(action 'onClickHandler')
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='primary'
-  size='large'
-  text='Text'
-}}
-```"}}
+        {{code-snippet name='button-primary-large.hbs'}}
       </div>
     </div>
 
     <div class='example'>
       <div class='title'>disabled</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-primary-disabled }}
         {{frost-button
+          disabled=true
           priority='primary'
           size='medium'
-          disabled=true
           text='Text'
+          onClick=(action 'onClickHandler')
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='primary'
-  size='medium'
-  disabled=true
-  text='Text'
-}}
-```"}}
+        {{code-snippet name='button-primary-disabled.hbs'}}
       </div>
     </div>
-
   </div>
 
-  <div class="section-title">Secondary</div>
+  <div class='section-title'>Secondary</div>
   <hr>
   <div class='section'>
-
     <div class='example'>
       <div class='title'>small</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-secondary-small }}
         {{frost-button
           priority='secondary'
           size='small'
           text='Text'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='secondary'
-  size='small'
-  text='Text'
-}}
-```"}}
+        {{code-snippet name='button-secondary-small.hbs'}}
       </div>
     </div>
 
     <div class='example'>
       <div class='title'>medium</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-secondary-medium }}
         {{frost-button
           priority='secondary'
           size='medium'
           text='Text'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='secondary'
-  size='medium'
-  text='Text'
-}}
-```"}}
+        {{code-snippet name='button-secondary-medium.hbs'}}
       </div>
     </div>
 
@@ -144,89 +112,70 @@
     <div class='example'>
       <div class='title'>large</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-secondary-large }}
         {{frost-button
           priority='secondary'
           size='large'
           text='Text'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='secondary'
-  size='large'
-  text='Text'
-}}
-```"}}
+        {{code-snippet name='button-secondary-large.hbs'}}
       </div>
     </div>
 
     <div class='example'>
       <div class='title'>disabled</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-secondary-disabled }}
         {{frost-button
+          disabled=true
           priority='secondary'
           size='medium'
-          disabled=true
           text='Text'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='secondary'
-  size='medium'
-  disabled=true
-  text='Text'
-}}
-```"}}
+        {{code-snippet name='button-secondary-disabled.hbs'}}
       </div>
     </div>
-
   </div>
 
 
-  <div class="section-title">Tertiary</div>
+  <div class='section-title'>Tertiary</div>
   <hr>
   <div class='section'>
-
     <div class='example'>
       <div class='title'>small</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-tertiary-small }}
         {{frost-button
           priority='tertiary'
           size='small'
           text='Text'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='tertiary'
-  size='small'
-  text='Text'
-}}
-```"}}
+        {{code-snippet name='button-tertiary-small.hbs'}}
       </div>
     </div>
 
     <div class='example'>
       <div class='title'>medium</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-tertiary-medium }}
         {{frost-button
           priority='tertiary'
           size='medium'
           text='Text'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='tertiary'
-  size='medium'
-  text='Text'
-}}
-```"}}
+        {{code-snippet name='button-tertiary-medium.hbs'}}
       </div>
     </div>
 
@@ -234,306 +183,236 @@
     <div class='example'>
       <div class='title'>large</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-tertiary-large }}
         {{frost-button
           priority='tertiary'
           size='large'
           text='Text'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='tertiary'
-  size='large'
-  text='Text'
-}}
-```"}}
+        {{code-snippet name='button-tertiary-large.hbs'}}
       </div>
     </div>
 
     <div class='example'>
       <div class='title'>disabled</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-tertiary-disabled }}
         {{frost-button
+          disabled=true
           priority='tertiary'
           size='medium'
-          disabled=true
           text='Text'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='tertiary'
-  size='medium'
-  disabled=true
-  text='Text'
-}}
-```"}}
+        {{code-snippet name='button-tertiary-disabled.hbs'}}
       </div>
     </div>
-
   </div>
 
 
-  <div class="section-title">Icon</div>
+  <div class='section-title'>Icon</div>
   <hr>
   <div class='section'>
-
     <div class='example'>
       <div class='title'>small</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-icon-small }}
         {{frost-button
+          icon='add'
           priority='primary'
           size='small'
-          icon='frost/add'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='primary'
-  size='small'
-  icon='frost/add'
-}}
-```"}}
+        {{code-snippet name='button-icon-small.hbs'}}
       </div>
     </div>
 
     <div class='example'>
       <div class='title'>medium</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-icon-medium }}
         {{frost-button
+          icon='add'
           priority='primary'
           size='medium'
-          icon='frost/add'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='primary'
-  size='medium'
-  icon='frost/add'
-}}
-```"}}
+        {{code-snippet name='button-icon-medium.hbs'}}
       </div>
     </div>
 
     <div class='example'>
       <div class='title'>large</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-icon-large }}
         {{frost-button
+          icon='add'
           priority='primary'
           size='large'
-          icon='frost/add'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='primary'
-  size='large'
-  icon='frost/add'
-}}
-```"}}
+        {{code-snippet name='button-icon-large.hbs'}}
       </div>
     </div>
 
     <div class='example'>
       <div class='title'>disabled</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-icon-disabled }}
         {{frost-button
+          disabled=true
+          icon='add'
           priority='primary'
           size='medium'
-          disabled=true
-          icon='frost/add'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='primary'
-  size='medium'
-  disabled=true
-  icon='frost/add'
-}}
-```"}}
+        {{code-snippet name='button-icon-disabled.hbs'}}
       </div>
     </div>
-
   </div>
 
-  <div class="section-title">Icon and Text</div>
+  <div class='section-title'>Icon and Text</div>
   <hr>
   <div class='section'>
-
     <div class='example'>
       <div class='title'>small</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-icon-text-small }}
         {{frost-button
+          icon='round-add'
           priority='tertiary'
           size='small'
-          icon='frost/round-add'
           text='Text'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='tertiary'
-  size='small'
-  icon='frost/round-add'
-  text='Text'
-}}
-```"}}
+        {{code-snippet name='button-icon-text-small.hbs'}}
       </div>
     </div>
 
     <div class='example'>
       <div class='title'>medium</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-icon-text-medium }}
         {{frost-button
+          icon='round-add'
           priority='tertiary'
           size='medium'
-          icon='frost/round-add'
           text='Text'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='tertiary'
-  size='medium'
-  icon='frost/round-add'
-  text='Text'
-}}
-```"}}
+        {{code-snippet name='button-icon-text-medium.hbs'}}
       </div>
     </div>
 
     <div class='example'>
       <div class='title'>large</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-icon-text-large }}
         {{frost-button
+          icon='round-add'
           priority='tertiary'
           size='large'
-          icon='frost/round-add'
           text='Text'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='tertiary'
-  size='large'
-  icon='frost/round-add'
-  text='Text'
-}}
-```"}}
+        {{code-snippet name='button-icon-text-large.hbs'}}
       </div>
     </div>
 
     <div class='example'>
       <div class='title'>disabled</div>
       <div class='demo'>
+        {{! BEGIN-SNIPPET button-icon-text-disabled }}
         {{frost-button
+          disabled=true
+          icon='round-add'
           priority='tertiary'
           size='medium'
-          disabled=true
-          icon='frost/round-add'
           text='Text'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='tertiary'
-  size='medium'
-  disabled=true
-  icon='frost/round-add'
-  text='Text'
-}}
-```"}}
+        {{code-snippet name='button-icon-text-disabled.hbs'}}
       </div>
     </div>
-
   </div>
 
-  <div class="section-title">Design</div>
+  <div class='section-title'>Design: info-bar</div>
   <hr>
   <div class='section'>
-
-    <div class="example">
-      <div class="title">info-bar</div>
-      <div class="demo">
+    <div class='example'>
+      <div class='title'>info-bar</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET button-design-info-bar }}
         {{frost-button
           design='info-bar'
-          icon='frost/infobar-find'
+          icon='search'
           text='Text'
         }}
+        {{! END-SNIPPET }}
       </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-button
-  design='info-bar'
-  icon='frost/infobar-find'
-  text='Text'
-}}
-```"}}
+      <div class='snippet'>
+        {{code-snippet name='button-design-info-bar.hbs'}}
       </div>
     </div>
 
-    <div class="example">
-      <div class="title">disabled info-bar</div>
-      <div class="demo">
+    <div class='example'>
+      <div class='title'>disabled</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET button-design-info-bar-disabled }}
         {{frost-button
           design='info-bar'
-          icon='frost/infobar-find'
-          text='Text'
           disabled=true
+          icon='search'
+          text='Text'
         }}
+        {{! END-SNIPPET }}
       </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-button
-  design='info-bar'
-  icon='frost/infobar-find'
-  text='Text'
-  disabled=true
-}}
-```"}}
+      <div class='snippet'>
+        {{code-snippet name='button-design-info-bar-disabled.hbs'}}
       </div>
     </div>
-
   </div>
 
- <div class="section-title">Events</div>
+  <div class='section-title'>Events</div>
   <hr>
   <div class='section'>
-    <div class="example">
-      <div class="title">onClick</div>
-      <div class="demo">
+    <div class='example'>
+      <div class='title'>onClick</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET button-onClick }}
         {{frost-button
           priority='confirm'
           size='medium'
           text='Action'
           onClick=(action 'onClickHandler')
         }}
+        {{! END-SNIPPET }}
       </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-button
-  priority='primary'
-  size='medium'
-  text='Action'
-  onClick=(action 'onClickHandler')
-}}
-```"
-        }}
+      <div class='snippet'>
+        {{code-snippet name='button-onClick.hbs'}}
       </div>
     </div>
-
   </div>
 
 </div>

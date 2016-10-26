@@ -1,8 +1,7 @@
-import _ from 'lodash'
 import Ember from 'ember'
-const {Component, Logger, ViewUtils} = Ember
+const {Component, Logger, typeOf, ViewUtils} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
-import {PropTypes} from 'ember-prop-types'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-button'
 
 /**
@@ -26,6 +25,7 @@ const validSizes = [
   'small'
 ]
 
+/* eslint-disable complexity */
 /**
  * Add the appropriate class for the given priority to the Array of classes
  * @param {String} priority - the priority to add
@@ -50,15 +50,12 @@ function addPriorityClass (priority, classes) {
       break
   }
 }
+/* eslint-enable complexity */
 
-export default Component.extend({
-  // ==========================================================================
-  // Dependencies
-  // ==========================================================================
+export default Component.extend(PropTypeMixin, {
+  // == Dependencies ==========================================================
 
-  // ==========================================================================
-  // Properties
-  // ==========================================================================
+  // == Properties ============================================================
 
   attributeBindings: [
     'autofocus',
@@ -85,6 +82,7 @@ export default Component.extend({
     autofocus: PropTypes.bool,
     design: PropTypes.string,
     disabled: PropTypes.bool,
+    hook: PropTypes.string,
     icon: PropTypes.string,
     pack: PropTypes.string,
     priority: PropTypes.string,
@@ -113,9 +111,7 @@ export default Component.extend({
     }
   },
 
-  // ==========================================================================
-  // Computed Properties
-  // ==========================================================================
+  // == Computed Properties ===================================================
 
   @readOnly
   @computed('icon', 'subtext', 'text')
@@ -169,6 +165,7 @@ export default Component.extend({
     return icon && text && subtext
   },
 
+  /* eslint-disable complexity */
   @readOnly
   @computed('design', 'icon', 'priority', 'size', 'text', 'vertical')
   /**
@@ -213,22 +210,32 @@ export default Component.extend({
 
     return classes.join(' ')
   },
+  /* eslint-enable complexity */
 
-  // ==========================================================================
-  // Functions
-  // ==========================================================================
+  // == Functions =============================================================
 
-  // ==========================================================================
-  // Events
-  // ==========================================================================
+  _getOnClickHandler () {
+    if (typeOf(this.attrs.onClick) === 'function') {
+      return this.attrs.onClick
+    }
+    // For the case when handler is passed from component property and converted
+    // into mutable cell
+    if (typeOf(this.attrs.onClick) === 'object' &&
+      typeOf(this.attrs.onClick.value) === 'function') {
+      return this.attrs.onClick.value
+    }
+  },
+
+  // == Events ================================================================
 
   onclick: Ember.on('click', function (event) {
     if (!ViewUtils.isSimpleClick(event)) {
       return true
     }
 
-    if (!this.get('disabled') && _.isFunction(this.attrs.onClick)) {
-      this.attrs.onClick(this.get('id'))
+    const onClickHandler = this._getOnClickHandler()
+    if (onClickHandler && !this.get('disabled')) {
+      onClickHandler(this.get('id'))
     }
   }),
 
@@ -239,7 +246,5 @@ export default Component.extend({
     }
   })
 
-  // ==========================================================================
-  // Actions
-  // ==========================================================================
+  // == Actions ===============================================================
 })

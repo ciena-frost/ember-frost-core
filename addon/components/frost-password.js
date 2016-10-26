@@ -1,103 +1,81 @@
-import _ from 'lodash'
+import computed from 'ember-computed-decorators'
 import Ember from 'ember'
-const {Component} = Ember
-import computed, {readOnly} from 'ember-computed-decorators'
+const {
+  Component
+} = Ember
+import {
+  task,
+  timeout
+} from 'ember-concurrency'
+import FrostEventsProxy from '../mixins/frost-events-proxy'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-password'
 
-export default Component.extend({
-  // ==========================================================================
-  // Dependencies
-  // ==========================================================================
+export default Component.extend(FrostEventsProxy, PropTypeMixin, {
 
-  // ==========================================================================
-  // Properties
-  // ==========================================================================
+  // == Properties ============================================================
 
-  classNames: ['frost-password'],
-  classNameBindings: ['revealable'],
-  isCapsOn: false,
-  isRevealerVisible: false,
+  classNames: [
+    'frost-password'
+  ],
+  classNameBindings: [
+    'revealable'
+  ],
   layout,
-  revealable: false,
-  revealed: false,
-  revealIcon: 'show',
-  tabindex: 0,
-  type: 'password',
 
-  // ==========================================================================
-  // Computed Properties
-  // ==========================================================================
-
-  @readOnly
-  @computed('isCapsOn', 'isRevealerVisible', 'revealable')
-  isCapsAndReveal (isCapsOn, isRevealerVisible, revealable) {
-    return revealable && isCapsOn && isRevealerVisible
+  propTypes: {
+    hook: PropTypes.string,
+    isRevealed: PropTypes.bool,
+    revealable: PropTypes.bool,
+    tabindex: PropTypes.number
   },
 
-  // ==========================================================================
-  // Functions
-  // ==========================================================================
-
-  // ==========================================================================
-  // Events
-  // ==========================================================================
-
-  focusOut: Ember.on('focusOut', function () {
-    this.set('isCapsOn', false)
-  }),
-
-  keyDown: Ember.on('keyDown', function (e) {
-    var s = e || window.e
-    if (this.get('isCapsOn') === false && (s.which === 20 || s.keyCode === 20)) {
-      this.set('isCapsOn', true)
+  getDefaultProps () {
+    return {
+      isRevealed: false,
+      revealable: false,
+      tabindex: 0
     }
-  }),
+  },
 
-  keyUp: Ember.on('keyUp', function (e) {
-    var s = e || window.e
-    if (this.get('isCapsOn') === true && (s.which === 20 || s.keyCode === 20)) {
-      this.set('isCapsOn', false)
-    }
-  }),
+  // == Computed properties  ===================================================
 
-  keyPressed: Ember.on('keyPress', function (e) {
-    var s = String.fromCharCode(e.which || e.keyCode)   // IE support
-    if ((s.toUpperCase() === s && s.toLowerCase() !== s && !e.shiftKey) ||
-      (s.toUpperCase() !== s && s.toLowerCase() === s && e.shiftKey)) { // caps is on
-      this.set('isCapsOn', true)
-    }
-  }),
+  @computed('isRevealed')
+  revealMessage (isRevealed) {
+    return isRevealed ? 'Hide' : 'Show'
+  },
 
-  _onFocus: Ember.on('focusIn', function (e) {
-    // If an onFocus handler is defined, call it
-    if (this.attrs.onFocus) {
-      this.attrs.onFocus()
-    }
-  }),
+  @computed('isRevealed')
+  type (isRevealed) {
+    return isRevealed ? 'text' : 'password'
+  },
 
-  // ==========================================================================
-  // Actions
-  // ==========================================================================
+  // == Tasks ==================================================================
+
+  _toggleReveal: task(function * (isVisible) {
+    this.toggleProperty('isRevealed')
+
+    const $input = this.$('input').get(0)
+
+    // Capture the current cursor selection/position
+    const selectionStart = $input.selectionStart
+    const selectionEnd = $input.selectionEnd
+
+    // Re-focus the input
+    $input.focus()
+
+    yield timeout(0) // Let focus resolve prior to setting the cursor
+
+    // Restore the cursor selection/position
+    $input.selectionStart = selectionStart
+    $input.selectionEnd = selectionEnd
+  }).restartable(),
+
+  // == Actions ===============================================================
 
   actions: {
-    onBlur () {
-      const onBlur = this.get('onBlur')
-
-      if (onBlur) {
-        onBlur()
-      }
-    },
-
-    onInput (args) {
-      this.set('isRevealerVisible', args.value.length > 0)
-      if (_.isFunction(this.get('onInput'))) {
-        this.get('onInput')(args)
-      }
-    },
     toggleReveal () {
-      this.toggleProperty('revealed')
-      this.set('type', this.get('revealed') ? 'text' : 'password')
-      this.set('revealIcon', this.get('revealed') ? 'hide' : 'show')
+      this.get('_toggleReveal').perform()
     }
   }
 })

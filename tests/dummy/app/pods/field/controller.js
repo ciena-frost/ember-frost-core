@@ -1,36 +1,38 @@
 import Ember from 'ember'
-const {Controller} = Ember
+const {
+  Controller
+} = Ember
 
 export default Controller.extend({
+  notifications: Ember.inject.service('notification-messages'),
   error: true,
 
   actions: {
-    onBlurHandler () {
-      this.notifications.addNotification({
-        message: 'blur event',
-        type: 'success',
+    // BEGIN-SNIPPET text-legacy-events
+    legacy (attrs) {
+      this.get('notifications').success(`id: ${attrs.id}, value: ${attrs.value}`, {
         autoClear: true,
         clearDuration: 2000
       })
     },
+    // END-SNIPPET text-legacy-events
 
-    onFocusHandler () {
-      this.notifications.addNotification({
-        message: 'focus event',
-        type: 'success',
+    // BEGIN-SNIPPET text-support-events
+    support (type, value) {
+      this.get('notifications').success(`${type}: ${value}`, {
         autoClear: true,
         clearDuration: 2000
       })
     },
+    // END-SNIPPET text-support-events
 
-    onInputHandler (attrs) {
-      console.log('field value: ' + attrs.value)
-      this.notifications.addNotification({
-        message: "value: '" + attrs.value + "'",
-        type: 'success',
+    // BEGIN-SNIPPET text-dom-events
+    event (event) {
+      this.get('notifications').success(`${event.type}: ${event.target.value}`, {
         autoClear: true,
         clearDuration: 2000
       })
     }
+    // END-SNIPPET text-dom-events
   }
 })

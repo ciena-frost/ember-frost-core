@@ -1,3 +1,245 @@
+# 0.29.1
+
+* **Fixed** issue where events weren't being unbound on component destruction.
+
+# 0.29.0
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.28.8
+* Fixed issue #120 
+
+# 0.28.7
+
+* **Fixed** input margins and borders to match.
+
+# 0.28.6
+ 
+* **Fixed** notifications for the dummy app.
+
+# 0.28.5
+
+* **Added** some test helpers for consumers to use in their tests.
+
+# 0.28.4
+
+* **Fixed** width of following inputs to match: `frost-password`, `frost-select`, and `frost-text`.
+
+# 0.28.3
+
+* **Fixed** `frost-multi-select`.
+
+# 0.28.2
+
+* **Updated** `frost-select` dropdown to update at 60 fps and stop using `element` property as it causes conflicts in Ember 2.9 beta 3.
+
+# 0.28.1
+
+* **Added** `frost-select-outlet` and documented it.
+
+# 0.28.0
+
+* **Added** [ember-elsewhere](https://github.com/ef4/ember-elsewhere) as a new dependency.
+* **Changed** `frost-select` and `frost-multi-select` to render dropdown elsewhere in the DOM, using `ember-elsewhere`, in order to make them more flexible.
+* **Changed** minimum Ember version from `2.1` to `2.3` since `ember-elsewhere` doesn't appear to work on versions prior to `2.3`.
+
+# 0.27.4
+* select value and prompt is now clearable by setting the 'selectedValue' property to an empty string in the consuming context
+
+# 0.27.3
+
+* The unselected text in the `frost-select` drop down menu is now a darker color.
+
+# 0.27.2
+
+* Pressing enter to select an item when there is no item hovered will no longer reset the selected value or cause an error
+* Changing select data after a selection has been made will no longer cause an error.
+
+# 0.27.1
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.27.0
+ * **Added** frost-toggle-button component and dummy example.
+
+# 0.26.0
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.25.7
+* Pass event to select's onBlur action
+
+# 0.25.6
+
+* Updated the button demo to demonstrate that disabled buttons don't fire actions
+
+# 0.25.5
+
+* Updated the frost-component blueprint to reflect current best practices
+
+# 0.25.4
+
+* **Added** `npm-install-security-check` as a dependency to make consumers more security conscious.
+
+# 0.25.3
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.25.2
+
+* **Fixed** Ember badge in README to reflect correct version.
+
+# 0.25.1
+
+* **Fixed** addon so it works with older versions of Ember all the way back to Ember `2.1`.
+
+# 0.25.0
+
+* Added an `onClick` event to the `frost-link` component that is sent prior to transition
+
+# 0.24.0
+
+* Added a first-pass version of a frost component blueprint
+
+# 0.23.1
+
+* **Updated** `ember-hook` dependency and blueprint to latest version
+
+<!-- Reviewable:start -->
+---
+This change is [<img src="https://reviewable.io/review_button.svg" height="34" align="absmiddle" alt="Reviewable"/>](https://reviewable.io/reviews/ciena-frost/ember-frost-core/172)
+<!-- Reviewable:end -->
+
+
+# 0.23.0
+
+* Added onScrollUp, onScrollDown, onScrollYStart, onScrollYEnd
+* Deprecated on-scroll-y-end in favor of onScrollYEnd
+
+# 0.22.3
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.22.2
+
+* **Removed** most uses of `lodash` methods in favor of ES6 and Ember methods.
+
+# 0.22.1
+
+* **Updated** `ember-cli-sass`  to float on the major
+* **Updated** CHANGELOG.md file to remove Reviewable note.
+
+
+# 0.22.0
+
+* **Added** hooks for testing into frost-select and frost-multi-select
+* **Added** tests to verify hooks in integration tests for frost-select and frost-multi-select
+* **Added** documentation on the hook usage for frost-select and frost-multi-select
+
+# 0.21.3
+
+* **Updated** temporarily restrict `ember-cli-sass` from going above version 5.4.0
+
+# 0.21.2
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.21.1
+
+* **Fixed** bug in `treeForAddon` that can affect consumers.
+
+# 0.21.0
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.20.0
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.19.2
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.19.1
+
+* **Fixed** components that use `ember-prop-types` to work as expected in integration tests by explicitly consuming the `ember-prop-types` mixin instead of relying on the initializer which isn't executed in an integration test environment.
+
+# 0.19.0
+The select input widgets now use redux.
+
+# 0.18.1
+
+* **Fixed** `frost-textarea`'s `onInput` handler to propagate change immediately to consumer rather than wait for another Ember run loop to pass.
+
+# 0.18.0
+
+## Text/Password native event support
+- Mapped all available DOM events to Frost events (e.g. focusIn -> onFocusIn) see the demo for a full list
+- Event hooks respond with native DOM events instead of {id, value} object, this is still supported as a legacy usage, but please switch (no way to detect when the legacy attributes are used unfortunately)
+- Deprecated `onFocus` (replaced by `onFocusIn`)
+- Deprecated `onBlur` (replaced by `onFocusOut`)
+- Removed the `excludedEvents` property from the FrostEvents mixin, this is covered automatically when local events are present
+
+## Text/Password visual and behavioral updates
+- Added a new color (grey-7) to the palette for input borders
+- Updated the visuals and animation for hover, focus, clear and show/hide
+
+## Text/Password demo updates
+- Demos demonstrate legacy, native, text support and deprecated events
+- Updated the text/password demos to use snippets
+
+## New keycodes util
+- Added a keycodes enum for use in matching keycodes from keyboard events
+
+## Code cleanup
+- Integrated ember-concurrency for async behavior in text/password (clear text, show/hide password)
+- Text/password actions are fully run-loop compliant and clean up automatically on component destruction
+
+## Future
+- Moving towards dropping ember-one-way-controls from the dependency list (requires Ember 2.3.1+)
+
+# 0.17.3
+ * **Fixes** a bug in `frost-select` where the options popover was closed whenever someone typed into the input (when `selectedValue` is passed in as props).
+ * **Updated** `eslint` within the project to `3.x`
+ * **Added** some linting rules for `mocha` (via an update to `eslint-config-frost-standard`)
+ * **Updated** `tests/` directory to no longer specify an `.eslintrc` with `globals` that shouldn't actually be globals.
+
+# 0.17.2
+
+Added ember-code-snippets to allow demo documentation to reference the code as the sample text.  Cleaned up the button demo as an example.
+
+# 0.17.1
+
+Fixed the text clear icon to only append to the DOM on insertion of the text field (was occurring on every render/re-render)
+
+# 0.17.0
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.16.0
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.15.0
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.14.1
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.14.0
+No CHANGELOG section found in Pull Request description.
+Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+# 0.13.1
+
+- Changed selection by value to not fire the onChange event
+
+# 0.13.0
+* **Added** `onKeyUp` property on `frost-text` that receives `keyUp` events from the inner `input`
+* **Added** `onKeyDown` property on `frost-text` that receives `keyDown` events from the inner `input`
+
 # 0.12.0
 
 * added shield-full, shield-half icons

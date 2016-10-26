@@ -20,16 +20,20 @@ export default [
     routeName: 'layout'
   },
   {
-    label: 'Loading',
-    routeName: 'loading'
-  },
-  {
     label: 'Link',
     routeName: 'link'
   },
   {
+    label: 'Loading',
+    routeName: 'loading'
+  },
+  {
     label: 'Password',
     routeName: 'password'
+  },
+  {
+    label: 'Radio',
+    routeName: 'radio'
   },
   {
     label: 'Scroll',
@@ -48,7 +52,15 @@ export default [
     routeName: 'field'
   },
   {
+    label: 'Toggle',
+    routeName: 'toggle'
+  },
+  {
     label: 'Typography',
     routeName: 'typography'
+  },
+  {
+    label: 'Helpers',
+    routeName: 'helpers'
   }
 ]

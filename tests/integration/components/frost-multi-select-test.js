@@ -1,19 +1,37 @@
-import {expect} from 'chai'
-import {describeComponent, it} from 'ember-mocha'
-import {beforeEach} from 'mocha'
-import sinon from 'sinon'
-import hbs from 'htmlbars-inline-precompile'
 import Ember from 'ember'
 const {run} = Ember
+import {expect} from 'chai'
+import {$hook, initialize} from 'ember-hook'
+import {describeComponent, it} from 'ember-mocha'
+import {beforeEach, describe} from 'mocha'
+import sinon from 'sinon'
+import hbs from 'htmlbars-inline-precompile'
 
 function wait (callback) {
   run.later(callback)
 }
 
-const selectedTestTemplate = hbs`{{frost-multi-select onChange=onChange selected=selected data=data greeting=greeting}}`
-const selectedValueTestTemplate = hbs`{{frost-multi-select onChange=onChange data=data greeting=greeting selectedValue=selectedValue}}`
+const selectedTestTemplate = hbs`
+  {{frost-select-outlet}}
+  {{frost-multi-select
+    onChange=onChange
+    selected=selected
+    data=data
+    greeting=greeting
+    hook=hook
+  }}
+`
+const selectedValueTestTemplate = hbs`
+  {{frost-select-outlet}}
+  {{frost-multi-select
+    onChange=onChange
+    data=data
+    greeting=greeting
+    selectedValue=selectedValue}}
+`
 
 let props = {
+  hook: 'my-multi-select',
   onChange: sinon.spy(),
   selected: [],
   data: [
@@ -41,6 +59,7 @@ describeComponent(
   },
   function () {
     beforeEach(function () {
+      initialize()
       props.selected = []
       run(() => {
         this.setProperties(props)
@@ -52,97 +71,114 @@ describeComponent(
       expect(this.$('.frost-select.multi')).to.have.length(1)
     })
 
-    it('shows a checkbox for each item', function () {
-      // test that each row has a checkbox, maybe $('.frost-checkbox').length
-      expect(this.$('.frost-checkbox').length).to.eql(props.data.length)
-    })
-
-    it('clicking a row checks the box', function (done) {
-      this.$('.frost-select li:first-child').click()
-      wait(() => {
-        expect(this.$('.frost-select .selected')).to.have.length(1)
-        done()
+    describe('when opened', function () {
+      beforeEach(function () {
+        $hook('my-multi-select').find('.down-arrow').click()
       })
-    })
 
-    it('displays the selection in the text input when 1 item is selected', function (done) {
-      this.$('.frost-select li:first-child').click()
-      wait(() => {
-        expect(this.$('.frost-select .trigger').val()).to.eql(props.data[0].label)
-        done()
+      it('hook grabs the multi-select as expected', function () {
+        expect($hook('my-multi-select').hasClass('multi')).to.be.true
+
+        expect($hook('my-multi-select-input').prop('type')).to.be.eql('text')
+
+        expect($hook('my-multi-select-list').find('li')).to.have.length(3)
+
+        expect($hook('my-multi-select-item-0')).to.have.length(1)
+
+        expect($hook('my-multi-select-checkbox-item-0')).to.have.length(1)
       })
-    })
 
-    it('displays both selected items in the text input when 2 items are selected', function (done) {
-      this.$('.frost-select li:first-child').click()
-      this.$('.frost-select li:nth-child(2)').click()
-      wait(() => {
-        expect(this.$('.frost-select .trigger').val()).to.eql([props.data[0].label, props.data[1].label].join(', '))
-        done()
+      it('shows a checkbox for each item', function () {
+        // test that each row has a checkbox, maybe $('.frost-checkbox').length
+        expect(this.$('.frost-checkbox').length).to.eql(props.data.length)
       })
-    })
 
-    it('displays the number of selected items in the text input when 3 or more items are selected', function (done) {
-      this.$('.frost-select li:first-child').click()
-      this.$('.frost-select li:nth-child(2)').click()
-      this.$('.frost-select li:nth-child(3)').click()
-      wait(() => {
-        expect(this.$('.frost-select .trigger').val()).to.eql('3 items selected')
-        done()
+      it('clicking a row checks the box', function (done) {
+        $hook('my-multi-select-list').find('li:first-child').click()
+        wait(() => {
+          expect($hook('my-multi-select-list').find('.selected')).to.have.length(1)
+          done()
+        })
       })
-    })
 
-    it('has a footer message with number selected', function (done) {
-      this.$('.frost-select li:first-child').click()
-      this.$('.frost-select li:nth-child(2)').click()
-      this.$('.frost-select li:nth-child(3)').click()
-      wait(() => {
-        expect(this.$('.frost-select .number-selected').text()).to.eql('3 selected')
-        done()
+      it('displays the selection in the text input when 1 item is selected', function (done) {
+        $hook('my-multi-select-list').find('li:first-child').click()
+        wait(() => {
+          expect(this.$('.frost-select .trigger').val()).to.eql(props.data[0].label)
+          done()
+        })
       })
-    })
 
-    it('has a clear button', function () {
-      expect(this.$('.frost-select .clear')).to.have.length(1)
-    })
-
-    it('that clears the selection', function (done) {
-      this.$('.frost-select li:first-child').click()
-      this.$('.frost-select li:nth-child(2)').click()
-      this.$('.frost-select li:nth-child(3)').click()
-      this.$('.frost-select .clear').click()
-      wait(() => {
-        expect(this.$('.frost-select .selected')).to.have.length(0)
-        done()
+      it('displays both selected items in the text input when 2 items are selected', function (done) {
+        $hook('my-multi-select-list').find('li:first-child').click()
+        $hook('my-multi-select-list').find('li:nth-child(2)').click()
+        wait(() => {
+          expect(this.$('.frost-select .trigger').val()).to.eql([props.data[0].label, props.data[1].label].join(', '))
+          done()
+        })
       })
-    })
 
-    it('filters list when none are selected', function (done) {
-      let input = this.$('.frost-select input')
-
-      input.val('kwon').trigger('input')
-      wait(() => {
-        expect(this.$('.frost-select li')).to.have.length(1)
-        done()
+      it('displays the number of selected items in the text input when 3 or more items are selected', function (done) {
+        $hook('my-multi-select-list').find('li:first-child').click()
+        $hook('my-multi-select-list').find('li:nth-child(2)').click()
+        $hook('my-multi-select-list').find('li:nth-child(3)').click()
+        wait(() => {
+          expect(this.$('.frost-select .trigger').val()).to.eql('3 items selected')
+          done()
+        })
       })
-    })
 
-    it('does not allow filtering when 1+ are selected', function (done) {
-      this.$('.frost-select li:first-child').click()
-      wait(() => {
-        let input = this.$('.frost-select input[type=text]')
-        expect(input.prop('disabled')).to.be.true
-        done()
+      it('has a footer message with number selected', function (done) {
+        $hook('my-multi-select-list').find('li:first-child').click()
+        $hook('my-multi-select-list').find('li:nth-child(2)').click()
+        $hook('my-multi-select-list').find('li:nth-child(3)').click()
+        wait(() => {
+          expect($hook('my-multi-select-list').find('.number-selected').text()).to.eql('3 selected')
+          done()
+        })
       })
-    })
 
-    it('keeps the list open when a value is selected', function (done) {
-      this.$('.down-arrow').click()
-      this.$('.frost-select li:first-child').click()
-      wait(() => {
-        const isOpen = this.$('.frost-select').hasClass('open')
-        expect(isOpen).to.be.true
-        done()
+      it('has a clear button', function () {
+        expect($hook('my-multi-select-list').find('.clear')).to.have.length(1)
+      })
+
+      it('that clears the selection', function (done) {
+        $hook('my-multi-select-list').find('li:first-child').click()
+        $hook('my-multi-select-list').find('li:nth-child(2)').click()
+        $hook('my-multi-select-list').find('li:nth-child(3)').click()
+        $hook('my-multi-select-list').find('.clear').click()
+        wait(() => {
+          expect($hook('my-multi-select-list').find('.selected')).to.have.length(0)
+          done()
+        })
+      })
+
+      it('filters list when none are selected', function (done) {
+        let input = this.$('.frost-select input')
+
+        input.val('kwon').trigger('input')
+        wait(() => {
+          expect($hook('my-multi-select-list').find('li')).to.have.length(1)
+          done()
+        })
+      })
+
+      it('does not allow filtering when 1+ are selected', function (done) {
+        $hook('my-multi-select-list').find('li:first-child').click()
+        wait(() => {
+          let input = this.$('.frost-select input[type=text]')
+          expect(input.prop('disabled')).to.be.true
+          done()
+        })
+      })
+
+      it('keeps the list open when a value is selected', function (done) {
+        $hook('my-multi-select-list').find('li:first-child').click()
+        wait(() => {
+          const isOpen = this.$('.frost-select').hasClass('open')
+          expect(isOpen).to.be.true
+          done()
+        })
       })
     })
   }
@@ -150,7 +186,7 @@ describeComponent(
 
 describeComponent(
   'frost-multi-select',
-  'Intergration: FrostMultiSelectComponent',
+  'Integration: FrostMultiSelectComponent',
   {
     integration: true
   },
@@ -170,6 +206,20 @@ describeComponent(
 
         expect(input.val()).to.eql('3 items selected')
         expect(props.onChange.called).to.be.true
+        done()
+      })
+    })
+
+    it('keeps prompt on rerender', function (done) {
+      this.set('selectedValue', ['Tony Starks'])
+      // A bug would cause the prompt to clear on a rerender
+      // We trigger one here by changing a dummy attribute
+      this.set('greeting', 'Bonjour')
+
+      wait(() => {
+        let input = this.$('.frost-select .trigger')
+
+        expect(input.val()).to.eql('Ghostface')
         done()
       })
     })
@@ -216,8 +266,17 @@ describeComponent(
       this.render(selectedTestTemplate)
     })
 
-    it('respects pre-selected values', function () {
-      expect(this.$('.frost-select .selected')).to.have.length(2)
+    describe('when opened', function () {
+      beforeEach(function () {
+        return $hook('my-multi-select').find('.down-arrow').click()
+      })
+
+      it('respects pre-selected values', function (done) {
+        run.later(() => {
+          expect($hook('my-multi-select-list').find('.selected')).to.have.length(2)
+          done()
+        })
+      })
     })
   }
 )

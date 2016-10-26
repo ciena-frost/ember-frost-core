@@ -1,38 +1,56 @@
+import Ember from 'ember'
+const {$, run, typeOf} = Ember
 import {expect} from 'chai'
+import {$hook, initialize} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
-import {beforeEach} from 'mocha'
+import {beforeEach, describe} from 'mocha'
 import sinon from 'sinon'
 import hbs from 'htmlbars-inline-precompile'
-import $ from 'jquery'
-import _ from 'lodash'
-import Ember from 'ember'
-const {run} = Ember
 
-const selectedTestTemplate = hbs`{{frost-select
-  data=data
-  greeting=greeting
-  onChange=onChange
-  placeholder=placeholder
-  selected=selected
-}}`
+const selectedTestTemplate = hbs`
+  {{frost-select-outlet}}
+  {{frost-select
+    data=data
+    greeting=greeting
+    hook=hook
+    onChange=onChange
+    placeholder=placeholder
+    selected=selected
+  }}
+`
 
-const selectedValueTestTemplate = hbs`{{frost-select
-  data=data
-  greeting=greeting
-  onChange=onChange
-  placeholder=placeholder
-  selectedValue=selVal
-}}`
+const selectedValueTestTemplate = hbs`
+  {{frost-select-outlet}}
+  {{frost-select
+    data=data
+    hook=hook
+    greeting=greeting
+    onChange=onChange
+    placeholder=placeholder
+    selectedValue=selVal
+  }}
+`
+
+const undefinedValueTestTemplate = hbs`
+  {{frost-select-outlet}}
+  {{frost-select
+    data=data
+    hook=hook
+    onChange=onChange
+  }}
+`
 
 const keyCodes = {
-  'up': 38,
-  'down': 40,
+  backspace: 8,
+  down: 40,
+  enter: 13,
   esc: 27,
-  tab: 9
+  tab: 9,
+  up: 38
 }
 
 function keyDown ($selection, keyCode) {
-  if (_.isString(keyCode)) {
+  if (typeOf(keyCode) === 'string') {
     keyCode = keyCodes[keyCode]
   }
   let event = $.Event('keydown')
@@ -42,7 +60,7 @@ function keyDown ($selection, keyCode) {
 }
 
 function keyUp ($selection, keyCode) {
-  if (_.isString(keyCode)) {
+  if (typeOf(keyCode) === 'string') {
     keyCode = keyCodes[keyCode]
   }
   let event = $.Event('keyup')
@@ -59,10 +77,13 @@ describeComponent(
   },
   function () {
     let props
-    let dropDown
+    let $dropDown, $input
 
     beforeEach(function () {
+      initialize()
+
       props = {
+        hook: 'my-select',
         selected: 1,
         onChange: sinon.spy(),
         placeholder: 'Select something already',
@@ -82,273 +103,313 @@ describeComponent(
         ],
         greeting: 'Hola'
       }
-      this.setProperties(props)
-      this.render(selectedTestTemplate)
-      dropDown = this.$('.frost-select')
+      run(() => {
+        this.setProperties(props)
+        this.render(selectedTestTemplate)
+      })
+      $dropDown = this.$('.frost-select')
+      $input = this.$('.frost-select input')
     })
 
     it('renders', function () {
       expect(this.$('.frost-select')).to.have.length(1)
     })
 
-    it('lists all passed data records', function () {
-      run.later(() => {
-        expect(this.$('.frost-select li').length).to.eql(props.data.length)
+    describe('when opened', function () {
+      beforeEach(function () {
+        return $hook('my-select').find('.down-arrow').click()
       })
-    })
 
-    it('opens when arrow clicked', (done) => {
-      this.$('.frost-select .down-arrow').click()
-      run.later(() => {
+      it('hook grabs the select as expected', function () {
+        expect($hook('my-select').hasClass('frost-select')).to.be.true
+
+        expect($hook('my-select-input').prop('type')).to.be.eql('text')
+
+        expect($hook('my-select-list').find('li')).to.have.length(3)
+
+        expect($hook('my-select-item-0')).to.have.length(1)
+      })
+
+      it('lists all passed data records', function () {
+        expect($hook('my-select-list').find('li').length).to.eql(props.data.length)
+      })
+
+      it('opens', function () {
         expect(this.$('.frost-select').hasClass('open')).to.be.true
-        done()
       })
-    })
 
-    it('closes when down arrow clicked a second time', (done) => {
-      this.$('.frost-select .down-arrow').click()
-      this.$('.frost-select .down-arrow').click()
-      run.later(() => {
+      it('closes when down arrow clicked a second time', function () {
+        run(() => {
+          this.$('.frost-select .down-arrow').click()
+        })
+
         expect(this.$('.frost-select').hasClass('open')).to.be.false
-        done()
+      })
+
+      it('highlights list items on mouse over', function () {
+        run(() => {
+          this.$('.frost-select').click()
+          let listItem = $hook('my-select-list').find('li:first-child')
+          listItem.mouseover()
+        })
+        let listItem = $hook('my-select-list').find('li:first-child')
+        expect(listItem.hasClass('hover')).to.be.true
+      })
+
+      it('highlights list items when down-arrowed to', function () {
+        run(() => {
+          let dropDown = this.$('.frost-select')
+          keyUp(dropDown, 'down')
+        })
+        let listItem = $hook('my-select-list').find('li:first-child')
+        expect(listItem.hasClass('hover')).to.be.true
+      })
+
+      it('highlights list items when up-arrowed to', function () {
+        let dropDown = this.$('.frost-select')
+        run(() => {
+          keyUp(dropDown, 'down')
+          keyUp(dropDown, 'down')
+          keyUp(dropDown, 'down')
+          keyUp(dropDown, 'down')
+
+          keyUp(dropDown, 'up')
+          keyUp(dropDown, 'up')
+          keyUp(dropDown, 'up')
+        })
+
+        let listItem = $hook('my-select-list').find('li:first-child')
+        expect(listItem.hasClass('hover')).to.be.true
+      })
+
+      it('closes when esc is pressed', function () {
+        keyUp($dropDown, 'esc')
+        expect($dropDown.hasClass('open')).to.be.false
+      })
+
+      it('closes when blurred', () => {
+        keyUp($dropDown, 27)
+        expect($dropDown.hasClass('open')).to.be.false
+      })
+
+      it('selects the hovered item when enter is pressed', function () {
+        run(() => {
+          keyUp($dropDown, 40)
+          keyUp($dropDown, 13)
+        })
+
+        let dropDownInput = this.$('.frost-select input')
+        let value = dropDownInput.val()
+        expect(value).to.eql(props.data[0].label)
+      })
+
+      it('selects the hovered item when it is clicked', function () {
+        run(() => {
+          let listItem = $hook('my-select-list').find('li:first-child')
+          listItem.click()
+        })
+        let dropDownInput = this.$('.frost-select input')
+        let value = dropDownInput.val()
+        expect(value).to.eql(props.data[0].label)
+      })
+
+      it('filters the list when input is typed into', function () {
+        run(() => {
+          this.$('.frost-select input').first()
+            .val('w')
+            .trigger('input')
+        })
+        let listItems = $hook('my-select-list').find('li')
+        expect(listItems.length).to.eql(1)
+      })
+
+      it('hovers the only available one if filter leaves one', function () {
+        run(() => {
+          this.$('.frost-select input').first()
+            .val('w')
+            .trigger('input')
+        })
+
+        let listItems = $hook('my-select-list').find('li')
+        expect(listItems.length).to.eql(1)
+        expect(listItems.hasClass('hover')).to.be.true
+      })
+
+      it('calls the supplied callback when an item is selected', function () {
+        run(() => {
+          let listItem = $hook('my-select-list').find('li:first-child')
+          listItem.click()
+        })
+        expect(props.onChange.called).to.be.true
+      })
+
+      it('respects a pre-selected value', function (done) {
+        run.later(() => {
+          let component = $hook('my-select-list').find('.selected')
+          expect(component.length).to.eql(1)
+          done()
+        })
+      })
+
+      it('goes into error state when something non-existant is typed', function () {
+        let input = this.$('.frost-select input')
+        input.val('zxcv').trigger('input')
+        let component = this.$('.frost-select')
+        expect(component.hasClass('open')).to.be.false
+        expect(component.hasClass('error')).to.be.true
+      })
+
+      it('handles click outside of select', function () {
+        this.$().click()
+        expect($dropDown.hasClass('open')).to.be.false
+      })
+
+      it('handles losing focus by pressing tab', function () {
+        keyDown($dropDown, 'tab')
+        expect($dropDown.hasClass('open')).to.be.false
       })
     })
 
     // FIXME: figure out why test is failing
-    /* it('opens when focused', function (done) {
-      this.$('.frost-select input').focus()
-      run.later(() => {
-        expect(this.$('.frost-select').hasClass('open')).to.be.true
-        done()
+    /* it('opens when focused', function () {
+      run(() => {
+        this.$('.frost-select input').focus()
       })
+      expect(this.$('.frost-select').hasClass('open')).to.be.true
     })*/
 
-    it('highlights list items on mouse over', function (done) {
-      this.$('.frost-select').click()
-      let listItem = this.$('.frost-select li:first-child')
-      listItem.mouseover()
-      run.later(() => {
-        // expect(true).to.eql(true)
-        let listItem = this.$('.frost-select li:first-child')
-
-        expect(listItem.hasClass('hover')).to.be.true
-        done()
+    it('unsets the value when the index is less than 0', function () {
+      run(() => {
+        this.set('selected', [-1])
       })
+      expect($hook('my-select-list').find('.selected').length).to.eql(0)
     })
 
-    it('highlights list items when down-arrowed to', function (done) {
-      let dropDown = this.$('.frost-select')
-      keyUp(dropDown, 'down')
-      run.later(() => {
-        let listItem = this.$('.frost-select li:first-child')
-        expect(listItem.hasClass('hover')).to.be.true
-        done()
+    it('sets the prompt to the selected value when the drop down list is closed', function () {
+      run(() => {
+        keyUp($dropDown, 'down')
+        keyUp($dropDown, keyCodes.enter)
+        $input.focus()
+        keyUp($dropDown, 'backspace')
+        keyUp($dropDown, 'esc')
       })
-    })
 
-    it('highlights list items when up-arrowed to', function (done) {
-      let dropDown = this.$('.frost-select')
-
-      keyUp(dropDown, 'down')
-      keyUp(dropDown, 'down')
-      keyUp(dropDown, 'down')
-      keyUp(dropDown, 'down')
-
-      keyUp(dropDown, 'up')
-      keyUp(dropDown, 'up')
-      keyUp(dropDown, 'up')
-
-      run.later(() => {
-        let listItem = this.$('.frost-select li:first-child')
-
-        expect(listItem.hasClass('hover')).to.be.true
-        done()
-      })
-    })
-
-    it('closes when esc is pressed', function () {
-      let dropDown = this.$('.frost-select')
-
-      dropDown.click()
-      keyUp(dropDown, 'esc')
-
-      expect(dropDown.hasClass('open')).to.be.false
-    })
-
-    it('closes when blurred', () => {
-      keyUp(dropDown, 27)
-      expect(dropDown.hasClass('open')).to.be.false
-
-      expect(dropDown)
-    })
-
-    it('selects the hovered item when enter is pressed', function (done) {
-      keyUp(dropDown, 40)
-      keyUp(dropDown, 13)
-
-      run.later(() => {
-        let dropDownInput = this.$('.frost-select input')
-        let value = dropDownInput.val()
-        expect(value).to.eql(props.data[0].label)
-        done()
-      })
-    })
-
-    it('selects the hovered item when it is clicked', function (done) {
-      let listItem = this.$('.frost-select li:first-child')
-      listItem.click()
-      run.later(() => {
-        let listItem = this.$('.frost-select li:first-child')
-        expect(listItem.hasClass('selected')).to.be.true
-        done()
-      })
-    })
-
-    it('filters the list when input is typed into', function (done) {
+      let select = this.$('.frost-select')
       let input = this.$('.frost-select input')
-      input.val('w')
-      input[0].oninput({target: input[0]})
-      run.later(() => {
-        let listItems = this.$('.frost-select li')
-        expect(listItems.length).to.eql(1)
-        done()
-      })
-    })
-
-    it('hovers the only available one if filter leaves one', function (done) {
-      let input = this.$('.frost-select input')
-      input.val('w')
-      input[0].oninput({target: input[0]})
-      run.later(() => {
-        let listItems = this.$('.frost-select li')
-        expect(listItems.length).to.eql(1)
-        expect(listItems.hasClass('hover')).to.be.true
-        done()
-      })
-    })
-
-    it('calls the supplied callback when an item is selected', function (done) {
-      let listItem = this.$('.frost-select li:first-child')
-      listItem.click()
-      run.later(() => {
-        expect(props.onChange.called).to.be.true
-        done()
-      })
-    })
-
-    it('goes into error state when something non-existant is typed', function (done) {
-      let input = this.$('.frost-select input')
-      this.$('.frost-select').addClass('open')
-      input.val('zxcv').trigger('input')
-      run.later(() => {
-        let component = this.$('.frost-select')
-        expect(component.hasClass('open')).to.be.false
-        expect(component.hasClass('error')).to.be.true
-
-        done()
-      })
-    })
-
-    it('respects a pre-selected value', function () {
-      let component = this.$('.frost-select .selected')
-      expect(component.length).to.eql(1)
-    })
-
-    it('sets the prompt to the selected value when the drop down list is closed', function (done) {
-      let input = this.$('.frost-select input')
-      keyUp(dropDown, 'down')
-      keyUp(dropDown, 13) // Enter key, select the item
-
-      run.later(() => {
-        input.val('')
-        keyUp(dropDown, 'down')
-        keyUp(dropDown, 'esc')
-
-        run.later(() => {
-          let select = this.$('.frost-select')
-          let input = this.$('.frost-select input')
-          expect(select.hasClass('open')).to.be.false
-          expect(input.val()).to.eql('Raekwon')
-          done()
-        })
-      })
-    })
-
-    it('handles click outside of select', function (done) {
-      this.$('.frost-select .down-arrow').click()
-      run.later(() => {
-        this.$().click()
-        run.later(() => {
-          expect(dropDown.hasClass('open')).to.be.false
-          done()
-        })
-      })
-    })
-
-    it('handles loosing focus by pressing tab', function (done) {
-      this.$('.frost-select .down-arrow').click()
-      run.later(() => {
-        keyDown(dropDown, 'tab')
-        run.later(() => {
-          expect(dropDown.hasClass('open')).to.be.false
-          done()
-        })
-      })
+      expect(select.hasClass('open')).to.be.false
+      expect(input.val()).to.eql('Raekwon')
     })
 
     it('supports placeholder', function () {
       const $input = this.$('.frost-select input')
       expect($input.attr('placeholder')).to.eql('Select something already')
     })
-  }
-)
 
-describeComponent(
-  'frost-select',
-  'Integration: FrostSelectComponent',
-  {
-    integration: true
-  },
-  function () {
-    let props
+    describe('when pressing enter to select a new item', function () {
+      beforeEach(function () {
+        keyUp($dropDown, 'down')
+        keyUp($dropDown, keyCodes.enter)
+      })
+      it('should display the selected item label', function () {
+        expect($input.val()).to.eql('Raekwon')
+      })
+    })
 
-    beforeEach(function () {
-      props = {
-        onChange: sinon.spy(),
-        placeholder: 'Select something already',
-        data: [
-          {
-            value: 'Lex Diamond',
-            label: 'Raekwon'
-          },
+    describe('when pressing enter after selecting an item', function () {
+      beforeEach(function () {
+        keyUp($dropDown, 'down')
+        keyUp($dropDown, 'down')
+        keyUp($dropDown, 'down')
+        keyUp($dropDown, keyCodes.enter)
+        keyUp($dropDown, keyCodes.enter)
+      })
+      it('should keep the correct label', function () {
+        expect($input.val()).to.eql('Ghostface')
+      })
+    })
+
+    describe('when pressing enter without a selected item', function () {
+      beforeEach(function () {
+        this.render(undefinedValueTestTemplate)
+        $dropDown = this.$('.frost-select')
+        $input = this.$('.frost-select input')
+        $dropDown.click()
+        keyUp($dropDown, keyCodes.enter)
+      })
+      it('should not display a label', function () {
+        expect($input.val()).to.eql('')
+      })
+    })
+
+    describe('when re-rendering with different data', function () {
+      beforeEach(function () {
+        this.render(undefinedValueTestTemplate)
+        $dropDown = this.$('.frost-select')
+        $input = this.$('.frost-select input')
+        // Make selection
+        keyUp($dropDown, 'down')
+        keyUp($dropDown, 'down')
+        keyUp($dropDown, 'enter')
+        // Now re-render with only that option
+        this.set('data', [
           {
             value: 'Johnny Blaze',
             label: 'Method Man'
-          },
-          {
-            value: 'Tony Starks',
-            label: 'Ghostface'
           }
-        ],
-        greeting: 'Hola'
-      }
-      this.setProperties(props)
-      this.render(selectedValueTestTemplate)
+        ])
+      })
+      it('should display the still-valid selection', function () {
+        expect($input.val()).to.eql('Method Man')
+      })
     })
 
-    it('renders', function () {
-      expect(this.$('.frost-select')).to.have.length(1)
-    })
+    describe('when passing in selected value', function () {
+      let props
+      beforeEach(function () {
+        props = {
+          selected: [],
+          onChange: sinon.spy(),
+          placeholder: 'Select something already',
+          data: [
+            {
+              value: 'Lex Diamond',
+              label: 'Raekwon'
+            },
+            {
+              value: 'Johnny Blaze',
+              label: 'Method Man'
+            },
+            {
+              value: 'Tony Starks',
+              label: 'Ghostface'
+            }
+          ],
+          greeting: 'Hola'
+        }
+        this.setProperties(props)
+        this.render(selectedValueTestTemplate)
+        $dropDown = this.$('.frost-select')
+        $input = this.$('.frost-select input')
+      })
 
-    it('sets the prompt and value from a component attribute', function (done) {
-      this.set('selVal', 'Tony Starks')
+      it('renders', function () {
+        expect(this.$('.frost-select')).to.have.length(1)
+      })
 
-      run.later(() => {
-        let input = this.$('.frost-select input')
+      it('sets the prompt and value from a component attribute', function () {
+        run(() => {
+          this.set('selVal', 'Tony Starks')
+        })
 
-        expect(input.val()).to.be.eql('Ghostface')
-        expect(props.onChange.called).to.be.true
-        done()
+        expect($input.val()).to.be.eql('Ghostface')
+      })
+
+      it('clears when selectedValue is set to empty string', function () {
+        this.set('selVal', '')
+        this.render(selectedTestTemplate)
+        return run.later(() => {
+          expect($input.val()).to.be.eql('')
+        })
       })
     })
   }

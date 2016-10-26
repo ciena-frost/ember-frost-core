@@ -1,72 +1,72 @@
 {
   "name": "ember-frost-core",
-  "version": "0.12.0",
+  "version": "0.29.1",
   "description": "The library of core frost components",
   "frostGuideDirectories": [
     {
       "demoName": "checkbox",
       "frostGuideDirectory": "ui-components/button-controls/checkbox",
-      "readme": "frost-checkbox.md"
+      "readme": "docs/frost-checkbox.md"
     },
     {
       "demoName": "button",
       "frostGuideDirectory": "ui-components/button-controls/button",
-      "readme": "frost-button.md"
+      "readme": "docs/frost-button.md"
     },
     {
       "demoName": "icons",
       "frostGuideDirectory": "design-conventions/icons",
-      "readme": "frost-icons.md"
+      "readme": "docs/frost-icons.md"
     },
     {
       "demoName": "field",
       "frostGuideDirectory": "ui-components/input-fields/text-field",
-      "readme": "frost-text.md"
+      "readme": "docs/frost-text.md"
     },
     {
       "demoName": "password",
       "frostGuideDirectory": "ui-components/input-fields/password",
-      "readme": "frost-password.md"
+      "readme": "docs/frost-password.md"
     },
     {
       "demoName": "area",
       "frostGuideDirectory": "ui-components/input-fields/text-area",
-      "readme": "frost-textarea.md"
+      "readme": "docs/frost-textarea.md"
     },
     {
       "demoName": "link",
       "frostGuideDirectory": "ui-components/button-controls/link",
-      "readme": "frost-link.md"
+      "readme": "docs/frost-link.md"
     },
     {
       "demoName": "palette",
       "frostGuideDirectory": "design-conventions/colors",
-      "readme": "frost-css.md"
+      "readme": "docs/frost-css.md"
     },
     {
       "demoName": "typography",
       "frostGuideDirectory": "design-conventions/typography",
-      "readme": "frost-css.md"
+      "readme": "docs/frost-css.md"
     },
     {
       "demoName": "layout",
       "frostGuideDirectory": "design-conventions/layout",
-      "readme": "frost-css.md"
+      "readme": "docs/frost-css.md"
     },
     {
       "demoName": "loading",
       "frostGuideDirectory": "ui-components/indicator-controls/progress-indicators",
-      "readme": "frost-loading.md"
+      "readme": "docs/frost-loading.md"
     },
     {
       "demoName": "scroll",
       "frostGuideDirectory": "ui-components/content-views/scrollbar",
-      "readme": "frost-scroll.md"
+      "readme": "docs/frost-scroll.md"
     },
     {
       "demoName": "select",
       "frostGuideDirectory": "ui-components/content-views/select",
-      "readme": "frost-select.md"
+      "readme": "docs/frost-select.md"
     }
   ],
   "directories": {
@@ -99,33 +99,42 @@
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.2.0",
-    "ember-cli": "2.5.1",
-    "ember-cli-app-version": "^1.0.0",
+    "ember-browserify": "1.1.11",
+    "ember-cli": "^2.7.0",
+    "ember-cli-app-version": "^2.0.0",
     "ember-cli-blanket": "^0.9.2",
     "ember-cli-dependency-checker": "^1.2.0",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-cli-inject-live-reload": "^1.4.0",
-    "ember-cli-mirage": "~0.1.11",
+    "ember-cli-mirage": "0.2.2",
     "ember-cli-mocha": "^0.10.0",
-    "ember-cli-notifications": "^3.2.0",
+    "ember-cli-notifications": "^4.0.8",
     "ember-cli-sass": "^5.2.0",
+    "ember-cli-test-loader": "^1.1.0",
     "ember-cli-uglify": "^1.2.0",
+    "ember-code-snippet": "^1.8.0",
     "ember-computed-decorators": ">=0.2.2 <2.0.0",
+    "ember-concurrency": "0.7.10",
     "ember-data": "^2.5.3",
     "ember-disable-proxy-controllers": "^1.0.1",
+    "ember-elsewhere": "0.4.1",
     "ember-export-application-global": "^1.0.4",
+    "ember-hook": "1.3.5",
     "ember-load-initializers": "^0.5.0",
-    "ember-lodash": ">=0.0.6 <2.0.0",
+    "ember-lodash-shim": "1.0.1",
     "ember-one-way-controls": ">=0.5.3 <2.0.0",
+    "ember-redux": "1.6.0",
     "ember-resolver": "^2.0.3",
     "ember-sinon": "0.5.1",
     "ember-truth-helpers": "^1.2.0",
-    "ember-try": "^0.2.2",
-    "eslint": "^2.10.2",
-    "eslint-config-frost-standard": "^2.0.0",
+    "eslint": "^3.0.1",
+    "eslint-config-frost-standard": "^4.0.0",
     "frost-guide-custom-routing": "0.0.4",
     "loader.js": "^4.0.0",
-    "markdown-code-highlighting": "0.0.6"
+    "lodash-es": "^4.16.4",
+    "markdown-code-highlighting": "0.1.0",
+    "redux": "^3.5.2",
+    "redux-thunk": "^2.1.0"
   },
   "keywords": [
     "ember-addon",
@@ -143,9 +152,13 @@
     "ember-browserify": "^1.1.9",
     "ember-cli-babel": "^5.1.5",
     "ember-cli-htmlbars": "^1.0.1",
+    "ember-cli-normalize-entity-name": "^1.0.0",
+    "ember-cli-path-utils": "^1.0.0",
     "ember-cli-sass": "^5.2.0",
-    "ember-prop-types": "^2.0.0",
-    "lodash": "^4.13.1",
+    "ember-cli-string-utils": "^1.0.0",
+    "ember-cli-valid-component-name": "^1.0.0",
+    "ember-prop-types": "^2.1.0",
+    "npm-install-security-check": "^1.0.0",
     "svg4everybody": "^2.0.3"
   },
   "ember-addon": {

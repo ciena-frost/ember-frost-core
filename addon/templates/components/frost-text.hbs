@@ -1,14 +1,58 @@
 {{input
-  type=type
+  autocapitalize=autocapitalize
+  autocorrect=autocorrect
   autofocus=autofocus
+  class='frost-text-input'
+  classNameBindings='align'
   disabled=disabled
-  focus-out=(action 'onBlur')
-  insert-newline=onEnter
-  value=value
+  form=form
+  hook=(concat receivedHook '-input')
+  maxlength=maxlength
   placeholder=placeholder
+  readonly=readonly
+  required=required
+  selectionDirection=selectionDirection
+  spellcheck=spellcheck
   tabindex=tabindex
-  readonly=readonly}}
-{{#if showClear}}
-  {{!frost-icon class='clear' icon='close'}}
-  <a class="clear" {{action "clear"}}>x</a>
-{{/if}}
+  title=title
+  type=type
+  value=value
+
+  change=_eventProxy.change
+  click=_eventProxy.click
+  contextMenu=_eventProxy.contextMenu
+  doubleClick=_eventProxy.doubleClick
+  drag=_eventProxy.drag
+  dragEnd=_eventProxy.dragEnd
+  dragEnter=_eventProxy.dragEnter
+  dragLeave=_eventProxy.dragLeave
+  dragOver=_eventProxy.dragOver
+  dragStart=_eventProxy.dragStart
+  drop=_eventProxy.drop
+  focusIn=_eventProxy.focusIn
+  focusOut=_eventProxy.focusOut
+  input=(action '_onInput')
+  keyDown=_eventProxy.keyDown
+  keyPress=_eventProxy.keyPress
+  key-up='keyUp'
+  mouseDown=_eventProxy.mouseDown
+  mouseEnter=_eventProxy.mouseEnter
+  mouseLeave=_eventProxy.mouseLeave
+  mouseMove=_eventProxy.mouseMove
+  mouseUp=_eventProxy.mouseUp
+  submit=_eventProxy.submit
+  touchCancel=_eventProxy.touchCancel
+  touchEnd=_eventProxy.touchEnd
+  touchMove=_eventProxy.touchMove
+  touchStart=_eventProxy.touchStart
+
+  escape-press=_eventProxy.escape-press
+  insert-newline=_eventProxy.enter
+}}
+{{! Using a div as a click target to workaround https://github.com/emberjs/ember.js/issues/13420 }}
+<div class='frost-text-clear' data-test={{hook (concat receivedHook '-clear')}} onclick={{action (action 'clear')}}>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+  </svg>
+</div>

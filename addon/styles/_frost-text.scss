@@ -1,78 +1,85 @@
+// FIXME Move variables into theme
 $border: 1px solid $frost-color-input-border;
 $color: $frost-color-input;
 $error-border: 1px solid $frost-color-input-error-border;
-$error-margin: 1px; // Note: margin + border width equals border width of focus state
-$focus-border: 2px solid $frost-color-input-focus-border;
-$hover-border: 1px solid $frost-color-input-focus-border;
-$focus-margin: 0;
+$focus-border: 1px solid $frost-color-input-focus-border;
+$hover-border: 1px solid $frost-color-input-hover-border;
 $disabled-border: 1px solid $frost-color-input-disabled-border;
 $disabled-bg: $frost-color-input-disabled-bg;
-$font-size: $frost-font-s;
+$font-size: $frost-font-m;
 $height: 35px;
-$margin: 1px; // Note: margin + border width equals border width of focus state
-$padding: 0 19px 0 6px;
+$padding: 0 30px 0 8px;
 
 .frost-text {
-  display: flex;
-  align-items: center;
-  width: 175px;
-  &.error {
-    > input {
-      border: $error-border;
-      margin: $error-margin;
-    }
-  }
+  display: block;
+  position: relative;
+  min-width: 175px;
 
-  &.right {
-    > input {
-      text-align: right;
-    }
-  }
-
-  &.center {
-    > input {
-      text-align: center;
-    }
-  }
-
-  > input {
-    border: $border;
-    color: $color;
-    font-size: $font-size;
-    width: 100%;
-    height: $height;
-    margin: $margin;
-    outline: none;
-    padding: $padding;
-
-    &:focus {
-      border: $focus-border;
-      margin: $margin;
-    }
-
-    &:read-only {
-      border: none;
-    }
-
-    &:disabled {
-      border: $disabled-border;
-      background-color: $disabled-bg;
-    }
+  &.error .frost-text-input {
+    border: $error-border;
 
     &:hover:enabled:read-write:not(:focus) {
-      border: $hover-border;
-      margin: $margin;
+      border: $error-border;
     }
   }
+}
 
-  .clear {
-    margin-left: -20px;
-    margin-right: 5px;
-    height: 15px;
-    width: 15px;
-    line-height: 15px;
-    text-align: center;
-    color: $frost-color-grey-6;
-    cursor: pointer;
+.frost-text-input {
+  display: inline-block;
+  width: 100%;
+  border: $border;
+  color: $color;
+  font-size: $font-size;
+  height: $height;
+  outline: none;
+  padding: $padding;
+  font-weight: 200;
+  transition: border 0.2s ease;
+
+  &.right {
+    text-align: right;
   }
+
+  &:focus {
+    border: $focus-border;
+  }
+
+  &:read-only {
+    border: none;
+  }
+
+  &:disabled {
+    border: $disabled-border;
+    background-color: $disabled-bg;
+  }
+
+  &:hover:enabled:read-write:not(:focus) {
+    border: $hover-border;
+  }
+}
+
+.frost-text-clear {
+  display: inline-block;
+  position: absolute;
+  width: 23px;
+  height: 23px;
+  right: 5px;
+  top: 7px;
+  opacity: 0;
+  fill: $frost-color-grey-6;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.frost-text.is-clear-visible .frost-text-clear {
+  opacity: 1;
+}
+
+.frost-text.is-clear-enabled .frost-text-clear {
+  cursor: pointer;
+  pointer-events: auto;
 }
