@@ -32,6 +32,7 @@ export default Component.extend(PropTypeMixin, {
     this._unregisterEvents()
   },
 
+  /* eslint-disable complexity */
   /**
    * Setup the perfect-scrollbar plugin and events
    *
@@ -123,4 +124,5 @@ export default Component.extend(PropTypeMixin, {
       this.$().off('ps-y-reach-end', this._legacyScrollYEndHandler)
     }
   }
+  /* eslint-enable complexity */
 })
