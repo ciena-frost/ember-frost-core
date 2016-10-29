@@ -13,6 +13,14 @@ const assign = Object.assign || Ember.assign || Ember.merge
  * @property {String} [text] - button text
  */
 
+ /**
+  * @typedef {Object} FrostSelectState
+  * @property {Boolean} [disabled=false] - whether or not select is disabled
+  * @property {Boolean} [error=false] - whether or not select has error
+  * @property {Boolean} [focused] - whether or not select is focused
+  * @property {Number} [tabIndex=0] - tab index of root element
+  */
+
 /**
  * @typedef {Object} FrostTextState
  * @property {String} [align="left"] - text alignment
@@ -36,6 +44,20 @@ function expectDisabledState ($element, disabled, type = 'element') {
     `${type} is ${disabled ? 'disabled' : 'enabled'}`
   )
     .to.equal(disabled)
+}
+
+/**
+ * Expect class on element depending on boolean state
+ * @param {jQuery} $element - element to check for class on
+ * @param {String} className - name of class
+ * @param {Boolean} state - whether or not class should be present
+ */
+function expectToggleClass ($element, className, state) {
+  expect(
+    $element.hasClass(className),
+    `${state ? 'has' : 'does not have'} ${className} class`
+  )
+    .to.equal(state)
 }
 
 /**
@@ -77,6 +99,41 @@ export function expectButtonWithState (button, state) {
       'button has expected text'
     )
       .to.equal(state.text)
+  }
+}
+
+/**
+ * Verify select exists with expected state
+ * @param {jQuery|String} select - name of Ember hook or jQuery instance
+ * @param {FrostSelectState} state - expected select state
+ */
+export function expectSelectWithState (select, state) {
+  const defaults = {
+    disabled: false,
+    error: false,
+    tabIndex: 0
+  }
+
+  const $select = typeOf(select) === 'string' ? $hook(select) : select
+  state = assign(defaults, state)
+
+  expect(
+    $select.hasClass('frost-select'),
+    'has frost-select class'
+  )
+    .to.equal(true)
+
+  expectToggleClass($select, 'disabled', state.disabled)
+  expectToggleClass($select, 'error', state.error)
+
+  expect(
+    $select.prop('tabindex'),
+    'has expected tab index'
+  )
+    .to.equal(state.disabled ? -1 : state.tabIndex)
+
+  if ('focused' in state) {
+    expectToggleClass($select, 'focused', state.focused)
   }
 }
 
@@ -189,6 +246,7 @@ export function focusout (element) {
 export default {
   click,
   expectButtonWithState,
+  expectSelectWithState,
   expectTextInputWithState,
   fillIn,
   findButtons,

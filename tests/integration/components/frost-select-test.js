@@ -1,416 +1,211 @@
-import Ember from 'ember'
-const {$, run, typeOf} = Ember
 import {expect} from 'chai'
+import {expectSelectWithState} from 'dummy/tests/helpers/ember-frost-core'
+import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
+import Ember from 'ember'
+const {$} = Ember
+import keyCodes from 'ember-frost-core/utils/keycodes'
+const {TAB} = keyCodes
 import {$hook, initialize} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
-import {beforeEach, describe} from 'mocha'
-import sinon from 'sinon'
 import hbs from 'htmlbars-inline-precompile'
+import {beforeEach, describe} from 'mocha'
 
-const selectedTestTemplate = hbs`
-  {{frost-select-outlet}}
-  {{frost-select
-    data=data
-    greeting=greeting
-    hook=hook
-    onChange=onChange
-    placeholder=placeholder
-    selected=selected
-  }}
-`
+/**
+ * Focus on next focusable element
+ * @param {jQuery} $element - element to find next focusable sibling of
+ */
+function focusNext ($element) {
+  const $focusableElements = $element.nextAll(':not([tabindex=-1])')
+  const $firstFocusableElement = $focusableElements.first()
 
-const selectedValueTestTemplate = hbs`
-  {{frost-select-outlet}}
-  {{frost-select
-    data=data
-    hook=hook
-    greeting=greeting
-    onChange=onChange
-    placeholder=placeholder
-    selectedValue=selVal
-  }}
-`
-
-const undefinedValueTestTemplate = hbs`
-  {{frost-select-outlet}}
-  {{frost-select
-    data=data
-    hook=hook
-    onChange=onChange
-  }}
-`
-
-const keyCodes = {
-  backspace: 8,
-  down: 40,
-  enter: 13,
-  esc: 27,
-  tab: 9,
-  up: 38
+  // We must use jQuery's focusin() method for Ember event to fire and the
+  // HTMLElement's focus() method to ensure the element is actually focused
+  $firstFocusableElement.focusin()[0].focus()
 }
 
-function keyDown ($selection, keyCode) {
-  if (typeOf(keyCode) === 'string') {
-    keyCode = keyCodes[keyCode]
-  }
-  let event = $.Event('keydown')
-  event.which = keyCode
+describeComponent(...integration('frost-select'), function () {
+  beforeEach(function () {
+    initialize()
 
-  $selection.trigger(event)
-}
+    this.setProperties({
+      hook: 'select',
+      tabIndex: 0 // This is the default
+    })
 
-function keyUp ($selection, keyCode) {
-  if (typeOf(keyCode) === 'string') {
-    keyCode = keyCodes[keyCode]
-  }
-  let event = $.Event('keyup')
-  event.which = keyCode
+    this.render(hbs`
+      {{frost-select-outlet}}
+      {{input hook='pre'}}
+      {{frost-select
+        disabled=disabled
+        error=error
+        hook=hook
+        tabIndex=tabIndex
+      }}
+      {{input hook='post'}}
+    `)
+  })
 
-  $selection.trigger(event)
-}
+  it('renders as expected', function () {
+    expectSelectWithState('select', {
+      focused: false
+    })
+  })
 
-describeComponent(
-  'frost-select',
-  'Integration: FrostSelectComponent',
-  {
-    integration: true
-  },
-  function () {
-    let props
-    let $dropDown, $input
-
+  describe('click on component', function () {
     beforeEach(function () {
-      initialize()
+      // In a real browser when you click on the select with your mouse a
+      // focusin event is fired on the component. However when using jQuery's
+      // click() method the focusin is not fired so we are programitcally
+      // triggering that in this test.
 
-      props = {
-        hook: 'my-select',
-        selected: 1,
-        onChange: sinon.spy(),
-        placeholder: 'Select something already',
-        data: [
-          {
-            value: 'Lex Diamond',
-            label: 'Raekwon'
-          },
-          {
-            value: 'Johnny Blaze',
-            label: 'Method Man'
-          },
-          {
-            value: 'Tony Starks',
-            label: 'Ghostface'
+      $hook('select').click().trigger('focusin')
+    })
+
+    it('renders as expected', function () {
+      expectSelectWithState('select', {
+        focused: true
+      })
+    })
+  })
+
+  describe('tab into component', function () {
+    beforeEach(function () {
+      // In case you are wondering what the hell is going on here there is no
+      // way to trigger a generic tab event on the document to move focus on to
+      // the next element for browser security reasons. So our approach is to
+      // simply bind a keypress event to the element before the select, which
+      // adds focus to the next element in the DOM when it receives a tab,
+      // simulating what would happen in a real world scenario. We then trigger
+      // a tab event on this input and ensure the our select receives focus.
+
+      $hook('pre')
+        .on('keypress', function (e) {
+          if (e.keyCode === TAB) {
+            focusNext($(this))
           }
-        ],
-        greeting: 'Hola'
-      }
-      run(() => {
-        this.setProperties(props)
-        this.render(selectedTestTemplate)
+        })
+        .focus()
+        .trigger(
+          $.Event('keypress', {
+            keyCode: TAB
+          })
+        )
+    })
+
+    it('renders as expected', function () {
+      expectSelectWithState('select', {
+        focused: true
       })
-      $dropDown = this.$('.frost-select')
-      $input = this.$('.frost-select input')
+    })
+  })
+
+  describe('programatically focus component', function () {
+    beforeEach(function () {
+      // We must use jQuery's focusin() method for Ember event to fire and the
+      // HTMLElement's focus() method to ensure the element is actually focused
+      $hook('select').focusin()[0].focus()
     })
 
-    it('renders', function () {
-      expect(this.$('.frost-select')).to.have.length(1)
+    it('renders as expected', function () {
+      expectSelectWithState('select', {
+        focused: true
+      })
+    })
+  })
+
+  describe('when input is disabled', function () {
+    beforeEach(function () {
+      this.set('disabled', true)
     })
 
-    describe('when opened', function () {
+    it('renders as expected', function () {
+      expectSelectWithState('select', {
+        disabled: true,
+        focused: false
+      })
+    })
+
+    describe('click on component', function () {
       beforeEach(function () {
-        return $hook('my-select').find('.down-arrow').click()
+        // In a real browser when you click on the select with your mouse a
+        // focusin event is fired on the component. However when using jQuery's
+        // click() method the focusin is not fired so we are programitcally
+        // triggering that in this test.
+
+        $hook('select').click().trigger('focusin')
       })
 
-      it('hook grabs the select as expected', function () {
-        expect($hook('my-select').hasClass('frost-select')).to.be.true
-
-        expect($hook('my-select-input').prop('type')).to.be.eql('text')
-
-        expect($hook('my-select-list').find('li')).to.have.length(3)
-
-        expect($hook('my-select-item-0')).to.have.length(1)
-      })
-
-      it('lists all passed data records', function () {
-        expect($hook('my-select-list').find('li').length).to.eql(props.data.length)
-      })
-
-      it('opens', function () {
-        expect(this.$('.frost-select').hasClass('open')).to.be.true
-      })
-
-      it('closes when down arrow clicked a second time', function () {
-        run(() => {
-          this.$('.frost-select .down-arrow').click()
+      it('renders as expected', function () {
+        expectSelectWithState('select', {
+          disabled: true,
+          focused: false
         })
-
-        expect(this.$('.frost-select').hasClass('open')).to.be.false
-      })
-
-      it('highlights list items on mouse over', function () {
-        run(() => {
-          this.$('.frost-select').click()
-          let listItem = $hook('my-select-list').find('li:first-child')
-          listItem.mouseover()
-        })
-        let listItem = $hook('my-select-list').find('li:first-child')
-        expect(listItem.hasClass('hover')).to.be.true
-      })
-
-      it('highlights list items when down-arrowed to', function () {
-        run(() => {
-          let dropDown = this.$('.frost-select')
-          keyUp(dropDown, 'down')
-        })
-        let listItem = $hook('my-select-list').find('li:first-child')
-        expect(listItem.hasClass('hover')).to.be.true
-      })
-
-      it('highlights list items when up-arrowed to', function () {
-        let dropDown = this.$('.frost-select')
-        run(() => {
-          keyUp(dropDown, 'down')
-          keyUp(dropDown, 'down')
-          keyUp(dropDown, 'down')
-          keyUp(dropDown, 'down')
-
-          keyUp(dropDown, 'up')
-          keyUp(dropDown, 'up')
-          keyUp(dropDown, 'up')
-        })
-
-        let listItem = $hook('my-select-list').find('li:first-child')
-        expect(listItem.hasClass('hover')).to.be.true
-      })
-
-      it('closes when esc is pressed', function () {
-        keyUp($dropDown, 'esc')
-        expect($dropDown.hasClass('open')).to.be.false
-      })
-
-      it('closes when blurred', () => {
-        keyUp($dropDown, 27)
-        expect($dropDown.hasClass('open')).to.be.false
-      })
-
-      it('selects the hovered item when enter is pressed', function () {
-        run(() => {
-          keyUp($dropDown, 40)
-          keyUp($dropDown, 13)
-        })
-
-        let dropDownInput = this.$('.frost-select input')
-        let value = dropDownInput.val()
-        expect(value).to.eql(props.data[0].label)
-      })
-
-      it('selects the hovered item when it is clicked', function () {
-        run(() => {
-          let listItem = $hook('my-select-list').find('li:first-child')
-          listItem.click()
-        })
-        let dropDownInput = this.$('.frost-select input')
-        let value = dropDownInput.val()
-        expect(value).to.eql(props.data[0].label)
-      })
-
-      it('filters the list when input is typed into', function () {
-        run(() => {
-          this.$('.frost-select input').first()
-            .val('w')
-            .trigger('input')
-        })
-        let listItems = $hook('my-select-list').find('li')
-        expect(listItems.length).to.eql(1)
-      })
-
-      it('hovers the only available one if filter leaves one', function () {
-        run(() => {
-          this.$('.frost-select input').first()
-            .val('w')
-            .trigger('input')
-        })
-
-        let listItems = $hook('my-select-list').find('li')
-        expect(listItems.length).to.eql(1)
-        expect(listItems.hasClass('hover')).to.be.true
-      })
-
-      it('calls the supplied callback when an item is selected', function () {
-        run(() => {
-          let listItem = $hook('my-select-list').find('li:first-child')
-          listItem.click()
-        })
-        expect(props.onChange.called).to.be.true
-      })
-
-      it('respects a pre-selected value', function (done) {
-        run.later(() => {
-          let component = $hook('my-select-list').find('.selected')
-          expect(component.length).to.eql(1)
-          done()
-        })
-      })
-
-      it('goes into error state when something non-existant is typed', function () {
-        let input = this.$('.frost-select input')
-        input.val('zxcv').trigger('input')
-        let component = this.$('.frost-select')
-        expect(component.hasClass('open')).to.be.false
-        expect(component.hasClass('error')).to.be.true
-      })
-
-      it('handles click outside of select', function () {
-        this.$().click()
-        expect($dropDown.hasClass('open')).to.be.false
-      })
-
-      it('handles losing focus by pressing tab', function () {
-        keyDown($dropDown, 'tab')
-        expect($dropDown.hasClass('open')).to.be.false
       })
     })
 
-    // FIXME: figure out why test is failing
-    /* it('opens when focused', function () {
-      run(() => {
-        this.$('.frost-select input').focus()
-      })
-      expect(this.$('.frost-select').hasClass('open')).to.be.true
-    })*/
-
-    it('unsets the value when the index is less than 0', function () {
-      run(() => {
-        this.set('selected', [-1])
-      })
-      expect($hook('my-select-list').find('.selected').length).to.eql(0)
-    })
-
-    it('sets the prompt to the selected value when the drop down list is closed', function () {
-      run(() => {
-        keyUp($dropDown, 'down')
-        keyUp($dropDown, keyCodes.enter)
-        $input.focus()
-        keyUp($dropDown, 'backspace')
-        keyUp($dropDown, 'esc')
-      })
-
-      let select = this.$('.frost-select')
-      let input = this.$('.frost-select input')
-      expect(select.hasClass('open')).to.be.false
-      expect(input.val()).to.eql('Raekwon')
-    })
-
-    it('supports placeholder', function () {
-      const $input = this.$('.frost-select input')
-      expect($input.attr('placeholder')).to.eql('Select something already')
-    })
-
-    describe('when pressing enter to select a new item', function () {
+    describe('tab into component', function () {
       beforeEach(function () {
-        keyUp($dropDown, 'down')
-        keyUp($dropDown, keyCodes.enter)
-      })
-      it('should display the selected item label', function () {
-        expect($input.val()).to.eql('Raekwon')
-      })
-    })
+        // In case you are wondering what the hell is going on here there is no
+        // way to trigger a generic tab event on the document to move focus on to
+        // the next element for browser security reasons. So our approach is to
+        // simply bind a keypress event to the element before the select, which
+        // adds focus to the next element in the DOM when it receives a tab,
+        // simulating what would happen in a real world scenario. We then trigger
+        // a tab event on this input and ensure the our select is skipped since
+        // it is disabled.
 
-    describe('when pressing enter after selecting an item', function () {
-      beforeEach(function () {
-        keyUp($dropDown, 'down')
-        keyUp($dropDown, 'down')
-        keyUp($dropDown, 'down')
-        keyUp($dropDown, keyCodes.enter)
-        keyUp($dropDown, keyCodes.enter)
-      })
-      it('should keep the correct label', function () {
-        expect($input.val()).to.eql('Ghostface')
-      })
-    })
-
-    describe('when pressing enter without a selected item', function () {
-      beforeEach(function () {
-        this.render(undefinedValueTestTemplate)
-        $dropDown = this.$('.frost-select')
-        $input = this.$('.frost-select input')
-        $dropDown.click()
-        keyUp($dropDown, keyCodes.enter)
-      })
-      it('should not display a label', function () {
-        expect($input.val()).to.eql('')
-      })
-    })
-
-    describe('when re-rendering with different data', function () {
-      beforeEach(function () {
-        this.render(undefinedValueTestTemplate)
-        $dropDown = this.$('.frost-select')
-        $input = this.$('.frost-select input')
-        // Make selection
-        keyUp($dropDown, 'down')
-        keyUp($dropDown, 'down')
-        keyUp($dropDown, 'enter')
-        // Now re-render with only that option
-        this.set('data', [
-          {
-            value: 'Johnny Blaze',
-            label: 'Method Man'
-          }
-        ])
-      })
-      it('should display the still-valid selection', function () {
-        expect($input.val()).to.eql('Method Man')
-      })
-    })
-
-    describe('when passing in selected value', function () {
-      let props
-      beforeEach(function () {
-        props = {
-          selected: [],
-          onChange: sinon.spy(),
-          placeholder: 'Select something already',
-          data: [
-            {
-              value: 'Lex Diamond',
-              label: 'Raekwon'
-            },
-            {
-              value: 'Johnny Blaze',
-              label: 'Method Man'
-            },
-            {
-              value: 'Tony Starks',
-              label: 'Ghostface'
+        $hook('pre')
+          .on('keypress', function (e) {
+            if (e.keyCode === TAB) {
+              focusNext($(this))
             }
-          ],
-          greeting: 'Hola'
-        }
-        this.setProperties(props)
-        this.render(selectedValueTestTemplate)
-        $dropDown = this.$('.frost-select')
-        $input = this.$('.frost-select input')
+          })
+          .focus()
+          .trigger(
+            $.Event('keypress', {
+              keyCode: TAB
+            })
+          )
       })
 
-      it('renders', function () {
-        expect(this.$('.frost-select')).to.have.length(1)
-      })
-
-      it('sets the prompt and value from a component attribute', function () {
-        run(() => {
-          this.set('selVal', 'Tony Starks')
+      it('renders as expected', function () {
+        expectSelectWithState('select', {
+          disabled: true,
+          focused: false
         })
 
-        expect($input.val()).to.be.eql('Ghostface')
-      })
-
-      it('clears when selectedValue is set to empty string', function () {
-        this.set('selVal', '')
-        this.render(selectedTestTemplate)
-        return run.later(() => {
-          expect($input.val()).to.be.eql('')
-        })
+        expect(
+          $hook('post')[0],
+          'focuses on element after select'
+        )
+          .to.equal(document.activeElement)
       })
     })
-  }
-)
+  })
+
+  describe('when input has custom tab index', function () {
+    beforeEach(function () {
+      this.set('tabIndex', 3)
+    })
+
+    it('renders as expected', function () {
+      expectSelectWithState('select', {
+        focused: false,
+        tabIndex: 3
+      })
+    })
+  })
+
+  describe('when input has error', function () {
+    beforeEach(function () {
+      this.set('error', true)
+    })
+
+    it('renders as expected', function () {
+      expectSelectWithState('select', {
+        error: true,
+        focused: false
+      })
+    })
+  })
+})

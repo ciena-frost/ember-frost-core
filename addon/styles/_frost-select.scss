@@ -1,199 +1,27 @@
-// TODO: get these from theme?
-$focus-border: 1px solid $frost-color-input-focus-border;
-$frost-input-text-height: 35px;
-$frost-input-select-option-row-height: 35px;
-
-@mixin triangle-down($color, $size) {
-  border-top: $size solid $color;
-  border-left: $size solid transparent;
-  border-right: $size solid transparent;
-  height: 0;
-  width: 25px;
-}
-
-@mixin triangle-up($color, $size) {
-  border-bottom: $size solid $color;
-  border-left: $size solid transparent;
-  border-right: $size solid transparent;
-  height: 0;
-  width: 25px;
-}
+$frost-select-disabled-background-color: $frost-color-lgrey-3;
+$frost-select-disabled-border-color: $frost-color-lgrey-1;
+$frost-select-disabled-color: $frost-color-grey-6;
+$frost-select-error-border-color: $frost-color-danger;
+$frost-select-focused-border-color: $frost-color-blue-1;
+$frost-select-normal-border-color: $frost-color-grey-7;
+$frost-select-height: 35px;
 
 .frost-select {
-  border: solid 1px $frost-color-input-border;
-  cursor: pointer;
-  height: $frost-input-text-height;
+  border: 1px solid $frost-select-normal-border-color;
+  height: $frost-select-height;
   min-width: 175px;
-  outline: none;
-  position: relative;
-  background: $frost-select-container-background;
 
-  &:focus {
-    border: $focus-border;
+  &.disabled {
+    background-color: $frost-select-disabled-background-color;
+    border-color: $frost-select-disabled-border-color;
+    color: $frost-select-disabled-color;
   }
 
-  input.trigger {
-    background: none;
-    border: 0;
-    color: $frost-color-input;
-    height: 100%;
-    outline: none;
-    overflow: hidden;
-    padding: 0 5px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 75%;
+  &.error {
+    border-color: $frost-select-error-border-color;
   }
 
-  .down-arrow {
-    height: 20px;
-    position: absolute;
-    right: 10px;
-    top: 7px;
-    width: 20px;
-
-    polygon {
-      fill: $frost-select-indicator;
-    }
+  &.focused {
+    border-color: $frost-select-focused-border-color;
   }
-}
-
-.frost-select.focus {
-  border: solid 1px $frost-selection;
-
-  .down-arrow {
-    polygon {
-      fill: $frost-selection;
-    }
-  }
-}
-
-.frost-select.error {
-  border: solid 1px $frost-color-danger;
-  .down-arrow {
-    polygon {
-      fill: $frost-select-indicator;
-    }
-  }
-}
-
-.frost-select.disabled {
-  background-color: $frost-color-input-disabled-bg;
-  border: 1px solid $frost-color-input-disabled-border;
-  color: $frost-color-grey-6;
-  cursor: default;
-
-  input {
-    color: inherit;
-  }
-
-  .down-arrow {
-    polygon {
-      fill: $frost-color-grey-6;
-    }
-  }
-}
-
-.frost-select-overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 9001;
-}
-
-.frost-select-dropdown {
-  position: fixed;
-  height: auto;
-  opacity: 1;
-  z-index: 2;
-  pointer-events: auto;
-  background: $frost-select-container-background;
-  border: 1px solid $frost-color-lgrey-3;
-  border-radius: 3px;
-  box-shadow: 0 2px 7px 3px transparentize($frost-select-container-shadow, .4);
-  transition: height .4s ease, opacity .2s ease;
-  z-index: 9002;
-  overflow-y: auto;
-
-  ul {
-    margin: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
-    padding: 0;
-    height: auto;
-  }
-
-  li {
-    border-bottom: solid 1px $frost-color-lgrey-3;
-    color: $frost-color-grey-3;
-    cursor: pointer;
-    display: inline-block;
-    height: $frost-input-select-option-row-height;
-    line-height: $frost-input-select-option-row-height;
-    padding: 0 5px;
-    width: 100%;
-
-    &.hover {
-      background: transparentize($frost-selection, .92);
-    }
-
-    &.selected {
-      color: $frost-color-grey-2;
-    }
-
-    .frost-checkbox {
-      input {
-        visibility: hidden;
-      }
-      pointer-events: none;
-      box-sizing: content-box;
-      position: relative;
-      top: -2px;
-      svg {
-        top: 6px;
-        left: 2px;
-      }
-    }
-  }
-
-  .multi-status {
-    display: flex;
-    flex-direction: row;
-    flex: 1;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: solid 5px $frost-color-lgrey-3;
-    padding: 5px;
-    font-size: $frost-font-m;
-
-    .number-selected {
-      color: $frost-color-grey-5;
-    }
-    // TODO frost-button with tertiary style
-    .clear {
-      color: $frost-color-button-tertiary;
-      float: right;
-      text-decoration: none;
-    }
-  }
-}
-
-.frost-select-down-arrow {
-  @include triangle-down($frost-select-container-background, 12px);
-  display: inline-block;
-  overflow: visible;
-  pointer-events: none;
-  position: fixed;
-  z-index: 9003;
-}
-
-.frost-select-up-arrow {
-  @include triangle-up($frost-select-container-background, 12px);
-  display: inline-block;
-  overflow: visible;
-  pointer-events: none;
-  position: fixed;
-  z-index: 9003;
 }
