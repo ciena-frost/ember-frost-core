@@ -83,13 +83,17 @@ export default Component.extend(PropTypeMixin, {
     }
   }),
 
-  _onFocus: Ember.on('focusIn', function () {
+  _onFocusIn: Ember.on('focusIn', function () {
     // If select is disabled make sure it can't get focus
     if (this.get('disabled')) {
       this.$().blur()
     } else {
       this.set('focused', true)
     }
+  }),
+
+  _onFocusOut: Ember.on('focusOut', function () {
+    this.set('focused', false)
   }),
 
   // == Actions ===============================================================

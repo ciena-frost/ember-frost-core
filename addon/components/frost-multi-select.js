@@ -1,6 +1,14 @@
 import Ember from 'ember'
-const {Component} = Ember
+import FrostSelect from './frost-select'
 
-export default Component.extend({
-  tagName: ''
+const assign = Object.assign || Ember.assign || Ember.merge
+
+export default FrostSelect.extend({
+  getDefaultProps () {
+    const defaults = this._super(...arguments)
+
+    return assign(defaults, {
+      multiple: true
+    })
+  }
 })

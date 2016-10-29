@@ -23,5 +23,6 @@ $frost-select-height: 35px;
 
   &.focused {
     border-color: $frost-select-focused-border-color;
+    outline: none;
   }
 }
