@@ -6,7 +6,7 @@ import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
 import layout from '../templates/components/frost-select-dropdown'
 import keyCodes from '../utils/keycodes'
-const {DOWN_ARROW, ESCAPE, UP_ARROW} = keyCodes
+const {DOWN_ARROW, ENTER, ESCAPE, UP_ARROW} = keyCodes
 
 const BORDER_HEIGHT = 1
 const ARROW_HEIGHT = 10
@@ -15,16 +15,19 @@ const FPS = 1000 / 60 // Update at 60 frames per second
 const WINDOW_SPACE = 20
 
 export default Component.extend(PropTypeMixin, {
+  // == Properties ============================================================
+
   layout,
   tagName: '',
 
-  PropTypes: {
+  propTypes: {
     // Public
     $element: PropTypes.object.isRequired,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     onClose: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
     receivedHook: PropTypes.string.isRequired,
+    selectedItems: PropTypes.arrayOf(PropTypes.object),
 
     // Private
     bottom: PropTypes.number,
@@ -32,9 +35,6 @@ export default Component.extend(PropTypeMixin, {
     left: PropTypes.number,
     maxHeight: PropTypes.number,
     onCheck: PropTypes.func,
-    onClear: PropTypes.func,
-    onItemOver: PropTypes.func.isRequired,
-    selectedItems: PropTypes.arrayOf(PropTypes.number),
     top: PropTypes.number,
     width: PropTypes.number
   },
@@ -49,6 +49,8 @@ export default Component.extend(PropTypeMixin, {
       width: 0
     }
   },
+
+  // == Computed Properties ===================================================
 
   @readOnly
   @computed('bottom', 'left', 'maxHeight', 'top', 'width')
@@ -111,6 +113,8 @@ export default Component.extend(PropTypeMixin, {
     })
   },
 
+  // == Functions =============================================================
+
   _getElementDimensionsAndPosition ($element) {
     const height = $element.height()
     const offset = $element.offset()
@@ -124,6 +128,18 @@ export default Component.extend(PropTypeMixin, {
       left: offset.left,
       top,
       width: $element.width()
+    }
+  },
+
+  _handleArrowKey (upArrow) {
+    const focusedIndex = this.get('focusedIndex')
+    const items = this.get('items')
+    const newFocusedIndex = (
+      upArrow ? Math.max(0, focusedIndex - 1) : Math.min(items.length - 1, focusedIndex + 1)
+    )
+
+    if (newFocusedIndex !== undefined && newFocusedIndex !== focusedIndex) {
+      this.set('focusedIndex', newFocusedIndex)
     }
   },
 
@@ -199,6 +215,8 @@ export default Component.extend(PropTypeMixin, {
     this._isUpdating = false
   }),
 
+  // == Events ================================================================
+
   didReceiveAttrs (attrs) {
     const $element = get(attrs, 'newAttrs.$element.value')
 
@@ -219,31 +237,20 @@ export default Component.extend(PropTypeMixin, {
     this._keyDownHandler = (e) => {
       e.preventDefault() // Keep arrow keys from scrolling document
 
-      const focusedIndex = this.get('focusedIndex')
-      const items = this.get('items')
-
-      if (!items) {
-        return
+      if ([DOWN_ARROW, UP_ARROW].indexOf(e.keyCode) !== -1) {
+        this._handleArrowKey(e.keyCode === UP_ARROW)
       }
 
-      let newFocusedIndex
-
       switch (e.keyCode) {
-        case DOWN_ARROW:
-          newFocusedIndex = Math.min(items.length - 1, focusedIndex + 1)
-          break
+        case ENTER:
+          const items = this.get('items') || []
+          const focusedIndex = this.get('focusedIndex')
+          this.get('onSelect')(items[focusedIndex].value)
+          return
 
         case ESCAPE:
           this.get('onClose')()
           return
-
-        case UP_ARROW:
-          newFocusedIndex = Math.max(0, focusedIndex - 1)
-          break
-      }
-
-      if (newFocusedIndex !== undefined && newFocusedIndex !== focusedIndex) {
-        this.set('focusedIndex', newFocusedIndex)
       }
     }
 
@@ -258,7 +265,13 @@ export default Component.extend(PropTypeMixin, {
     $(document).off('keydown', this._keyDownHandler)
   },
 
+  // == Actions ===============================================================
+
   actions: {
+    clear () {
+      this.get('onSelect')(null)
+    },
+
     focusOnItem (item) {
       const value = get(item, 'value')
       const items = this.get('items')

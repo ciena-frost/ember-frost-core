@@ -8,17 +8,17 @@
   {{#if multiselect}}
     <div class='multi-status'>
       <span class='number-selected'>{{selectedItems.length}} selected</span>
-      <span class='clear' tabIndex={-1} onClick={{action onClear}}>Clear all</span>
+      <span class='clear' tabIndex={-1} onClick={{action 'clear'}}>Clear all</span>
     </div>
   {{/if}}
   <ul>
     {{#each renderItems as |item index|}}
       {{#frost-select-li
         class=item.className
-        hook=(concat receivedHook '-item-' index)
         data=item
-        onSelect=onSelect
+        hook=(concat receivedHook '-item-' index)
         onItemOver=(action 'focusOnItem')
+        onSelect=onSelect
       }}
         {{#if multiselect}}
           {{frost-checkbox

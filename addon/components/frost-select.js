@@ -161,8 +161,13 @@ export default Component.extend(PropTypeMixin, {
       this.set('opened', false)
     },
 
-    selectItem () {
-      //
+    selectItem (selectedValue) {
+      this.setProperties({
+        opened: false,
+        selectedValue
+      })
+
+      // TODO: inform consumer
     }
   }
 })
