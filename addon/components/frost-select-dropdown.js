@@ -5,6 +5,8 @@ import {task, timeout} from 'ember-concurrency'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
 import layout from '../templates/components/frost-select-dropdown'
+import keyCodes from '../utils/keycodes'
+const {DOWN_ARROW, ESCAPE, UP_ARROW} = keyCodes
 
 const BORDER_HEIGHT = 1
 const ARROW_HEIGHT = 10
@@ -17,16 +19,21 @@ export default Component.extend(PropTypeMixin, {
   tagName: '',
 
   PropTypes: {
+    // Public
     $element: PropTypes.object.isRequired,
-    bottom: PropTypes.number,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
+    onClose: PropTypes.func.isRequired,
+    onSelect: PropTypes.func.isRequired,
+    receivedHook: PropTypes.string.isRequired,
+
+    // Private
+    bottom: PropTypes.number,
+    focusedIndex: PropTypes.number,
     left: PropTypes.number,
     maxHeight: PropTypes.number,
     onCheck: PropTypes.func,
     onClear: PropTypes.func,
     onItemOver: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired,
-    receivedHook: PropTypes.string.isRequired,
     selectedItems: PropTypes.arrayOf(PropTypes.number),
     top: PropTypes.number,
     width: PropTypes.number
@@ -35,6 +42,7 @@ export default Component.extend(PropTypeMixin, {
   getDefaultProps () {
     return {
       bottom: 0,
+      focusedIndex: 0,
       left: 0,
       maxHeight: 0,
       top: 0,
@@ -79,6 +87,28 @@ export default Component.extend(PropTypeMixin, {
     }
 
     return Ember.String.htmlSafe(style.join(';'))
+  },
+
+  @readOnly
+  @computed('focusedIndex', 'items')
+  renderItems (focusedIndex, items) {
+    if (!items) {
+      return []
+    }
+
+    return items.map((item, index) => {
+      const classNames = ['frost-select-list-item']
+
+      if (index === focusedIndex) {
+        classNames.push('frost-select-list-item-focused')
+      }
+
+      return {
+        className: classNames.join(' '),
+        label: get(item, 'label'),
+        value: get(item, 'value')
+      }
+    })
   },
 
   _getElementDimensionsAndPosition ($element) {
@@ -186,12 +216,63 @@ export default Component.extend(PropTypeMixin, {
       }
     }
 
+    this._keyDownHandler = (e) => {
+      e.preventDefault() // Keep arrow keys from scrolling document
+
+      const focusedIndex = this.get('focusedIndex')
+      const items = this.get('items')
+
+      if (!items) {
+        return
+      }
+
+      let newFocusedIndex
+
+      switch (e.keyCode) {
+        case DOWN_ARROW:
+          newFocusedIndex = Math.min(items.length - 1, focusedIndex + 1)
+          break
+
+        case ESCAPE:
+          this.get('onClose')()
+          return
+
+        case UP_ARROW:
+          newFocusedIndex = Math.max(0, focusedIndex - 1)
+          break
+      }
+
+      if (newFocusedIndex !== undefined && newFocusedIndex !== focusedIndex) {
+        this.set('focusedIndex', newFocusedIndex)
+      }
+    }
+
     $(window).on('resize', this._updateHandler)
     $(document).on('scroll', this._updateHandler)
+    $(document).on('keydown', this._keyDownHandler)
   },
 
   willDestroyElement () {
     $(window).off('resize', this._updateHandler)
     $(document).off('scroll', this._updateHandler)
+    $(document).off('keydown', this._keyDownHandler)
+  },
+
+  actions: {
+    focusOnItem (item) {
+      const value = get(item, 'value')
+      const items = this.get('items')
+
+      if (!items) {
+        return
+      }
+
+      for (let i = 0; i < items.length; i++) {
+        if (get(items[i], 'value') === value) {
+          this.set('focusedIndex', i)
+          break
+        }
+      }
+    }
   }
 })

@@ -18,7 +18,9 @@ const assign = Object.assign || Ember.assign || Ember.merge
   * @property {Boolean} [disabled=false] - whether or not select is disabled
   * @property {Boolean} [error=false] - whether or not select has error
   * @property {Boolean} [focused] - whether or not select is focused
+  * @property {Boolean} [opened=false] - whether or not select is opened
   * @property {Number} [tabIndex=0] - tab index of root element
+  * @property {String} [text=''] - text in select for describing what is selected
   */
 
 /**
@@ -111,7 +113,9 @@ export function expectSelectWithState (select, state) {
   const defaults = {
     disabled: false,
     error: false,
-    tabIndex: 0
+    opened: false,
+    tabIndex: 0,
+    text: ''
   }
 
   const $select = typeOf(select) === 'string' ? $hook(select) : select
@@ -123,8 +127,9 @@ export function expectSelectWithState (select, state) {
   )
     .to.equal(true)
 
-  expectToggleClass($select, 'disabled', state.disabled)
-  expectToggleClass($select, 'error', state.error)
+  expectToggleClass($select, 'frost-select-disabled', state.disabled)
+  expectToggleClass($select, 'frost-select-error', state.error)
+  expectToggleClass($select, 'frost-select-opened', state.opened)
 
   expect(
     $select.prop('tabindex'),
@@ -133,8 +138,14 @@ export function expectSelectWithState (select, state) {
     .to.equal(state.disabled ? -1 : state.tabIndex)
 
   if ('focused' in state) {
-    expectToggleClass($select, 'focused', state.focused)
+    expectToggleClass($select, 'frost-select-focused', state.focused)
   }
+
+  expect(
+    $select.find('.frost-select-text').text().trim(),
+    'has expected text'
+  )
+    .to.equal(state.text)
 }
 
 /**

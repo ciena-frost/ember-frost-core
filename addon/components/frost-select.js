@@ -1,10 +1,11 @@
 import Ember from 'ember'
-const {Component} = Ember
+const {Component, typeOf} = Ember
+import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
 import layout from '../templates/components/frost-select'
 import keyCodes from '../utils/keycodes'
-const {ENTER, SPACE} = keyCodes
+const {SPACE} = keyCodes
 
 export default Component.extend(PropTypeMixin, {
   // == Properties ============================================================
@@ -14,10 +15,11 @@ export default Component.extend(PropTypeMixin, {
   ],
 
   classNameBindings: [
-    'disabled',
-    'error',
-    'focused',
-    'opened'
+    'disabled:frost-select-disabled',
+    'error:frost-select-error',
+    'focused:frost-select-focused',
+    'opened:frost-select-opened',
+    'text::frost-select-placeholder'
   ],
 
   classNames: [
@@ -54,6 +56,53 @@ export default Component.extend(PropTypeMixin, {
 
   // == Computed Properties ===================================================
 
+  @readOnly
+  @computed('data')
+  items (data) {
+    return data // TODO: apply filtering here?
+  },
+
+  @readOnly
+  @computed('items', 'selected', 'selectedValue')
+  selectedItems (items, selected, selectedValue) {
+    if (selectedValue) {
+      return items.filter((item) => {
+        if (typeOf(selectedValue) === 'array') {
+          return selectedValue.indexOf(item.value) !== -1
+        }
+
+        return item.value === selectedValue
+      })
+    }
+
+    if (typeOf(selected) === 'array') {
+      return selected.map((itemIndex) => items[itemIndex])
+    }
+
+    if (selected) {
+      return [items[selected]]
+    }
+
+    return []
+  },
+
+  @readOnly
+  @computed('selectedItems')
+  text (selectedItems) {
+    switch (selectedItems.length) {
+      case 0:
+        return null
+
+      case 1:
+        return selectedItems[0].label
+
+      case 2:
+        return `${selectedItems[0].label}, ${selectedItems[1].label}`
+    }
+
+    return `${selectedItems.length} items selected`
+  },
+
   // == Functions =============================================================
 
   // == Events ================================================================
@@ -75,8 +124,14 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
+  _onClick: Ember.on('click', function () {
+    if (!this.get('disabled')) {
+      this.toggleProperty('opened')
+    }
+  }),
+
   _onKeyPress: Ember.on('keyPress', function (e) {
-    if ([ENTER, SPACE].indexOf(e.keyCode) !== -1) {
+    if (e.keyCode === SPACE) {
       e.preventDefault() // Keep space from scrolling page
       e.stopPropagation()
       this.toggleProperty('opened')
@@ -93,11 +148,21 @@ export default Component.extend(PropTypeMixin, {
   }),
 
   _onFocusOut: Ember.on('focusOut', function () {
-    this.set('focused', false)
+    this.setProperties({
+      focused: false,
+      opened: false
+    })
   }),
 
   // == Actions ===============================================================
 
   actions: {
+    closeDropDown () {
+      this.set('opened', false)
+    },
+
+    selectItem () {
+      //
+    }
   }
 })
