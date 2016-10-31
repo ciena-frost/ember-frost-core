@@ -18,7 +18,7 @@
         data=item
         hook=(concat receivedHook '-item-' index)
         onItemOver=(action 'focusOnItem')
-        onSelect=onSelect
+        onSelect=(action 'selectItem')
       }}
         {{#if multiselect}}
           {{frost-checkbox

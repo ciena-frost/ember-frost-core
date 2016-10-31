@@ -20,6 +20,7 @@ export default Component.extend(PropTypeMixin, {
   // == Events ================================================================
 
   _onMouseDown: Ember.on('mouseDown', function (e) {
+    e.preventDefault() // Prevent dropdown overlay from receiving click
     const data = this.get('data')
     this.get('onSelect')(data.value)
   }),

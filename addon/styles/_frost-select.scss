@@ -131,10 +131,6 @@ $frost-select-placeholder-color: $frost-color-grey-6;
   padding: 0 5px;
   width: 100%;
 
-  &.selected {
-    color: $frost-color-grey-2;
-  }
-
   .frost-checkbox {
     input {
       visibility: hidden;
@@ -152,6 +148,10 @@ $frost-select-placeholder-color: $frost-color-grey-6;
 
 .frost-select-list-item-focused {
   background: transparentize($frost-selection, .92);
+}
+
+.frost-select-list-item-selected {
+  color: $frost-color-grey-2;
 }
 
 .frost-select-overlay {

@@ -8,7 +8,7 @@ export default FrostSelect.extend({
     const defaults = this._super(...arguments)
 
     return assign(defaults, {
-      multiple: true
+      multiselect: true
     })
   }
 })

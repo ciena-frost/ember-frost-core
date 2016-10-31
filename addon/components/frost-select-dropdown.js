@@ -24,6 +24,7 @@ export default Component.extend(PropTypeMixin, {
     // Public
     $element: PropTypes.object.isRequired,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
+    multiselect: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
     receivedHook: PropTypes.string.isRequired,
@@ -92,22 +93,29 @@ export default Component.extend(PropTypeMixin, {
   },
 
   @readOnly
-  @computed('focusedIndex', 'items')
-  renderItems (focusedIndex, items) {
+  @computed('focusedIndex', 'items', 'selectedItems')
+  renderItems (focusedIndex, items, selectedItems) {
     if (!items) {
       return []
     }
 
     return items.map((item, index) => {
       const classNames = ['frost-select-list-item']
+      const value = get(item, 'value')
+      const isSelected = selectedItems.findBy('value', value) !== undefined
 
       if (index === focusedIndex) {
         classNames.push('frost-select-list-item-focused')
       }
 
+      if (isSelected) {
+        classNames.push('frost-select-list-item-selected')
+      }
+
       return {
         className: classNames.join(' '),
         label: get(item, 'label'),
+        selected: isSelected,
         value: get(item, 'value')
       }
     })
@@ -286,6 +294,26 @@ export default Component.extend(PropTypeMixin, {
           break
         }
       }
+    },
+
+    selectItem (value) {
+      // Single select
+      if (!this.get('multiselect')) {
+        this.get('onSelect')(value)
+        return
+      }
+
+      // Multi-select
+      const selectedValue = this.get('selectedItems').map((item) => item.value)
+      const index = selectedValue.indexOf(value)
+
+      if (index === -1) {
+        selectedValue.push(value)
+      } else {
+        selectedValue.splice(index, 1)
+      }
+
+      this.get('onSelect')(selectedValue)
     }
   }
 })

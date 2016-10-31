@@ -33,7 +33,7 @@ export default Component.extend(PropTypeMixin, {
     disabled: PropTypes.bool,
     error: PropTypes.bool,
     hook: PropTypes.string.isRequired,
-    multiple: PropTypes.bool,
+    multiselect: PropTypes.bool,
     outlet: PropTypes.string,
     tabIndex: PropTypes.number,
 
@@ -48,7 +48,7 @@ export default Component.extend(PropTypeMixin, {
       disabled: false,
       error: false,
       focused: false,
-      multiple: false,
+      multiselect: false,
       outlet: 'frost-select',
       tabIndex: 0
     }
@@ -163,7 +163,7 @@ export default Component.extend(PropTypeMixin, {
 
     selectItem (selectedValue) {
       this.setProperties({
-        opened: false,
+        opened: this.get('multiselect'),
         selectedValue
       })
 
