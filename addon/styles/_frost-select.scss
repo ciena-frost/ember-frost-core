@@ -138,7 +138,10 @@ $frost-select-placeholder-color: $frost-color-grey-6;
   display: inline-block;
   height: $frost-input-select-option-row-height;
   line-height: $frost-input-select-option-row-height;
+  overflow: hidden;
   padding: 0 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   width: 100%;
 
   .frost-checkbox {
