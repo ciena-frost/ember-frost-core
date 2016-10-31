@@ -25,7 +25,7 @@ function focusNext ($element) {
   $firstFocusableElement.focusin()[0].focus()
 }
 
-describeComponent(...integration('frost-select'), function () {
+describeComponent(...integration('frost-multi-select'), function () {
   let onBlur, onChange, onFocus, sandbox
 
   beforeEach(function () {
@@ -47,7 +47,7 @@ describeComponent(...integration('frost-select'), function () {
     this.render(hbs`
       {{frost-select-outlet}}
       {{input hook='pre'}}
-      {{frost-select
+      {{frost-multi-select
         data=data
         disabled=disabled
         error=error
@@ -640,7 +640,8 @@ describeComponent(...integration('frost-select'), function () {
           it('renders as expected', function () {
             expectSelectWithState('select', {
               focused: true,
-              opened: false,
+              items: ['Foo', 'Bar'],
+              opened: true,
               text: 'Foo'
             })
 
@@ -649,10 +650,68 @@ describeComponent(...integration('frost-select'), function () {
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
 
             expect(
-              onChange.lastCall.args,
+              onChange.lastCall.args[0],
               'informs consumer of selected value'
             )
               .to.eql(['foo'])
+          })
+
+          describe('when down arrow pressed', function () {
+            beforeEach(function () {
+              [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+              $(document)
+                .trigger(
+                  $.Event('keydown', {
+                    keyCode: DOWN_ARROW
+                  })
+                )
+            })
+
+            it('renders as expected', function () {
+              expectSelectWithState('select', {
+                focused: true,
+                items: ['Foo', 'Bar'],
+                opened: true,
+                text: 'Foo'
+              })
+
+              expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+              expect(onChange.callCount, 'onChange is not called').to.equal(0)
+              expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+            })
+
+            describe('when enter key is pressed', function () {
+              beforeEach(function () {
+                [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+                $(document)
+                  .trigger(
+                    $.Event('keydown', {
+                      keyCode: ENTER
+                    })
+                  )
+              })
+
+              it('renders as expected', function () {
+                expectSelectWithState('select', {
+                  focused: true,
+                  items: ['Foo', 'Bar'],
+                  opened: true,
+                  text: 'Foo, Bar'
+                })
+
+                expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+                expect(onChange.callCount, 'onChange is called').to.equal(1)
+                expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+
+                expect(
+                  onChange.lastCall.args[0],
+                  'informs consumer of selected value'
+                )
+                  .to.eql(['foo', 'bar'])
+              })
+            })
           })
         })
 
@@ -774,7 +833,8 @@ describeComponent(...integration('frost-select'), function () {
             it('renders as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
-                opened: false,
+                items: ['Foo', 'Bar'],
+                opened: true,
                 text: 'Bar'
               })
 
@@ -783,7 +843,7 @@ describeComponent(...integration('frost-select'), function () {
               expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
 
               expect(
-                onChange.lastCall.args,
+                onChange.lastCall.args[0],
                 'informs consumer of selected value'
               )
                 .to.eql(['bar'])
@@ -810,7 +870,7 @@ describeComponent(...integration('frost-select'), function () {
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
 
             expect(
-              onChange.lastCall.args,
+              onChange.lastCall.args[0],
               'informs consumer of selected value'
             )
               .to.eql(['foo'])
@@ -835,7 +895,7 @@ describeComponent(...integration('frost-select'), function () {
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
 
             expect(
-              onChange.lastCall.args,
+              onChange.lastCall.args[0],
               'informs consumer of selected value'
             )
               .to.eql(['bar'])

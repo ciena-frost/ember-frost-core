@@ -287,6 +287,10 @@ export default Component.extend(PropTypeMixin, {
   actions: {
     clear (e) {
       this.get('onSelect')([])
+
+      // Focus is now on clear all button so we need to put focus back on the
+      // filter text input
+      $('.frost-select-dropdown .frost-text-input').focus()
     },
 
     focusOnItem (item) {
@@ -328,6 +332,10 @@ export default Component.extend(PropTypeMixin, {
       }
 
       this.get('onSelect')(selectedValue)
+
+      // When multiselect the checkbox for selected item gets focus so we need
+      // to put focus back on filter text input
+      $('.frost-select-dropdown .frost-text-input').focus()
     }
   }
 })

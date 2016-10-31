@@ -102,7 +102,7 @@ export default Component.extend(PropTypeMixin, {
   },
 
   @readOnly
-  @computed('items', 'selected', 'selectedValue')
+  @computed('data', 'selected', 'selectedValue')
   selectedItems (items, selected, selectedValue) {
     if (selectedValue) {
       return items.filter((item) => {
