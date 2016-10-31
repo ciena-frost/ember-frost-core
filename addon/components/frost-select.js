@@ -1,5 +1,5 @@
 import Ember from 'ember'
-const {Component, typeOf} = Ember
+const {$, Component, run, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
@@ -37,6 +37,7 @@ export default Component.extend(PropTypeMixin, {
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
+    onInput: PropTypes.func,
     renderTarget: PropTypes.string,
     selected: PropTypes.oneOfType([
       PropTypes.array,
@@ -72,9 +73,32 @@ export default Component.extend(PropTypeMixin, {
   // == Computed Properties ===================================================
 
   @readOnly
-  @computed('data')
-  items (data) {
-    return data // TODO: apply filtering here?
+  @computed('data', 'filter', 'onInput')
+  items (data, filter, onInput) {
+    // If no data to filter we are done
+    if (!data) {
+      return data
+    }
+
+    // External filtering
+    if (typeOf(onInput) === 'function') {
+      return data
+    }
+
+    // Internal filtering
+
+    filter = filter ? filter.toLowerCase() : ''
+
+    return data
+      .filter((item) => {
+        if (!filter) {
+          return true
+        }
+
+        const label = item.label || ''
+
+        return label.toLowerCase().indexOf(filter) !== -1
+      })
   },
 
   @readOnly
@@ -157,7 +181,7 @@ export default Component.extend(PropTypeMixin, {
     // If select is disabled make sure it can't get focus
     if (this.get('disabled')) {
       this.$().blur()
-    } else {
+    } else if (!this.get('focused')) {
       this.set('focused', true)
 
       const onFocus = this.get('onFocus')
@@ -169,17 +193,34 @@ export default Component.extend(PropTypeMixin, {
   }),
 
   _onFocusOut: Ember.on('focusOut', function () {
-    const isFocused = this.get('focused')
-    const onBlur = this.get('onBlur')
+    // We must use run.later so filter text input has time to focus when select
+    // dropdown is being opened
+    run.later(() => {
+      if (this.isDestroyed || this.isDestroying) {
+        return
+      }
 
-    this.setProperties({
-      focused: false,
-      opened: false
+      const focusedElement = $(':focus')[0]
+      const filterElement = $('.frost-select-dropdown .frost-text-input')[0]
+
+      // If focus has moved to filter in select dropdown then keep select
+      // visually focused and open
+      if (filterElement && focusedElement === filterElement) {
+        return
+      }
+
+      const isFocused = this.get('focused')
+      const onBlur = this.get('onBlur')
+
+      this.setProperties({
+        focused: false,
+        opened: false
+      })
+
+      if (typeOf(onBlur) === 'function' && isFocused) {
+        this.get('onBlur')()
+      }
     })
-
-    if (typeOf(onBlur) === 'function' && isFocused) {
-      this.get('onBlur')()
-    }
   }),
 
   // == Actions ===============================================================
@@ -187,10 +228,21 @@ export default Component.extend(PropTypeMixin, {
   actions: {
     closeDropDown () {
       this.set('opened', false)
+
+      // We need to make sure focus goes back to select since it is on the
+      // filter text input while the dropdown is open
+      this.$().focus()
     },
 
-    filterChange (e) {
-      console.info(e) // TODO: apply filter
+    filterInput (e) {
+      const filter = e.target.value
+      const onInput = this.get('onInput')
+
+      if (typeOf(onInput) === 'function') {
+        onInput(filter)
+      } else {
+        this.set('filter', filter)
+      }
     },
 
     selectItem (selectedValue) {
@@ -204,6 +256,10 @@ export default Component.extend(PropTypeMixin, {
       if (typeOf(onChange) === 'function') {
         this.onChange(selectedValue)
       }
+
+      // We need to make sure focus goes back to select since it is on the
+      // filter text input while the dropdown is open
+      this.$().focus()
     }
   }
 })

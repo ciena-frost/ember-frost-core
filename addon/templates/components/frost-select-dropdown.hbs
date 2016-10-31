@@ -9,6 +9,10 @@
   onmousedown={{action 'mouseDown'}}
   style={{listStyle}}
 >
+  {{frost-text
+    onInput=onFilterInput
+    value=filter
+  }}
   {{#if multiselect}}
     <div class='multi-status'>
       <span class='number-selected'>{{selectedItems.length}} selected</span>

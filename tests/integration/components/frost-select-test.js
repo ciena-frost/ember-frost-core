@@ -7,6 +7,7 @@ import keyCodes from 'ember-frost-core/utils/keycodes'
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW, TAB} = keyCodes
 import {$hook, initialize} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
+import wait from 'ember-test-helpers/wait'
 import hbs from 'htmlbars-inline-precompile'
 import {afterEach, beforeEach, describe} from 'mocha'
 import sinon from 'sinon'
@@ -177,6 +178,7 @@ describeComponent(...integration('frost-select'), function () {
         beforeEach(function () {
           [onBlur, onChange, onFocus].forEach((func) => func.reset())
           $hook('select').focusout()[0].blur()
+          return wait()
         })
 
         it('renders as expected', function () {
@@ -218,6 +220,7 @@ describeComponent(...integration('frost-select'), function () {
           beforeEach(function () {
             [onBlur, onChange, onFocus].forEach((func) => func.reset())
             $hook('select').focusout()[0].blur()
+            return wait()
           })
 
           it('renders as expected', function () {
@@ -518,6 +521,7 @@ describeComponent(...integration('frost-select'), function () {
         beforeEach(function () {
           [onBlur, onChange, onFocus].forEach((func) => func.reset())
           $hook('select').focusout()[0].blur()
+          return wait()
         })
 
         it('renders as expected', function () {
@@ -583,6 +587,7 @@ describeComponent(...integration('frost-select'), function () {
           beforeEach(function () {
             [onBlur, onChange, onFocus].forEach((func) => func.reset())
             $hook('select').focusout()[0].blur()
+            return wait()
           })
 
           it('renders as expected', function () {

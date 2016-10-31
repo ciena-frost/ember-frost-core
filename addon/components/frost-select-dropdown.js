@@ -23,10 +23,11 @@ export default Component.extend(PropTypeMixin, {
   propTypes: {
     // Public
     $element: PropTypes.object.isRequired,
+    filter: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     multiselect: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
-    onFilterChange: PropTypes.func.isRequired,
+    onFilterInput: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
     receivedHook: PropTypes.string.isRequired,
     selectedItems: PropTypes.arrayOf(PropTypes.object),
@@ -235,6 +236,8 @@ export default Component.extend(PropTypeMixin, {
   },
 
   didInsertElement () {
+    $('.frost-select-dropdown .frost-text-input').focus() // Focus on filter
+
     this._updateHandler = () => {
       this._lastInteraction = Date.now()
 
@@ -244,9 +247,8 @@ export default Component.extend(PropTypeMixin, {
     }
 
     this._keyDownHandler = (e) => {
-      e.preventDefault() // Keep arrow keys from scrolling document
-
       if ([DOWN_ARROW, UP_ARROW].indexOf(e.keyCode) !== -1) {
+        e.preventDefault() // Keep arrow keys from scrolling document
         this._handleArrowKey(e.keyCode === UP_ARROW)
       }
 

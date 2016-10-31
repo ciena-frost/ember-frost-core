@@ -11,10 +11,11 @@
     named=renderTarget
     send=(component 'frost-select-dropdown'
       $element=$element
+      filter=filter
       items=items
       multiselect=multiselect
       onClose=(action 'closeDropDown')
-      onFilterChange=(action 'filterChange')
+      onFilterInput=(action 'filterInput')
       onSelect=(action 'selectItem')
       receivedHook=hook
       selectedItems=selectedItems
