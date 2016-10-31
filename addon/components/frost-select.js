@@ -169,14 +169,15 @@ export default Component.extend(PropTypeMixin, {
   }),
 
   _onFocusOut: Ember.on('focusOut', function () {
+    const isFocused = this.get('focused')
+    const onBlur = this.get('onBlur')
+
     this.setProperties({
       focused: false,
       opened: false
     })
 
-    const onBlur = this.get('onBlur')
-
-    if (typeOf(onBlur) === 'function') {
+    if (typeOf(onBlur) === 'function' && isFocused) {
       this.get('onBlur')()
     }
   }),
@@ -186,6 +187,10 @@ export default Component.extend(PropTypeMixin, {
   actions: {
     closeDropDown () {
       this.set('opened', false)
+    },
+
+    filterChange (e) {
+      console.info(e) // TODO: apply filter
     },
 
     selectItem (selectedValue) {

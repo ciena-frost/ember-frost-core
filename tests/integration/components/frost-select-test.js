@@ -4,11 +4,12 @@ import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-compone
 import Ember from 'ember'
 const {$} = Ember
 import keyCodes from 'ember-frost-core/utils/keycodes'
-const {SPACE, TAB} = keyCodes
+const {ESCAPE, SPACE, TAB} = keyCodes
 import {$hook, initialize} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
-import {beforeEach, describe} from 'mocha'
+import {afterEach, beforeEach, describe} from 'mocha'
+import sinon from 'sinon'
 
 /**
  * Focus on next focusable element
@@ -24,11 +25,21 @@ function focusNext ($element) {
 }
 
 describeComponent(...integration('frost-select'), function () {
+  let onBlur, onChange, onFocus, sandbox
+
   beforeEach(function () {
     initialize()
+    sandbox = sinon.sandbox.create()
+
+    onBlur = sandbox.spy()
+    onChange = sandbox.spy()
+    onFocus = sandbox.spy()
 
     this.setProperties({
       hook: 'select',
+      onBlur,
+      onFocus,
+      onChange,
       tabIndex: 0 // This is the default
     })
 
@@ -40,10 +51,17 @@ describeComponent(...integration('frost-select'), function () {
         disabled=disabled
         error=error
         hook=hook
+        onBlur=onBlur
+        onChange=onChange
+        onFocus=onFocus
         tabIndex=tabIndex
       }}
       {{input hook='post'}}
     `)
+  })
+
+  afterEach(function () {
+    sandbox.restore()
   })
 
   describe('when data not present', function () {
@@ -51,6 +69,10 @@ describeComponent(...integration('frost-select'), function () {
       expectSelectWithState('select', {
         focused: false
       })
+
+      expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+      expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+      expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
     })
 
     describe('click on component', function () {
@@ -66,7 +88,35 @@ describeComponent(...integration('frost-select'), function () {
       it('renders as expected', function () {
         expectSelectWithState('select', {
           focused: true,
+          items: [],
           opened: true
+        })
+
+        expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+        expect(onFocus.callCount, 'onFocus is called once').to.equal(1)
+      })
+
+      describe('when escape key pressed', function () {
+        beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+          $(document)
+            .trigger(
+              $.Event('keydown', {
+                keyCode: ESCAPE
+              })
+            )
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
         })
       })
     })
@@ -99,6 +149,12 @@ describeComponent(...integration('frost-select'), function () {
         expectSelectWithState('select', {
           focused: true
         })
+
+        expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+
+        // NOTE: called twice because focusin() and focus() are called in test
+        expect(onFocus.callCount, 'onFocus is called once').to.equal(2)
       })
     })
 
@@ -113,10 +169,17 @@ describeComponent(...integration('frost-select'), function () {
         expectSelectWithState('select', {
           focused: true
         })
+
+        expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+
+        // NOTE: called twice because focusin() and focus() are called in test
+        expect(onFocus.callCount, 'onFocus is called once').to.equal(2)
       })
 
       describe('programitcally blur component', function () {
         beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
           $hook('select').blur()
         })
 
@@ -124,11 +187,17 @@ describeComponent(...integration('frost-select'), function () {
           expectSelectWithState('select', {
             focused: false
           })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(1)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
         })
       })
 
       describe('when space bar pressed', function () {
         beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
           $hook('select')
             .trigger(
               $.Event('keypress', {
@@ -140,12 +209,18 @@ describeComponent(...integration('frost-select'), function () {
         it('renders as expected', function () {
           expectSelectWithState('select', {
             focused: true,
+            items: [],
             opened: true
           })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
         })
 
         describe('programitcally blur component', function () {
           beforeEach(function () {
+            [onBlur, onChange, onFocus].forEach((func) => func.reset())
             $hook('select').blur()
           })
 
@@ -153,11 +228,40 @@ describeComponent(...integration('frost-select'), function () {
             expectSelectWithState('select', {
               focused: false
             })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(1)
+            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+          })
+        })
+
+        describe('when escape key pressed', function () {
+          beforeEach(function () {
+            [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+            $(document)
+              .trigger(
+                $.Event('keydown', {
+                  keyCode: ESCAPE
+                })
+              )
+          })
+
+          it('renders as expected', function () {
+            expectSelectWithState('select', {
+              focused: true
+            })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
 
         describe('when space bar pressed again', function () {
           beforeEach(function () {
+            [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
             $hook('select')
               .trigger(
                 $.Event('keypress', {
@@ -171,6 +275,10 @@ describeComponent(...integration('frost-select'), function () {
               focused: true,
               opened: false
             })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
       })
@@ -186,6 +294,10 @@ describeComponent(...integration('frost-select'), function () {
           disabled: true,
           focused: false
         })
+
+        expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+        expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
       })
 
       describe('click on component', function () {
@@ -203,6 +315,10 @@ describeComponent(...integration('frost-select'), function () {
             disabled: true,
             focused: false
           })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
         })
       })
 
@@ -242,6 +358,10 @@ describeComponent(...integration('frost-select'), function () {
             'focuses on element after select'
           )
             .to.equal(document.activeElement)
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
         })
       })
     })
@@ -256,6 +376,10 @@ describeComponent(...integration('frost-select'), function () {
           focused: false,
           tabIndex: 3
         })
+
+        expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+        expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
       })
     })
 
@@ -269,6 +393,10 @@ describeComponent(...integration('frost-select'), function () {
           error: true,
           focused: false
         })
+
+        expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+        expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
       })
     })
   })
@@ -285,6 +413,10 @@ describeComponent(...integration('frost-select'), function () {
       expectSelectWithState('select', {
         focused: false
       })
+
+      expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+      expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+      expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
     })
 
     describe('click on component', function () {
@@ -304,6 +436,33 @@ describeComponent(...integration('frost-select'), function () {
           items: ['Foo', 'Bar'],
           opened: true
         })
+
+        expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+        expect(onFocus.callCount, 'onFocus is called once').to.equal(1)
+      })
+
+      describe('when escape key pressed', function () {
+        beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+          $(document)
+            .trigger(
+              $.Event('keydown', {
+                keyCode: ESCAPE
+              })
+            )
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
       })
     })
 
@@ -335,6 +494,12 @@ describeComponent(...integration('frost-select'), function () {
         expectSelectWithState('select', {
           focused: true
         })
+
+        expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+
+        // NOTE: called twice because focusin() and focus() are called in test
+        expect(onFocus.callCount, 'onFocus is called once').to.equal(2)
       })
     })
 
@@ -349,10 +514,17 @@ describeComponent(...integration('frost-select'), function () {
         expectSelectWithState('select', {
           focused: true
         })
+
+        expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+
+        // NOTE: called twice because focusin() and focus() are called in test
+        expect(onFocus.callCount, 'onFocus is called once').to.equal(2)
       })
 
       describe('programitcally blur component', function () {
         beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
           $hook('select').blur()
         })
 
@@ -360,11 +532,40 @@ describeComponent(...integration('frost-select'), function () {
           expectSelectWithState('select', {
             focused: false
           })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(1)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
+      })
+
+      describe('when escape key pressed', function () {
+        beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+          $(document)
+            .trigger(
+              $.Event('keydown', {
+                keyCode: ESCAPE
+              })
+            )
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
         })
       })
 
       describe('when space bar pressed', function () {
         beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
           $hook('select')
             .trigger(
               $.Event('keypress', {
@@ -380,10 +581,15 @@ describeComponent(...integration('frost-select'), function () {
             items: ['Foo', 'Bar'],
             opened: true
           })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
         })
 
         describe('programitcally blur component', function () {
           beforeEach(function () {
+            [onBlur, onChange, onFocus].forEach((func) => func.reset())
             $hook('select').blur()
           })
 
@@ -391,11 +597,17 @@ describeComponent(...integration('frost-select'), function () {
             expectSelectWithState('select', {
               focused: false
             })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(1)
+            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
 
         describe('when space bar pressed again', function () {
           beforeEach(function () {
+            [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
             $hook('select')
               .trigger(
                 $.Event('keypress', {
@@ -409,6 +621,10 @@ describeComponent(...integration('frost-select'), function () {
               focused: true,
               opened: false
             })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
 
@@ -428,6 +644,10 @@ describeComponent(...integration('frost-select'), function () {
           disabled: true,
           focused: false
         })
+
+        expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+        expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
       })
 
       describe('click on component', function () {
@@ -445,6 +665,10 @@ describeComponent(...integration('frost-select'), function () {
             disabled: true,
             focused: false
           })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
         })
       })
 
@@ -484,6 +708,10 @@ describeComponent(...integration('frost-select'), function () {
             'focuses on element after select'
           )
             .to.equal(document.activeElement)
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
         })
       })
     })
@@ -498,6 +726,10 @@ describeComponent(...integration('frost-select'), function () {
           focused: false,
           tabIndex: 3
         })
+
+        expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+        expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
       })
     })
 
@@ -511,6 +743,10 @@ describeComponent(...integration('frost-select'), function () {
           error: true,
           focused: false
         })
+
+        expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+        expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
       })
     })
   })

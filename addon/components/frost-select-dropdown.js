@@ -26,6 +26,7 @@ export default Component.extend(PropTypeMixin, {
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     multiselect: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
+    onFilterChange: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
     receivedHook: PropTypes.string.isRequired,
     selectedItems: PropTypes.arrayOf(PropTypes.object),
