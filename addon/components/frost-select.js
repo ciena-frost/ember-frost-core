@@ -34,7 +34,22 @@ export default Component.extend(PropTypeMixin, {
     error: PropTypes.bool,
     hook: PropTypes.string.isRequired,
     multiselect: PropTypes.bool,
-    outlet: PropTypes.string,
+    onBlur: PropTypes.func,
+    onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    renderTarget: PropTypes.string,
+    selected: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.number
+    ]),
+    selectedValue: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.bool,
+      PropTypes.number,
+      PropTypes.null,
+      PropTypes.object,
+      PropTypes.string
+    ]),
     tabIndex: PropTypes.number,
 
     // Private
@@ -49,7 +64,7 @@ export default Component.extend(PropTypeMixin, {
       error: false,
       focused: false,
       multiselect: false,
-      outlet: 'frost-select',
+      renderTarget: 'frost-select',
       tabIndex: 0
     }
   },
@@ -144,6 +159,12 @@ export default Component.extend(PropTypeMixin, {
       this.$().blur()
     } else {
       this.set('focused', true)
+
+      const onFocus = this.get('onFocus')
+
+      if (typeOf(onFocus) === 'function') {
+        this.get('onFocus')()
+      }
     }
   }),
 
@@ -152,6 +173,12 @@ export default Component.extend(PropTypeMixin, {
       focused: false,
       opened: false
     })
+
+    const onBlur = this.get('onBlur')
+
+    if (typeOf(onBlur) === 'function') {
+      this.get('onBlur')()
+    }
   }),
 
   // == Actions ===============================================================
@@ -167,7 +194,11 @@ export default Component.extend(PropTypeMixin, {
         selectedValue
       })
 
-      // TODO: inform consumer
+      const onChange = this.get('onChange')
+
+      if (typeOf(onChange) === 'function') {
+        this.onChange(selectedValue)
+      }
     }
   }
 })
