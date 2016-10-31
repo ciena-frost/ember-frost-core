@@ -662,7 +662,7 @@ describeComponent(...integration('frost-select'), function () {
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
 
             expect(
-              onChange.lastCall.args,
+              onChange.lastCall.args[0],
               'informs consumer of selected value'
             )
               .to.eql(['foo'])
@@ -796,7 +796,7 @@ describeComponent(...integration('frost-select'), function () {
               expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
 
               expect(
-                onChange.lastCall.args,
+                onChange.lastCall.args[0],
                 'informs consumer of selected value'
               )
                 .to.eql(['bar'])
@@ -823,7 +823,7 @@ describeComponent(...integration('frost-select'), function () {
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
 
             expect(
-              onChange.lastCall.args,
+              onChange.lastCall.args[0],
               'informs consumer of selected value'
             )
               .to.eql(['foo'])
@@ -848,7 +848,7 @@ describeComponent(...integration('frost-select'), function () {
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
 
             expect(
-              onChange.lastCall.args,
+              onChange.lastCall.args[0],
               'informs consumer of selected value'
             )
               .to.eql(['bar'])

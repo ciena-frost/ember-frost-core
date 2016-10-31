@@ -317,7 +317,7 @@ export default Component.extend(PropTypeMixin, {
     selectItem (value) {
       // Single select
       if (!this.get('multiselect')) {
-        this.get('onSelect')(value)
+        this.get('onSelect')([value])
         return
       }
 
