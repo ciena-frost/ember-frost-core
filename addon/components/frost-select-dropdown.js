@@ -123,6 +123,12 @@ export default Component.extend(PropTypeMixin, {
     })
   },
 
+  @readOnly
+  @computed('items')
+  showEmptyMessage (items) {
+    return !items || items.length === 0
+  },
+
   // == Functions =============================================================
 
   _getElementDimensionsAndPosition ($element) {

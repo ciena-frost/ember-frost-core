@@ -65,6 +65,11 @@ $frost-select-placeholder-color: $frost-color-grey-6;
   z-index: 9003;
 }
 
+.frost-select-dropdown-empty-msg {
+  color: $frost-color-grey-3;
+  padding: 6px;
+}
+
 .frost-select-error {
   border-color: $frost-select-error-border-color;
 

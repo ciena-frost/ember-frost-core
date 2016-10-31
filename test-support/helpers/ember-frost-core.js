@@ -152,12 +152,17 @@ export function expectSelectWithState (select, state) {
       .to.equal(state.focusedItem)
   }
 
-  if (state.items) {
+  const $emptyMessage = $('.frost-select-dropdown-empty-msg')
+
+  if (state.items && state.items.length !== 0) {
     const labels = $('.frost-select-dropdown li')
       .toArray()
       .map((element) => element.textContent.trim())
 
     expect(labels, 'has expected items').to.eql(state.items)
+    expect($emptyMessage, 'does not show empty message').to.have.length(0)
+  } else if (state.opened) {
+    expect($emptyMessage, 'shows empty message').to.have.length(1)
   }
 
   expect(

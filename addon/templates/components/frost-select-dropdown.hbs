@@ -25,6 +25,15 @@
     </div>
   {{/if}}
   <ul>
+    {{#if showEmptyMessage}}
+      <div class="frost-select-dropdown-empty-msg">
+        {{#if filter}}
+          No items matching filter.
+        {{else}}
+          No items.
+        {{/if}}
+      </div>
+    {{/if}}
     {{#each renderItems as |item index|}}
       {{#frost-select-li
         class=item.className
