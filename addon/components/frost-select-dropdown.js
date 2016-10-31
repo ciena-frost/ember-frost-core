@@ -253,7 +253,7 @@ export default Component.extend(PropTypeMixin, {
         case ENTER:
           const items = this.get('items') || []
           const focusedIndex = this.get('focusedIndex')
-          this.get('onSelect')(items[focusedIndex].value)
+          this.send('selectItem', items[focusedIndex].value)
           return
 
         case ESCAPE:
@@ -276,8 +276,8 @@ export default Component.extend(PropTypeMixin, {
   // == Actions ===============================================================
 
   actions: {
-    clear () {
-      this.get('onSelect')(null)
+    clear (e) {
+      this.get('onSelect')([])
     },
 
     focusOnItem (item) {
@@ -294,6 +294,11 @@ export default Component.extend(PropTypeMixin, {
           break
         }
       }
+    },
+
+    mouseDown (e) {
+      // This keeps the overlay from swallowing clicks on the clear button
+      e.preventDefault()
     },
 
     selectItem (value) {

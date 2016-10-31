@@ -27,6 +27,7 @@ $frost-select-placeholder-color: $frost-color-grey-6;
 .frost-select {
   align-items: center;
   border: 1px solid $frost-select-normal-border-color;
+  cursor: pointer;
   display: flex;
   height: $frost-select-height;
   min-width: 175px;
@@ -43,6 +44,10 @@ $frost-select-placeholder-color: $frost-color-grey-6;
     top: 7px;
     width: 20px;
   }
+}
+
+.frost-select-clear {
+  float: right;
 }
 
 .frost-select-disabled {
@@ -111,12 +116,6 @@ $frost-select-placeholder-color: $frost-color-grey-6;
 
     .number-selected {
       color: $frost-color-grey-5;
-    }
-    // TODO frost-button with tertiary style
-    .clear {
-      color: $frost-color-button-tertiary;
-      float: right;
-      text-decoration: none;
     }
   }
 }

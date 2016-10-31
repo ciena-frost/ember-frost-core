@@ -1,14 +1,23 @@
 <div class='frost-select-overlay' onclick={{onClose}} />
-<div class={{if (eq top 'auto') 'frost-select-down-arrow' 'frost-select-up-arrow'}} style={{arrowStyle}} />
+<div
+  class={{if (eq top 'auto') 'frost-select-down-arrow' 'frost-select-up-arrow'}}
+  style={{arrowStyle}}
+/>
 <div
   class='frost-select-dropdown'
   data-test={{hook (concat receivedHook '-list')}}
+  onmousedown={{action 'mouseDown'}}
   style={{listStyle}}
 >
   {{#if multiselect}}
     <div class='multi-status'>
       <span class='number-selected'>{{selectedItems.length}} selected</span>
-      <span class='clear' tabIndex={-1} onClick={{action 'clear'}}>Clear all</span>
+      {{frost-button
+        class='frost-select-clear'
+        onClick=(action 'clear')
+        priority='tertiary'
+        text='Clear all'
+      }}
     </div>
   {{/if}}
   <ul>
