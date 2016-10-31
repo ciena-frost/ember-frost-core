@@ -110,6 +110,7 @@ export function expectButtonWithState (button, state) {
   }
 }
 
+/* eslint-disable complexity */
 /**
  * Verify select exists with expected state
  * @param {jQuery|String} select - name of Ember hook or jQuery instance
@@ -171,6 +172,7 @@ export function expectSelectWithState (select, state) {
   )
     .to.equal(state.text)
 }
+/* eslint-disable complexity */
 
 /**
  * Verify text input exists with expected state
