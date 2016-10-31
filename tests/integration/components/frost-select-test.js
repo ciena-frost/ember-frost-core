@@ -4,7 +4,7 @@ import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-compone
 import Ember from 'ember'
 const {$} = Ember
 import keyCodes from 'ember-frost-core/utils/keycodes'
-const {ESCAPE, SPACE, TAB} = keyCodes
+const {DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW, TAB} = keyCodes
 import {$hook, initialize} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
@@ -628,9 +628,223 @@ describeComponent(...integration('frost-select'), function () {
           })
         })
 
-        describe('when item selected', function () {
-          // TODO: implemente test
+        describe('when enter key pressed', function () {
+          beforeEach(function () {
+            [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+            $(document)
+              .trigger(
+                $.Event('keydown', {
+                  keyCode: ENTER
+                })
+              )
+          })
+
+          it('renders as expected', function () {
+            expectSelectWithState('select', {
+              focused: true,
+              opened: false,
+              text: 'Foo'
+            })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'OnChange is not called').to.equal(1)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+
+            expect(
+              onChange.lastCall.args,
+              'informs consumer of selected value'
+            )
+              .to.eql(['foo'])
+          })
         })
+
+        describe('when up arrow key pressed', function () {
+          beforeEach(function () {
+            [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+            $(document)
+              .trigger(
+                $.Event('keydown', {
+                  keyCode: UP_ARROW
+                })
+              )
+          })
+
+          it('renders as expected', function () {
+            expectSelectWithState('select', {
+              focused: true,
+              focusedItem: 'Foo',
+              items: ['Foo', 'Bar'],
+              opened: true
+            })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+          })
+        })
+
+        describe('when down arrow key pressed', function () {
+          beforeEach(function () {
+            [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+            $(document)
+              .trigger(
+                $.Event('keydown', {
+                  keyCode: DOWN_ARROW
+                })
+              )
+          })
+
+          it('renders as expected', function () {
+            expectSelectWithState('select', {
+              focused: true,
+              focusedItem: 'Bar',
+              items: ['Foo', 'Bar'],
+              opened: true
+            })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+          })
+
+          describe('when up arrow key pressed', function () {
+            beforeEach(function () {
+              [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+              $(document)
+                .trigger(
+                  $.Event('keydown', {
+                    keyCode: UP_ARROW
+                  })
+                )
+            })
+
+            it('renders as expected', function () {
+              expectSelectWithState('select', {
+                focused: true,
+                focusedItem: 'Foo',
+                items: ['Foo', 'Bar'],
+                opened: true
+              })
+
+              expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+              expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+              expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+            })
+          })
+
+          describe('when down arrow key pressed again', function () {
+            beforeEach(function () {
+              [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+              $(document)
+                .trigger(
+                  $.Event('keydown', {
+                    keyCode: DOWN_ARROW
+                  })
+                )
+            })
+
+            it('renders as expected', function () {
+              expectSelectWithState('select', {
+                focused: true,
+                focusedItem: 'Bar',
+                items: ['Foo', 'Bar'],
+                opened: true
+              })
+
+              expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+              expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+              expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+            })
+          })
+
+          describe('when enter key pressed', function () {
+            beforeEach(function () {
+              [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+              $(document)
+                .trigger(
+                  $.Event('keydown', {
+                    keyCode: ENTER
+                  })
+                )
+            })
+
+            it('renders as expected', function () {
+              expectSelectWithState('select', {
+                focused: true,
+                opened: false,
+                text: 'Bar'
+              })
+
+              expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+              expect(onChange.callCount, 'OnChange is not called').to.equal(1)
+              expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+
+              expect(
+                onChange.lastCall.args,
+                'informs consumer of selected value'
+              )
+                .to.eql(['bar'])
+            })
+          })
+        })
+
+        /* FIXME: for some reason click events are selecting item in test
+        describe('when first item clicked', function () {
+          beforeEach(function () {
+            [onBlur, onChange, onFocus].forEach((func) => func.reset())
+            $hook('select-item-0').click()
+          })
+
+          it('renders as expected', function () {
+            expectSelectWithState('select', {
+              focused: true,
+              opened: false,
+              text: 'Foo'
+            })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'OnChange is not called').to.equal(1)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+
+            expect(
+              onChange.lastCall.args,
+              'informs consumer of selected value'
+            )
+              .to.eql(['foo'])
+          })
+        })
+
+        describe('when second item clicked', function () {
+          beforeEach(function () {
+            [onBlur, onChange, onFocus].forEach((func) => func.reset())
+            $hook('select-item-1').click()
+          })
+
+          it('renders as expected', function () {
+            expectSelectWithState('select', {
+              focused: true,
+              opened: false,
+              text: 'Bar'
+            })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'OnChange is not called').to.equal(1)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+
+            expect(
+              onChange.lastCall.args,
+              'informs consumer of selected value'
+            )
+              .to.eql(['bar'])
+          })
+        })
+        */
       })
     })
 
