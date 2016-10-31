@@ -30,6 +30,7 @@ export default Component.extend(PropTypeMixin, {
 
   propTypes: {
     // Public
+    autofocus: PropTypes.bool,
     disabled: PropTypes.bool,
     error: PropTypes.bool,
     hook: PropTypes.string.isRequired,
@@ -61,6 +62,7 @@ export default Component.extend(PropTypeMixin, {
 
   getDefaultProps () {
     return {
+      autofocus: false,
       disabled: false,
       error: false,
       focused: false,
@@ -152,6 +154,11 @@ export default Component.extend(PropTypeMixin, {
     // We need jQuery instance of components root DOM node to hand off to
     // dropdown so it can position itself properly relative to the select
     this.set('$element', this.$())
+
+    // If autofocus and nothing else has focus, focus on select
+    if (this.get('autofocus') && $(':focus').length === 0) {
+      this.$().focus()
+    }
   },
 
   didReceiveAttrs () {
