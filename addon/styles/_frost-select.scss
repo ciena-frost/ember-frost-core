@@ -26,6 +26,7 @@ $frost-select-placeholder-color: $frost-color-grey-6;
 
 .frost-select {
   align-items: center;
+  background-color: $frost-color-white;
   border: 1px solid $frost-select-normal-border-color;
   cursor: pointer;
   display: flex;
@@ -107,6 +108,11 @@ $frost-select-placeholder-color: $frost-color-grey-6;
     overflow-y: auto;
     padding: 0;
     height: auto;
+  }
+
+  .frost-text {
+    width: auto;
+    min-width: auto;
   }
 
   .multi-status {
