@@ -11,8 +11,7 @@ module.exports = {
       'ember-frost-select',
       'ember-frost-text',
       'ember-frost-textarea',
-      'ember-frost-theme',
-      'ember-lodash'
+      'ember-frost-theme'
     ].map((packageName) => {
       return {name: packageName}
     })
@@ -36,7 +35,6 @@ module.exports = {
             {name: 'ember-computed-decorators', target: '>=0.2.2 <2.0.0'},
             {name: 'ember-elsewhere', target: '~0.4.1'},
             {name: 'ember-hook', target: '^1.3.5'},
-            {name: 'ember-lodash-shim', target: '^1.0.1'},
             {name: 'ember-one-way-controls', target: '>=0.5.3 <2.0.0'},
             {name: 'ember-truth-helpers', target: '^1.0.0'}
           ]

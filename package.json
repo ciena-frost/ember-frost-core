@@ -121,7 +121,6 @@
     "ember-export-application-global": "^1.0.4",
     "ember-hook": "1.3.5",
     "ember-load-initializers": "^0.5.0",
-    "ember-lodash-shim": "1.0.1",
     "ember-one-way-controls": ">=0.5.3 <2.0.0",
     "ember-resolver": "^2.0.3",
     "ember-sinon": "0.5.1",
@@ -131,7 +130,6 @@
     "eslint-config-frost-standard": "^4.0.0",
     "frost-guide-custom-routing": "0.0.4",
     "loader.js": "^4.0.0",
-    "lodash-es": "^4.16.4",
     "markdown-code-highlighting": "0.1.0"
   },
   "keywords": [
@@ -162,7 +160,6 @@
   "ember-addon": {
     "after": [
       "ember-computed-decorators",
-      "ember-lodash",
       "ember-one-way-controls"
     ],
     "configPath": "tests/dummy/config"
