@@ -9,7 +9,7 @@ import keyCodes from '../utils/keycodes'
 const {DOWN_ARROW, ENTER, ESCAPE, UP_ARROW} = keyCodes
 
 const BORDER_HEIGHT = 1
-const ARROW_HEIGHT = 10
+const ARROW_HEIGHT = 12
 const ARROW_WIDTH = 25
 const FPS = 1000 / 60 // Update at 60 frames per second
 const WINDOW_SPACE = 20
@@ -88,7 +88,7 @@ export default Component.extend(PropTypeMixin, {
     if (bottom === 'auto') {
       style.push(`top:${top - ARROW_HEIGHT + BORDER_HEIGHT}px`)
     } else {
-      style.push(`bottom:${bottom - ARROW_HEIGHT - BORDER_HEIGHT}px`)
+      style.push(`bottom:${bottom - ARROW_HEIGHT + BORDER_HEIGHT}px`)
     }
 
     return Ember.String.htmlSafe(style.join(';'))
