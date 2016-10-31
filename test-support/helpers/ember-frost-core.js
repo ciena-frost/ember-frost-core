@@ -18,6 +18,8 @@ const assign = Object.assign || Ember.assign || Ember.merge
   * @property {Boolean} [disabled=false] - whether or not select is disabled
   * @property {Boolean} [error=false] - whether or not select has error
   * @property {Boolean} [focused] - whether or not select is focused
+  * @property {String} [focusedItem] - label of focused item
+  * @property {String} [items] - list of item labels present in dropdown
   * @property {Boolean} [opened=false] - whether or not select is opened
   * @property {Number} [tabIndex=0] - tab index of root element
   * @property {String} [text=''] - text in select for describing what is selected
@@ -55,6 +57,10 @@ function expectDisabledState ($element, disabled, type = 'element') {
  * @param {Boolean} state - whether or not class should be present
  */
 function expectToggleClass ($element, className, state) {
+  if (state === undefined) {
+    return
+  }
+
   expect(
     $element.hasClass(className),
     `${state ? 'has' : 'does not have'} ${className} class`
@@ -129,6 +135,7 @@ export function expectSelectWithState (select, state) {
 
   expectToggleClass($select, 'frost-select-disabled', state.disabled)
   expectToggleClass($select, 'frost-select-error', state.error)
+  expectToggleClass($select, 'frost-select-focused', state.focused)
   expectToggleClass($select, 'frost-select-opened', state.opened)
 
   expect(
@@ -137,8 +144,20 @@ export function expectSelectWithState (select, state) {
   )
     .to.equal(state.disabled ? -1 : state.tabIndex)
 
-  if ('focused' in state) {
-    expectToggleClass($select, 'frost-select-focused', state.focused)
+  if (state.focusedItem) {
+    expect(
+      $('.frost-select-list-item-focused').text().trim(),
+      'is focused on expected item'
+    )
+      .to.equal(state.focusedItem)
+  }
+
+  if (state.items) {
+    const labels = $('.frost-select-dropdown li')
+      .toArray()
+      .map((element) => element.textContent.trim())
+
+    expect(labels, 'has expected items').to.eql(state.items)
   }
 
   expect(

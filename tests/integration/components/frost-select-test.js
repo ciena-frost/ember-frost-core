@@ -300,6 +300,8 @@ describeComponent(...integration('frost-select'), function () {
       it('renders as expected', function () {
         expectSelectWithState('select', {
           focused: true,
+          focusedItem: 'Foo',
+          items: ['Foo', 'Bar'],
           opened: true
         })
       })
@@ -374,6 +376,8 @@ describeComponent(...integration('frost-select'), function () {
         it('renders as expected', function () {
           expectSelectWithState('select', {
             focused: true,
+            focusedItem: 'Foo',
+            items: ['Foo', 'Bar'],
             opened: true
           })
         })
