@@ -1,1 +1,12 @@
-{{yield}}
+{{#if hasBlock}}
+  {{yield}}
+{{else}}
+  {{#each inputs as |input|}}
+    {{#frost-radio-button
+      disabled=input.disabled
+      value=input.value
+    }}
+      {{if input.label input.label input.value}}
+    {{/frost-radio-button}}
+  {{/each}}
+{{/if}}

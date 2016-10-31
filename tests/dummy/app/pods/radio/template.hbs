@@ -29,6 +29,31 @@
     </div>
   </div>
 
+  <div class="section-title">Inline</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Demo</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET radio-inline }}
+        {{frost-radio-group
+          id='inline'
+          inputs=(array
+            (hash value='a')
+            (hash label='B' value='b')
+            (hash value='c' disabled=true)
+          )
+          onChange=(action (mut inlineValue) value='target.value')
+          value=inlineValue
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div style='padding-top:15px' class='snippet'>
+        {{code-snippet name='radio-inline.hbs'}}
+      </div>
+    </div>
+  </div>
+
   <div class="section-title">Size</div>
   <hr>
   <div class='section'>
