@@ -1,3 +1,7 @@
+# 0.30.1
+
+* **Fixed** `frost-select` to not depend on prototype extensions.
+
 # 0.30.0
 
 * Rewrote `frost-select` from the ground up to make it keyboard friendly and fix all of the issues we have been having with it. However I kept the same component API so consuming apps should still just work. CSS selectors did change though which will break any overriding CSS and tests that depend on the old selectors.
