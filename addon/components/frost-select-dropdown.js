@@ -5,29 +5,39 @@ import {task, timeout} from 'ember-concurrency'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
 import layout from '../templates/components/frost-select-dropdown'
+import keyCodes from '../utils/keycodes'
+const {DOWN_ARROW, ENTER, ESCAPE, UP_ARROW} = keyCodes
 
 const BORDER_HEIGHT = 1
-const ARROW_HEIGHT = 10
+const ARROW_HEIGHT = 12
 const ARROW_WIDTH = 25
 const FPS = 1000 / 60 // Update at 60 frames per second
 const WINDOW_SPACE = 20
 
 export default Component.extend(PropTypeMixin, {
+  // == Properties ============================================================
+
   layout,
   tagName: '',
 
-  PropTypes: {
+  propTypes: {
+    // Public
     $element: PropTypes.object.isRequired,
-    bottom: PropTypes.number,
+    filter: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
+    multiselect: PropTypes.bool,
+    onClose: PropTypes.func.isRequired,
+    onFilterInput: PropTypes.func.isRequired,
+    onSelect: PropTypes.func.isRequired,
+    receivedHook: PropTypes.string.isRequired,
+    selectedItems: PropTypes.arrayOf(PropTypes.object),
+
+    // Private
+    bottom: PropTypes.number,
+    focusedIndex: PropTypes.number,
     left: PropTypes.number,
     maxHeight: PropTypes.number,
     onCheck: PropTypes.func,
-    onClear: PropTypes.func,
-    onItemOver: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired,
-    receivedHook: PropTypes.string.isRequired,
-    selectedItems: PropTypes.arrayOf(PropTypes.number),
     top: PropTypes.number,
     width: PropTypes.number
   },
@@ -35,12 +45,15 @@ export default Component.extend(PropTypeMixin, {
   getDefaultProps () {
     return {
       bottom: 0,
+      focusedIndex: 0,
       left: 0,
       maxHeight: 0,
       top: 0,
       width: 0
     }
   },
+
+  // == Computed Properties ===================================================
 
   @readOnly
   @computed('bottom', 'left', 'maxHeight', 'top', 'width')
@@ -75,11 +88,48 @@ export default Component.extend(PropTypeMixin, {
     if (bottom === 'auto') {
       style.push(`top:${top - ARROW_HEIGHT + BORDER_HEIGHT}px`)
     } else {
-      style.push(`bottom:${bottom - ARROW_HEIGHT - BORDER_HEIGHT}px`)
+      style.push(`bottom:${bottom - ARROW_HEIGHT + BORDER_HEIGHT}px`)
     }
 
     return Ember.String.htmlSafe(style.join(';'))
   },
+
+  @readOnly
+  @computed('focusedIndex', 'items', 'selectedItems')
+  renderItems (focusedIndex, items, selectedItems) {
+    if (!items) {
+      return []
+    }
+
+    return items.map((item, index) => {
+      const classNames = ['frost-select-list-item']
+      const value = get(item, 'value')
+      const isSelected = selectedItems.findBy('value', value) !== undefined
+
+      if (index === focusedIndex) {
+        classNames.push('frost-select-list-item-focused')
+      }
+
+      if (isSelected) {
+        classNames.push('frost-select-list-item-selected')
+      }
+
+      return {
+        className: classNames.join(' '),
+        label: get(item, 'label'),
+        selected: isSelected,
+        value: get(item, 'value')
+      }
+    })
+  },
+
+  @readOnly
+  @computed('items')
+  showEmptyMessage (items) {
+    return !items || items.length === 0
+  },
+
+  // == Functions =============================================================
 
   _getElementDimensionsAndPosition ($element) {
     const height = $element.height()
@@ -94,6 +144,26 @@ export default Component.extend(PropTypeMixin, {
       left: offset.left,
       top,
       width: $element.width()
+    }
+  },
+
+  _handleArrowKey (upArrow) {
+    const focusedIndex = this.get('focusedIndex')
+    const items = this.get('items')
+    const newFocusedIndex = (
+      upArrow ? Math.max(0, focusedIndex - 1) : Math.min(items.length - 1, focusedIndex + 1)
+    )
+
+    if (newFocusedIndex !== undefined && newFocusedIndex !== focusedIndex) {
+      this.set('focusedIndex', newFocusedIndex)
+
+      const $focusedListItem = $('.frost-select-list-item').eq(newFocusedIndex)
+
+      if (newFocusedIndex === 0) {
+        $('.frost-select-dropdown')[0].scrollTop = 0
+      } else {
+        $focusedListItem[0].scrollIntoView(upArrow)
+      }
     }
   },
 
@@ -169,6 +239,8 @@ export default Component.extend(PropTypeMixin, {
     this._isUpdating = false
   }),
 
+  // == Events ================================================================
+
   didReceiveAttrs (attrs) {
     const $element = get(attrs, 'newAttrs.$element.value')
 
@@ -178,6 +250,8 @@ export default Component.extend(PropTypeMixin, {
   },
 
   didInsertElement () {
+    $('.frost-select-dropdown .frost-text-input').focus() // Focus on filter
+
     this._updateHandler = () => {
       this._lastInteraction = Date.now()
 
@@ -186,12 +260,90 @@ export default Component.extend(PropTypeMixin, {
       }
     }
 
+    this._keyDownHandler = (e) => {
+      if ([DOWN_ARROW, UP_ARROW].indexOf(e.keyCode) !== -1) {
+        e.preventDefault() // Keep arrow keys from scrolling document
+        this._handleArrowKey(e.keyCode === UP_ARROW)
+      }
+
+      switch (e.keyCode) {
+        case ENTER:
+          const items = this.get('items') || []
+          const focusedIndex = this.get('focusedIndex')
+          this.send('selectItem', items[focusedIndex].value)
+          return
+
+        case ESCAPE:
+          this.get('onClose')()
+          return
+      }
+    }
+
     $(window).on('resize', this._updateHandler)
     $(document).on('scroll', this._updateHandler)
+    $(document).on('keydown', this._keyDownHandler)
   },
 
   willDestroyElement () {
     $(window).off('resize', this._updateHandler)
     $(document).off('scroll', this._updateHandler)
+    $(document).off('keydown', this._keyDownHandler)
+  },
+
+  // == Actions ===============================================================
+
+  actions: {
+    clear (e) {
+      this.get('onSelect')([])
+
+      // Focus is now on clear all button so we need to put focus back on the
+      // filter text input
+      $('.frost-select-dropdown .frost-text-input').focus()
+    },
+
+    focusOnItem (item) {
+      const value = get(item, 'value')
+      const items = this.get('items')
+
+      if (!items) {
+        return
+      }
+
+      for (let i = 0; i < items.length; i++) {
+        if (get(items[i], 'value') === value) {
+          this.set('focusedIndex', i)
+          break
+        }
+      }
+    },
+
+    mouseDown (e) {
+      // This keeps the overlay from swallowing clicks on the clear button
+      e.preventDefault()
+    },
+
+    selectItem (value) {
+      // Single select
+      if (!this.get('multiselect')) {
+        this.get('onSelect')([value])
+        return
+      }
+
+      // Multi-select
+      const selectedValue = this.get('selectedItems').map((item) => item.value)
+      const index = selectedValue.indexOf(value)
+
+      if (index === -1) {
+        selectedValue.push(value)
+      } else {
+        selectedValue.splice(index, 1)
+      }
+
+      this.get('onSelect')(selectedValue)
+
+      // When multiselect the checkbox for selected item gets focus so we need
+      // to put focus back on filter text input
+      $('.frost-select-dropdown .frost-text-input').focus()
+    }
   }
 })

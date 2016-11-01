@@ -1,7 +1,12 @@
-// TODO: get these from theme?
-$focus-border: 1px solid $frost-color-input-focus-border;
-$frost-input-text-height: 35px;
 $frost-input-select-option-row-height: 35px;
+$frost-select-disabled-background-color: $frost-color-lgrey-3;
+$frost-select-disabled-border-color: $frost-color-lgrey-1;
+$frost-select-disabled-color: $frost-color-grey-6;
+$frost-select-error-border-color: $frost-color-danger;
+$frost-select-focused-border-color: $frost-color-blue-1;
+$frost-select-height: 35px;
+$frost-select-normal-border-color: $frost-color-grey-7;
+$frost-select-placeholder-color: $frost-color-grey-6;
 
 @mixin triangle-down($color, $size) {
   border-top: $size solid $color;
@@ -20,87 +25,67 @@ $frost-input-select-option-row-height: 35px;
 }
 
 .frost-select {
-  border: solid 1px $frost-color-input-border;
+  align-items: center;
+  background-color: $frost-color-white;
+  border: 1px solid $frost-select-normal-border-color;
   cursor: pointer;
-  height: $frost-input-text-height;
+  display: flex;
+  height: $frost-select-height;
   min-width: 175px;
-  outline: none;
   position: relative;
-  background: $frost-select-container-background;
 
-  &:focus {
-    border: $focus-border;
+  polygon {
+    fill: $frost-select-indicator;
   }
 
-  input.trigger {
-    background: none;
-    border: 0;
-    color: $frost-color-input;
-    height: 100%;
-    outline: none;
-    overflow: hidden;
-    padding: 0 5px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 75%;
-  }
-
-  .down-arrow {
+  svg {
     height: 20px;
     position: absolute;
     right: 10px;
     top: 7px;
     width: 20px;
-
-    polygon {
-      fill: $frost-select-indicator;
-    }
   }
 }
 
-.frost-select.focus {
-  border: solid 1px $frost-selection;
-
-  .down-arrow {
-    polygon {
-      fill: $frost-selection;
-    }
-  }
+.frost-select-clear {
+  float: right;
 }
 
-.frost-select.error {
-  border: solid 1px $frost-color-danger;
-  .down-arrow {
-    polygon {
-      fill: $frost-select-indicator;
-    }
-  }
+.frost-select-disabled {
+  background-color: $frost-select-disabled-background-color;
+  border-color: $frost-select-disabled-border-color;
+  color: $frost-select-disabled-color;
 }
 
-.frost-select.disabled {
-  background-color: $frost-color-input-disabled-bg;
-  border: 1px solid $frost-color-input-disabled-border;
-  color: $frost-color-grey-6;
-  cursor: default;
-
-  input {
-    color: inherit;
-  }
-
-  .down-arrow {
-    polygon {
-      fill: $frost-color-grey-6;
-    }
-  }
-}
-
-.frost-select-overlay {
+.frost-select-down-arrow {
+  @include triangle-down($frost-select-container-background, 12px);
+  display: inline-block;
+  overflow: visible;
+  pointer-events: none;
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 9001;
+  z-index: 9003;
+}
+
+.frost-select-dropdown-empty-msg {
+  color: $frost-color-grey-3;
+  padding: 6px;
+}
+
+.frost-select-error {
+  border-color: $frost-select-error-border-color;
+
+  polygon {
+    fill: $frost-select-indicator;
+  }
+}
+
+.frost-select-focused {
+  border-color: $frost-select-focused-border-color;
+  outline: none;
+
+  polygon {
+    fill: $frost-select-focused-border-color;
+  }
 }
 
 .frost-select-dropdown {
@@ -125,37 +110,9 @@ $frost-input-select-option-row-height: 35px;
     height: auto;
   }
 
-  li {
-    border-bottom: solid 1px $frost-color-lgrey-3;
-    color: $frost-color-grey-3;
-    cursor: pointer;
-    display: inline-block;
-    height: $frost-input-select-option-row-height;
-    line-height: $frost-input-select-option-row-height;
-    padding: 0 5px;
-    width: 100%;
-
-    &.hover {
-      background: transparentize($frost-selection, .92);
-    }
-
-    &.selected {
-      color: $frost-color-grey-2;
-    }
-
-    .frost-checkbox {
-      input {
-        visibility: hidden;
-      }
-      pointer-events: none;
-      box-sizing: content-box;
-      position: relative;
-      top: -2px;
-      svg {
-        top: 6px;
-        left: 2px;
-      }
-    }
+  .frost-text {
+    width: auto;
+    min-width: auto;
   }
 
   .multi-status {
@@ -171,22 +128,65 @@ $frost-input-select-option-row-height: 35px;
     .number-selected {
       color: $frost-color-grey-5;
     }
-    // TODO frost-button with tertiary style
-    .clear {
-      color: $frost-color-button-tertiary;
-      float: right;
-      text-decoration: none;
+  }
+}
+
+.frost-select-list-item {
+  border-bottom: solid 1px $frost-color-lgrey-3;
+  color: $frost-color-grey-3;
+  cursor: pointer;
+  display: inline-block;
+  height: $frost-input-select-option-row-height;
+  line-height: $frost-input-select-option-row-height;
+  overflow: hidden;
+  padding: 0 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+
+  .frost-checkbox {
+    input {
+      visibility: hidden;
+    }
+    pointer-events: none;
+    box-sizing: content-box;
+    position: relative;
+    top: -2px;
+    svg {
+      top: 6px;
+      left: 2px;
     }
   }
 }
 
-.frost-select-down-arrow {
-  @include triangle-down($frost-select-container-background, 12px);
-  display: inline-block;
-  overflow: visible;
-  pointer-events: none;
+.frost-select-list-item-focused {
+  background: transparentize($frost-selection, .92);
+}
+
+.frost-select-list-item-selected {
+  color: $frost-color-grey-2;
+}
+
+.frost-select-overlay {
   position: fixed;
-  z-index: 9003;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9001;
+}
+
+.frost-select-placeholder {
+  color: $frost-select-placeholder-color;
+}
+
+.frost-select-text {
+  overflow: hidden;
+  padding-left: 5px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: calc(100% - 30px);
 }
 
 .frost-select-up-arrow {
