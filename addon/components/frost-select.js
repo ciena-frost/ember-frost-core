@@ -208,7 +208,7 @@ export default Component.extend(PropTypeMixin, {
 
     const props = {}
 
-    let newSelectedValue = get(attrs, 'oldAttrs.selectedValue.value')
+    let newSelectedValue = get(attrs, 'newAttrs.selectedValue.value')
     let oldSelectedValue = get(attrs, 'oldAttrs.selectedValue.value')
 
     // If user provided a new selected value and it doesn't match the internal
