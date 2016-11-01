@@ -236,7 +236,10 @@ export default Component.extend(PropTypeMixin, {
 
   actions: {
     closeDropDown () {
-      this.set('opened', false)
+      this.setProperties({
+        filter: '',
+        opened: false
+      })
 
       // We need to make sure focus goes back to select since it is on the
       // filter text input while the dropdown is open
@@ -255,10 +258,17 @@ export default Component.extend(PropTypeMixin, {
     },
 
     selectItem (selectedValue) {
-      this.setProperties({
-        opened: this.get('multiselect'),
+      const isMultiselect = this.get('multiselect')
+      const props = {
+        opened: isMultiselect,
         selectedValue
-      })
+      }
+
+      if (!isMultiselect) {
+        props.filter = ''
+      }
+
+      this.setProperties(props)
 
       const onChange = this.get('onChange')
 
