@@ -36,6 +36,11 @@ describeComponent(
       ).to.be.null
 
       expect(
+        component.get('inputs'),
+        'inputs: undefined'
+      ).to.be.undefined
+
+      expect(
         component.get('value'),
         'value: null'
       ).to.be.null

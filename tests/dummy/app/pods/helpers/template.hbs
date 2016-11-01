@@ -1,0 +1,34 @@
+{{!-- BEGIN-SNIPPET array-helper-api}}
+{{array <param1> <param2> ...}}
+{{ END-SNIPPET --}}
+{{!-- BEGIN-SNIPPET array-helper-example1 }}
+{{array 1 2 3}}
+{{ END-SNIPPET --}}
+{{!-- BEGIN-SNIPPET array-helper-example2 }}
+{{hash
+  components=(array
+    (component ...)
+    (component ...)
+  )
+}}
+{{ END-SNIPPET --}}
+
+<div class="section-title">Helpers</div>
+<hr>
+<h3>Array</h3>
+<h4>Properties:</h4>
+<dl>
+  <dt>values <span>Array</span></dt>
+  <dd>a list of the values</dd>
+</dl>
+<h4>API:</h4>
+<div>
+  {{code-snippet name='array-helper-api.hbs'}}
+</div>
+<h4>Examples:</h4>
+<div>
+  {{code-snippet name='array-helper-example1.hbs'}}
+  <br>
+  {{code-snippet name='array-helper-example2.hbs'}}
+</div>
+<hr>

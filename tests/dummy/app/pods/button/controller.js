@@ -2,22 +2,19 @@ import Ember from 'ember'
 const {Controller} = Ember
 
 export default Controller.extend({
+  notifications: Ember.inject.service('notification-messages'),
   vertical: false,
 
   actions: {
     onClickHandler () {
-      this.notifications.addNotification({
-        message: 'Button clicked action sent',
-        type: 'success',
+      this.get('notifications').success('Button clicked action sent', {
         autoClear: true,
         clearDuration: 2000
       })
     },
 
     onFocusHandler () {
-      this.notifications.addNotification({
-        message: 'Button focused action sent',
-        type: 'success',
+      this.get('notifications').success('Button focused action sent', {
         autoClear: true,
         clearDuration: 2000
       })

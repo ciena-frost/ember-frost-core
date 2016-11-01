@@ -192,7 +192,7 @@ describeComponent(
       this.on('externalAction', externalActionSpy)
 
       this.render(hbs`
-        {{frost-link
+        {{frost-link 'title'
           onClick=(action 'externalAction')
         }}
       `)

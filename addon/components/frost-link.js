@@ -79,6 +79,7 @@ export default LinkComponent.extend(PropTypeMixin, {
 
   // == Computed properties ===================================================
 
+  /* eslint-disable complexity */
   @readOnly
   @computed('design', 'priority', 'size')
   /**
@@ -112,6 +113,7 @@ export default LinkComponent.extend(PropTypeMixin, {
 
     return classes.join(' ')
   },
+  /* eslint-enable complexity */
 
   // == Functions =============================================================
 

@@ -3,6 +3,8 @@ const {Controller} = Ember
 
 // BEGIN-SNIPPET radio-controller
 export default Controller.extend({
+  notifications: Ember.inject.service('notification-messages'),
+
   inlineValue: 'a',
 
   sampleList1: ['a', 'b', 'c', 'd', 'e'],
@@ -26,12 +28,12 @@ export default Controller.extend({
   actions: {
     change (event) {
       this.set(`model.${event.target.id}`, event.target.value)
-      this.notifications.addNotification({
-        message: `Radio group ${event.target.id} value set to ${event.target.value}`,
-        type: 'success',
-        autoClear: true,
-        clearDuration: 2000
-      })
+      this.get('notifications').success(
+        `Radio group ${event.target.id} value set to ${event.target.value}`, {
+          autoClear: true,
+          clearDuration: 2000
+        }
+      )
     }
   }
 })

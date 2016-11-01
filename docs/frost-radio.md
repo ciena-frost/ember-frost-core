@@ -9,6 +9,7 @@
 | --------- | ---- | ----- | ----------- |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `id` | `string` | `<group-name>` | acts as the group id |
+| `inputs` | `array` | `[ disabled: `string`, label: `string`, value: `string` ] | used to set the label, value and disabled state when using radio-group/radio-button in a non-block (inline) usage
 | `onChange` | `string` |`<action-name>`| triggers associated action on change or keypress of space/enter |
 | `value` | `string` | `<group-value>` | default checked radio button |
 
@@ -57,6 +58,20 @@ export default Controller.extend({
     {{/frost-radio-button}}
   {{/each}}
 {{/frost-radio-group}}
+```
+
+### Inline
+```handlebars
+{{frost-radio-group
+  id='inline'
+  inputs=(array
+    (hash value='a')
+    (hash label='B' value='b')
+    (hash value='c' disabled=true)
+  )
+  onChange=(action (mut inlineValue) value='target.value')
+  value=inlineValue
+}}
 ```
 
 ### Disabled

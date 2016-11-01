@@ -111,6 +111,7 @@ export default Component.extend(PropTypeMixin, {
       /frost-radio-group/.test(this.parentView.toString()))
   },
 
+/* eslint-disable complexity */
   keyPress (event) {
     if (event.keyCode === 13 || event.keyCode === 32) {
       if (get(this, 'disabled') || get(this, 'groupValue') === get(this, 'value')) {
@@ -122,6 +123,7 @@ export default Component.extend(PropTypeMixin, {
       }
     }
   },
+  /* eslint-enable complexity */
 
   change (event) {
     const onChange = get(this, 'onChange')

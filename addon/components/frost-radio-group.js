@@ -7,7 +7,7 @@ export default Ember.Component.extend(PropTypeMixin, {
   layout,
 
   propTypes: {
-    hook: PropTypes.string.isRequired,
+    hook: PropTypes.string,
     id: PropTypes.string,
     value: PropTypes.string,
     inputs: PropTypes.arrayOf(PropTypes.shape({

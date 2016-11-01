@@ -90,6 +90,7 @@ export default Component.extend(FrostEventsProxy, {
 
   // == Actions ================================================================
   actions: {
+    /* eslint-disable complexity */
     _onClick (e) {
       if (this.get('disabled')) return
 
@@ -109,5 +110,6 @@ export default Component.extend(FrostEventsProxy, {
         this._eventProxy.click(this._modifyEvent(e, target))
       }
     }
+    /* eslint-enable complexity */
   }
 })
