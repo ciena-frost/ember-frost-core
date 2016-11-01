@@ -175,6 +175,7 @@ export default Component.extend(PropTypeMixin, {
 
   // == Functions =============================================================
 
+  /* eslint-disable complexity */
   /**
    * Add the appropriate class for the given priority to the Array of classes
    * @param {String} priority - the priority to add
@@ -199,6 +200,7 @@ export default Component.extend(PropTypeMixin, {
         break
     }
   },
+  /* eslint-enable complexity */
 
   _getOnClickHandler () {
     if (typeOf(this.attrs.onClick) === 'function') {
