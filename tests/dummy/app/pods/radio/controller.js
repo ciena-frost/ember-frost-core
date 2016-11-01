@@ -3,6 +3,8 @@ const {Controller} = Ember
 
 // BEGIN-SNIPPET radio-controller
 export default Controller.extend({
+  inlineValue: 'a',
+
   sampleList1: ['a', 'b', 'c', 'd', 'e'],
   sampleList2: ['a', 'b', 'c', 'd', 'e'],
   sampleList3: ['a', 'b', 'c', 'd', 'e'],
