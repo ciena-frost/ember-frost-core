@@ -245,21 +245,21 @@ describeComponent(
     })
 
     // https://github.com/juwara0/ember-frost-core/issues/1
-    // it('sets focus on render when autofocus is true', function () {
-    //   const focusSpy = sinon.spy(this.$.prototype, 'focus')
+    it.skip('sets focus on render when autofocus is true', function () {
+      const focusSpy = sinon.spy(this.$.prototype, 'focus')
 
-    //   this.render(hbs`
-    //     {{frost-checkbox
-    //       autofocus=true
-    //     }}
-    //   `)
+      this.render(hbs`
+        {{frost-checkbox
+          autofocus=true
+        }}
+      `)
 
-    //   expect(
-    //     focusSpy.called,
-    //     'autofocus is set'
-    //   ).to.be.true
+      expect(
+        focusSpy.called,
+        'autofocus is set'
+      ).to.be.true
 
-    //   this.$.prototype.focus.restore()
-    // })
+      this.$.prototype.focus.restore()
+    })
   }
 )
