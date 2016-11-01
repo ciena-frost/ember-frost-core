@@ -121,28 +121,6 @@ describeComponent(
       ).to.eql(tabindexDependentKeys)
     })
 
-    describe('"hook" computed property', function () {
-      it('concatenates hook property if passed in from radio-group', function () {
-        const parentViewMock = {
-          hook: 'my-radio-group'
-        }
-
-        run(() => component.set('parentView', parentViewMock))
-
-        expect(
-          component.get('hook'),
-          'hook is concatenated correctly'
-        ).to.eql('my-radio-group-button-testValue')
-      })
-
-      it('is undefined if hook property is not passed in from radio-group', function () {
-        expect(
-          component.get('hook'),
-          'hook: undefined'
-        ).to.be.undefined
-      })
-    })
-
     describe('"checked" computed property', function () {
       const parentView = Ember.Object.create({
         'value': 'testValue'

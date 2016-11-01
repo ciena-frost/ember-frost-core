@@ -52,7 +52,6 @@ export default Component.extend(PropTypeMixin, {
   groupId: readOnly('parentView.id'),
   groupValue: readOnly('parentView.value'),
   onChange: readOnly('parentView.onChange'),
-  radioGroupHook: readOnly('parentView.hook'),
 
   @computed('groupValue', 'value')
   /**
@@ -65,14 +64,14 @@ export default Component.extend(PropTypeMixin, {
     return groupValue === value
   },
 
-  @computed('radioGroupHook', 'value')
+  @computed('value')
   /**
    * Determine hook name for radio-button
-   * @param {String} radioGroupHook - radio group's hook name
    * @param {String} value - radio button's value
    * @returns {String} the concatenated hook name
    */
-  hook (radioGroupHook, value) {
+  hook (value) {
+    const radioGroupHook = get(this, 'parentView.hook')
     if (radioGroupHook) {
       return `${radioGroupHook}-button-${value}`
     }
