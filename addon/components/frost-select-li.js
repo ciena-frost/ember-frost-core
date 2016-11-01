@@ -1,27 +1,32 @@
 import Ember from 'ember'
-const {Component, typeOf} = Ember
-import layout from '../templates/components/frost-select-li'
-import FrostEvents from '../mixins/frost-events'
+const {Component} = Ember
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
-export default Component.extend(FrostEvents, {
+import layout from '../templates/components/frost-select-li'
+
+export default Component.extend(PropTypeMixin, {
+  // == Properties ============================================================
+
   tagName: 'li',
   layout,
 
+  propTypes: {
+    data: PropTypes.object.isRequired,
+    hook: PropTypes.string.isRequired,
+    onItemOver: PropTypes.func.isRequired,
+    onSelect: PropTypes.func.isRequired
+  },
+
   // == Events ================================================================
 
-  click (event) {
-    event.stopPropagation()
+  _onMouseDown: Ember.on('mouseDown', function (e) {
+    e.preventDefault() // Prevent dropdown overlay from receiving click
     const data = this.get('data')
-    const onSelect = this.get('onSelect')
-    if (typeOf(onSelect) === 'function') {
-      onSelect(data)
-    }
-  },
-  mouseEnter () {
+    this.get('onSelect')(data.value)
+  }),
+
+  _onMouseEnter: Ember.on('mouseEnter', function () {
     const data = this.get('data')
-    const onItemOver = this.get('onItemOver')
-    if (typeOf(onItemOver) === 'function') {
-      onItemOver(data)
-    }
-  }
+    this.get('onItemOver')(data)
+  })
 })
