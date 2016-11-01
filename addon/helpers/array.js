@@ -1,5 +1,6 @@
 import Ember from 'ember'
 const {
+  A,
   Helper: {
     helper
   }
@@ -10,7 +11,7 @@ export function array (params) {
   // initial code:
   // return params
 
-  let array = Ember.A()
+  let array = A()
   array.pushObjects(params)
   return array
 }
