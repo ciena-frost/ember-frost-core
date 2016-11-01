@@ -104,7 +104,7 @@ export default Component.extend(PropTypeMixin, {
     return items.map((item, index) => {
       const classNames = ['frost-select-list-item']
       const value = get(item, 'value')
-      const isSelected = selectedItems.findBy('value', value) !== undefined
+      const isSelected = selectedItems.find((item) => item.value === value) !== undefined
 
       if (index === focusedIndex) {
         classNames.push('frost-select-list-item-focused')
