@@ -1,3 +1,7 @@
+# 0.30.0
+
+* Rewrote `frost-select` from the ground up to make it keyboard friendly and fix all of the issues we have been having with it. However I kept the same component API so consuming apps should still just work. CSS selectors did change though which will break any overriding CSS and tests that depend on the old selectors.
+
 # 0.29.1
 
 * **Fixed** issue where events weren't being unbound on component destruction.
