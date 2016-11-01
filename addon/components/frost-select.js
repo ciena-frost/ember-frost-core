@@ -1,11 +1,43 @@
 import Ember from 'ember'
-const {$, Component, run, typeOf} = Ember
+const {$, Component, get, run, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
 import layout from '../templates/components/frost-select'
 import keyCodes from '../utils/keycodes'
 const {SPACE} = keyCodes
+
+/**
+ * Compare two string arrays to determine if they contain the same values
+ * NOTE: this method does not care about the order of the items
+ * @param {Array<String>} a - first array
+ * @param {Array<String>} b second array
+ * @returns {Boolean} whether or not arrays contain same values
+ */
+function compareArrays (a, b) {
+  if (a.length !== b.length) {
+    return false
+  }
+
+  a = a.sort()
+  b = b.sort()
+
+  return a.every((value, index) => value === b[index])
+}
+
+/**
+ * Compare two selected value objects to determine if they are equivalent
+ * @param {Array<String>|String} a - first selected value object
+ * @param {Array<String>|String} b - second selected value object
+ * @returns {Boolean} whether or not selected value objects are equivalent
+ */
+function compareSelectedValues (a, b) {
+  if (typeOf(a) === 'array' && typeOf(b) === 'array') {
+    return compareArrays(a, b)
+  }
+
+  return a === b
+}
 
 export default Component.extend(PropTypeMixin, {
   // == Properties ============================================================
@@ -57,6 +89,14 @@ export default Component.extend(PropTypeMixin, {
     // Private
     $element: PropTypes.object,
     focused: PropTypes.bool,
+    internalSelectedValue: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.bool,
+      PropTypes.number,
+      PropTypes.null,
+      PropTypes.object,
+      PropTypes.string
+    ]),
     opened: PropTypes.bool
   },
 
@@ -104,7 +144,7 @@ export default Component.extend(PropTypeMixin, {
   },
 
   @readOnly
-  @computed('data', 'selected', 'selectedValue')
+  @computed('data', 'selected', 'internalSelectedValue')
   selectedItems (items, selected, selectedValue) {
     if (selectedValue) {
       return items.filter((item) => {
@@ -163,12 +203,30 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
-  didReceiveAttrs () {
+  didReceiveAttrs (attrs) {
     this._super(...arguments)
+
+    const props = {}
+
+    let newSelectedValue = get(attrs, 'oldAttrs.selectedValue.value')
+    let oldSelectedValue = get(attrs, 'oldAttrs.selectedValue.value')
+
+    // If user provided a new selected value and it doesn't match the internal
+    // selected value then update internal selected value
+    if (
+      !compareSelectedValues(newSelectedValue, oldSelectedValue) &&
+      !compareSelectedValues(newSelectedValue, this.get('internalSelectedValue'))
+    ) {
+      props.internalSelectedValue = newSelectedValue
+    }
 
     // Make sure user can't tab into disabled select
     if (this.get('disabled')) {
-      this.set('tabIndex', -1)
+      props.tabIndex = -1
+    }
+
+    if (Object.keys(props).length !== 0) {
+      this.setProperties(props)
     }
   },
 
@@ -261,7 +319,7 @@ export default Component.extend(PropTypeMixin, {
       const isMultiselect = this.get('multiselect')
       const props = {
         opened: isMultiselect,
-        selectedValue
+        internalSelectedValue: selectedValue
       }
 
       if (!isMultiselect) {
