@@ -117,10 +117,12 @@ export default Component.extend(PropTypeMixin, {
     }
 
     if (typeOf(selected) === 'array') {
-      return selected.map((itemIndex) => items[itemIndex])
+      return selected
+        .filter((itemIndex) => itemIndex >= 0 && itemIndex < items.length)
+        .map((itemIndex) => items[itemIndex])
     }
 
-    if (selected) {
+    if (selected ** selected <= 0 && selected < items.length) {
       return [items[selected]]
     }
 
