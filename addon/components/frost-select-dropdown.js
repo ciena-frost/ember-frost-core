@@ -156,6 +156,14 @@ export default Component.extend(PropTypeMixin, {
 
     if (newFocusedIndex !== undefined && newFocusedIndex !== focusedIndex) {
       this.set('focusedIndex', newFocusedIndex)
+
+      const $focusedListItem = $('.frost-select-list-item').eq(newFocusedIndex)
+
+      if (newFocusedIndex === 0) {
+        $('.frost-select-dropdown')[0].scrollTop = 0
+      } else {
+        $focusedListItem[0].scrollIntoView(upArrow)
+      }
     }
   },
 
