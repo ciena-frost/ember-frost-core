@@ -1,3 +1,7 @@
+# 0.30.2
+
+* Updated ember-hook selector for frost-select-dropdown input
+
 # 0.30.1
 
 * **Fixed** `frost-select` to not depend on prototype extensions.
