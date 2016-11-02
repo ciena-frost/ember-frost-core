@@ -11,18 +11,18 @@
 * **Fixed** issue where events weren't being unbound on component destruction.
 
 # 0.29.0
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+- Add an array helper
 
 # 0.28.8
-* Fixed issue #120 
+* Fixed issue #120
 
 # 0.28.7
 
 * **Fixed** input margins and borders to match.
 
 # 0.28.6
- 
+
 * **Fixed** notifications for the dummy app.
 
 # 0.28.5
@@ -64,15 +64,15 @@ Use a `# CHANGELOG` section in your Pull Request description to auto-populate th
 * Changing select data after a selection has been made will no longer cause an error.
 
 # 0.27.1
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+Fix a problem where frost-select would clear prompt on redraw
 
 # 0.27.0
  * **Added** frost-toggle-button component and dummy example.
 
 # 0.26.0
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+Use onclick handler from parameter passed from component/controller property
 
 # 0.25.7
 * Pass event to select's onBlur action
@@ -90,8 +90,8 @@ Use a `# CHANGELOG` section in your Pull Request description to auto-populate th
 * **Added** `npm-install-security-check` as a dependency to make consumers more security conscious.
 
 # 0.25.3
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+fix for active route on link click
 
 # 0.25.2
 
@@ -125,8 +125,8 @@ This change is [<img src="https://reviewable.io/review_button.svg" height="34" a
 * Deprecated on-scroll-y-end in favor of onScrollYEnd
 
 # 0.22.3
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+invoke child included hooks
 
 # 0.22.2
 
@@ -149,24 +149,24 @@ Use a `# CHANGELOG` section in your Pull Request description to auto-populate th
 * **Updated** temporarily restrict `ember-cli-sass` from going above version 5.4.0
 
 # 0.21.2
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+guards added for any consuming app @ ember 2.7
 
 # 0.21.1
 
 * **Fixed** bug in `treeForAddon` that can affect consumers.
 
 # 0.21.0
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+- **Changed** from `ember-lodash` to `ember-lodash-shim`. This means upgrading from `lodash` version `3.x` to version `4.x` which could impact consumers relying on [things removed](https://github.com/lodash/lodash/wiki/Changelog#v400) in `lodash` version `4.0.0`.
 
 # 0.20.0
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+- **Added** Consumers can now use 'hook' attr of core components to enable easier testing with addons like ember-cli-page-object
 
 # 0.19.2
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+Fixed how negative indices are handled by frost-select.
 
 # 0.19.1
 
@@ -221,24 +221,24 @@ Added ember-code-snippets to allow demo documentation to reference the code as t
 Fixed the text clear icon to only append to the DOM on insertion of the text field (was occurring on every render/re-render)
 
 # 0.17.0
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+Events
 
 # 0.16.0
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+keypress
 
 # 0.15.0
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+added radio button
 
 # 0.14.1
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+README update
 
 # 0.14.0
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+Inline svg config option
 
 # 0.13.1
 
@@ -260,8 +260,8 @@ Use a `# CHANGELOG` section in your Pull Request description to auto-populate th
 * FIXED frost-textarea clear icon style to show it inside the text area
 
 # 0.11.19
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+this.super init
 
 # 0.11.18
 
@@ -358,12 +358,12 @@ Added the icon pack feature to `frost-icon`, see the documentation at http://cie
 Minor - updating path for frost guide.
 
 # 0.9.2
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+upversion to fix travis build
 
 # 0.9.1
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+Adjusting directory name to match UX components.
 
 # 0.9.0
 
