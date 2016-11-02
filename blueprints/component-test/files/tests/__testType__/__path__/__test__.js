@@ -5,7 +5,7 @@
 import {expect} from 'chai'
 import {describeComponent, it} from 'ember-mocha'
 <% if (testType === 'integration' ) { %>import hbs from 'htmlbars-inline-precompile'
-import {$hook, initialize} from 'ember-hook'
+import {$hook, initialize as initializeHook} from 'ember-hook'
 import wait from 'ember-test-helpers/wait'
 import {afterEach, beforeEach, describe} from 'mocha'<% } else { %>
 import {afterEach, beforeEach, describe} from 'mocha'<% } %>
@@ -18,7 +18,7 @@ describeComponent(...<%= testType %>('<%= dasherizedModuleName %>'), function ()
 
   beforeEach(function () {
     <% if (testType === 'integration') { %>sandbox = sinon.sandbox.create()
-    initialize()<% } else { %>sandbox = sinon.sandbox.create()<% } %>
+    initializeHook()<% } else { %>sandbox = sinon.sandbox.create()<% } %>
   })
 
   afterEach(function () {

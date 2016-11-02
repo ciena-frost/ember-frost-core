@@ -17,7 +17,7 @@ module.exports = {
 
   /**
    * Blueprint hook
-   * {@link https://ember-cli.com/extending/#filemaptokens}
+   * @see {@link https://ember-cli.com/extending/#filemaptokens}
    *
    * @returns {Object} custom tokens to be replaced in your files
    */
@@ -60,7 +60,7 @@ module.exports = {
 
   /**
    * Blueprint hook
-   * {@link https://ember-cli.com/extending/#locals}
+   * @see {@link https://ember-cli.com/extending/#locals}
    * @param {Object} options - the options for the ember generate command
    * @returns {Object|Promise} a set of custom template variables or a Promise that resolves with the set
    */
@@ -82,7 +82,7 @@ module.exports = {
 
   /**
    * Blueprint hook
-   * {@link https://ember-cli.com/extending/#normalizeentityname}
+   * @see {@link https://ember-cli.com/extending/#normalizeentityname}
    * @param {String} entityName - the requested name
    * @returns {String} the normalized, validated entity name (must be a valid component name)
    */
