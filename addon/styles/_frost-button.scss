@@ -148,18 +148,6 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
   // Sizes
   // ----------------------
 
-  // size = 'extra-large'
-  &.extra-large {
-    height: 60px;
-    padding: 0 30px 0 30px;
-    font-size: $frost-font-l;
-
-    .frost-icon {
-      width: 40px;
-      height: 40px;
-    }
-  }
-
   // size = 'large'
   &.large {
     height: 50px;
@@ -471,14 +459,6 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
     .frost-icon + .content,
     .frost-icon + .text {
       margin-top: 8px;
-    }
-
-    .info {
-      flex-direction: column;
-
-      .content {
-        padding-left: 0px;
-      }
     }
 
     .icon-text {

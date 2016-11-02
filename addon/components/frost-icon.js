@@ -1,5 +1,9 @@
 import Ember from 'ember'
-const {Component, deprecate, get} = Ember
+const {
+  Component,
+  deprecate,
+  get
+} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-icon'
@@ -26,6 +30,7 @@ export default Component.extend(PropTypeMixin, {
 
   getDefaultProps () {
     return {
+      icon: '',
       pack: 'frost'
     }
   },

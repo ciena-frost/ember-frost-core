@@ -8,42 +8,29 @@ A check in a box, a checkbox
 
 | Attribute   | Type | Value | Description |
 | ----------- | ---- | ----- | ----------- |
-| `size` | `string` | `small` | **default** - small size checkbox |
-|  | | `medium` | medium size checkbox |
-|  |  | `large` | large size checkbox |
-| `label` | `string` | `<label-name>` | label for the checkbox |
 | `autofocus` | `boolean` | `false` | **default** - basic checkbox  |
 |  |  | `true` | sets focus on checkbox |
 | `checked` | `boolean` | `false` | **default** - basic checkbox |
 |  |  | `true` | checked checkbox |
+| `class` | `string` | `error` | sets checkbox to error state |
 | `disabled` | `boolean` | `false` | **default** - basic checkbox |
 |  |  | `true` | disabled checkbox |
-| `class` | `string` | `error` | sets checkbox to error state |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
+| `label` | `string` | `<label-name>` | label for the checkbox |
+| `onBlur` | `string` | `<action-name>` | triggers associated action when the checkbox loses focus |
+| `onFocus` | `string` | `<action-name>` | triggers associated action when the checkbox receives focusin event |
 | `onInput` |`string` | `<action-name>` | The action callback to call when the value of the checkbox changes as the user clicks |
+| `size` | `string` | `small` | **default** - small size checkbox |
+|  | | `medium` | medium size checkbox |
+|  |  | `large` | large size checkbox |
+
 
 ## Examples
 
-### Basic
+### Default
 
 ```handlebars
 {{frost-checkbox}}
-```
-
-### Size
-
-```handlebars
-{{frost-checkbox
-  size='large'
-}}
-```
-
-### Label
-
-```handlebars
-{{frost-checkbox
-  label='label'
-}}
 ```
 
 ### Autofocus
@@ -86,6 +73,38 @@ A check in a box, a checkbox
 }}
 ```
 
+### Label
+
+```handlebars
+{{frost-checkbox
+  label='label'
+}}
+```
+
+### Size
+
+```handlebars
+{{frost-checkbox
+  size='large'
+}}
+```
+
+### Events - onBlur
+
+```handlebars
+{{frost-checkbox
+  onBlur=(action 'onBlurHandler')
+}}
+```
+
+### Events - onFocus
+
+```handlebars
+{{frost-checkbox
+  onFocus=(action 'onFocusHandler')
+}}
+```
+
 ### Events - onInput
 
 ```handlebars
@@ -94,10 +113,4 @@ A check in a box, a checkbox
 }}
 ```
 
-```javascript
-actions: {
-  onInputHandler(attrs) {
-    console.log('checkbox value: ' + attrs.value)
-    }
-  }
-```
+

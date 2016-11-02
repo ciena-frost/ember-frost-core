@@ -1,8 +1,9 @@
 import Ember from 'ember'
 const {Component} = Ember
 import layout from '../templates/components/frost-loading'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
-export default Component.extend({
+export default Component.extend(PropTypeMixin, {
   // ==========================================================================
   // Dependencies
   // ==========================================================================
@@ -12,7 +13,17 @@ export default Component.extend({
   // ==========================================================================
 
   classNames: ['frost-loading'],
-  layout
+  layout,
+
+  propTypes: {
+    type: PropTypes.string
+  },
+
+  getDefaultProps () {
+    return {
+      type: 'ripple'
+    }
+  }
 
   // ==========================================================================
   // Computed Properties

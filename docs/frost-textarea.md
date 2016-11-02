@@ -7,16 +7,26 @@ a text area component
 ## API
 | Attribute | Type | Value | Description |
 | --------- | ---- | ----- | ----------- |
-| `value` | `string` |`<value-text>`| text to be displayed in text area |
-| `cols` | `integer` |`<num-of-cols>`| number of columns for text area |
-| `rows` | `integer` |`<num-of-rows>`| number of rows for text area |
 | `autofocus` | `boolean` |`false`| **default** - normal text area |
 |  |  |`true`| text area in focus |
+| `class` | `string` | `error` | sets text area to error state |
+| `cols` | `number` |`<num-of-columns>`| number of columns for text area |
 | `disabled` | `boolean` | `false` | **default** - normal text area |
 | | | `true` | disabled text area |
-| `class` | `string` | `error` | sets text area to error state |
+| `form` | `string` | `<form-owner>` | form element that this is associated with (its form owner) |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
-| `onInput` | `string` |`<action-name>`| triggers associated action when text is entered |
+| `placeholder` | `string` | `<text>` | placeholder text |
+| `readonly` | `boolean` | `false` | **default** - basic text area |
+| | | `true` | the user cannot modify the value |
+| `rows` | `number` |`<num-of-rows>`| number of rows for text area |
+| `tabindex` | `number` | `<tabindex-value>` | the tabindex value |
+| `value` | `string` |`<value-text>`| text to be displayed in text area |
+| `wrap` | `string` | `soft` | **default** - normal text area |
+| | | `hard` | text wrap setting |
+
+### Event Handlers
+A comprehensive list of [HTML event handlers](frost-events.md) are available to choose from based on your needs.
+
 
 ## Examples
 
@@ -48,19 +58,27 @@ a text area component
 ### Size - cols and rows
 ```handlebars
 {{frost-textarea
-  cols='80' rows='6'}}
+  cols=80 rows=6
+}}
 ```
 
-### Events - onInput
+### Actions - onInput
 ```handlebars
 {{frost-textarea
-  onInput=(action 'onInputHandler')}}
+  onInput=(action 'onInputHandler')
+}}
 ```
 
-```javascript
-actions: {
-  onInputHandler () {
-    console.log('text area value: ' + attrs.value)
-  }
-}
+### Actions - onFocusOut
+```handlebars
+{{frost-textarea
+  onFocusOut=(action 'onBlurHandler')
+}}
+```
+
+### Actions - onFocusIn
+```handlebars
+{{frost-textarea
+  onFocusIn=(action 'onFocusHandler')
+}}
 ```
