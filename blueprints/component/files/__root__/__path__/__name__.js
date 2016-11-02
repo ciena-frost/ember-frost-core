@@ -21,7 +21,7 @@ export default Component.extend(PropTypesMixin, {
    */
   propTypes: {
     // public
-    hook: PropTypes.string,
+    hook: PropTypes.string.isRequired,
 
     // private
     layout: PropTypes.any
@@ -33,7 +33,6 @@ export default Component.extend(PropTypesMixin, {
   getDefaultProps () {
     return {
       // public
-      hook: '<%= camelizedModuleName %>',
 
       // private
       layout
