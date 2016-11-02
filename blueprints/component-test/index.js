@@ -7,7 +7,6 @@
 'use strict'
 
 const getPathOption = require('ember-cli-get-component-path-option')
-const isPackageMissing = require('ember-cli-is-package-missing')
 const stringUtil = require('ember-cli-string-utils')
 const path = require('path')
 

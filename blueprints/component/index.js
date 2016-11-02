@@ -4,6 +4,7 @@
  */
 
 'use strict'
+
 const getPathOption = require('ember-cli-get-component-path-option')
 const normalizeEntityName = require('ember-cli-normalize-entity-name')
 const pathUtil = require('ember-cli-path-utils')
