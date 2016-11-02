@@ -1,3 +1,13 @@
+# 0.31.0
+ * **Removed** the `frost-component` generator
+ * **Added** Some new dependencies that will be installed when this addon is `ember install`'d 
+    * Addon: `ember-test-utils`
+    * Bower packages: `chai-jquery` and `sinon-chai`
+ * **Added** a `component` generator which uses our lint rules and our comment blocks
+ * **Added** a `component-test` generator which uses `mocha` and `ember-test-utils`. It also sets up `sinon` automatically and has a failing test to make developers add a real test. 
+ * **Added** a `component-addon` generator which does the re-export of a component in the `app` directory, basically the same as the default generator, minus the `;` at the end. 
+ * **Added** a `PULL_REQUEST_TEMPLATE.md` file to help contributors remember to put version-bump comments and changelog messages in their PR descriptions. 
+
 # 0.30.2
 
 * Updated ember-hook selector for frost-select-dropdown input
