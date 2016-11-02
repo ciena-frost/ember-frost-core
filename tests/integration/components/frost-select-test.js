@@ -974,4 +974,16 @@ describeComponent(...integration('frost-select'), function () {
       })
     })
   })
+
+  describe('ember-hook selectors', function () {
+    describe('when dropdown is open', function () {
+      beforeEach(function () {
+        $hook('select').click().focus()
+      })
+
+      it('can find dropdown input', function () {
+        expect($hook('select-list-input')).to.have.length(1)
+      })
+    })
+  })
 })
