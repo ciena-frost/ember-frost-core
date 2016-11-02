@@ -137,6 +137,9 @@
     "ember-frost-icon-pack",
     "frost"
   ],
+  "ember-addon": {
+    "after": "ember-cli-mocha"
+  },
   "ember-frost-icon-pack": {
     "name": "frost"
   },
