@@ -8,7 +8,8 @@
 
 const getPathOption = require('ember-cli-get-component-path-option')
 const stringUtil = require('ember-cli-string-utils')
-const path = require('path')
+
+const utils = require('../utils')
 
 module.exports = {
   description: 'Generates a frost component integration or unit test using mocha.',
@@ -35,23 +36,14 @@ module.exports = {
    */
   fileMapTokens () {
     return {
+      __path__: utils.component.fileMapTokens.path,
+
       /**
        * @param {Object} options - the options for the ember generate command
        * @returns {String} the type of test (unit|integration)
        */
       __testType__ (options) {
         return options.locals.testType || 'integration'
-      },
-
-      /**
-       * @param {Object} options - the options for the ember generate command
-       * @returns {String} the path
-       */
-      __path__ (options) {
-        if (options.pod) {
-          return path.join(options.podPath, options.locals.path, options.dasherizedModuleName)
-        }
-        return 'components'
       }
     }
   },
@@ -77,5 +69,7 @@ module.exports = {
       path: getPathOption(options),
       testType
     }
-  }
+  },
+
+  normalizeEntityName: utils.component.normalizeEntityName
 }

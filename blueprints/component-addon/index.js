@@ -7,10 +7,10 @@
 'use strict'
 
 const getPathOption = require('ember-cli-get-component-path-option')
-const normalizeEntityName = require('ember-cli-normalize-entity-name')
 const stringUtil = require('ember-cli-string-utils')
-const validComponentName = require('ember-cli-valid-component-name')
 const path = require('path')
+
+const utils = require('../utils')
 
 module.exports = {
   description: 'Generates a component. Name must contain a hyphen.',
@@ -23,16 +23,7 @@ module.exports = {
    */
   fileMapTokens () {
     return {
-      /**
-       * @param {Object} options - the options for the ember generate command
-       * @returns {String} the path for the component being generated
-       */
-      __path__ (options) {
-        if (options.pod) {
-          return path.join(options.podPath, options.locals.path, options.dasherizedModuleName)
-        }
-        return 'components'
-      },
+      __path__: utils.component.fileMapTokens.path,
 
       /**
        * @param {Object} options - the options for the ember generate command
@@ -80,14 +71,5 @@ module.exports = {
     }
   },
 
-  /**
-   * Blueprint hook
-   * @see {@link https://ember-cli.com/extending/#normalizeentityname}
-   * @param {String} entityName - the requested name
-   * @returns {String} the normalized, validated entity name (must be a valid component name)
-   */
-  normalizeEntityName (entityName) {
-    entityName = normalizeEntityName(entityName)
-    return validComponentName(entityName)
-  }
+  normalizeEntityName: utils.component.normalizeEntityName
 }
