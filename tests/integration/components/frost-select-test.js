@@ -978,7 +978,7 @@ describeComponent(...integration('frost-select'), function () {
   describe('ember-hook selectors', function () {
     describe('when dropdown is open', function () {
       beforeEach(function () {
-        $hook('select').click().focus()
+        $hook('select').click()
       })
 
       it('can find dropdown input', function () {
