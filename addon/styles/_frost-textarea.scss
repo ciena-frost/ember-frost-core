@@ -1,5 +1,6 @@
 $border: 1px solid $frost-color-input-border;
 $error-border: 1px solid $frost-color-input-error-border;
+$error-margin: 1px; // Note: margin + border width equals border width of focus state
 $focus-border: 1px solid $frost-color-input-focus-border;
 $hover-border: 1px solid $frost-color-input-focus-border;
 $disabled-border: 1px solid $frost-color-input-disabled-border;
@@ -7,57 +8,69 @@ $disabled-bg: $frost-color-input-disabled-bg;
 
 .frost-textarea {
   display: flex;
-  align-items: flex-start;
-  &.error > textarea {
+  position: relative;
+
+  &.error .frost-textarea-input {
     border: $error-border;
+    margin: $error-margin;
     color: $frost-color-danger;
-  }
-
-  > textarea {
-    padding: 5px;
-    padding-right: 30px;
-    border: $border;
-    font-size: $frost-font-s;
-    color: $frost-color-grey-1;
-    resize: none;
-
-
-    &:disabled {
-      border: $disabled-border;
-      background: $disabled-bg;
-    }
-
-    &:focus {
-      border: $focus-border;
-      outline: none;
-    }
 
     &:hover:enabled:read-write:not(:focus) {
+      border: $error-border;
+    }
+  }
+}
+
+.frost-textarea-input {
+  padding: 5px;
+  padding-right: 30px;
+  border: $border;
+  font-size: $frost-font-s;
+  color: $frost-color-grey-1;
+  resize: none;
+
+  &:disabled {
+    border: $disabled-border;
+    background-color: $disabled-bg;
+  }
+
+  &:focus {
+    border: $focus-border;
+    outline: none;
+  }
+
+  &:hover:enabled:read-write:not(:focus) {
       border: $hover-border;
       outline: none;
-    }
-
-    &:read-only {
-      border: none;
-      cursor: default;
-    }
   }
 
-  .frost-button:focus {
-    box-shadow: none;
+  &:read-only {
+    border: none;
+    cursor: default;
   }
+}
 
-  .clear {
-    z-index: 1;
-    margin: 5px 0 0 -40px;
-    width: 35px;
-    > svg {
-      width: 26px;
-      height: 26px;
-      fill: $frost-color-grey-6;
-      cursor: pointer;
-     }
+.frost-textarea-clear {
+  position: relative;
+  width: 23px;
+  height: 23px;
+  right: 26px;
+  top: 7px;
+  opacity: 0;
+  fill: $frost-color-grey-6;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
 
+  &:focus {
+    outline: none;
   }
+}
 
+.frost-textarea.is-clear-visible .frost-textarea-clear {
+  opacity: 1;
+}
+
+.frost-textarea.is-clear-enabled .frost-textarea-clear {
+  cursor: pointer;
+  pointer-events: auto;
 }

@@ -13,8 +13,14 @@ export default Controller.extend({
       })
     },
 
+    onFocusHandler () {
+      this.get('notifications').success('focus event', {
+        autoClear: true,
+        clearDuration: 2000
+      })
+    },
+
     onInputHandler (attrs) {
-      console.log('checkbox value: ' + attrs.value)
       this.get('notifications').success("value: '" + attrs.value + "'", {
         autoClear: true,
         clearDuration: 2000
