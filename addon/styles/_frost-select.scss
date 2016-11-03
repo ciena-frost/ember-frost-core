@@ -103,6 +103,8 @@ $frost-select-placeholder-color: $frost-color-grey-6;
   overflow-y: auto;
 
   ul {
+    display: flex;
+    flex-wrap: wrap;
     margin: 0;
     overflow-x: hidden;
     overflow-y: auto;
@@ -136,6 +138,7 @@ $frost-select-placeholder-color: $frost-color-grey-6;
   color: $frost-color-grey-3;
   cursor: pointer;
   display: inline-block;
+  flex: 1 0 auto;
   height: $frost-input-select-option-row-height;
   line-height: $frost-input-select-option-row-height;
   overflow: hidden;

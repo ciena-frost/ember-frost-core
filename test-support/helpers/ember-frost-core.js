@@ -78,6 +78,16 @@ export function click (element) {
 }
 
 /**
+ * Filter frost-select
+ * @param {String} filter - filter to apply to select
+ */
+export function filterSelect (filter) {
+  $('.frost-select-dropdown .frost-text-input')
+    .val(filter)
+    .trigger('input')
+}
+
+/**
  * Verify button exists with expected state
  * @param {jQuery|String} button - name of Ember hook or jQuery instance
  * @param {FrostButtonState} state - expected button state
