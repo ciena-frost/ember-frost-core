@@ -37,7 +37,6 @@ export default Component.extend(PropTypeMixin, {
     focusedIndex: PropTypes.number,
     left: PropTypes.number,
     maxHeight: PropTypes.number,
-    onCheck: PropTypes.func,
     top: PropTypes.number,
     width: PropTypes.number
   },

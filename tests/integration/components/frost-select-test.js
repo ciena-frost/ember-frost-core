@@ -1,5 +1,10 @@
 import {expect} from 'chai'
-import {expectSelectWithState} from 'dummy/tests/helpers/ember-frost-core'
+
+import {
+  expectSelectWithState,
+  filterSelect
+} from 'dummy/tests/helpers/ember-frost-core'
+
 import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
 import Ember from 'ember'
 const {$} = Ember
@@ -40,6 +45,18 @@ function focusNext ($element) {
   // We must use jQuery's focusin() method for Ember event to fire and the
   // HTMLElement's focus() method to ensure the element is actually focused
   $firstFocusableElement.focusin()[0].focus()
+}
+
+/**
+ * Get HTML for list item
+ * @param {Number} index - item index (1 based)
+ * @returns {String} list item's HTML
+ */
+function getItemHtml (index) {
+  return $(`.frost-select-dropdown li:nth-child(${index})`)
+    .html()
+    .replace('<!---->', '')
+    .trim()
 }
 
 describeComponent(...integration('frost-select'), function () {
@@ -419,7 +436,9 @@ describeComponent(...integration('frost-select'), function () {
     beforeEach(function () {
       this.set('data', [
         {label: 'Foo', value: 'foo'},
-        {label: 'Bar', value: 'bar'}
+        {label: 'Bar', value: 'bar'},
+        {label: 'Baz', value: 'baz'},
+        {label: 'Ba ba black sheep', value: 'sheep'}
       ])
     })
 
@@ -447,7 +466,7 @@ describeComponent(...integration('frost-select'), function () {
         expectSelectWithState('select', {
           focused: true,
           focusedItem: 'Foo',
-          items: ['Foo', 'Bar'],
+          items: ['Foo', 'Bar', 'Baz', 'Ba ba black sheep'],
           opened: true
         })
 
@@ -588,7 +607,7 @@ describeComponent(...integration('frost-select'), function () {
           expectSelectWithState('select', {
             focused: true,
             focusedItem: 'Foo',
-            items: ['Foo', 'Bar'],
+            items: ['Foo', 'Bar', 'Baz', 'Ba ba black sheep'],
             opened: true
           })
 
@@ -685,7 +704,7 @@ describeComponent(...integration('frost-select'), function () {
             expectSelectWithState('select', {
               focused: true,
               focusedItem: 'Foo',
-              items: ['Foo', 'Bar'],
+              items: ['Foo', 'Bar', 'Baz', 'Ba ba black sheep'],
               opened: true
             })
 
@@ -711,7 +730,7 @@ describeComponent(...integration('frost-select'), function () {
             expectSelectWithState('select', {
               focused: true,
               focusedItem: 'Bar',
-              items: ['Foo', 'Bar'],
+              items: ['Foo', 'Bar', 'Baz', 'Ba ba black sheep'],
               opened: true
             })
 
@@ -736,7 +755,7 @@ describeComponent(...integration('frost-select'), function () {
               expectSelectWithState('select', {
                 focused: true,
                 focusedItem: 'Foo',
-                items: ['Foo', 'Bar'],
+                items: ['Foo', 'Bar', 'Baz', 'Ba ba black sheep'],
                 opened: true
               })
 
@@ -761,8 +780,8 @@ describeComponent(...integration('frost-select'), function () {
             it('renders as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
-                focusedItem: 'Bar',
-                items: ['Foo', 'Bar'],
+                focusedItem: 'Baz',
+                items: ['Foo', 'Bar', 'Baz', 'Ba ba black sheep'],
                 opened: true
               })
 
@@ -804,11 +823,10 @@ describeComponent(...integration('frost-select'), function () {
           })
         })
 
-        /* FIXME: for some reason click events are selecting item in test
         describe('when first item clicked', function () {
           beforeEach(function () {
             [onBlur, onChange, onFocus].forEach((func) => func.reset())
-            $hook('select-item-0').click()
+            $hook('select-item-0').trigger('mousedown')
           })
 
           it('renders as expected', function () {
@@ -833,7 +851,7 @@ describeComponent(...integration('frost-select'), function () {
         describe('when second item clicked', function () {
           beforeEach(function () {
             [onBlur, onChange, onFocus].forEach((func) => func.reset())
-            $hook('select-item-1').click()
+            $hook('select-item-1').trigger('mousedown')
           })
 
           it('renders as expected', function () {
@@ -854,7 +872,86 @@ describeComponent(...integration('frost-select'), function () {
               .to.eql(['bar'])
           })
         })
-        */
+
+        describe('when filter applied with no matches', function () {
+          beforeEach(function () {
+            filterSelect('asdf')
+          })
+
+          it('renders as expected', function () {
+            expectSelectWithState('select', {
+              focused: true,
+              items: [],
+              opened: true
+            })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+          })
+        })
+
+        describe('when filter applied with one match', function () {
+          beforeEach(function () {
+            filterSelect('baz')
+          })
+
+          it('renders as expected', function () {
+            expectSelectWithState('select', {
+              focused: true,
+              focusedItem: 'Baz',
+              items: ['Baz'],
+              opened: true
+            })
+
+            expect(
+              getItemHtml(1),
+              'underlines matching text'
+            )
+              .to.eql('<u>Baz</u>')
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+          })
+        })
+
+        describe('when filter applied with more than one match', function () {
+          beforeEach(function () {
+            filterSelect('ba')
+          })
+
+          it('renders as expected', function () {
+            expectSelectWithState('select', {
+              focused: true,
+              focusedItem: 'Bar',
+              items: ['Bar', 'Baz', 'Ba ba black sheep'],
+              opened: true
+            })
+
+            expect(
+              getItemHtml(1),
+              'underlines matching text in first item'
+            )
+              .to.eql('<u>Ba</u>r')
+
+            expect(
+              getItemHtml(2),
+              'underlines matching text in second item'
+            )
+              .to.eql('<u>Ba</u>z')
+
+            expect(
+              getItemHtml(3),
+              'underlines matching text in second item'
+            )
+              .to.eql('<u>Ba</u> <u>ba</u> black sheep')
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+          })
+        })
       })
     })
 

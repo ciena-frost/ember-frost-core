@@ -1,8 +1,11 @@
 import Ember from 'ember'
 const {Component} = Ember
+import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
 import layout from '../templates/components/frost-select-li'
+
+const regexEscapeChars = '-[]/{}()*+?.^$|'.split('')
 
 export default Component.extend(PropTypeMixin, {
   // == Properties ============================================================
@@ -12,9 +15,30 @@ export default Component.extend(PropTypeMixin, {
 
   propTypes: {
     data: PropTypes.object.isRequired,
+    filter: PropTypes.string,
     hook: PropTypes.string.isRequired,
+    multiselect: PropTypes.bool,
     onItemOver: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired
+  },
+
+  // == Computed Properties ===================================================
+
+  @readOnly
+  @computed('data', 'filter')
+  label (data, filter) {
+    if (filter) {
+      // Make sure special chars are escaped in filter so we can use it as a
+      // regular expression pattern
+      filter = filter.replace(`[${regexEscapeChars.join('\\')}]`, 'g')
+
+      const pattern = new RegExp(filter, 'gi')
+      const label = data.label.replace(pattern, '<u>$&</u>')
+
+      return Ember.String.htmlSafe(label)
+    }
+
+    return data && data.label || ''
   },
 
   // == Events ================================================================
