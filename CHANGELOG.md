@@ -1,3 +1,9 @@
+# 0.32.0
+
+* **Added** underlining of matching text in items when filtering `frost-select`.
+
+
+
 # 0.31.0
  * **Removed** the `frost-component` generator
  * **Added** Some new dependencies that will be installed when this addon is `ember install`'d 
