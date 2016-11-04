@@ -77,10 +77,10 @@
     "build": "ember build",
     "start": "ember server",
     "test": "npm run lint && COVERAGE=true ember test",
-    "eslint": "eslint *.js addon app blueprints config tests --fix",
+    "eslint": "eslint *.js addon app blueprints config tests",
     "md-lint": "remark *.md",
     "sass-lint": "sass-lint -q -v",
-    "lint": "npm run eslint && npm run sass-lint && npm run md-lint"
+    "lint": "npm run eslint && npm run md-lint"
   },
   "repository": "git@github.com:ciena-frost/ember-frost-core.git",
   "engines": {
@@ -109,6 +109,7 @@
     "ember-cli-dependency-checker": "^1.2.0",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-cli-inject-live-reload": "^1.4.0",
+    "ember-cli-mirage": "0.2.3",
     "ember-cli-mocha": "^0.10.0",
     "ember-cli-notifications": "^4.0.8",
     "ember-cli-test-loader": "^1.1.0",
