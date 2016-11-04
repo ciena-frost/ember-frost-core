@@ -118,6 +118,7 @@ describeComponent(...integration('frost-select'), function () {
         // triggering that in this test.
 
         $hook('select').click().trigger('focusin')
+        return wait()
       })
 
       it('renders as expected', function () {
@@ -142,6 +143,8 @@ describeComponent(...integration('frost-select'), function () {
                 keyCode: ESCAPE
               })
             )
+
+          return wait()
         })
 
         it('renders as expected', function () {
@@ -178,6 +181,8 @@ describeComponent(...integration('frost-select'), function () {
               keyCode: TAB
             })
           )
+
+        return wait()
       })
 
       it('renders as expected', function () {
@@ -196,6 +201,7 @@ describeComponent(...integration('frost-select'), function () {
         // We must use jQuery's focusin() method for Ember event to fire and the
         // HTMLElement's focus() method to ensure the element is actually focused
         $hook('select').focusin()[0].focus()
+        return wait()
       })
 
       it('renders as expected', function () {
@@ -235,6 +241,8 @@ describeComponent(...integration('frost-select'), function () {
                 keyCode: SPACE
               })
             )
+
+          return wait()
         })
 
         it('renders as expected', function () {
@@ -276,6 +284,8 @@ describeComponent(...integration('frost-select'), function () {
                   keyCode: ESCAPE
                 })
               )
+
+            return wait()
           })
 
           it('renders as expected', function () {
@@ -299,6 +309,8 @@ describeComponent(...integration('frost-select'), function () {
                   keyCode: SPACE
                 })
               )
+
+            return wait()
           })
 
           it('renders as expected', function () {
@@ -339,6 +351,7 @@ describeComponent(...integration('frost-select'), function () {
           // triggering that in this test.
 
           $hook('select').click().trigger('focusin')
+          return wait()
         })
 
         it('renders as expected', function () {
@@ -376,6 +389,8 @@ describeComponent(...integration('frost-select'), function () {
                 keyCode: TAB
               })
             )
+
+          return wait()
         })
 
         it('renders as expected', function () {
@@ -460,6 +475,7 @@ describeComponent(...integration('frost-select'), function () {
         // triggering that in this test.
 
         $hook('select').click().trigger('focusin')
+        return wait()
       })
 
       it('renders as expected', function () {
@@ -485,6 +501,8 @@ describeComponent(...integration('frost-select'), function () {
                 keyCode: ESCAPE
               })
             )
+
+          return wait()
         })
 
         it('renders as expected', function () {
@@ -521,6 +539,8 @@ describeComponent(...integration('frost-select'), function () {
               keyCode: TAB
             })
           )
+
+        return wait()
       })
 
       it('renders as expected', function () {
@@ -539,6 +559,7 @@ describeComponent(...integration('frost-select'), function () {
         // We must use jQuery's focusin() method for Ember event to fire and the
         // HTMLElement's focus() method to ensure the element is actually focused
         $hook('select').focusin()[0].focus()
+        return wait()
       })
 
       it('renders as expected', function () {
@@ -578,6 +599,8 @@ describeComponent(...integration('frost-select'), function () {
                 keyCode: ESCAPE
               })
             )
+
+          return wait()
         })
 
         it('renders as expected', function () {
@@ -601,6 +624,8 @@ describeComponent(...integration('frost-select'), function () {
                 keyCode: SPACE
               })
             )
+
+          return wait()
         })
 
         it('renders as expected', function () {
@@ -643,6 +668,8 @@ describeComponent(...integration('frost-select'), function () {
                   keyCode: SPACE
                 })
               )
+
+            return wait()
           })
 
           it('renders as expected', function () {
@@ -667,6 +694,8 @@ describeComponent(...integration('frost-select'), function () {
                   keyCode: ENTER
                 })
               )
+
+            return wait()
           })
 
           it('renders as expected', function () {
@@ -698,6 +727,8 @@ describeComponent(...integration('frost-select'), function () {
                   keyCode: UP_ARROW
                 })
               )
+
+            return wait()
           })
 
           it('renders as expected', function () {
@@ -724,6 +755,8 @@ describeComponent(...integration('frost-select'), function () {
                   keyCode: DOWN_ARROW
                 })
               )
+
+            return wait()
           })
 
           it('renders as expected', function () {
@@ -749,6 +782,8 @@ describeComponent(...integration('frost-select'), function () {
                     keyCode: UP_ARROW
                   })
                 )
+
+              return wait()
             })
 
             it('renders as expected', function () {
@@ -775,6 +810,8 @@ describeComponent(...integration('frost-select'), function () {
                     keyCode: DOWN_ARROW
                   })
                 )
+
+              return wait()
             })
 
             it('renders as expected', function () {
@@ -801,6 +838,8 @@ describeComponent(...integration('frost-select'), function () {
                     keyCode: ENTER
                   })
                 )
+
+              return wait()
             })
 
             it('renders as expected', function () {
@@ -827,6 +866,7 @@ describeComponent(...integration('frost-select'), function () {
           beforeEach(function () {
             [onBlur, onChange, onFocus].forEach((func) => func.reset())
             $hook('select-item-0').trigger('mousedown')
+            return wait()
           })
 
           it('renders as expected', function () {
@@ -852,6 +892,7 @@ describeComponent(...integration('frost-select'), function () {
           beforeEach(function () {
             [onBlur, onChange, onFocus].forEach((func) => func.reset())
             $hook('select-item-1').trigger('mousedown')
+            return wait()
           })
 
           it('renders as expected', function () {
@@ -876,6 +917,7 @@ describeComponent(...integration('frost-select'), function () {
         describe('when filter applied with no matches', function () {
           beforeEach(function () {
             filterSelect('asdf')
+            return wait()
           })
 
           it('renders as expected', function () {
@@ -894,6 +936,7 @@ describeComponent(...integration('frost-select'), function () {
         describe('when filter applied with one match', function () {
           beforeEach(function () {
             filterSelect('baz')
+            return wait()
           })
 
           it('renders as expected', function () {
@@ -919,6 +962,7 @@ describeComponent(...integration('frost-select'), function () {
         describe('when filter applied with more than one match', function () {
           beforeEach(function () {
             filterSelect('ba')
+            return wait()
           })
 
           it('renders as expected', function () {
@@ -979,6 +1023,7 @@ describeComponent(...integration('frost-select'), function () {
           // triggering that in this test.
 
           $hook('select').click().trigger('focusin')
+          return wait()
         })
 
         it('renders as expected', function () {
@@ -1016,6 +1061,8 @@ describeComponent(...integration('frost-select'), function () {
                 keyCode: TAB
               })
             )
+
+          return wait()
         })
 
         it('renders as expected', function () {
@@ -1076,6 +1123,7 @@ describeComponent(...integration('frost-select'), function () {
     describe('when dropdown is open', function () {
       beforeEach(function () {
         $hook('select').click()
+        return wait()
       })
 
       it('can find dropdown input', function () {
