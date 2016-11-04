@@ -1,14 +1,10 @@
-import Ember from 'ember'
 import FrostSelect from './frost-select'
+import PropTypeMixin from 'ember-prop-types'
 
-const assign = Object.assign || Ember.assign || Ember.merge
-
-export default FrostSelect.extend({
+export default FrostSelect.extend(PropTypeMixin, {
   getDefaultProps () {
-    const defaults = this._super(...arguments)
-
-    return assign(defaults, {
+    return {
       multiselect: true
-    })
+    }
   }
 })
