@@ -28,7 +28,6 @@ The following components are available when you install ember-frost-core
 * [frost-text](docs/frost-text.md)
 * [frost-textarea](docs/frost-textarea.md)
 
-
 ## Development
 
 ### Setup
