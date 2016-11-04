@@ -1,5 +1,9 @@
 <div class='frost-select-overlay' onclick={{onClose}} />
 <div
+  class={{if (eq top 'auto') 'frost-select-down-arrow-shadow' 'frost-select-up-arrow-shadow'}}
+  style={{arrowStyle}}
+/>
+<div
   class={{if (eq top 'auto') 'frost-select-down-arrow' 'frost-select-up-arrow'}}
   style={{arrowStyle}}
 />
@@ -36,24 +40,15 @@
       </div>
     {{/if}}
     {{#each renderItems as |item index|}}
-      {{#frost-select-li
+      {{frost-select-li
         class=item.className
         data=item
+        filter=filter
         hook=(concat receivedHook '-item-' index)
+        multiselect=multiselect
         onItemOver=(action 'focusOnItem')
         onSelect=(action 'selectItem')
       }}
-        {{#if multiselect}}
-          {{frost-checkbox
-            checked=item.selected
-            hook=(concat receivedHook '-checkbox-item-' index)
-            onInput=onCheck
-            size='medium'
-            value=item.index
-          }}
-        {{/if}}
-        {{item.label}}
-      {{/frost-select-li}}
     {{/each}}
   </ul>
 </div>

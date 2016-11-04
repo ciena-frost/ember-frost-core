@@ -1,6 +1,6 @@
 {
   "name": "ember-frost-core",
-  "version": "0.30.2",
+  "version": "0.32.1",
   "description": "The library of core frost components",
   "frostGuideDirectories": [
     {
@@ -138,6 +138,13 @@
     "ember-frost-icon-pack",
     "frost"
   ],
+  "ember-addon": {
+    "after": [
+      "ember-computed-decorators",
+      "ember-one-way-controls"
+    ],
+    "configPath": "tests/dummy/config"
+  },
   "ember-frost-icon-pack": {
     "name": "frost"
   },
@@ -157,12 +164,5 @@
     "ember-prop-types": "^3.0.0",
     "npm-install-security-check": "^1.0.0",
     "svg4everybody": "^2.0.3"
-  },
-  "ember-addon": {
-    "after": [
-      "ember-computed-decorators",
-      "ember-one-way-controls"
-    ],
-    "configPath": "tests/dummy/config"
   }
 }

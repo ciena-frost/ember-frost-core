@@ -1,7 +1,9 @@
 $frost-input-select-option-row-height: 35px;
+$frost-select-arrow-box-shadow: 0 0 7px 3px transparentize($frost-select-container-shadow, .4);
 $frost-select-disabled-background-color: $frost-color-lgrey-3;
 $frost-select-disabled-border-color: $frost-color-lgrey-1;
 $frost-select-disabled-color: $frost-color-grey-6;
+$frost-select-dropdown-box-shadow: 0 2px 7px 3px transparentize($frost-select-container-shadow, .4);
 $frost-select-error-border-color: $frost-color-danger;
 $frost-select-focused-border-color: $frost-color-blue-1;
 $frost-select-height: 35px;
@@ -66,9 +68,26 @@ $frost-select-placeholder-color: $frost-color-grey-6;
   z-index: 9003;
 }
 
+.frost-select-down-arrow-shadow {
+  box-shadow: $frost-select-arrow-box-shadow;
+  content: '';
+  display: block;
+  height: 25px;
+  margin-bottom: 5px;
+  pointer-events: none;
+  position: fixed;
+  transform: rotate(45deg);
+  width: 25px;
+  z-index: 9001;
+}
+
+.frost-select-dropdown-container {
+  z-index: 9004;
+}
+
 .frost-select-dropdown-empty-msg {
   color: $frost-color-grey-3;
-  padding: 6px;
+  padding: 0 5px 5px;
 }
 
 .frost-select-error {
@@ -97,12 +116,14 @@ $frost-select-placeholder-color: $frost-color-grey-6;
   background: $frost-select-container-background;
   border: 1px solid $frost-color-lgrey-3;
   border-radius: 3px;
-  box-shadow: 0 2px 7px 3px transparentize($frost-select-container-shadow, .4);
+  box-shadow: $frost-select-dropdown-box-shadow;
   transition: height .4s ease, opacity .2s ease;
   z-index: 9002;
   overflow-y: auto;
 
   ul {
+    display: flex;
+    flex-wrap: wrap;
     margin: 0;
     overflow-x: hidden;
     overflow-y: auto;
@@ -111,8 +132,14 @@ $frost-select-placeholder-color: $frost-color-grey-6;
   }
 
   .frost-text {
+    padding: 5px;
     width: auto;
     min-width: auto;
+  }
+
+  .frost-text-clear {
+    right: 10px;
+    top: 12px;
   }
 
   .multi-status {
@@ -136,6 +163,7 @@ $frost-select-placeholder-color: $frost-color-grey-6;
   color: $frost-color-grey-3;
   cursor: pointer;
   display: inline-block;
+  flex: 1 0 auto;
   height: $frost-input-select-option-row-height;
   line-height: $frost-input-select-option-row-height;
   overflow: hidden;
@@ -156,6 +184,10 @@ $frost-select-placeholder-color: $frost-color-grey-6;
       top: 6px;
       left: 2px;
     }
+  }
+
+  u {
+    color: $frost-color-grey-2;
   }
 }
 
@@ -196,4 +228,17 @@ $frost-select-placeholder-color: $frost-color-grey-6;
   pointer-events: none;
   position: fixed;
   z-index: 9003;
+}
+
+.frost-select-up-arrow-shadow {
+  box-shadow: $frost-select-arrow-box-shadow;
+  content: '';
+  display: block;
+  height: 25px;
+  margin-top: 8px;
+  pointer-events: none;
+  position: fixed;
+  transform: rotate(45deg);
+  width: 25px;
+  z-index: 9001;
 }
