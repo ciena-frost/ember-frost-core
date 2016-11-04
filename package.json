@@ -79,7 +79,6 @@
     "test": "npm run lint && COVERAGE=true ember test",
     "eslint": "eslint *.js addon app blueprints config tests",
     "md-lint": "remark *.md",
-    "sass-lint": "sass-lint -q -v",
     "lint": "npm run eslint && npm run md-lint"
   },
   "repository": "git@github.com:ciena-frost/ember-frost-core.git",
