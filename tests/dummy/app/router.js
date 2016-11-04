@@ -4,7 +4,8 @@ import addRoute from 'frost-guide-custom-routing/utils/addRoute'
 import demoRoutes from './demo-routes'
 
 var Router = Ember.Router.extend({
-  location: config.locationType
+  location: config.locationType,
+  rootURL: config.rootURL
 })
 
 Router.map(function () {
