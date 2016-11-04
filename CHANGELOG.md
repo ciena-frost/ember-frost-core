@@ -1,3 +1,11 @@
+# 0.32.1
+
+* **Added** box shadow to select dropdown arrow to match box shadow of dropdown box.
+* **Added** space around select dropdown text input.
+* **Changed** color of matching text when filtering select dropdown.
+
+
+
 # 0.32.0
 
 * **Added** underlining of matching text in items when filtering `frost-select`.
