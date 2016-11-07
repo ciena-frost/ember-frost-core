@@ -325,6 +325,60 @@ describeComponent(...integration('frost-select'), function () {
           })
         })
       })
+
+      describe('when down arrow pressed', function () {
+        beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+          $hook('select')
+            .trigger(
+              $.Event('keydown', {
+                keyCode: DOWN_ARROW
+              })
+            )
+
+          return wait()
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true,
+            items: [],
+            opened: true
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
+      })
+
+      describe('when up arrow pressed', function () {
+        beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+          $hook('select')
+            .trigger(
+              $.Event('keydown', {
+                keyCode: UP_ARROW
+              })
+            )
+
+          return wait()
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true,
+            items: [],
+            opened: true
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
+      })
     })
 
     describe('when input is disabled', function () {
@@ -995,6 +1049,62 @@ describeComponent(...integration('frost-select'), function () {
             expect(onChange.callCount, 'OnChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
+        })
+      })
+
+      describe('when down arrow pressed', function () {
+        beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+          $hook('select')
+            .trigger(
+              $.Event('keydown', {
+                keyCode: DOWN_ARROW
+              })
+            )
+
+          return wait()
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true,
+            focusedItem: 'Foo',
+            items: ['Foo', 'Bar', 'Baz', 'Ba ba black sheep'],
+            opened: true
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
+      })
+
+      describe('when up arrow pressed', function () {
+        beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+          $hook('select')
+            .trigger(
+              $.Event('keydown', {
+                keyCode: UP_ARROW
+              })
+            )
+
+          return wait()
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true,
+            focusedItem: 'Foo',
+            items: ['Foo', 'Bar', 'Baz', 'Ba ba black sheep'],
+            opened: true
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
         })
       })
     })
