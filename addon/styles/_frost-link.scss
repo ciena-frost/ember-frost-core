@@ -1,36 +1,40 @@
 $frost-color-link-primary-focus-bg: $frost-color-blue-4;
 $frost-color-link-primary-pressed-bg: #1e9de5;
 $frost-color-link-secondary-pressed-bg: #e7eef3;
-$frost-color-link-focus-box-shadow: 0 1px 6px rgba(0,158,239, 0.75);
+$frost-color-link-secondary-border-bottom-color: #fff;
+$frost-color-link-secondary-hover-bg-color: rgba($frost-color-blue-1, .05);
+$frost-color-link-focus-box-shadow: 0 1px 6px rgba(0, 158, 239, .75);
 
 // info-bar style
 $frost-color-link-info-bar-bg: $frost-color-white;
-$frost-color-link-info-bar-bg-hover: rgba($frost-color-blue-1, 0.05);
-$frost-color-link-info-bar-focus: 0 1px 6px rgba($frost-color-blue-1, 0.75);
-$frost-color-link-info-bar-active:  rgba($frost-color-blue-1, 0.1);
+$frost-color-link-info-bar-bg-hover: rgba($frost-color-blue-1, .05);
+$frost-color-link-info-bar-focus: 0 1px 6px rgba($frost-color-blue-1, .75);
+$frost-color-link-info-bar-active:  rgba($frost-color-blue-1, .1);
 
 // in-line style
 $frost-color-link-in-line-darken-1: darken($frost-color-blue-1, 8);
 $frost-color-link-in-line-darken-2: darken($frost-color-blue-1, 15);
+$frost-color-link-in-line-hover-bg: rgba($frost-color-blue-1, .05);
 
 .frost-link {
   display: inline-block;
-  text-align: center;
   border-radius: 2px;
+  font-family: $frost-font-family;
+  text-align: center;
   text-decoration: none;
   cursor: pointer;
-  font-family: $frost-font-family;
 
-   &.disabled {
-    border: none;
+  &.disabled {
+    border: 0;
     cursor: default;
 
-     &:hover {
-      background-color: inherit
+    &:hover {
+      background-color: inherit;
     }
   }
 
-  &:focus, &:active {
+  &:focus,
+  &:active {
     outline: none;
   }
 
@@ -45,7 +49,7 @@ $frost-color-link-in-line-darken-2: darken($frost-color-blue-1, 15);
 
   // priority = 'primary'
   &.primary {
-    border: none;
+    border: 0;
     background: linear-gradient(lighten($frost-color-blue-1, 14), $frost-color-blue-1);
     color: $frost-color-white;
 
@@ -55,29 +59,32 @@ $frost-color-link-in-line-darken-2: darken($frost-color-blue-1, 15);
 
     &:focus {
       border: 2px solid $frost-color-link-primary-focus-bg;
+      outline: 0;
       box-shadow: $frost-color-link-focus-box-shadow;
-      outline:0;
+
     }
 
     &:active {
       &:not(.disabled) {
-        box-shadow:none;
         background: $frost-color-link-primary-pressed-bg;
+        box-shadow: none;
+
         .content {
-          opacity: 0.5;
+          opacity: .5;
         }
       }
     }
 
     &.disabled {
       box-shadow: none;
-      opacity: 0.25;
+      opacity: .25;
 
       &:hover {
         background: linear-gradient(lighten($frost-color-blue-1, 14), $frost-color-blue-1);
       }
+
       &:focus {
-        border: none;
+        border: 0;
       }
     }
   }
@@ -89,14 +96,15 @@ $frost-color-link-in-line-darken-2: darken($frost-color-blue-1, 15);
     color: $frost-color-blue-1;
 
     .text {
-          border-bottom-width: 1px;
-          border-bottom-style: solid;
-          border-bottom-color: white;
-        }
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+      border-bottom-color: $frost-color-link-secondary-border-bottom-color;
+    }
 
     &:hover {
-      background-color:rgba($frost-color-blue-1, 0.05);
+      background-color: $frost-color-link-secondary-hover-bg-color;
       box-shadow: none;
+
       &:not(.disabled) {
         .text {
           border-bottom-width: 1px;
@@ -107,7 +115,7 @@ $frost-color-link-in-line-darken-2: darken($frost-color-blue-1, 15);
     }
 
     &:focus {
-      outline:0;
+      outline: 0;
       box-shadow: $frost-color-link-focus-box-shadow;
 
       &:not(.disabled) {
@@ -120,15 +128,15 @@ $frost-color-link-in-line-darken-2: darken($frost-color-blue-1, 15);
     }
 
     &:active {
-      box-shadow: none;
       background: $frost-color-link-secondary-pressed-bg;
+      box-shadow: none;
 
       &:not(.disabled) {
         .content {
-          opacity: 0.5;
+          opacity: .5;
         }
 
-        .text{
+        .text {
           border-bottom-width: 1px;
           border-bottom-style: solid;
           border-bottom-color: $frost-color-blue-1;
@@ -138,7 +146,7 @@ $frost-color-link-in-line-darken-2: darken($frost-color-blue-1, 15);
 
     &.disabled {
       box-shadow: none;
-      opacity: 0.25;
+      opacity: .25;
 
       &:hover {
         background: none;
@@ -152,141 +160,153 @@ $frost-color-link-in-line-darken-2: darken($frost-color-blue-1, 15);
 
   // design = 'in-line'
   &.in-line {
-    background-color: inherit;
     margin-bottom: -7px;
+    background-color: inherit;
 
     > .content {
       min-width: inherit;
     }
 
     .text {
-      color: $frost-color-blue-1;
       border-bottom: 1px solid $frost-color-blue-1;
-    }
-
-    &:hover:not(.disabled) {
-      background-color: $frost-color-link-info-bar-bg-hover;
-      box-shadow: none;
-
-      .text {
-        color: $frost-color-link-in-line-darken-1;
-        border-bottom: 1px solid $frost-color-link-in-line-darken-1;
-      }
-      background-color:rgba($frost-color-blue-1, 0.05);
-    }
-
-    &:focus:not(.disabled) {
-      outline: 0;
-      box-shadow: $frost-color-link-info-bar-focus;
-
-      .text {
-        color: $frost-color-link-in-line-darken-1;
-        border-bottom: 1px solid $frost-color-link-in-line-darken-1;
-      }
-    }
-
-    &:active:not(.disabled) {
-      background-color: $frost-color-link-info-bar-active;
-      opacity: 0.7;
       color: $frost-color-blue-1;
-      box-shadow: none;
+    }
 
-      .text {
+    &:hover {
+      &:not(.disabled) {
+        background-color: $frost-color-link-in-line-hover-bg;
         box-shadow: none;
-        color: $frost-color-link-in-line-darken-2;
-        border-bottom: 1px solid $frost-color-link-in-line-darken-2;
+
+        .text {
+          border-bottom: 1px solid $frost-color-link-in-line-darken-1;
+          color: $frost-color-link-in-line-darken-1;
+        }
+      }
+    }
+
+    &:focus {
+      &:not(.disabled) {
+        outline: 0;
+        box-shadow: $frost-color-link-info-bar-focus;
+
+        .text {
+          border-bottom: 1px solid $frost-color-link-in-line-darken-1;
+          color: $frost-color-link-in-line-darken-1;
+        }
+      }
+    }
+
+    &:active {
+      &:not(.disabled) {
+        background-color: $frost-color-link-info-bar-active;
+        color: $frost-color-blue-1;
+        box-shadow: none;
+        opacity: .7;
+
+        .text {
+          border-bottom: 1px solid $frost-color-link-in-line-darken-2;
+          color: $frost-color-link-in-line-darken-2;
+          box-shadow: none;
+        }
       }
     }
 
     &.disabled {
-      opacity: 0.3;
       background: none;
       box-shadow: none;
+      opacity: .3;
     }
   }
 
   // design = 'info-bar'
   &.info-bar {
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
     width: 75px;
     height: 75px;
     background-color: $frost-color-link-info-bar-bg;
     color: $frost-color-blue-1;
 
     .frost-icon  {
-      margin-left: -10px;
-      padding-bottom: 0px;
       width: 30px;
       height: 30px;
+      margin-left: -10px;
+      padding-bottom: 0;
     }
 
     .text {
       display: inline-block;
-      padding: 5px 1px 2px 1px;
       margin-top: -5px;
-      font-size: $frost-font-s;
+      padding: 5px 1px 2px;
       color: $frost-color-blue-1;
+      font-size: $frost-font-s;
       line-height: 1;
     }
 
     > .content {
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       height: 100%;
       box-sizing: border-box;
 
       .text {
-        vertical-align: middle;
+        padding: 0 1px 2px;
         text-align: center;
-        padding: 0 1px 2px 1px;
+        vertical-align: middle;
       }
 
       .svg {
         margin-bottom: 10px;
+
         .frost-icon {
           vertical-align: middle;
         }
       }
     }
 
-    &:hover:not(.disabled) {
-      background-color: $frost-color-link-info-bar-bg-hover;
-      box-shadow: none;
+    &:hover {
+      &:not(.disabled) {
+        background-color: $frost-color-link-info-bar-bg-hover;
+        box-shadow: none;
 
-      .text{
+        .text {
           border-bottom-width: 1px;
           border-bottom-style: solid;
         }
-    }
-
-    &:focus:not(.disabled) {
-      outline:0;
-      box-shadow: $frost-color-link-info-bar-focus;
-
-      .text{
-        border-bottom-width: 1px;
-        border-bottom-style: solid;
       }
     }
 
-    &:active:not(.disabled) {
-      background-color: $frost-color-link-info-bar-active;
-      opacity: 0.7;
-      color: $frost-color-blue-1;
-      box-shadow: none;
+    &:focus {
+      &:not(.disabled) {
+        outline: 0;
+        box-shadow: $frost-color-link-info-bar-focus;
 
-      .text{
-        border-bottom-width: 1px;
-        border-bottom-style: solid;
+        .text {
+          border-bottom-width: 1px;
+          border-bottom-style: solid;
+        }
+      }
+    }
+
+    &:active {
+      &:not(.disabled) {
+        background-color: $frost-color-link-info-bar-active;
+        color: $frost-color-blue-1;
+        box-shadow: none;
+        opacity: .7;
+
+        .text {
+          border-bottom-width: 1px;
+          border-bottom-style: solid;
+        }
       }
     }
 
     &.disabled {
       box-shadow: none;
-      opacity: 0.25;
+      opacity: .25;
 
       &:hover {
         background: none;
@@ -301,9 +321,8 @@ $frost-color-link-in-line-darken-2: darken($frost-color-blue-1, 15);
   // size = 'large'
   &.large {
     height: 50px;
-    font-size: $frost-font-l;
     padding: 0 20px;
-
+    font-size: $frost-font-l;
 
     .frost-icon {
       width: 40px;
@@ -313,8 +332,8 @@ $frost-color-link-in-line-darken-2: darken($frost-color-blue-1, 15);
 
   // size = 'medium'
   &.medium {
-    padding: 0 20px;
     height: 40px;
+    padding: 0 20px;
     font-size: $frost-font-m;
 
     .frost-icon {
@@ -326,8 +345,8 @@ $frost-color-link-in-line-darken-2: darken($frost-color-blue-1, 15);
   // size = 'small'
   &.small {
     height: 30px;
-    font-size: $frost-font-s;
     padding: 0 10px;
+    font-size: $frost-font-s;
 
     .frost-icon {
       width: 20px;
@@ -337,16 +356,16 @@ $frost-color-link-in-line-darken-2: darken($frost-color-blue-1, 15);
 
   > .content {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    min-width: 120px;
     height: 100%;
     box-sizing: border-box;
-    min-width: 120px;
 
     .text {
-      vertical-align: middle;
+      padding: 0 1px 2px;
       text-align: center;
-      padding: 0 1px 2px 1px;
+      vertical-align: middle;
     }
 
     .svg {

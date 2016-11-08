@@ -1,12 +1,14 @@
-svg.frost-icon {
-  fill: currentColor;
+svg {
+  &.frost-icon {
+    fill: currentColor;
 
-  // Frost icon pack default colors
-  &-frost {
-    &-add { color: $frost-color-white; }
-    &-chevron { color: $frost-color-grey-5; }
-    &-close-circle { color: $frost-color-blue-1; }
-    &-link { color: $frost-color-white; }
-    &-search { color: $frost-color-grey-4; }
+    // Frost icon pack default colors
+    &-frost {
+      &-add { color: $frost-color-white; }
+      &-chevron { color: $frost-color-grey-5; }
+      &-close-circle { color: $frost-color-blue-1; }
+      &-link { color: $frost-color-white; }
+      &-search { color: $frost-color-grey-4; }
+    }
   }
 }

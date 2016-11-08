@@ -79,11 +79,12 @@
     "test": "npm run lint && COVERAGE=true ember test",
     "eslint": "eslint *.js addon app blueprints config tests",
     "md-lint": "remark *.md",
-    "lint": "npm run eslint && npm run md-lint"
+    "sass-lint": "sass-lint -q -v",
+    "lint": "npm run eslint && npm run sass-lint && npm run md-lint"
   },
   "repository": "git@github.com:ciena-frost/ember-frost-core.git",
   "engines": {
-    "node": ">= 5.0.0"
+    "node": ">= 6.0.0"
   },
   "author": "Roxanne Panthaky (https://github.com/rox163)",
   "contributors": [
@@ -104,7 +105,7 @@
     "broccoli-asset-rev": "^2.4.2",
     "ember-cli": "~2.8.0",
     "ember-cli-app-version": "^1.0.0",
-    "ember-cli-code-coverage": "~0.3.0",
+    "ember-cli-code-coverage": "0.3.5",
     "ember-cli-dependency-checker": "^1.2.0",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
     "ember-cli-inject-live-reload": "^1.4.0",

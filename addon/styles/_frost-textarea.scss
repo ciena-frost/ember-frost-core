@@ -10,13 +10,34 @@ $disabled-bg: $frost-color-input-disabled-bg;
   display: flex;
   position: relative;
 
-  &.error .frost-textarea-input {
-    border: $error-border;
-    margin: $error-margin;
-    color: $frost-color-danger;
+  &.is-clear-visible {
+    .frost-textarea-clear {
+      opacity: 1;
+    }
+  }
 
-    &:hover:enabled:read-write:not(:focus) {
+  &.is-clear-enabled {
+    .frost-textarea-clear {
+      cursor: pointer;
+      pointer-events: auto;
+    }
+  }
+
+  &.error {
+    .frost-textarea-input {
+      margin: $error-margin;
       border: $error-border;
+      color: $frost-color-danger;
+
+      &:hover {
+        &:enabled {
+          &:read-write {
+            &:not(:focus) {
+              border: $error-border;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -25,8 +46,8 @@ $disabled-bg: $frost-color-input-disabled-bg;
   padding: 5px;
   padding-right: 30px;
   border: $border;
-  font-size: $frost-font-s;
   color: $frost-color-grey-1;
+  font-size: $frost-font-s;
   resize: none;
 
   &:disabled {
@@ -39,38 +60,35 @@ $disabled-bg: $frost-color-input-disabled-bg;
     outline: none;
   }
 
-  &:hover:enabled:read-write:not(:focus) {
-      border: $hover-border;
-      outline: none;
+  &:hover {
+    &:enabled {
+      &:read-write {
+        &:not(:focus) {
+          border: $hover-border;
+          outline: none;
+        }
+      }
+    }
   }
 
   &:read-only {
-    border: none;
+    border: 0;
     cursor: default;
   }
 }
 
 .frost-textarea-clear {
   position: relative;
+  top: 7px;
+  right: 26px;
   width: 23px;
   height: 23px;
-  right: 26px;
-  top: 7px;
+  transition: opacity .2s ease;
   opacity: 0;
   fill: $frost-color-grey-6;
   pointer-events: none;
-  transition: opacity 0.2s ease;
 
   &:focus {
     outline: none;
   }
-}
-
-.frost-textarea.is-clear-visible .frost-textarea-clear {
-  opacity: 1;
-}
-
-.frost-textarea.is-clear-enabled .frost-textarea-clear {
-  cursor: pointer;
-  pointer-events: auto;
 }

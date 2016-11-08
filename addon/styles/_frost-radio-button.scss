@@ -9,15 +9,17 @@
   &.error {
     svg {
       .ring {
-        fill: $frost-color-input-error-border
+        fill: $frost-color-input-error-border;
       }
     }
   }
 
   &.small {
-    > .label::before  {
-      width: 20px;
-      height: 20px;
+    > .label {
+      &::before  {
+        width: 20px;
+        height: 20px;
+      }
     }
 
     svg {
@@ -27,9 +29,11 @@
   }
 
   &.medium {
-    > .label::before {
-      width: 25px;
-      height: 25px;
+    > .label {
+      &::before {
+        width: 25px;
+        height: 25px;
+      }
     }
 
     svg {
@@ -39,9 +43,11 @@
   }
 
   &.large {
-    > .label::before {
-      width: 30px;
-      height: 30px;
+    > .label {
+      &::before {
+        width: 30px;
+        height: 30px;
+      }
     }
 
     svg {
@@ -52,16 +58,18 @@
 
   label {
     cursor: pointer;
+
     svg {
-      vertical-align: middle;
       margin-right: 5px;
+      vertical-align: middle;
+
       .inner {
-        transition: fill 0.2s ease;
+        transition: fill .2s ease;
         fill: transparent;
       }
 
       .ring {
-        transition: fill 0.2s ease;
+        transition: fill .2s ease;
         fill: $frost-color-grey-5;
       }
     }
@@ -71,25 +79,47 @@
     display: none;
   }
 
-  &.checked:not(.disabled) label svg .inner {
-    fill: $frost-color-blue-1;
-  }
-
-  &:hover, &:focus {
-    &:not(.disabled):not(.checked) {
-      label svg .inner {
-        fill: $frost-color-blue-4;
+  &.checked {
+    &:not(.disabled) {
+      label {
+        svg {
+          .inner {
+            fill: $frost-color-blue-1;
+          }
+        }
       }
     }
   }
+
+  &:hover,
+  &:focus {
+    &:not(.disabled) {
+      &:not(.checked) {
+        label {
+          svg {
+            .inner {
+              fill: $frost-color-blue-4;
+            }
+          }
+        }
+      }
+    }
+  }
+
   &.disabled {
     label {
       color: $frost-color-grey-5;
       cursor: default;
     }
 
-    &.checked label svg .inner {
-      fill: $frost-color-grey-5;
+    &.checked {
+      label {
+        svg {
+          .inner {
+            fill: $frost-color-grey-5;
+          }
+        }
+      }
     }
   }
 }
