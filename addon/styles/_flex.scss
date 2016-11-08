@@ -1,9 +1,9 @@
-html,
-body {
+html {
   height: 100%;
 }
 
 body {
+  height: 100%;
   > .ember-view {
     &:not(.liquid-target-container) {
       height: 100%;
@@ -22,5 +22,3 @@ body {
     flex: (#{$x});
   }
 }
-
-
