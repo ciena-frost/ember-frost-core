@@ -1,7 +1,20 @@
 html,
-body,
-body > .ember-view:not(.liquid-target-container), .setupHeight.ember-view {
-  height: 100%; // 100% height is used for vertical flexbox
+body {
+  height: 100%;
+}
+
+body {
+  > .ember-view {
+    &:not(.liquid-target-container) {
+      height: 100%;
+    }
+  }
+}
+
+.setup-height {
+  &.ember-view {
+    height: 100%;
+  }
 }
 
 @for $x from 1 through 11 {
@@ -9,4 +22,5 @@ body > .ember-view:not(.liquid-target-container), .setupHeight.ember-view {
     flex: (#{$x});
   }
 }
+
 
