@@ -28,7 +28,7 @@ script:
 - npm run lint
 - ember try:one $EMBER_TRY_SCENARIO --- ember test
 after_success:
- - .travis/publish-coverage.sh
+- .travis/publish-coverage.sh
 addons:
   apt:
     sources:
