@@ -10,7 +10,7 @@ files:
   include: '+(addon|app|tests)/**/styles/**/*.s+(a|c)ss'
   ignore:
     - '**/dummy/app/styles//**/*.s+(a|c)ss'
-    - '**/_flex.scss'
+    # - '**/_flex.scss'
     - '**/_normalize.scss'
 
 # Documentation on all rules available here: https://github.com/sasstools/sass-lint/blob/master/docs/rules
@@ -240,7 +240,10 @@ rules:
 
   # enforce how deeply a selector can be nested (defaults to 2)
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/nesting-depth.md
-  nesting-depth: 3
+  nesting-depth:
+    - 2
+    -
+      max-depth: 5
 
   # enforce the order in which declarations are written (default alphabetical)
   # https://github.com/sasstools/sass-lint/blob/master/docs/rules/property-sort-order.md
