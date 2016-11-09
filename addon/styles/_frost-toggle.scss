@@ -37,7 +37,7 @@ $frost-toggle-on-color: #fff;
     background-color: $frost-color-lgrey-1;
     cursor: pointer;
 
-    &disabled {
+    &.disabled {
       cursor: default;
     }
 
