@@ -171,6 +171,13 @@ export default Component.extend(PropTypeMixin, {
 
   @readOnly
   @computed('disabled', 'tabIndex')
+  /**
+   * Get appropriate tab index
+   * disabled state changes.
+   * @param {Boolean} disabled - whether or not input is disabled
+   * @param {Number} tabIndex - tab index
+   * @returns {Number} tab index
+   */
   computedTabIndex (disabled, tabIndex) {
     return disabled ? -1 : tabIndex
   },
