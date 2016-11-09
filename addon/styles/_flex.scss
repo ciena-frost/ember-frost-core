@@ -4,6 +4,7 @@ html {
 
 body {
   height: 100%;
+
   > .ember-view {
     &:not(.liquid-target-container) {
       height: 100%;
