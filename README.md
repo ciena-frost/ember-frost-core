@@ -23,10 +23,12 @@ The following components are available when you install ember-frost-core
 * [frost-link](docs/frost-link.md)
 * [frost-loading](docs/frost-loading.md)
 * [frost-password](docs/frost-password.md)
+* [frost-radio](docs/frost-radio.md)
 * [frost-scroll](docs/frost-scroll.md)
 * [frost-select](docs/frost-select.md)
 * [frost-text](docs/frost-text.md)
 * [frost-textarea](docs/frost-textarea.md)
+* [frost-toggle](docs/frost-toggle.md)
 
 ## Development
 
