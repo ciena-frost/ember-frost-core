@@ -7,44 +7,36 @@
   name={{name}}
   type='checkbox'
 >
+{{log _eventProxy.change}}
 
-{{#frost-toggle-label
-  disabled=disabled
-  id=(concat elementId '-visual')
-  for=(concat elementId '-input')
-  size=size
+<label
+  class='frost-toggle-button {{if disabled 'disabled' ''}} {{size}}'
+  id={{concat elementId '-visual'}}
+  for={{concat elementId '-input'}}
 
-  change=_eventProxy.change
-  click=(action '_onClick')
-  contextMenu=_eventProxy.contextMenu
-  doubleClick=_eventProxy.doubleClick
-  drag=_eventProxy.drag
-  dragEnd=_eventProxy.dragEnd
-  dragEnter=_eventProxy.dragEnter
-  dragLeave=_eventProxy.dragLeave
-  dragOver=_eventProxy.dragOver
-  dragStart=_eventProxy.dragStart
-  drop=_eventProxy.drop
-  focusIn=_eventProxy.focusIn
-  focusOut=_eventProxy.focusOut
-  input=_eventProxy.onInput
-  keyDown=_eventProxy.keyDown
-  keyPress=_eventProxy.keyPress
-  key-up=_eventProxy.keyUp
-  mouseDown=_eventProxy.mouseDown
-  mouseEnter=_eventProxy.mouseEnter
-  mouseLeave=_eventProxy.mouseLeave
-  mouseMove=_eventProxy.mouseMove
-  mouseUp=_eventProxy.mouseUp
-  submit=_eventProxy.submit
-  touchCancel=_eventProxy.touchCancel
-  touchEnd=_eventProxy.touchEnd
-  touchMove=_eventProxy.touchMove
-  touchStart=_eventProxy.touchStart
+  {{action (or _eventProxy.change 'noop') on='change'}}
+  {{action '_onClick' on='click'}}
+  {{action (or _eventProxy.doubleClick 'noop') on='doubleClick'}}
+  {{action (or _eventProxy.focusIn 'noop') on='focusIn'}}
+  {{action (or _eventProxy.focusOut 'noop') on='focusOut'}}
+  {{action (or _eventProxy.input 'noop') on='input'}}
+  {{action (or _eventProxy.keyDown 'noop') on='keyDown'}}
+  {{action (or _eventProxy.keyPress 'noop') on='keyPress'}}
+  {{action (or _eventProxy.keyUp 'noop') on='keyUp'}}
+  {{action (or _eventProxy.mouseDown 'noop') on='mouseDown'}}
+  {{action (or _eventProxy.mouseEnter 'noop') on='mouseEnter'}}
+  {{action (or _eventProxy.mouseLeave 'noop') on='mouseLeave'}}
+  {{action (or _eventProxy.mouseMove 'noop') on='mouseMove'}}
+  {{action (or _eventProxy.mouseUp 'noop') on='mouseUp'}}
+  {{action (or _eventProxy.submit 'noop') on='submit'}}
+  {{action (or _eventProxy.touchCancel 'noop') on='touchCancel'}}
+  {{action (or _eventProxy.touchEnd 'noop') on='touchEnd'}}
+  {{action (or _eventProxy.touchMove 'noop') on='touchMove'}}
+  {{action (or _eventProxy.touchStart 'noop') on='touchStart'}}
 
-  escape-press=_eventProxy.escape-press
-  insert-newline=_eventProxy.enter
-}}
+  {{action (or _eventProxy.enter 'noop') on='enter'}}
+  {{action (or _eventProxy.escape-press 'noop') on='escape-press'}}
+>
   <div class="frost-toggle-text off">{{if falseLabel _falseLabel 'Off'}}</div>
   <div class="frost-toggle-text on">{{if trueLabel _trueLabel 'On'}}</div>
-{{/frost-toggle-label}}
+</label>

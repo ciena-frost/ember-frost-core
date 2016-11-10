@@ -1,12 +1,21 @@
 import Ember from 'ember'
-const {Component, ViewUtils} = Ember
+const {
+  assert,
+  Component,
+  get,
+  isPresent,
+  ViewUtils: {
+    isSimpleClick
+  }
+} = Ember
 import computed from 'ember-computed-decorators'
-import {PropTypes} from 'ember-prop-types'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-toggle'
 import FrostEventsProxy from '../mixins/frost-events-proxy'
+import Events from '../utils/events'
+const {cloneEvent} = Events
 
-export default Component.extend(FrostEventsProxy, {
-
+export default Component.extend(PropTypeMixin, FrostEventsProxy, {
   // == Properties ============================================================
   attributeBindings: [
     '_isToggled:toggled',
@@ -40,7 +49,7 @@ export default Component.extend(FrostEventsProxy, {
   // == Functions ==============================================================
   init () {
     this._super(...arguments)
-    Ember.assert(`Same value has been assigned to both ${this.toString()}.trueValue and ${this.toString()}.falseValue`,
+    assert(`Same value has been assigned to both ${this.toString()}.trueValue and ${this.toString()}.falseValue`,
       (typeof this.attrs['trueValue'] === 'undefined' && typeof this.attrs['falseValue'] === 'undefined') ||
       this.attrs['trueValue'] !== this.attrs['falseValue'])
   },
@@ -55,12 +64,13 @@ export default Component.extend(FrostEventsProxy, {
   },
 
   _modifyEvent (event, target) {
-    const _toggled = this.get('_isToggled')
-    target.value = _toggled ? this.get('_falseValue') : this.get('_trueValue')
-    target.state = !_toggled
-    event.target = target
+    const e = cloneEvent(event, target)
+    const toggled = get(this, '_isToggled')
 
-    return event
+    e.target.value = toggled ? get(this, '_falseValue') : get(this, '_trueValue')
+    e.target.state = !toggled
+
+    return e
   },
 
   _preferBoolean (value) {
@@ -91,25 +101,27 @@ export default Component.extend(FrostEventsProxy, {
   // == Actions ================================================================
   actions: {
     /* eslint-disable complexity */
-    _onClick (e) {
-      if (this.get('disabled')) return
+    _onClick () {
+      if (get(this, 'disabled')) return
 
-      if (!ViewUtils.isSimpleClick(e)) {
+      if (!isSimpleClick(event)) {
         return true
       }
 
-      e.stopPropagation()
-      e.preventDefault()
+      event.stopPropagation()
+      event.preventDefault()
 
       const onClick = this.attrs['onClick']
       if (onClick && onClick.update) {
-        onClick.update(this.get('_isToggled') ? this.get('_falseValue') : this.get('_trueValue'))
-      } else if (Ember.isPresent(Ember.get(this, '_eventProxy.click'))) {
+        onClick.update(get(this, '_isToggled') ? get(this, '_falseValue') : get(this, '_trueValue'))
+      } else if (isPresent(get(this, '_eventProxy.click'))) {
         //  override target to make sure it's always the <input> field
-        let target = this.$('input')[0]
-        this._eventProxy.click(this._modifyEvent(e, target))
+        this._eventProxy.click(this._modifyEvent(event, this.$('input')[0]))
       }
-    }
+    },
     /* eslint-enable complexity */
+    noop () {
+      // we have this method to avoid action undefined error
+    }
   }
 })
