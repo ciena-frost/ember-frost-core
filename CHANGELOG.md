@@ -1,3 +1,10 @@
+# 0.32.3
+
+* **Fixed** `frost-select` to open dropdown when select is focused and user presses up/down arrow key.
+* **Fixed** selected item(s) in the select dropdown to have a heavier font weight.
+* **Removed** `ember-browserify` and `svg4everybody` npm dependencies in favor of including `svg4everybody` via `vendor` directory.
+
+
 # 0.32.2
 
 * Fixed the tabIndex on frost-select that are disabled and then enabled
