@@ -91,7 +91,7 @@ export default Component.extend(PropTypeMixin, {
 
   // == Functions ===============================================================
 
-  _modifyEvent (event, target) {
+  _changeTarget (event, target) {
     const e = cloneEvent(event, target)
     e.target.id = get(this, 'groupId')
     return e
@@ -118,7 +118,7 @@ export default Component.extend(PropTypeMixin, {
       }
       const onChange = get(this, 'onChange')
       if (onChange && typeOf(onChange === 'function')) {
-        onChange(this._modifyEvent(event, $(event.target).find('input')[0]))
+        onChange(this._changeTarget(event, $(event.target).find('input')[0]))
       }
     }
   },
@@ -127,7 +127,7 @@ export default Component.extend(PropTypeMixin, {
   change (event) {
     const onChange = get(this, 'onChange')
     if (onChange && typeOf(onChange === 'function')) {
-      onChange(this._modifyEvent(event, event.target))
+      onChange(this._changeTarget(event, event.target))
     }
   }
 })

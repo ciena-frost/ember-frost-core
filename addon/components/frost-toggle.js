@@ -32,9 +32,11 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
     autofocus: PropTypes.bool,
     disabled: PropTypes.bool,
     hook: PropTypes.string,
-    size: PropTypes.string,
-    toggled: PropTypes.bool,
-
+    value: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.string,
+      PropTypes.number
+    ]),
     falseLabel: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string,
@@ -57,6 +59,8 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
 
   getDefaultProps () {
     return {
+      autofocus: false,
+      disabled: false,
       _trueLabel: typeof this.get('trueLabel') === 'string' || typeof this.get('trueLabel') === 'number'
                 ? this.get('trueLabel') : true,
       _falseLabel: typeof this.get('falseLabel') === 'string' || typeof this.get('falseLabel') === 'number'
@@ -64,7 +68,7 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
     }
   },
 
-  _modifyEvent (event, target) {
+  _changeTarget (event, target) {
     const e = cloneEvent(event, target)
     const toggled = get(this, '_isToggled')
 
@@ -117,7 +121,8 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
         onClick.update(get(this, '_isToggled') ? get(this, '_falseValue') : get(this, '_trueValue'))
       } else if (isPresent(get(this, '_eventProxy.click'))) {
         //  override target to make sure it's always the <input> field
-        this._eventProxy.click(this._modifyEvent(event, this.$('input')[0]))
+        const target = this.$('input')[0]
+        this._eventProxy.click(this._changeTarget(event, target))
       }
     },
     /* eslint-enable complexity */
