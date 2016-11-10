@@ -1,3 +1,9 @@
+# 0.32.2
+
+* Fixed the tabIndex on frost-select that are disabled and then enabled
+
+
+
 # 0.32.1
 
 * **Added** box shadow to select dropdown arrow to match box shadow of dropdown box.
