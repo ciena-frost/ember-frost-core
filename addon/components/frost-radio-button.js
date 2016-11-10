@@ -12,6 +12,8 @@ const {
 import computed from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-radio-button'
+import Events from '../utils/events'
+const {cloneEvent} = Events
 
 export default Component.extend(PropTypeMixin, {
   // == Properties  ============================================================
@@ -89,12 +91,10 @@ export default Component.extend(PropTypeMixin, {
 
   // == Functions ===============================================================
 
-  _createEvent (_event, _target) {
-    let event = $.Event(null, _event)
-    let target = $.clone(_target)
-    target.id = get(this, 'groupId')
-    event.target = target
-    return event
+  _changeTarget (event, target) {
+    const e = cloneEvent(event, target)
+    e.target.id = get(this, 'groupId')
+    return e
   },
 
   // == Events ===============================================================
@@ -118,7 +118,7 @@ export default Component.extend(PropTypeMixin, {
       }
       const onChange = get(this, 'onChange')
       if (onChange && typeOf(onChange === 'function')) {
-        onChange(this._createEvent(event, $(event.target).find('input')[0]))
+        onChange(this._changeTarget(event, $(event.target).find('input')[0]))
       }
     }
   },
@@ -127,7 +127,7 @@ export default Component.extend(PropTypeMixin, {
   change (event) {
     const onChange = get(this, 'onChange')
     if (onChange && typeOf(onChange === 'function')) {
-      onChange(this._createEvent(event, event.target))
+      onChange(this._changeTarget(event, event.target))
     }
   }
 })
