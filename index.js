@@ -93,6 +93,7 @@ module.exports = {
       app.import(path.join(robotoPath, 'Roboto-Medium.woff2'), {destDir: 'assets/fonts'})
       app.import(path.join(robotoPath, 'Roboto-Regular.woff2'), {destDir: 'assets/fonts'})
       app.import(path.join(robotoPath, 'stylesheet.css'))
+      app.import(path.join('vendor', 'svg4everybody.min.js'))
     }
 
     if (typeof this.import === 'function' && app.bowerDirectory) {
