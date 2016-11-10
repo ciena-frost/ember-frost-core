@@ -297,6 +297,56 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
         })
       })
+
+      describe('when down arrow pressed', function () {
+        beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+          $hook('select')
+            .trigger(
+              $.Event('keydown', {
+                keyCode: DOWN_ARROW
+              })
+            )
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true,
+            items: [],
+            opened: true
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
+      })
+
+      describe('when up arrow pressed', function () {
+        beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+          $hook('select')
+            .trigger(
+              $.Event('keydown', {
+                keyCode: UP_ARROW
+              })
+            )
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true,
+            items: [],
+            opened: true
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
+      })
     })
 
     describe('when input is disabled', function () {
@@ -865,17 +915,17 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
         })
 
-        /* FIXME: for some reason click events are selecting item in test
         describe('when first item clicked', function () {
           beforeEach(function () {
             [onBlur, onChange, onFocus].forEach((func) => func.reset())
-            $hook('select-item-0').click()
+            $hook('select-item-0').trigger('mousedown')
           })
 
           it('renders as expected', function () {
             expectSelectWithState('select', {
               focused: true,
-              opened: false,
+              items: ['Foo', 'Bar'],
+              opened: true,
               text: 'Foo'
             })
 
@@ -894,13 +944,14 @@ describeComponent(...integration('frost-multi-select'), function () {
         describe('when second item clicked', function () {
           beforeEach(function () {
             [onBlur, onChange, onFocus].forEach((func) => func.reset())
-            $hook('select-item-1').click()
+            $hook('select-item-1').trigger('mousedown')
           })
 
           it('renders as expected', function () {
             expectSelectWithState('select', {
               focused: true,
-              opened: false,
+              items: ['Foo', 'Bar'],
+              opened: true,
               text: 'Bar'
             })
 
@@ -915,7 +966,58 @@ describeComponent(...integration('frost-multi-select'), function () {
               .to.eql(['bar'])
           })
         })
-        */
+      })
+
+      describe('when down arrow pressed', function () {
+        beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+          $hook('select')
+            .trigger(
+              $.Event('keydown', {
+                keyCode: DOWN_ARROW
+              })
+            )
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true,
+            focusedItem: 'Foo',
+            items: ['Foo', 'Bar'],
+            opened: true
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
+      })
+
+      describe('when up arrow pressed', function () {
+        beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+          $hook('select')
+            .trigger(
+              $.Event('keydown', {
+                keyCode: UP_ARROW
+              })
+            )
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true,
+            focusedItem: 'Foo',
+            items: ['Foo', 'Bar'],
+            opened: true
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
       })
     })
 
@@ -1032,6 +1134,18 @@ describeComponent(...integration('frost-multi-select'), function () {
         expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
         expect(onChange.callCount, 'OnChange is not called').to.equal(0)
         expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+      })
+    })
+  })
+
+  describe('ember-hook selectors', function () {
+    describe('when dropdown is open', function () {
+      beforeEach(function () {
+        $hook('select').click()
+      })
+
+      it('can find dropdown input', function () {
+        expect($hook('select-list-input')).to.have.length(1)
       })
     })
   })
