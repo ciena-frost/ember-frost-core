@@ -5,7 +5,7 @@ import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
 import layout from '../templates/components/frost-select'
 import keyCodes from '../utils/keycodes'
-const {SPACE} = keyCodes
+const {DOWN_ARROW, SPACE, UP_ARROW} = keyCodes
 
 /**
  * Compare two string arrays to determine if they contain the same values
@@ -241,6 +241,17 @@ export default Component.extend(PropTypeMixin, {
   _onClick: Ember.on('click', function () {
     if (!this.get('disabled')) {
       this.toggleProperty('opened')
+    }
+  }),
+
+  _onKeyDown: Ember.on('keyDown', function (e) {
+    if (
+      [DOWN_ARROW, UP_ARROW].indexOf(e.keyCode) !== -1 &&
+      !this.get('openend')
+    ) {
+      e.preventDefault() // Keep up/down arrow from scrolling page
+      e.stopPropagation()
+      this.set('opened', true)
     }
   }),
 
