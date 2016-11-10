@@ -65,8 +65,6 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
-  // == Events ================================================================
-
   /**
    * Set unique inputId that will be set on label and input element
    * @private
@@ -77,6 +75,8 @@ export default Component.extend(PropTypeMixin, {
       set(this, 'inputId', `${get(this, 'elementId')}_input`)
     }
   },
+
+  // == Events ================================================================
 
   _onFocus: Ember.on('focusIn', function (e) {
     // If an onFocus handler is defined, call it
