@@ -31,8 +31,9 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
   propTypes: {
     autofocus: PropTypes.bool,
     disabled: PropTypes.bool,
-    toggled: PropTypes.bool,
+    hook: PropTypes.string,
     size: PropTypes.string,
+    toggled: PropTypes.bool,
 
     falseLabel: PropTypes.oneOfType([
       PropTypes.bool,

@@ -6,6 +6,7 @@
   id={{concat elementId '-input'}}
   name={{name}}
   type='checkbox'
+  data-test={{hook (concat hook '-input')}}
 >
 {{log _eventProxy.change}}
 
@@ -13,6 +14,7 @@
   class='frost-toggle-button {{if disabled 'disabled' ''}} {{size}}'
   id={{concat elementId '-visual'}}
   for={{concat elementId '-input'}}
+  data-test={{hook (concat hook '-label')}}
 
   {{action (or _eventProxy.change 'noop') on='change'}}
   {{action '_onClick' on='click'}}
@@ -37,6 +39,6 @@
   {{action (or _eventProxy.enter 'noop') on='enter'}}
   {{action (or _eventProxy.escape-press 'noop') on='escape-press'}}
 >
-  <div class="frost-toggle-text off">{{if falseLabel _falseLabel 'Off'}}</div>
-  <div class="frost-toggle-text on">{{if trueLabel _trueLabel 'On'}}</div>
+  <div class="frost-toggle-text off" data-test={{hook (concat hook '-label-off')}}>{{if falseLabel _falseLabel 'Off'}}</div>
+  <div class="frost-toggle-text on" data-test={{hook (concat hook '-label-on')}}>{{if trueLabel _trueLabel 'On'}}</div>
 </label>
