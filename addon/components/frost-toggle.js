@@ -49,14 +49,6 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
     ])
   },
 
-  // == Functions ==============================================================
-  init () {
-    this._super(...arguments)
-    assert(`Same value has been assigned to both ${this.toString()}.trueValue and ${this.toString()}.falseValue`,
-      (typeof this.attrs['trueValue'] === 'undefined' && typeof this.attrs['falseValue'] === 'undefined') ||
-      this.attrs['trueValue'] !== this.attrs['falseValue'])
-  },
-
   getDefaultProps () {
     return {
       autofocus: false,
@@ -68,6 +60,15 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
     }
   },
 
+  // == Events ================================================================
+  init () {
+    this._super(...arguments)
+    assert(`Same value has been assigned to both ${this.toString()}.trueValue and ${this.toString()}.falseValue`,
+      (typeof this.attrs['trueValue'] === 'undefined' && typeof this.attrs['falseValue'] === 'undefined') ||
+      this.attrs['trueValue'] !== this.attrs['falseValue'])
+  },
+
+  // == Functions ==============================================================
   _changeTarget (event, target) {
     const e = cloneEvent(event, target)
     const toggled = get(this, '_isToggled')
