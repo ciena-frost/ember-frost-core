@@ -43,7 +43,7 @@ export default Component.extend(PropTypeMixin, {
   // == Properties ============================================================
 
   attributeBindings: [
-    'tabIndex'
+    'computedTabIndex:tabIndex'
   ],
 
   classNameBindings: [
@@ -170,6 +170,19 @@ export default Component.extend(PropTypeMixin, {
   },
 
   @readOnly
+  @computed('disabled', 'tabIndex')
+  /**
+   * Get appropriate tab index
+   * disabled state changes.
+   * @param {Boolean} disabled - whether or not input is disabled
+   * @param {Number} tabIndex - tab index
+   * @returns {Number} tab index
+   */
+  computedTabIndex (disabled, tabIndex) {
+    return disabled ? -1 : tabIndex
+  },
+
+  @readOnly
   @computed('selectedItems')
   text (selectedItems) {
     switch (selectedItems.length) {
@@ -218,11 +231,6 @@ export default Component.extend(PropTypeMixin, {
       !compareSelectedValues(newSelectedValue, this.get('internalSelectedValue'))
     ) {
       props.internalSelectedValue = newSelectedValue
-    }
-
-    // Make sure user can't tab into disabled select
-    if (this.get('disabled')) {
-      props.tabIndex = -1
     }
 
     if (Object.keys(props).length !== 0) {

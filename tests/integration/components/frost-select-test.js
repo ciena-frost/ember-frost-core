@@ -427,6 +427,50 @@ describeComponent(...integration('frost-select'), function () {
         expect(onChange.callCount, 'OnChange is not called').to.equal(0)
         expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
       })
+
+      describe('when input is disabled', function () {
+        beforeEach(function () {
+          this.set('disabled', true)
+        })
+
+        describe('when input is re-enabled', function () {
+          beforeEach(function () {
+            this.set('disabled', false)
+          })
+
+          it('renders as expected', function () {
+            expectSelectWithState('select', {
+              focused: false,
+              tabIndex: 3
+            })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+          })
+        })
+
+        describe('when input is re-enabled and tabIndex is set simultaneously', function () {
+          beforeEach(function () {
+            this.set('disabled', true)
+            this.setProperties({
+              disabled: false,
+              tabIndex: 42
+            })
+          })
+
+          it('renders as expected', function () {
+            expectSelectWithState('select', {
+              focused: false,
+              tabIndex: 42
+            })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+          })
+        })
+      })
     })
 
     describe('when input has error', function () {
