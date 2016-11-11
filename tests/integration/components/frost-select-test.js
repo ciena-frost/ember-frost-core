@@ -1148,7 +1148,6 @@ describeComponent(...integration('frost-select'), function () {
           done()
         })
       })
-
     })
   })
 })
