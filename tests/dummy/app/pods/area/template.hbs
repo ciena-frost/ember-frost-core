@@ -211,24 +211,5 @@
         {{code-snippet name='textarea-support-events.js'}}
       </div>
     </div>
-
-    <div class="example">
-      <div class="title">Deprecated events</div>
-      <div class="demo">
-        {{! BEGIN-SNIPPET textarea-deprecated-events }}
-        {{frost-textarea
-          onBlur=(action 'event')
-          onFocus=(action 'event')
-        }}
-        {{! END-SNIPPET }}
-      </div>
-      <div class="snippet">
-         <div>Template</div>
-        {{code-snippet name='textarea-deprecated-events.hbs'}}
-        <br>
-        <div>Controller</div>
-        {{code-snippet name='textarea-dom-events.js'}}
-      </div>
-    </div>
   </div>
 </div>

@@ -138,7 +138,6 @@ export default LinkComponent.extend(PropTypeMixin, {
       case 'info-bar':
         classes.push('info-bar')
         break
-      case 'in-line':
       case 'inline':
         classes.push('in-line')
         break
