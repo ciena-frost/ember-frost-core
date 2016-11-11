@@ -241,15 +241,15 @@ describeComponent(
         ).to.eql('info-bar')
       })
 
-      it('sets "in-line" class', function () {
+      it('sets "inline" class', function () {
         const design = 'inline'
 
         run(() => component.set('design', design))
 
         expect(
           component.get('extraClasses'),
-          'extraClasses: "in-line"'
-        ).to.eql('in-line')
+          'extraClasses: "inline"'
+        ).to.eql('inline')
       })
     })
 

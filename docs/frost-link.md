@@ -6,7 +6,7 @@
 
 | Attribute | Type | Value | Description |
 | --------- | ---- | ----- | -----------
-| `design` | `string` | `inline` | custom link styling for in-line text, opens content in the same tab.  Should not be used with `priority` and `size`. |
+| `design` | `string` | `inline` | custom link styling for inline text, opens content in the same tab.  Should not be used with `priority` and `size`. |
 |  | | `info-bar` | custom link styling for the info-bar context, opens content in the same tab.  Requires `icon` to be specified.  Should not be used with `priority` and `size`. |
 | `disabled` | `boolean` | `false` | **default** - basic link |
 |  |  | `true` | disabled link |
@@ -56,7 +56,7 @@
 }}
 ```
 
-### Design - in-line (font based on size)
+### Design - inline (font based on size)
 ```handlebars
 {{#frost-link 'route name'
   design='inline'
