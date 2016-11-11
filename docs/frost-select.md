@@ -22,10 +22,16 @@
 The select component is accessible using ember-hook with the top level hook name or you can access the internal components as well -
 * Input field hook - `$hook('<hook-name>-input')`
 * List hook - `$hook('<hook-name>-list')`
-* List item hook - `$hook('<hook-name>-item-<index>')'`
+* Individual list items can be found using hook qualifiers like index, label or value -
+  - `$hook('<hook-name>-item', {index: <index>})'`
+  - `$hook('<hook-name>-item', {label: <item label>})'`
+  - `$hook('<hook-name>-item', {value: <item value>})'`
 
 The multi-select component has all of the hooks listed above from the select component and adds one additional -
-* List checkbox item hook - `$hook('<hook-name>-checkbox-item-<index>')'`
+* List checkbox item hook -
+  - `$hook('<hook-name>-item-checkbox', {index: <index>})'`
+  - `$hook('<hook-name>-item-checkbox', {label: <item label>})'`
+  - `$hook('<hook-name>-item-checkbox', {value: <item value>})'`
 
 ## Examples
 Assuming the following data is available in the consuming context:
