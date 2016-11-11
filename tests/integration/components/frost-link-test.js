@@ -150,8 +150,8 @@ describeComponent(
         `)
 
         expect(
-          this.$('.frost-link').hasClass('in-line'),
-          'in-line class is set'
+          this.$('.frost-link').hasClass('inline'),
+          'inline class is set'
         ).to.be.true
       })
     })

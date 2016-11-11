@@ -91,7 +91,6 @@ export default Component.extend(PropTypeMixin, {
           url: 'http://ciena-frost.github.io/ember-frost-core/#/scroll'
         }
       )
-      this.$().on('ps-y-reach-end', this._legacyScrollYEndHandler)
     }
   },
 
@@ -118,10 +117,6 @@ export default Component.extend(PropTypeMixin, {
 
     if (typeOf(this.onScrollYEnd) === 'function') {
       this.$().off('ps-y-reach-end', this._scrollYEndHandler)
-    }
-
-    if (typeOf(this.attrs['on-scroll-y-end']) === 'function') {
-      this.$().off('ps-y-reach-end', this._legacyScrollYEndHandler)
     }
   }
   /* eslint-enable complexity */

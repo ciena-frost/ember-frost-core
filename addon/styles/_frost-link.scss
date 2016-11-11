@@ -11,10 +11,10 @@ $frost-color-link-info-bar-bg-hover: rgba($frost-color-blue-1, .05);
 $frost-color-link-info-bar-focus: 0 1px 6px rgba($frost-color-blue-1, .75);
 $frost-color-link-info-bar-active:  rgba($frost-color-blue-1, .1);
 
-// in-line style
-$frost-color-link-in-line-darken-1: darken($frost-color-blue-1, 8);
-$frost-color-link-in-line-darken-2: darken($frost-color-blue-1, 15);
-$frost-color-link-in-line-hover-bg: rgba($frost-color-blue-1, .05);
+// inline style
+$frost-color-link-inline-darken-1: darken($frost-color-blue-1, 8);
+$frost-color-link-inline-darken-2: darken($frost-color-blue-1, 15);
+$frost-color-link-inline-hover-bg: rgba($frost-color-blue-1, .05);
 
 .frost-link {
   display: inline-block;
@@ -158,8 +158,8 @@ $frost-color-link-in-line-hover-bg: rgba($frost-color-blue-1, .05);
   // Design based coloring
   // ----------------------
 
-  // design = 'in-line'
-  &.in-line {
+  // design = 'inline'
+  &.inline {
     margin-bottom: -7px;
     background-color: inherit;
 
@@ -174,12 +174,12 @@ $frost-color-link-in-line-hover-bg: rgba($frost-color-blue-1, .05);
 
     &:hover {
       &:not(.disabled) {
-        background-color: $frost-color-link-in-line-hover-bg;
+        background-color: $frost-color-link-inline-hover-bg;
         box-shadow: none;
 
         .text {
-          border-bottom: 1px solid $frost-color-link-in-line-darken-1;
-          color: $frost-color-link-in-line-darken-1;
+          border-bottom: 1px solid $frost-color-link-inline-darken-1;
+          color: $frost-color-link-inline-darken-1;
         }
       }
     }
@@ -190,8 +190,8 @@ $frost-color-link-in-line-hover-bg: rgba($frost-color-blue-1, .05);
         box-shadow: $frost-color-link-info-bar-focus;
 
         .text {
-          border-bottom: 1px solid $frost-color-link-in-line-darken-1;
-          color: $frost-color-link-in-line-darken-1;
+          border-bottom: 1px solid $frost-color-link-inline-darken-1;
+          color: $frost-color-link-inline-darken-1;
         }
       }
     }
@@ -204,8 +204,8 @@ $frost-color-link-in-line-hover-bg: rgba($frost-color-blue-1, .05);
         opacity: .7;
 
         .text {
-          border-bottom: 1px solid $frost-color-link-in-line-darken-2;
-          color: $frost-color-link-in-line-darken-2;
+          border-bottom: 1px solid $frost-color-link-inline-darken-2;
+          color: $frost-color-link-inline-darken-2;
           box-shadow: none;
         }
       }

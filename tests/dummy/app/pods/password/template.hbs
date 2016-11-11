@@ -98,24 +98,6 @@
   <hr>
   <div class='section'>
     <div class='example'>
-      <div class='title'>Legacy events</div>
-      <div class='demo'>
-        {{! BEGIN-SNIPPET password-legacy-events }}
-        {{frost-password
-          onInput=(action 'legacy')
-        }}
-        {{! END-SNIPPET }}
-      </div>
-      <div class='snippet'>
-         <div>Template</div>
-        {{code-snippet name='password-legacy-events.hbs'}}
-        <br>
-        <div>Controller</div>
-        {{code-snippet name='password-legacy-events.js'}}
-      </div>
-    </div>
-
-    <div class='example'>
       <div class='title'>DOM events</div>
       <div class='demo'>
         {{! BEGIN-SNIPPET password-dom-events }}
@@ -175,25 +157,6 @@
         <br>
         <div>Controller</div>
         {{code-snippet name='password-support-events.js'}}
-      </div>
-    </div>
-
-    <div class='example'>
-      <div class='title'>Deprecated events</div>
-      <div class='demo'>
-        {{! BEGIN-SNIPPET password-deprecated-events }}
-        {{frost-password
-          onBlur=(action 'event')
-          onFocus=(action 'event')
-        }}
-        {{! END-SNIPPET }}
-      </div>
-      <div class='snippet'>
-         <div>Template</div>
-        {{code-snippet name='password-deprecated-events.hbs'}}
-        <br>
-        <div>Controller</div>
-        {{code-snippet name='password-dom-events.js'}}
       </div>
     </div>
   </div>

@@ -8,15 +8,6 @@ export default Controller.extend({
   error: true,
 
   actions: {
-    // BEGIN-SNIPPET text-legacy-events
-    legacy (attrs) {
-      this.get('notifications').success(`id: ${attrs.id}, value: ${attrs.value}`, {
-        autoClear: true,
-        clearDuration: 2000
-      })
-    },
-    // END-SNIPPET text-legacy-events
-
     // BEGIN-SNIPPET text-support-events
     support (type, value) {
       this.get('notifications').success(`${type}: ${value}`, {
