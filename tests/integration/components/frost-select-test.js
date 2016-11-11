@@ -1141,7 +1141,6 @@ describeComponent(...integration('frost-select'), function () {
       })
 
       it('can find items by index, label and value', function (done) {
-        // $hook('select-list-input').click()
         return wait().then(() => {
           expect($hook('select-item', {index: 0})).to.have.length(1)
           expect($hook('select-item', {label: 'Foo'})).to.have.length(1)
