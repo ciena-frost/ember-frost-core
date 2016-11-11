@@ -457,47 +457,17 @@ describeComponent(...integration('frost-multi-select'), function () {
         expect(onFocus.callCount, 'onFocus is called').to.equal(1)
       })
 
-      // FIX ME
-      /*
       describe('when first item clicked', function () {
-        it('renders as expected', function (done) {
-          $hook('select-item-checkbox', {index: 0}).click()
-          return wait().then(() => {
-            debugger
-
-            expectSelectWithState('select', {
-              opened: true,
-              items: ['Foo', 'Bar'],
-              text: 'Foo'
-            })
-
-            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-            expect(onChange.callCount, 'onChange is called').to.equal(1)
-            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
-
-            expect(
-              onChange.lastCall.args[0],
-              'informs consumer of selected value'
-            )
-              .to.eql(['foo'])
-              done()
-          })
-        })
-      })
-
-      describe('when second item clicked', function () {
-        beforeEach(function () {
+        beforeEach(() => {
           [onBlur, onChange, onFocus].forEach((func) => func.reset())
-          $hook('select-item-1').click()
+          $hook('select-item', {index: 0}).trigger('mousedown')
         })
-
         it('renders as expected', function () {
           expectSelectWithState('select', {
-            focused: true,
-            opened: false,
-            text: 'Bar'
+            opened: true,
+            items: ['Foo', 'Bar'],
+            text: 'Foo'
           })
-
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
           expect(onChange.callCount, 'onChange is called').to.equal(1)
           expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
@@ -506,10 +476,36 @@ describeComponent(...integration('frost-multi-select'), function () {
             onChange.lastCall.args[0],
             'informs consumer of selected value'
           )
-            .to.eql(['bar'])
+            .to.eql(['foo'])
         })
       })
-      */
+
+      describe('when second item clicked', function () {
+        beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+          $hook('select-item', {index: 0}).trigger('mousedown')
+        })
+
+        it('renders as expected', function (done) {
+          $hook('select-item', {index: 1}).trigger('mousedown')
+          expectSelectWithState('select', {
+            opened: true,
+            items: ['Foo', 'Bar'],
+            text: 'Foo, Bar'
+          })
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'onChange is called').to.equal(2)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+
+          expect(
+            onChange.lastCall.args[0],
+            'informs consumer of selected value'
+          )
+            .to.eql(['foo', 'bar'])
+          done()
+        })
+      })
+
       describe('when escape key pressed', function () {
         beforeEach(function () {
           [onBlur, onChange, onFocus].forEach((func) => func.reset())
