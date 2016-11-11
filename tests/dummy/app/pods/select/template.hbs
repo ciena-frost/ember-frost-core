@@ -82,6 +82,7 @@
         {{frost-select
           autofocus=true
           data=data
+          hook='mySelect'
         }}
       </div>
       <div class="snippet">
@@ -89,6 +90,7 @@
 {{frost-select
   autofocus=true
   data=data
+  hook='mySelect'
 }}
 ```"}}
       </div>
@@ -99,6 +101,7 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
           placeholder="Superhero"
         }}
       </div>
@@ -106,6 +109,7 @@
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
   placeholder='Superhero'
 }}
 ```"}}
@@ -117,6 +121,7 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
           selected=selectedIndex
         }}
       </div>
@@ -124,6 +129,7 @@
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
   selected=selectedIndex
 }}
 ```"}}
@@ -135,6 +141,7 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
           selectedValue=preSelectedValue
         }}
       </div>
@@ -142,6 +149,7 @@
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
   selectedValue=preSelectedValue
 }}
 ```"}}
@@ -158,6 +166,7 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
           selected=selectedIndex
           error=true
         }}
@@ -166,6 +175,7 @@
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
   selected=selectedIndex
   error=true
 }}
@@ -178,6 +188,7 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
           selectedValue=preSelectedValue
           disabled=true
         }}
@@ -186,6 +197,7 @@
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
   selectedValue=preSelectedValue
   disabled=true
 }}
@@ -203,6 +215,7 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
           onBlur=(action 'onBlurHandler')
         }}
       </div>
@@ -210,6 +223,7 @@
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
   onBlur=(action 'onBlurHandler')
 }}
 ```"}}
@@ -221,6 +235,7 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
           onChange=(action 'onChangeHandler')
         }}
       </div>
@@ -228,6 +243,7 @@
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
   onChange=(action 'onChangeHandler')
 }}
 ```"}}
@@ -239,6 +255,7 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
           selectedValue=externalSelectedValue
           onChange=(action 'onChangeHandler')
           onInput=(action 'onInputHandler')
@@ -248,6 +265,7 @@
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
   onChange=(action 'onChangeHandler')
   onInput=(action 'onInputHandler')
 }}
@@ -299,6 +317,7 @@
         {{frost-multi-select
           autofocus=true
           data=data
+          hook='myMultiSelect'
         }}
       </div>
       <div class="snippet">
@@ -306,6 +325,7 @@
 {{frost-multi-select
   autofocus=true
   data=data
+  hook='myMultiSelect'
 }}
 ```"}}
       </div>
@@ -316,6 +336,7 @@
       <div class="demo">
         {{frost-multi-select
           data=data
+          hook='myMultiSelect'
           placeholder="Superheroes"
         }}
       </div>
@@ -323,6 +344,7 @@
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
+  hook='myMultiSelect'
   placeholder='Superheroes'
 }}
 ```"}}

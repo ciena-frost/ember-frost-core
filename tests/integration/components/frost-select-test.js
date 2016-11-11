@@ -1,20 +1,28 @@
 import {expect} from 'chai'
-
 import {
   expectSelectWithState,
   filterSelect
 } from 'dummy/tests/helpers/ember-frost-core'
-
 import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
 import Ember from 'ember'
 const {$} = Ember
 import keyCodes from 'ember-frost-core/utils/keycodes'
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW, TAB} = keyCodes
-import {$hook, initialize} from 'ember-hook'
-import {describeComponent, it} from 'ember-mocha'
+import {
+  $hook,
+  initialize as initializeHook
+} from 'ember-hook'
+import {
+  describeComponent,
+  it
+} from 'ember-mocha'
 import wait from 'ember-test-helpers/wait'
 import hbs from 'htmlbars-inline-precompile'
-import {afterEach, beforeEach, describe} from 'mocha'
+import {
+  afterEach,
+  beforeEach,
+  describe
+} from 'mocha'
 import sinon from 'sinon'
 
 /**
@@ -63,7 +71,7 @@ describeComponent(...integration('frost-select'), function () {
   let onBlur, onChange, onFocus, sandbox
 
   beforeEach(function () {
-    initialize()
+    initializeHook()
     sandbox = sinon.sandbox.create()
 
     onBlur = sandbox.spy()
@@ -595,7 +603,7 @@ describeComponent(...integration('frost-select'), function () {
         expect(onFocus.callCount, 'onFocus is called').not.to.equal(0)
       })
 
-      describe('programitcally blur component', function () {
+      describe('programatically blur component', function () {
         beforeEach(function () {
           [onBlur, onChange, onFocus].forEach((func) => func.reset())
           blur($hook('select'))
@@ -870,7 +878,7 @@ describeComponent(...integration('frost-select'), function () {
         describe('when first item clicked', function () {
           beforeEach(function () {
             [onBlur, onChange, onFocus].forEach((func) => func.reset())
-            $hook('select-item-0').trigger('mousedown')
+            $hook('select-item', {index: 0}).trigger('mousedown')
           })
 
           it('renders as expected', function () {
@@ -895,7 +903,7 @@ describeComponent(...integration('frost-select'), function () {
         describe('when second item clicked', function () {
           beforeEach(function () {
             [onBlur, onChange, onFocus].forEach((func) => func.reset())
-            $hook('select-item-1').trigger('mousedown')
+            $hook('select-item', {index: 1}).trigger('mousedown')
           })
 
           it('renders as expected', function () {
@@ -1119,12 +1127,29 @@ describeComponent(...integration('frost-select'), function () {
   describe('ember-hook selectors', function () {
     describe('when dropdown is open', function () {
       beforeEach(function () {
+        this.set('data', [
+          {label: 'Foo', value: 'foo'},
+          {label: 'Bar', value: 'bar'},
+          {label: 'Baz', value: 'baz'},
+          {label: 'Ba ba black sheep', value: 'sheep'}
+        ])
         $hook('select').click()
       })
 
       it('can find dropdown input', function () {
         expect($hook('select-list-input')).to.have.length(1)
       })
+
+      it('can find items by index, label and value', function (done) {
+        // $hook('select-list-input').click()
+        return wait().then(() => {
+          expect($hook('select-item', {index: 0})).to.have.length(1)
+          expect($hook('select-item', {label: 'Foo'})).to.have.length(1)
+          expect($hook('select-item', {value: 'foo'})).to.have.length(1)
+          done()
+        })
+      })
+
     })
   })
 })
