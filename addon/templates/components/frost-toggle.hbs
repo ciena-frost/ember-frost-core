@@ -14,28 +14,28 @@
   for={{concat elementId '-input'}}
   data-test={{hook (concat hook '-toggle-label')}}
 
-  {{action (or _eventProxy.change 'noop') on='change'}}
-  {{action '_onClick' on='click'}}
-  {{action (or _eventProxy.doubleClick 'noop') on='doubleClick'}}
-  {{action (or _eventProxy.focusIn 'noop') on='focusIn'}}
-  {{action (or _eventProxy.focusOut 'noop') on='focusOut'}}
-  {{action (or _eventProxy.input 'noop') on='input'}}
-  {{action (or _eventProxy.keyDown 'noop') on='keyDown'}}
-  {{action (or _eventProxy.keyPress 'noop') on='keyPress'}}
-  {{action (or _eventProxy.keyUp 'noop') on='keyUp'}}
-  {{action (or _eventProxy.mouseDown 'noop') on='mouseDown'}}
-  {{action (or _eventProxy.mouseEnter 'noop') on='mouseEnter'}}
-  {{action (or _eventProxy.mouseLeave 'noop') on='mouseLeave'}}
-  {{action (or _eventProxy.mouseMove 'noop') on='mouseMove'}}
-  {{action (or _eventProxy.mouseUp 'noop') on='mouseUp'}}
-  {{action (or _eventProxy.submit 'noop') on='submit'}}
-  {{action (or _eventProxy.touchCancel 'noop') on='touchCancel'}}
-  {{action (or _eventProxy.touchEnd 'noop') on='touchEnd'}}
-  {{action (or _eventProxy.touchMove 'noop') on='touchMove'}}
-  {{action (or _eventProxy.touchStart 'noop') on='touchStart'}}
+  onChange={{action (or _eventProxy.change 'noop')}}
+  onClick={{action '_onClick'}}
+  onDoubleClick={{action (or _eventProxy.doubleClick 'noop')}}
+  onFocusIn={{action (or _eventProxy.focusIn 'noop')}}
+  onFocusOut={{action (or _eventProxy.focusOut 'noop')}}
+  onInput={{action (or _eventProxy.input 'noop')}}
+  onKeyDown={{action (or _eventProxy.keyDown 'noop')}}
+  onKeyPress={{action (or _eventProxy.keyPress 'noop')}}
+  onKeyUp={{action (or _eventProxy.keyUp 'noop')}}
+  onMouseDown={{action (or _eventProxy.mouseDown 'noop')}}
+  onMouseEnter={{action (or _eventProxy.mouseEnter 'noop')}}
+  onMouseLeave={{action (or _eventProxy.mouseLeave 'noop')}}
+  onMouseMove={{action (or _eventProxy.mouseMove 'noop')}}
+  onMouseUp={{action (or _eventProxy.mouseUp 'noop')}}
+  onSubmit={{action (or _eventProxy.submit 'noop')}}
+  onTouchCancel={{action (or _eventProxy.touchCancel 'noop')}}
+  onTouchEnd={{action (or _eventProxy.touchEnd 'noop')}}
+  onTouchMove={{action (or _eventProxy.touchMove 'noop')}}
+  onTouchStart={{action (or _eventProxy.touchStart 'noop')}}
 
-  {{action (or _eventProxy.enter 'noop') on='enter'}}
-  {{action (or _eventProxy.escape-press 'noop') on='escape-press'}}
+  onEnter={{action (or _eventProxy.enter 'noop')}}
+  onEscape{{action (or _eventProxy.escape-press 'noop')}}
 >
   <div class="frost-toggle-text off" data-test={{hook (concat hook '-toggle-text-off')}}>{{if falseLabel _falseLabel 'Off'}}</div>
   <div class="frost-toggle-text on" data-test={{hook (concat hook '-toggle-text-on')}}>{{if trueLabel _trueLabel 'On'}}</div>

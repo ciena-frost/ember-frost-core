@@ -102,12 +102,10 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
     return this._preferBoolean(value) === this.get('_trueValue')
   },
 
-  // == Events ================================================================
-
   // == Actions ================================================================
   actions: {
     /* eslint-disable complexity */
-    _onClick () {
+    _onClick (event) {
       if (get(this, 'disabled')) return
 
       if (!isSimpleClick(event)) {

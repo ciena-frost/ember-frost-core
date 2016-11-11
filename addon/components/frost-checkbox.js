@@ -11,8 +11,6 @@ import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-checkbox'
 
 export default Component.extend(PropTypeMixin, {
-  // == Dependencies ==========================================================
-
   // == Properties ============================================================
 
   classNames: ['frost-checkbox'],
@@ -40,8 +38,6 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
-  // == Computed properties  ===================================================
-
   // == Functions =============================================================
 
   /* Ember.Component method */
@@ -52,7 +48,6 @@ export default Component.extend(PropTypeMixin, {
       })
     }
   },
-
   init () {
     this._super(...arguments)
     this._setInputId()
@@ -103,8 +98,8 @@ export default Component.extend(PropTypeMixin, {
 
     input () {
       let id = get(this, 'value')
-      if (typeOf(this.attrs['onInput']) === 'function') {
-        this.attrs['onInput']({
+      if (typeOf(get(this, 'onInput')) === 'function') {
+        get(this, 'onInput')({
           id: isEmpty(id) ? get(this, 'elementId') : id,
           value: this.$('input').prop('checked')
         })

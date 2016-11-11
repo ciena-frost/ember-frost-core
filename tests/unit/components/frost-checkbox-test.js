@@ -15,7 +15,7 @@ describeComponent(
   'Unit: FrostCheckboxComponent',
   {
     needs: [
-      'component:one-way-checkbox'
+      'helper:hook'
     ],
 
     unit: true
