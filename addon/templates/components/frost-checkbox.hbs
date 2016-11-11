@@ -1,12 +1,14 @@
-{{one-way-checkbox
-    id=inputId
-    class='input'
-    checked=checked
-    disabled=disabled
-    name=name
-    update=(action 'input')
-}}
-<label for={{inputId}} class='label' onBlur={{action 'onBlur'}} tabIndex=0>
+<input
+  class='input'
+  id={{inputId}}
+  checked={{checked}}
+  disabled={{disabled}}
+  name={{name}}
+  type='checkbox'
+  data-test={{hook (concat hook '-checkbox-input')}}
+  {{action 'input' on='change'}}
+>
+<label for={{inputId}} class='label' onBlur={{action 'onBlur'}} tabIndex=0 data-test={{hook (concat hook '-checkbox-label')}}>
   {{#if hasBlock}}
     {{yield}}
   {{else}}
