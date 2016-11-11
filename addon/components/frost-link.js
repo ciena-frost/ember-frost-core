@@ -16,7 +16,6 @@ import layout from '../templates/components/frost-link'
  */
 const validDesigns = [
   'info-bar',
-  'in-line',
   'inline'
 ]
 
@@ -139,7 +138,7 @@ export default LinkComponent.extend(PropTypeMixin, {
         classes.push('info-bar')
         break
       case 'inline':
-        classes.push('in-line')
+        classes.push('inline')
         break
       default:
         // no class to add for invalid design
