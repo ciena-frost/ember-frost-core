@@ -488,8 +488,6 @@ describeComponent(...integration('frost-multi-select'), function () {
 
         it('renders as expected', function (done) {
           $hook('select-item', {index: 1}).trigger('mousedown')
-
-          console.log(this.$('.frost-select-text'))
           expectSelectWithState('select', {
             opened: true,
             items: ['Foo', 'Bar'],
