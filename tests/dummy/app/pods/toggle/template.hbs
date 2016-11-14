@@ -7,6 +7,7 @@
             <div class='demo'>
               {{! BEGIN-SNIPPET toggle-action }}
               {{frost-toggle
+                hook='myToggle'
                 value=value1
                 onClick=(action 'toggleHandler1')
               }}

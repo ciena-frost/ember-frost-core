@@ -4,6 +4,7 @@ const {
   Component,
   get,
   isPresent,
+  typeOf,
   ViewUtils: {
     isSimpleClick
   }
@@ -26,23 +27,23 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
   ],
   classNames: ['frost-toggle'],
   layout: layout,
-  size: 'medium',
 
   propTypes: {
     autofocus: PropTypes.bool,
     disabled: PropTypes.bool,
-    hook: PropTypes.string,
-    value: PropTypes.oneOfType([
-      PropTypes.bool,
-      PropTypes.string,
-      PropTypes.number
-    ]),
     falseLabel: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string,
       PropTypes.number
     ]),
+    hook: PropTypes.string,
+    size: PropTypes.string,
     trueLabel: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.string,
+      PropTypes.number
+    ]),
+    value: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string,
       PropTypes.number
@@ -53,10 +54,13 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
     return {
       autofocus: false,
       disabled: false,
-      _trueLabel: typeof this.get('trueLabel') === 'string' || typeof this.get('trueLabel') === 'number'
-                ? this.get('trueLabel') : true,
-      _falseLabel: typeof this.get('falseLabel') === 'string' || typeof this.get('falseLabel') === 'number'
-                ? this.get('falseLabel') : false
+      _falseLabel: get(this, 'falseLabel') !== undefined &&
+      (typeOf(get(this, 'falseLabel') === 'string') || typeOf(get(this, 'falseLabel') === 'number'))
+                ? get(this, 'falseLabel') : false,
+      size: 'medium',
+      _trueLabel: get(this, 'trueLabel') !== undefined &&
+      (typeOf(get(this, 'trueLabel') === 'string') || typeOf(get(this, 'trueLabel') === 'number'))
+                ? get(this, 'trueLabel') : true
     }
   },
 
@@ -64,8 +68,8 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
   init () {
     this._super(...arguments)
     assert(`Same value has been assigned to both ${this.toString()}.trueValue and ${this.toString()}.falseValue`,
-      (typeof this.attrs['trueValue'] === 'undefined' && typeof this.attrs['falseValue'] === 'undefined') ||
-      this.attrs['trueValue'] !== this.attrs['falseValue'])
+      (typeOf(get(this, 'trueValue') === 'undefined') && typeOf(get(this, 'falseValue') === 'undefined')) ||
+      get(this, 'trueValue') !== get(this, 'falseValue'))
   },
 
   // == Functions ==============================================================
@@ -99,7 +103,7 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
 
   @computed('value')
   _isToggled (value) {
-    return this._preferBoolean(value) === this.get('_trueValue')
+    return this._preferBoolean(value) === get(this, '_trueValue')
   },
 
   // == Actions ================================================================
