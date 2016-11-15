@@ -61,6 +61,7 @@ export default LinkComponent.extend(PropTypeMixin, {
     hook: PropTypes.string,
     icon: PropTypes.string,
     priority: PropTypes.oneOf(validPriorities),
+    routeNames: PropTypes.array,
     size: PropTypes.oneOf(validSizes),
     linkTitle: PropTypes.string,
     onClick: PropTypes.func
@@ -71,6 +72,7 @@ export default LinkComponent.extend(PropTypeMixin, {
       design: '',
       icon: '',
       priority: '',
+      routeNames: [],
       size: '',
       linkTitle: ''
     }
@@ -147,16 +149,65 @@ export default LinkComponent.extend(PropTypeMixin, {
   },
 
   /**
-   * Set whether the primary link opens content in a new tab
-   * @private
+   * Returns true if we should open the link in the current tab and false otherwise.
+   * @returns {boolean} true if we should open the link in the current tab and false otherwise
+   */
+  _shouldOpenInSameTab () {
+    return !(get(this, 'priority') === 'primary' && get(this, 'disabled') === false)
+  },
+
+  /**
+   * Returns true if we need to open multiple links on click and false otherwise.
+   * @returns {boolean} true if we need to open multiple links on click and false otherwise
+   */
+  _hasMultipleLinks () {
+    return get(this, 'routeNames') !== undefined && get(this, 'routeNames').length !== 0
+  },
+
+  /**
+   * Change basic link component properties to open link(s) in new tabs.
    * @returns {undefined}
    */
-  _setTarget () {
-    if (
-      get(this, 'priority') === 'primary' &&
-      get(this, 'disabled') === false
-    ) {
-      set(this, 'target', '_blank')
+  _setupRouting () {
+    if (!this._shouldOpenInSameTab()) {
+      if (this._hasMultipleLinks()) {
+        const params = get(this, 'params')
+        // When we have the block format, LinkComponent expect a minimum of 1 element in params so we hardcode the
+        // first parameter
+        if (params && params.length === 0) {
+          params.push(get(this, '_routing.currentRouteName'))
+        }
+
+        // Remove the link destination
+        set(this, 'href', null)
+
+        if (get(this, 'routeName')) {
+          Logger.warn('Warning: The `routeNames` property takes precedence over `routeName`.')
+        }
+      } else {
+        set(this, 'target', '_blank')
+      }
+    }
+  },
+
+  /**
+   * Open multiple links.
+   * @returns {undefined}
+   */
+  _openLinks () {
+    let routing = get(this, '_routing')
+    let models = get(this, 'models')
+    let queryParams = get(this, 'queryParams.values')
+
+    const routeNames = get(this, 'routeNames')
+
+    if (routeNames) {
+      routeNames.forEach((routeName) => {
+        const windowHandler = window.open(routing.generateURL(routeName, models, queryParams))
+        if (!windowHandler) {
+          Logger.warn('Warning: Make sure that the pop-ups are not blocked')
+        }
+      })
     }
   },
 
@@ -164,14 +215,16 @@ export default LinkComponent.extend(PropTypeMixin, {
 
   init () {
     this._super(...arguments)
-
-    this._setTarget()
+    this._setupRouting()
   },
 
   click () {
+    if (this._hasMultipleLinks()) {
+      this._openLinks()
+    }
+
     if (this.onClick) {
       this.onClick()
     }
   }
-
 })
