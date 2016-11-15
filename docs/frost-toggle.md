@@ -7,14 +7,19 @@
 ### toggle
 | Attribute | Type | Value | Description |
 | --------- | ---- | ----- | ----------- |
-| `autofocus` | `boolean` | `false` | **default** - toggle component |
-| |  | `true` | sets focus on toggle component |
 | `disabled` | `boolean` | `false` | **default** - toggle component |
 | | | `true` | disable toggle component |
+| `falseLabel` | `boolean` or `string` or `number` | `<value>` | the label for the false value of the toggle component |
+| `falseValue` | `boolean` or `string` or `number` | `<value>` | the false value of the toggle component |
+| `trueLabel` | `boolean` or `string` or `number` | `<value>` | the label for the true value of the toggle component |
+| `trueValue` | `boolean` or `string` or `number` | `<value>` | true value of the toggle component |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
+| `onClick` | `string` | `<action-name>` | triggers associated action when the toggle is clicked |
 | `value` | `boolean` or `string` or `number` | `<value>` | value of the toggle component |
-| `falseLabel` | `boolean` or `string` or `number` | `<value>` | **default** to `false` - the label for the false value of the toggle component |
-| `trueLabel` | `boolean` or `string` or `number` | `<value>` | **default** to `true` - the label for the true value of the toggle component |
+
+### Event Handlers
+A comprehensive list of [HTML event handlers](frost-events.md) are available to choose from based on your needs.
+
 
 ## Testing with ember-hook
 If a hook is set on radio-group, a concatenated hook will be created as follows:
