@@ -55,6 +55,38 @@ describeComponent(
       ).to.eql(title)
     })
 
+    describe('RouteNames property', function () {
+      it('target is not set', function () {
+        this.render(hbs`
+          {{frost-link 'title'
+            routeNames=(array 'testRoute')
+            priority='primary'
+          }}
+        `)
+
+        expect(
+          this.$('.frost-link').attr('target'),
+          'target should not be set set'
+        ).to.be.empty
+      })
+
+      it('target is not set in block format', function () {
+        this.render(hbs`
+          {{#frost-link
+            routeNames=(array 'testRoute')
+            priority='primary'
+          }}
+            title
+          {{/frost-link}}
+        `)
+
+        expect(
+          this.$('.frost-link').attr('target'),
+          'target should not be set set'
+        ).to.be.empty
+      })
+    })
+
     describe('Priority property', function () {
       it('has primary class set', function () {
         this.render(hbs`
