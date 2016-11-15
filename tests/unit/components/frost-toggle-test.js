@@ -31,11 +31,6 @@ describeComponent(
 
     it('sets default property values correctly', function () {
       expect(
-        component.get('autofocus'),
-        'autofocus: false'
-      ).to.be.false
-
-      expect(
         component.get('disabled'),
         'disabled: false'
       ).to.be.false

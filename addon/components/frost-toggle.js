@@ -29,7 +29,6 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
   layout: layout,
 
   propTypes: {
-    autofocus: PropTypes.bool,
     disabled: PropTypes.bool,
     falseLabel: PropTypes.oneOfType([
       PropTypes.bool,
@@ -52,7 +51,6 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
 
   getDefaultProps () {
     return {
-      autofocus: false,
       disabled: false,
       _falseLabel: get(this, 'falseLabel') !== undefined &&
       (typeOf(get(this, 'falseLabel') === 'string') || typeOf(get(this, 'falseLabel') === 'number'))
