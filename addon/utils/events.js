@@ -1,8 +1,5 @@
 import Ember from 'ember'
-const {
-  $,
-  deprecate
-} = Ember
+const {deprecate} = Ember
 
 export default {
   addProperty: function (event, frostEvent) {
@@ -46,13 +43,6 @@ export default {
         }
       })
     })
-  },
-
-  cloneEvent: function (event, target) {
-    let newEvent = $.Event(null, event)
-    let newTarget = $.clone(target)
-    newEvent.target = newTarget
-    return newEvent
   },
 
   map: {

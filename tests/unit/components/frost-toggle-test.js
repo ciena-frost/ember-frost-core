@@ -2,6 +2,7 @@ import {expect} from 'chai'
 import Ember from 'ember'
 const {run} = Ember
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
+import * as utils from 'ember-frost-core/utils/utils'
 import {describeComponent} from 'ember-mocha'
 import PropTypeMixin from 'ember-prop-types'
 import {
@@ -9,6 +10,7 @@ import {
   describe,
   it
 } from 'mocha'
+import sinon from 'sinon'
 
 describeComponent(
   'frost-toggle',
@@ -185,6 +187,60 @@ describeComponent(
           component.get('_isToggled'),
           '_isToggled returns false'
         ).to.be.false
+      })
+    })
+
+    describe('_changeTarget()', function () {
+      it('sets toggled state to "false"', function () {
+        const cloneEventStub = sinon.stub(utils, 'cloneEvent').returns({
+          target: { value: null }
+        })
+
+        run(() => {
+          component.set('_trueValue', 'testValueOn')
+          component.set('value', 'testValueOn')
+          component.set('_falseValue', 'testValueOff')
+        })
+
+        expect(
+          component._changeTarget({}, {}),
+          'target object is set to "false" toggled state'
+        ).to.eql({
+          target: {
+            state: false,
+            value: 'testValueOff'
+          }
+        })
+
+        expect(
+          cloneEventStub.called,
+          'cloneEvent() method is called'
+        ).to.be.true
+
+        utils.cloneEvent.restore()
+      })
+
+      it('sets toggled state to "true"', function () {
+        sinon.stub(utils, 'cloneEvent').returns({
+          target: { value: null }
+        })
+
+        run(() => {
+          component.set('_trueValue', 'testValueOn')
+          component.set('value', 'testValueOff')
+          component.set('_falseValue', 'testValueOff')
+        })
+
+        expect(
+          component._changeTarget({}, {}),
+          'target object is set to "true" toggled state'
+        ).to.eql({
+          target: {
+            state: true,
+            value: 'testValueOn'
+          }
+        })
+        utils.cloneEvent.restore()
       })
     })
   }
