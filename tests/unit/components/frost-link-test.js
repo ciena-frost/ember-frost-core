@@ -324,7 +324,7 @@ describeComponent(
       })
     })
 
-    describe('_updateProperties()', function () {
+    describe('_setupRouting()', function () {
       it('do nothing when opening a new tab is not necessary', function () {
         const href = 'my-url'
 
@@ -333,7 +333,7 @@ describeComponent(
           component.set('_shouldOpenInSameTab', function () { return true })
         })
 
-        component._updateProperties()
+        component._setupRouting()
 
         expect(
           component.get('href'),
@@ -347,7 +347,7 @@ describeComponent(
           component.set('_hasMultipleLinks', function () { return false })
         })
 
-        component._updateProperties()
+        component._setupRouting()
 
         expect(
           component.get('target'),
@@ -368,7 +368,7 @@ describeComponent(
           component.set('_hasMultipleLinks', function () { return true })
         })
 
-        component._updateProperties()
+        component._setupRouting()
 
         expect(
           component.get('params.0'),
@@ -381,7 +381,7 @@ describeComponent(
         ).to.eql(null)
       })
 
-      describe('display warning on _updateProperties', function () {
+      describe('display warning on _setupRouting', function () {
         let EmberLoggerSpy
 
         beforeEach(function () {
@@ -403,7 +403,7 @@ describeComponent(
             component.set('_hasMultipleLinks', function () { return true })
           })
 
-          component._updateProperties()
+          component._setupRouting()
 
           expect(
             EmberLoggerSpy.called,

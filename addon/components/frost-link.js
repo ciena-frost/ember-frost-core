@@ -168,7 +168,7 @@ export default LinkComponent.extend(PropTypeMixin, {
    * Change basic link component properties to open link(s) in new tabs.
    * @returns {undefined}
    */
-  _updateProperties () {
+  _setupRouting () {
     if (!this._shouldOpenInSameTab()) {
       if (this._hasMultipleLinks()) {
         const params = get(this, 'params')
@@ -215,7 +215,7 @@ export default LinkComponent.extend(PropTypeMixin, {
 
   init () {
     this._super(...arguments)
-    this._updateProperties()
+    this._setupRouting()
   },
 
   click () {

@@ -65,7 +65,7 @@ describeComponent(
         `)
 
         expect(
-          this.$('.frost-link').attr('target'),
+          this.$('.frost-link').prop('target'),
           'target should not be set set'
         ).to.be.empty
       })
@@ -81,7 +81,7 @@ describeComponent(
         `)
 
         expect(
-          this.$('.frost-link').attr('target'),
+          this.$('.frost-link').prop('target'),
           'target should not be set set'
         ).to.be.empty
       })
