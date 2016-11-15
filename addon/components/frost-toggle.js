@@ -67,9 +67,7 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
   // == Events ================================================================
   init () {
     this._super(...arguments)
-    assert(`Same value has been assigned to both ${this.toString()}.trueValue and ${this.toString()}.falseValue`,
-      (typeOf(get(this, 'trueValue') === 'undefined') && typeOf(get(this, 'falseValue') === 'undefined')) ||
-      get(this, 'trueValue') !== get(this, 'falseValue'))
+    this._setupAssertion()
   },
 
   // == Functions ==============================================================
@@ -88,6 +86,12 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
     if (value === 'false') return false
 
     return value
+  },
+
+  _setupAssertion () {
+    assert(`Same value has been assigned to both ${this.toString()}.trueValue and ${this.toString()}.falseValue`,
+      (typeOf(get(this, 'trueValue')) === 'undefined' && typeOf(get(this, 'falseValue')) === 'undefined') ||
+      get(this, 'trueValue') !== get(this, 'falseValue'))
   },
 
   // == Computed Properties =====================================================

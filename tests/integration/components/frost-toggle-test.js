@@ -53,6 +53,20 @@ describeComponent(
       )
     })
 
+    it('throws assertion error', function () {
+      expect(
+        () => {
+          this.render(hbs`
+            {{frost-toggle
+              trueValue='testValue'
+              falseValue='testValue'
+            }}
+          `)
+        },
+        'assertion thrown when trueValue and falseValue are same value'
+      ).to.throw(/Same value has been assigned/)
+    })
+
     it('sets disabled property', function () {
       this.render(hbs`
         {{frost-toggle

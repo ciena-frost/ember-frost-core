@@ -20,7 +20,9 @@ describeComponent(
     let component
 
     beforeEach(function () {
-      component = this.subject()
+      component = this.subject({
+        _setupAssertion: function () {}
+      })
     })
 
     it('includes className frost-toggle', function () {
