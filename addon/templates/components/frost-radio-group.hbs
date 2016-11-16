@@ -1,10 +1,24 @@
 {{#if hasBlock}}
-  {{yield}}
+  {{yield (hash
+    button=(component 'frost-radio-button'
+        groupId=id
+        receivedHook=hook
+        selectedValue=selectedValue
+        onChange=onChange
+      )
+    )
+  }}
 {{else}}
-  {{#each inputs as |input|}}
+  {{#each meshedInputs as |input|}}
     {{#frost-radio-button
+      groupId=id
+      selectedValue=selectedValue
       disabled=input.disabled
+      receivedHook=hook
+      required=input.required
+      size=input.size
       value=input.value
+      onChange=onChange
     }}
       {{if input.label input.label input.value}}
     {{/frost-radio-button}}
