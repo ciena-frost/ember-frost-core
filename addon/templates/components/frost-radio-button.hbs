@@ -1,8 +1,9 @@
 <label>
+  {{log hookQualifiers}}
   <input
     checked={{checked}}
     class="frost-radio-button-input"
-    data-test={{hook (concat hook '-input')}}
+    data-test={{hook (concat hook '-input') value=value}}
     disabled={{disabled}}
     required={{required}}
     type="radio"
@@ -18,5 +19,9 @@
       S5.6,25,12.5,25S25,19.4,25,12.5S19.4,0,12.5,0L12.5,0z" />
     <circle class="inner" cx="12.5" cy="12.5" r="7.5" />
   </svg>
-  {{yield}}
+  {{#if hasBlock}}
+    {{yield}}
+  {{else}}
+    {{label}}
+  {{/if}}
 </label>

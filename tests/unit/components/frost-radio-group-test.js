@@ -1,9 +1,14 @@
 /* jshint expr:true */
 import { expect } from 'chai'
+import Ember from 'ember'
+const {
+  run
+} = Ember
 import { describeComponent } from 'ember-mocha'
 import PropTypeMixin from 'ember-prop-types'
 import {
   beforeEach,
+  describe,
   it
 } from 'mocha'
 
@@ -44,6 +49,11 @@ describeComponent(
         component.get('value'),
         'value: null'
       ).to.be.null
+
+      expect(
+        component.get('selectedValue'),
+        'selectedValue: undefined'
+      ).to.be.undefined
     })
 
     it('has the expect Mixins', function () {
@@ -51,6 +61,28 @@ describeComponent(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
       ).to.be.true
+    })
+
+    describe('"meshedInputs" computed property', function () {
+      it('is not set when inputs is not set', function () {
+        expect(
+          component.get('meshedInputs'),
+          '"meshedInputs" is returning an empty list'
+        ).to.be.empty
+      })
+
+      it('is set when inputs is set', function () {
+        const inputs = [{
+          value: 'test', label: 'test'
+        }]
+
+        run(() => component.set('inputs', inputs))
+
+        expect(
+          component.get('meshedInputs')[0].size,
+          'default size is set in "meshedInputs"'
+        ).to.eq('small')
+      })
     })
   }
 )

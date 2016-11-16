@@ -7,16 +7,16 @@ export default Controller.extend({
 
   inlineValue: 'a',
 
-  sampleList1: ['a', 'b', 'c', 'd', 'e'],
-  sampleList2: ['a', 'b', 'c', 'd', 'e'],
-  sampleList3: ['a', 'b', 'c', 'd', 'e'],
-  sampleList4: ['a', 'b', 'c', 'd', 'e'],
-  sampleList5: ['a', 'b', 'c', 'd', 'e'],
-  sampleList6: ['a', 'b', 'c', 'd', 'e'],
-  sampleList7: ['a', 'b', 'c', 'd', 'e'],
+  sampleList: [
+    {label: 'a', value: 'a'},
+    {label: 'b', value: 'b'},
+    {label: 'c', value: 'c'},
+    {label: 'd', value: 'd'},
+    {label: 'e', value: 'e'}
+  ],
 
   model: Ember.Object.create({
-    radioGroup1: 'a',
+    radioGroup1: 'c',
     radioGroup2: 'b',
     radioGroup3: 'c',
     radioGroup4: 'd',

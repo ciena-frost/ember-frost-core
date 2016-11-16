@@ -56,14 +56,19 @@ describeComponent(
       ).to.eql(0)
 
       expect(
-        component.get('hook'),
-        'hook: undefined'
-      ).to.be.undefined
-
-      expect(
         component.get('size'),
         'size: small'
       ).to.eql('small')
+
+      expect(
+        component.get('groupId'),
+        'groupId: null'
+      ).to.be.null
+
+      expect(
+        component.get('selectedValue'),
+        'selectedValue: null'
+      ).to.be.null
     })
 
     it('has the expect Mixins', function () {
@@ -75,20 +80,8 @@ describeComponent(
 
     it('sets dependent keys correctly', function () {
       const checkedDependentKeys = [
-        'groupValue',
+        'selectedValue',
         'value'
-      ]
-
-      const groupIdDependentKeys = [
-        'parentView.id'
-      ]
-
-      const groupValueDependentKeys = [
-        'parentView.value'
-      ]
-
-      const onChangeDependentKeys = [
-        'parentView.onChange'
       ]
 
       const tabindexDependentKeys = [
@@ -101,33 +94,16 @@ describeComponent(
       ).to.eql(checkedDependentKeys)
 
       expect(
-        component.groupId._dependentKeys,
-        'Dependent keys are correct for groupId()'
-      ).to.eql(groupIdDependentKeys)
-
-      expect(
-        component.groupValue._dependentKeys,
-        'Dependent keys are correct for groupValue()'
-      ).to.eql(groupValueDependentKeys)
-
-      expect(
-        component.onChange._dependentKeys,
-        'Dependent keys are correct for onChange()'
-      ).to.eql(onChangeDependentKeys)
-
-      expect(
         component.tabindex._dependentKeys,
         'Dependent keys are correct for tabindex()'
       ).to.eql(tabindexDependentKeys)
     })
 
     describe('"checked" computed property', function () {
-      const parentView = Ember.Object.create({
-        'value': 'testValue'
-      })
+      const selectedValue = 'testValue'
 
-      it('is set to true when "groupValue" is equal to "value"', function () {
-        run(() => component.set('parentView', parentView))
+      it('is set to true when "selectedValue" is equal to "value"', function () {
+        run(() => component.set('selectedValue', selectedValue))
 
         expect(
           component.get('checked'),
@@ -135,9 +111,9 @@ describeComponent(
         ).to.be.true
       })
 
-      it('is set to false when "groupValue" is NOT equal to "value"', function () {
+      it('is set to false when "selectedValue" is NOT equal to "value"', function () {
         run(() => {
-          component.set('parentView', parentView)
+          component.set('selectedValue', selectedValue)
           component.set('value', 'newTestValue')
         })
 
@@ -155,6 +131,62 @@ describeComponent(
         component.get('tabindex'),
         'tabindex: -1'
       ).to.eql(-1)
+    })
+
+    describe('"hook" computed property', function () {
+      it('is set when "receivedHook" is not set', function () {
+        const value = 'my-value'
+
+        run(() => component.set('value', value))
+
+        expect(
+          component.get('hook'),
+          'hook: -button-my-value'
+        ).to.eql(`-button-${value}`)
+      })
+
+      it('is set when "receivedHook" is set', function () {
+        const value = 'my-value'
+        const receivedHook = 'my-hook'
+
+        run(() => {
+          component.set('value', value)
+          component.set('receivedHook', receivedHook)
+        })
+
+        expect(
+          component.get('hook'),
+          'hook: my-hook-button-my-value'
+        ).to.eql(`${receivedHook}-button-${value}`)
+      })
+    })
+
+    describe('keyPress', function () {
+      it('"onChange" not called when "disabled" is set', function () {
+        run(() => {
+          component.set('disabled', true)
+        })
+
+        const keyPressed = component.keyPress({keyCode: 13})
+
+        expect(
+          keyPressed,
+          'onChange not called'
+        ).to.be.undefined
+      })
+
+      it('"onChange" not called when "checked" is set', function () {
+        run(() => {
+          component.set('checked', true)
+        })
+
+        const keyPressed = component.keyPress({keyCode: 13})
+
+        expect(
+          keyPressed,
+          'onChange not called'
+        ).to.be.undefined
+      })
     })
   }
 )
