@@ -69,17 +69,16 @@ export default Component.extend(PropTypeMixin, {
     return selectedValue === value
   },
 
-  @computed('value')
+  @computed('value', 'receivedHook')
   /**
    * Determine hook name for radio-button
    * @param {String} value - radio button's value
+   * @param {String} receivedHook - hook received from parent
    * @returns {String} the concatenated hook name
    */
-  hook (value) {
-    const radioGroupHook = get(this, 'receivedHook')
-    if (radioGroupHook) {
-      return `${radioGroupHook}-button-${value}`
-    }
+  hook (value, receivedHook) {
+    const radioGroupHook = receivedHook || ''
+    return `${radioGroupHook}-button-${value}`
   },
 
   @computed('disabled')

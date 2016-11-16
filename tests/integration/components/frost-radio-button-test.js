@@ -25,25 +25,10 @@ describeComponent(
       initialize()
     })
 
-    it('throws assertion error', function () {
-      expect(
-        () => {
-          this.render(hbs`
-            {{frost-radio-button}}
-          `)
-        },
-        'assertion thrown when used without frost-radio-group'
-      ).to.throw(/frost-radio-button/)
-    })
-
     describe('Checked property', function () {
       it('sets checked property', function () {
         this.render(hbs`
-          {{#frost-radio-group
-            value='testValue'
-          }}
-            {{frost-radio-button value='testValue'}}
-          {{/frost-radio-group}}
+          {{frost-radio-button checked=true value='testValue'}}
         `)
 
         expect(
@@ -59,9 +44,7 @@ describeComponent(
 
       it('does not set checked property', function () {
         this.render(hbs`
-          {{#frost-radio-group}}
             {{frost-radio-button value='testValue'}}
-          {{/frost-radio-group}}
         `)
 
         expect(
@@ -76,62 +59,38 @@ describeComponent(
       })
     })
 
-    it('sets disabled property', function () {
-      this.render(hbs`
-        {{#frost-radio-group}}
+    describe('Disabled property', function () {
+      it('sets disabled property', function () {
+        this.render(hbs`
           {{frost-radio-button
             disabled=true
             value='testValue'
           }}
-        {{/frost-radio-group}}
-      `)
+        `)
 
-      expect(
-        this.$('.frost-radio-button').hasClass('disabled'),
-        'disabled class is set'
-      ).to.be.true
+        expect(
+          this.$('.frost-radio-button').hasClass('disabled'),
+          'disabled class is set'
+        ).to.be.true
 
-      expect(
-        this.$('.frost-radio-button-input').prop('disabled'),
-        'disabled class is set'
-      ).to.be.true
+        expect(
+          this.$('.frost-radio-button-input').prop('disabled'),
+          'disabled class is set'
+        ).to.be.true
+      })
     })
 
     describe('Hook property', function () {
       it('sets when passed into radio-button', function () {
         this.render(hbs`
-          {{#frost-radio-group}}
-            {{frost-radio-button
-              hook='my-radio-button'
-              value='testValue'
-            }}
-          {{/frost-radio-group}}
+          {{frost-radio-button
+            hook='my-radio-button'
+            value='testValue'
+          }}
         `)
 
         expect(
           $hook('my-radio-button-input').hasClass('frost-radio-button-input'),
-          'input hook is set'
-        ).to.be.true
-      })
-
-      it('sets when passed into radio-group', function () {
-        this.render(hbs`
-          {{#frost-radio-group
-            hook='my-radio-group'
-          }}
-            {{frost-radio-button
-              value='testValue'
-            }}
-          {{/frost-radio-group}}
-        `)
-
-        expect(
-          $hook('my-radio-group-button-testValue').hasClass('frost-radio-button'),
-          'radio button hook is set'
-        ).to.be.true
-
-        expect(
-          $hook('my-radio-group-button-testValue-input').hasClass('frost-radio-button-input'),
           'input hook is set'
         ).to.be.true
       })
@@ -144,12 +103,10 @@ describeComponent(
         this.set('size', size)
 
         this.render(hbs`
-          {{#frost-radio-group}}
-            {{frost-radio-button
-              size=size
-              value='testValue'
-            }}
-          {{/frost-radio-group}}
+          {{frost-radio-button
+            size=size
+            value='testValue'
+          }}
         `)
 
         expect(
@@ -164,12 +121,10 @@ describeComponent(
         this.set('size', size)
 
         this.render(hbs`
-          {{#frost-radio-group}}
-            {{frost-radio-button
-              size=size
-              value='testValue'
-            }}
-          {{/frost-radio-group}}
+          {{frost-radio-button
+            size=size
+            value='testValue'
+          }}
         `)
 
         expect(
@@ -184,12 +139,10 @@ describeComponent(
         this.set('size', size)
 
         this.render(hbs`
-          {{#frost-radio-group}}
-            {{frost-radio-button
-              size=size
-              value='testValue'
-            }}
-          {{/frost-radio-group}}
+          {{frost-radio-button
+            size=size
+            value='testValue'
+          }}
         `)
 
         expect(
@@ -201,12 +154,10 @@ describeComponent(
 
     it('sets required property', function () {
       this.render(hbs`
-        {{#frost-radio-group}}
-          {{frost-radio-button
-            required=true
-            value='testValue'
-          }}
-        {{/frost-radio-group}}
+        {{frost-radio-button
+          required=true
+          value='testValue'
+        }}
       `)
 
       expect(
@@ -222,9 +173,7 @@ describeComponent(
 
     it('sets type to "radio"', function () {
       this.render(hbs`
-        {{#frost-radio-group}}
-          {{frost-radio-button value='testValue'}}
-        {{/frost-radio-group}}
+        {{frost-radio-button value='testValue'}}
       `)
 
       expect(
@@ -239,17 +188,309 @@ describeComponent(
       this.set('value', value)
 
       this.render(hbs`
-        {{#frost-radio-group}}
-          {{frost-radio-button
-            value=value
-          }}
-        {{/frost-radio-group}}
+        {{frost-radio-button
+          value=value
+        }}
       `)
 
       expect(
         this.$('.frost-radio-button-input').prop('value'),
         'value is set'
       ).to.eql(value)
+    })
+
+    describe('Label property', function () {
+      it('inline format', function () {
+        const text = 'my-text'
+
+        this.set('text', text)
+
+        this.render(hbs`
+          {{frost-radio-button
+            value='test value'
+            label=text
+          }}
+        `)
+
+        expect(
+          this.$('.frost-radio-button').text().trim(),
+          'label is set'
+        ).to.eql(text)
+      })
+
+      it('block format', function () {
+        const text = 'my-text'
+
+        this.set('text', text)
+
+        this.render(hbs`
+          {{#frost-radio-button
+            value='test value'
+          }}
+            {{text}}
+          {{/frost-radio-button}}
+        `)
+
+        expect(
+          this.$('.frost-radio-button').text().trim(),
+          'label is set'
+        ).to.eql(text)
+      })
+    })
+
+    describe('Radio button in group', function () {
+      describe('Checked property', function () {
+        it('sets checked property', function () {
+          this.render(hbs`
+            {{#frost-radio-group
+              selectedValue='testValue'
+              as |controls|
+            }}
+              {{controls.button value='testValue'}}
+            {{/frost-radio-group}}
+          `)
+
+          expect(
+            this.$('.frost-radio-button').hasClass('checked'),
+            'checked class is set'
+          ).to.be.true
+
+          expect(
+            this.$('.frost-radio-button-input').prop('checked'),
+            'checked is set'
+          ).to.be.true
+        })
+
+        it('does not set checked property', function () {
+          this.render(hbs`
+            {{#frost-radio-group as |controls|}}
+              {{controls.button value='testValue'}}
+            {{/frost-radio-group}}
+          `)
+
+          expect(
+            this.$('.frost-radio-button').hasClass('checked'),
+            'checked class is set'
+          ).to.be.false
+
+          expect(
+            this.$('.frost-radio-button-input').prop('checked'),
+            'checked is set'
+          ).to.be.false
+        })
+      })
+
+      describe('Disabled property', function () {
+        it('sets disabled property', function () {
+          this.render(hbs`
+            {{#frost-radio-group as |controls|}}
+              {{controls.button
+                disabled=true
+                value='testValue'
+              }}
+            {{/frost-radio-group}}
+          `)
+
+          expect(
+            this.$('.frost-radio-button').hasClass('disabled'),
+            'disabled class is set'
+          ).to.be.true
+
+          expect(
+            this.$('.frost-radio-button-input').prop('disabled'),
+            'disabled class is set'
+          ).to.be.true
+        })
+      })
+
+      describe('Hook property', function () {
+        it('sets when passed into radio-group', function () {
+          this.render(hbs`
+            {{#frost-radio-group
+              hook='my-radio-group'
+              as |controls|
+            }}
+              {{controls.button
+                value='testValue'
+              }}
+            {{/frost-radio-group}}
+          `)
+
+          expect(
+            $hook('my-radio-group-button-testValue').hasClass('frost-radio-button'),
+            'radio button hook is set'
+          ).to.be.true
+
+          expect(
+            $hook('my-radio-group-button-testValue-input').hasClass('frost-radio-button-input'),
+            'input hook is set'
+          ).to.be.true
+        })
+      })
+
+      describe('Size property', function () {
+        it('has small class set', function () {
+          const size = 'small'
+
+          this.set('size', size)
+
+          this.render(hbs`
+            {{#frost-radio-group as |controls|}}
+              {{controls.button
+                size=size
+                value='testValue'
+              }}
+            {{/frost-radio-group}}
+          `)
+
+          expect(
+            this.$('.frost-radio-button').hasClass(size),
+            'small class is set'
+          ).to.be.true
+        })
+
+        it('has medium class set', function () {
+          const size = 'medium'
+
+          this.set('size', size)
+
+          this.render(hbs`
+            {{#frost-radio-group as |controls|}}
+              {{controls.button
+                size=size
+                value='testValue'
+              }}
+            {{/frost-radio-group}}
+          `)
+
+          expect(
+            this.$('.frost-radio-button').hasClass(size),
+            'medium class is set'
+          ).to.be.true
+        })
+
+        it('has large class set', function () {
+          const size = 'large'
+
+          this.set('size', size)
+
+          this.render(hbs`
+            {{#frost-radio-group as |controls|}}
+              {{controls.button
+                size=size
+                value='testValue'
+              }}
+            {{/frost-radio-group}}
+          `)
+
+          expect(
+            this.$('.frost-radio-button').hasClass(size),
+            'large class is set'
+          ).to.be.true
+        })
+      })
+
+      it('sets required property', function () {
+        this.render(hbs`
+          {{#frost-radio-group as |controls|}}
+            {{controls.button
+              required=true
+              value='testValue'
+            }}
+          {{/frost-radio-group}}
+        `)
+
+        expect(
+          this.$('.frost-radio-button').hasClass('required'),
+          'required class is set'
+        ).to.be.true
+
+        expect(
+          this.$('.frost-radio-button-input').prop('required'),
+          'required class is set'
+        ).to.be.true
+      })
+
+      it('sets value property', function () {
+        const value = 'test value'
+
+        this.set('value', value)
+
+        this.render(hbs`
+          {{#frost-radio-group as |controls|}}
+            {{controls.button
+              value=value
+            }}
+          {{/frost-radio-group}}
+        `)
+
+        expect(
+          this.$('.frost-radio-button-input').prop('value'),
+          'value is set'
+        ).to.eql(value)
+      })
+
+      describe('Label property', function () {
+        it('inline format', function () {
+          const text = 'my-text'
+
+          this.set('text', text)
+
+          this.render(hbs`
+            {{#frost-radio-group as |controls|}}
+              {{controls.button
+                value='test value'
+                label=text
+              }}
+            {{/frost-radio-group}}
+          `)
+
+          expect(
+            this.$('.frost-radio-button').text().trim(),
+            'label is set'
+          ).to.eql(text)
+        })
+
+        it('block format', function () {
+          const text = 'my-text'
+
+          this.set('text', text)
+
+          this.render(hbs`
+            {{#frost-radio-group as |controls|}}
+              {{#controls.button
+                value='test value'
+              }}
+                {{text}}
+              {{/controls.button}}
+            {{/frost-radio-group}}
+          `)
+
+          expect(
+            this.$('.frost-radio-button').text().trim(),
+            'label is set'
+          ).to.eql(text)
+        })
+      })
+
+      describe('onChange closure action', function () {
+        it('is called on click', function () {
+          const externalActionSpy = sinon.spy()
+
+          this.on('externalAction', externalActionSpy)
+
+          this.render(hbs`
+            {{frost-radio-button value='testValue' onChange=(action 'externalAction')}}
+          `)
+
+          this.$('input').trigger('click')
+
+          expect(
+            externalActionSpy.called,
+            'onChange closure action called on click'
+          ).to.be.true
+        })
+      })
     })
 
     describe('onChange closure action', function () {
@@ -262,8 +503,9 @@ describeComponent(
           {{#frost-radio-group
             id='groupId'
             onChange=(action 'externalAction')
+            as |controls|
           }}
-            {{frost-radio-button value='testValue'}}
+            {{controls.button value='testValue'}}
           {{/frost-radio-group}}
         `)
 
@@ -284,8 +526,9 @@ describeComponent(
           {{#frost-radio-group
             id='groupId'
             onChange=(action 'externalAction')
+            as |controls|
           }}
-            {{frost-radio-button value='testValue'}}
+            {{controls.button value='testValue'}}
           {{/frost-radio-group}}
         `)
 
@@ -306,8 +549,9 @@ describeComponent(
           {{#frost-radio-group
             id='groupId'
             onChange=(action 'externalAction')
+            as |controls|
           }}
-            {{frost-radio-button value='testValue'}}
+            {{controls.button value='testValue'}}
           {{/frost-radio-group}}
         `)
 
@@ -331,8 +575,9 @@ describeComponent(
         {{#frost-radio-group
           id=id
           onChange=(action 'externalAction')
+          as |controls|
         }}
-          {{frost-radio-button value='testValue'}}
+          {{controls.button value='testValue'}}
         {{/frost-radio-group}}
       `)
 
