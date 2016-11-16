@@ -2,10 +2,10 @@ import Ember from 'ember'
 const {
   $,
   Component,
+  computed,
   get,
   typeOf
 } = Ember
-import computed from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-radio-button'
 import Events from '../utils/events'
@@ -58,38 +58,47 @@ export default Component.extend(PropTypeMixin, {
 
   // == Computed properties  ===================================================
 
-  @computed('selectedValue', 'value')
   /**
    * Determine checked state
    * @param {String} selectedValue - which radio button in the group is selected
    * @param {String} value - radio button value
    * @returns {Boolean} whether this radio button is checked or not
    */
-  checked (selectedValue, value) {
-    return selectedValue === value
-  },
+  checked: computed('selectedValue', 'value', function () {
+    const selectedValue = get(this, 'selectedValue')
+    const value = get(this, 'value')
 
-  @computed('value', 'receivedHook')
+    return selectedValue === value
+  }),
+
   /**
    * Determine hook name for radio-button
-   * @param {String} value - radio button's value
    * @param {String} receivedHook - hook received from parent
    * @returns {String} the concatenated hook name
    */
-  hook (value, receivedHook) {
-    const radioGroupHook = receivedHook || ''
-    return `${radioGroupHook}-button-${value}`
-  },
+  hook: computed('receivedHook', function () {
+    const radioGroupHook = get(this, 'receivedHook') || ''
+    return `${radioGroupHook}-button`
+  }),
 
-  @computed('disabled')
+  /**
+   * Determine hook qualifiers for radio-button
+   * @param {String} value - radio button's value
+   * @returns {String} the hook qualifiers
+   */
+  hookQualifiers: computed('value', function () {
+    const value = get(this, 'value') || ''
+    return {value: value}
+  }),
+
   /**
    * Determine tabindex value
    * @param {Boolean} disabled - is this button disabled
    * @returns {Number} the tabindex value
    */
-  tabindex (disabled) {
-    return disabled ? -1 : 0
-  },
+  tabindex: computed('disabled', function () {
+    return get(this, 'disabled') ? -1 : 0
+  }),
 
   // == Functions ===============================================================
 

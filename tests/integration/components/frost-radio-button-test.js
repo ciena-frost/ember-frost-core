@@ -82,15 +82,19 @@ describeComponent(
 
     describe('Hook property', function () {
       it('sets when passed into radio-button', function () {
+        const value = 'testValue'
+
+        this.set('value', value)
+
         this.render(hbs`
           {{frost-radio-button
             hook='my-radio-button'
-            value='testValue'
+            value=value
           }}
         `)
 
         expect(
-          $hook('my-radio-button-input').hasClass('frost-radio-button-input'),
+          $hook('my-radio-button-input', {value: value}).hasClass('frost-radio-button-input'),
           'input hook is set'
         ).to.be.true
       })
@@ -305,24 +309,28 @@ describeComponent(
 
       describe('Hook property', function () {
         it('sets when passed into radio-group', function () {
+          const value = 'testValue'
+
+          this.set('value', value)
+
           this.render(hbs`
             {{#frost-radio-group
               hook='my-radio-group'
               as |controls|
             }}
               {{controls.button
-                value='testValue'
+                value=value
               }}
             {{/frost-radio-group}}
           `)
 
           expect(
-            $hook('my-radio-group-button-testValue').hasClass('frost-radio-button'),
+            $hook('my-radio-group-button', {value: value}).hasClass('frost-radio-button'),
             'radio button hook is set'
           ).to.be.true
 
           expect(
-            $hook('my-radio-group-button-testValue-input').hasClass('frost-radio-button-input'),
+            $hook('my-radio-group-button-input', {value: value}).hasClass('frost-radio-button-input'),
             'input hook is set'
           ).to.be.true
         })
