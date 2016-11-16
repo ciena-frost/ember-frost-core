@@ -357,13 +357,11 @@ describeComponent(
 
       it('set "params"=currentRoute and "href"=null when has multiple routes', function () {
         const currentRoute = 'my-route'
-        const params = []
-        const href = 'my-url'
 
         run(() => {
           component.set('_routing', { currentRouteName: currentRoute })
-          component.set('params', params)
-          component.set('href', href)
+          component.set('params', [])
+          component.set('href', 'my-url')
           component.set('_shouldOpenInSameTab', function () { return false })
           component.set('_hasMultipleLinks', function () { return true })
         })
@@ -378,7 +376,7 @@ describeComponent(
         expect(
           component.get('href'),
           '"href" is set to null'
-        ).to.eql(null)
+        ).to.be.null
       })
 
       describe('display warning on _setupRouting', function () {
