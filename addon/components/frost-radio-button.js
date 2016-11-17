@@ -86,8 +86,10 @@ export default Component.extend(PropTypeMixin, {
    * @returns {String} the hook qualifiers
    */
   hookQualifiers: computed('value', function () {
-    const value = get(this, 'value') || ''
-    return {value: value}
+    const value = get(this, 'value')
+    if (value) {
+      return {value: value}
+    }
   }),
 
   /**
