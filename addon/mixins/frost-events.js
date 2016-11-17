@@ -3,7 +3,7 @@ const {
   Mixin,
   on
 } = Ember
-import events from '../utils/events'
+import {events} from '../utils'
 
 export default Mixin.create({
   initEvents: on('init', function () {

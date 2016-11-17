@@ -4,7 +4,7 @@ import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
 import layout from '../templates/components/frost-select'
-import keyCodes from '../utils/keycodes'
+import {keyCodes} from '../utils'
 const {SPACE} = keyCodes
 
 /**

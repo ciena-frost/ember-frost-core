@@ -1,14 +1,11 @@
+/**
+ * Component definition for the frost-button component
+ */
 import Ember from 'ember'
-const {
-  Component,
-  get,
-  isEmpty,
-  Logger,
-  typeOf,
-  ViewUtils
-} = Ember
+const {Component, Logger, ViewUtils, get, isEmpty, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+
 import layout from '../templates/components/frost-button'
 
 /**
@@ -34,7 +31,7 @@ const validSizes = [
 export default Component.extend(PropTypeMixin, {
   // == Dependencies ==========================================================
 
-  // == Properties ============================================================
+  // == Keyword Properties ====================================================
 
   attributeBindings: [
     'autofocus',
@@ -44,20 +41,23 @@ export default Component.extend(PropTypeMixin, {
     'title'
   ],
 
-  classNames: [
-    'frost-button'
-  ],
-
   classNameBindings: [
     'disabled',
     'extraClasses'
+  ],
+
+  classNames: [
+    'frost-button'
   ],
 
   layout,
 
   tagName: 'button',
 
+  // == PropTypes =============================================================
+
   propTypes: {
+    // options
     autofocus: PropTypes.bool,
     design: PropTypes.oneOf(validDesignClasses),
     disabled: PropTypes.bool,
@@ -69,7 +69,14 @@ export default Component.extend(PropTypeMixin, {
     text: PropTypes.string,
     title: PropTypes.string,
     type: PropTypes.string,
-    vertical: PropTypes.bool
+    vertical: PropTypes.bool,
+
+    // keywords
+    attributeBinding: PropTypes.arrayOf(PropTypes.string),
+    classNameBindings: PropTypes.arrayOf(PropTypes.string),
+    classNames: PropTypes.arrayOf(PropTypes.string),
+    layout: PropTypes.any,
+    tagName: PropTypes.string
   },
 
   getDefaultProps () {

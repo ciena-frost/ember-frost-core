@@ -13,7 +13,7 @@ import computed from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-toggle'
 import FrostEventsProxy from '../mixins/frost-events-proxy'
-import {cloneEvent} from '../utils/utils'
+import {cloneEvent} from '../utils'
 
 export default Component.extend(PropTypeMixin, FrostEventsProxy, {
   // == Properties ============================================================

@@ -8,7 +8,7 @@ const {
 } = Ember
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-radio-button'
-import {cloneEvent} from '../utils/utils'
+import {cloneEvent} from '../utils'
 
 export default Component.extend(PropTypeMixin, {
   // == Properties  ============================================================
