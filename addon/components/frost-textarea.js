@@ -1,33 +1,39 @@
+/**
+ * Component definition for frost-textarea component
+ */
 import Ember from 'ember'
-const {
-  Component,
-  get,
-  isPresent,
-  on,
-  set
-} = Ember
-import {
-  task,
-  timeout
-} from 'ember-concurrency'
+const {Component, get, isPresent, on, set} = Ember
+import {task, timeout} from 'ember-concurrency'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-import FrostEventsProxy from '../mixins/frost-events-proxy'
+
+import FrostEventsProxyMixin from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-textarea'
 
-export default Component.extend(FrostEventsProxy, PropTypeMixin, {
+export default Component.extend(FrostEventsProxyMixin, PropTypeMixin, {
   // == Dependencies ==========================================================
 
-  // == Properties ============================================================
-  classNames: [
-    'frost-textarea'
-  ],
+  // == Keyword Properties ====================================================
+
   classNameBindings: [
     'isClearVisible',
     'isClearEnabled'
   ],
+
+  classNames: [
+    'frost-textarea'
+  ],
+
   layout,
 
+  // == PropTypes =============================================================
+
+  /**
+   * Properties for this component. Options are expected to be (potentially)
+   * passed in to the component. State properties are *not* expected to be
+   * passed in/overwritten.
+   */
   propTypes: {
+    // options
     autofocus: PropTypes.bool,
     cols: PropTypes.number,
     disabled: PropTypes.bool,
@@ -40,11 +46,20 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     rows: PropTypes.number,
     tabindex: PropTypes.number,
     value: PropTypes.string,
-    wrap: PropTypes.string
+    wrap: PropTypes.string,
+
+    // state
+
+    // keywords
+    classNameBindings: PropTypes.arrayOf(PropTypes.string),
+    classNames: PropTypes.arrayOf(PropTypes.string),
+    layout: PropTypes.any
   },
 
+  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
+      // options
       autofocus: false,
       isClearEnabled: false,
       isClearVisible: false,
@@ -59,17 +74,18 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       placeholder: null,
       value: null,
       wrap: 'soft'
+
+      // state
     }
   },
 
-  // == Events ================================================================
-  _showClearEvent: on('focusIn', 'focusOut', 'input', function (event) {
-    const isFocused = event.type !== 'focusout'
-    get(this, '_showClear').perform(isFocused)
-  }),
+  // == Computed Properties ===================================================
+
+  // == Functions =============================================================
 
   // == Tasks ==================================================================
 
+  // FIXME: jsdoc
   _clear: task(function * () {
     this.$('textarea')
       .focus()
@@ -77,6 +93,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       .trigger('input')
   }).restartable(),
 
+  // FIXME: jsdoc
   _showClear: task(function * (isFocused) {
     const showClear = isFocused && isPresent(get(this, 'value')) && !get(this, 'readonly')
     if (get(this, 'isClearVisible') === showClear) {
@@ -94,9 +111,20 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     set(this, 'isClearEnabled', showClear)
   }).restartable(),
 
+  // == DOM Events ============================================================
+
+  // FIXME: jsdoc
+  _showClearEvent: on('focusIn', 'focusOut', 'input', function (event) {
+    const isFocused = event.type !== 'focusout'
+    get(this, '_showClear').perform(isFocused)
+  }),
+
+  // == Lifecycle Hooks =======================================================
+
   // == Actions ===============================================================
 
   actions: {
+    // FIXME: jsdoc
     clear () {
       get(this, '_clear').perform()
     },
@@ -106,12 +134,14 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     // TextSupport events (i.e. 'enter' and 'escape') don't fire.
     // To avoid this, we use the TextSupport 'key-up' event and
     // proxy the event to the keyUp handler.
+    // FIXME: jsdoc
     keyUp (value, event) {
       if (isPresent(get(this, '_eventProxy.keyUp'))) {
         this._eventProxy.keyUp(event)
       }
     },
 
+    // FIXME: jsdoc
     _onInput (event) {
       if (isPresent(get(this, '_eventProxy.input'))) {
         // Add id and value for legacy support

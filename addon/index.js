@@ -23,4 +23,5 @@ export {default as Toggle} from './components/frost-toggle'
 export {default as EventsProxyMixin} from './mixins/frost-events-proxy'
 export {default as EventsMixin} from './mixins/frost-events'
 
-export * as utils from './utils'
+import * as utils from './utils'
+export {utils}

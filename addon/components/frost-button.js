@@ -56,6 +56,11 @@ export default Component.extend(PropTypeMixin, {
 
   // == PropTypes =============================================================
 
+  /**
+   * Properties for this component. Options are expected to be (potentially)
+   * passed in to the component. State properties are *not* expected to be
+   * passed in/overwritten.
+   */
   propTypes: {
     // options
     autofocus: PropTypes.bool,
@@ -71,16 +76,20 @@ export default Component.extend(PropTypeMixin, {
     type: PropTypes.string,
     vertical: PropTypes.bool,
 
+    // state
+
     // keywords
-    attributeBinding: PropTypes.arrayOf(PropTypes.string),
+    attributeBindings: PropTypes.arrayOf(PropTypes.string),
     classNameBindings: PropTypes.arrayOf(PropTypes.string),
     classNames: PropTypes.arrayOf(PropTypes.string),
     layout: PropTypes.any,
     tagName: PropTypes.string
   },
 
+  /** @returns {Object} the default values for properties when not provided by consumer */
   getDefaultProps () {
     return {
+      // options
       autofocus: false,
       design: '',
       disabled: false,
@@ -92,6 +101,8 @@ export default Component.extend(PropTypeMixin, {
       title: null,
       type: 'button',
       vertical: false
+
+      // state
     }
   },
 
@@ -221,8 +232,9 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
-  // == Events ================================================================
+  // == DOM Events ============================================================
 
+  // FIXME: jsdoc
   onclick: Ember.on('click', function (event) {
     if (!ViewUtils.isSimpleClick(event)) {
       return true
@@ -234,12 +246,17 @@ export default Component.extend(PropTypeMixin, {
     }
   }),
 
+  // FIXME: jsdoc
   _onFocus: Ember.on('focusIn', function (e) {
     // If an onFocus handler is defined, call it
     if (this.attrs.onFocus) {
       this.attrs.onFocus()
     }
-  })
+  }),
+
+  // == Lifecycle Hooks =======================================================
 
   // == Actions ===============================================================
+
+  actions: {}
 })

@@ -12,30 +12,33 @@ import layout from '<%= templatePath %>'
 export default Component.extend(PropTypesMixin, {
   // == Dependencies ==========================================================
 
-  // == Properties ============================================================
+  // == Keyword Properties ====================================================
+
+  layout,
+
+  // == PropTypes =============================================================
 
   /**
-   * Properties for this component. Public properties are expected to be
-   * (potentially) passed in to the component. Private properties are *not*
-   * expected to be passed in/overwritten.
+   * Properties for this component. Options are expected to be (potentially)
+   * passed in to the component. State properties are *not* expected to be
+   * passed in/overwritten.
    */
   propTypes: {
-    // public
+    // options
     hook: PropTypes.string.isRequired,
 
-    // private
+    // state
+
+    // keywords
     layout: PropTypes.any
   },
 
-  /**
-   * @returns {Object} the default property values for this component
-   */
+  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
-      // public
+      // options
 
-      // private
-      layout
+      // state
     }
   },
 
@@ -54,6 +57,8 @@ export default Component.extend(PropTypesMixin, {
   },
 
   // == Functions =============================================================
+
+  // == DOM Events ============================================================
 
   // == Lifecycle Hooks =======================================================
 

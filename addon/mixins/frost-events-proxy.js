@@ -1,8 +1,9 @@
+/**
+ * Mixin for the frost-events-proxy
+ */
 import Ember from 'ember'
-const {
-  Mixin,
-  on
-} = Ember
+const {Mixin, on} = Ember
+
 import {events} from '../utils'
 
 export default Mixin.create({

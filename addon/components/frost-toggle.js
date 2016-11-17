@@ -1,33 +1,42 @@
+/**
+ * Component definition for the frost-toggle component
+ */
 import Ember from 'ember'
-const {
-  assert,
-  Component,
-  get,
-  isPresent,
-  typeOf,
-  ViewUtils: {
-    isSimpleClick
-  }
-} = Ember
+const {Component, ViewUtils, assert, get, isPresent, typeOf} = Ember
 import computed from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+
+import FrostEventsProxyMixin from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-toggle'
-import FrostEventsProxy from '../mixins/frost-events-proxy'
 import {cloneEvent} from '../utils'
 
-export default Component.extend(PropTypeMixin, FrostEventsProxy, {
-  // == Properties ============================================================
+export default Component.extend(PropTypeMixin, FrostEventsProxyMixin, {
+  // == Dependencies ==========================================================
+
+  // == Keyword Properties ====================================================
+
   attributeBindings: [
     '_isToggled:toggled',
     'disabled'
   ],
+
   classNameBindings: [
     'disabled'
   ],
+
   classNames: ['frost-toggle'],
+
   layout: layout,
 
+  // == PropTypes =============================================================
+
+  /**
+   * Properties for this component. Options are expected to be (potentially)
+   * passed in to the component. State properties are *not* expected to be
+   * passed in/overwritten.
+   */
   propTypes: {
+    // options
     disabled: PropTypes.bool,
     falseLabel: PropTypes.oneOfType([
       PropTypes.bool,
@@ -45,11 +54,21 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
       PropTypes.bool,
       PropTypes.string,
       PropTypes.number
-    ])
+    ]),
+
+    // state
+
+    // keywords
+    attributeBindings: PropTypes.arrayOf(PropTypes.string),
+    classNameBindings: PropTypes.arrayOf(PropTypes.string),
+    classNames: PropTypes.arrayOf(PropTypes.string),
+    layout: PropTypes.any
   },
 
+  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
+      // options
       disabled: false,
       _falseLabel: get(this, 'falseLabel') !== undefined &&
       (typeOf(get(this, 'falseLabel') === 'string') || typeOf(get(this, 'falseLabel') === 'number'))
@@ -61,13 +80,29 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
     }
   },
 
-  // == Events ================================================================
-  init () {
-    this._super(...arguments)
-    this._setupAssertion()
+  // == Computed Properties ===================================================
+
+  @computed('trueValue', '_trueLabel')
+  // FIXME: jsdoc
+  _trueValue (trueValue, _trueLabel) {
+    return trueValue || _trueLabel
   },
 
-  // == Functions ==============================================================
+  @computed('falseValue', '_falseLabel')
+  // FIXME: jsdoc
+  _falseValue (falseValue, _falseLabel) {
+    return falseValue || _falseLabel
+  },
+
+  @computed('value')
+  // FIXME: jsdoc
+  _isToggled (value) {
+    return this._preferBoolean(value) === get(this, '_trueValue')
+  },
+
+  // == Functions =============================================================
+
+  // FIXME: jsdoc
   _changeTarget (event, target) {
     const e = cloneEvent(event, target)
     const toggled = get(this, '_isToggled')
@@ -78,6 +113,7 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
     return e
   },
 
+  // FIXME: jsdoc
   _preferBoolean (value) {
     if (value === 'true') return true
     if (value === 'false') return false
@@ -85,35 +121,32 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
     return value
   },
 
+  // FIXME: jsdoc
   _setupAssertion () {
     assert(`Same value has been assigned to both ${this.toString()}.trueValue and ${this.toString()}.falseValue`,
       (typeOf(get(this, 'trueValue')) === 'undefined' && typeOf(get(this, 'falseValue')) === 'undefined') ||
       get(this, 'trueValue') !== get(this, 'falseValue'))
   },
 
-  // == Computed Properties =====================================================
-  @computed('trueValue', '_trueLabel')
-  _trueValue (trueValue, _trueLabel) {
-    return trueValue || _trueLabel
+  // == DOM Events ============================================================
+
+  // == Lifecycle Hooks =======================================================
+
+  /* Ember.Component method */
+  init () {
+    this._super(...arguments)
+    this._setupAssertion()
   },
 
-  @computed('falseValue', '_falseLabel')
-  _falseValue (falseValue, _falseLabel) {
-    return falseValue || _falseLabel
-  },
+  // == Actions ===============================================================
 
-  @computed('value')
-  _isToggled (value) {
-    return this._preferBoolean(value) === get(this, '_trueValue')
-  },
-
-  // == Actions ================================================================
   actions: {
     /* eslint-disable complexity */
+    // FIXME: eslint
     _onClick (event) {
       if (get(this, 'disabled')) return
 
-      if (!isSimpleClick(event)) {
+      if (!ViewUtils.isSimpleClick(event)) {
         return true
       }
 
@@ -130,8 +163,8 @@ export default Component.extend(PropTypeMixin, FrostEventsProxy, {
       }
     },
     /* eslint-enable complexity */
-    noop () {
-      // we have this method to avoid action undefined error
-    }
+
+    /** A no-op action to avoid an action undefined error */
+    noop () {}
   }
 })

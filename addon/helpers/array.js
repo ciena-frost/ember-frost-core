@@ -1,16 +1,12 @@
+/**
+ * array helper
+ * Temporary fix until the following bug is resolved: https://github.com/emberjs/ember.js/issues/14264
+ */
 import Ember from 'ember'
-const {
-  A,
-  Helper: {
-    helper
-  }
-} = Ember
+const {A, Helper} = Ember
+const {helper} = Helper
 
 export function array (params) {
-  // Temporary fix until the following bug is resolved: https://github.com/emberjs/ember.js/issues/14264
-  // initial code:
-  // return params
-
   let array = A()
   array.pushObjects(params)
   return array

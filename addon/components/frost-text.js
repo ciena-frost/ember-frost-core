@@ -1,32 +1,38 @@
+/**
+ * Component definition for the frost-text component
+ */
 import Ember from 'ember'
-const {
-  Component,
-  get,
-  isPresent,
-  on,
-  set
-} = Ember
-import {
-  task,
-  timeout
-} from 'ember-concurrency'
-import FrostEventsProxy from '../mixins/frost-events-proxy'
+const {Component, get, isPresent, on, set} = Ember
+import {task, timeout} from 'ember-concurrency'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import FrostEventsProxyMixin from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-text'
 
-export default Component.extend(FrostEventsProxy, PropTypeMixin, {
-  // == Properties =============================================================
+export default Component.extend(FrostEventsProxyMixin, PropTypeMixin, {
+  // == Dependencies ==========================================================
 
-  classNames: [
-    'frost-text'
-  ],
+  // == Keyword Properties ====================================================
+
   classNameBindings: [
     'isClearVisible',
     'isClearEnabled'
   ],
+
+  classNames: [
+    'frost-text'
+  ],
+
   layout,
 
+  // == PropTypes =============================================================
+
+  /**
+   * Properties for this component. Options are expected to be (potentially)
+   * passed in to the component. State properties are *not* expected to be
+   * passed in/overwritten.
+   */
   propTypes: {
+    // options
     align: PropTypes.string,
     hook: PropTypes.string,
     isClearEnabled: PropTypes.bool,
@@ -48,11 +54,20 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     selectionDirection: PropTypes.string,
     spellcheck: PropTypes.bool,
     value: PropTypes.string,
-    title: PropTypes.string
+    title: PropTypes.string,
+
+    // state
+
+    // keywords
+    classNameBindings: PropTypes.arrayOf(PropTypes.string),
+    classNames: PropTypes.arrayOf(PropTypes.string),
+    layout: PropTypes.any
   },
 
+  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
+      // options
       align: 'left',
       autocapitalize: 'off',
       autocorrect: 'off',
@@ -73,26 +88,18 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       placeholder: null,
       title: null,
       value: null
+
+      // state
     }
   },
 
-  // == Events =================================================================
+  // == Computed Properties ===================================================
 
-  init () {
-    this._super(...arguments)
-    this.receivedHook = this.hook
-    if (get(this, 'isHookEmbedded')) {
-      this.hook = ''
-    }
-  },
-
-  _showClearEvent: on('focusIn', 'focusOut', 'input', function (event) {
-    const isFocused = event.type !== 'focusout'
-    get(this, '_showClear').perform(isFocused)
-  }),
+  // == Functions =============================================================
 
   // == Tasks ==================================================================
 
+  // FIXME: jsdoc
   _clear: task(function * () {
     this.$('input')
       .focus()
@@ -100,6 +107,7 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
       .trigger('input')
   }).restartable(),
 
+  // FIXME: jsdoc
   _showClear: task(function * (isFocused) {
     const showClear = isFocused && isPresent(get(this, 'value')) && !get(this, 'readonly')
     if (get(this, 'isClearVisible') === showClear) {
@@ -117,6 +125,25 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     set(this, 'isClearEnabled', showClear)
   }).restartable(),
 
+  // == DOM Events ============================================================
+
+  // FIXME: jsdoc
+  _showClearEvent: on('focusIn', 'focusOut', 'input', function (event) {
+    const isFocused = event.type !== 'focusout'
+    get(this, '_showClear').perform(isFocused)
+  }),
+
+  // == Lifecycle Hooks =======================================================
+
+  /* Ember.Component method */
+  init () {
+    this._super(...arguments)
+    this.receivedHook = this.hook
+    if (get(this, 'isHookEmbedded')) {
+      this.hook = ''
+    }
+  },
+
   // == Actions ================================================================
 
   // Setting 'keyUp' directly on the {{input}} helper overwrites
@@ -125,16 +152,19 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
   // To avoid this, we use the TextSupport 'key-up' event and
   // proxy the event to the keyUp handler.
   actions: {
+    // FIXME: jsdoc
     clear () {
       get(this, '_clear').perform()
     },
 
+    // FIXME: jsdoc
     keyUp (value, event) {
       if (isPresent(get(this, '_eventProxy.keyUp'))) {
         this._eventProxy.keyUp(event)
       }
     },
 
+    // FIXME: jsdoc
     _onInput (event) {
       if (isPresent(get(this, '_eventProxy.input'))) {
         // Add id and value for legacy support

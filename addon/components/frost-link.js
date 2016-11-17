@@ -1,13 +1,11 @@
+/**
+ * Component definition for frost-link component
+ */
 import Ember from 'ember'
-const {
-  deprecate,
-  get,
-  LinkComponent,
-  Logger,
-  set
-} = Ember
+const {LinkComponent, Logger, deprecate, get, set} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+
 import layout from '../templates/components/frost-link'
 
 /**
@@ -39,6 +37,10 @@ const validSizes = [
 ]
 
 export default LinkComponent.extend(PropTypeMixin, {
+  // == Dependencies ==========================================================
+
+  // == Keyword Properties ====================================================
+
   // == Component properties ==================================================
 
   /*
@@ -48,15 +50,19 @@ export default LinkComponent.extend(PropTypeMixin, {
     target: null
    */
 
+  classNameBindings: ['extraClasses'],
   classNames: ['frost-link'],
-  classNameBindings: [
-    'extraClasses'
-  ],
   layout,
 
   // == State properties ======================================================
 
+  /**
+   * Properties for this component. Options are expected to be (potentially)
+   * passed in to the component. State properties are *not* expected to be
+   * passed in/overwritten.
+   */
   propTypes: {
+    // options
     design: PropTypes.oneOf(validDesigns),
     hook: PropTypes.string,
     icon: PropTypes.string,
@@ -64,9 +70,17 @@ export default LinkComponent.extend(PropTypeMixin, {
     routeNames: PropTypes.array,
     size: PropTypes.oneOf(validSizes),
     linkTitle: PropTypes.string,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+
+    // state
+
+    // keywords
+    classNameBindings: PropTypes.arrayOf(PropTypes.string),
+    classNames: PropTypes.arrayOf(PropTypes.string),
+    layout: PropTypes.any
   },
 
+  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
       design: '',
@@ -165,6 +179,26 @@ export default LinkComponent.extend(PropTypeMixin, {
   },
 
   /**
+   * Open multiple links.
+   */
+  _openLinks () {
+    let routing = get(this, '_routing')
+    let models = get(this, 'models')
+    let queryParams = get(this, 'queryParams.values')
+
+    const routeNames = get(this, 'routeNames')
+
+    if (routeNames) {
+      routeNames.forEach((routeName) => {
+        const windowHandler = window.open(routing.generateURL(routeName, models, queryParams))
+        if (!windowHandler) {
+          Logger.warn('Warning: Make sure that the pop-ups are not blocked')
+        }
+      })
+    }
+  },
+
+  /**
    * Change basic link component properties to open link(s) in new tabs.
    * @returns {undefined}
    */
@@ -189,35 +223,11 @@ export default LinkComponent.extend(PropTypeMixin, {
       }
     }
   },
+  // == DOM Events ============================================================
 
   /**
-   * Open multiple links.
-   * @returns {undefined}
+   * Handle the click event
    */
-  _openLinks () {
-    let routing = get(this, '_routing')
-    let models = get(this, 'models')
-    let queryParams = get(this, 'queryParams.values')
-
-    const routeNames = get(this, 'routeNames')
-
-    if (routeNames) {
-      routeNames.forEach((routeName) => {
-        const windowHandler = window.open(routing.generateURL(routeName, models, queryParams))
-        if (!windowHandler) {
-          Logger.warn('Warning: Make sure that the pop-ups are not blocked')
-        }
-      })
-    }
-  },
-
-  // == Events ================================================================
-
-  init () {
-    this._super(...arguments)
-    this._setupRouting()
-  },
-
   click () {
     if (this._hasMultipleLinks()) {
       this._openLinks()
@@ -226,5 +236,15 @@ export default LinkComponent.extend(PropTypeMixin, {
     if (this.onClick) {
       this.onClick()
     }
+  },
+
+  // == Lifecycle Hooks =======================================================
+
+  /* Ember.Component method */
+  init () {
+    this._super(...arguments)
+    this._setupRouting()
   }
+
+  // == Actions ===============================================================
 })
