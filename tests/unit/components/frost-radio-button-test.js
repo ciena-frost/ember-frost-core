@@ -135,29 +135,47 @@ describeComponent(
 
     describe('"hook" computed property', function () {
       it('is set when "receivedHook" is not set', function () {
-        const value = 'my-value'
-
-        run(() => component.set('value', value))
-
         expect(
           component.get('hook'),
           'hook: -button-my-value'
-        ).to.eql(`-button-${value}`)
+        ).to.eql('-button')
       })
 
       it('is set when "receivedHook" is set', function () {
-        const value = 'my-value'
         const receivedHook = 'my-hook'
 
         run(() => {
-          component.set('value', value)
           component.set('receivedHook', receivedHook)
         })
 
         expect(
           component.get('hook'),
           'hook: my-hook-button-my-value'
-        ).to.eql(`${receivedHook}-button-${value}`)
+        ).to.eql(`${receivedHook}-button`)
+      })
+    })
+
+    describe('"hookQualifiers" computed property', function () {
+      it('is empty when "value" is not set', function () {
+        run(() => {
+          component.set('value', null)
+        })
+
+        expect(
+          component.get('hookQualifiers'),
+          'hookQualifiers: undefined'
+        ).to.eql(undefined)
+      })
+
+      it('is set when "value" is set', function () {
+        const value = 'my-value'
+
+        run(() => component.set('value', value))
+
+        expect(
+          component.get('hookQualifiers').value,
+          `hookQualifiers: {value: ${value}}`
+        ).to.eql(value)
       })
     })
 
