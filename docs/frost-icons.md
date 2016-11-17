@@ -112,3 +112,14 @@ Legacy support will continue until `ember-frost-core` 1.0 is released.
 ```handlebars
 {{frost-icon icon='frost/add'}}
 ```
+
+### Set the fill color for an icon
+```scss
+.fillColor {
+  color: green;
+}
+```
+
+```handlebars
+{{frost-icon icon='back' classNames='fillColor'}}
+```
