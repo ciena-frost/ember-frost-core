@@ -154,7 +154,7 @@
     "broccoli-file-creator": "^1.1.0",
     "broccoli-funnel": "^1.0.1",
     "broccoli-merge-trees": "^1.0.0",
-    "broccoli-svgstore": "https://github.com/sglanzer/broccoli-svgstore/tarball/master",
+    "broccoli-svgstore": "~0.3.1",
     "ember-browserify": "^1.1.13",
     "ember-cli-babel": "^5.1.6",
     "ember-cli-htmlbars": "^1.0.3",
