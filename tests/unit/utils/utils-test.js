@@ -7,7 +7,7 @@ import {
   describe,
   it
 } from 'mocha'
-import {cloneEvent} from 'ember-frost-core/utils/utils'
+import {cloneEvent} from 'ember-frost-core/utils'
 
 describe('cloneEvent', function () {
   it('target cloned and original target unchanged', function () {

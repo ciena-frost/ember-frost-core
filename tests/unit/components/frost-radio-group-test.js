@@ -42,8 +42,8 @@ describeComponent(
 
       expect(
         component.get('inputs'),
-        'inputs: undefined'
-      ).to.be.undefined
+        'inputs: []'
+      ).to.be.eql([])
 
       expect(
         component.get('value'),
