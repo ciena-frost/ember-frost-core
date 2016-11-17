@@ -203,7 +203,10 @@ module.exports = {
         })
       }
 
-      return new SVGStore(svgFunnel, { outputFile: `/assets/icon-packs/${iconPack.name}.svg`, flatten: false })
+      return new SVGStore(svgFunnel, {
+        outputFile: `/assets/icon-packs/${iconPack.name}.svg`,
+        svgstoreOpts: { customSymbolAttrs: ['preserveAspectRatio'] }
+      })
     })
 
     const localIconPackName = get(this, 'app.options.iconPackOptions.name', isAddon ? 'dummy' : 'app')
@@ -217,7 +220,7 @@ module.exports = {
       })
       iconPacks.push(new SVGStore(svgFunnel, {
         outputFile: `/assets/icon-packs/${localIconPackName}.svg`,
-        flatten: false
+        svgstoreOpts: { customSymbolAttrs: ['preserveAspectRatio'] }
       }))
     }
 
