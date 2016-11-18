@@ -1,3 +1,6 @@
+# 0.32.4
+* Updated frost-select-dropdown to be a columnar flex layout
+
 # 0.32.3
 
 * **Fixed** `frost-select` to open dropdown when select is focused and user presses up/down arrow key.
