@@ -1,27 +1,56 @@
 import Ember from 'ember'
-const {Component, typeOf} = Ember
-import layout from '../templates/components/frost-select-li'
-import FrostEvents from '../mixins/frost-events'
+const {Component} = Ember
+import computed, {readOnly} from 'ember-computed-decorators'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
-export default Component.extend(FrostEvents, {
+import layout from '../templates/components/frost-select-li'
+
+const regexEscapeChars = '-[]/{}()*+?.^$|'.split('')
+
+export default Component.extend(PropTypeMixin, {
+  // == Properties ============================================================
+
   tagName: 'li',
   layout,
 
+  propTypes: {
+    data: PropTypes.object.isRequired,
+    filter: PropTypes.string,
+    hook: PropTypes.string.isRequired,
+    multiselect: PropTypes.bool,
+    onItemOver: PropTypes.func.isRequired,
+    onSelect: PropTypes.func.isRequired
+  },
+
+  // == Computed Properties ===================================================
+
+  @readOnly
+  @computed('data', 'filter')
+  label (data, filter) {
+    if (filter) {
+      // Make sure special chars are escaped in filter so we can use it as a
+      // regular expression pattern
+      filter = filter.replace(`[${regexEscapeChars.join('\\')}]`, 'g')
+
+      const pattern = new RegExp(filter, 'gi')
+      const label = data.label.replace(pattern, '<u>$&</u>')
+
+      return Ember.String.htmlSafe(label)
+    }
+
+    return data && data.label || ''
+  },
+
   // == Events ================================================================
 
-  click (event) {
-    event.stopPropagation()
+  _onMouseDown: Ember.on('mouseDown', function (e) {
+    e.preventDefault() // Prevent dropdown overlay from receiving click
     const data = this.get('data')
-    const onSelect = this.get('onSelect')
-    if (typeOf(onSelect) === 'function') {
-      onSelect(data)
-    }
-  },
-  mouseEnter () {
+    this.get('onSelect')(data.value)
+  }),
+
+  _onMouseEnter: Ember.on('mouseEnter', function () {
     const data = this.get('data')
-    const onItemOver = this.get('onItemOver')
-    if (typeOf(onItemOver) === 'function') {
-      onItemOver(data)
-    }
-  }
+    this.get('onItemOver')(data)
+  })
 })

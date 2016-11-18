@@ -2,25 +2,21 @@
 $border: 1px solid $frost-color-input-border;
 $color: $frost-color-input;
 $error-border: 1px solid $frost-color-input-error-border;
-$error-margin: 1px; // Note: margin + border width equals border width of focus state
 $focus-border: 1px solid $frost-color-input-focus-border;
 $hover-border: 1px solid $frost-color-input-hover-border;
-$focus-margin: 0;
 $disabled-border: 1px solid $frost-color-input-disabled-border;
 $disabled-bg: $frost-color-input-disabled-bg;
 $font-size: $frost-font-m;
 $height: 35px;
-$margin: 1px; // Note: margin + border width equals border width of focus state
 $padding: 0 30px 0 8px;
 
 .frost-text {
   display: block;
   position: relative;
-  width: 175px;
+  min-width: 175px;
 
   &.error .frost-text-input {
     border: $error-border;
-    margin: $error-margin;
 
     &:hover:enabled:read-write:not(:focus) {
       border: $error-border;
@@ -35,7 +31,6 @@ $padding: 0 30px 0 8px;
   color: $color;
   font-size: $font-size;
   height: $height;
-  margin: $margin;
   outline: none;
   padding: $padding;
   font-weight: 200;

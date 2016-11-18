@@ -1,98 +1,77 @@
-import _ from 'lodash'
 import Ember from 'ember'
-const {A, Component, get, typeOf} = Ember
+const {$, Component, get, run, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-import layout from '../templates/components/frost-select'
-import Redux from 'npm:redux'
-import {
-  selectItem,
-  closeDropDown,
-  openDropDown,
-  selectHover,
-  moveHoverNext,
-  moveHoverPrev,
-  mouseHoverItem,
-  clickArrow,
-  updateSearchText,
-  resetDropDown,
-  selectValue
-} from '../actions/frost-select'
 
-import reducer from '../reducers/frost-select'
+import layout from '../templates/components/frost-select'
+import keyCodes from '../utils/keycodes'
+const {DOWN_ARROW, SPACE, UP_ARROW} = keyCodes
 
 /**
- * Map of human readable keys to their key codes
- * @type {Object}
+ * Compare two string arrays to determine if they contain the same values
+ * NOTE: this method does not care about the order of the items
+ * @param {Array<String>} a - first array
+ * @param {Array<String>} b second array
+ * @returns {Boolean} whether or not arrays contain same values
  */
-const keyCodes = {
-  backspace: 8,
-  down: 40,
-  enter: 13,
-  esc: 27,
-  up: 38,
-  tab: 9
-}
-
-const ATTR_MAP_DELIM = '->'
-// TODO: add jsdoc
-function isAttrDifferent (newAttrs, oldAttrs, attributeName) {
-  newAttrs = newAttrs || {}
-  oldAttrs = oldAttrs || {}
-
-  let oldValue = get(oldAttrs, attributeName + '.value')
-  let newValue = get(newAttrs, attributeName + '.value')
-
-  return !_.isEqual(oldValue, newValue)
-}
-
-/** Hook for handling outside element click
- * @param {Object} event - JQuery event object
- */
-function handleOutsideClick (event) {
-  const $target = Ember.$(event.target)
-  if (!$target.closest(this.$()).length) {
-    this.onOutsideClick()
+function compareArrays (a, b) {
+  if (a.length !== b.length) {
+    return false
   }
+
+  a = a.sort()
+  b = b.sort()
+
+  return a.every((value, index) => value === b[index])
+}
+
+/**
+ * Compare two selected value objects to determine if they are equivalent
+ * @param {Array<String>|String} a - first selected value object
+ * @param {Array<String>|String} b - second selected value object
+ * @returns {Boolean} whether or not selected value objects are equivalent
+ */
+function compareSelectedValues (a, b) {
+  if (typeOf(a) === 'array' && typeOf(b) === 'array') {
+    return compareArrays(a, b)
+  }
+
+  return a === b
 }
 
 export default Component.extend(PropTypeMixin, {
-  // ==========================================================================
-  // Dependencies
-  // ==========================================================================
+  // == Properties ============================================================
 
-  // ==========================================================================
-  // Properties
-  // ==========================================================================
+  attributeBindings: [
+    'computedTabIndex:tabIndex'
+  ],
 
-  attributeBindings: ['tabIndex'],
-  classNames: ['frost-select'],
-  classNameBindings: ['focus', 'shouldOpen:open', 'disabled', 'hasError:error'],
-  stateProperties: [
-    'open',
-    'prompt',
-    'disabled',
-    'displayItems',
-    'error'
+  classNameBindings: [
+    'disabled:frost-select-disabled',
+    'error:frost-select-error',
+    'focused:frost-select-focused',
+    'opened:frost-select-opened',
+    'text::frost-select-placeholder'
   ],
-  stateAttributes: [
-    'disabled',
-    'data->baseItems',
-    'placeholder',
-    'error',
-    'selected->selectedItem'
+
+  classNames: [
+    'frost-select'
   ],
+
   layout,
 
   propTypes: {
+    // Public
     autofocus: PropTypes.bool,
-    data: PropTypes.array,
     disabled: PropTypes.bool,
     error: PropTypes.bool,
-    filter: PropTypes.string,
-    hook: PropTypes.string,
-    hovered: PropTypes.number,
-    maxListHeight: PropTypes.number,
+    hook: PropTypes.string.isRequired,
+    multiselect: PropTypes.bool,
+    onBlur: PropTypes.func,
+    onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    onInput: PropTypes.func,
+    renderTarget: PropTypes.string,
     selected: PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.number
@@ -106,7 +85,19 @@ export default Component.extend(PropTypeMixin, {
       PropTypes.string
     ]),
     tabIndex: PropTypes.number,
-    width: PropTypes.number
+
+    // Private
+    $element: PropTypes.object,
+    focused: PropTypes.bool,
+    internalSelectedValue: PropTypes.oneOfType([
+      PropTypes.array,
+      PropTypes.bool,
+      PropTypes.number,
+      PropTypes.null,
+      PropTypes.object,
+      PropTypes.string
+    ]),
+    opened: PropTypes.bool
   },
 
   getDefaultProps () {
@@ -114,337 +105,257 @@ export default Component.extend(PropTypeMixin, {
       autofocus: false,
       disabled: false,
       error: false,
-      hovered: -1,
-      maxListHeight: 400,
-      selected: A([]),
-      tabIndex: -1,
-      width: 200
+      focused: false,
+      multiselect: false,
+      renderTarget: 'frost-select',
+      tabIndex: 0
     }
   },
 
-  // ==========================================================================
-  // Computed Properties
-  // ==========================================================================
+  // == Computed Properties ===================================================
 
   @readOnly
-  @computed('maxListHeight')
-  /**
-   * Get inline style for container
-   * Note: This must be a computed property rather than in a SASS file because the
-   * value is dependent on properties passed in by the consumer.
-   * @param {Number} maxListHeight - maximum height at which list should render
-   * @returns {String} container style
-   */
-  containerStyle (maxListHeight) {
-    return Ember.String.htmlSafe(`max-height: ${maxListHeight}px`)
-  },
+  @computed('data', 'filter', 'onInput')
+  items (data, filter, onInput) {
+    // If no data to filter we are done
+    if (!data) {
+      return data
+    }
 
-  @readOnly
-  @computed('data', 'displayItems')
-  /**
-   * Flag for if the user has typed something that doesn't match any options
-   * @param {Array<Item>} data - all the possible items
-   * @param {Object[]} displayItems - the current items being displayed
-   * @returns {Boolean} true if in error state
-   */
-  invalidFilter (data, displayItems) {
-    return (
-      Array.isArray(data) &&
-      Array.isArray(displayItems) &&
-      data.length > 0 &&
-      displayItems.length === 0
-    )
+    // External filtering
+    if (typeOf(onInput) === 'function') {
+      return data
+    }
+
+    // Internal filtering
+
+    filter = filter ? filter.toLowerCase() : ''
+
+    return data
+      .filter((item) => {
+        if (!filter) {
+          return true
+        }
+
+        const label = item.label || ''
+
+        return label.toLowerCase().indexOf(filter) !== -1
+      })
   },
 
   @readOnly
-  @computed('error', 'invalidFilter')
-  /**
-   * Computed flag for if consumer flagged us as having an error, or if the user has typed
-   * something bad.
-   * @param {Boolean} error - true if consumer has flagged that an error exists
-   * @param {Boolean} invalidFilter - true if the user has typed something that doesn't match an option
-   * @returns {Boolean} true if either error condition occured
-   */
-  hasError (error, invalidFilter) {
-    return error || invalidFilter
+  @computed('data', 'selected', 'internalSelectedValue')
+  selectedItems (items, selected, selectedValue) {
+    if (selectedValue) {
+      return items.filter((item) => {
+        if (typeOf(selectedValue) === 'array') {
+          return selectedValue.indexOf(item.value) !== -1
+        }
+
+        return item.value === selectedValue
+      })
+    }
+
+    if (typeOf(selected) === 'array') {
+      return selected
+        .filter((itemIndex) => itemIndex >= 0 && itemIndex < items.length)
+        .map((itemIndex) => items[itemIndex])
+    }
+
+    if (selected ** selected <= 0 && selected < items.length) {
+      return [items[selected]]
+    }
+
+    return []
   },
 
   @readOnly
-  @computed('invalidFilter', 'shouldDisableDropDown', 'open')
+  @computed('disabled', 'tabIndex')
   /**
-   * Determine if drop-down should open
-   * @param {Boolean} invalidFilter - did the user goof?
-   * @param {Boolean} shouldDisableDropDown - computed flag for whether opening the drop-down should be disabled
-   * @param {Boolean} open - TODO: what is this?
-   * @returns {Boolean} true if we should open
+   * Get appropriate tab index
+   * disabled state changes.
+   * @param {Boolean} disabled - whether or not input is disabled
+   * @param {Number} tabIndex - tab index
+   * @returns {Number} tab index
    */
-  shouldOpen (invalidFilter, shouldDisableDropDown, open) {
-    return !invalidFilter && !shouldDisableDropDown && open
+  computedTabIndex (disabled, tabIndex) {
+    return disabled ? -1 : tabIndex
   },
 
   @readOnly
-  @computed('invalidFilter', 'disabled')
-  /**
-   * Determine if we should disable opening the drop-down
-   * @param {Boolean} invalidFilter - did the user goof?
-   * @param {Boolean} disabled - are we in a disabled state?
-   * @returns {Boolean} true if opening should be disabled
-   */
-  shouldDisableDropDown (invalidFilter, disabled) {
-    return invalidFilter || disabled
+  @computed('selectedItems')
+  text (selectedItems) {
+    switch (selectedItems.length) {
+      case 0:
+        return null
+
+      case 1:
+        return selectedItems[0].label
+
+      case 2:
+        return `${selectedItems[0].label}, ${selectedItems[1].label}`
+    }
+
+    return `${selectedItems.length} items selected`
   },
 
-  @readOnly
-  @computed('width')
-  /**
-   * Compute the style attribute based on width
-   * @param {Number} width - the width property
-   * @returns {String} the computed style attribute
-   */
-  style (width) {
-    return `width: ${width}px`
-  },
+  // == Functions =============================================================
 
-  // ==========================================================================
-  // Functions
-  // ==========================================================================
+  // == Events ================================================================
 
-  /** obvious */
-  bindDropdownEvents () {
-    this._handleOutsideClick = handleOutsideClick.bind(this)
-    Ember.$(document).on('click', this._handleOutsideClick)
-  },
-
-  /* Ember.Component method */
-  didReceiveAttrs ({newAttrs, oldAttrs}) {
-    newAttrs = newAttrs || {}
-    oldAttrs = oldAttrs || {}
-
+  didInsertElement () {
     this._super(...arguments)
-    const stateAttrs = this.get('stateAttributes')
 
-    let reduxAttrs = _.chain(stateAttrs)
-    .map((attrName) => {
-      const split = _.filter(attrName.split(ATTR_MAP_DELIM))
-      let attrValue
-      if (split.length > 1) {
-        attrValue = this.get(split[0])
-        attrName = split[1]
-      } else {
-        attrValue = this.get(attrName)
-      }
+    // We need jQuery instance of components root DOM node to hand off to
+    // dropdown so it can position itself properly relative to the select
+    this.set('$element', this.$())
 
-      return [attrName, attrValue]
-    })
-    .filter(([name, value]) => value !== undefined)
-    .fromPairs()
-    .value()
-
-    const dataChanged = isAttrDifferent(newAttrs, oldAttrs, 'data')
-    const selectedChanged = isAttrDifferent(newAttrs, oldAttrs, 'selected')
-    const selectedValueChanged = isAttrDifferent(newAttrs, oldAttrs, 'selectedValue')
-
-    if (!(selectedChanged || selectedValueChanged || dataChanged)) {
-      reduxAttrs = _.omit(reduxAttrs, ['selectedItem', 'selectedItems'])
+    // If autofocus and nothing else has focus, focus on select
+    if (this.get('autofocus') && $(':focus').length === 0) {
+      this.$().focus()
     }
-    this.get('reduxStore').dispatch(resetDropDown(reduxAttrs))
+  },
 
-    // If frost-select instance is being reused by consumer but context is cleared make
-    // make sure to actually clear input (noticed when used in conjunction with dialog
-    // components that don't destroy DOM when closed and re-opened)
+  didReceiveAttrs (attrs) {
+    this._super(...arguments)
+
+    const props = {}
+
+    let newSelectedValue = get(attrs, 'newAttrs.selectedValue.value')
+    let oldSelectedValue = get(attrs, 'oldAttrs.selectedValue.value')
+
+    // If user provided a new selected value and it doesn't match the internal
+    // selected value then update internal selected value
     if (
-      selectedValueChanged &&
-      ('selectedValue' in newAttrs) &&
-      (newAttrs.selectedValue.value === undefined || newAttrs.selectedValue.value === '')
+      !compareSelectedValues(newSelectedValue, oldSelectedValue) &&
+      !compareSelectedValues(newSelectedValue, this.get('internalSelectedValue'))
     ) {
-      this.selectOptionByValue(null)
-      return
+      props.internalSelectedValue = newSelectedValue
     }
 
-    if (selectedValueChanged || (dataChanged && get(newAttrs, 'selectedValue.value'))) {
-      this.selectOptionByValue(newAttrs.selectedValue.value)
-    } else if (selectedChanged || (dataChanged && get(newAttrs, 'selected.value'))) {
-      let selected = this.get('selected')
+    if (Object.keys(props).length !== 0) {
+      this.setProperties(props)
+    }
+  },
 
-      if (typeOf(selected) === 'number') {
-        selected = [selected]
-      } else if (!Array.isArray(selected)) {
-        selected = []
+  _onClick: Ember.on('click', function () {
+    if (!this.get('disabled')) {
+      this.toggleProperty('opened')
+    }
+  }),
+
+  _onKeyDown: Ember.on('keyDown', function (e) {
+    if (
+      [DOWN_ARROW, UP_ARROW].indexOf(e.keyCode) !== -1 &&
+      !this.get('openend')
+    ) {
+      e.preventDefault() // Keep up/down arrow from scrolling page
+      e.stopPropagation()
+      this.set('opened', true)
+    }
+  }),
+
+  _onKeyPress: Ember.on('keyPress', function (e) {
+    if (e.keyCode === SPACE) {
+      e.preventDefault() // Keep space from scrolling page
+      e.stopPropagation()
+      this.toggleProperty('opened')
+    }
+  }),
+
+  _onFocusIn: Ember.on('focusIn', function () {
+    // If select is disabled make sure it can't get focus
+    if (this.get('disabled')) {
+      this.$().blur()
+    } else if (!this.get('focused')) {
+      this.set('focused', true)
+
+      const onFocus = this.get('onFocus')
+
+      if (typeOf(onFocus) === 'function') {
+        this.get('onFocus')()
       }
     }
-  },
+  }),
 
-  // TODO: add jsdoc
-  getValues () {
-    const state = this.get('reduxStore').getState()
-    return [state.baseItems[state.selectedItem].value]
-  },
-  keyDown (event) {
-    const reduxStore = this.get('reduxStore')
-    switch (event.which) {
-      case keyCodes.tab:
-        reduxStore.dispatch(closeDropDown)
-        break
-    }
-  },
-  // TODO: add jsdoc
-  keyUp (event) {
-    const reduxStore = this.get('reduxStore')
-    switch (event.which) {
-      // escape key or tab key, close the dropdown
-      case keyCodes.esc:
-        event.preventDefault()
-        reduxStore.dispatch(closeDropDown)
-        break
-      // enter + spacebar, choose selected
-      case keyCodes.enter:
-        reduxStore.dispatch(selectHover)
-        break
-
-      // up arrow
-      case keyCodes.up:
-        event.preventDefault()
-        reduxStore.dispatch(moveHoverPrev)
-        break
-
-      // down arrow, open the dropdown if necessary, select next
-      case keyCodes.down:
-        event.preventDefault()
-        reduxStore.dispatch(moveHoverNext)
-        break
-
-      // backspace
-      case keyCodes.backspace:
-        event.preventDefault()
-    }
-  },
-
-  /**
-   * Notify parent of currently selected values by calling the onChange callback
-   * with the values of the currently selected indices
-   * @param {Number[]} selected - the selected indices
-   */
-  notifyOfChange () {
-    const onChange = this.get('onChange')
-    if (onChange) {
-      const values = this.getValues()
-      onChange(values)
-    }
-  },
-
-  /** Handler for click outside of an element
-   */
-  onOutsideClick () {
-    this.get('reduxStore').dispatch(closeDropDown)
-  },
-
-  // TODO: add jsdoc
-  selectOptionByValue (selectedValue) {
-    this.get('reduxStore').dispatch(selectValue(selectedValue))
-  },
-
-  /** obvious */
-  unbindDropdownEvents () {
-    Ember.$(document).off('click', this._handleOutsideClick)
-  },
-
-  /** Ember.Component method */
-  willDestroyElement () {
-    this.unbindDropdownEvents()
-  },
-
-  setUpReduxStore () {
-    const reduxStore = Redux.createStore(reducer)
-    this.set('reduxStore', reduxStore)
-    return reduxStore
-  },
-
-  subscribe (reduxStore) {
-    reduxStore.subscribe(() => {
-      const state = reduxStore.getState()
-
-      const wasOpen = this.get('open')
-
-      const newProps = _.pick(state, this.get('stateProperties'))
-
-      this.setProperties(newProps)
-
-      switch (state.lastAction) {
-        case 'SELECT_HOVER':
-        case 'SELECT_ITEM':
-          this.notifyOfChange()
-          break
+  _onFocusOut: Ember.on('focusOut', function () {
+    // We must use run.later so filter text input has time to focus when select
+    // dropdown is being opened
+    run.later(() => {
+      if (this.isDestroyed || this.isDestroying) {
+        return
       }
-      if (!wasOpen && newProps.open) {
-        this.bindDropdownEvents()
-      } else if (wasOpen && !newProps.open) {
-        this.unbindDropdownEvents()
+
+      const focusedElement = $(':focus')[0]
+      const filterElement = $('.frost-select-dropdown .frost-text-input')[0]
+
+      // If focus has moved to filter in select dropdown then keep select
+      // visually focused and open
+      if (filterElement && focusedElement === filterElement) {
+        return
       }
-    })
-  },
 
-  init () {
-    this._super(...arguments)
-    this.subscribe(this.setUpReduxStore())
-  },
-
-  // ==========================================================================
-  // Events
-  // ==========================================================================
-
-  // ==========================================================================
-  // Actions
-  // ==========================================================================
-
-  actions: {
-    // TODO: add jsdoc
-    onBlur (event) {
-      this.set('focus', false)
-
+      const isFocused = this.get('focused')
       const onBlur = this.get('onBlur')
 
-      if (onBlur) {
-        onBlur(event)
+      this.setProperties({
+        focused: false,
+        opened: false
+      })
+
+      if (typeOf(onBlur) === 'function' && isFocused) {
+        this.get('onBlur')()
       }
+    })
+  }),
+
+  // == Actions ===============================================================
+
+  actions: {
+    closeDropDown () {
+      this.setProperties({
+        filter: '',
+        opened: false
+      })
+
+      // We need to make sure focus goes back to select since it is on the
+      // filter text input while the dropdown is open
+      this.$().focus()
     },
 
-    // TODO: add jsdoc
-    onChange (event) {
-      const target = event.currentTarget || event.target
+    filterInput (e) {
+      const filter = e.target.value
       const onInput = this.get('onInput')
+
       if (typeOf(onInput) === 'function') {
-        onInput(target.value)
+        onInput(filter)
       } else {
-        this.get('reduxStore').dispatch(updateSearchText(target.value))
+        this.set('filter', filter)
       }
     },
 
-    // TODO: add jsdoc
-    onClickArrow (event) {
-      event.preventDefault()
-      const reduxStore = this.get('reduxStore')
-      reduxStore.dispatch(clickArrow)
-    },
-
-    // TODO: add jsdoc
-    onFocus () {
-      this.get('reduxStore').dispatch(openDropDown)
-      // If an onFocus event handler is defined, call it
-      if (this.attrs.onFocus) {
-        this.attrs.onFocus()
+    selectItem (selectedValue) {
+      const isMultiselect = this.get('multiselect')
+      const props = {
+        opened: isMultiselect,
+        internalSelectedValue: selectedValue
       }
-      return false
-    },
 
-    // TODO: add jsdoc
-    onItemOver (data) {
-      this.get('reduxStore').dispatch(mouseHoverItem(data.index))
-      return false
-    },
+      if (!isMultiselect) {
+        props.filter = ''
+      }
 
-    // TODO: add jsdoc
-    onSelect (data) {
-      this.get('reduxStore').dispatch(selectItem(data.index))
+      this.setProperties(props)
+
+      const onChange = this.get('onChange')
+
+      if (typeOf(onChange) === 'function') {
+        this.onChange(selectedValue)
+      }
+
+      // We need to make sure focus goes back to select since it is on the
+      // filter text input while the dropdown is open
+      this.$().focus()
     }
   }
 })

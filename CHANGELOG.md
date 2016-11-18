@@ -1,3 +1,100 @@
+# 0.32.3
+
+* **Fixed** `frost-select` to open dropdown when select is focused and user presses up/down arrow key.
+* **Fixed** selected item(s) in the select dropdown to have a heavier font weight.
+* **Removed** `ember-browserify` and `svg4everybody` npm dependencies in favor of including `svg4everybody` via `vendor` directory.
+
+
+# 0.32.2
+
+* Fixed the tabIndex on frost-select that are disabled and then enabled
+
+
+
+# 0.32.1
+
+* **Added** box shadow to select dropdown arrow to match box shadow of dropdown box.
+* **Added** space around select dropdown text input.
+* **Changed** color of matching text when filtering select dropdown.
+
+
+
+# 0.32.0
+
+* **Added** underlining of matching text in items when filtering `frost-select`.
+
+
+
+# 0.31.0
+ * **Removed** the `frost-component` generator
+ * **Added** Some new dependencies that will be installed when this addon is `ember install`'d 
+    * Addon: `ember-test-utils`
+    * Bower packages: `chai-jquery` and `sinon-chai`
+ * **Added** a `component` generator which uses our lint rules and our comment blocks
+ * **Added** a `component-test` generator which uses `mocha` and `ember-test-utils`. It also sets up `sinon` automatically and has a failing test to make developers add a real test. 
+ * **Added** a `component-addon` generator which does the re-export of a component in the `app` directory, basically the same as the default generator, minus the `;` at the end. 
+ * **Added** a `PULL_REQUEST_TEMPLATE.md` file to help contributors remember to put version-bump comments and changelog messages in their PR descriptions. 
+
+# 0.30.2
+
+* Updated ember-hook selector for frost-select-dropdown input
+
+# 0.30.1
+
+* **Fixed** `frost-select` to not depend on prototype extensions.
+
+# 0.30.0
+
+* Rewrote `frost-select` from the ground up to make it keyboard friendly and fix all of the issues we have been having with it. However I kept the same component API so consuming apps should still just work. CSS selectors did change though which will break any overriding CSS and tests that depend on the old selectors.
+
+# 0.29.1
+
+* **Fixed** issue where events weren't being unbound on component destruction.
+
+# 0.29.0
+
+- Add an array helper
+
+# 0.28.8
+* Fixed issue #120
+
+# 0.28.7
+
+* **Fixed** input margins and borders to match.
+
+# 0.28.6
+
+* **Fixed** notifications for the dummy app.
+
+# 0.28.5
+
+* **Added** some test helpers for consumers to use in their tests.
+
+# 0.28.4
+
+* **Fixed** width of following inputs to match: `frost-password`, `frost-select`, and `frost-text`.
+
+# 0.28.3
+
+* **Fixed** `frost-multi-select`.
+
+# 0.28.2
+
+* **Updated** `frost-select` dropdown to update at 60 fps and stop using `element` property as it causes conflicts in Ember 2.9 beta 3.
+
+# 0.28.1
+
+* **Added** `frost-select-outlet` and documented it.
+
+# 0.28.0
+
+* **Added** [ember-elsewhere](https://github.com/ef4/ember-elsewhere) as a new dependency.
+* **Changed** `frost-select` and `frost-multi-select` to render dropdown elsewhere in the DOM, using `ember-elsewhere`, in order to make them more flexible.
+* **Changed** minimum Ember version from `2.1` to `2.3` since `ember-elsewhere` doesn't appear to work on versions prior to `2.3`.
+
+# 0.27.4
+* select value and prompt is now clearable by setting the 'selectedValue' property to an empty string in the consuming context
+
 # 0.27.3
 
 * The unselected text in the `frost-select` drop down menu is now a darker color.
@@ -8,15 +105,15 @@
 * Changing select data after a selection has been made will no longer cause an error.
 
 # 0.27.1
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+Fix a problem where frost-select would clear prompt on redraw
 
 # 0.27.0
  * **Added** frost-toggle-button component and dummy example.
 
 # 0.26.0
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+Use onclick handler from parameter passed from component/controller property
 
 # 0.25.7
 * Pass event to select's onBlur action
@@ -34,8 +131,8 @@ Use a `# CHANGELOG` section in your Pull Request description to auto-populate th
 * **Added** `npm-install-security-check` as a dependency to make consumers more security conscious.
 
 # 0.25.3
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+fix for active route on link click
 
 # 0.25.2
 
@@ -69,8 +166,8 @@ This change is [<img src="https://reviewable.io/review_button.svg" height="34" a
 * Deprecated on-scroll-y-end in favor of onScrollYEnd
 
 # 0.22.3
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+invoke child included hooks
 
 # 0.22.2
 
@@ -93,24 +190,24 @@ Use a `# CHANGELOG` section in your Pull Request description to auto-populate th
 * **Updated** temporarily restrict `ember-cli-sass` from going above version 5.4.0
 
 # 0.21.2
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+guards added for any consuming app @ ember 2.7
 
 # 0.21.1
 
 * **Fixed** bug in `treeForAddon` that can affect consumers.
 
 # 0.21.0
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+- **Changed** from `ember-lodash` to `ember-lodash-shim`. This means upgrading from `lodash` version `3.x` to version `4.x` which could impact consumers relying on [things removed](https://github.com/lodash/lodash/wiki/Changelog#v400) in `lodash` version `4.0.0`.
 
 # 0.20.0
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+- **Added** Consumers can now use 'hook' attr of core components to enable easier testing with addons like ember-cli-page-object
 
 # 0.19.2
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+Fixed how negative indices are handled by frost-select.
 
 # 0.19.1
 
@@ -165,24 +262,24 @@ Added ember-code-snippets to allow demo documentation to reference the code as t
 Fixed the text clear icon to only append to the DOM on insertion of the text field (was occurring on every render/re-render)
 
 # 0.17.0
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+Events
 
 # 0.16.0
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+keypress
 
 # 0.15.0
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+added radio button
 
 # 0.14.1
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+README update
 
 # 0.14.0
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+Inline svg config option
 
 # 0.13.1
 
@@ -204,8 +301,8 @@ Use a `# CHANGELOG` section in your Pull Request description to auto-populate th
 * FIXED frost-textarea clear icon style to show it inside the text area
 
 # 0.11.19
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+this.super init
 
 # 0.11.18
 
@@ -302,12 +399,12 @@ Added the icon pack feature to `frost-icon`, see the documentation at http://cie
 Minor - updating path for frost guide.
 
 # 0.9.2
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+upversion to fix travis build
 
 # 0.9.1
-No CHANGELOG section found in Pull Request description.
-Use a `# CHANGELOG` section in your Pull Request description to auto-populate the `CHANGELOG.md`
+
+Adjusting directory name to match UX components.
 
 # 0.9.0
 

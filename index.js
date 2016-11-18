@@ -93,6 +93,7 @@ module.exports = {
       app.import(path.join(robotoPath, 'Roboto-Medium.woff2'), {destDir: 'assets/fonts'})
       app.import(path.join(robotoPath, 'Roboto-Regular.woff2'), {destDir: 'assets/fonts'})
       app.import(path.join(robotoPath, 'stylesheet.css'))
+      app.import(path.join('vendor', 'svg4everybody.min.js'))
     }
 
     if (typeof this.import === 'function' && app.bowerDirectory) {
@@ -125,6 +126,7 @@ module.exports = {
     return iconNames
   },
 
+  /* eslint-disable complexity */
   // Present purely to allow programmatic access to the icon packs and icon names (for demo purposes)
   treeForAddon: function (tree) {
     var addonTree = this._super.treeForAddon.call(this, tree)
@@ -168,6 +170,7 @@ module.exports = {
 
     return mergeTrees([addonTree, iconNameTree], {overwrite: true})
   },
+  /* eslint-enable complexity */
 
   treeForPublic: function (tree) {
     const isAddon = this.project.isEmberCLIAddon()

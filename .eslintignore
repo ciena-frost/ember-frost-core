@@ -1,5 +1,2 @@
-bower_components/**/*
-dist/**/*
-node_modules/**/*
-tmp/**/*
-blueprints/frost-component/files/**/*
+blueprints/component/files/**/*
+blueprints/component-test/files/**/*
