@@ -38,6 +38,8 @@ $frost-input-select-option-row-height: 35px;
     border: 1px solid $frost-color-lgrey-3;
     border-radius: 3px;
     box-shadow: 0 2px 7px 3px transparentize($frost-select-container-shadow, .4);
+    display: flex;
+    flex-direction: column;
     left: -1px;
     margin-bottom: 1em;
     opacity: 0;
@@ -46,6 +48,7 @@ $frost-input-select-option-row-height: 35px;
     transition: height .4s ease, opacity .2s ease;
     width: calc(100% + 2px);
     pointer-events: none;
+
   }
 
   input.trigger {
