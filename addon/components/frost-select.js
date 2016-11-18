@@ -8,7 +8,7 @@ import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
 import layout from '../templates/components/frost-select'
 
-import keyCodes from '../utils/keycodes'
+import keyCodes from '../utils/key-codes'
 const {DOWN_ARROW, SPACE, UP_ARROW} = keyCodes
 
 /**
