@@ -6,7 +6,7 @@ import {
 import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
 import Ember from 'ember'
 const {$} = Ember
-import keyCodes from 'ember-frost-core/utils/keycodes'
+import {keyCodes} from 'ember-frost-core/utils'
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW, TAB} = keyCodes
 import {
   $hook,

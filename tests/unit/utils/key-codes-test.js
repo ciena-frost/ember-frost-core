@@ -4,7 +4,7 @@ import {
   describe,
   it
 } from 'mocha'
-import keycodes from 'ember-frost-core/utils/keycodes'
+import keycodes from 'ember-frost-core/utils/key-codes'
 
 describe('keycodes', function () {
   // Replace this with your real tests.

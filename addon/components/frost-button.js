@@ -1,14 +1,11 @@
+/**
+ * Component definition for the frost-button component
+ */
 import Ember from 'ember'
-const {
-  Component,
-  get,
-  isEmpty,
-  Logger,
-  typeOf,
-  ViewUtils
-} = Ember
+const {Component, Logger, ViewUtils, get, isEmpty, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+
 import layout from '../templates/components/frost-button'
 
 /**
@@ -34,7 +31,7 @@ const validSizes = [
 export default Component.extend(PropTypeMixin, {
   // == Dependencies ==========================================================
 
-  // == Properties ============================================================
+  // == Keyword Properties ====================================================
 
   attributeBindings: [
     'autofocus',
@@ -44,20 +41,28 @@ export default Component.extend(PropTypeMixin, {
     'title'
   ],
 
-  classNames: [
-    'frost-button'
-  ],
-
   classNameBindings: [
     'disabled',
     'extraClasses'
+  ],
+
+  classNames: [
+    'frost-button'
   ],
 
   layout,
 
   tagName: 'button',
 
+  // == PropTypes =============================================================
+
+  /**
+   * Properties for this component. Options are expected to be (potentially)
+   * passed in to the component. State properties are *not* expected to be
+   * passed in/overwritten.
+   */
   propTypes: {
+    // options
     autofocus: PropTypes.bool,
     design: PropTypes.oneOf(validDesignClasses),
     disabled: PropTypes.bool,
@@ -69,11 +74,22 @@ export default Component.extend(PropTypeMixin, {
     text: PropTypes.string,
     title: PropTypes.string,
     type: PropTypes.string,
-    vertical: PropTypes.bool
+    vertical: PropTypes.bool,
+
+    // state
+
+    // keywords
+    attributeBindings: PropTypes.arrayOf(PropTypes.string),
+    classNameBindings: PropTypes.arrayOf(PropTypes.string),
+    classNames: PropTypes.arrayOf(PropTypes.string),
+    layout: PropTypes.any,
+    tagName: PropTypes.string
   },
 
+  /** @returns {Object} the default values for properties when not provided by consumer */
   getDefaultProps () {
     return {
+      // options
       autofocus: false,
       design: '',
       disabled: false,
@@ -85,6 +101,8 @@ export default Component.extend(PropTypeMixin, {
       title: null,
       type: 'button',
       vertical: false
+
+      // state
     }
   },
 
@@ -214,8 +232,9 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
-  // == Events ================================================================
+  // == DOM Events ============================================================
 
+  // FIXME: jsdoc
   onclick: Ember.on('click', function (event) {
     if (!ViewUtils.isSimpleClick(event)) {
       return true
@@ -227,12 +246,17 @@ export default Component.extend(PropTypeMixin, {
     }
   }),
 
+  // FIXME: jsdoc
   _onFocus: Ember.on('focusIn', function (e) {
     // If an onFocus handler is defined, call it
     if (this.attrs.onFocus) {
       this.attrs.onFocus()
     }
-  })
+  }),
+
+  // == Lifecycle Hooks =======================================================
 
   // == Actions ===============================================================
+
+  actions: {}
 })

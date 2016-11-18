@@ -1,20 +1,20 @@
-import computed from 'ember-computed-decorators'
+/**
+ * Component definition for the frost-password component
+ */
 import Ember from 'ember'
-const {
-  Component,
-  get
-} = Ember
-import {
-  task,
-  timeout
-} from 'ember-concurrency'
-import FrostEventsProxy from '../mixins/frost-events-proxy'
+const {Component, get} = Ember
+import computed from 'ember-computed-decorators'
+import {task, timeout} from 'ember-concurrency'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+
+import FrostEventsProxy from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-password'
 
 export default Component.extend(FrostEventsProxy, PropTypeMixin, {
 
-  // == Properties ============================================================
+  // == Dependencies ==========================================================
+
+  // == Keyword Properties ====================================================
 
   classNames: [
     'frost-password'
@@ -40,7 +40,15 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     title
    */
 
+  // == PropTypes =============================================================
+
+  /**
+   * Properties for this component. Options are expected to be (potentially)
+   * passed in to the component. State properties are *not* expected to be
+   * passed in/overwritten.
+   */
   propTypes: {
+    // options
     disabled: PropTypes.bool,
     hook: PropTypes.string,
     isRevealed: PropTypes.bool,
@@ -56,11 +64,20 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     readonly: PropTypes.bool,
     required: PropTypes.bool,
     selectionDirection: PropTypes.string,
-    title: PropTypes.string
+    title: PropTypes.string,
+
+    // state
+
+    // keywords
+    classNames: PropTypes.arrayOf(PropTypes.string),
+    classNameBindings: PropTypes.arrayOf(PropTypes.string),
+    layout: PropTypes.any
   },
 
+  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
+      // options
       disabled: false,
       isRevealed: false,
       revealable: false,
@@ -79,20 +96,31 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     }
   },
 
-  // == Computed properties  ===================================================
+  // == Computed properties  ==================================================
 
   @computed('isRevealed')
+  /**
+   * The message to display on the reveal button
+   * @param {Boolean} isRevealed - true if the password is revealed
+   * @returns {String} the message for the reveal button
+   */
   revealMessage (isRevealed) {
     return isRevealed ? 'Hide' : 'Show'
   },
 
   @computed('isRevealed')
+  /**
+   * The type of the <input>
+   * @param {Boolean} isRevealed - true if the password is revealed
+   * @returns {String} the type of the <input>
+   */
   type (isRevealed) {
     return isRevealed ? 'text' : 'password'
   },
 
-  // == Tasks ==================================================================
+  // == Tasks =================================================================
 
+  // FIXME: jsdoc
   _toggleReveal: task(function * (isVisible) {
     this.toggleProperty('isRevealed')
 
@@ -112,9 +140,16 @@ export default Component.extend(FrostEventsProxy, PropTypeMixin, {
     $input.selectionEnd = selectionEnd
   }).restartable(),
 
+  // == DOM Events ============================================================
+
+  // == Lifecycle Hooks =======================================================
+
   // == Actions ===============================================================
 
   actions: {
+    /**
+     * Toggle the reveal property using an ember-concurrency task
+     */
     toggleReveal () {
       get(this, '_toggleReveal').perform()
     }

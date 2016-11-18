@@ -2,7 +2,7 @@ import {expect} from 'chai'
 import Ember from 'ember'
 const {run} = Ember
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
-import * as utils from 'ember-frost-core/utils/utils'
+import * as utils from 'ember-frost-core/utils'
 import {describeComponent} from 'ember-mocha'
 import PropTypeMixin from 'ember-prop-types'
 import {
