@@ -108,7 +108,9 @@ $frost-select-placeholder-color: $frost-color-grey-6;
 }
 
 .frost-select-dropdown {
+  display: flex;
   position: fixed;
+  flex-direction: column;
   height: auto;
   transition: height .4s ease, opacity .2s ease;
   border: 1px solid $frost-color-lgrey-3;
@@ -119,8 +121,6 @@ $frost-select-placeholder-color: $frost-color-grey-6;
   z-index: 9002;
   pointer-events: auto;
   overflow-y: auto;
-  display: flex;
-  flex-direction: column;
 
   ul {
     display: flex;
