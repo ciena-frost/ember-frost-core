@@ -3,7 +3,7 @@ import {expectSelectWithState} from 'dummy/tests/helpers/ember-frost-core'
 import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
 import Ember from 'ember'
 const {$} = Ember
-import {keyCodes} from 'ember-frost-core/utils'
+import keyCodes from 'ember-frost-core/utils/key-codes'
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW, TAB} = keyCodes
 import {$hook, initialize as initializeHook} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
@@ -297,6 +297,56 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
         })
       })
+
+      describe('when down arrow pressed', function () {
+        beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+          $hook('select')
+            .trigger(
+              $.Event('keydown', {
+                keyCode: DOWN_ARROW
+              })
+            )
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true,
+            items: [],
+            opened: true
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
+      })
+
+      describe('when up arrow pressed', function () {
+        beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+          $hook('select')
+            .trigger(
+              $.Event('keydown', {
+                keyCode: UP_ARROW
+              })
+            )
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true,
+            items: [],
+            opened: true
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
+      })
     })
 
     describe('when input is disabled', function () {
@@ -455,55 +505,6 @@ describeComponent(...integration('frost-multi-select'), function () {
         expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
         expect(onChange.callCount, 'OnChange is not called').to.equal(0)
         expect(onFocus.callCount, 'onFocus is called').to.equal(1)
-      })
-
-      describe('when first item clicked', function () {
-        beforeEach(() => {
-          [onBlur, onChange, onFocus].forEach((func) => func.reset())
-          $hook('select-item', {index: 0}).trigger('mousedown')
-        })
-        it('renders as expected', function () {
-          expectSelectWithState('select', {
-            opened: true,
-            items: ['Foo', 'Bar'],
-            text: 'Foo'
-          })
-          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-          expect(onChange.callCount, 'onChange is called').to.equal(1)
-          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
-
-          expect(
-            onChange.lastCall.args[0],
-            'informs consumer of selected value'
-          )
-            .to.eql(['foo'])
-        })
-      })
-
-      describe('when second item clicked', function () {
-        beforeEach(function () {
-          [onBlur, onChange, onFocus].forEach((func) => func.reset())
-          $hook('select-item', {index: 0}).trigger('mousedown')
-        })
-
-        it('renders as expected', function (done) {
-          $hook('select-item', {index: 1}).trigger('mousedown')
-          expectSelectWithState('select', {
-            opened: true,
-            items: ['Foo', 'Bar'],
-            text: 'Foo, Bar'
-          })
-          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-          expect(onChange.callCount, 'onChange is called').to.equal(2)
-          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
-
-          expect(
-            onChange.lastCall.args[0],
-            'informs consumer of selected value'
-          )
-            .to.eql(['foo', 'bar'])
-          done()
-        })
       })
 
       describe('when escape key pressed', function () {
@@ -913,71 +914,116 @@ describeComponent(...integration('frost-multi-select'), function () {
             })
           })
         })
-      })
-    })
-  })
 
-  describe('when input is disabled', function () {
-    beforeEach(function () {
-      this.set('disabled', true)
-    })
-
-    it('renders as expected', function () {
-      expectSelectWithState('select', {
-        disabled: true,
-        focused: false
-      })
-
-      expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-      expect(onChange.callCount, 'OnChange is not called').to.equal(0)
-      expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
-    })
-
-    describe('click on component', function () {
-      beforeEach(function () {
-        // In a real browser when you click on the select with your mouse a
-        // focusin event is fired on the component. However when using jQuery's
-        // click() method the focusin is not fired so we are programitcally
-        // triggering that in this test.
-
-        $hook('select').click().trigger('focusin')
-      })
-
-      it('renders as expected', function () {
-        expectSelectWithState('select', {
-          disabled: true,
-          focused: false
-        })
-
-        expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
-        expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
-      })
-    })
-
-    describe('tab into component', function () {
-      beforeEach(function () {
-        // In case you are wondering what the hell is going on here there is no
-        // way to trigger a generic tab event on the document to move focus on to
-        // the next element for browser security reasons. So our approach is to
-        // simply bind a keypress event to the element before the select, which
-        // adds focus to the next element in the DOM when it receives a tab,
-        // simulating what would happen in a real world scenario. We then trigger
-        // a tab event on this input and ensure the our select is skipped since
-        // it is disabled.
-
-        $hook('pre')
-          .on('keypress', function (e) {
-            if (e.keyCode === TAB) {
-              focusNext($(this))
-            }
+        describe('when first item clicked', function () {
+          beforeEach(function () {
+            [onBlur, onChange, onFocus].forEach((func) => func.reset())
+            $hook('select-item', {index: 0}).trigger('mousedown')
           })
-          .focus()
-          .trigger(
-            $.Event('keypress', {
-              keyCode: TAB
+
+          it('renders as expected', function () {
+            expectSelectWithState('select', {
+              focused: true,
+              items: ['Foo', 'Bar'],
+              opened: true,
+              text: 'Foo'
             })
-          )
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is called').to.equal(1)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+
+            expect(
+              onChange.lastCall.args[0],
+              'informs consumer of selected value'
+            )
+              .to.eql(['foo'])
+          })
+        })
+
+        describe('when second item clicked', function () {
+          beforeEach(function () {
+            [onBlur, onChange, onFocus].forEach((func) => func.reset())
+            $hook('select-item', {index: 1}).trigger('mousedown')
+          })
+
+          it('renders as expected', function () {
+            expectSelectWithState('select', {
+              focused: true,
+              items: ['Foo', 'Bar'],
+              opened: true,
+              text: 'Bar'
+            })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is called').to.equal(1)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+
+            expect(
+              onChange.lastCall.args[0],
+              'informs consumer of selected value'
+            )
+              .to.eql(['bar'])
+          })
+        })
+      })
+
+      describe('when down arrow pressed', function () {
+        beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+          $hook('select')
+            .trigger(
+              $.Event('keydown', {
+                keyCode: DOWN_ARROW
+              })
+            )
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true,
+            focusedItem: 'Foo',
+            items: ['Foo', 'Bar'],
+            opened: true
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
+      })
+
+      describe('when up arrow pressed', function () {
+        beforeEach(function () {
+          [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+          $hook('select')
+            .trigger(
+              $.Event('keydown', {
+                keyCode: UP_ARROW
+              })
+            )
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true,
+            focusedItem: 'Foo',
+            items: ['Foo', 'Bar'],
+            opened: true
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
+      })
+    })
+
+    describe('when input is disabled', function () {
+      beforeEach(function () {
+        this.set('disabled', true)
       })
 
       it('renders as expected', function () {
@@ -986,11 +1032,104 @@ describeComponent(...integration('frost-multi-select'), function () {
           focused: false
         })
 
-        expect(
-          $hook('post')[0],
-          'focuses on element after select'
-        )
-          .to.equal(document.activeElement)
+        expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+        expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+      })
+
+      describe('click on component', function () {
+        beforeEach(function () {
+          // In a real browser when you click on the select with your mouse a
+          // focusin event is fired on the component. However when using jQuery's
+          // click() method the focusin is not fired so we are programitcally
+          // triggering that in this test.
+
+          $hook('select').click().trigger('focusin')
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            disabled: true,
+            focused: false
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
+      })
+
+      describe('tab into component', function () {
+        beforeEach(function () {
+          // In case you are wondering what the hell is going on here there is no
+          // way to trigger a generic tab event on the document to move focus on to
+          // the next element for browser security reasons. So our approach is to
+          // simply bind a keypress event to the element before the select, which
+          // adds focus to the next element in the DOM when it receives a tab,
+          // simulating what would happen in a real world scenario. We then trigger
+          // a tab event on this input and ensure the our select is skipped since
+          // it is disabled.
+
+          $hook('pre')
+            .on('keypress', function (e) {
+              if (e.keyCode === TAB) {
+                focusNext($(this))
+              }
+            })
+            .focus()
+            .trigger(
+              $.Event('keypress', {
+                keyCode: TAB
+              })
+            )
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            disabled: true,
+            focused: false
+          })
+
+          expect(
+            $hook('post')[0],
+            'focuses on element after select'
+          )
+            .to.equal(document.activeElement)
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
+      })
+    })
+
+    describe('when input has custom tab index', function () {
+      beforeEach(function () {
+        this.set('tabIndex', 3)
+      })
+
+      it('renders as expected', function () {
+        expectSelectWithState('select', {
+          focused: false,
+          tabIndex: 3
+        })
+
+        expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+        expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+      })
+    })
+
+    describe('when input has error', function () {
+      beforeEach(function () {
+        this.set('error', true)
+      })
+
+      it('renders as expected', function () {
+        expectSelectWithState('select', {
+          error: true,
+          focused: false
+        })
 
         expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
         expect(onChange.callCount, 'OnChange is not called').to.equal(0)
@@ -999,37 +1138,15 @@ describeComponent(...integration('frost-multi-select'), function () {
     })
   })
 
-  describe('when input has custom tab index', function () {
-    beforeEach(function () {
-      this.set('tabIndex', 3)
-    })
-
-    it('renders as expected', function () {
-      expectSelectWithState('select', {
-        focused: false,
-        tabIndex: 3
+  describe('ember-hook selectors', function () {
+    describe('when dropdown is open', function () {
+      beforeEach(function () {
+        $hook('select').click()
       })
 
-      expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-      expect(onChange.callCount, 'OnChange is not called').to.equal(0)
-      expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
-    })
-  })
-
-  describe('when input has error', function () {
-    beforeEach(function () {
-      this.set('error', true)
-    })
-
-    it('renders as expected', function () {
-      expectSelectWithState('select', {
-        error: true,
-        focused: false
+      it('can find dropdown input', function () {
+        expect($hook('select-list-input')).to.have.length(1)
       })
-
-      expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-      expect(onChange.callCount, 'OnChange is not called').to.equal(0)
-      expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
     })
   })
 })
