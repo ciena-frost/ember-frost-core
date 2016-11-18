@@ -1,5 +1,3 @@
-import Ember from 'ember'
-const {run} = Ember
 import {expect} from 'chai'
 import {
   describeComponent,
@@ -8,6 +6,7 @@ import {
 import hbs from 'htmlbars-inline-precompile'
 import {describe} from 'mocha'
 import sinon from 'sinon'
+import wait from 'ember-test-helpers/wait'
 
 describeComponent(
   'frost-checkbox',
@@ -140,20 +139,24 @@ describeComponent(
     })
 
     it('triggers value change', function () {
-      this.set('checkbox-value', '')
-      this.on('valueChange', function (val) {
-        this.set('checkbox-value', val)
+      this.set('checkbox-value', false)
+      this.on('valueChange', function (attrs) {
+        this.set('checkbox-value', attrs.value)
       })
-      this.render(hbs`{{#frost-checkbox
+      this.render(hbs`{{frost-checkbox
         id="value"
         value="value"
-        on-input=(action "valueChange")}}value{{/frost-checkbox}}
+        onInput=(action 'valueChange')
+        label='value'}}
       `)
+
       var input = this.$('input')
-      input.trigger('input')
-      run.next(this, () => {
-        expect(this.get('checkbox-value')).to.eql(true)
-      })
+      input.trigger('click')
+
+      return wait()
+        .then(() => {
+          expect(this.get('checkbox-value')).to.eql(true)
+        })
     })
 
     describe('calls onInput closure action', function () {
