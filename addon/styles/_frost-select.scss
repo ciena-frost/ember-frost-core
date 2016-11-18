@@ -119,6 +119,8 @@ $frost-select-placeholder-color: $frost-color-grey-6;
   z-index: 9002;
   pointer-events: auto;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 
   ul {
     display: flex;
