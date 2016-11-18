@@ -1,6 +1,6 @@
 {
   "name": "ember-frost-core",
-  "version": "0.32.2",
+  "version": "0.32.3",
   "description": "The library of core frost components",
   "frostGuideDirectories": [
     {
@@ -104,6 +104,7 @@
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
     "ember-cli": "~2.8.0",
+    "ember-cli-app-version": "^2.0.0",
     "ember-cli-code-coverage": "0.3.5",
     "ember-cli-dependency-checker": "^1.2.0",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
@@ -163,7 +164,6 @@
     "ember-cli-string-utils": "^1.0.0",
     "ember-cli-valid-component-name": "^1.0.0",
     "ember-prop-types": "^3.0.0",
-    "npm-install-security-check": "^1.0.0",
-    "svg4everybody": "^2.0.3"
+    "npm-install-security-check": "^1.0.0"
   }
 }

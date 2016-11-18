@@ -11,17 +11,13 @@ module.exports = {
       'ember-frost-select',
       'ember-frost-text',
       'ember-frost-textarea',
-      'ember-frost-theme'
+      'ember-frost-theme',
+      'svg4everybody'
     ].map((packageName) => {
       return {name: packageName}
     })
 
     return this.removePackagesFromProject(packagesToRemove)
-      .then(() => {
-        return this.addPackagesToProject([
-          {name: 'svg4everybody', target: '^2.0.3'}
-        ])
-      })
       .then(() => {
         return this.addBowerPackagesToProject([
           {name: 'perfect-scrollbar', target: '~0.6.12'}
@@ -30,7 +26,6 @@ module.exports = {
       .then(() => {
         return this.addAddonsToProject({
           packages: [
-            {name: 'ember-browserify', target: '^1.1.13'},
             {name: 'ember-cli-htmlbars-inline-precompile', target: '^0.3.1'},
             {name: 'ember-concurrency', target: '~0.7.15'},
             {name: 'ember-computed-decorators', target: '~0.2.0'},
