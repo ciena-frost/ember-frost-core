@@ -5,7 +5,7 @@ import Ember from 'ember'
 const {$} = Ember
 import keyCodes from 'ember-frost-core/utils/key-codes'
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW, TAB} = keyCodes
-import {$hook, initialize} from 'ember-hook'
+import {$hook, initialize as initializeHook} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
 import wait from 'ember-test-helpers/wait'
 import hbs from 'htmlbars-inline-precompile'
@@ -47,7 +47,7 @@ describeComponent(...integration('frost-multi-select'), function () {
   let onBlur, onChange, onFocus, sandbox
 
   beforeEach(function () {
-    initialize()
+    initializeHook()
     sandbox = sinon.sandbox.create()
 
     onBlur = sandbox.spy()
