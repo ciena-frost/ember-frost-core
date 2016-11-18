@@ -120,6 +120,8 @@ $frost-select-placeholder-color: $frost-color-grey-6;
   transition: height .4s ease, opacity .2s ease;
   z-index: 9002;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 
   ul {
     display: flex;
