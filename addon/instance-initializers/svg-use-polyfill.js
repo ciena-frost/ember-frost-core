@@ -1,6 +1,8 @@
-import svg4everybody from 'npm:svg4everybody'
+/* global svg4everybody */
+
 import Ember from 'ember'
 const {ENV} = Ember
+
 export function initialize () {
   if (ENV.iconPacks && ENV.iconPacks.inline) {
     svg4everybody({

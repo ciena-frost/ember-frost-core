@@ -19,3 +19,4 @@ testem.log
 coverage.json
 .DS_Store
 /typings/*
+.vscode
