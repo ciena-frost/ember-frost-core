@@ -89,5 +89,6 @@ export default Component.extend(PropTypeMixin, {
     this.$().off('ps-y-reach-end', this._legacyScrollYEndHandler)
     this.$().off('ps-y-reach-end', this._scrollYEndHandler)
     this.$().off('ps-y-reach-start', this._scrollYStartHandler)
+    window.Ps.destroy(this.$()[0])
   })
 })
