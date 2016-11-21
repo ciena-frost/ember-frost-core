@@ -78,16 +78,6 @@ to work with legacy IE browsers using [svg4everybody](https://github.com/jonatha
 the [advantages](https://css-tricks.com/icon-fonts-vs-svg/) of inline
 SVGs versus icon fonts.
 
-## Legacy support
-
-The icon pack feature contains support for the legacy form of
-`frost-icon`, merging svgs from the prior `public/` svg paths
-into the the default `frost` icon-pack.  Deprecation notices will
-be displayed until the svgs are moved from `public/` and flat icon
-packs are used instead of nested directories.
-
-Legacy support will continue until `ember-frost-core` 1.0 is released.
-
 ## API
 
 | Name   | Description | Default |
@@ -106,11 +96,6 @@ Legacy support will continue until `ember-frost-core` 1.0 is released.
 ### Icon pack
 ```handlebars
 {{frost-icon pack='frost' icon='add'}}
-```
-
-### Legacy
-```handlebars
-{{frost-icon icon='frost/add'}}
 ```
 
 ### Set the fill color for an icon
