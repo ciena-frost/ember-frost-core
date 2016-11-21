@@ -1,3 +1,9 @@
+# 0.32.5
+
+* **Fixes** a major memory leak in `frost-scroll`
+
+
+
 # 0.32.4
 * Updated frost-select-dropdown to be a columnar flex layout
 
