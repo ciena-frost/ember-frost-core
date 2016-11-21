@@ -152,5 +152,4 @@ export default Component.extend(PropTypeMixin, {
 
   actions: {
   }
-
 })
