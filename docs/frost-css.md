@@ -4,13 +4,11 @@ SASS based normalization and default theme variables for Frost projects
 
 # Usage
 
-Modify your `app.scss` to include 
+Colors and typography variables are available in `frost-theme`.
+Z-index and flex variables are available in `frost-app`.
 
-
-```sass
-@import 'node_modules/ember-frost-core/addon/styles/frost-theme';
-@import 'node_modules/ember-frost-core/addon/styles/frost-app';
-```
+Apps can import these styles via `@import 'ember-frost-core/frost-<theme or app>';`
+Addons can import these styles via `@import 'node_modules/ember-frost-core/app/styles/ember-frost-core/frost-<theme or app>';`
 
 You now have access to the theme and core variables
 
