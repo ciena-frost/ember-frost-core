@@ -88,7 +88,7 @@ describeComponent(
      `)
 
       expect(
-        $hook('my-test-toggle-input').hasClass('frost-toggle-input '),
+        $hook('my-test-toggle-input').hasClass('frost-toggle-input'),
         'input hook is set'
       ).to.be.true
 
