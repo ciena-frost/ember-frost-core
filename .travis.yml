@@ -29,7 +29,7 @@ script:
 - npm run lint
 - ember try:one $EMBER_TRY_SCENARIO --- ember test
 after_success:
-- COVERAGE=true ember test -r 'dot'
+- COVERAGE=true ember test --server
 - .travis/publish-coverage.sh
 env:
   matrix:
