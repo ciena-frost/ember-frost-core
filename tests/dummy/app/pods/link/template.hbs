@@ -120,6 +120,25 @@
       </div>
     </div>
 
+      <div class="example">
+          <div class="title">in-line</div>
+          <div class="demo">
+            {{frost-link 'In-line' 'link.min'
+            hook='myInlineLink'
+            priority='primary'
+            size='small'
+            }}
+          </div>
+          <div class="snippet">
+            {{format-markdown "```handlebars
+{{frost-link 'In-line' 'link.min'
+  hook='mySmallLink'
+  priority='primary'
+  size='small'
+}}
+```"}}
+          </div>
+      </div>
   </div>
 
   <div class="section-title">Secondary</div>
@@ -239,6 +258,26 @@
 ```"}}
       </div>
     </div>
+
+      <div class="example">
+          <div class="title">in-line</div>
+          <div class="demo">
+            {{frost-link 'In-line' 'link.min'
+            hook='myInlineLink'
+            priority='secondary'
+            size='small'
+            }}
+          </div>
+          <div class="snippet">
+            {{format-markdown "```handlebars
+{{frost-link 'In-line' 'link.min'
+  hook='mySmallLink'
+  priority='secondary'
+  size='small'
+}}
+```"}}
+          </div>
+      </div>
 
   </div>
 
