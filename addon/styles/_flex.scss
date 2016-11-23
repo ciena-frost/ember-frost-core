@@ -1,0 +1,29 @@
+// The content of this file must stay in sync
+// with app/styles/ember-frost-core/_flex
+// Any changes here should be duplicated in there
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+
+  > .ember-view {
+    &:not(.liquid-target-container) {
+      height: 100%;
+    }
+  }
+}
+
+.setup-height {
+  &.ember-view {
+    height: 100%;
+  }
+}
+
+@for $x from 1 through 11 {
+  .frost-flex-#{$x} {
+    flex: (#{$x});
+  }
+}

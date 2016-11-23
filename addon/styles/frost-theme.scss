@@ -1,0 +1,43 @@
+// The content of this file must stay in sync
+// with app/styles/ember-frost-core/frost-theme
+// Any changes here should be duplicated in there
+
+@import 'colors';
+@import 'typography';
+
+// ================================================================
+// Aliased variables
+// ================================================================
+
+// Global
+$frost-color-input: $frost-color-grey-2 !global;
+$frost-color-input-border: $frost-color-grey-7 !global;
+$frost-color-input-error-border: $frost-color-danger !global;
+$frost-color-input-hover-border: $frost-color-grey-5 !global;
+$frost-color-input-focus-border: $frost-color-blue-1 !global;
+$frost-color-input-disabled-border: $frost-color-lgrey-1 !global;
+$frost-color-input-disabled-bg: $frost-color-lgrey-3 !global;
+$frost-color-selection: $frost-color-blue-1 !global;
+$frost-color-button-focus-shadow: rgba($frost-color-blue-1, .75) !global;
+
+// Select
+$frost-color-select-container-background: $frost-color-white !global;
+$frost-color-select-container-shadow: $frost-color-grey-5 !global;
+$frost-color-select-footer-divider: $frost-color-blue-1 !global;
+$frost-color-select-indicator: $frost-color-grey-5 !global;
+$frost-color-select-item-divider: $frost-color-lgrey-1 !global;
+
+// ================================================================
+// Deprecated
+// ================================================================
+
+// TODO: deprecate the variables below in favor of the -color- ones above
+// global
+$frost-selection: $frost-color-blue-1 !global;
+
+// select
+$frost-select-container-background: $frost-color-white !global;
+$frost-select-container-shadow: $frost-color-grey-5 !global;
+$frost-select-footer-divider: $frost-color-blue-1 !global;
+$frost-select-indicator: $frost-color-grey-5 !global;
+$frost-select-item-divider: $frost-color-lgrey-1 !global;
