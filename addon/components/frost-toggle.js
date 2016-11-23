@@ -1,68 +1,119 @@
+/**
+ * Component definition for the frost-toggle component
+ */
 import Ember from 'ember'
-const {Component, ViewUtils} = Ember
+const {Component, ViewUtils, assert, get, isPresent, typeOf} = Ember
 import computed from 'ember-computed-decorators'
-import {PropTypes} from 'ember-prop-types'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+
+import FrostEventsProxyMixin from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-toggle'
-import FrostEventsProxy from '../mixins/frost-events-proxy'
+import {cloneEvent} from '../utils'
 
-export default Component.extend(FrostEventsProxy, {
+export default Component.extend(PropTypeMixin, FrostEventsProxyMixin, {
+  // == Dependencies ==========================================================
 
-  // == Properties ============================================================
+  // == Keyword Properties ====================================================
+
   attributeBindings: [
     '_isToggled:toggled',
     'disabled'
   ],
+
   classNameBindings: [
     'disabled'
   ],
+
   classNames: ['frost-toggle'],
+
   layout: layout,
-  size: 'medium',
 
+  // == PropTypes =============================================================
+
+  /**
+   * Properties for this component. Options are expected to be (potentially)
+   * passed in to the component. State properties are *not* expected to be
+   * passed in/overwritten.
+   */
   propTypes: {
-    autofocus: PropTypes.bool,
+    // options
     disabled: PropTypes.bool,
-    toggled: PropTypes.bool,
-    size: PropTypes.string,
-
     falseLabel: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string,
       PropTypes.number
     ]),
+    hook: PropTypes.string,
+    size: PropTypes.string,
     trueLabel: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string,
       PropTypes.number
-    ])
+    ]),
+    value: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.string,
+      PropTypes.number
+    ]),
+
+    // state
+
+    // keywords
+    attributeBindings: PropTypes.arrayOf(PropTypes.string),
+    classNameBindings: PropTypes.arrayOf(PropTypes.string),
+    classNames: PropTypes.arrayOf(PropTypes.string),
+    layout: PropTypes.any
   },
 
-  // == Functions ==============================================================
-  init () {
-    this._super(...arguments)
-    Ember.assert(`Same value has been assigned to both ${this.toString()}.trueValue and ${this.toString()}.falseValue`,
-      (typeof this.attrs['trueValue'] === 'undefined' && typeof this.attrs['falseValue'] === 'undefined') ||
-      this.attrs['trueValue'] !== this.attrs['falseValue'])
-  },
-
+  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
-      _trueLabel: typeof this.get('trueLabel') === 'string' || typeof this.get('trueLabel') === 'number'
-                ? this.get('trueLabel') : true,
-      _falseLabel: typeof this.get('falseLabel') === 'string' || typeof this.get('falseLabel') === 'number'
-                ? this.get('falseLabel') : false
+      // options
+      disabled: false,
+      _falseLabel: get(this, 'falseLabel') !== undefined &&
+      (typeOf(get(this, 'falseLabel') === 'string') || typeOf(get(this, 'falseLabel') === 'number'))
+                ? get(this, 'falseLabel') : false,
+      size: 'medium',
+      _trueLabel: get(this, 'trueLabel') !== undefined &&
+      (typeOf(get(this, 'trueLabel') === 'string') || typeOf(get(this, 'trueLabel') === 'number'))
+                ? get(this, 'trueLabel') : true
     }
   },
 
-  _modifyEvent (event, target) {
-    const _toggled = this.get('_isToggled')
-    target.value = _toggled ? this.get('_falseValue') : this.get('_trueValue')
-    target.state = !_toggled
-    event.target = target
+  // == Computed Properties ===================================================
 
-    return event
+  @computed('trueValue', '_trueLabel')
+  // FIXME: jsdoc
+  _trueValue (trueValue, _trueLabel) {
+    return trueValue || _trueLabel
   },
 
+  @computed('falseValue', '_falseLabel')
+  // FIXME: jsdoc
+  _falseValue (falseValue, _falseLabel) {
+    return falseValue || _falseLabel
+  },
+
+  @computed('value')
+  // FIXME: jsdoc
+  _isToggled (value) {
+    return this._preferBoolean(value) === get(this, '_trueValue')
+  },
+
+  // == Functions =============================================================
+
+  // FIXME: jsdoc
+  _changeTarget (event, target) {
+    const e = cloneEvent(event, target)
+    const toggled = get(this, '_isToggled')
+
+    e.target.value = toggled ? get(this, '_falseValue') : get(this, '_trueValue')
+    e.target.state = !toggled
+
+    return e
+  },
+
+  // FIXME: jsdoc
   _preferBoolean (value) {
     if (value === 'true') return true
     if (value === 'false') return false
@@ -70,46 +121,50 @@ export default Component.extend(FrostEventsProxy, {
     return value
   },
 
-  // == Computed Properties =====================================================
-  @computed('trueValue', '_trueLabel')
-  _trueValue (trueValue, _trueLabel) {
-    return trueValue || _trueLabel
+  // FIXME: jsdoc
+  _setupAssertion () {
+    assert(`Same value has been assigned to both ${this.toString()}.trueValue and ${this.toString()}.falseValue`,
+      (typeOf(get(this, 'trueValue')) === 'undefined' && typeOf(get(this, 'falseValue')) === 'undefined') ||
+      get(this, 'trueValue') !== get(this, 'falseValue'))
   },
 
-  @computed('falseValue', '_falseLabel')
-  _falseValue (falseValue, _falseLabel) {
-    return falseValue || _falseLabel
+  // == DOM Events ============================================================
+
+  // == Lifecycle Hooks =======================================================
+
+  /* Ember.Component method */
+  init () {
+    this._super(...arguments)
+    this._setupAssertion()
   },
 
-  @computed('value')
-  _isToggled (value) {
-    return this._preferBoolean(value) === this.get('_trueValue')
-  },
+  // == Actions ===============================================================
 
-  // == Events ================================================================
-
-  // == Actions ================================================================
   actions: {
     /* eslint-disable complexity */
-    _onClick (e) {
-      if (this.get('disabled')) return
+    // FIXME: eslint
+    _onClick (event) {
+      if (get(this, 'disabled')) return
 
-      if (!ViewUtils.isSimpleClick(e)) {
+      if (!ViewUtils.isSimpleClick(event)) {
         return true
       }
 
-      e.stopPropagation()
-      e.preventDefault()
+      event.stopPropagation()
+      event.preventDefault()
 
       const onClick = this.attrs['onClick']
       if (onClick && onClick.update) {
-        onClick.update(this.get('_isToggled') ? this.get('_falseValue') : this.get('_trueValue'))
-      } else if (Ember.isPresent(Ember.get(this, '_eventProxy.click'))) {
+        onClick.update(get(this, '_isToggled') ? get(this, '_falseValue') : get(this, '_trueValue'))
+      } else if (isPresent(get(this, '_eventProxy.click'))) {
         //  override target to make sure it's always the <input> field
-        let target = this.$('input')[0]
-        this._eventProxy.click(this._modifyEvent(e, target))
+        const target = this.$('input')[0]
+        this._eventProxy.click(this._changeTarget(event, target))
       }
-    }
+    },
     /* eslint-enable complexity */
+
+    /** A no-op action to avoid an action undefined error */
+    noop () {}
   }
 })

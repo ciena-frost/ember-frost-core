@@ -1,66 +1,225 @@
 <div class='dummy-body'>
-
-  <div class="section-title">Frost Radio Button</div>
+  <div class="section-title">Default</div>
   <hr>
-
   <div class='section'>
-
     <div class='example'>
       <div class='demo'>
+        {{! BEGIN-SNIPPET radio-default }}
         {{#frost-radio-group
-          hook='myCBGroup'
-          id='checkboxGroup'
-          value=model.checkboxGroup
+          hook='myRBGroup'
+          id='radioGroup1'
+          selectedValue=model.radioGroup1
           onChange=(action 'change')
+          as |control|
         }}
-          {{#each sampleList as |i|}}
-            {{#frost-radio-button value=i disabled=(eq i 'a')}}
-              Label for {{i}}
-            {{/frost-radio-button}}
+          {{#each sampleList as |input|}}
+            {{#control.button
+              value=input.value
+              disabled=input.disabled
+            }}
+              Label for {{input.label}}
+            {{/control.button}}
+          {{/each}}
+          {{control.button
+            value='f'
+            label='my-label'
+          }}
+        {{/frost-radio-group}}
+        {{! END-SNIPPET }}
+      </div>
+      <div style='padding-top:15px' class='snippet'>
+        <div>Template</div>
+        {{code-snippet name='radio-default.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='radio-controller.js'}}
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Inline</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Demo</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET radio-inline }}
+        {{frost-radio-group
+          id='inline'
+          inputs=(array
+            (hash value='a')
+            (hash label='B' value='b')
+            (hash value='c' disabled=true)
+          )
+          onChange=(action (mut inlineValue) value='target.value')
+          selectedValue=inlineValue
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div style='padding-top:15px' class='snippet'>
+        {{code-snippet name='radio-inline.hbs'}}
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Size</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>small</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET radio-small }}
+        {{#frost-radio-group
+          id='radioGroup2'
+          selectedValue=model.radioGroup2
+          onChange=(action 'change')
+          as |controls|
+        }}
+          {{#each sampleList as |input|}}
+            {{#controls.button
+                size='small'
+                value=input.value}}
+              Label for {{input.label}}
+            {{/controls.button}}
           {{/each}}
         {{/frost-radio-group}}
+        {{! END-SNIPPET }}
       </div>
-      <div style='padding-bottom:10px' class='snippet'>
-        {{format-markdown
-"```handlebars
-// id can be optionally specified, but acts as the group value for the checkboxes.
-// a class property can also be specified
-{{#frost-radio-group id='checkboxGroup' hook='myCBGroup' value=model.checkboxGroup onChange=(action 'change')}}
-  {{#each sampleList as |i|}}
-    {{#frost-radio-button value=i disabled=(eq i 'a')}}
-      Label for {{i}}
-    {{/frost-radio-button}}
-  {{/each}}
-{{/frost-radio-group}}```"}}
-      </div>
-      <div style='padding-bottom:10px' class='snippet'>
-        {{format-markdown "```handlebars
-import Ember from 'ember'
-const {Controller} = Ember
-
-export default Controller.extend({
-  sampleList: ['a', 'b', 'c', 'd', 'e'],
-
-  model: Ember.Object.create({
-    checkboxGroup: 'c'
-  }),
-
-  actions: {
-    change (event) {
-      this.set(`model.${event.target.id}`, event.target.value)
-      this.notifications.addNotification({
-        message: `Radio group ${event.target.id} value set to ${event.target.value}`,
-        type: 'success',
-        autoClear: true,
-        clearDuration: 2000
-      })
-    }
-  }
-})
-```"}}
+      <div style='padding-top:15px' class='snippet'>
+        {{code-snippet name='radio-small.hbs'}}
       </div>
     </div>
 
+    <div class='example'>
+      <div class='title'>medium</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET radio-medium }}
+        {{#frost-radio-group
+          id='radioGroup3'
+          selectedValue=model.radioGroup3
+          onChange=(action 'change')
+          as |controls|
+        }}
+          {{#each sampleList as |input|}}
+            {{#controls.button
+                size='medium'
+                value=input.value}}
+              Label for {{input.label}}
+            {{/controls.button}}
+          {{/each}}
+        {{/frost-radio-group}}
+        {{! END-SNIPPET }}
+      </div>
+      <div style='padding-top:15px' class='snippet'>
+        {{code-snippet name='radio-medium.hbs'}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>large</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET radio-large }}
+        {{#frost-radio-group
+          id='radioGroup4'
+          selectedValue=model.radioGroup4
+          onChange=(action 'change')
+          as |controls|
+        }}
+          {{#each sampleList as |input|}}
+            {{#controls.button
+                size='large'
+                value=input.value}}
+              Label for {{input.label}}
+            {{/controls.button}}
+          {{/each}}
+        {{/frost-radio-group}}
+        {{! END-SNIPPET }}
+      </div>
+      <div style='padding-top:15px' class='snippet'>
+        {{code-snippet name='radio-large.hbs'}}
+      </div>
+    </div>
   </div>
 
+  <div class="section-title">State</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>disabled</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET radio-disabled }}
+        {{#frost-radio-group
+          id='radioGroup5'
+          selectedValue=model.radioGroup5
+          onChange=(action 'change')
+          as |controls|
+        }}
+          {{#each sampleList as |input|}}
+            {{#controls.button
+                size='medium'
+                value=input.value
+                disabled=(eq input.value 'a')}}
+              Label for {{input.label}}
+            {{/controls.button}}
+          {{/each}}
+        {{/frost-radio-group}}
+        {{! END-SNIPPET }}
+      </div>
+      <div style='padding-top:15px' class='snippet'>
+        {{code-snippet name='radio-disabled.hbs'}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>error</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET radio-error }}
+        {{#frost-radio-group
+          id='radioGroup6'
+          selectedValue=model.radioGroup6
+          onChange=(action 'change')
+          as |controls|
+        }}
+          {{#each sampleList as |input|}}
+            {{#controls.button
+                size='medium'
+                value=input.value
+                class='error'}}
+              Label for {{input.label}}
+            {{/controls.button}}
+          {{/each}}
+        {{/frost-radio-group}}
+        {{! END-SNIPPET }}
+      </div>
+      <div style='padding-top:15px' class='snippet'>
+        {{code-snippet name='radio-error.hbs'}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>required</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET radio-required }}
+        {{#frost-radio-group
+          id='radioGroup7'
+          selectedValue=model.radioGroup7
+          onChange=(action 'change')
+          as |controls|
+        }}
+          {{#each sampleList as |input|}}
+            {{#controls.button
+                size='medium'
+                value=input.value
+                required=true}}
+              Label for {{input.label}}
+            {{/controls.button}}
+          {{/each}}
+        {{/frost-radio-group}}
+        {{! END-SNIPPET }}
+      </div>
+      <div style='padding-top:15px' class='snippet'>
+        {{code-snippet name='radio-required.hbs'}}
+      </div>
+    </div>
+  </div>
 </div>

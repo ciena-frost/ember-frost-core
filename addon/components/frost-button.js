@@ -1,7 +1,11 @@
+/**
+ * Component definition for the frost-button component
+ */
 import Ember from 'ember'
-const {Component, Logger, typeOf, ViewUtils} = Ember
+const {Component, Logger, ViewUtils, get, isEmpty, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+
 import layout from '../templates/components/frost-button'
 
 /**
@@ -19,43 +23,15 @@ const validDesignClasses = [
  * @type {Array} valid `size` values
  */
 const validSizes = [
-  'extra-large',
   'large',
   'medium',
   'small'
 ]
 
-/* eslint-disable complexity */
-/**
- * Add the appropriate class for the given priority to the Array of classes
- * @param {String} priority - the priority to add
- * @param {String[]} classes - the classes to add the priority class to
- */
-function addPriorityClass (priority, classes) {
-  switch (priority) {
-    case 'confirm': // fallthrough
-    case 'primary':
-      classes.push('primary')
-      break
-    case 'normal': // fallthrough
-    case 'secondary':
-      classes.push('secondary')
-      break
-    case 'cancel': // fallthrough
-    case 'tertiary':
-      classes.push('tertiary')
-      break
-    default:
-      // no class to add for invalid priority
-      break
-  }
-}
-/* eslint-enable complexity */
-
 export default Component.extend(PropTypeMixin, {
   // == Dependencies ==========================================================
 
-  // == Properties ============================================================
+  // == Keyword Properties ====================================================
 
   attributeBindings: [
     'autofocus',
@@ -65,37 +41,55 @@ export default Component.extend(PropTypeMixin, {
     'title'
   ],
 
-  classNames: [
-    'frost-button'
-  ],
-
   classNameBindings: [
     'disabled',
     'extraClasses'
+  ],
+
+  classNames: [
+    'frost-button'
   ],
 
   layout,
 
   tagName: 'button',
 
+  // == PropTypes =============================================================
+
+  /**
+   * Properties for this component. Options are expected to be (potentially)
+   * passed in to the component. State properties are *not* expected to be
+   * passed in/overwritten.
+   */
   propTypes: {
+    // options
     autofocus: PropTypes.bool,
-    design: PropTypes.string,
+    design: PropTypes.oneOf(validDesignClasses),
     disabled: PropTypes.bool,
     hook: PropTypes.string,
     icon: PropTypes.string,
     pack: PropTypes.string,
     priority: PropTypes.string,
-    size: PropTypes.string,
-    subtext: PropTypes.string,
+    size: PropTypes.oneOf(validSizes),
     text: PropTypes.string,
     title: PropTypes.string,
     type: PropTypes.string,
-    vertical: PropTypes.bool
+    vertical: PropTypes.bool,
+
+    // state
+
+    // keywords
+    attributeBindings: PropTypes.arrayOf(PropTypes.string),
+    classNameBindings: PropTypes.arrayOf(PropTypes.string),
+    classNames: PropTypes.arrayOf(PropTypes.string),
+    layout: PropTypes.any,
+    tagName: PropTypes.string
   },
 
+  /** @returns {Object} the default values for properties when not provided by consumer */
   getDefaultProps () {
     return {
+      // options
       autofocus: false,
       design: '',
       disabled: false,
@@ -103,66 +97,51 @@ export default Component.extend(PropTypeMixin, {
       pack: 'frost',
       priority: '',
       size: '',
-      subtext: '',
       text: '',
       title: null,
       type: 'button',
       vertical: false
+
+      // state
     }
   },
 
   // == Computed Properties ===================================================
 
   @readOnly
-  @computed('icon', 'subtext', 'text')
+  @computed('icon', 'text')
   /**
-   * Determine whether or not button is text only (no icon or subtext)
+   * Determine whether or not button is text only (no icon)
    * @param {String} icon - button icon
-   * @param {String} subtext - button subtext
    * @param {String} text - button text
-   * @returns {Boolean} whether or not button is text only (no icon or subtext)
+   * @returns {Boolean} whether or not button is text only (no icon)
    */
-  isTextOnly (icon, subtext, text) {
-    return text && !(icon || subtext)
+  isTextOnly (icon, text) {
+    return !isEmpty(text) && isEmpty(icon)
   },
 
   @readOnly
-  @computed('icon', 'subtext', 'text')
+  @computed('icon', 'text')
   /**
-   * Determine whether or not button is icon only (no text or subtext)
+   * Determine whether or not button is icon only (no text)
    * @param {String} icon - button icon
-   * @param {String} subtext - button subtext
    * @param {String} text - button text
-   * @returns {Boolean} whether or not button is icon only (no text or subtext)
+   * @returns {Boolean} whether or not button is icon only (no text)
    */
-  isIconOnly (icon, subtext, text) {
-    return icon && !(text || subtext)
+  isIconOnly (icon, text) {
+    return !isEmpty(icon) && isEmpty(text)
   },
 
   @readOnly
-  @computed('icon', 'subtext', 'text')
+  @computed('icon', 'text')
   /**
-   * Determine whether or not button contains icon and text but not subtext
+   * Determine whether or not button contains icon and text
    * @param {String} icon - button icon
-   * @param {String} subtext - button subtext
    * @param {String} text - button text
-   * @returns {Boolean} whether or not button contains icon and text but not subtext
+   * @returns {Boolean} whether or not button contains icon and text
    */
-  isIconAndText (icon, subtext, text) {
-    return icon && text && !subtext
-  },
-
-  @readOnly
-  @computed('icon', 'subtext', 'text')
-  /**
-   * Determine whether or not button is an info button
-   * @param {String} icon - button icon
-   * @param {String} subtext - button subtext
-   * @param {String} text - button text
-   * @returns {Boolean} whether or not button is info button
-   */
-  isInfo (icon, subtext, text) {
-    return icon && text && subtext
+  isIconAndText (icon, text) {
+    return !isEmpty(icon) && !isEmpty(text)
   },
 
   /* eslint-disable complexity */
@@ -202,7 +181,7 @@ export default Component.extend(PropTypeMixin, {
       classes.push(size)
     }
 
-    addPriorityClass(priority, classes)
+    this.addPriorityClass(priority, classes)
 
     if (vertical) {
       classes.push('vertical')
@@ -213,6 +192,33 @@ export default Component.extend(PropTypeMixin, {
   /* eslint-enable complexity */
 
   // == Functions =============================================================
+
+  /* eslint-disable complexity */
+  /**
+   * Add the appropriate class for the given priority to the Array of classes
+   * @param {String} priority - the priority to add
+   * @param {String[]} classes - the classes to add the priority class to
+   */
+  addPriorityClass (priority, classes) {
+    switch (priority) {
+      case 'confirm': // fallthrough
+      case 'primary':
+        classes.push('primary')
+        break
+      case 'normal': // fallthrough
+      case 'secondary':
+        classes.push('secondary')
+        break
+      case 'cancel': // fallthrough
+      case 'tertiary':
+        classes.push('tertiary')
+        break
+      default:
+        // no class to add for invalid priority
+        break
+    }
+  },
+  /* eslint-enable complexity */
 
   _getOnClickHandler () {
     if (typeOf(this.attrs.onClick) === 'function') {
@@ -226,25 +232,31 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
-  // == Events ================================================================
+  // == DOM Events ============================================================
 
+  // FIXME: jsdoc
   onclick: Ember.on('click', function (event) {
     if (!ViewUtils.isSimpleClick(event)) {
       return true
     }
 
     const onClickHandler = this._getOnClickHandler()
-    if (onClickHandler && !this.get('disabled')) {
-      onClickHandler(this.get('id'))
+    if (onClickHandler && !get(this, 'disabled')) {
+      onClickHandler(get(this, 'id'))
     }
   }),
 
+  // FIXME: jsdoc
   _onFocus: Ember.on('focusIn', function (e) {
     // If an onFocus handler is defined, call it
     if (this.attrs.onFocus) {
       this.attrs.onFocus()
     }
-  })
+  }),
+
+  // == Lifecycle Hooks =======================================================
 
   // == Actions ===============================================================
+
+  actions: {}
 })

@@ -1,10 +1,14 @@
+/**
+ * Component definition for frost-select component
+ */
 import Ember from 'ember'
 const {$, Component, get, run, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
 import layout from '../templates/components/frost-select'
-import keyCodes from '../utils/keycodes'
+
+import keyCodes from '../utils/key-codes'
 const {DOWN_ARROW, SPACE, UP_ARROW} = keyCodes
 
 /**
@@ -40,7 +44,9 @@ function compareSelectedValues (a, b) {
 }
 
 export default Component.extend(PropTypeMixin, {
-  // == Properties ============================================================
+  // == Dependencies ==========================================================
+
+  // == Keyword Properties ====================================================
 
   attributeBindings: [
     'computedTabIndex:tabIndex'
@@ -60,8 +66,15 @@ export default Component.extend(PropTypeMixin, {
 
   layout,
 
+  // == PropTypes =============================================================
+
+  /**
+   * Properties for this component. Options are expected to be (potentially)
+   * passed in to the component. State properties are *not* expected to be
+   * passed in/overwritten.
+   */
   propTypes: {
-    // Public
+    // options
     autofocus: PropTypes.bool,
     disabled: PropTypes.bool,
     error: PropTypes.bool,
@@ -86,7 +99,7 @@ export default Component.extend(PropTypeMixin, {
     ]),
     tabIndex: PropTypes.number,
 
-    // Private
+    // state
     $element: PropTypes.object,
     focused: PropTypes.bool,
     internalSelectedValue: PropTypes.oneOfType([
@@ -97,18 +110,28 @@ export default Component.extend(PropTypeMixin, {
       PropTypes.object,
       PropTypes.string
     ]),
-    opened: PropTypes.bool
+    opened: PropTypes.bool,
+
+    // keywords
+    attributeBindings: PropTypes.arrayOf(PropTypes.string),
+    classNameBindings: PropTypes.arrayOf(PropTypes.string),
+    classNames: PropTypes.arrayOf(PropTypes.string),
+    layout: PropTypes.any
   },
 
+  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
+      // options
       autofocus: false,
       disabled: false,
       error: false,
-      focused: false,
       multiselect: false,
       renderTarget: 'frost-select',
-      tabIndex: 0
+      tabIndex: 0,
+
+      // state
+      focused: false
     }
   },
 
@@ -116,6 +139,7 @@ export default Component.extend(PropTypeMixin, {
 
   @readOnly
   @computed('data', 'filter', 'onInput')
+  // FIXME: jsdoc
   items (data, filter, onInput) {
     // If no data to filter we are done
     if (!data) {
@@ -145,6 +169,7 @@ export default Component.extend(PropTypeMixin, {
 
   @readOnly
   @computed('data', 'selected', 'internalSelectedValue')
+  // FIXME: jsdoc
   selectedItems (items, selected, selectedValue) {
     if (selectedValue) {
       return items.filter((item) => {
@@ -201,49 +226,16 @@ export default Component.extend(PropTypeMixin, {
 
   // == Functions =============================================================
 
-  // == Events ================================================================
+  // == DOM Events ============================================================
 
-  didInsertElement () {
-    this._super(...arguments)
-
-    // We need jQuery instance of components root DOM node to hand off to
-    // dropdown so it can position itself properly relative to the select
-    this.set('$element', this.$())
-
-    // If autofocus and nothing else has focus, focus on select
-    if (this.get('autofocus') && $(':focus').length === 0) {
-      this.$().focus()
-    }
-  },
-
-  didReceiveAttrs (attrs) {
-    this._super(...arguments)
-
-    const props = {}
-
-    let newSelectedValue = get(attrs, 'newAttrs.selectedValue.value')
-    let oldSelectedValue = get(attrs, 'oldAttrs.selectedValue.value')
-
-    // If user provided a new selected value and it doesn't match the internal
-    // selected value then update internal selected value
-    if (
-      !compareSelectedValues(newSelectedValue, oldSelectedValue) &&
-      !compareSelectedValues(newSelectedValue, this.get('internalSelectedValue'))
-    ) {
-      props.internalSelectedValue = newSelectedValue
-    }
-
-    if (Object.keys(props).length !== 0) {
-      this.setProperties(props)
-    }
-  },
-
+  // FIXME: jsdoc
   _onClick: Ember.on('click', function () {
     if (!this.get('disabled')) {
       this.toggleProperty('opened')
     }
   }),
 
+  // FIXME: jsdoc
   _onKeyDown: Ember.on('keyDown', function (e) {
     if (
       [DOWN_ARROW, UP_ARROW].indexOf(e.keyCode) !== -1 &&
@@ -255,6 +247,7 @@ export default Component.extend(PropTypeMixin, {
     }
   }),
 
+  // FIXME: jsdoc
   _onKeyPress: Ember.on('keyPress', function (e) {
     if (e.keyCode === SPACE) {
       e.preventDefault() // Keep space from scrolling page
@@ -263,6 +256,7 @@ export default Component.extend(PropTypeMixin, {
     }
   }),
 
+  // FIXME: jsdoc
   _onFocusIn: Ember.on('focusIn', function () {
     // If select is disabled make sure it can't get focus
     if (this.get('disabled')) {
@@ -278,6 +272,7 @@ export default Component.extend(PropTypeMixin, {
     }
   }),
 
+  // FIXME: jsdoc
   _onFocusOut: Ember.on('focusOut', function () {
     // We must use run.later so filter text input has time to focus when select
     // dropdown is being opened
@@ -309,9 +304,49 @@ export default Component.extend(PropTypeMixin, {
     })
   }),
 
+  // == Lifecycle Hooks =======================================================
+
+  /* Ember.Component method */
+  didInsertElement () {
+    this._super(...arguments)
+
+    // We need jQuery instance of components root DOM node to hand off to
+    // dropdown so it can position itself properly relative to the select
+    this.set('$element', this.$())
+
+    // If autofocus and nothing else has focus, focus on select
+    if (this.get('autofocus') && $(':focus').length === 0) {
+      this.$().focus()
+    }
+  },
+
+  /* Ember.Component method */
+  didReceiveAttrs (attrs) {
+    this._super(...arguments)
+
+    const props = {}
+
+    let newSelectedValue = get(attrs, 'newAttrs.selectedValue.value')
+    let oldSelectedValue = get(attrs, 'oldAttrs.selectedValue.value')
+
+    // If user provided a new selected value and it doesn't match the internal
+    // selected value then update internal selected value
+    if (
+      !compareSelectedValues(newSelectedValue, oldSelectedValue) &&
+      !compareSelectedValues(newSelectedValue, this.get('internalSelectedValue'))
+    ) {
+      props.internalSelectedValue = newSelectedValue
+    }
+
+    if (Object.keys(props).length !== 0) {
+      this.setProperties(props)
+    }
+  },
+
   // == Actions ===============================================================
 
   actions: {
+    // FIXME: jsdoc
     closeDropDown () {
       this.setProperties({
         filter: '',
@@ -323,6 +358,7 @@ export default Component.extend(PropTypeMixin, {
       this.$().focus()
     },
 
+    // FIXME: jsdoc
     filterInput (e) {
       const filter = e.target.value
       const onInput = this.get('onInput')
@@ -334,6 +370,7 @@ export default Component.extend(PropTypeMixin, {
       }
     },
 
+    // FIXME: jsdoc
     selectItem (selectedValue) {
       const isMultiselect = this.get('multiselect')
       const props = {

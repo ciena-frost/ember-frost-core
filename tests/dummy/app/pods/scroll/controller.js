@@ -1,6 +1,7 @@
 import Ember from 'ember'
 const {Controller} = Ember
 
+// BEGIN-SNIPPET scroll-controller
 export default Controller.extend({
   notifications: Ember.inject.service('notification-messages'),
 
@@ -41,3 +42,5 @@ export default Controller.extend({
     }
   }
 })
+// END-SNIPPET scroll-controller
+

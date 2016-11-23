@@ -1,56 +1,80 @@
+/**
+ * Component definition for frost-scroll component
+ */
 import Ember from 'ember'
-const {
-  Component,
-  deprecate,
-  on,
-  run: {
-    debounce,
-    scheduleOnce
-  },
-  typeOf
-} = Ember
+const {Component, deprecate, run, typeOf} = Ember
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-
-const debouncePeriod = 150
 
 export default Component.extend(PropTypeMixin, {
 
-  // == Component properties ==================================================
+  // == Dependencies ==========================================================
+
+  // == Keyword Properties ====================================================
 
   classNames: ['frost-scroll'],
 
-  // == State properties ======================================================
+  // == PropTypes =============================================================
 
+  /**
+   * Properties for this component. Options are expected to be (potentially)
+   * passed in to the component. State properties are *not* expected to be
+   * passed in/overwritten.
+   */
   propTypes: {
-    hook: PropTypes.string
+    // options
+    hook: PropTypes.string,
+
+    // state
+
+    // keywords
+    classNames: PropTypes.arrayOf(PropTypes.string)
   },
 
-  // == Events ================================================================
+  /** @returns {Object} the default property values when not provided by consumer */
+  getDefaultProps () {
+    return {
+      // options
+
+      // state
+    }
+  },
+
+  // == Computed Properties ===================================================
+
+  // == Functions =============================================================
 
   /* eslint-disable complexity */
-  initializeScroll: on('didInsertElement', function () {
-    scheduleOnce('afterRender', this, () => {
+  /**
+   * Setup the perfect-scrollbar plugin and events
+   *
+   * @private
+   * @returns {undefined}
+   */
+  _setupPerfectScroll () {
+    const debouncePeriod = 150
+
+    run.scheduleOnce('afterRender', this, () => {
       window.Ps.initialize(this.$()[0])
     })
 
     this._legacyScrollYEndHandler = () => {
-      debounce(this, this['on-scroll-y-end'], debouncePeriod, true)
+      run.debounce(this, this['on-scroll-y-end'], debouncePeriod, true)
     }
 
     this._scrollDownHandler = () => {
-      debounce(this, this.onScrollDown, debouncePeriod, true)
+      run.debounce(this, this.onScrollDown, debouncePeriod, true)
     }
 
     this._scrollUpHandler = () => {
-      debounce(this, this.onScrollUp, debouncePeriod, true)
+      run.debounce(this, this.onScrollUp, debouncePeriod, true)
     }
 
     this._scrollYEndHandler = () => {
-      debounce(this, this.onScrollYEnd, debouncePeriod, true)
+      run.debounce(this, this.onScrollYEnd, debouncePeriod, true)
     }
 
     this._scrollYStartHandler = () => {
-      debounce(this, this.onScrollYStart, debouncePeriod, true)
+      run.debounce(this, this.onScrollYStart, debouncePeriod, true)
     }
 
     if (typeOf(this.onScrollUp) === 'function') {
@@ -78,17 +102,54 @@ export default Component.extend(PropTypeMixin, {
           url: 'http://ciena-frost.github.io/ember-frost-core/#/scroll'
         }
       )
-      this.$().on('ps-y-reach-end', this._legacyScrollYEndHandler)
     }
-  }),
+  },
+
+  /**
+   * Remove perfect-scrollbar plugin and events
+   *
+   * @private
+   * @returns {undefined}
+   */
+  _unregisterEvents () {
+    window.Ps.destroy(this.$()[0])
+
+    if (typeOf(this.onScrollUp) === 'function') {
+      this.$().off('ps-scroll-up', this._scrollUpHandler)
+    }
+
+    if (typeOf(this.onScrollDown) === 'function') {
+      this.$().off('ps-scroll-down', this._scrollDownHandler)
+    }
+
+    if (typeOf(this.onScrollYStart) === 'function') {
+      this.$().off('ps-y-reach-start', this._scrollYStartHandler)
+    }
+
+    if (typeOf(this.onScrollYEnd) === 'function') {
+      this.$().off('ps-y-reach-end', this._scrollYEndHandler)
+    }
+  },
   /* eslint-enable complexity */
 
-  cleanup: on('willDestroyElement', function () {
-    this.$().off('ps-scroll-down', this._scrollDownHandler)
-    this.$().off('ps-scroll-up', this._scrollUpHandler)
-    this.$().off('ps-y-reach-end', this._legacyScrollYEndHandler)
-    this.$().off('ps-y-reach-end', this._scrollYEndHandler)
-    this.$().off('ps-y-reach-start', this._scrollYStartHandler)
-    window.Ps.destroy(this.$()[0])
-  })
+  // == DOM Events ============================================================
+
+  // == Lifecycle Hooks =======================================================
+
+  /* Ember.Component method */
+  didInsertElement () {
+    this._super(...arguments)
+    this._setupPerfectScroll()
+  },
+
+  /* Ember.Component method */
+  willDestroyElement () {
+    this._super(...arguments)
+    this._unregisterEvents()
+  },
+
+  // == Actions ===============================================================
+
+  actions: {
+  }
 })

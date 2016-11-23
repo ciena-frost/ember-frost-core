@@ -6,68 +6,70 @@
 
 | Attribute | Type | Value | Description |
 | --------- | ---- | ----- | -----------
+| `design` | `string` | `inline` | custom link styling for inline text, opens content in the same tab.  Should not be used with `priority` and `size`. |
+|  | | `info-bar` | custom link styling for the info-bar context, opens content in the same tab.  Requires `icon` to be specified.  Should not be used with `priority` and `size`. |
+| `disabled` | `boolean` | `false` | **default** - basic link |
+|  |  | `true` | disabled link |
+| `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
+| `icon` | `string` | `<icon-name>` | the name of a frost-icon |
+| `onClick` |`string` | `<action-name>` | triggers associated action when the link is clicked prior to transition |
 | `priority` | `string` | `primary` | primary link - opens content in a new tab |
 |  |  | `secondary` | secondary link - opens content in the same tab |
-| `design` | `string` | `inline` | custom link styling for in-line text, opens content in the same tab.  Should not be used with `priority` and `size`. |
-|  | | `info-bar` | custom link styling for the info-bar context, opens content in the same tab.  Requires `icon` to be specified.  Should not be used with `priority` and `size`. |
+| `routeNames` | `array` | `[...]` | list of the routes to open in new tabs on click <i>(only available for non disabled primary link)</i>. |
 | `size` | `string` | `small` | small size link |
 |  |  | `medium` | medium size link |
 |  |  | `large` | large size link |
-| `disabled` | `boolean` | `false` | **default** - basic link |
-|  |  | `true` | disabled link |
-| `autofocus` | `boolean` | `false` | **default** - basic link |
-|  |  | `true` | link in focus |
-| `icon` | `string` | `<icon-name>` | the name of a frost-icon |
-| `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
-| `onClick` |`string` | `<action-name>` | triggers associated action when the link is clicked prior to transition |
+| `tabindex` | `string` | `<tabindex-value>` | the tabindex value |
 
 
 ## Examples
 
 ### Primary - small
 ```handlebars
-{{#frost-link 'route name'
+{{frost-link 'link title' 'route name'
   priority='primary'
   size='small'
 }}
-  Primary
-{{/frost-link}}
 ```
 
 ### Primary - medium
 ```handlebars
-{{#frost-link 'route name'
+{{frost-link 'link title' 'route name'
   priority='primary'
   size='medium'
 }}
-  Primary
-{{/frost-link}}
+```
+
+### Primary - multiple routes
+```handlebars
+{{frost-link 'Text'
+  routeNames=(array 'route name 1' 'route name 2')
+  hook='mySmallLink'
+  priority='primary'
+  size='small'
+}}
 ```
 
 ### Secondary - large
 ```handlebars
-{{#frost-link 'route name'
+{{frost-link 'link title' 'route name'
   priority='secondary'
   size='large'
 }}
-  Secondary
-{{/frost-link}}
 ```
 
 ### Disabled
 ```handlebars
-{{#frost-link 'route name'
+{{frost-link 'link title' 'route name'
   priority='primary'
   size='small'
   disabled=true
 }}
-  Primary
-{{/frost-link}}
 ```
 
-### Design - in-line (font based on size)
+### Design - inline (font based on size)
 ```handlebars
-{{#frost-link 'link.min'
+{{#frost-link 'route name'
   design='inline'
 }}
   link

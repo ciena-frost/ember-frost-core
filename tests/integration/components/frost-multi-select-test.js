@@ -3,9 +3,9 @@ import {expectSelectWithState} from 'dummy/tests/helpers/ember-frost-core'
 import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
 import Ember from 'ember'
 const {$} = Ember
-import keyCodes from 'ember-frost-core/utils/keycodes'
+import keyCodes from 'ember-frost-core/utils/key-codes'
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW, TAB} = keyCodes
-import {$hook, initialize} from 'ember-hook'
+import {$hook, initialize as initializeHook} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
 import wait from 'ember-test-helpers/wait'
 import hbs from 'htmlbars-inline-precompile'
@@ -47,7 +47,7 @@ describeComponent(...integration('frost-multi-select'), function () {
   let onBlur, onChange, onFocus, sandbox
 
   beforeEach(function () {
-    initialize()
+    initializeHook()
     sandbox = sinon.sandbox.create()
 
     onBlur = sandbox.spy()
@@ -918,7 +918,7 @@ describeComponent(...integration('frost-multi-select'), function () {
         describe('when first item clicked', function () {
           beforeEach(function () {
             [onBlur, onChange, onFocus].forEach((func) => func.reset())
-            $hook('select-item-0').trigger('mousedown')
+            $hook('select-item', {index: 0}).trigger('mousedown')
           })
 
           it('renders as expected', function () {
@@ -944,7 +944,7 @@ describeComponent(...integration('frost-multi-select'), function () {
         describe('when second item clicked', function () {
           beforeEach(function () {
             [onBlur, onChange, onFocus].forEach((func) => func.reset())
-            $hook('select-item-1').trigger('mousedown')
+            $hook('select-item', {index: 1}).trigger('mousedown')
           })
 
           it('renders as expected', function () {

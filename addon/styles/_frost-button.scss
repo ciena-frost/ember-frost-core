@@ -9,43 +9,46 @@ $frost-color-button-secondary-bg: $frost-color-white !global;
 $frost-color-button-secondary-border: $frost-color-blue-1 !global;
 $frost-color-button-secondary-active: $frost-color-blue-3 !global;
 $frost-color-button-secondary-active-bg: #e7eef3 !global;
-$frost-color-button-secondary-hover-bg: rgba($frost-color-blue-1, 0.1) !global;
+$frost-color-button-secondary-hover-bg: rgba($frost-color-blue-1, .1) !global;
 
 $frost-color-button-tertiary: $frost-color-blue-1 !global;
 $frost-color-button-tertiary-bg: inherit !global;
-$frost-color-button-tertiary-hover-bg: rgba($frost-color-blue-1, 0.05) !global;
+$frost-color-button-tertiary-hover-bg: rgba($frost-color-blue-1, .05) !global;
 $frost-color-button-tertiary-active: $frost-color-blue-3 !global;
 $frost-color-button-tertiary-active-bg: #e7eef3 !global;
 
 // info-bar style
 $frost-color-button-info-bar-bg: $frost-color-white;
-$frost-color-button-info-bar-bg-hover: rgba($frost-color-blue-1, 0.05);
-$frost-color-button-info-bar-focus: 0 1px 6px rgba($frost-color-blue-1, 0.75);
-$frost-color-button-info-bar-active:  rgba($frost-color-blue-1, 0.1);
+$frost-color-button-info-bar-bg-hover: rgba($frost-color-blue-1, .05);
+$frost-color-button-info-bar-focus: 0 1px 6px rgba($frost-color-blue-1, .75);
+$frost-color-button-info-bar-active:  rgba($frost-color-blue-1, .1);
 
 // in-line style
 $frost-color-button-in-line-darken-1: darken($frost-color-blue-1, 8);
 $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
 
+$frost-color-button-info-content-subtext-color: rgba($frost-color-white, .8);
+
 .frost-button {
   padding: 0;
-  border: none;
+  border: 0;
   border-radius: 2px;
   background-color: transparent;
   color: $frost-color-white;
-  cursor: pointer;
   font-family: $frost-font-family;
+  cursor: pointer;
 
-  &:focus, &:active {
+  &:focus,
+  &:active {
     outline: none;
   }
 
   &:focus {
-    box-shadow: 0px 1px 6px transparentize($frost-color-blue-1, .25)
+    box-shadow: 0 1px 6px transparentize($frost-color-blue-1, .25);
   }
 
   &.disabled {
-    opacity: 0.25;
+    opacity: .25;
     // In Firefox, the click on the app bar was not detected - added this to enable it.
     // From https://developer.mozilla.org/en/docs/Web/CSS/pointer-events
     //     The CSS property pointer-events allows authors to control under what circumstances (if any)
@@ -70,20 +73,26 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
     background: $frost-color-button-primary-bg;
     color: $frost-color-button-primary;
 
-    &:hover:not(.disabled) {
-      background: $frost-color-button-primary-hover-bg;
+    &:hover {
+      &:not(.disabled) {
+        background: $frost-color-button-primary-hover-bg;
+      }
     }
 
-    &:focus:not(.disabled) {
-      border: solid 2px $frost-color-blue-4;
+    &:focus {
+      &:not(.disabled) {
+        border: solid 2px $frost-color-blue-4;
+      }
     }
 
-    &:active:not(.disabled) {
-      background: $frost-color-button-primary-active-bg;
-      color: $frost-color-button-primary-active;
+    &:active {
+      &:not(.disabled) {
+        background: $frost-color-button-primary-active-bg;
+        color: $frost-color-button-primary-active;
 
-      .text {
-        opacity: 0.5;
+        .text {
+          opacity: .5;
+        }
       }
     }
 
@@ -98,16 +107,20 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
     background-color: $frost-color-button-secondary-bg;
     color: $frost-color-button-secondary;
 
-    &:hover:not(.disabled) {
-      background-color: transparentize($frost-color-blue-1, .9);
+    &:hover {
+      &:not(.disabled) {
+        background-color: transparentize($frost-color-blue-1, .9);
+      }
     }
 
-    &:active:not(.disabled) {
-      background: $frost-color-button-secondary-active-bg;
-      color: $frost-color-button-secondary-active;
+    &:active {
+      &:not(.disabled) {
+        background: $frost-color-button-secondary-active-bg;
+        color: $frost-color-button-secondary-active;
 
-      .text {
-        opacity: 0.5;
+        .text {
+          opacity: .5;
+        }
       }
     }
 
@@ -121,21 +134,27 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
     background-color: $frost-color-button-tertiary-bg;
     color: $frost-color-button-tertiary;
 
-    &:hover:not(.disabled) {
-      background-color: $frost-color-button-tertiary-hover-bg;
+    &:hover {
+      &:not(.disabled) {
+        background-color: $frost-color-button-tertiary-hover-bg;
+      }
     }
 
-    &:focus:not(.disabled) {
-      outline: 0;
-      box-shadow: 1px solid $frost-color-blue-4;
+    &:focus {
+      &:not(.disabled) {
+        outline: 0;
+        box-shadow: 1px solid $frost-color-blue-4;
+      }
     }
 
-    &:active:not(.disabled) {
-      background: $frost-color-button-tertiary-active-bg;
-      color: $frost-color-button-tertiary-active;
+    &:active {
+      &:not(.disabled) {
+        background: $frost-color-button-tertiary-active-bg;
+        color: $frost-color-button-tertiary-active;
 
-      .text {
-        opacity: 0.5;
+        .text {
+          opacity: .5;
+        }
       }
     }
 
@@ -147,18 +166,6 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
   // ----------------------
   // Sizes
   // ----------------------
-
-  // size = 'extra-large'
-  &.extra-large {
-    height: 60px;
-    padding: 0 30px 0 30px;
-    font-size: $frost-font-l;
-
-    .frost-icon {
-      width: 40px;
-      height: 40px;
-    }
-  }
 
   // size = 'large'
   &.large {
@@ -208,9 +215,9 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
     cursor: default;
 
     .text {
+      color: $frost-color-grey-5;
       font-family: $frost-font-family;
       font-size: $frost-font-m;
-      color: $frost-color-grey-5;
     }
 
     &:hover {
@@ -221,45 +228,45 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
   // design = 'info-bar'
   &.info-bar {
     display: inline;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
     width: 75px;
     height: 75px;
     background-color: $frost-color-button-info-bar-bg;
     color: $frost-color-blue-1;
 
     .frost-icon  {
-      margin-left: -10px;
-      padding-bottom: 0px;
       width: 30px;
       height: 30px;
+      margin-left: -10px;
+      padding-bottom: 0;
     }
 
     .text {
       display: inline-block;
-      padding: 5px 1px 2px 1px;
       margin-top: -5px;
-      font-size: $frost-font-s;
+      padding: 5px 1px 2px;
       color: $frost-color-blue-1;
+      font-size: $frost-font-s;
       line-height: 1;
     }
 
     > .content {
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       height: 100%;
       box-sizing: border-box;
 
       .text {
-        vertical-align: middle;
+        padding: 0 1px 2px;
         text-align: center;
-        padding: 0 1px 2px 1px;
+        vertical-align: middle;
       }
 
       .svg {
-        margin-left: 10px;
         margin-bottom: 10px;
+        margin-left: 10px;
 
         .frost-icon {
           vertical-align: middle;
@@ -267,21 +274,27 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
       }
     }
 
-    &:hover:not(.disabled) {
-      background-color: $frost-color-button-info-bar-bg-hover;
-      box-shadow: none;
+    &:hover {
+      &:not(.disabled) {
+        background-color: $frost-color-button-info-bar-bg-hover;
+        box-shadow: none;
+      }
     }
 
-    &:focus:not(.disabled) {
-      outline:0;
-      box-shadow: $frost-color-button-info-bar-focus;
+    &:focus {
+      &:not(.disabled) {
+        outline: 0;
+        box-shadow: $frost-color-button-info-bar-focus;
+      }
     }
 
-    &:active:not(.disabled) {
-      background-color: $frost-color-button-info-bar-active;
-      opacity: 0.7;
-      color: $frost-color-blue-1;
-      box-shadow: none;
+    &:active {
+      &:not(.disabled) {
+        background-color: $frost-color-button-info-bar-active;
+        color: $frost-color-blue-1;
+        box-shadow: none;
+        opacity: .7;
+      }
     }
   }
 
@@ -291,31 +304,38 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
       color: $frost-color-blue-1;
     }
 
-    &:hover:not(.disabled) {
-      .text {
-        color: $frost-color-button-in-line-darken-1;
+    &:hover {
+      &:not(.disabled) {
+        .text {
+          color: $frost-color-button-in-line-darken-1;
+        }
       }
     }
 
-    &:focus:not(.disabled) {
-      outline:0;
-      box-shadow: none;
-      .text {
-        color: $frost-color-button-in-line-darken-1;
-      }
-    }
-
-    &:active:not(.disabled) {
-      .text {
+    &:focus {
+      &:not(.disabled) {
+        outline: 0;
         box-shadow: none;
-        color: $frost-color-button-in-line-darken-2;
+
+        .text {
+          color: $frost-color-button-in-line-darken-1;
+        }
+      }
+    }
+
+    &:active {
+      &:not(.disabled) {
+        .text {
+          color: $frost-color-button-in-line-darken-2;
+          box-shadow: none;
+        }
       }
     }
 
     &.disabled {
-      opacity: 0.3;
       background: none;
       box-shadow: none;
+      opacity: .3;
     }
   }
 
@@ -339,20 +359,21 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
     }
 
     .frost-icon  {
-      padding-bottom: 0px;
       width: 35px;
       height: 35px;
+      padding-bottom: 0;
     }
 
     .text {
       display: flex;
       color: $frost-color-white;
     }
+
     .svg {
-      margin-left: 10px;
-      margin-bottom: 10px;
-      color: inherit;
       order: 2;
+      margin-bottom: 10px;
+      margin-left: 10px;
+      color: inherit;
 
       .frost-icon {
         vertical-align: middle;
@@ -364,8 +385,6 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
       box-shadow: none;
     }
   }
-
-
 
   // Content - text
   &.text {
@@ -384,9 +403,9 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
   }
 
   > .icon {
-    height: 100%;
     display: flex;
     align-items: center;
+    height: 100%;
   }
 
   // Content - text-info
@@ -404,8 +423,12 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
     > .info {
       background-color: $frost-color-button-primary-bg;
       color: $frost-color-button-primary-active;
-      .content .text, .content .subtext {
-        color: $frost-color-button-primary-active;
+
+      .content {
+        .text,
+        .subtext {
+          color: $frost-color-button-primary-active;
+        }
       }
     }
   }
@@ -422,13 +445,13 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
       padding-left: 10px;
 
       .text {
-        font-size: $frost-font-m;
         color: $frost-color-button-primary;
+        font-size: $frost-font-m;
       }
 
       .subtext {
+        color: $frost-color-button-info-content-subtext-color;
         font-size: $frost-font-xs;
-        color: rgba($frost-color-white, 0.8);
       }
     }
   }
@@ -471,14 +494,6 @@ $frost-color-button-in-line-darken-2: darken($frost-color-blue-1, 15);
     .frost-icon + .content,
     .frost-icon + .text {
       margin-top: 8px;
-    }
-
-    .info {
-      flex-direction: column;
-
-      .content {
-        padding-left: 0px;
-      }
     }
 
     .icon-text {

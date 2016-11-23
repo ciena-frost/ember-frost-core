@@ -1,90 +1,94 @@
+/**
+ * Component definition for frost-link component
+ */
 import Ember from 'ember'
-const {
-  LinkComponent,
-  Logger,
-  deprecate,
-  get
-} = Ember
+const {LinkComponent, Logger, deprecate, get, set} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+
 import layout from '../templates/components/frost-link'
 
+/**
+ * List of valid values to pass into `design` propery
+ * @type {Array} valid `design` values
+ */
 const validDesigns = [
   'info-bar',
-  'in-line',
   'inline'
 ]
 
+/**
+ * List of valid values to pass into `priorities` property
+ * @type {Array} valid `priorities` values
+ */
 const validPriorities = [
   'primary',
   'secondary'
 ]
 
+/**
+ * List of valid values to pass into `size` property
+ * @type {Array} valid `size` values
+ */
 const validSizes = [
   'large',
   'medium',
   'small'
 ]
 
-function addDesignClass (design, classes) {
-  deprecate(
-    '\'in-line\' design style has been deprecated in favour of \'inline\'',
-    design !== 'in-line',
-    {
-      id: 'frost-debug.deprecate-design-in-line-style',
-      until: '1.0.0',
-      url: 'http://ciena-frost.github.io/ember-frost-core/#/link'
-    }
-  )
-
-  switch (design) {
-    case 'info-bar':
-      classes.push('info-bar')
-      break
-    case 'in-line':
-    case 'inline':
-      classes.push('in-line')
-      break
-    default:
-      // no class to add for invalid design
-      break
-  }
-}
-
 export default LinkComponent.extend(PropTypeMixin, {
+  // == Dependencies ==========================================================
+
+  // == Keyword Properties ====================================================
 
   // == Component properties ==================================================
 
-  attributeBindings: [
-    'disabled'
-  ],
+  /*
+    The Link component provides and sets default values for:
+    disabled: false - className and attributeBindings
+    tabindex: null - attributeBindings
+    target: null
+   */
+
+  classNameBindings: ['extraClasses'],
   classNames: ['frost-link'],
-  classNameBindings: [
-    'disabled',
-    'extraClasses'
-  ],
   layout,
-  target: '',
 
   // == State properties ======================================================
 
+  /**
+   * Properties for this component. Options are expected to be (potentially)
+   * passed in to the component. State properties are *not* expected to be
+   * passed in/overwritten.
+   */
   propTypes: {
+    // options
     design: PropTypes.oneOf(validDesigns),
     hook: PropTypes.string,
     icon: PropTypes.string,
     priority: PropTypes.oneOf(validPriorities),
+    routeNames: PropTypes.array,
     size: PropTypes.oneOf(validSizes),
-    text: PropTypes.string,
-    onClick: PropTypes.func
+    linkTitle: PropTypes.string,
+    onClick: PropTypes.func,
+
+    // state
+
+    // keywords
+    classNameBindings: PropTypes.arrayOf(PropTypes.string),
+    classNames: PropTypes.arrayOf(PropTypes.string),
+    layout: PropTypes.any
   },
 
+  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
       design: '',
       icon: '',
       priority: '',
+      routeNames: [],
       size: '',
-      text: ''
+      linkTitle: ''
     }
   },
 
@@ -92,11 +96,18 @@ export default LinkComponent.extend(PropTypeMixin, {
 
   /* eslint-disable complexity */
   @readOnly
-  @computed('design', 'disabled', 'priority', 'size')
-  extraClasses (design, disabled, priority, size) {
+  @computed('design', 'priority', 'size')
+  /**
+   * Get extra classes for links based on link's settings
+   * @param {String} design - link design
+   * @param {String} priority - link priority
+   * @param {String} size - link size
+   * @returns {String} extra classNames
+   */
+  extraClasses (design, priority, size) {
     const classes = []
 
-    addDesignClass(design, classes)
+    this.addDesignClass(design, classes)
 
     if (classes.length !== 0) {
       // display warning when design property is used together with size and/or priority
@@ -115,35 +126,125 @@ export default LinkComponent.extend(PropTypeMixin, {
       classes.push(priority)
     }
 
-    // primary link opens content in a new tab
-    if (
-      priority.indexOf('primary') > -1 &&
-      disabled === false
-    ) {
-      this.set('target', '_blank')
-    }
-
     return classes.join(' ')
   },
   /* eslint-enable complexity */
 
   // == Functions =============================================================
 
-  _clickAndInvoke (event) {
+  /**
+   * Sets correct classes to be added to the classNames array
+   * @param {String} design link design type
+   * @param {Array} classes the classes to be added to the classNames array for the component
+   * @returns {undefined}
+   */
+  addDesignClass (design, classes) {
+    deprecate(
+      '\'in-line\' design style has been deprecated in favour of \'inline\'',
+      design !== 'in-line',
+      {
+        id: 'frost-debug.deprecate-design-in-line-style',
+        until: '1.0.0',
+        url: 'http://ciena-frost.github.io/ember-frost-core/#/link'
+      }
+    )
+
+    switch (design) {
+      case 'info-bar':
+        classes.push('info-bar')
+        break
+      case 'inline':
+        classes.push('inline')
+        break
+      default:
+        // no class to add for invalid design
+        break
+    }
+  },
+
+  /**
+   * Returns true if we should open the link in the current tab and false otherwise.
+   * @returns {boolean} true if we should open the link in the current tab and false otherwise
+   */
+  _shouldOpenInSameTab () {
+    return !(get(this, 'priority') === 'primary' && get(this, 'disabled') === false)
+  },
+
+  /**
+   * Returns true if we need to open multiple links on click and false otherwise.
+   * @returns {boolean} true if we need to open multiple links on click and false otherwise
+   */
+  _hasMultipleLinks () {
+    return get(this, 'routeNames') !== undefined && get(this, 'routeNames').length !== 0
+  },
+
+  /**
+   * Open multiple links.
+   */
+  _openLinks () {
+    let routing = get(this, '_routing')
+    let models = get(this, 'models')
+    let queryParams = get(this, 'queryParams.values')
+
+    const routeNames = get(this, 'routeNames')
+
+    if (routeNames) {
+      routeNames.forEach((routeName) => {
+        const windowHandler = window.open(routing.generateURL(routeName, models, queryParams))
+        if (!windowHandler) {
+          Logger.warn('Warning: Make sure that the pop-ups are not blocked')
+        }
+      })
+    }
+  },
+
+  /**
+   * Change basic link component properties to open link(s) in new tabs.
+   * @returns {undefined}
+   */
+  _setupRouting () {
+    if (!this._shouldOpenInSameTab()) {
+      if (this._hasMultipleLinks()) {
+        const params = get(this, 'params')
+        // When we have the block format, LinkComponent expect a minimum of 1 element in params so we hardcode the
+        // first parameter
+        if (params && params.length === 0) {
+          params.push(get(this, '_routing.currentRouteName'))
+        }
+
+        // Remove the link destination
+        set(this, 'href', null)
+
+        if (get(this, 'routeName')) {
+          Logger.warn('Warning: The `routeNames` property takes precedence over `routeName`.')
+        }
+      } else {
+        set(this, 'target', '_blank')
+      }
+    }
+  },
+  // == DOM Events ============================================================
+
+  /**
+   * Handle the click event
+   */
+  click () {
+    if (this._hasMultipleLinks()) {
+      this._openLinks()
+    }
+
     if (this.onClick) {
       this.onClick()
     }
   },
 
-  // == Events ================================================================
+  // == Lifecycle Hooks =======================================================
 
+  /* Ember.Component method */
   init () {
     this._super(...arguments)
-
-    // Turn off the default _invoke on event and use _clickAndInvoke instead
-    let eventName = get(this, 'eventName')
-    this.off(eventName)
-    this.on(eventName, this, this._clickAndInvoke)
+    this._setupRouting()
   }
 
+  // == Actions ===============================================================
 })

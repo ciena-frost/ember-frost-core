@@ -8,18 +8,39 @@ $disabled-border: 1px solid $frost-color-input-disabled-border;
 $disabled-bg: $frost-color-input-disabled-bg;
 $font-size: $frost-font-m;
 $height: 35px;
-$padding: 0 30px 0 8px;
+$padding: 0 30 0 8px;
 
 .frost-text {
   display: block;
   position: relative;
   min-width: 175px;
 
-  &.error .frost-text-input {
-    border: $error-border;
+  &.is-clear-visible {
+    &.frost-text-clear {
+      opacity: 1;
+    }
+  }
 
-    &:hover:enabled:read-write:not(:focus) {
+  &.is-clear-enabled {
+    &.frost-text-clear {
+      cursor: pointer;
+      pointer-events: auto;
+    }
+  }
+
+  &.error {
+    .frost-text-input {
       border: $error-border;
+
+      &:hover {
+        &:enabled {
+          &:read-write {
+            &:not(:focus) {
+              border: $error-border;
+            }
+          }
+        }
+      }
     }
   }
 }
@@ -27,14 +48,14 @@ $padding: 0 30px 0 8px;
 .frost-text-input {
   display: inline-block;
   width: 100%;
+  height: $height;
+  padding: $padding;
+  transition: border .2s ease;
   border: $border;
+  outline: none;
   color: $color;
   font-size: $font-size;
-  height: $height;
-  outline: none;
-  padding: $padding;
   font-weight: 200;
-  transition: border 0.2s ease;
 
   &.right {
     text-align: right;
@@ -45,7 +66,7 @@ $padding: 0 30px 0 8px;
   }
 
   &:read-only {
-    border: none;
+    border: 0;
   }
 
   &:disabled {
@@ -53,33 +74,30 @@ $padding: 0 30px 0 8px;
     background-color: $disabled-bg;
   }
 
-  &:hover:enabled:read-write:not(:focus) {
-    border: $hover-border;
+  &:hover {
+    &:enabled {
+      &:read-write {
+        &:not(:focus) {
+          border: $hover-border;
+        }
+      }
+    }
   }
 }
 
 .frost-text-clear {
   display: inline-block;
   position: absolute;
+  top: 7px;
+  right: 5px;
   width: 23px;
   height: 23px;
-  right: 5px;
-  top: 7px;
+  transition: opacity .2s ease;
   opacity: 0;
   fill: $frost-color-grey-6;
   pointer-events: none;
-  transition: opacity 0.2s ease;
 
   &:focus {
     outline: none;
   }
-}
-
-.frost-text.is-clear-visible .frost-text-clear {
-  opacity: 1;
-}
-
-.frost-text.is-clear-enabled .frost-text-clear {
-  cursor: pointer;
-  pointer-events: auto;
 }

@@ -1,3 +1,4 @@
+{{! Template for the frost-select-dropdown component }}
 <div class='frost-select-overlay' onclick={{onClose}} />
 <div
   class={{if (eq top 'auto') 'frost-select-down-arrow-shadow' 'frost-select-up-arrow-shadow'}}
@@ -44,7 +45,8 @@
         class=item.className
         data=item
         filter=filter
-        hook=(concat receivedHook '-item-' index)
+        hook=(concat receivedHook '-item')
+        hookQualifiers=(hash index=index label=item.label value=item.value)
         multiselect=multiselect
         onItemOver=(action 'focusOnItem')
         onSelect=(action 'selectItem')

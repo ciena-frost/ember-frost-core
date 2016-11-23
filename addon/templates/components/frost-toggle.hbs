@@ -1,3 +1,4 @@
+{{! Template for the frost-toggle component }}
 <input
   class='frost-toggle-input {{if _isToggled 'is-toggled'}}'
   checked={{_isToggled}}
@@ -6,45 +7,37 @@
   id={{concat elementId '-input'}}
   name={{name}}
   type='checkbox'
+  data-test={{hook (concat hook '-toggle-input')}}
 >
+<label
+  class='frost-toggle-button {{if disabled 'disabled' ''}} {{size}}'
+  id={{concat elementId '-visual'}}
+  for={{concat elementId '-input'}}
+  data-test={{hook (concat hook '-toggle-label')}}
 
-{{#frost-toggle-label
-  disabled=disabled
-  id=(concat elementId '-visual')
-  for=(concat elementId '-input')
-  size=size
+  onChange={{action (or _eventProxy.change 'noop')}}
+  onClick={{action '_onClick'}}
+  onDoubleClick={{action (or _eventProxy.doubleClick 'noop')}}
+  onFocusIn={{action (or _eventProxy.focusIn 'noop')}}
+  onFocusOut={{action (or _eventProxy.focusOut 'noop')}}
+  onInput={{action (or _eventProxy.input 'noop')}}
+  onKeyDown={{action (or _eventProxy.keyDown 'noop')}}
+  onKeyPress={{action (or _eventProxy.keyPress 'noop')}}
+  onKeyUp={{action (or _eventProxy.keyUp 'noop')}}
+  onMouseDown={{action (or _eventProxy.mouseDown 'noop')}}
+  onMouseEnter={{action (or _eventProxy.mouseEnter 'noop')}}
+  onMouseLeave={{action (or _eventProxy.mouseLeave 'noop')}}
+  onMouseMove={{action (or _eventProxy.mouseMove 'noop')}}
+  onMouseUp={{action (or _eventProxy.mouseUp 'noop')}}
+  onSubmit={{action (or _eventProxy.submit 'noop')}}
+  onTouchCancel={{action (or _eventProxy.touchCancel 'noop')}}
+  onTouchEnd={{action (or _eventProxy.touchEnd 'noop')}}
+  onTouchMove={{action (or _eventProxy.touchMove 'noop')}}
+  onTouchStart={{action (or _eventProxy.touchStart 'noop')}}
 
-  change=_eventProxy.change
-  click=(action '_onClick')
-  contextMenu=_eventProxy.contextMenu
-  doubleClick=_eventProxy.doubleClick
-  drag=_eventProxy.drag
-  dragEnd=_eventProxy.dragEnd
-  dragEnter=_eventProxy.dragEnter
-  dragLeave=_eventProxy.dragLeave
-  dragOver=_eventProxy.dragOver
-  dragStart=_eventProxy.dragStart
-  drop=_eventProxy.drop
-  focusIn=_eventProxy.focusIn
-  focusOut=_eventProxy.focusOut
-  input=_eventProxy.onInput
-  keyDown=_eventProxy.keyDown
-  keyPress=_eventProxy.keyPress
-  key-up=_eventProxy.keyUp
-  mouseDown=_eventProxy.mouseDown
-  mouseEnter=_eventProxy.mouseEnter
-  mouseLeave=_eventProxy.mouseLeave
-  mouseMove=_eventProxy.mouseMove
-  mouseUp=_eventProxy.mouseUp
-  submit=_eventProxy.submit
-  touchCancel=_eventProxy.touchCancel
-  touchEnd=_eventProxy.touchEnd
-  touchMove=_eventProxy.touchMove
-  touchStart=_eventProxy.touchStart
-
-  escape-press=_eventProxy.escape-press
-  insert-newline=_eventProxy.enter
-}}
-  <div class="frost-toggle-text off">{{if falseLabel _falseLabel 'Off'}}</div>
-  <div class="frost-toggle-text on">{{if trueLabel _trueLabel 'On'}}</div>
-{{/frost-toggle-label}}
+  onEnter={{action (or _eventProxy.enter 'noop')}}
+  onEscape{{action (or _eventProxy.escape-press 'noop')}}
+>
+  <div class="frost-toggle-text off" data-test={{hook (concat hook '-toggle-text-off')}}>{{if falseLabel _falseLabel 'Off'}}</div>
+  <div class="frost-toggle-text on" data-test={{hook (concat hook '-toggle-text-on')}}>{{if trueLabel _trueLabel 'On'}}</div>
+</label>

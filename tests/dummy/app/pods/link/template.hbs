@@ -1,29 +1,23 @@
 <div class="dummy-body link">
-
   <div class="section-title">Primary</div>
   <hr>
   <div class="section">
-
     <div class="example">
       <div class="title">small</div>
       <div class="demo">
-        {{#frost-link 'link.min'
+        {{frost-link 'Text' 'link.min'
           hook='mySmallLink'
           priority='primary'
           size='small'
         }}
-          Primary
-        {{/frost-link}}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
-{{#frost-link 'link.min'
+{{frost-link 'Text' 'link.min'
   hook='mySmallLink'
   priority='primary'
   size='small'
 }}
-  Primary
-{{/frost-link}}
 ```"}}
       </div>
     </div>
@@ -31,21 +25,17 @@
     <div class="example">
       <div class="title">medium</div>
       <div class="demo">
-        {{#frost-link 'link.min'
+        {{frost-link 'Text' 'link.min'
           priority='primary'
           size='medium'
         }}
-          Primary
-        {{/frost-link}}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
-{{#frost-link 'link.min'
+{{frost-link 'Text' 'link.min'
   priority='primary'
   size='medium'
 }}
-  Primary
-{{/frost-link}}
 ```"}}
       </div>
     </div>
@@ -53,21 +43,17 @@
     <div class="example">
       <div class="title">large</div>
       <div class="demo">
-        {{#frost-link 'link.min'
+        {{frost-link 'Text' 'link.min'
           priority='primary'
           size='large'
         }}
-          Primary
-        {{/frost-link}}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
-{{#frost-link 'link.min'
+{{frost-link 'Text' 'link.min'
   priority='primary'
   size='large'
 }}
-  Primary
-{{/frost-link}}
 ```"}}
       </div>
     </div>
@@ -75,23 +61,19 @@
     <div class="example">
       <div class="title">disabled</div>
       <div class="demo">
-        {{#frost-link 'link.min'
+        {{frost-link 'Text' 'link.min'
           priority='primary'
           size='small'
           disabled=true
         }}
-          Primary
-        {{/frost-link}}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
-{{#frost-link 'link.min'
+{{frost-link 'Text' 'link.min'
   priority='primary'
   size='small'
   disabled=true
 }}
-  Primary
-{{/frost-link}}
 ```"}}
       </div>
     </div>
@@ -99,27 +81,73 @@
     <div class="example">
       <div class="title">tabindex</div>
       <div class="demo">
-        {{#frost-link 'link.min'
+        {{frost-link 'Text' 'link.min'
           priority='primary'
           size='small'
           tabindex='-1'
         }}
-          Primary
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+    {{frost-link 'Text' 'link.min'
+      priority='primary'
+      size='small'
+      tabindex='-1'
+    }}
+  ```"}}
+      </div>
+    </div>
+    <div class="example">
+      <div class="title">multiple routes</div>
+      <div class="demo">
+        {{frost-link 'Text'
+          routeNames=(array 'link.min' 'link.max')
+          hook='mySmallLink'
+          priority='primary'
+          size='small'
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+    {{frost-link 'Text'
+      routeNames=(array
+        'link.min'
+        'link.max')
+      hook='mySmallLink'
+      priority='primary'
+      size='small'
+    }}
+  ```"}}
+      </div>
+    </div>
+    <div class="example">
+      <div class="title">multiple routes - block format</div>
+      <div class="demo">
+        {{#frost-link
+          routeNames=(array 'link.min' 'link.max' 'link.middle')
+          hook='mySmallLink'
+          priority='primary'
+          size='small'
+        }}
+          Text
         {{/frost-link}}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
-{{#frost-link 'link.min'
-  priority='primary'
-  size='small'
-  tabindex='-1'
-}}
-  Primary
-{{/frost-link}}
-```"}}
+    {{#frost-link
+      routeNames=(array
+        'link.min'
+        'link.max'
+        'link.middle')
+      hook='mySmallLink'
+      priority='primary'
+      size='small'
+    }}
+      Text
+    {{/frost-link}}
+  ```"}}
       </div>
     </div>
-
   </div>
 
   <div class="section-title">Secondary</div>
@@ -129,21 +157,17 @@
     <div class="example">
       <div class="title">small</div>
       <div class="demo">
-        {{#frost-link 'link.min'
+        {{frost-link 'Text' 'link.min'
           priority='secondary'
           size='small'
         }}
-          Secondary
-        {{/frost-link}}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
-{{#frost-link 'link.min'
+{{frost-link 'Text' 'link.min'
   priority='secondary'
   size='small'
 }}
-  Secondary
-{{/frost-link}}
 ```"}}
       </div>
     </div>
@@ -151,21 +175,17 @@
     <div class="example">
       <div class="title">medium</div>
       <div class="demo">
-        {{#frost-link 'link.min'
+        {{frost-link 'Text' 'link.min'
           priority='secondary'
           size='medium'
         }}
-          Secondary
-        {{/frost-link}}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
-{{#frost-link 'link.min'
+{{frost-link 'Text' 'link.min'
   priority='secondary'
   size='medium'
 }}
-  Secondary
-{{/frost-link}}
 ```"}}
       </div>
     </div>
@@ -173,21 +193,17 @@
     <div class="example">
       <div class="title">large</div>
       <div class="demo">
-        {{#frost-link 'link.min'
+        {{frost-link 'Text' 'link.min'
           priority='secondary'
           size='large'
         }}
-          Secondary
-        {{/frost-link}}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
-{{#frost-link 'link.min'
+{{#frost-link 'Text' 'link.min'
   priority='secondary'
   size='large'
 }}
-  Secondary
-{{/frost-link}}
 ```"}}
       </div>
     </div>
@@ -195,23 +211,19 @@
     <div class="example">
       <div class="title">disabled</div>
       <div class="demo">
-        {{#frost-link 'link.min'
+        {{frost-link 'Text' 'link.min'
           priority='secondary'
           size='small'
           disabled=true
         }}
-          Secondary
-        {{/frost-link}}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
-{{#frost-link 'link.min'
+{{frost-link 'Text' 'link.min'
   priority='secondary'
   size='small'
   disabled=true
 }}
-  Secondary
-{{/frost-link}}
 ```"}}
       </div>
     </div>
@@ -219,23 +231,19 @@
     <div class="example">
       <div class="title">tabindex</div>
       <div class="demo">
-        {{#frost-link 'link.min'
+        {{frost-link 'Text' 'link.min'
           priority='secondary'
           size='small'
           tabindex='-1'
         }}
-          Secondary
-        {{/frost-link}}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
-{{#frost-link 'link.min'
+{{frost-link 'Text' 'link.min'
   priority='secondary'
   size='small'
   tabindex='-1'
 }}
-  Secondary
-{{/frost-link}}
 ```"}}
       </div>
     </div>
@@ -247,7 +255,7 @@
   <div class="section">
 
   <div class="example">
-      <div class="title">in-line (font based on size)</div>
+      <div class="title">inline (font based on size)</div>
       <div class="demo">
         <div class='extra-padding'>
           <span style="font-size: {{fontSize}}px">
@@ -288,7 +296,7 @@
     </div>
 
      <div class="example">
-      <div class="title">disabled in-line</div>
+      <div class="title">disabled inline</div>
       <div class="demo">
         lorem
         {{#frost-link 'link.min'
@@ -316,7 +324,7 @@
       <div class="demo">
         {{#frost-link 'link.min'
           design='info-bar'
-          icon='frost/infobar-find'
+          icon='infobar-find'
         }}
           Action
         {{/frost-link}}
@@ -325,7 +333,7 @@
         {{format-markdown "```handlebars
 {{#frost-link 'link.min'
   design='info-bar'
-  icon='frost/infobar-find'
+  icon='infobar-find'
 }}
   Action
 {{/frost-link}}
@@ -338,7 +346,7 @@
       <div class="demo">
         {{#frost-link 'link.min'
           design='info-bar'
-          icon='frost/infobar-find'
+          icon='infobar-find'
           disabled=true
         }}
           Action
@@ -348,7 +356,7 @@
         {{format-markdown "```handlebars
 {{#frost-link 'link.min'
   design='info-bar'
-  icon='frost/infobar-find'
+  icon='infobar-find'
   disabled=true
 }}
   Action
@@ -368,13 +376,11 @@
         <div class="title">Pre-transition onClick action</div>
         <div class="demo">
           {{! BEGIN-SNIPPET pre-transition-action }}
-          {{#frost-link 'link.min'
+          {{frost-link 'Watch for a notification' 'link.min'
             priority='secondary'
             size='small'
             onClick=(action 'preTransition')
           }}
-            Watch for a notification
-          {{/frost-link}}
           {{! END-SNIPPET }}
         </div>
         <div class="snippet">

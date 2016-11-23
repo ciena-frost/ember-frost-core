@@ -1,65 +1,93 @@
+/**
+ * Component definition for the frost-checkbox component
+ */
 import Ember from 'ember'
-const {Component, isEmpty, run, typeOf} = Ember
-import computed, {readOnly} from 'ember-computed-decorators'
+const {Component, get, isEmpty, run, set, typeOf} = Ember
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+
 import layout from '../templates/components/frost-checkbox'
 
 export default Component.extend(PropTypeMixin, {
   // == Dependencies ==========================================================
 
-  // == Properties ============================================================
+  // == Keyword Properties ====================================================
 
+  classNameBindings: ['size'],
   classNames: ['frost-checkbox'],
-  classNameBindings: ['sizeClass'],
   layout,
 
+  // == PropTypes =============================================================
+
+  /**
+   * Properties for this component. Options are expected to be (potentially)
+   * passed in to the component. State properties are *not* expected to be
+   * passed in/overwritten.
+   */
   propTypes: {
-    hook: PropTypes.string
+    // options
+    autofocus: PropTypes.bool,
+    checked: PropTypes.bool,
+    disabled: PropTypes.bool,
+    hook: PropTypes.string,
+    inputId: PropTypes.string,
+    label: PropTypes.string,
+    size: PropTypes.string,
+
+    // state
+
+    // keywords
+    classNameBindings: PropTypes.arrayOf(PropTypes.string),
+    classNames: PropTypes.arrayOf(PropTypes.string),
+    layout: PropTypes.any
   },
 
+  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
-    return {}
-  },
-
-  // == Computed properties  ===================================================
-
-  @computed('checked')
-  /**
-   * Determine whether or not input should be checked
-   * @param {Boolean|null|undefined} checked - desired checked state
-   * @returns {Boolean} whether or not input should be checked
-   */
-  isChecked (checked) {
-    return [null, undefined, false].indexOf(checked) === -1
-  },
-
-  @computed('id')
-  /**
-   * Get input ID
-   * @param {String} id - ID to use for input
-   * @returns {String} input ID
-   */
-  inputId (id) {
-    id = id || this.elementId
-    return `${id}_input`
-  },
-
-  @readOnly
-  @computed('size')
-  /**
-   * Get class for setting input size
-   * @param {String} size - desired size
-   * @returns {String} size class (defaults to small if not provided)
-   */
-  sizeClass (size) {
-    return size || 'small'
+    return {
+      // options
+      autofocus: false,
+      checked: false,
+      disabled: false,
+      inputId: null,
+      label: '',
+      size: 'small'
+    }
   },
 
   // == Functions =============================================================
 
+  /**
+   * Set unique inputId that will be set on label and input element
+   * @private
+   * @returns {undefined}
+   */
+  _setInputId () {
+    if (!get(this, 'inputId')) {
+      set(this, 'inputId', `${get(this, 'elementId')}_input`)
+    }
+  },
+
+  // == DOM Events ============================================================
+
+  /**
+   * Handle the focusIn event
+   * @params {Event} e - the event being handled
+   */
+  _onFocus: Ember.on('focusIn', function (e) {
+    // If an onFocus handler is defined, call it
+    if (this.attrs.onFocus) {
+      this.attrs.onFocus()
+    }
+  }),
+
+  /**
+   * Handle the keypress event
+   * @param {Event} e - the event being handled
+   * @returns {Boolean|undefined} false if we want to stop propagation
+   */
   keyPress (e) {
     if (e.keyCode === 32) {
-      if (this.get('disabled') !== true) {
+      if (get(this, 'disabled') !== true) {
         this.$('input').prop('checked', !this.$('input').prop('checked'))
         this.send('input')
       }
@@ -69,40 +97,45 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
+  // == Lifecycle Hooks =======================================================
+
   /* Ember.Component method */
   didInsertElement () {
-    if (this.get('autofocus')) {
+    if (get(this, 'autofocus')) {
       run.next('render', () => {
         this.$('input').focus()
       })
     }
   },
 
-  // == Events ================================================================
-
-  _onFocus: Ember.on('focusIn', function (e) {
-    // If an onFocus handler is defined, call it
-    if (this.attrs.onFocus) {
-      this.attrs.onFocus()
-    }
-  }),
+  /* Ember.Component method */
+  init () {
+    this._super(...arguments)
+    this._setInputId()
+  },
 
   // == Actions ===============================================================
 
   actions: {
+    /**
+     * Handle the blur event, calling passed in handler if provided
+     */
     onBlur () {
-      const onBlur = this.get('onBlur')
+      const onBlur = get(this, 'onBlur')
 
       if (onBlur) {
         onBlur()
       }
     },
 
+    /**
+     * Handle the change event on the checkbox, calling onInput if provided
+     */
     input () {
-      let id = this.get('value')
-      if (typeOf(this.attrs['onInput']) === 'function') {
-        this.attrs['onInput']({
-          id: isEmpty(id) ? this.get('id') : id,
+      let id = get(this, 'value')
+      if (typeOf(get(this, 'onInput')) === 'function') {
+        get(this, 'onInput')({
+          id: isEmpty(id) ? get(this, 'elementId') : id,
           value: this.$('input').prop('checked')
         })
       }

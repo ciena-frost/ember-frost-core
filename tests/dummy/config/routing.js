@@ -9,6 +9,16 @@ module.exports = [
       alias: 'First',
       type: 'route',
       route: 'link.min'
+    },
+    {
+      id: 'max',
+      type: 'route',
+      route: 'link.max'
+    },
+    {
+      id: 'middle',
+      type: 'route',
+      route: 'link.middle'
     }]
   }
 ]

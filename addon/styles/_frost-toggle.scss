@@ -1,26 +1,30 @@
+
+$frost-toggle-off-color: #000;
+$frost-toggle-on-color: #fff;
+
 .frost-toggle {
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
   &.disabled {
-    opacity: 0.4;
+    opacity: .4;
   }
 
   .frost-toggle-input {
     display: none;
 
-    &.is-toggled + .frost-toggle-button {
-      background-color: $frost-color-blue-1;
-    }
+    &.is-toggled {
+      + {
+        .frost-toggle-button {
+          background-color: $frost-color-blue-1;
 
-    &.is-toggled + .frost-toggle-button:after {
-      right: 50%;
+          &:after {
+            right: 50%;
+          }
+        }
+      }
     }
-  }
-
-  .frost-toggle-button.disabled {
-    cursor: default;
   }
 
   .frost-toggle-button {
@@ -28,22 +32,20 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    transition: background-color 0.2s;
+    transition: background-color .2s;
     outline: 0;
     background-color: $frost-color-lgrey-1;
     cursor: pointer;
+
+    &.disabled {
+      cursor: default;
+    }
 
     &.medium {
       width: 115px;
       height: 35px;
       padding: 3px;
       border-radius: 3px;
-    }
-
-    &:after {
-      transition: right 0.2s;
-      border-radius: 3px;
-      background-color: $frost-color-white;
     }
 
     &:before,
@@ -53,12 +55,16 @@
       width: 40px;
       height: 27px;
       margin: 0 10px 0 0;
-      content: "";
+      content: '';
     }
 
     &:after {
       right: 0;
+      transition: right .2s;
+      border-radius: 3px;
+      background-color: $frost-color-white;
     }
+
     &:before {
       display: none;
     }
@@ -68,10 +74,11 @@
       text-align: center;
 
       &.off {
-        color: black;
+        color: $frost-toggle-off-color;
       }
+
       &.on {
-        color: white;
+        color: $frost-toggle-on-color;
       }
     }
   }

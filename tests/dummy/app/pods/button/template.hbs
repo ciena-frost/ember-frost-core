@@ -242,6 +242,7 @@
           icon='add'
           priority='primary'
           size='medium'
+          title='This is a tooltip message'
         }}
         {{! END-SNIPPET }}
       </div>
@@ -296,6 +297,7 @@
           priority='tertiary'
           size='small'
           text='Text'
+          vertical=true
         }}
         {{! END-SNIPPET }}
       </div>
@@ -402,7 +404,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-onClick }}
         {{frost-button
-          priority='confirm'
+          priority='primary'
           size='medium'
           text='Action'
           onClick=(action 'onClickHandler')
@@ -413,6 +415,23 @@
         {{code-snippet name='button-onClick.hbs'}}
       </div>
     </div>
+    <div class='example'>
+      <div class='title'>onFocus</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET button-onFocus }}
+        {{frost-button
+          priority='primary'
+          size='medium'
+          text='Action'
+          onFocus=(action 'onFocusHandler')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='button-onFocus.hbs'}}
+      </div>
+    </div>
+
   </div>
 
 </div>

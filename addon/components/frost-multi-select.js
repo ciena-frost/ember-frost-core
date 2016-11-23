@@ -1,14 +1,31 @@
-import Ember from 'ember'
+/**
+ * Component definition for the frost-mult-select component
+ */
+import PropTypeMixin from 'ember-prop-types'
+
 import FrostSelect from './frost-select'
 
-const assign = Object.assign || Ember.assign || Ember.merge
+export default FrostSelect.extend(PropTypeMixin, {
+  // == Dependencies ==========================================================
 
-export default FrostSelect.extend({
+  // == Keyword Properties ====================================================
+
+  // == PropTypes =============================================================
+
+  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
-    const defaults = this._super(...arguments)
-
-    return assign(defaults, {
+    return {
       multiselect: true
-    })
+    }
   }
+
+  // == Computed Properties ===================================================
+
+  // == Functions =============================================================
+
+  // == DOM Events ============================================================
+
+  // == Lifecycle Hooks =======================================================
+
+  // == Actions ===============================================================
 })

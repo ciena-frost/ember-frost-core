@@ -1,3 +1,6 @@
+/**
+ * Component definition for frost-select-dropdown component
+ */
 import Ember from 'ember'
 const {$, Component, get} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
@@ -5,7 +8,7 @@ import {task, timeout} from 'ember-concurrency'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
 import layout from '../templates/components/frost-select-dropdown'
-import keyCodes from '../utils/keycodes'
+import {keyCodes} from '../utils'
 const {DOWN_ARROW, ENTER, ESCAPE, UP_ARROW} = keyCodes
 
 const BORDER_HEIGHT = 1
@@ -15,13 +18,22 @@ const FPS = 1000 / 60 // Update at 60 frames per second
 const WINDOW_SPACE = 20
 
 export default Component.extend(PropTypeMixin, {
-  // == Properties ============================================================
+  // == Dependencies ==========================================================
+
+  // == Keyword Properties ====================================================
 
   layout,
   tagName: '',
 
+  // == PropTypes =============================================================
+
+  /**
+   * Properties for this component. Options are expected to be (potentially)
+   * passed in to the component. State properties are *not* expected to be
+   * passed in/overwritten.
+   */
   propTypes: {
-    // Public
+    // options
     $element: PropTypes.object.isRequired,
     filter: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -32,17 +44,25 @@ export default Component.extend(PropTypeMixin, {
     receivedHook: PropTypes.string.isRequired,
     selectedItems: PropTypes.arrayOf(PropTypes.object),
 
-    // Private
+    // state
     bottom: PropTypes.number,
     focusedIndex: PropTypes.number,
     left: PropTypes.number,
     maxHeight: PropTypes.number,
     top: PropTypes.number,
-    width: PropTypes.number
+    width: PropTypes.number,
+
+    // keywords
+    layout: PropTypes.any,
+    tagName: PropTypes.string
   },
 
+  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
+      // options
+
+      // state
       bottom: 0,
       focusedIndex: 0,
       left: 0,
@@ -56,6 +76,7 @@ export default Component.extend(PropTypeMixin, {
 
   @readOnly
   @computed('bottom', 'left', 'maxHeight', 'top', 'width')
+  // FIXME: jsdoc
   listStyle (bottom, left, maxHeight, top, width) {
     if (bottom !== 'auto') {
       bottom = `${bottom}px`
@@ -79,6 +100,7 @@ export default Component.extend(PropTypeMixin, {
 
   @readOnly
   @computed('bottom', 'left', 'top', 'width')
+  // FIXME: jsdoc
   arrowStyle (bottom, left, top, width) {
     const style = [
       `left:${left + (width - ARROW_WIDTH) / 2}px`
@@ -95,6 +117,7 @@ export default Component.extend(PropTypeMixin, {
 
   @readOnly
   @computed('focusedIndex', 'items', 'selectedItems')
+  // FIXME: jsdoc
   renderItems (focusedIndex, items, selectedItems) {
     if (!items) {
       return []
@@ -124,12 +147,14 @@ export default Component.extend(PropTypeMixin, {
 
   @readOnly
   @computed('items')
+  // FIXME: jsdoc
   showEmptyMessage (items) {
     return !items || items.length === 0
   },
 
   // == Functions =============================================================
 
+  // FIXME: jsdoc
   _getElementDimensionsAndPosition ($element) {
     const height = $element.height()
     const offset = $element.offset()
@@ -146,6 +171,7 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
+  // FIXME: jsdoc
   _handleArrowKey (upArrow) {
     const focusedIndex = this.get('focusedIndex')
     const items = this.get('items')
@@ -166,6 +192,7 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
+  // FIXME: jsdoc
   _positionAboveInput (top) {
     const bottom = $(window).height() - top + $(document).scrollTop() + ARROW_HEIGHT + BORDER_HEIGHT
 
@@ -180,6 +207,7 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
+  // FIXME: jsdoc
   _positionBelowInput (height, top) {
     // Make sure dropdown is rendered below input and we leave space for arrow
     // that connects dropdown to input
@@ -196,6 +224,7 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
+  // FIXME: jsdoc
   _updatePosition ($element) {
     $element = $element.first()
 
@@ -222,6 +251,9 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
+  // == Tasks =================================================================
+
+  // FIXME: jsdoc
   updateTask: task(function * () {
     this._isUpdating = true
 
@@ -238,8 +270,11 @@ export default Component.extend(PropTypeMixin, {
     this._isUpdating = false
   }),
 
-  // == Events ================================================================
+  // == DOM Events ============================================================
 
+  // == Lifecycle Hooks =======================================================
+
+  /* Ember.Component method */
   didReceiveAttrs (attrs) {
     const $element = get(attrs, 'newAttrs.$element.value')
 
@@ -248,6 +283,7 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
+  /* Ember.Component method */
   didInsertElement () {
     $('.frost-select-dropdown .frost-text-input').focus() // Focus on filter
 
@@ -283,6 +319,7 @@ export default Component.extend(PropTypeMixin, {
     $(document).on('keydown', this._keyDownHandler)
   },
 
+  /* Ember.Component method */
   willDestroyElement () {
     $(window).off('resize', this._updateHandler)
     $(document).off('scroll', this._updateHandler)
@@ -292,6 +329,7 @@ export default Component.extend(PropTypeMixin, {
   // == Actions ===============================================================
 
   actions: {
+    // FIXME: jsdoc
     clear (e) {
       this.get('onSelect')([])
 
@@ -300,6 +338,7 @@ export default Component.extend(PropTypeMixin, {
       $('.frost-select-dropdown .frost-text-input').focus()
     },
 
+    // FIXME: jsdoc
     focusOnItem (item) {
       const value = get(item, 'value')
       const items = this.get('items')
@@ -316,11 +355,13 @@ export default Component.extend(PropTypeMixin, {
       }
     },
 
+    // FIXME: jsdoc
     mouseDown (e) {
       // This keeps the overlay from swallowing clicks on the clear button
       e.preventDefault()
     },
 
+    // FIXME: jsdoc
     selectItem (value) {
       // Single select
       if (!this.get('multiselect')) {

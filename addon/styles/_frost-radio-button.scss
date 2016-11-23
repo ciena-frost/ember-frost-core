@@ -6,21 +6,70 @@
   padding: 2px;
   outline: 0;
 
-  label {
-    cursor: pointer;
+  &.error {
+    svg {
+      .ring {
+        fill: $frost-color-input-error-border;
+      }
+    }
+  }
+
+  &.small {
+    > .label {
+      &::before  {
+        width: 20px;
+        height: 20px;
+      }
+    }
 
     svg {
       width: 20px;
       height: 20px;
-      vertical-align: text-top;
+    }
+  }
+
+  &.medium {
+    > .label {
+      &::before {
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  &.large {
+    > .label {
+      &::before {
+        width: 30px;
+        height: 30px;
+      }
+    }
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  label {
+    cursor: pointer;
+
+    svg {
+      margin-right: 5px;
+      vertical-align: middle;
 
       .inner {
-        transition: fill 0.2s ease;
+        transition: fill .2s ease;
         fill: transparent;
       }
 
       .ring {
-        transition: fill 0.2s ease;
+        transition: fill .2s ease;
         fill: $frost-color-grey-5;
       }
     }
@@ -30,25 +79,47 @@
     display: none;
   }
 
-  &.checked:not(.disabled) label svg .inner {
-    fill: $frost-color-blue-1;
-  }
-
-  &:hover, &:focus {
-    &:not(.disabled):not(.checked) {
-      label svg .inner {
-        fill: $frost-color-blue-4;
+  &.checked {
+    &:not(.disabled) {
+      label {
+        svg {
+          .inner {
+            fill: $frost-color-blue-1;
+          }
+        }
       }
     }
   }
+
+  &:hover,
+  &:focus {
+    &:not(.disabled) {
+      &:not(.checked) {
+        label {
+          svg {
+            .inner {
+              fill: $frost-color-blue-4;
+            }
+          }
+        }
+      }
+    }
+  }
+
   &.disabled {
     label {
       color: $frost-color-grey-5;
       cursor: default;
     }
 
-    &.checked label svg .inner {
-      fill: $frost-color-grey-5;
+    &.checked {
+      label {
+        svg {
+          .inner {
+            fill: $frost-color-grey-5;
+          }
+        }
+      }
     }
   }
 }

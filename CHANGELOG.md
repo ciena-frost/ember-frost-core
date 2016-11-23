@@ -13,7 +13,6 @@
 * **Fixed** selected item(s) in the select dropdown to have a heavier font weight.
 * **Removed** `ember-browserify` and `svg4everybody` npm dependencies in favor of including `svg4everybody` via `vendor` directory.
 
-
 # 0.32.2
 
 * Fixed the tabIndex on frost-select that are disabled and then enabled
@@ -36,13 +35,13 @@
 
 # 0.31.0
  * **Removed** the `frost-component` generator
- * **Added** Some new dependencies that will be installed when this addon is `ember install`'d 
+ * **Added** Some new dependencies that will be installed when this addon is `ember install`'d
     * Addon: `ember-test-utils`
     * Bower packages: `chai-jquery` and `sinon-chai`
  * **Added** a `component` generator which uses our lint rules and our comment blocks
- * **Added** a `component-test` generator which uses `mocha` and `ember-test-utils`. It also sets up `sinon` automatically and has a failing test to make developers add a real test. 
- * **Added** a `component-addon` generator which does the re-export of a component in the `app` directory, basically the same as the default generator, minus the `;` at the end. 
- * **Added** a `PULL_REQUEST_TEMPLATE.md` file to help contributors remember to put version-bump comments and changelog messages in their PR descriptions. 
+ * **Added** a `component-test` generator which uses `mocha` and `ember-test-utils`. It also sets up `sinon` automatically and has a failing test to make developers add a real test.
+ * **Added** a `component-addon` generator which does the re-export of a component in the `app` directory, basically the same as the default generator, minus the `;` at the end.
+ * **Added** a `PULL_REQUEST_TEMPLATE.md` file to help contributors remember to put version-bump comments and changelog messages in their PR descriptions.
 
 # 0.30.2
 

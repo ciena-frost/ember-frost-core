@@ -94,11 +94,8 @@ module.exports = {
       app.import(path.join(robotoPath, 'Roboto-Regular.woff2'), {destDir: 'assets/fonts'})
       app.import(path.join(robotoPath, 'stylesheet.css'))
       app.import(path.join('vendor', 'svg4everybody.min.js'))
-    }
-
-    if (typeof this.import === 'function' && app.bowerDirectory) {
-      this.import(app.bowerDirectory + '/perfect-scrollbar/js/perfect-scrollbar.js')
-      this.import(app.bowerDirectory + '/perfect-scrollbar/css/perfect-scrollbar.css')
+      app.import(path.join('vendor', 'perfect-scrollbar.min.js'))
+      app.import(path.join('vendor', 'perfect-scrollbar.min.css'))
     }
   },
 
@@ -155,13 +152,7 @@ module.exports = {
       get(this, 'app.options.iconPackOptions.path', isAddon ? 'tests/dummy/svgs' : 'svgs')
     )
 
-    // No icon pack path defined and an app = legacy case where the app icons must be merged into the 'frost' icon pack
-    const isLegacy = !has(this, 'app.options.iconPackOptions.path') && !isAddon
-
-    const svgPath = path.join(this.project.root, 'public/svgs')
-    if (isLegacy && fs.existsSync(svgPath)) {
-      iconNames['frost'] = (iconNames['frost'] || []).concat(this.flattenIcons([], '', svgPath))
-    } else if (fs.existsSync(localIconPackPath)) {
+    if (fs.existsSync(localIconPackPath)) {
       iconNames[localIconPackName] = this.flattenIcons([], '', localIconPackPath)
     }
 
@@ -175,9 +166,6 @@ module.exports = {
   treeForPublic: function (tree) {
     const isAddon = this.project.isEmberCLIAddon()
 
-    // No icon pack path defined and an app = legacy case where the app icons must be merged into the 'frost' icon pack
-    const isLegacy = !has(this, 'app.options.iconPackOptions.path') && !isAddon
-
     const addonPackages = pickBy(this.project.addonPackages, (addonPackage) => {
       return has(addonPackage.pkg, 'ember-frost-icon-pack')
     })
@@ -188,23 +176,14 @@ module.exports = {
       const iconPackPath = iconPack.path || 'svgs'
       const addonIconPackPath = path.join(addonPackage.path, iconPackPath)
 
-      var svgFunnel
-      if (iconPack.name === 'frost' && isLegacy && fs.existsSync(path.join(this.project.root, 'public/svgs'))) {
-        svgFunnel = mergeTrees([
-          new Funnel(addonIconPackPath, {
-            include: [new RegExp(/\.svg$/)]
-          }),
-          new Funnel(path.join(this.project.root, 'public/svgs'), {
-            include: [new RegExp(/\.svg$/)]
-          })
-        ])
-      } else {
-        svgFunnel = new Funnel(addonIconPackPath, {
-          include: [new RegExp(/\.svg$/)]
-        })
-      }
+      var svgFunnel = new Funnel(addonIconPackPath, {
+        include: [new RegExp(/\.svg$/)]
+      })
 
-      return new SVGStore(svgFunnel, { outputFile: `/assets/icon-packs/${iconPack.name}.svg`, flatten: false })
+      return new SVGStore(svgFunnel, {
+        outputFile: `/assets/icon-packs/${iconPack.name}.svg`,
+        svgstoreOpts: { customSymbolAttrs: ['preserveAspectRatio'] }
+      })
     })
 
     const localIconPackName = get(this, 'app.options.iconPackOptions.name', isAddon ? 'dummy' : 'app')
@@ -212,13 +191,13 @@ module.exports = {
       get(this, 'app.options.iconPackOptions.path', isAddon ? 'tests/dummy/svgs' : 'svgs')
     )
 
-    if (!isLegacy && fs.existsSync(localIconPackPath)) {
+    if (fs.existsSync(localIconPackPath)) {
       const svgFunnel = new Funnel(localIconPackPath, {
         include: [new RegExp(/\.svg$/)]
       })
       iconPacks.push(new SVGStore(svgFunnel, {
         outputFile: `/assets/icon-packs/${localIconPackName}.svg`,
-        flatten: false
+        svgstoreOpts: { customSymbolAttrs: ['preserveAspectRatio'] }
       }))
     }
 
