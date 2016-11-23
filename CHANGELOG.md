@@ -1,3 +1,9 @@
+# 1.0.1
+
+* With the travis config updated and coverage still hanging, turning off coverage temporarily
+
+
+
 # 1.0.0
 - **UPDATED/ADDED** test suite for frost-button, frost-checkbox, frost-events, frost-icon, frost-link, frost-loading, frost-password, frost-radio-button, frost-group, frost-scroll, frost-text, frost-textarea, frost-toggle, utils
 - **UPDATED** README for frost-button, frost-checkbox, frost-events, frost-icon, frost-link, frost-loading, frost-password, frost-radio-button, frost-group, frost-scroll, frost-text, frost-textarea, frost-toggle
