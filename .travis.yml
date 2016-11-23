@@ -3,9 +3,11 @@ dist: trusty
 addons:
   apt:
     sources:
+    - ubuntu-toolchain-r-test
     - google-chrome
     packages:
     - google-chrome-stable
+    - g++-4.8
 language: node_js
 node_js:
 - '6.9'
@@ -28,13 +30,6 @@ script:
 - ember try:one $EMBER_TRY_SCENARIO --- ember test
 after_success:
 - .travis/publish-coverage.sh
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-4.8
-  firefox: "latest-esr"
 env:
   matrix:
   - EMBER_TRY_SCENARIO=ember-2-3
