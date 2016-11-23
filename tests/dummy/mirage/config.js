@@ -1,6 +1,8 @@
 import config from '../config/environment'
 
 export default function () {
+  this.passthrough('/write-coverage')
+
   if (config && config.mirageNamespace) {
     this.namespace = config.mirageNamespace
   }
