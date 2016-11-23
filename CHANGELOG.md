@@ -1,3 +1,30 @@
+# 1.0.0
+- **UPDATED/ADDED** test suite for frost-button, frost-checkbox, frost-events, frost-icon, frost-link, frost-loading, frost-password, frost-radio-button, frost-group, frost-scroll, frost-text, frost-textarea, frost-toggle, utils
+- **UPDATED** README for frost-button, frost-checkbox, frost-events, frost-icon, frost-link, frost-loading, frost-password, frost-radio-button, frost-group, frost-scroll, frost-text, frost-textarea, frost-toggle
+- **UPDATED/ADDED** demo app for frost-button, frost-checkbox, frost-icon, frost-link, frost-loading, frost-password, frost-radio-button, frost-group, frost-scroll, frost-text, frost-textarea, frost-toggle
+- **REWORK** API of frost-toggle, frost-link, frost-radio-button, frost-radio-group
+- **UPDATED** general cleanup for destructing of `get`, `set`, `on` and `$`
+- **UPDATED** existing component definitions to match recently updated generator.
+- **UPDATED/ADDED** hooks and qualifiers on all the components
+- **ADDED** a single export point at `addon/index.js`
+- **REMOVED** all the unnecessary frost-icons
+- **REMOVED** all the deprecated functionalities
+- **REMOVED** unnecessary code
+- **UPDATED** the dependencies
+- **UPDATED** `baseURL` to `rootURL`
+- **UPDATED** tests to run in chrome
+- **UPDATED** `package.json` scripts
+- **UPDATED** node version from >= 5 to >=6
+- **FIXED** `ember-cli-code-coverage` version to 3.5.0
+- **FIXED** all the sass linting issues
+- **REMOVED** dependency to `one-way-controls`
+- **ADDED** support for an inline version of frost-link
+- **ADDED** support for small/medium/large radio-button `size`
+- **ADDED** support for `required` and `error` for radio-button/radio-group
+- **ADDED** support for an inline version of radio-group
+- **ADDED** support for multiple routes on frost-link
+
+
 # 0.32.5
 
 * **Fixes** a major memory leak in `frost-scroll`
