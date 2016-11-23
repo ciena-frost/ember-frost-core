@@ -1,5 +1,13 @@
 sudo: required
 dist: trusty
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    - google-chrome
+    packages:
+    - google-chrome-stable
+    - g++-4.8
 language: node_js
 node_js:
 - '6.9'
@@ -8,6 +16,8 @@ branches:
   except:
   - /^v[0-9\.]+/
 before_install:
+- "export DISPLAY=:99.0"
+- "sh -e /etc/init.d/xvfb start"
 - npm config set spin false
 - npm install -g coveralls pr-bumper --ignore-scripts
 - pr-bumper check
@@ -15,34 +25,18 @@ install:
 - npm install ember-cli-sass # NOTE: this requies scripts
 - npm install --ignore-scripts
 - bower install
-before_script:
-- export CHROME_BIN=/usr/bin/google-chrome
-- "export DISPLAY=:99.0"
-- "sh -e /etc/init.d/xvfb start"
-- sleep 3 # give xvfb some time to start
-- sudo apt-get update
-- sudo apt-get install -y libappindicator1 fonts-liberation
-- wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-- sudo dpkg -i google-chrome*.deb
 script:
 - npm run lint
 - ember try:one $EMBER_TRY_SCENARIO --- ember test
 after_success:
 - .travis/publish-coverage.sh
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-4.8
-  firefox: "latest-esr"
 env:
   matrix:
   - EMBER_TRY_SCENARIO=ember-2-3
   - EMBER_TRY_SCENARIO=default
   - EMBER_TRY_SCENARIO=ember-release
   global:
-    - COVERAGE=false # FIXME: When coverage is enabled tests never complete
+    - COVERAGE=true
     - CXX=g++-4.8
     - secure: qvGQ3mqwgWOPhY4Y1/zWEKvzwNOqUQ3gL7H5LovD+Wx6XngykHea0L02GxSC5xTIZ+hDP4XnxWOgLUpXDz29M1DMvzaRwGpHXUdHAphuVYg1GVrN5FKfV0MEWvyREr8PZ0J0Wdze47yICxYZQ3SIQh5CfJKL2z2ypReNZn+RbpL5dain/2SVUji/U+iMZA+q1xoLFFjnNaixW/pJ5n+0FYq4IeNVRNCPV2JsPibzFFwJTbjVBl7m6ayiO1lMC09MZdJUvvyv0Qs7lHpYdEAjkoni9aXoXeFqR4hTwOXMzj9Z0+l5sDcCBEOsMrBp8FsVDPG6e2NnXp05I26F1HoHBToYOwg+/l5QPW51iqjLPWoNrKqfjUQOUVR8hvAhTNzEoOmut7IZOCdA587ud0R7EADCUDt5OTnGH06SFx5ud3W67S/nXlpIu/VBoM6tXC2xTBh05QdLtuirqb0w51GLJW+saOcOhsgYiDAxdQ759PWuOBtiW42nzXiV9h0WcAJj2z6xWxOPblrYqmYcLAAcXSRLKHZXaZ3T+0VVmF1X2xvV7LX9bIVJCskvEo6/3dlPjaEfNAc438LcNw5fr6BqrqTZEtmAnehOAVn4TdiX4DYlaE0oUQ6nm/s9cyqnQsNtNu8HHYXsIA9iSS2rBMyg5SJyOfo2qAQpVq3t0w9xsTk=
 matrix:
