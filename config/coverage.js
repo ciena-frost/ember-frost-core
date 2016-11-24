@@ -7,6 +7,7 @@ module.exports = {
   ],
   useBabelInstrumenter: true,
   reporters: [
-    'lcov'
+    'lcov',
+    'text-summary'
   ]
 }

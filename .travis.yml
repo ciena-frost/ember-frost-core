@@ -27,9 +27,8 @@ install:
 - bower install
 script:
 - npm run lint
-- ember try:one $EMBER_TRY_SCENARIO --- ember test
+- ember try:one $EMBER_TRY_SCENARIO --- COVERAGE=true ember test
 after_success:
-- COVERAGE=true ember test
 - .travis/publish-coverage.sh
 env:
   matrix:
