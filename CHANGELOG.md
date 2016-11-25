@@ -1,3 +1,7 @@
+# 1.0.2
+* **Fixed** coverage
+
+
 # 1.0.1
 
 * With the travis config updated and coverage still hanging, turning off coverage temporarily
