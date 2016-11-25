@@ -1,3 +1,8 @@
+# 1.0.3
+* Fix issues with local icons
+
+
+
 # 1.0.2
 * **Fixed** coverage
 
