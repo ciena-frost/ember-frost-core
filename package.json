@@ -86,7 +86,7 @@
     "broccoli-file-creator": "^1.1.0",
     "broccoli-funnel": "^1.0.1",
     "broccoli-merge-trees": "^1.0.0",
-    "broccoli-svgstore": "~0.3.1",
+    "broccoli-svgstore": "git://github.com/ciena-frost/broccoli-svgstore.git#master",
     "ember-cli-babel": "^5.1.6",
     "ember-cli-get-component-path-option": "1.0.0",
     "ember-cli-htmlbars": "^1.0.3",
