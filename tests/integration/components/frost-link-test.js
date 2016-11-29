@@ -8,6 +8,7 @@ import {
   describe
 } from 'mocha'
 import sinon from 'sinon'
+import wait from 'ember-test-helpers/wait'
 
 describeComponent(
   'frost-link',
@@ -231,10 +232,13 @@ describeComponent(
 
       this.$('a').trigger('click')
 
-      expect(
-        externalActionSpy.called,
-        'onClick closure action called'
-      ).to.be.true
+      return wait()
+        .then(() => {
+          expect(
+            externalActionSpy.called,
+            'onClick closure action called'
+          ).to.be.true
+        })
     })
   }
 )
