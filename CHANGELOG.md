@@ -1,3 +1,7 @@
+# 1.0.4
+* **Fixed** `onClick` action call
+
+
 # 1.0.3
 * Fix issues with local icons
 
