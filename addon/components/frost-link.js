@@ -2,7 +2,7 @@
  * Component definition for frost-link component
  */
 import Ember from 'ember'
-const {LinkComponent, Logger, deprecate, get, set} = Ember
+const {LinkComponent, Logger, deprecate, get, run, set} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 
@@ -234,7 +234,9 @@ export default LinkComponent.extend(PropTypeMixin, {
     }
 
     if (this.onClick) {
-      this.onClick()
+      run.next(() => {
+        this.onClick()
+      })
     }
   },
 
