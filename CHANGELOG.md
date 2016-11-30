@@ -1,3 +1,8 @@
+# 1.0.5
+
+ * **Undo** the change from [#168](https://github.com/ciena-frost/ember-frost-core/pull/168) as it has been [rendered unnecessary](https://github.com/null-null-null/ember-get-config/issues/10) 
+
+
 # 1.0.4
 * **Fixed** `onClick` action call
 
