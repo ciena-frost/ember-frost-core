@@ -9,6 +9,7 @@ import {
 } from 'mocha'
 import PropTypeMixin from 'ember-prop-types'
 import sinon from 'sinon'
+import SpreadMixin from 'ember-spread'
 
 describeComponent(
   'frost-checkbox',
@@ -72,6 +73,10 @@ describeComponent(
       expect(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
+      ).to.be.true
+      expect(
+        SpreadMixin.detect(component),
+        'SpreadMixin Mixin is present'
       ).to.be.true
     })
 

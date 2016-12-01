@@ -15,6 +15,7 @@ a text area component
 | | | `true` | disabled text area |
 | `form` | `string` | `<form-owner>` | form element that this is associated with (its form owner) |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
+| `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `placeholder` | `string` | `<text>` | placeholder text |
 | `readonly` | `boolean` | `false` | **default** - basic text area |
 | | | `true` | the user cannot modify the value |
@@ -27,6 +28,14 @@ a text area component
 ### Event Handlers
 A comprehensive list of [HTML event handlers](frost-events.md) are available to choose from based on your needs.
 
+## Testing with ember-hook
+The text area component is accessible using ember-hook:
+* Top level hook - `$hook('<hook-name>')`
+* Input - `$hook('<hook-name>-input')`
+* Input field clear button - `$hook('<hook-name>-clear')`
+
+## Spread attributes
+The text area component use ember-spread to `spread` a property object against the top level of the component.
 
 ## Examples
 
@@ -80,5 +89,14 @@ A comprehensive list of [HTML event handlers](frost-events.md) are available to 
 ```handlebars
 {{frost-textarea
   onFocusIn=(action 'onFocusHandler')
+}}
+```
+
+### Spread
+```handlebars
+{{frost-textarea
+  options=(hash
+    disabled=true
+  )
 }}
 ```

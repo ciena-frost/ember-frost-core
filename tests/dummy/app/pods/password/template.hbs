@@ -160,4 +160,25 @@
       </div>
     </div>
   </div>
+
+  <div class='section-title'>Other</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Spread</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET password-other-spread }}
+        {{frost-password
+          options=(hash
+            revealable=true
+            value='admin'
+          )
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='password-other-spread.hbs'}}
+      </div>
+    </div>
+  </div>
 </div>

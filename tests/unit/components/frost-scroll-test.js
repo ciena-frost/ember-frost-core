@@ -8,6 +8,7 @@ import {
   it
 } from 'mocha'
 import sinon from 'sinon'
+import SpreadMixin from 'ember-spread'
 
 describeComponent(
   'frost-scroll',
@@ -37,6 +38,11 @@ describeComponent(
       expect(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
+      ).to.be.true
+
+      expect(
+        SpreadMixin.detect(component),
+        'SpreadMixin Mixin is present'
       ).to.be.true
     })
 

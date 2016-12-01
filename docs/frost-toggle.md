@@ -15,6 +15,7 @@
 | `trueValue` | `boolean` or `string` or `number` | `<value>` | true value of the toggle component |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `onClick` | `string` | `<action-name>` | triggers associated action when the toggle is clicked |
+| `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `value` | `boolean` or `string` or `number` | `<value>` | value of the toggle component |
 
 ### Event Handlers
@@ -28,6 +29,9 @@ If a hook is set on radio-group, a concatenated hook will be created as follows:
 * Toggle label hook - `<hook-name>-toggle-label`
 * Toggle text off hook - `<hook-name>-toggle-text-off`
 * Toggle text on hook - `<hook-name>-toggle-text-on`
+
+## Spread attributes
+The text component use ember-spread to `spread` a property object against the top level of the component.
 
 ## Examples
 
@@ -92,4 +96,14 @@ export default Controller.extend({
     disabled=true
     onClick=(mut value)
   }}
+```
+
+### Spread
+```handlebars
+{{frost-toggle
+  options=(hash
+    value=value
+  )
+  onClick=(action 'toggleHandler')
+}}
 ```

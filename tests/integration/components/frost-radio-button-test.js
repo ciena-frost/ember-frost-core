@@ -596,5 +596,26 @@ describeComponent(
         '_createEvent() added groupId'
       ).to.eql(id)
     })
+
+    it('renders using spread', function () {
+      this.render(hbs`
+        {{frost-radio-button
+          options=(hash
+            disabled=true
+            value='testValue'
+          )
+        }}
+      `)
+
+      expect(
+        this.$('.frost-radio-button').hasClass('disabled'),
+        'disabled class is set'
+      ).to.be.true
+
+      expect(
+        this.$('.frost-radio-button-input').prop('disabled'),
+        'disabled class is set'
+      ).to.be.true
+    })
   }
 )

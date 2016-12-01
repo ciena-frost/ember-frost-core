@@ -5,6 +5,8 @@ import {
   it
 } from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
+import {$hook, initialize as initializeHook} from 'ember-hook'
+import {beforeEach} from 'mocha'
 import sinon from 'sinon'
 
 describeComponent(
@@ -14,6 +16,10 @@ describeComponent(
     integration: true
   },
   function () {
+    beforeEach(function () {
+      initializeHook()
+    })
+
     it('onScrollUp closure action is called', function () {
       const externalActionSpy = sinon.spy()
 
@@ -87,6 +93,25 @@ describeComponent(
       expect(
         externalActionSpy.called,
         'onScrollYEnd closure action called on ps-y-reach-end'
+      ).to.be.true
+    })
+
+    it('renders using spread', function () {
+      const hook = 'my-hook'
+
+      this.set('hook', hook)
+
+      this.render(hbs`
+        {{frost-scroll
+          options=(hash
+            hook=hook
+          )
+        }}
+      `)
+
+      expect(
+        $hook(hook).hasClass('frost-scroll'),
+        'scroll has been rendered'
       ).to.be.true
     })
   }

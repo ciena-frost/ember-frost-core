@@ -5,6 +5,7 @@ import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import {describeComponent} from 'ember-mocha'
 import PropTypeMixin from 'ember-prop-types'
 import {beforeEach, describe, it} from 'mocha'
+import SpreadMixin from 'ember-spread'
 
 describeComponent(
   'frost-textarea',
@@ -94,6 +95,11 @@ describeComponent(
       expect(
         FrostEventsProxy.detect(component),
         'FrostEventsProxy is present'
+      ).to.be.true
+
+      expect(
+        SpreadMixin.detect(component),
+        'SpreadMixin Mixin is present'
       ).to.be.true
     })
 

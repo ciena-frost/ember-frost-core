@@ -240,5 +240,20 @@ describeComponent(
           ).to.be.true
         })
     })
+
+    it('renders using spread', function () {
+      this.render(hbs`
+        {{frost-link 'title' 'testRoute'
+          options=(hash
+            priority='primary'
+          )
+        }}
+      `)
+
+      expect(
+        this.$('.frost-link').hasClass('primary'),
+        'primary class is set'
+      ).to.be.true
+    })
   }
 )

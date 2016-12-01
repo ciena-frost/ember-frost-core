@@ -4,6 +4,8 @@ import {
   beforeEach,
   it
 } from 'mocha'
+import PropTypeMixin from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
 
 describeComponent(
   'frost-loading',
@@ -27,6 +29,18 @@ describeComponent(
         component.get('type'),
         'type: "ripple"'
       ).to.eql('ripple')
+    })
+
+    it('has the expected Mixins', function () {
+      expect(
+        PropTypeMixin.detect(component),
+        'PropTypeMixin Mixin is present'
+      ).to.be.true
+
+      expect(
+        SpreadMixin.detect(component),
+        'SpreadMixin Mixin is present'
+      ).to.be.true
     })
   }
 )

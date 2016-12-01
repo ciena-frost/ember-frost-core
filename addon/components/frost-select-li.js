@@ -5,12 +5,13 @@ import Ember from 'ember'
 const {Component} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
 
 import layout from '../templates/components/frost-select-li'
 
 const regexEscapeChars = '-[]/{}()*+?.^$|'.split('')
 
-export default Component.extend(PropTypeMixin, {
+export default Component.extend(SpreadMixin, PropTypeMixin, {
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================

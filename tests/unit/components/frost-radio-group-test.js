@@ -11,6 +11,7 @@ import {
   describe,
   it
 } from 'mocha'
+import SpreadMixin from 'ember-spread'
 
 describeComponent(
   'frost-radio-group',
@@ -60,6 +61,11 @@ describeComponent(
       expect(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
+      ).to.be.true
+
+      expect(
+        SpreadMixin.detect(component),
+        'SpreadMixin Mixin is present'
       ).to.be.true
     })
 

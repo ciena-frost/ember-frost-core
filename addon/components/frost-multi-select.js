@@ -2,10 +2,11 @@
  * Component definition for the frost-mult-select component
  */
 import PropTypeMixin from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
 
 import FrostSelect from './frost-select'
 
-export default FrostSelect.extend(PropTypeMixin, {
+export default FrostSelect.extend(SpreadMixin, PropTypeMixin, {
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================

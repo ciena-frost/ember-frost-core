@@ -5,11 +5,12 @@ import Ember from 'ember'
 const {$, Component, get, typeOf} = Ember
 import computed from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
 
 import layout from '../templates/components/frost-radio-button'
 import {cloneEvent} from '../utils'
 
-export default Component.extend(PropTypeMixin, {
+export default Component.extend(SpreadMixin, PropTypeMixin, {
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================

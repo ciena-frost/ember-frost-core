@@ -16,6 +16,7 @@
 | `icon` | `string` | `<icon-name>` | name of a frost-icon |
 | `onClick` | `string` | `<action-name>` | triggers associated action when the button is clicked |
 | `onFocus` | `string` | `<action-name>` | triggers associated action when the button received focusin event |
+| `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `pack` | `string` | `frost` | **default** - name of the icon pack |
 | `priority` | `string` | `primary` | primary action button |
 |  |  | `secondary` | secondary action button |
@@ -28,6 +29,12 @@
 | `vertical` | `boolean` | `false` | **default** - set button text below the icon on an icon and text button |
 |  |  | `true` | sets the button text below the icon |
 
+## Testing with ember-hook
+The button component is accessible using ember-hook:
+* Top level hook - `$hook('<hook-name>')`
+
+## Spread attributes
+The button component use ember-spread to `spread` a property object against the top level of the component.  
 
 ## Examples
 
@@ -222,4 +229,16 @@ actions: {
     console.log('button focused')
   }
 }
+```
+
+### Spread
+
+```handlebars
+{{frost-button
+  options=(hash
+    priority='primary'
+    size='small'
+    text='Action'
+  )
+}}
 ```

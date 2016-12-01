@@ -20,10 +20,19 @@ A check in a box, a checkbox
 | `onBlur` | `string` | `<action-name>` | triggers associated action when the checkbox loses focus |
 | `onFocus` | `string` | `<action-name>` | triggers associated action when the checkbox receives focusin event |
 | `onInput` |`string` | `<action-name>` | The action callback to call when the value of the checkbox changes as the user clicks |
+| `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `size` | `string` | `small` | **default** - small size checkbox |
 |  | | `medium` | medium size checkbox |
 |  |  | `large` | large size checkbox |
 
+## Testing with ember-hook
+The checkbox component is accessible using ember-hook:
+* Top level hook - `$hook('<hook-name>')`
+* Input - `$hook('<hook-name>-checkbox-input')`
+* Label - `$hook('<hook-name>-checkbox-label')`
+
+## Spread attributes
+The checkbox component use ember-spread to `spread` a property object against the top level of the component.  
 
 ## Examples
 
@@ -112,5 +121,11 @@ A check in a box, a checkbox
   onInput=(action 'onInputHandler')
 }}
 ```
-
-
+### Spread
+```handlebars
+{{frost-checkbox
+  options=(hash
+    checked=true
+  )
+}}
+```

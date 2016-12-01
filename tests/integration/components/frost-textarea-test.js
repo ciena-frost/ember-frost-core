@@ -222,7 +222,7 @@ describeComponent(
 
     it('hook attr grabs frost-textarea-input as expected', function () {
       this.render(hbs`
-        {{frost-textarea 
+        {{frost-textarea
           hook='my-textarea'
         }}
       `)
@@ -235,7 +235,7 @@ describeComponent(
 
     it('hook attr grabs frost-textarea-clear as expected', function () {
       this.render(hbs`
-        {{frost-textarea 
+        {{frost-textarea
           hook='my-textarea'
           value='Test'
         }}
@@ -353,6 +353,21 @@ describeComponent(
         externalActionSpy.args[0][0].value,
         'onInput closure action called with an object that contains the value'
       ).to.eql(testValue)
+    })
+
+    it('renders using spread', function () {
+      this.render(hbs`
+        {{frost-textarea
+          options=(hash
+            disabled=true
+          )
+        }}
+     `)
+
+      expect(
+        this.$('textarea').prop('disabled'),
+        'disabled attribute is set'
+      ).to.be.true
     })
   }
 )

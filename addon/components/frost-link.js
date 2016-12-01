@@ -5,6 +5,7 @@ import Ember from 'ember'
 const {LinkComponent, Logger, deprecate, get, run, set} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
 
 import layout from '../templates/components/frost-link'
 
@@ -36,7 +37,7 @@ const validSizes = [
   'small'
 ]
 
-export default LinkComponent.extend(PropTypeMixin, {
+export default LinkComponent.extend(SpreadMixin, PropTypeMixin, {
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================

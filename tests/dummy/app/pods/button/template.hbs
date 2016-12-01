@@ -431,7 +431,27 @@
         {{code-snippet name='button-onFocus.hbs'}}
       </div>
     </div>
-
   </div>
-
+  <div class='section-title'>Other</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Spread</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET button-other-spread }}
+        {{frost-button
+          options= (hash
+            priority='primary'
+            size='medium'
+            text='Action'
+          )
+          onClick=(action 'onClickHandler')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='button-other-spread.hbs'}}
+      </div>
+    </div>
+  </div>
 </div>

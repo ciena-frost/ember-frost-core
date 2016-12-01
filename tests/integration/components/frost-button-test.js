@@ -340,5 +340,21 @@ describeComponent(
         'onFocus closure action called'
       ).to.be.true
     })
+
+    it('renders a text button as expected using spread', function () {
+      this.render(hbs`
+        {{frost-button options=(hash text='Text')}}
+      `)
+
+      expect(
+        this.$('.text'),
+        'Text button has the correct class'
+      ).to.have.length(1)
+
+      expect(
+        this.$('.frost-button').text().trim(),
+        'Text is set correctly'
+      ).to.eql('Text')
+    })
   }
 )

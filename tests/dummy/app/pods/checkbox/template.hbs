@@ -213,6 +213,25 @@
         }}
       </div>
     </div>
-
+  </div>
+  <div class='section-title'>Other</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Spread</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET checkbox-other-spread }}
+        {{frost-checkbox
+          options=(hash
+            checked=true
+          )
+          onInput=(action 'onInputHandler')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='checkbox-other-spread.hbs'}}
+      </div>
+    </div>
   </div>
 </div>
