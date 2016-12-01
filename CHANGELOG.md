@@ -1,3 +1,6 @@
+# 1.1.1
+* **Fixed** dependency issue with `ember-spread`
+
 # 1.1.0
 * **Added** `ember-spread` to core components
 
