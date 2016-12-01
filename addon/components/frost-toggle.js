@@ -5,12 +5,13 @@ import Ember from 'ember'
 const {Component, ViewUtils, assert, get, isPresent, typeOf} = Ember
 import computed from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
 
 import FrostEventsProxyMixin from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-toggle'
 import {cloneEvent} from '../utils'
 
-export default Component.extend(PropTypeMixin, FrostEventsProxyMixin, {
+export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixin, {
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================

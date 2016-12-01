@@ -255,5 +255,20 @@ describeComponent(
         'value is set'
       ).to.eql(value)
     })
+
+    it('renders using spread', function () {
+      this.render(hbs`
+        {{frost-password
+          options=(hash
+            disabled=true
+          )
+        }}
+     `)
+
+      expect(
+        this.$('.frost-password').find('input').prop('disabled'),
+        'disabled is set'
+      ).to.be.true
+    })
   }
 )

@@ -23,6 +23,7 @@
 | `form` | `string` | `<form-owner>` | form element that this is associated with (its form owner) |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `maxlength` | `number` | `<maxlength-value>` | maximum number of characters a user can enter |
+| `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `placeholder` | `string` | `<text>` | placeholder text |
 | `readonly` | `boolean` | `false` | **default** - normal text field |
 | | | `true` | the user cannot modify the value |
@@ -37,6 +38,15 @@
 
 ### Event Handlers
 A comprehensive list of [HTML event handlers](frost-events.md) are available to choose from based on your needs.
+
+## Testing with ember-hook
+The text component is accessible using ember-hook:
+* Top level hook - `$hook('<hook-name>')`
+* Input - `$hook('<hook-name>-input')`
+* Input field clear button - `$hook('<hook-name>-clear')`
+
+## Spread attributes
+The text component use ember-spread to `spread` a property object against the top level of the component.
 
 ## Examples
 
@@ -112,5 +122,14 @@ A comprehensive list of [HTML event handlers](frost-events.md) are available to 
 ```handlebars
 {{frost-text
   onKeyUp=(action 'handleKeyUp')
+}}
+```
+
+### Spread
+```handlebars
+{{frost-text
+  options=(hash
+    disabled=true
+  )
 }}
 ```

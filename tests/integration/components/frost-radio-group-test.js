@@ -80,5 +80,42 @@ describeComponent(
         'radio button group is set'
       ).to.be.true
     })
+
+    it('renders using spread', function () {
+      const value = 'b'
+      const label = `Label for ${value}`
+
+      this.set('value', value)
+      this.set('label', label)
+
+      this.render(hbs`
+        {{#frost-radio-group
+          options=(hash
+            id='radioGroup7'
+            selectedValue=value
+          )
+          as |controls|
+        }}
+            {{#controls.button
+              options=(hash
+                size='medium'
+              )
+              value=value
+            }}
+              {{label}}
+            {{/controls.button}}
+        {{/frost-radio-group}}
+      `)
+
+      expect(
+        this.$('.frost-radio-button-input').first().prop('value'),
+        'value is set'
+      ).to.eql(value)
+
+      expect(
+        this.$('.frost-radio-button').first().text().trim(),
+        'label is set'
+      ).to.eql(label)
+    })
   }
 )

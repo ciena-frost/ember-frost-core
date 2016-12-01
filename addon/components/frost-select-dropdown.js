@@ -6,6 +6,7 @@ const {$, Component, get} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
 
 import layout from '../templates/components/frost-select-dropdown'
 import {keyCodes} from '../utils'
@@ -17,7 +18,7 @@ const ARROW_WIDTH = 25
 const FPS = 1000 / 60 // Update at 60 frames per second
 const WINDOW_SPACE = 20
 
-export default Component.extend(PropTypeMixin, {
+export default Component.extend(SpreadMixin, PropTypeMixin, {
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================

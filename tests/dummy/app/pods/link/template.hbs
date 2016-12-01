@@ -371,24 +371,43 @@
   <div class="section-title">Advanced</div>
   <hr>
   <div class="section">
-
     <div class="example">
-        <div class="title">Pre-transition onClick action</div>
-        <div class="demo">
-          {{! BEGIN-SNIPPET pre-transition-action }}
-          {{frost-link 'Watch for a notification' 'link.min'
-            priority='secondary'
-            size='small'
-            onClick=(action 'preTransition')
-          }}
-          {{! END-SNIPPET }}
-        </div>
-        <div class="snippet">
-          {{code-snippet name='pre-transition-action.hbs'}}
-          {{code-snippet name='pre-transition-action.js'}}
-        </div>
+      <div class="title">Pre-transition onClick action</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET pre-transition-action }}
+        {{frost-link 'Watch for a notification' 'link.min'
+          priority='secondary'
+          size='small'
+          onClick=(action 'preTransition')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='pre-transition-action.hbs'}}
+        {{code-snippet name='pre-transition-action.js'}}
       </div>
     </div>
+  </div>
+  <div class='section-title'>Other</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Spread</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET link-other-spread }}
+        {{frost-link 'Text' 'link.min'
+          options=(hash
+            priority='secondary'
+            size='small'
+          )
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='link-other-spread.hbs'}}
+      </div>
+    </div>
+  </div>
 
   {{outlet}}
 </div>

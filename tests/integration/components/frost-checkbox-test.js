@@ -264,5 +264,37 @@ describeComponent(
 
       this.$.prototype.focus.restore()
     })
+
+    it('renders using spread', function () {
+      this.render(hbs`
+        {{frost-checkbox
+          options=(hash
+            checked=true
+          )
+        }}
+      `)
+
+      expect(
+        this.$('.frost-checkbox').hasClass('small'),
+        'Has class "small"'
+      ).to.be.true
+
+      expect(
+        this.$('.frost-checkbox').find('label').prop('for'),
+        '"label for" property has the correct value'
+      ).to.eql(
+        this.$('.frost-checkbox').find('input').prop('id')
+      )
+
+      expect(
+        this.$('.frost-checkbox').find('label').prop('tabIndex'),
+        'label tabindex set to 0'
+      ).to.eql(0)
+
+      expect(
+        this.$('.frost-checkbox').find('input').prop('checked'),
+        'Rendered input is checked'
+      ).to.be.true
+    })
   }
 )

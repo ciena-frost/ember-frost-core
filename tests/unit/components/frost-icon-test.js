@@ -8,6 +8,7 @@ import {
   it
 } from 'mocha'
 import PropTypeMixin from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
 
 describeComponent(
   'frost-icon',
@@ -64,6 +65,11 @@ describeComponent(
       expect(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
+      ).to.be.true
+
+      expect(
+        SpreadMixin.detect(component),
+        'SpreadMixin Mixin is present'
       ).to.be.true
     })
 

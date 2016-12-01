@@ -151,4 +151,26 @@
             </div>
         </div>
     </div>
+
+    <div class='section-title'>Other</div>
+    <hr>
+    <div class='section'>
+      <div class='example'>
+        <div class='title'>Spread</div>
+        <div class='demo'>
+          {{! BEGIN-SNIPPET toggle-other-spread }}
+          {{frost-toggle
+            options=(hash
+              value=value9
+              disabled=true
+            )
+            onClick=(mut value9)
+          }}
+          {{! END-SNIPPET }}
+        </div>
+        <div class='snippet'>
+          {{code-snippet name='toggle-other-spread.hbs'}}
+        </div>
+      </div>
+    </div>
 </div>

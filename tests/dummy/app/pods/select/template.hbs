@@ -272,9 +272,30 @@
 ```"}}
       </div>
     </div>
-
   </div>
 
+  <div class='section-title'>Other</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Spread</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET select-other-spread }}
+        {{frost-select
+          options=(hash
+            data=data
+            hook='mySelect'
+            selected=selectedIndex
+            error=true
+          )
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='select-other-spread.hbs'}}
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -304,8 +325,6 @@
     </div>
 
   </div>
-
-
 
   <div class="section-title">Selection</div>
   <hr>
@@ -491,6 +510,26 @@
 ```"}}
       </div>
     </div>
+  </div>
 
+  <div class='section-title'>Other</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Spread</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET multi-select-other-spread }}
+        {{frost-multi-select
+          options=(hash
+            data=data
+            error=true
+          )
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='multi-select-other-spread.hbs'}}
+      </div>
+    </div>
   </div>
 </div>

@@ -4,8 +4,9 @@
 import Ember from 'ember'
 const {Component, deprecate, run, typeOf} = Ember
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
 
-export default Component.extend(PropTypeMixin, {
+export default Component.extend(SpreadMixin, PropTypeMixin, {
 
   // == Dependencies ==========================================================
 

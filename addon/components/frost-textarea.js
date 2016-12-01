@@ -5,11 +5,12 @@ import Ember from 'ember'
 const {Component, get, isPresent, on, set} = Ember
 import {task, timeout} from 'ember-concurrency'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
 
 import FrostEventsProxyMixin from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-textarea'
 
-export default Component.extend(FrostEventsProxyMixin, PropTypeMixin, {
+export default Component.extend(SpreadMixin, FrostEventsProxyMixin, PropTypeMixin, {
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================

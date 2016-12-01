@@ -5,10 +5,11 @@ import Ember from 'ember'
 const {Component} = Ember
 import computed from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
 
 import layout from '../templates/components/frost-radio-group'
 
-export default Component.extend(PropTypeMixin, {
+export default Component.extend(SpreadMixin, PropTypeMixin, {
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================

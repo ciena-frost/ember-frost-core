@@ -6,11 +6,12 @@ const {Component, get} = Ember
 import computed from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
 
 import FrostEventsProxy from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-password'
 
-export default Component.extend(FrostEventsProxy, PropTypeMixin, {
+export default Component.extend(SpreadMixin, FrostEventsProxy, PropTypeMixin, {
 
   // == Dependencies ==========================================================
 

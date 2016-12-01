@@ -82,9 +82,17 @@ SVGs versus icon fonts.
 
 | Name   | Description | Default |
 | ------ | ----------- | ----------- |
-| `icon` | the name of the icon to display | - |
+| `hook` | the name used for testing with ember-hook | - |
+| `icon` | the name of the icon to display | - | 
+| `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `pack` | the name of the icon pack to load | frost |
-| `hook` | the name used for testing with ember-hook | - | 
+
+## Testing with ember-hook
+The icon component is accessible using ember-hook:
+* Top level hook - `$hook('<hook-name>')`
+
+## Spread attributes
+The icon component use ember-spread to `spread` a property object against the top level of the component.
 
 ## Examples
 
@@ -112,4 +120,14 @@ SVGs versus icon fonts.
 
 ```handlebars
 {{frost-icon icon='close'}}
+```
+
+### Spread
+```handlebars
+{{frost-icon 
+  options=(hash
+    pack='frost' 
+    icon='add'
+  )
+}}
 ```

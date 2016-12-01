@@ -37,5 +37,16 @@ describeComponent(
         'Icon class updates correctly when pack is set.'
       ).to.have.length(1)
     })
+
+    it('renders using spread', function () {
+      this.render(hbs`
+        {{frost-icon options=(hash icon='round-add')}}
+      `)
+
+      expect(
+        this.$('.frost-icon-frost-round-add'),
+        'Icon class is set correctly.'
+      ).to.have.length(1)
+    })
   }
 )

@@ -11,6 +11,7 @@ import {
   it
 } from 'mocha'
 import sinon from 'sinon'
+import SpreadMixin from 'ember-spread'
 
 describeComponent(
   'frost-toggle',
@@ -98,6 +99,11 @@ describeComponent(
       expect(
         FrostEventsProxy.detect(component),
         'FrostEventsProxy Mixin is present'
+      ).to.be.true
+
+      expect(
+        SpreadMixin.detect(component),
+        'SpreadMixin Mixin is present'
       ).to.be.true
     })
 

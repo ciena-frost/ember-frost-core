@@ -353,5 +353,20 @@ describeComponent(
         'onInput closure action called with an object that contains the value'
       ).to.eql(testValue)
     })
+
+    it('renders using spread', function () {
+      this.render(hbs`
+        {{frost-text
+          options=(hash
+            disabled=true
+          )
+        }}
+      `)
+
+      expect(
+        this.$('input').prop('disabled'),
+        'disabled attribute is set'
+      ).to.be.true
+    })
   }
 )

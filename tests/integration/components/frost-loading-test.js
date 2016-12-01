@@ -35,5 +35,20 @@ describeComponent(
         'Has class "uil-ring"'
       ).to.have.length(1)
     })
+
+    it('renders using spread', function () {
+      this.render(hbs`
+        {{frost-loading
+          options=(hash
+            type='ring'
+          )
+        }}
+      `)
+
+      expect(
+        this.$('.uil-ring'),
+        'Has class "uil-ring"'
+      ).to.have.length(1)
+    })
   }
 )

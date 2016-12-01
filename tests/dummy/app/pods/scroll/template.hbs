@@ -46,4 +46,27 @@
       </div>
     </div>
   </div>
+
+  <div class='section-title'>Other</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Spread</div>
+      <div class='demo scroll-size'>
+        {{! BEGIN-SNIPPET scroll-other-spread }}
+        {{#frost-scroll
+          class='full'
+          options=(hash
+            hook='myScroll'
+          )
+        }}
+          {{frost-icon icon='add' class='dummy-svg-huge'}}
+        {{/frost-scroll}}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='scroll-other-spread.hbs'}}
+      </div>
+    </div>
+  </div>
 </div>

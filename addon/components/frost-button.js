@@ -5,6 +5,7 @@ import Ember from 'ember'
 const {Component, Logger, ViewUtils, get, isEmpty, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
 
 import layout from '../templates/components/frost-button'
 
@@ -28,7 +29,7 @@ const validSizes = [
   'small'
 ]
 
-export default Component.extend(PropTypeMixin, {
+export default Component.extend(SpreadMixin, PropTypeMixin, {
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================

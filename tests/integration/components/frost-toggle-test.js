@@ -233,5 +233,20 @@ describeComponent(
         'onClick closure action called'
       ).to.be.true
     })
+
+    it('renders using spread', function () {
+      this.render(hbs`
+        {{frost-toggle
+          options=(hash
+            disabled=true
+          )
+        }}
+     `)
+
+      expect(
+        this.$('.frost-toggle').find('input').prop('disabled'),
+        'disabled is set'
+      ).to.be.true
+    })
   }
 )

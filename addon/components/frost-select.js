@@ -5,6 +5,7 @@ import Ember from 'ember'
 const {$, Component, get, run, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
 
 import layout from '../templates/components/frost-select'
 
@@ -43,7 +44,7 @@ function compareSelectedValues (a, b) {
   return a === b
 }
 
-export default Component.extend(PropTypeMixin, {
+export default Component.extend(SpreadMixin, PropTypeMixin, {
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
