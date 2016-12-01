@@ -31,7 +31,7 @@ If a hook is set on radio-group, a concatenated hook will be created as follows:
 * Toggle text on hook - `<hook-name>-toggle-text-on`
 
 ## Spread attributes
-The text component use ember-spread to `spread` a property object against the top level of the component.
+The toggle component use ember-spread to `spread` a property object against the top level of the component.
 
 ## Examples
 
