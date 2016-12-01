@@ -1,3 +1,7 @@
+# 1.1.0
+* **Added** `ember-spread` to core components
+
+
 # 1.0.6
 * **Replaced** loading ring by the new loading ring
 
