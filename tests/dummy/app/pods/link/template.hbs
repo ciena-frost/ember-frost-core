@@ -1,3 +1,4 @@
+
 <div class="dummy-body link">
   <div class="section-title">Primary</div>
   <hr>
@@ -395,10 +396,13 @@
       <div class='title'>Spread</div>
       <div class='demo'>
         {{! BEGIN-SNIPPET link-other-spread }}
-        {{frost-link 'Text' 'link.min'
+        {{frost-link
+          id='frost-link-spread'
           options=(hash
             priority='secondary'
+            route='link.min'
             size='small'
+            text='Text'
           )
         }}
         {{! END-SNIPPET }}
