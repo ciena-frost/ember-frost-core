@@ -16,13 +16,13 @@ $padding: 0 30 0 8px;
   min-width: 175px;
 
   &.is-clear-visible {
-    &.frost-text-clear {
+    .frost-text-clear {
       opacity: 1;
     }
   }
 
   &.is-clear-enabled {
-    &.frost-text-clear {
+    .frost-text-clear {
       cursor: pointer;
       pointer-events: auto;
     }
