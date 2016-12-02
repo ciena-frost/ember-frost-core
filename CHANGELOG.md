@@ -1,3 +1,10 @@
+# 1.1.2
+
+* **Fixed** text input field clear. It now appears as expected
+* **Fixed** primary link to use the new icon 'open-tabs'
+
+
+
 # 1.1.1
 * **Fixed** dependency issue with `ember-spread`
 
