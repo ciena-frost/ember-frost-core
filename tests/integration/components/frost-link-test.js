@@ -214,7 +214,7 @@ describeComponent(
       `)
 
       expect(
-        this.$('.frost-icon-frost-new-tab'),
+        this.$('.frost-icon-frost-open-tabs'),
         'icon property is set'
       ).to.have.length(1)
     })
