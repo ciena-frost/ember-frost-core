@@ -1,3 +1,7 @@
+# 1.1.3
+* **Udpated** `ember-spread`
+
+
 # 1.1.2
 
 * **Fixed** text input field clear. It now appears as expected
