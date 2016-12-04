@@ -244,13 +244,10 @@ export default LinkComponent.extend(SpreadMixin, PropTypeMixin, {
   // == Lifecycle Hooks =======================================================
 
   /**
-   * Explicitly overrides the didReceiveAttrs in link-to
-   * https://github.com/emberjs/ember.js/blob/v2.10.0/packages/ember-glimmer/lib/components/link-to.js#L790
-   *
-   * This allows named parameters to be passed to the link instead of positional
-   * params.  However, because the link-to expects positional params the named
+   * Allow named parameters to be passed to the link instead of positional
+   * params.  Because the link-to expects positional params the named
    * parameters must be set back against the component as a positional param
-   * array in the correct order (text, route, queryParams, models).  Once set
+   * array in the correct order (text, route, models, queryParams).  Once set
    * we're free to hand control back to the parent function and it will react
    * as if we used the original link-to interface.
    */
@@ -262,14 +259,19 @@ export default LinkComponent.extend(SpreadMixin, PropTypeMixin, {
 
       params.push(this.get('route'))
 
-      const queryParams = this.get('queryParams')
-      if (isPresent(queryParams)) {
-        params.push(queryParams)
-      }
-
       const models = this.get('models')
       if (!isEmpty(models)) {
-        params.push(this.get('models'))
+        models.forEach((model) => {
+          params.push(model)
+        })
+      }
+
+      const queryParams = this.get('queryParams')
+      if (isPresent(queryParams)) {
+        params.push({
+          isQueryParams: true,
+          values: queryParams
+        })
       }
 
       this.set('params', params)
