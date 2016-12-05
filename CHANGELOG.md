@@ -1,3 +1,8 @@
+# 1.1.4
+* **Updated** Fixed text padding
+
+
+
 # 1.1.3
 * **Udpated** `ember-spread`
 
