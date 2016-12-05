@@ -2,15 +2,14 @@ import {expect} from 'chai'
 import Ember from 'ember'
 const {run} = Ember
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
-import {initialize} from 'ember-hook'
 import {describeComponent} from 'ember-mocha'
-import PropTypeMixin from 'ember-prop-types'
 import {
   beforeEach,
   describe,
   it
 } from 'mocha'
-import SpreadMixin from 'ember-spread'
+
+import Component from 'ember-frost-core/components/frost-component'
 
 describeComponent(
   'frost-password',
@@ -25,12 +24,7 @@ describeComponent(
     let component
 
     beforeEach(function () {
-      initialize()
       component = this.subject()
-    })
-
-    it('includes className frost-password', function () {
-      expect(component.classNames).to.include('frost-password')
     })
 
     it('sets default property values correctly', function () {
@@ -110,20 +104,17 @@ describeComponent(
       ).to.equal(null)
     })
 
-    it('has the expected Mixins', function () {
+    it('extends the commone frost component', function () {
       expect(
-        PropTypeMixin.detect(component),
-        'PropTypeMixin Mixin is present'
+        component instanceof Component,
+        'is instance of Frost Component'
       ).to.equal(true)
+    })
 
+    it('has the expected Mixins', function () {
       expect(
         FrostEventsProxy.detect(component),
         'FrostEventsProxy Mixin is present'
-      ).to.equal(true)
-
-      expect(
-        SpreadMixin.detect(component),
-        'SpreadMixin Mixin is present'
       ).to.equal(true)
     })
 

@@ -3,9 +3,9 @@ import Ember from 'ember'
 const {run} = Ember
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import {describeComponent} from 'ember-mocha'
-import PropTypeMixin from 'ember-prop-types'
 import {beforeEach, describe, it} from 'mocha'
-import SpreadMixin from 'ember-spread'
+
+import Component from 'ember-frost-core/components/frost-component'
 
 describeComponent(
   'frost-textarea',
@@ -18,10 +18,6 @@ describeComponent(
 
     beforeEach(function () {
       component = this.subject()
-    })
-
-    it('includes className frost-textarea', function () {
-      expect(component.classNames).to.include('frost-textarea')
     })
 
     it('sets default property values correctly', function () {
@@ -86,20 +82,17 @@ describeComponent(
       ).to.be.eql('soft')
     })
 
-    it('has the expect Mixins', function () {
+    it('extends the commone frost component', function () {
       expect(
-        PropTypeMixin.detect(component),
-        'PropTypeMixin Mixin is present'
+        component instanceof Component,
+        'is instance of Frost Component'
       ).to.equal(true)
+    })
 
+    it('has the expect Mixins', function () {
       expect(
         FrostEventsProxy.detect(component),
         'FrostEventsProxy is present'
-      ).to.equal(true)
-
-      expect(
-        SpreadMixin.detect(component),
-        'SpreadMixin Mixin is present'
       ).to.equal(true)
     })
 

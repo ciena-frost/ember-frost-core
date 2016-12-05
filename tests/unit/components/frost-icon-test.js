@@ -10,6 +10,8 @@ import {
 import PropTypeMixin from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
 
+import Component from 'ember-frost-core/components/frost-component'
+
 describeComponent(
   'frost-icon',
   'Unit: FrostIconComponent',
@@ -21,10 +23,6 @@ describeComponent(
 
     beforeEach(function () {
       component = this.subject()
-    })
-
-    it('includes className frost-icon', function () {
-      expect(component.classNames).to.include('frost-icon')
     })
 
     it('sets default property values correctly', function () {
@@ -47,6 +45,13 @@ describeComponent(
         component.get('pack'),
         'pack: "frost"'
       ).to.eql('frost')
+    })
+
+    it('extends the base frost component', function () {
+      expect(
+        component instanceof Component,
+        'is instance of Frost Component'
+      ).to.equal(true)
     })
 
     it('sets dependent keys correctly', function () {

@@ -5,13 +5,13 @@ const {
   run
 } = Ember
 import { describeComponent } from 'ember-mocha'
-import PropTypeMixin from 'ember-prop-types'
 import {
   beforeEach,
   describe,
   it
 } from 'mocha'
-import SpreadMixin from 'ember-spread'
+
+import Component from 'ember-frost-core/components/frost-component'
 
 describeComponent(
   'frost-radio-button',
@@ -29,10 +29,6 @@ describeComponent(
         },
         value: 'testValue'
       })
-    })
-
-    it('includes className frost-radio-button', function () {
-      expect(component.classNames).to.include('frost-radio-button')
     })
 
     it('sets default property values correctly', function () {
@@ -72,15 +68,10 @@ describeComponent(
       ).to.equal(null)
     })
 
-    it('has the expect Mixins', function () {
+    it('extends the commone frost component', function () {
       expect(
-        PropTypeMixin.detect(component),
-        'PropTypeMixin Mixin is present'
-      ).to.equal(true)
-
-      expect(
-        SpreadMixin.detect(component),
-        'SpreadMixin Mixin is present'
+        component instanceof Component,
+        'is instance of Frost Component'
       ).to.equal(true)
     })
 

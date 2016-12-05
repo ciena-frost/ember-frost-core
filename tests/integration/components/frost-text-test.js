@@ -1,10 +1,10 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {run} = Ember
-import {$hook, initialize} from 'ember-hook'
+import {$hook} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
-import {beforeEach} from 'mocha'
+import {beforeEach, describe} from 'mocha'
 import sinon from 'sinon'
 
 describeComponent(
@@ -14,10 +14,6 @@ describeComponent(
     integration: true
   },
   function () {
-    beforeEach(function () {
-      initialize()
-    })
-
     it('renders', function () {
       this.render(hbs`
           {{frost-text}}
@@ -290,22 +286,22 @@ describeComponent(
       ).to.eql('')
     })
 
-    it('hook attr grabs frost-text as expected', function () {
-      this.render(hbs`
+    describe('when setting the hook property', function () {
+      beforeEach(function () {
+        this.render(hbs`
           {{frost-text
-            hook='my-text'
+            hook='myText'
           }}
-      `)
+        `)
+      })
 
-      expect(
-        $hook('my-text-input').hasClass('frost-text-input'),
-        'input hook is set'
-      ).to.equal(true)
+      it('should set the clear hook', function () {
+        expect($hook('myText-clear')).to.have.class('frost-text-clear')
+      })
 
-      expect(
-        $hook('my-text-clear').hasClass('frost-text-clear'),
-        'clear hook is set'
-      ).to.equal(true)
+      it('should set the input hook', function () {
+        expect($hook('myText-input')).to.have.class('frost-text-input')
+      })
     })
 
     it('calls onKeyUp closure action', function () {

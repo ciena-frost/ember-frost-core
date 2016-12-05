@@ -5,8 +5,7 @@ import {
   it
 } from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
-import {$hook, initialize as initializeHook} from 'ember-hook'
-import {beforeEach} from 'mocha'
+import {$hook} from 'ember-hook'
 import sinon from 'sinon'
 
 describeComponent(
@@ -16,10 +15,6 @@ describeComponent(
     integration: true
   },
   function () {
-    beforeEach(function () {
-      initializeHook()
-    })
-
     it('onScrollUp closure action is called', function () {
       const externalActionSpy = sinon.spy()
 

@@ -4,13 +4,11 @@ import {
   it
 } from 'ember-mocha'
 import {
-  beforeEach,
   describe
 } from 'mocha'
 import hbs from 'htmlbars-inline-precompile'
 import {
-  $hook,
-  initialize
+  $hook
 } from 'ember-hook'
 
 describeComponent(
@@ -20,10 +18,6 @@ describeComponent(
     integration: true
   },
   function () {
-    beforeEach(function () {
-      initialize()
-    })
-
     it('renders default values', function () {
       this.render(hbs`
         {{frost-password}}
@@ -75,17 +69,17 @@ describeComponent(
       it('grabs frost-password as expected', function () {
         this.render(hbs`
           {{frost-password
-            hook='my-password'
+            hook='myPassword'
           }}
         `)
 
         expect(
-          $hook('my-password-input').hasClass('frost-text-input'),
+          $hook('myPassword-input').hasClass('frost-text-input'),
           'input hook is set'
         ).to.equal(true)
 
         expect(
-          $hook('my-password-clear').hasClass('frost-text-clear'),
+          $hook('myPassword-clear').hasClass('frost-text-clear'),
           'clear hook is set'
         ).to.equal(true)
       })
@@ -93,13 +87,13 @@ describeComponent(
       it('grabs frost-password-reveal as expected', function () {
         this.render(hbs`
           {{frost-password
-            hook='my-password'
+            hook='myPassword'
             revealable=true
           }}
         `)
 
         expect(
-          $hook('my-password-reveal').hasClass('frost-password-reveal'),
+          $hook('myPassword-reveal').hasClass('frost-password-reveal'),
           'reveal hook is set'
         ).to.equal(true)
       })

@@ -4,14 +4,14 @@ const {run} = Ember
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import * as utils from 'ember-frost-core/utils'
 import {describeComponent} from 'ember-mocha'
-import PropTypeMixin from 'ember-prop-types'
 import {
   beforeEach,
   describe,
   it
 } from 'mocha'
 import sinon from 'sinon'
-import SpreadMixin from 'ember-spread'
+
+import Component from 'ember-frost-core/components/frost-component'
 
 describeComponent(
   'frost-toggle',
@@ -26,10 +26,6 @@ describeComponent(
       component = this.subject({
         _setupAssertion: function () {}
       })
-    })
-
-    it('includes className frost-toggle', function () {
-      expect(component.classNames).to.include('frost-toggle')
     })
 
     it('sets default property values correctly', function () {
@@ -90,20 +86,17 @@ describeComponent(
       ).to.eql(_isToggledDependentKeys)
     })
 
-    it('has the expected Mixins', function () {
+    it('extends the commone frost component', function () {
       expect(
-        PropTypeMixin.detect(component),
-        'PropTypeMixin Mixin is present'
+        component instanceof Component,
+        'is instance of Frost Component'
       ).to.equal(true)
+    })
 
+    it('has the expected Mixins', function () {
       expect(
         FrostEventsProxy.detect(component),
         'FrostEventsProxy Mixin is present'
-      ).to.equal(true)
-
-      expect(
-        SpreadMixin.detect(component),
-        'SpreadMixin Mixin is present'
       ).to.equal(true)
     })
 

@@ -4,8 +4,8 @@ import {
   beforeEach,
   it
 } from 'mocha'
-import PropTypeMixin from 'ember-prop-types'
-import SpreadMixin from 'ember-spread'
+
+import Component from 'ember-frost-core/components/frost-component'
 
 describeComponent(
   'frost-loading',
@@ -20,10 +20,6 @@ describeComponent(
       component = this.subject()
     })
 
-    it('includes className frost-loading', function () {
-      expect(component.classNames).to.include('frost-loading')
-    })
-
     it('sets default property values correctly', function () {
       expect(
         component.get('type'),
@@ -31,15 +27,10 @@ describeComponent(
       ).to.eql('ripple')
     })
 
-    it('has the expected Mixins', function () {
+    it('extends the commone frost component', function () {
       expect(
-        PropTypeMixin.detect(component),
-        'PropTypeMixin Mixin is present'
-      ).to.equal(true)
-
-      expect(
-        SpreadMixin.detect(component),
-        'SpreadMixin Mixin is present'
+        component instanceof Component,
+        'is instance of Frost Component'
       ).to.equal(true)
     })
   }

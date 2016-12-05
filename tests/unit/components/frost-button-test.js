@@ -2,7 +2,6 @@ import {expect} from 'chai'
 import Ember from 'ember'
 const {run} = Ember
 import {describeComponent} from 'ember-mocha'
-import PropTypeMixin from 'ember-prop-types'
 import {
   afterEach,
   beforeEach,
@@ -10,7 +9,8 @@ import {
   it
 } from 'mocha'
 import sinon from 'sinon'
-import SpreadMixin from 'ember-spread'
+
+import Component from 'ember-frost-core/components/frost-component'
 
 describeComponent(
   'frost-button',
@@ -23,10 +23,6 @@ describeComponent(
 
     beforeEach(function () {
       component = this.subject()
-    })
-
-    it('includes className frost-button', function () {
-      expect(component.classNames).to.include('frost-button')
     })
 
     it('sets default property values correctly', function () {
@@ -142,15 +138,10 @@ describeComponent(
       ).to.eql(extraClassesDependentKeys)
     })
 
-    it('has the expected Mixins', function () {
+    it('extends the commone frost component', function () {
       expect(
-        PropTypeMixin.detect(component),
-        'PropTypeMixin Mixin is present'
-      ).to.equal(true)
-
-      expect(
-        SpreadMixin.detect(component),
-        'SpreadMixin Mixin is present'
+        component instanceof Component,
+        'is instance of Frost Component'
       ).to.equal(true)
     })
 

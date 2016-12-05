@@ -1,12 +1,8 @@
 import {expect} from 'chai'
 import {
-  $hook,
-  initialize
+  $hook
 } from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
-import {
-  beforeEach
-} from 'mocha'
 import hbs from 'htmlbars-inline-precompile'
 
 describeComponent(
@@ -16,10 +12,6 @@ describeComponent(
     integration: true
   },
   function () {
-    beforeEach(function () {
-      initialize()
-    })
-
     it('block format', function () {
       const label = 'b'
       const value = 'a'

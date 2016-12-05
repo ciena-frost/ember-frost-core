@@ -1,10 +1,9 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {run} = Ember
-import {$hook, initialize} from 'ember-hook'
+import {$hook} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
-import {beforeEach} from 'mocha'
 import sinon from 'sinon'
 
 describeComponent(
@@ -14,10 +13,6 @@ describeComponent(
     integration: true
   },
   function () {
-    beforeEach(function () {
-      initialize()
-    })
-
     it('renders default values', function () {
       this.render(hbs`
         {{frost-textarea}}
@@ -223,12 +218,12 @@ describeComponent(
     it('hook attr grabs frost-textarea-input as expected', function () {
       this.render(hbs`
         {{frost-textarea
-          hook='my-textarea'
+          hook='myTextarea'
         }}
       `)
 
       expect(
-        $hook('my-textarea-input').hasClass('ember-text-area'),
+        $hook('myTextarea-input').hasClass('ember-text-area'),
         'input hook is set'
       ).to.equal(true)
     })
@@ -236,13 +231,13 @@ describeComponent(
     it('hook attr grabs frost-textarea-clear as expected', function () {
       this.render(hbs`
         {{frost-textarea
-          hook='my-textarea'
+          hook='myTextarea'
           value='Test'
         }}
       `)
 
       expect(
-        $hook('my-textarea-clear').hasClass('frost-textarea-clear'),
+        $hook('myTextarea-clear').hasClass('frost-textarea-clear'),
         'clear hook is set'
       ).to.equal(true)
     })

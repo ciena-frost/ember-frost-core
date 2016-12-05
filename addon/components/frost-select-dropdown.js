@@ -2,12 +2,12 @@
  * Component definition for frost-select-dropdown component
  */
 import Ember from 'ember'
-const {$, Component, get} = Ember
+const {$, get} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-import SpreadMixin from 'ember-spread'
+import {PropTypes} from 'ember-prop-types'
 
+import Component from './frost-component'
 import layout from '../templates/components/frost-select-dropdown'
 import {keyCodes} from '../utils'
 const {DOWN_ARROW, ENTER, ESCAPE, UP_ARROW} = keyCodes
@@ -18,7 +18,7 @@ const ARROW_WIDTH = 25
 const FPS = 1000 / 60 // Update at 60 frames per second
 const WINDOW_SPACE = 20
 
-export default Component.extend(SpreadMixin, PropTypeMixin, {
+export default Component.extend({
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
@@ -51,14 +51,9 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
     left: PropTypes.number,
     maxHeight: PropTypes.number,
     top: PropTypes.number,
-    width: PropTypes.number,
-
-    // keywords
-    layout: PropTypes.any,
-    tagName: PropTypes.string
+    width: PropTypes.number
   },
 
-  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
       // options
@@ -275,7 +270,6 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
 
   // == Lifecycle Hooks =======================================================
 
-  /* Ember.Component method */
   didReceiveAttrs (attrs) {
     const $element = get(attrs, 'newAttrs.$element.value')
 
@@ -284,7 +278,6 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
     }
   },
 
-  /* Ember.Component method */
   didInsertElement () {
     $('.frost-select-dropdown .frost-text-input').focus() // Focus on filter
 
@@ -320,7 +313,6 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
     $(document).on('keydown', this._keyDownHandler)
   },
 
-  /* Ember.Component method */
   willDestroyElement () {
     $(window).off('resize', this._updateHandler)
     $(document).off('scroll', this._updateHandler)

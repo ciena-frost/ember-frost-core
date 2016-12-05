@@ -1,28 +1,24 @@
 /**
  * Component definition for the frost-password component
  */
-import Ember from 'ember'
-const {Component, get} = Ember
 import computed from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-import SpreadMixin from 'ember-spread'
+import {PropTypes} from 'ember-prop-types'
 
+import Component from './frost-component'
 import FrostEventsProxy from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-password'
 
-export default Component.extend(SpreadMixin, FrostEventsProxy, PropTypeMixin, {
+export default Component.extend(FrostEventsProxy, {
 
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
 
-  classNames: [
-    'frost-password'
-  ],
   classNameBindings: [
     'revealable'
   ],
+
   layout,
 
   /*
@@ -43,11 +39,6 @@ export default Component.extend(SpreadMixin, FrostEventsProxy, PropTypeMixin, {
 
   // == PropTypes =============================================================
 
-  /**
-   * Properties for this component. Options are expected to be (potentially)
-   * passed in to the component. State properties are *not* expected to be
-   * passed in/overwritten.
-   */
   propTypes: {
     // options
     disabled: PropTypes.bool,
@@ -65,17 +56,11 @@ export default Component.extend(SpreadMixin, FrostEventsProxy, PropTypeMixin, {
     readonly: PropTypes.bool,
     required: PropTypes.bool,
     selectionDirection: PropTypes.string,
-    title: PropTypes.string,
+    title: PropTypes.string
 
     // state
-
-    // keywords
-    classNames: PropTypes.arrayOf(PropTypes.string),
-    classNameBindings: PropTypes.arrayOf(PropTypes.string),
-    layout: PropTypes.any
   },
 
-  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
       // options
@@ -152,7 +137,7 @@ export default Component.extend(SpreadMixin, FrostEventsProxy, PropTypeMixin, {
      * Toggle the reveal property using an ember-concurrency task
      */
     toggleReveal () {
-      get(this, '_toggleReveal').perform()
+      this.get('_toggleReveal').perform()
     }
   }
 })

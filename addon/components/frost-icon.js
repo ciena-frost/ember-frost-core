@@ -2,47 +2,34 @@
  * Component definition for frost-icon component
  */
 import Ember from 'ember'
-const {Component, deprecate, get} = Ember
+const {deprecate, get} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-import SpreadMixin from 'ember-spread'
+import {PropTypes} from 'ember-prop-types'
 
+import Component from './frost-component'
 import layout from '../templates/components/frost-icon'
 
-export default Component.extend(SpreadMixin, PropTypeMixin, {
+export default Component.extend({
 
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
 
   classNameBindings: ['iconClass'],
-  classNames: 'frost-icon',
   layout,
   tagName: 'svg',
 
   // == PropTypes =============================================================
 
-  /**
-   * Properties for this component. Options are expected to be (potentially)
-   * passed in to the component. State properties are *not* expected to be
-   * passed in/overwritten.
-   */
   propTypes: {
     // options
     hook: PropTypes.string,
     pack: PropTypes.string,
-    icon: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired
 
     // state
-
-    // keywords
-    classNameBindings: PropTypes.arrayOf(PropTypes.string),
-    classNames: PropTypes.arrayOf(PropTypes.string),
-    layout: PropTypes.any,
-    tagName: PropTypes.string
   },
 
-  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
       // options
@@ -73,7 +60,6 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
 
   // == Lifecycle Hooks =======================================================
 
-  /* Ember.Component method */
   didReceiveAttrs (attrs) {
     const icon = get(attrs, 'newAttrs.icon.value') || ''
 

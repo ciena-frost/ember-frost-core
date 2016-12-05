@@ -1,24 +1,21 @@
 /**
  * Component definition for the frost-mult-select component
  */
-import PropTypeMixin from 'ember-prop-types'
-import SpreadMixin from 'ember-spread'
-
 import FrostSelect from './frost-select'
 
-export default FrostSelect.extend(SpreadMixin, PropTypeMixin, {
+export default FrostSelect.extend({
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
 
   // == PropTypes =============================================================
 
-  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
+      css: 'frost-select', // the multi-select uses the same base class as frost-select
       multiselect: true
     }
-  }
+  },
 
   // == Computed Properties ===================================================
 
@@ -29,4 +26,5 @@ export default FrostSelect.extend(SpreadMixin, PropTypeMixin, {
   // == Lifecycle Hooks =======================================================
 
   // == Actions ===============================================================
+  actions: {}
 })

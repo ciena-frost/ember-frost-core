@@ -1,7 +1,6 @@
 import {expect} from 'chai'
 import {
-  $hook,
-  initialize
+  $hook
 } from 'ember-hook'
 import {
   describeComponent,
@@ -9,7 +8,6 @@ import {
 } from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
 import {
-  beforeEach,
   describe
 } from 'mocha'
 import sinon from 'sinon'
@@ -21,10 +19,6 @@ describeComponent(
     integration: true
   },
   function () {
-    beforeEach(function () {
-      initialize()
-    })
-
     it('renders a text button as expected', function () {
       this.render(hbs`
         {{frost-button text='Text'}}

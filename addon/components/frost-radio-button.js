@@ -2,25 +2,21 @@
  * Component definition for the frost-radio-button component
  */
 import Ember from 'ember'
-const {$, Component, get, typeOf} = Ember
+const {$} = Ember
 import computed from 'ember-computed-decorators'
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-import SpreadMixin from 'ember-spread'
+import {PropTypes} from 'ember-prop-types'
 
+import Component from './frost-component'
 import layout from '../templates/components/frost-radio-button'
 import {cloneEvent} from '../utils'
 
-export default Component.extend(SpreadMixin, PropTypeMixin, {
+export default Component.extend({
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
 
   attributeBindings: [
     'tabindex'
-  ],
-
-  classNames: [
-    'frost-radio-button'
   ],
 
   classNameBindings: [
@@ -34,11 +30,6 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
 
   // == PropTypes =============================================================
 
-  /**
-   * Properties for this component. Options are expected to be (potentially)
-   * passed in to the component. State properties are *not* expected to be
-   * passed in/overwritten.
-   */
   propTypes: {
     // options
     // Group properties
@@ -53,15 +44,9 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
     required: PropTypes.bool,
     size: PropTypes.string,
     value: PropTypes.string.isRequired,
-    onChange: PropTypes.func,
+    onChange: PropTypes.func
 
     // state
-
-    // keywords
-    attributeBinding: PropTypes.arrayOf(PropTypes.string),
-    classNameBinding: PropTypes.arrayOf(PropTypes.string),
-    classNames: PropTypes.arrayOf(PropTypes.string),
-    layout: PropTypes.any
   },
 
   getDefaultProps () {
@@ -129,9 +114,9 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
   _changeTarget (event, target) {
     const e = cloneEvent(event, target)
 
-    const groupdId = get(this, 'groupId')
+    const groupdId = this.get('groupId')
     if (groupdId) {
-      e.target.id = get(this, 'groupId')
+      e.target.id = this.get('groupId')
     }
 
     return e
@@ -142,12 +127,12 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
   // FIXME: jsdoc
   keyPress (event) {
     if (event.keyCode === 13 || event.keyCode === 32) {
-      if (get(this, 'disabled') || get(this, 'checked')) {
+      if (this.get('disabled') || this.get('checked')) {
         return
       }
-      const onChange = get(this, 'onChange')
-      if (onChange && typeOf(onChange === 'function')) {
-        onChange(this._changeTarget(event, $(event.target).find('input')[0]))
+
+      if (this.onChange) {
+        this.onChange(this._changeTarget(event, $(event.target).find('input')[0]))
       }
     }
   },
@@ -155,9 +140,8 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
 
   // FIXME: jsdoc
   change (event) {
-    const onChange = get(this, 'onChange')
-    if (onChange && typeOf(onChange === 'function')) {
-      onChange(this._changeTarget(event, event.target))
+    if (this.onChange) {
+      this.onChange(this._changeTarget(event, event.target))
     }
   }
 })

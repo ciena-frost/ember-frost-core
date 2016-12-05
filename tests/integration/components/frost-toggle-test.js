@@ -4,13 +4,11 @@ import {
   it
 } from 'ember-mocha'
 import {
-  beforeEach,
   describe
 } from 'mocha'
 import hbs from 'htmlbars-inline-precompile'
 import {
-  $hook,
-  initialize
+  $hook
 } from 'ember-hook'
 import sinon from 'sinon'
 
@@ -21,10 +19,6 @@ describeComponent(
     integration: true
   },
   function () {
-    beforeEach(function () {
-      initialize()
-    })
-
     it('renders default values', function () {
       this.render(hbs`
         {{frost-toggle}}
