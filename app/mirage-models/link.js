@@ -1,1 +1,1 @@
-export { default } from 'ember-frost-core/mirage-models/link';
+export { default } from 'ember-frost-core/mirage-models/link'
