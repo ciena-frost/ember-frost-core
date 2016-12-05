@@ -2,7 +2,7 @@
  * Component definition for the frost-button component
  */
 import Ember from 'ember'
-const {Component, Logger, ViewUtils, get, isEmpty, typeOf} = Ember
+const {Component, Logger, ViewUtils, get, isEmpty} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
@@ -221,18 +221,6 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
   },
   /* eslint-enable complexity */
 
-  _getOnClickHandler () {
-    if (typeOf(this.attrs.onClick) === 'function') {
-      return this.attrs.onClick
-    }
-    // For the case when handler is passed from component property and converted
-    // into mutable cell
-    if (typeOf(this.attrs.onClick) === 'object' &&
-      typeOf(this.attrs.onClick.value) === 'function') {
-      return this.attrs.onClick.value
-    }
-  },
-
   // == DOM Events ============================================================
 
   // FIXME: jsdoc
@@ -241,9 +229,9 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
       return true
     }
 
-    const onClickHandler = this._getOnClickHandler()
-    if (onClickHandler && !get(this, 'disabled')) {
-      onClickHandler(get(this, 'id'))
+    const onClick = this.get('onClick')
+    if (onClick && !get(this, 'disabled')) {
+      onClick(get(this, 'id'))
     }
   }),
 
