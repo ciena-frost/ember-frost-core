@@ -259,14 +259,14 @@ export default LinkComponent.extend(SpreadMixin, PropTypeMixin, {
 
       params.push(this.get('route'))
 
-      const models = this.get('models')
+      const models = this.get('routeModels')
       if (!isEmpty(models)) {
         models.forEach((model) => {
           params.push(model)
         })
       }
 
-      const queryParams = this.get('queryParams')
+      const queryParams = this.get('routeQueryParams')
       if (isPresent(queryParams)) {
         params.push({
           isQueryParams: true,
