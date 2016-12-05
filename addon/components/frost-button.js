@@ -2,7 +2,7 @@
  * Component definition for the frost-button component
  */
 import Ember from 'ember'
-const {Component, Logger, ViewUtils, get, isEmpty} = Ember
+const {Component, Logger, ViewUtils, get, isEmpty, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
@@ -230,7 +230,7 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
     }
 
     const onClick = this.get('onClick')
-    if (onClick && !get(this, 'disabled')) {
+    if (typeOf(onClick) === 'function' && !get(this, 'disabled')) {
       onClick(get(this, 'id'))
     }
   }),
