@@ -99,6 +99,8 @@ The link component use ember-spread to `spread` a property object against the to
   options=(hash
     priority='primary'
     route='route name'
+    routeModels=(array ...)
+    routeQueryParams=(hash ...)
     size='small'
     text='link title'
   )

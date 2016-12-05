@@ -21,7 +21,7 @@ describe('Acceptance | link', function () {
 
     it('should set the href', function () {
       expect(
-        find('#frost-link-spread').attr('href'),
+        find('#spread-basic').attr('href'),
         'href is set'
       ).to.eql('/link/min')
     })
@@ -30,7 +30,7 @@ describe('Acceptance | link', function () {
   describe('when clicking a link using spread options', function () {
     beforeEach(function () {
       visit('/link')
-      click('#frost-link-spread')
+      click('#spread-basic')
     })
 
     it('should transition', function () {

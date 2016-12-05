@@ -397,10 +397,11 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET link-other-spread }}
         {{frost-link
-          id='frost-link-spread'
           options=(hash
             priority='secondary'
-            route='link.min'
+            route='link.first'
+            routeModels=(array 1)
+            routeQueryParams=(hash foo='bar')
             size='small'
             text='Text'
           )
@@ -452,6 +453,12 @@
 
       <div class='title'>Spread</div>
       <div class='demo'>
+        <div class='dummy-header'>Basic</div>
+        {{frost-link id='spread-basic' options=(hash
+          route='link.min'
+          text='Basic'
+        )}}
+
         <div class='dummy-header'>Model - ID</div>
         {{frost-link id='spread-model-id' options=(hash
           route='link.first'
