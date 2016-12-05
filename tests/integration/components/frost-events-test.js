@@ -126,7 +126,7 @@ describeComponent(
           expect(
             externalActionSpy.called,
             `${test.in} closure action called`
-          ).to.true
+          ).to.equal(true)
         })
       })
     })
@@ -161,7 +161,7 @@ describeComponent(
           expect(
             externalActionSpy.called,
             `${test.in} closure action called`
-          ).to.true
+          ).to.equal(true)
         })
       })
     })

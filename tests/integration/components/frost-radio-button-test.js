@@ -34,12 +34,12 @@ describeComponent(
         expect(
           this.$('.frost-radio-button').hasClass('checked'),
           'checked class is set'
-        ).to.be.true
+        ).to.equal(true)
 
         expect(
           this.$('.frost-radio-button-input').prop('checked'),
           'checked is set'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('does not set checked property', function () {
@@ -50,12 +50,12 @@ describeComponent(
         expect(
           this.$('.frost-radio-button').hasClass('checked'),
           'checked class is set'
-        ).to.be.false
+        ).to.equal(false)
 
         expect(
           this.$('.frost-radio-button-input').prop('checked'),
           'checked is set'
-        ).to.be.false
+        ).to.equal(false)
       })
     })
 
@@ -71,12 +71,12 @@ describeComponent(
         expect(
           this.$('.frost-radio-button').hasClass('disabled'),
           'disabled class is set'
-        ).to.be.true
+        ).to.equal(true)
 
         expect(
           this.$('.frost-radio-button-input').prop('disabled'),
           'disabled class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
     })
 
@@ -96,7 +96,7 @@ describeComponent(
         expect(
           $hook('my-radio-button-input', {value: value}).hasClass('frost-radio-button-input'),
           'input hook is set'
-        ).to.be.true
+        ).to.equal(true)
       })
     })
 
@@ -116,7 +116,7 @@ describeComponent(
         expect(
           this.$('.frost-radio-button').hasClass(size),
           'small class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('has medium class set', function () {
@@ -134,7 +134,7 @@ describeComponent(
         expect(
           this.$('.frost-radio-button').hasClass(size),
           'medium class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('has large class set', function () {
@@ -152,7 +152,7 @@ describeComponent(
         expect(
           this.$('.frost-radio-button').hasClass(size),
           'large class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
     })
 
@@ -167,12 +167,12 @@ describeComponent(
       expect(
         this.$('.frost-radio-button').hasClass('required'),
         'required class is set'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         this.$('.frost-radio-button-input').prop('required'),
         'required class is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets type to "radio"', function () {
@@ -257,12 +257,12 @@ describeComponent(
           expect(
             this.$('.frost-radio-button').hasClass('checked'),
             'checked class is set'
-          ).to.be.true
+          ).to.equal(true)
 
           expect(
             this.$('.frost-radio-button-input').prop('checked'),
             'checked is set'
-          ).to.be.true
+          ).to.equal(true)
         })
 
         it('does not set checked property', function () {
@@ -275,12 +275,12 @@ describeComponent(
           expect(
             this.$('.frost-radio-button').hasClass('checked'),
             'checked class is set'
-          ).to.be.false
+          ).to.equal(false)
 
           expect(
             this.$('.frost-radio-button-input').prop('checked'),
             'checked is set'
-          ).to.be.false
+          ).to.equal(false)
         })
       })
 
@@ -298,12 +298,12 @@ describeComponent(
           expect(
             this.$('.frost-radio-button').hasClass('disabled'),
             'disabled class is set'
-          ).to.be.true
+          ).to.equal(true)
 
           expect(
             this.$('.frost-radio-button-input').prop('disabled'),
             'disabled class is set'
-          ).to.be.true
+          ).to.equal(true)
         })
       })
 
@@ -327,12 +327,12 @@ describeComponent(
           expect(
             $hook('my-radio-group-button', {value: value}).hasClass('frost-radio-button'),
             'radio button hook is set'
-          ).to.be.true
+          ).to.equal(true)
 
           expect(
             $hook('my-radio-group-button-input', {value: value}).hasClass('frost-radio-button-input'),
             'input hook is set'
-          ).to.be.true
+          ).to.equal(true)
         })
       })
 
@@ -354,7 +354,7 @@ describeComponent(
           expect(
             this.$('.frost-radio-button').hasClass(size),
             'small class is set'
-          ).to.be.true
+          ).to.equal(true)
         })
 
         it('has medium class set', function () {
@@ -374,7 +374,7 @@ describeComponent(
           expect(
             this.$('.frost-radio-button').hasClass(size),
             'medium class is set'
-          ).to.be.true
+          ).to.equal(true)
         })
 
         it('has large class set', function () {
@@ -394,7 +394,7 @@ describeComponent(
           expect(
             this.$('.frost-radio-button').hasClass(size),
             'large class is set'
-          ).to.be.true
+          ).to.equal(true)
         })
       })
 
@@ -411,12 +411,12 @@ describeComponent(
         expect(
           this.$('.frost-radio-button').hasClass('required'),
           'required class is set'
-        ).to.be.true
+        ).to.equal(true)
 
         expect(
           this.$('.frost-radio-button-input').prop('required'),
           'required class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('sets value property', function () {
@@ -496,7 +496,7 @@ describeComponent(
           expect(
             externalActionSpy.called,
             'onChange closure action called on click'
-          ).to.be.true
+          ).to.equal(true)
         })
       })
     })
@@ -522,7 +522,7 @@ describeComponent(
         expect(
           externalActionSpy.called,
           'onChange closure action called on keypress "enter"'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('is called on keypress of "spacebar"', function () {
@@ -545,7 +545,7 @@ describeComponent(
         expect(
           externalActionSpy.called,
           'onChange closure action called on keypress "spacebar"'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('is called on click', function () {
@@ -568,7 +568,7 @@ describeComponent(
         expect(
           externalActionSpy.called,
           'onChange closure action called on click'
-        ).to.be.true
+        ).to.equal(true)
       })
     })
 
@@ -610,12 +610,12 @@ describeComponent(
       expect(
         this.$('.frost-radio-button').hasClass('disabled'),
         'disabled class is set'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         this.$('.frost-radio-button-input').prop('disabled'),
         'disabled class is set'
-      ).to.be.true
+      ).to.equal(true)
     })
   }
 )

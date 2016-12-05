@@ -36,7 +36,7 @@ describeComponent(
       expect(
         externalActionSpy.called,
         'onScrollUp closure action called on ps-scroll-up'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('onScrollDown closure action is called', function () {
@@ -55,7 +55,7 @@ describeComponent(
       expect(
         externalActionSpy.called,
         'onScrollDown closure action called on ps-scroll-down'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('onScrollYStart closure action is called', function () {
@@ -74,7 +74,7 @@ describeComponent(
       expect(
         externalActionSpy.called,
         'onScrollYStart closure action called on ps-y-reach-start'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('onScrollYEnd closure action is called', function () {
@@ -93,7 +93,7 @@ describeComponent(
       expect(
         externalActionSpy.called,
         'onScrollYEnd closure action called on ps-y-reach-end'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('renders using spread', function () {
@@ -112,7 +112,7 @@ describeComponent(
       expect(
         $hook(hook).hasClass('frost-scroll'),
         'scroll has been rendered'
-      ).to.be.true
+      ).to.equal(true)
     })
   }
 )

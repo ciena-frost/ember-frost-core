@@ -36,12 +36,12 @@ describeComponent(
       expect(
         this.$('input').hasClass('frost-text-input'),
         'class "frost-text-input" is set'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         this.$('input').hasClass('left'),
         'class "left" is set'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         this.$('.frost-text-clear'),
@@ -63,7 +63,7 @@ describeComponent(
       expect(
         this.$('input').hasClass(align),
         'class "right" is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     // "autocapitalize" only works in Chrome and iOS Safari Mobile
@@ -93,7 +93,7 @@ describeComponent(
     //   expect(
     //     this.$('input').prop('autocorrect'),
     //     'autocorrect attribute is set'
-    //   ).to.be.true
+    //   ).to.equal(true)
     // })
 
     it('sets autofocus property', function () {
@@ -106,7 +106,7 @@ describeComponent(
       expect(
         this.$('input').prop('autofocus'),
         'autofocus attribute is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('set disabled property', function () {
@@ -119,7 +119,7 @@ describeComponent(
       expect(
         this.$('input').prop('disabled'),
         'disabled attribute is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets maxlength property', function () {
@@ -183,7 +183,7 @@ describeComponent(
       expect(
         this.$('input').prop('readonly'),
         'readonly attribute is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('set required property', function () {
@@ -196,7 +196,7 @@ describeComponent(
       expect(
         this.$('input').prop('required'),
         'required attribute is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('set spellcheck property', function () {
@@ -209,7 +209,7 @@ describeComponent(
       expect(
         this.$('input').prop('spellcheck'),
         'spellcheck attribute is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('set tabindex property', function () {
@@ -254,24 +254,24 @@ describeComponent(
       expect(
         this.$('.frost-text').hasClass('is-clear-visible'),
         'class "is-clear-visible" is not set'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         this.$('.frost-text').hasClass('is-clear-enabled'),
         'class "is-clear-enabled" is not set'
-      ).to.be.false
+      ).to.equal(false)
 
       run(() => this.$('input').val('Test').trigger('input'))
 
       expect(
         this.$('.frost-text').hasClass('is-clear-visible'),
         'class "is-clear-visible" is set'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         this.$('.frost-text').hasClass('is-clear-enabled'),
         'class "is-clear-enabled" is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('runs clear() which clears the input value', function () {
@@ -300,12 +300,12 @@ describeComponent(
       expect(
         $hook('my-text-input').hasClass('frost-text-input'),
         'input hook is set'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         $hook('my-text-clear').hasClass('frost-text-clear'),
         'clear hook is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('calls onKeyUp closure action', function () {
@@ -324,7 +324,7 @@ describeComponent(
       expect(
         externalActionSpy.called,
         'onKeyUp closure action called'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('calls onInput closure action', function () {
@@ -366,7 +366,7 @@ describeComponent(
       expect(
         this.$('input').prop('disabled'),
         'disabled attribute is set'
-      ).to.be.true
+      ).to.equal(true)
     })
   }
 )

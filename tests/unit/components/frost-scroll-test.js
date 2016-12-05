@@ -31,19 +31,19 @@ describeComponent(
       expect(
         component.get('hook'),
         'hook: "undefined"'
-      ).to.be.undefined
+      ).to.equal(undefined)
     })
 
     it('has the expected Mixins', function () {
       expect(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         SpreadMixin.detect(component),
         'SpreadMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('registers and unregisters "ps-scroll-up" event handlers', function () {
@@ -61,7 +61,7 @@ describeComponent(
       expect(
         spyOn.calledWith("ps-scroll-up"), // eslint-disable-line
         'on() was called with "ps-scroll-up" event'
-      ).to.be.true
+      ).to.equal(true)
 
       spyOff.reset()
 
@@ -70,7 +70,7 @@ describeComponent(
       expect(
         spyOff.calledWith("ps-scroll-up"), // eslint-disable-line
         'off() was called with "ps-scroll-up" event'
-      ).to.be.true
+      ).to.equal(true)
 
       $.fn.on.restore()
       $.fn.off.restore()
@@ -91,7 +91,7 @@ describeComponent(
       expect(
         spyOn.calledWith("ps-scroll-down"), // eslint-disable-line
         'on() was called with "ps-scroll-down" event'
-      ).to.be.true
+      ).to.equal(true)
 
       spyOff.reset()
 
@@ -100,7 +100,7 @@ describeComponent(
       expect(
         spyOff.calledWith("ps-scroll-down"), // eslint-disable-line
         'off() was called with "ps-scroll-down" event'
-      ).to.be.true
+      ).to.equal(true)
 
       $.fn.on.restore()
       $.fn.off.restore()
@@ -121,7 +121,7 @@ describeComponent(
       expect(
         spyOn.calledWith("ps-y-reach-start"), // eslint-disable-line
         'on() was called with "ps-y-reach-start" event'
-      ).to.be.true
+      ).to.equal(true)
 
       spyOff.reset()
 
@@ -130,7 +130,7 @@ describeComponent(
       expect(
         spyOff.calledWith("ps-y-reach-start"), // eslint-disable-line
         'off() was called with "ps-y-reach-start" event'
-      ).to.be.true
+      ).to.equal(true)
 
       $.fn.on.restore()
       $.fn.off.restore()
@@ -151,7 +151,7 @@ describeComponent(
       expect(
         spyOn.calledWith("ps-y-reach-end"), // eslint-disable-line
         'on() was called with "ps-y-reach-end" event'
-      ).to.be.true
+      ).to.equal(true)
 
       spyOff.reset()
 
@@ -160,7 +160,7 @@ describeComponent(
       expect(
         spyOff.calledWith("ps-y-reach-end"), // eslint-disable-line
         'off() was called with "ps-y-reach-end" event'
-      ).to.be.true
+      ).to.equal(true)
 
       $.fn.on.restore()
       $.fn.off.restore()

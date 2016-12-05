@@ -68,7 +68,7 @@ describeComponent(
         expect(
           this.$('.frost-link').prop('target'),
           'target should not be set set'
-        ).to.be.empty
+        ).to.equal('')
       })
 
       it('target is not set in block format', function () {
@@ -84,7 +84,7 @@ describeComponent(
         expect(
           this.$('.frost-link').prop('target'),
           'target should not be set set'
-        ).to.be.empty
+        ).to.equal('')
       })
     })
 
@@ -99,7 +99,7 @@ describeComponent(
         expect(
           this.$('.frost-link').hasClass('primary'),
           'primary class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('has secondary class set', function () {
@@ -112,7 +112,7 @@ describeComponent(
         expect(
           this.$('.frost-link').hasClass('secondary'),
           'secondary class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
     })
 
@@ -127,7 +127,7 @@ describeComponent(
         expect(
           this.$('.frost-link').hasClass('small'),
           'small class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('has medium class set', function () {
@@ -140,7 +140,7 @@ describeComponent(
         expect(
           this.$('.frost-link').hasClass('medium'),
           'medium class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('has large class set', function () {
@@ -153,7 +153,7 @@ describeComponent(
         expect(
           this.$('.frost-link').hasClass('large'),
           'large class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
     })
 
@@ -170,7 +170,7 @@ describeComponent(
         expect(
           this.$('.frost-link').hasClass('info-bar'),
           'info-bar class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('has inline class set', function () {
@@ -185,7 +185,7 @@ describeComponent(
         expect(
           this.$('.frost-link').hasClass('inline'),
           'inline class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
     })
 
@@ -199,7 +199,7 @@ describeComponent(
       expect(
         this.$('.frost-link').hasClass('disabled'),
         'disabled class is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets icon property', function () {
@@ -237,7 +237,7 @@ describeComponent(
           expect(
             externalActionSpy.called,
             'onClick closure action called'
-          ).to.be.true
+          ).to.equal(true)
         })
     })
 
@@ -253,7 +253,7 @@ describeComponent(
       expect(
         this.$('.frost-link').hasClass('primary'),
         'primary class is set'
-      ).to.be.true
+      ).to.equal(true)
     })
   }
 )

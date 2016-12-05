@@ -37,52 +37,52 @@ describeComponent(
       expect(
         component.get('autofocus'),
         'autofocus: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('disabled'),
         'disabled: "false"'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('form'),
         'form: "null"'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('hook'),
         'hook: "undefined"'
-      ).to.be.undefined
+      ).to.equal(undefined)
 
       expect(
         component.get('isRevealed'),
         'isRevealed: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('maxlength'),
         'maxlength: "null"'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('placeholder'),
         'placeholder: "null"'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('readonly'),
         'readonly: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('required'),
         'required: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('revealable'),
         'revealable: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('selectionDirection'),
@@ -97,7 +97,7 @@ describeComponent(
       expect(
         component.get('title'),
         'title: "null"'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('type'),
@@ -107,24 +107,24 @@ describeComponent(
       expect(
         component.get('value'),
         'value: "null"'
-      ).to.be.null
+      ).to.equal(null)
     })
 
     it('has the expected Mixins', function () {
       expect(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         FrostEventsProxy.detect(component),
         'FrostEventsProxy Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         SpreadMixin.detect(component),
         'SpreadMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets dependent keys correctly', function () {

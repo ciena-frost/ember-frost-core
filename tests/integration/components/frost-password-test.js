@@ -55,7 +55,7 @@ describeComponent(
       expect(
         this.$('.frost-password').find('input').prop('autofocus'),
         'autofocus is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets disabled property', function () {
@@ -68,7 +68,7 @@ describeComponent(
       expect(
         this.$('.frost-password').find('input').prop('disabled'),
         'disabled is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     describe('hook property', function () {
@@ -82,12 +82,12 @@ describeComponent(
         expect(
           $hook('my-password-input').hasClass('frost-text-input'),
           'input hook is set'
-        ).to.be.true
+        ).to.equal(true)
 
         expect(
           $hook('my-password-clear').hasClass('frost-text-clear'),
           'clear hook is set'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('grabs frost-password-reveal as expected', function () {
@@ -101,7 +101,7 @@ describeComponent(
         expect(
           $hook('my-password-reveal').hasClass('frost-password-reveal'),
           'reveal hook is set'
-        ).to.be.true
+        ).to.equal(true)
       })
     })
 
@@ -149,7 +149,7 @@ describeComponent(
       expect(
         this.$('.frost-password').find('input').prop('readonly'),
         'readonly is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets required property', function () {
@@ -162,7 +162,7 @@ describeComponent(
       expect(
         this.$('.frost-password').find('input').prop('required'),
         'required is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     describe('revealable property', function () {
@@ -176,7 +176,7 @@ describeComponent(
         expect(
           this.$('.frost-password').hasClass('revealable'),
           'revealable class is set'
-        ).to.be.true
+        ).to.equal(true)
 
         expect(
           this.$('.frost-password-reveal').text().trim(),
@@ -268,7 +268,7 @@ describeComponent(
       expect(
         this.$('.frost-password').find('input').prop('disabled'),
         'disabled is set'
-      ).to.be.true
+      ).to.equal(true)
     })
   }
 )

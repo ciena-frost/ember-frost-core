@@ -10,6 +10,6 @@ describe('keycodes', function () {
   // Replace this with your real tests.
   it('works', function () {
     let result = keycodes
-    expect(result).to.be.ok
+    expect(result).not.to.equal(null)
   })
 })

@@ -31,7 +31,7 @@ describeComponent(
       expect(
         this.$('textarea').hasClass('frost-textarea-input'),
         'class "frost-textarea-input" is set'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         this.$('.frost-textarea-clear'),
@@ -49,7 +49,7 @@ describeComponent(
       expect(
         this.$('textarea').prop('autofocus'),
         'autofocus attribute is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets disabled property', function () {
@@ -62,7 +62,7 @@ describeComponent(
       expect(
         this.$('textarea').prop('disabled'),
         'disabled attribute is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets readonly property', function () {
@@ -75,7 +75,7 @@ describeComponent(
       expect(
         this.$('textarea').prop('readonly'),
         'readonly attribute is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets cols property', function () {
@@ -179,7 +179,7 @@ describeComponent(
       expect(
         externalActionSpy.called,
         'onFocus closure action called'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('calls onInput closure action', function () {
@@ -198,7 +198,7 @@ describeComponent(
       expect(
         externalActionSpy.called,
         'onInput closure action called'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('calls onBlur closure action', function () {
@@ -217,7 +217,7 @@ describeComponent(
       expect(
         externalActionSpy.called,
         'onBlur closure action called'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('hook attr grabs frost-textarea-input as expected', function () {
@@ -230,7 +230,7 @@ describeComponent(
       expect(
         $hook('my-textarea-input').hasClass('ember-text-area'),
         'input hook is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('hook attr grabs frost-textarea-clear as expected', function () {
@@ -244,7 +244,7 @@ describeComponent(
       expect(
         $hook('my-textarea-clear').hasClass('frost-textarea-clear'),
         'clear hook is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('only renders the clear icon in insert', function () {
@@ -255,24 +255,24 @@ describeComponent(
       expect(
         this.$('.frost-textarea').hasClass('is-clear-visible'),
         'class "is-clear-visible" is not set'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         this.$('.frost-textarea').hasClass('is-clear-enabled'),
         'class "is-clear-enabled" is not set'
-      ).to.be.false
+      ).to.equal(false)
 
       run(() => this.$('textarea').val('Test').trigger('input'))
 
       expect(
         this.$('.frost-textarea').hasClass('is-clear-visible'),
         'class "is-clear-visible" is set'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         this.$('.frost-textarea').hasClass('is-clear-enabled'),
         'class "is-clear-enabled" is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('runs clear() which clears the input value', function () {
@@ -301,12 +301,12 @@ describeComponent(
       expect(
         $hook('my-text-input').hasClass('frost-textarea-input'),
         'input hook is set'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         $hook('my-text-clear').hasClass('frost-textarea-clear'),
         'clear hook is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('calls onKeyUp closure action', function () {
@@ -325,7 +325,7 @@ describeComponent(
       expect(
         externalActionSpy.called,
         'onKeyUp closure action called'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('calls onInput closure action', function () {
@@ -367,7 +367,7 @@ describeComponent(
       expect(
         this.$('textarea').prop('disabled'),
         'disabled attribute is set'
-      ).to.be.true
+      ).to.equal(true)
     })
   }
 )

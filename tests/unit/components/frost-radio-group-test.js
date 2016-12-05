@@ -34,12 +34,12 @@ describeComponent(
       expect(
         component.get('hook'),
         'hook: undefined'
-      ).to.be.undefined
+      ).to.equal(undefined)
 
       expect(
         component.get('id'),
         'id: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('inputs'),
@@ -49,24 +49,24 @@ describeComponent(
       expect(
         component.get('value'),
         'value: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('selectedValue'),
         'selectedValue: undefined'
-      ).to.be.undefined
+      ).to.equal(undefined)
     })
 
     it('has the expect Mixins', function () {
       expect(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         SpreadMixin.detect(component),
         'SpreadMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     describe('"meshedInputs" computed property', function () {
@@ -74,7 +74,7 @@ describeComponent(
         expect(
           component.get('meshedInputs'),
           '"meshedInputs" is returning an empty list'
-        ).to.be.empty
+        ).to.equal('')
       })
 
       it('is set when inputs is set', function () {

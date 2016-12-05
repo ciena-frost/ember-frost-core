@@ -39,17 +39,17 @@ describeComponent(
       expect(
         component.get('checked'),
         'checked: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('disabled'),
         'disabled: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('required'),
         'required: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('tabindex'),
@@ -64,24 +64,24 @@ describeComponent(
       expect(
         component.get('groupId'),
         'groupId: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('selectedValue'),
         'selectedValue: null'
-      ).to.be.null
+      ).to.equal(null)
     })
 
     it('has the expect Mixins', function () {
       expect(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         SpreadMixin.detect(component),
         'SpreadMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets dependent keys correctly', function () {
@@ -114,7 +114,7 @@ describeComponent(
         expect(
           component.get('checked'),
           'checked: true'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('is set to false when "selectedValue" is NOT equal to "value"', function () {
@@ -126,7 +126,7 @@ describeComponent(
         expect(
           component.get('checked'),
           'checked: false'
-        ).to.be.false
+        ).to.equal(false)
       })
     })
 
@@ -196,7 +196,7 @@ describeComponent(
         expect(
           keyPressed,
           'onChange not called'
-        ).to.be.undefined
+        ).to.equal(undefined)
       })
 
       it('"onChange" not called when "checked" is set', function () {
@@ -209,7 +209,7 @@ describeComponent(
         expect(
           keyPressed,
           'onChange not called'
-        ).to.be.undefined
+        ).to.equal(undefined)
       })
     })
   }

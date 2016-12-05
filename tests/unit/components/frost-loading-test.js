@@ -35,12 +35,12 @@ describeComponent(
       expect(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         SpreadMixin.detect(component),
         'SpreadMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
     })
   }
 )

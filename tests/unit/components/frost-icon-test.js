@@ -36,7 +36,7 @@ describeComponent(
       expect(
         component.get('hook'),
         'hook: "undefined"'
-      ).to.be.undefined
+      ).to.equal(undefined)
 
       expect(
         component.get('icon'),
@@ -65,12 +65,12 @@ describeComponent(
       expect(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         SpreadMixin.detect(component),
         'SpreadMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     describe('"iconClass" computed property', function () {

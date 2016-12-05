@@ -36,22 +36,22 @@ describeComponent(
       expect(
         component.get('disabled'),
         'disabled: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('_trueLabel'),
         '_trueLabel: true'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         component.get('_falseLabel'),
         '_falseLabel: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('hook'),
         'hook: "undefined"'
-      ).to.be.undefined
+      ).to.equal(undefined)
 
       expect(
         component.get('size'),
@@ -94,17 +94,17 @@ describeComponent(
       expect(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         FrostEventsProxy.detect(component),
         'FrostEventsProxy Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         SpreadMixin.detect(component),
         'SpreadMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     describe('_preferBoolean()', function () {
@@ -112,14 +112,14 @@ describeComponent(
         expect(
           component._preferBoolean('true'),
           'returned boolean true'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('returns boolean false when passed string "false"', function () {
         expect(
           component._preferBoolean('false'),
           'returned boolean false'
-        ).to.be.false
+        ).to.equal(false)
       })
 
       it('returns value passed when not string "false" or "true"', function () {
@@ -180,7 +180,7 @@ describeComponent(
         expect(
           component.get('_isToggled'),
           '_isToggled returns true'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('returns false when value is toggled off', function () {
@@ -192,7 +192,7 @@ describeComponent(
         expect(
           component.get('_isToggled'),
           '_isToggled returns false'
-        ).to.be.false
+        ).to.equal(false)
       })
     })
 
@@ -221,7 +221,7 @@ describeComponent(
         expect(
           cloneEventStub.called,
           'cloneEvent() method is called'
-        ).to.be.true
+        ).to.equal(true)
 
         utils.cloneEvent.restore()
       })

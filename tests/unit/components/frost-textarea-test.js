@@ -28,47 +28,47 @@ describeComponent(
       expect(
         component.get('autofocus'),
         'autofocus: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('cols'),
         'cols: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('disabled'),
         'disabled: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('form'),
         'form: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('isClearEnabled'),
         'isClearEnabled: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('isClearVisible'),
         'isClearVisible: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('placeholder'),
         'placeholder: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('readonly'),
         'readonly: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('rows'),
         'rows: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('tabindex'),
@@ -78,7 +78,7 @@ describeComponent(
       expect(
         component.get('value'),
         'value: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('wrap'),
@@ -90,17 +90,17 @@ describeComponent(
       expect(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         FrostEventsProxy.detect(component),
         'FrostEventsProxy is present'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         SpreadMixin.detect(component),
         'SpreadMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     describe('when keyUp property is omitted', function () {

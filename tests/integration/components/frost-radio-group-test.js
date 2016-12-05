@@ -78,7 +78,7 @@ describeComponent(
       expect(
         $hook(`${hook}`).hasClass('frost-radio-group'),
         'radio button group is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('renders using spread', function () {
