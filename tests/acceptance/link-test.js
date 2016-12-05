@@ -3,7 +3,7 @@ import { expect } from 'chai'
 import startApp from '../helpers/start-app'
 import destroyApp from '../helpers/destroy-app'
 
-describe.skip('Acceptance | link', function () {
+describe('Acceptance | link', function () {
   let application
 
   beforeEach(function () {
