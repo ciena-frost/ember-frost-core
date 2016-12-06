@@ -19,7 +19,7 @@ before_install:
 - "export DISPLAY=:99.0"
 - "sh -e /etc/init.d/xvfb start"
 - npm config set spin false
-- npm install -g coveralls pr-bumper --ignore-scripts
+- npm install -g coveralls pr-bumper bower --ignore-scripts
 - pr-bumper check
 install:
 - npm install ember-cli-sass # NOTE: this requies scripts
