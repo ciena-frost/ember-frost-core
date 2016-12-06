@@ -3,7 +3,6 @@
  */
 import Ember from 'ember'
 const {deprecate, run, typeOf} = Ember
-import {PropTypes} from 'ember-prop-types'
 
 import Component from './frost-component'
 

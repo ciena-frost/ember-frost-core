@@ -2,7 +2,7 @@
  * Component definition for the frost-checkbox component
  */
 import Ember from 'ember'
-const {isEmpty, run, typeOf} = Ember
+const {isEmpty, run} = Ember
 import {PropTypes} from 'ember-prop-types'
 
 import Component from './frost-component'

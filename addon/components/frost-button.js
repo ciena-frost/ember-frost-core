@@ -2,7 +2,7 @@
  * Component definition for the frost-button component
  */
 import Ember from 'ember'
-const {Logger, ViewUtils, isEmpty, typeOf} = Ember
+const {Logger, ViewUtils, isEmpty} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
 
