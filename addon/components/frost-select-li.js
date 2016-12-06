@@ -2,16 +2,15 @@
  * Component definition for the frost-select-li component
  */
 import Ember from 'ember'
-const {Component} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-import SpreadMixin from 'ember-spread'
+import {PropTypes} from 'ember-prop-types'
 
+import Component from './frost-component'
 import layout from '../templates/components/frost-select-li'
 
 const regexEscapeChars = '-[]/{}()*+?.^$|'.split('')
 
-export default Component.extend(SpreadMixin, PropTypeMixin, {
+export default Component.extend({
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
@@ -21,11 +20,6 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
 
   // == PropTypes =============================================================
 
-  /**
-   * Properties for this component. Options are expected to be (potentially)
-   * passed in to the component. State properties are *not* expected to be
-   * passed in/overwritten.
-   */
   propTypes: {
     // options
     data: PropTypes.object.isRequired,
@@ -36,7 +30,6 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
     onSelect: PropTypes.func.isRequired
   },
 
-  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {}
   },

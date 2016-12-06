@@ -5,13 +5,13 @@ const {
   run
 } = Ember
 import { describeComponent } from 'ember-mocha'
-import PropTypeMixin from 'ember-prop-types'
 import {
   beforeEach,
   describe,
   it
 } from 'mocha'
-import SpreadMixin from 'ember-spread'
+
+import Component from 'ember-frost-core/components/frost-component'
 
 describeComponent(
   'frost-radio-button',
@@ -31,25 +31,21 @@ describeComponent(
       })
     })
 
-    it('includes className frost-radio-button', function () {
-      expect(component.classNames).to.include('frost-radio-button')
-    })
-
     it('sets default property values correctly', function () {
       expect(
         component.get('checked'),
         'checked: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('disabled'),
         'disabled: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('required'),
         'required: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('tabindex'),
@@ -64,24 +60,19 @@ describeComponent(
       expect(
         component.get('groupId'),
         'groupId: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('selectedValue'),
         'selectedValue: null'
-      ).to.be.null
+      ).to.equal(null)
     })
 
-    it('has the expect Mixins', function () {
+    it('extends the commone frost component', function () {
       expect(
-        PropTypeMixin.detect(component),
-        'PropTypeMixin Mixin is present'
-      ).to.be.true
-
-      expect(
-        SpreadMixin.detect(component),
-        'SpreadMixin Mixin is present'
-      ).to.be.true
+        component instanceof Component,
+        'is instance of Frost Component'
+      ).to.equal(true)
     })
 
     it('sets dependent keys correctly', function () {
@@ -114,7 +105,7 @@ describeComponent(
         expect(
           component.get('checked'),
           'checked: true'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('is set to false when "selectedValue" is NOT equal to "value"', function () {
@@ -126,7 +117,7 @@ describeComponent(
         expect(
           component.get('checked'),
           'checked: false'
-        ).to.be.false
+        ).to.equal(false)
       })
     })
 
@@ -196,7 +187,7 @@ describeComponent(
         expect(
           keyPressed,
           'onChange not called'
-        ).to.be.undefined
+        ).to.equal(undefined)
       })
 
       it('"onChange" not called when "checked" is set', function () {
@@ -209,7 +200,7 @@ describeComponent(
         expect(
           keyPressed,
           'onChange not called'
-        ).to.be.undefined
+        ).to.equal(undefined)
       })
     })
   }

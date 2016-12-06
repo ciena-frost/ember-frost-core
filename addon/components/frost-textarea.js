@@ -2,15 +2,15 @@
  * Component definition for frost-textarea component
  */
 import Ember from 'ember'
-const {Component, get, isPresent, on, set} = Ember
+const {isPresent, on} = Ember
 import {task, timeout} from 'ember-concurrency'
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-import SpreadMixin from 'ember-spread'
+import {PropTypes} from 'ember-prop-types'
 
+import Component from './frost-component'
 import FrostEventsProxyMixin from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-textarea'
 
-export default Component.extend(SpreadMixin, FrostEventsProxyMixin, PropTypeMixin, {
+export default Component.extend(FrostEventsProxyMixin, {
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
@@ -20,19 +20,10 @@ export default Component.extend(SpreadMixin, FrostEventsProxyMixin, PropTypeMixi
     'isClearEnabled'
   ],
 
-  classNames: [
-    'frost-textarea'
-  ],
-
   layout,
 
   // == PropTypes =============================================================
 
-  /**
-   * Properties for this component. Options are expected to be (potentially)
-   * passed in to the component. State properties are *not* expected to be
-   * passed in/overwritten.
-   */
   propTypes: {
     // options
     autofocus: PropTypes.bool,
@@ -47,17 +38,11 @@ export default Component.extend(SpreadMixin, FrostEventsProxyMixin, PropTypeMixi
     rows: PropTypes.number,
     tabindex: PropTypes.number,
     value: PropTypes.string,
-    wrap: PropTypes.string,
+    wrap: PropTypes.string
 
     // state
-
-    // keywords
-    classNameBindings: PropTypes.arrayOf(PropTypes.string),
-    classNames: PropTypes.arrayOf(PropTypes.string),
-    layout: PropTypes.any
   },
 
-  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
       // options
@@ -96,12 +81,12 @@ export default Component.extend(SpreadMixin, FrostEventsProxyMixin, PropTypeMixi
 
   // FIXME: jsdoc
   _showClear: task(function * (isFocused) {
-    const showClear = isFocused && isPresent(get(this, 'value')) && !get(this, 'readonly')
-    if (get(this, 'isClearVisible') === showClear) {
+    const showClear = isFocused && isPresent(this.get('value')) && !this.get('readonly')
+    if (this.get('isClearVisible') === showClear) {
       return
     }
 
-    set(this, 'isClearVisible', showClear)
+    this.set('isClearVisible', showClear)
 
     // If the clear button is clicked the focusOut event occurs before
     // the click event, so delay disabling the clear so that the click
@@ -109,7 +94,7 @@ export default Component.extend(SpreadMixin, FrostEventsProxyMixin, PropTypeMixi
     if (!showClear) {
       yield timeout(200) // Duration of the visibility animation
     }
-    set(this, 'isClearEnabled', showClear)
+    this.set('isClearEnabled', showClear)
   }).restartable(),
 
   // == DOM Events ============================================================
@@ -117,7 +102,7 @@ export default Component.extend(SpreadMixin, FrostEventsProxyMixin, PropTypeMixi
   // FIXME: jsdoc
   _showClearEvent: on('focusIn', 'focusOut', 'input', function (event) {
     const isFocused = event.type !== 'focusout'
-    get(this, '_showClear').perform(isFocused)
+    this.get('_showClear').perform(isFocused)
   }),
 
   // == Lifecycle Hooks =======================================================
@@ -127,7 +112,7 @@ export default Component.extend(SpreadMixin, FrostEventsProxyMixin, PropTypeMixi
   actions: {
     // FIXME: jsdoc
     clear () {
-      get(this, '_clear').perform()
+      this.get('_clear').perform()
     },
 
     // Setting 'keyUp' directly on the {{input}} helper overwrites
@@ -137,16 +122,16 @@ export default Component.extend(SpreadMixin, FrostEventsProxyMixin, PropTypeMixi
     // proxy the event to the keyUp handler.
     // FIXME: jsdoc
     keyUp (value, event) {
-      if (isPresent(get(this, '_eventProxy.keyUp'))) {
+      if (isPresent(this.get('_eventProxy.keyUp'))) {
         this._eventProxy.keyUp(event)
       }
     },
 
     // FIXME: jsdoc
     _onInput (event) {
-      if (isPresent(get(this, '_eventProxy.input'))) {
+      if (isPresent(this.get('_eventProxy.input'))) {
         // Add id and value for legacy support
-        event.id = get(this, 'elementId')
+        event.id = this.get('elementId')
         event.value = event.target.value
         this._eventProxy.input(event)
       }

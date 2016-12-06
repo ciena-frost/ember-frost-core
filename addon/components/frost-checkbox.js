@@ -2,28 +2,22 @@
  * Component definition for the frost-checkbox component
  */
 import Ember from 'ember'
-const {Component, get, isEmpty, run, set, typeOf} = Ember
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-import SpreadMixin from 'ember-spread'
+const {isEmpty, run} = Ember
+import {PropTypes} from 'ember-prop-types'
 
+import Component from './frost-component'
 import layout from '../templates/components/frost-checkbox'
 
-export default Component.extend(SpreadMixin, PropTypeMixin, {
+export default Component.extend({
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
 
   classNameBindings: ['size'],
-  classNames: ['frost-checkbox'],
   layout,
 
   // == PropTypes =============================================================
 
-  /**
-   * Properties for this component. Options are expected to be (potentially)
-   * passed in to the component. State properties are *not* expected to be
-   * passed in/overwritten.
-   */
   propTypes: {
     // options
     autofocus: PropTypes.bool,
@@ -32,17 +26,11 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
     hook: PropTypes.string,
     inputId: PropTypes.string,
     label: PropTypes.string,
-    size: PropTypes.string,
+    size: PropTypes.string
 
     // state
-
-    // keywords
-    classNameBindings: PropTypes.arrayOf(PropTypes.string),
-    classNames: PropTypes.arrayOf(PropTypes.string),
-    layout: PropTypes.any
   },
 
-  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
       // options
@@ -63,8 +51,8 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
    * @returns {undefined}
    */
   _setInputId () {
-    if (!get(this, 'inputId')) {
-      set(this, 'inputId', `${get(this, 'elementId')}_input`)
+    if (!this.get('inputId')) {
+      this.set('inputId', `${this.get('elementId')}_input`)
     }
   },
 
@@ -88,7 +76,7 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
    */
   keyPress (e) {
     if (e.keyCode === 32) {
-      if (get(this, 'disabled') !== true) {
+      if (this.get('disabled') !== true) {
         this.$('input').prop('checked', !this.$('input').prop('checked'))
         this.send('input')
       }
@@ -100,16 +88,14 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
 
   // == Lifecycle Hooks =======================================================
 
-  /* Ember.Component method */
   didInsertElement () {
-    if (get(this, 'autofocus')) {
+    if (this.get('autofocus')) {
       run.next('render', () => {
         this.$('input').focus()
       })
     }
   },
 
-  /* Ember.Component method */
   init () {
     this._super(...arguments)
     this._setInputId()
@@ -122,10 +108,8 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
      * Handle the blur event, calling passed in handler if provided
      */
     onBlur () {
-      const onBlur = get(this, 'onBlur')
-
-      if (onBlur) {
-        onBlur()
+      if (this.onBlur) {
+        this.onBlur()
       }
     },
 
@@ -133,10 +117,10 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
      * Handle the change event on the checkbox, calling onInput if provided
      */
     input () {
-      let id = get(this, 'value')
-      if (typeOf(get(this, 'onInput')) === 'function') {
-        get(this, 'onInput')({
-          id: isEmpty(id) ? get(this, 'elementId') : id,
+      let id = this.get('value')
+      if (this.onInput) {
+        this.onInput({
+          id: isEmpty(id) ? this.get('elementId') : id,
           value: this.$('input').prop('checked')
         })
       }

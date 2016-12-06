@@ -3,9 +3,9 @@ import Ember from 'ember'
 const {run} = Ember
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import {describeComponent} from 'ember-mocha'
-import PropTypeMixin from 'ember-prop-types'
 import {beforeEach, describe, it} from 'mocha'
-import SpreadMixin from 'ember-spread'
+
+import Component from 'ember-frost-core/components/frost-component'
 
 describeComponent(
   'frost-textarea',
@@ -20,55 +20,51 @@ describeComponent(
       component = this.subject()
     })
 
-    it('includes className frost-textarea', function () {
-      expect(component.classNames).to.include('frost-textarea')
-    })
-
     it('sets default property values correctly', function () {
       expect(
         component.get('autofocus'),
         'autofocus: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('cols'),
         'cols: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('disabled'),
         'disabled: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('form'),
         'form: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('isClearEnabled'),
         'isClearEnabled: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('isClearVisible'),
         'isClearVisible: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('placeholder'),
         'placeholder: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('readonly'),
         'readonly: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('rows'),
         'rows: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('tabindex'),
@@ -78,7 +74,7 @@ describeComponent(
       expect(
         component.get('value'),
         'value: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('wrap'),
@@ -86,21 +82,18 @@ describeComponent(
       ).to.be.eql('soft')
     })
 
-    it('has the expect Mixins', function () {
+    it('extends the commone frost component', function () {
       expect(
-        PropTypeMixin.detect(component),
-        'PropTypeMixin Mixin is present'
-      ).to.be.true
+        component instanceof Component,
+        'is instance of Frost Component'
+      ).to.equal(true)
+    })
 
+    it('has the expect Mixins', function () {
       expect(
         FrostEventsProxy.detect(component),
         'FrostEventsProxy is present'
-      ).to.be.true
-
-      expect(
-        SpreadMixin.detect(component),
-        'SpreadMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     describe('when keyUp property is omitted', function () {

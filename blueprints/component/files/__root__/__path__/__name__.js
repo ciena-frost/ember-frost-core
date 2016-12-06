@@ -2,14 +2,13 @@
  * Component definition for the <%= dasherizedModuleName %> component
  */
 
-import Ember from 'ember'
-const {Component} = Ember
-import PropTypesMixin, {PropTypes} from 'ember-prop-types'
+import {PropTypes} from 'ember-prop-types'
 import computed, {readOnly} from 'ember-computed-decorators'
+import {Component} from 'ember-frost-core'
 
 import layout from '<%= templatePath %>'
 
-export default Component.extend(PropTypesMixin, {
+export default Component.extend({
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
@@ -25,12 +24,8 @@ export default Component.extend(PropTypesMixin, {
    */
   propTypes: {
     // options
-    hook: PropTypes.string.isRequired,
 
     // state
-
-    // keywords
-    layout: PropTypes.any
   },
 
   /** @returns {Object} the default property values when not provided by consumer */
@@ -45,15 +40,15 @@ export default Component.extend(PropTypesMixin, {
   // == Computed Properties ===================================================
 
   @readOnly
-  @computed('hook')
+  @computed('css')
   /**
    * A pretty silly computed property just as an example of one
-   * it appends '-' to the hook
-   * @param {String} hook - the hook for this component
-   * @returns {String} a hook prefix suitable for use within the template
+   * it appends '-' to the css base
+   * @param {String} css - the base css class for this component (the component name)
+   * @returns {String} a css prefix suitable for use within the template
    */
-  hookPrefix (hook) {
-    return `${hook}-`
+  cssPrefix (css) {
+    return `${css}-`
   },
 
   // == Functions =============================================================

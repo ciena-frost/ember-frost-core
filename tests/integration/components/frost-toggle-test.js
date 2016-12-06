@@ -4,13 +4,11 @@ import {
   it
 } from 'ember-mocha'
 import {
-  beforeEach,
   describe
 } from 'mocha'
 import hbs from 'htmlbars-inline-precompile'
 import {
-  $hook,
-  initialize
+  $hook
 } from 'ember-hook'
 import sinon from 'sinon'
 
@@ -21,10 +19,6 @@ describeComponent(
     integration: true
   },
   function () {
-    beforeEach(function () {
-      initialize()
-    })
-
     it('renders default values', function () {
       this.render(hbs`
         {{frost-toggle}}
@@ -43,7 +37,7 @@ describeComponent(
       expect(
         this.$('.frost-toggle').find('label').hasClass('frost-toggle-button'),
         'label has class "frost-toggle-button"'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         this.$('.frost-toggle').find('label').prop('for'),
@@ -77,7 +71,7 @@ describeComponent(
       expect(
         this.$('.frost-toggle').find('input').prop('disabled'),
         'disabled is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets hook property', function () {
@@ -90,22 +84,22 @@ describeComponent(
       expect(
         $hook('my-test-toggle-input').hasClass('frost-toggle-input'),
         'input hook is set'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         $hook('my-test-toggle-label').hasClass('frost-toggle-button'),
         'label hook is set'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         $hook('my-test-toggle-text-on').hasClass('frost-toggle-text on'),
         'toggle text on hook is set'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         $hook('my-test-toggle-text-off').hasClass('frost-toggle-text off'),
         'toggle text off hook is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets value property', function () {
@@ -192,7 +186,7 @@ describeComponent(
       expect(
         this.$('input').prop('checked'),
         'toggle is in "On" state'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('uses falseValue property', function () {
@@ -208,7 +202,7 @@ describeComponent(
       expect(
         this.$('input').prop('checked'),
         'toggle is in "Off" state'
-      ).to.be.false
+      ).to.equal(false)
     })
 
     it('fires onClick closure action', function () {
@@ -231,7 +225,7 @@ describeComponent(
       expect(
         externalActionSpy.called,
         'onClick closure action called'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('renders using spread', function () {
@@ -246,7 +240,7 @@ describeComponent(
       expect(
         this.$('.frost-toggle').find('input').prop('disabled'),
         'disabled is set'
-      ).to.be.true
+      ).to.equal(true)
     })
   }
 )

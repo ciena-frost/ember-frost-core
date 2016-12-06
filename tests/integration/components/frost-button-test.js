@@ -1,7 +1,6 @@
 import {expect} from 'chai'
 import {
-  $hook,
-  initialize
+  $hook
 } from 'ember-hook'
 import {
   describeComponent,
@@ -9,7 +8,6 @@ import {
 } from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
 import {
-  beforeEach,
   describe
 } from 'mocha'
 import sinon from 'sinon'
@@ -21,10 +19,6 @@ describeComponent(
     integration: true
   },
   function () {
-    beforeEach(function () {
-      initialize()
-    })
-
     it('renders a text button as expected', function () {
       this.render(hbs`
         {{frost-button text='Text'}}
@@ -104,7 +98,7 @@ describeComponent(
         expect(
           this.$('.frost-button').hasClass('primary'),
           'primary class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('has secondary class set', function () {
@@ -119,7 +113,7 @@ describeComponent(
         expect(
           this.$('.frost-button').hasClass('secondary'),
           'secondary class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('has tertiary class set', function () {
@@ -134,7 +128,7 @@ describeComponent(
         expect(
           this.$('.frost-button').hasClass('tertiary'),
           'tertiary class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
     })
 
@@ -151,7 +145,7 @@ describeComponent(
         expect(
           this.$('.frost-button').hasClass('small'),
           'small class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('has medium class set', function () {
@@ -166,7 +160,7 @@ describeComponent(
         expect(
           this.$('.frost-button').hasClass('medium'),
           'medium class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('has large class set', function () {
@@ -181,7 +175,7 @@ describeComponent(
         expect(
           this.$('.frost-button').hasClass('large'),
           'large class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
     })
 
@@ -198,7 +192,7 @@ describeComponent(
         expect(
           this.$('.frost-button').hasClass('info-bar'),
           'info-bar class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('has app-bar class set', function () {
@@ -213,7 +207,7 @@ describeComponent(
         expect(
           this.$('.frost-button').hasClass('app-bar'),
           'app-bar class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('has tab class set', function () {
@@ -228,7 +222,7 @@ describeComponent(
         expect(
           this.$('.frost-button').hasClass('tab'),
           'tab class is set'
-        ).to.be.true
+        ).to.equal(true)
       })
     })
 
@@ -245,7 +239,7 @@ describeComponent(
       expect(
         this.$('.frost-button').prop('autofocus'),
         'autofocus class is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets disabled property', function () {
@@ -261,7 +255,7 @@ describeComponent(
       expect(
         this.$('.frost-button').prop('disabled'),
         'disabled class is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets title property', function () {
@@ -294,7 +288,7 @@ describeComponent(
       expect(
         this.$('.frost-button').hasClass('vertical'),
         'vertical class is set'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('fires onClick closure action', function () {
@@ -316,7 +310,7 @@ describeComponent(
       expect(
         externalActionSpy.called,
         'onClick closure action called'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('fires onFocus closure action', function () {
@@ -338,7 +332,7 @@ describeComponent(
       expect(
         externalActionSpy.called,
         'onFocus closure action called'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('renders a text button as expected using spread', function () {

@@ -9,7 +9,9 @@
     "highlightjs": "^9.5.0",
     "marked": "0.3.6",
     "pretender": "^1.1.0",
-    "sinonjs": "^1.17.1"
+    "sinonjs": "^1.17.1",
+    "sinon-chai": "^2.8.0",
+    "chai-jquery": "^2.0.1"
   },
   "resolutions": {
     "ember": "~2.8.2"

@@ -2,43 +2,17 @@
  * Component definition for frost-scroll component
  */
 import Ember from 'ember'
-const {Component, deprecate, run, typeOf} = Ember
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-import SpreadMixin from 'ember-spread'
+const {deprecate, run, typeOf} = Ember
 
-export default Component.extend(SpreadMixin, PropTypeMixin, {
+import Component from './frost-component'
+
+export default Component.extend({
 
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
 
-  classNames: ['frost-scroll'],
-
   // == PropTypes =============================================================
-
-  /**
-   * Properties for this component. Options are expected to be (potentially)
-   * passed in to the component. State properties are *not* expected to be
-   * passed in/overwritten.
-   */
-  propTypes: {
-    // options
-    hook: PropTypes.string,
-
-    // state
-
-    // keywords
-    classNames: PropTypes.arrayOf(PropTypes.string)
-  },
-
-  /** @returns {Object} the default property values when not provided by consumer */
-  getDefaultProps () {
-    return {
-      // options
-
-      // state
-    }
-  },
 
   // == Computed Properties ===================================================
 
@@ -137,13 +111,11 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
 
   // == Lifecycle Hooks =======================================================
 
-  /* Ember.Component method */
   didInsertElement () {
     this._super(...arguments)
     this._setupPerfectScroll()
   },
 
-  /* Ember.Component method */
   willDestroyElement () {
     this._super(...arguments)
     this._unregisterEvents()

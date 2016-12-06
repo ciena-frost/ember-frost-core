@@ -24,10 +24,10 @@ before_install:
 install:
 - npm install ember-cli-sass # NOTE: this requies scripts
 - npm install --ignore-scripts
-- bower install
+- ./node_modules/.bin/bower install
 script:
 - npm run lint
-- ember try:one $EMBER_TRY_SCENARIO --- COVERAGE=true ember test
+- npm run ci-test
 after_success:
 - .travis/publish-coverage.sh
 env:
