@@ -1,3 +1,7 @@
+# 1.1.5
+- **removed** `_getOnClickHandler()` and unnecessary mutable cell check.
+
+
 # 1.1.4
 * **Updated** Fixed text padding
 
