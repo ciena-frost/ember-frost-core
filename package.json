@@ -10,6 +10,7 @@
     "build": "ember build",
     "start": "ember server",
     "test": "npm run lint && COVERAGE=true ember test",
+    "ci-test": "ember try:one $EMBER_TRY_SCENARIO --- COVERAGE=true ember test",
     "eslint": "eslint *.js addon app blueprints config tests",
     "md-lint": "remark *.md",
     "sass-lint": "sass-lint -q -v",
