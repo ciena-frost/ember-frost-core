@@ -34,6 +34,8 @@ export default Mixin.create({
   // == Functions =============================================================
 
   /**
+   * Parse the component name from the `toString()` value of the component instance
+   * NOTE: This function relies on the speicifc format of the value from `toString()` which may change in future
    * @returns {String} the name of the component, parsed out of the toString() result
    */
   getComponentName () {
@@ -43,7 +45,7 @@ export default Mixin.create({
   /**
    * This function is really only here because we can't stub this._super
    * @see {@link https://github.com/emberjs/ember.js/issues/12457}
-   * It let's us test the functionality in the `init()` method w/o having to call
+   * It lets us test the functionality in the `init()` method w/o having to call
    * the real this._super() which was breaking when testing with tagName === '' for some reason
    */
   maybeClearClassNameBindings () {
