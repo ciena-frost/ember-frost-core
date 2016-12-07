@@ -18,7 +18,7 @@ export {default as SelectItem} from './components/frost-select-li'
 export {default as SelectOutlet} from './components/frost-select-outlet'
 export {default as Select} from './components/frost-select'
 export {default as Text} from './components/frost-text'
-export {default as TextArea} from './components/frost-text-area'
+export {default as Textarea} from './components/frost-textarea'
 export {default as Toggle} from './components/frost-toggle'
 
 export {default as HookableInput} from './components/hookable-input'
