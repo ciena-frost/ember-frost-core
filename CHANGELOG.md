@@ -1,3 +1,7 @@
+# 1.2.1
+
+* **Fixed** a bug where the `addon/index.js` had a typo w.r.t. a module name and thus threw an error whenever anyone tried to import anything directly from `ember-frost-core`. 
+
 # 1.2.0
 
 * **Added** `extends` helper to allow adding properties to a pojo (for use with `hookQualifiers`. Will add docs to `README.md` in next PR
