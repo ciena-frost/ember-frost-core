@@ -1,3 +1,11 @@
+# 1.2.0
+
+* **Added** `extends` helper to allow adding properties to a pojo (for use with `hookQualifiers`. Will add docs to `README.md` in next PR
+* **Added** `ehook` helper to allow setting hookQualifiers as a POJO and not just key/value pairs (only useful until [this pr](https://github.com/Ticketfly/ember-hook/pull/35) is merged). Will add docs to `README.md` in next PR
+* **Added** `CssMixin` - will add docs in `README.md` in next PR
+* **Added** `Component` base class `addon/components/frost-component.js` to easily include all desired/required mixins for our components (`CssMixin`, `HookMixin`, `PropTypesMixin`, and `SpreadMixin` currently).
+ * **Updated** existing components to derive from `frost-component`
+
 # 1.1.5
 - **removed** `_getOnClickHandler()` and unnecessary mutable cell check.
 

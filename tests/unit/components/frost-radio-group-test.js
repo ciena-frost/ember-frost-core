@@ -5,13 +5,13 @@ const {
   run
 } = Ember
 import { describeComponent } from 'ember-mocha'
-import PropTypeMixin from 'ember-prop-types'
 import {
   beforeEach,
   describe,
   it
 } from 'mocha'
-import SpreadMixin from 'ember-spread'
+
+import Component from 'ember-frost-core/components/frost-component'
 
 describeComponent(
   'frost-radio-group',
@@ -26,20 +26,16 @@ describeComponent(
       component = this.subject()
     })
 
-    it('includes className frost-radio-group', function () {
-      expect(component.classNames).to.include('frost-radio-group')
-    })
-
     it('sets default property values correctly', function () {
       expect(
         component.get('hook'),
         'hook: undefined'
-      ).to.be.undefined
+      ).to.equal(undefined)
 
       expect(
         component.get('id'),
         'id: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('inputs'),
@@ -49,24 +45,19 @@ describeComponent(
       expect(
         component.get('value'),
         'value: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('selectedValue'),
         'selectedValue: undefined'
-      ).to.be.undefined
+      ).to.equal(undefined)
     })
 
-    it('has the expect Mixins', function () {
+    it('extends the commone frost component', function () {
       expect(
-        PropTypeMixin.detect(component),
-        'PropTypeMixin Mixin is present'
-      ).to.be.true
-
-      expect(
-        SpreadMixin.detect(component),
-        'SpreadMixin Mixin is present'
-      ).to.be.true
+        component instanceof Component,
+        'is instance of Frost Component'
+      ).to.equal(true)
     })
 
     describe('"meshedInputs" computed property', function () {
@@ -74,7 +65,7 @@ describeComponent(
         expect(
           component.get('meshedInputs'),
           '"meshedInputs" is returning an empty list'
-        ).to.be.empty
+        ).to.eql([])
       })
 
       it('is set when inputs is set', function () {

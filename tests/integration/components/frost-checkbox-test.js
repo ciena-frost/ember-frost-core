@@ -23,7 +23,7 @@ describeComponent(
       expect(
         this.$('.frost-checkbox').hasClass('small'),
         'Has class "small"'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         this.$('.frost-checkbox').find('label').prop('for'),
@@ -48,14 +48,14 @@ describeComponent(
       expect(
         this.$('.frost-checkbox').hasClass('medium'),
         'Has class "medium"'
-      ).to.be.true
+      ).to.equal(true)
 
       this.set('size', 'large')
 
       expect(
         this.$('.frost-checkbox').hasClass('large'),
         'Has class "large"'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets checked state property to input', function () {
@@ -66,7 +66,7 @@ describeComponent(
       expect(
         this.$('.frost-checkbox').find('input').prop('checked'),
         'Rendered input is not checked'
-      ).to.be.false
+      ).to.equal(false)
 
       this.render(hbs`
         {{frost-checkbox checked=true}}
@@ -75,7 +75,7 @@ describeComponent(
       expect(
         this.$('.frost-checkbox').find('input').prop('checked'),
         'Rendered input is checked'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets error class correctly', function () {
@@ -86,7 +86,7 @@ describeComponent(
       expect(
         this.$('.frost-checkbox').hasClass('error'),
         'Initially does not have class "error"'
-      ).to.be.false
+      ).to.equal(false)
 
       this.render(hbs`
         {{frost-checkbox class="error"}}
@@ -95,7 +95,7 @@ describeComponent(
       expect(
         this.$('.frost-checkbox').hasClass('error'),
         'Has class "error"'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets disabled state property to input', function () {
@@ -106,7 +106,7 @@ describeComponent(
       expect(
         this.$('.frost-checkbox').find('input').prop('disabled'),
         'Rendered input is initially enabled'
-      ).to.be.false
+      ).to.equal(false)
 
       this.render(hbs`
         {{frost-checkbox disabled=true}}
@@ -115,7 +115,7 @@ describeComponent(
       expect(
         this.$('.frost-checkbox').find('input').prop('disabled'),
         'Rendered input is disabled'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('renders label when it is set', function () {
@@ -183,7 +183,7 @@ describeComponent(
             value: true
           }),
           'onInput() is called with id set to value'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('has an object with id set to elementId', function () {
@@ -205,7 +205,7 @@ describeComponent(
             value: true
           }),
           'onInput() is called with id set to value'
-        ).to.be.true
+        ).to.equal(true)
       })
     })
 
@@ -225,7 +225,7 @@ describeComponent(
       expect(
         externalActionSpy.called,
         'onBlur closure action called'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('calls onFocus closure action', function () {
@@ -244,7 +244,7 @@ describeComponent(
       expect(
         externalActionSpy.called,
         'onFocus closure action called'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     // https://github.com/juwara0/ember-frost-core/issues/1
@@ -260,7 +260,7 @@ describeComponent(
       expect(
         focusSpy.called,
         'autofocus is set'
-      ).to.be.true
+      ).to.equal(true)
 
       this.$.prototype.focus.restore()
     })
@@ -277,7 +277,7 @@ describeComponent(
       expect(
         this.$('.frost-checkbox').hasClass('small'),
         'Has class "small"'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         this.$('.frost-checkbox').find('label').prop('for'),
@@ -294,7 +294,7 @@ describeComponent(
       expect(
         this.$('.frost-checkbox').find('input').prop('checked'),
         'Rendered input is checked'
-      ).to.be.true
+      ).to.equal(true)
     })
   }
 )

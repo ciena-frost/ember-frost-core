@@ -2,15 +2,14 @@ import {expect} from 'chai'
 import Ember from 'ember'
 const {run} = Ember
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
-import {initialize} from 'ember-hook'
 import {describeComponent} from 'ember-mocha'
-import PropTypeMixin from 'ember-prop-types'
 import {
   beforeEach,
   describe,
   it
 } from 'mocha'
-import SpreadMixin from 'ember-spread'
+
+import Component from 'ember-frost-core/components/frost-component'
 
 describeComponent(
   'frost-password',
@@ -25,64 +24,59 @@ describeComponent(
     let component
 
     beforeEach(function () {
-      initialize()
       component = this.subject()
-    })
-
-    it('includes className frost-password', function () {
-      expect(component.classNames).to.include('frost-password')
     })
 
     it('sets default property values correctly', function () {
       expect(
         component.get('autofocus'),
         'autofocus: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('disabled'),
         'disabled: "false"'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('form'),
         'form: "null"'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('hook'),
         'hook: "undefined"'
-      ).to.be.undefined
+      ).to.equal(undefined)
 
       expect(
         component.get('isRevealed'),
         'isRevealed: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('maxlength'),
         'maxlength: "null"'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('placeholder'),
         'placeholder: "null"'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('readonly'),
         'readonly: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('required'),
         'required: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('revealable'),
         'revealable: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('selectionDirection'),
@@ -97,7 +91,7 @@ describeComponent(
       expect(
         component.get('title'),
         'title: "null"'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('type'),
@@ -107,24 +101,21 @@ describeComponent(
       expect(
         component.get('value'),
         'value: "null"'
-      ).to.be.null
+      ).to.equal(null)
+    })
+
+    it('extends the commone frost component', function () {
+      expect(
+        component instanceof Component,
+        'is instance of Frost Component'
+      ).to.equal(true)
     })
 
     it('has the expected Mixins', function () {
       expect(
-        PropTypeMixin.detect(component),
-        'PropTypeMixin Mixin is present'
-      ).to.be.true
-
-      expect(
         FrostEventsProxy.detect(component),
         'FrostEventsProxy Mixin is present'
-      ).to.be.true
-
-      expect(
-        SpreadMixin.detect(component),
-        'SpreadMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets dependent keys correctly', function () {

@@ -43,12 +43,12 @@ describeComponent(
       expect(
         component.get('disabled'),
         'disabled: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('hook'),
         'hook: "undefined"'
-      ).to.be.undefined
+      ).to.equal(undefined)
 
       expect(
         component.get('icon'),
@@ -68,7 +68,7 @@ describeComponent(
       expect(
         component.get('target'),
         'target: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('linkTitle'),
@@ -78,19 +78,19 @@ describeComponent(
       expect(
         component.get('tabindex'),
         'tabindex: null'
-      ).to.be.null
+      ).to.equal(null)
     })
 
     it('has the expected Mixins', function () {
       expect(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         SpreadMixin.detect(component),
         'SpreadMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     it('sets dependent keys correctly', function () {
@@ -126,7 +126,7 @@ describeComponent(
         expect(
           addDesignClassSpy.calledWith(design, testArray),
           'addDesignClass method called'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       describe('display warning on design property', function () {
@@ -154,7 +154,7 @@ describeComponent(
           expect(
             EmberLoggerSpy.called,
             'Ember.Logger.warn is called with warn message'
-          ).to.be.true
+          ).to.equal(true)
         })
 
         it('is used with "size" property', function () {
@@ -168,7 +168,7 @@ describeComponent(
           expect(
             EmberLoggerSpy.called,
             'Ember.Logger.warn is called with warn message'
-          ).to.be.true
+          ).to.equal(true)
         })
 
         it('is used with "priority" and "size" properties', function () {
@@ -183,7 +183,7 @@ describeComponent(
           expect(
             EmberLoggerSpy.called,
             'Ember.Logger.warn is called with warn message'
-          ).to.be.true
+          ).to.equal(true)
         })
       })
 
@@ -382,7 +382,7 @@ describeComponent(
         expect(
           component.get('href'),
           '"href" is set to null'
-        ).to.be.null
+        ).to.equal(null)
       })
 
       describe('display warning on _setupRouting', function () {
@@ -412,7 +412,7 @@ describeComponent(
           expect(
             EmberLoggerSpy.called,
             'Ember.Logger.warn is called with warn message'
-          ).to.be.true
+          ).to.equal(true)
         })
       })
     })
@@ -443,7 +443,7 @@ describeComponent(
         expect(
           WindowOpenStub.called,
           'window.open is not called'
-        ).to.be.false
+        ).to.equal(false)
       })
 
       it('call "window.open" when "routeNames" is not empty', function () {
@@ -458,7 +458,7 @@ describeComponent(
         expect(
           WindowOpenStub.called,
           'window.open is called'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('user get warning message when call "window.open" and that pop-ups blocker is enable', function () {
@@ -473,7 +473,7 @@ describeComponent(
         expect(
           EmberLoggerSpy.called,
           'Ember.Logger.warn is called with warn message'
-        ).to.be.true
+        ).to.equal(true)
       })
     })
 
@@ -498,7 +498,7 @@ describeComponent(
         expect(
           openLinksSpy.called,
           '_openLinks is called'
-        ).to.be.true
+        ).to.equal(true)
       })
     })
   }

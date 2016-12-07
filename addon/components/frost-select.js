@@ -2,11 +2,11 @@
  * Component definition for frost-select component
  */
 import Ember from 'ember'
-const {$, Component, get, run, typeOf} = Ember
+const {$, get, run, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-import SpreadMixin from 'ember-spread'
+import {PropTypes} from 'ember-prop-types'
 
+import Component from './frost-component'
 import layout from '../templates/components/frost-select'
 
 import keyCodes from '../utils/key-codes'
@@ -44,7 +44,7 @@ function compareSelectedValues (a, b) {
   return a === b
 }
 
-export default Component.extend(SpreadMixin, PropTypeMixin, {
+export default Component.extend({
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
@@ -61,19 +61,10 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
     'text::frost-select-placeholder'
   ],
 
-  classNames: [
-    'frost-select'
-  ],
-
   layout,
 
   // == PropTypes =============================================================
 
-  /**
-   * Properties for this component. Options are expected to be (potentially)
-   * passed in to the component. State properties are *not* expected to be
-   * passed in/overwritten.
-   */
   propTypes: {
     // options
     autofocus: PropTypes.bool,
@@ -111,16 +102,9 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
       PropTypes.object,
       PropTypes.string
     ]),
-    opened: PropTypes.bool,
-
-    // keywords
-    attributeBindings: PropTypes.arrayOf(PropTypes.string),
-    classNameBindings: PropTypes.arrayOf(PropTypes.string),
-    classNames: PropTypes.arrayOf(PropTypes.string),
-    layout: PropTypes.any
+    opened: PropTypes.bool
   },
 
-  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
       // options
@@ -307,7 +291,6 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
 
   // == Lifecycle Hooks =======================================================
 
-  /* Ember.Component method */
   didInsertElement () {
     this._super(...arguments)
 
@@ -321,7 +304,6 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
     }
   },
 
-  /* Ember.Component method */
   didReceiveAttrs (attrs) {
     this._super(...arguments)
 

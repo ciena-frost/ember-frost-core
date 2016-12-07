@@ -7,9 +7,9 @@ import {
   describe,
   it
 } from 'mocha'
-import PropTypeMixin from 'ember-prop-types'
 import sinon from 'sinon'
-import SpreadMixin from 'ember-spread'
+
+import Component from 'ember-frost-core/components/frost-component'
 
 describeComponent(
   'frost-checkbox',
@@ -28,10 +28,6 @@ describeComponent(
       component = this.subject()
     })
 
-    it('includes className frost-button', function () {
-      expect(component.classNames).to.include('frost-checkbox')
-    })
-
     it('sets default property values correctly', function () {
       expect(
         component.get('size'),
@@ -46,38 +42,34 @@ describeComponent(
       expect(
         component.get('autofocus'),
         'autofocus: "false"'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('checked'),
         'checked: "false"'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('disabled'),
         'disabled: "false"'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('hook'),
         'hook: "undefined"'
-      ).to.be.undefined
+      ).to.equal(undefined)
 
       expect(
         component.get('inputId'),
         'inputId: "null"'
-      ).to.not.be.null
+      ).not.to.equal(null)
     })
 
-    it('has the expected Mixins', function () {
+    it('extends the base frost component', function () {
       expect(
-        PropTypeMixin.detect(component),
-        'PropTypeMixin Mixin is present'
-      ).to.be.true
-      expect(
-        SpreadMixin.detect(component),
-        'SpreadMixin Mixin is present'
-      ).to.be.true
+        component instanceof Component,
+        'is instance of Frost Component'
+      ).to.equal(true)
     })
 
     it('_setInputId() concatenates elmenentId to "_input"', function () {
@@ -124,7 +116,7 @@ describeComponent(
         expect(
           $('input').prop('checked'),
           'keyPress() sets checked state'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('does not set state to checked when disabled is true', function () {
@@ -139,7 +131,7 @@ describeComponent(
         expect(
           $('input').prop('checked'),
           'keyPress() did not set checked state'
-        ).to.be.false
+        ).to.equal(false)
       })
 
       it('calls preventDefault', function () {
@@ -150,7 +142,7 @@ describeComponent(
         expect(
           preventDefaultSpy.called,
           'preventDefault() was called'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('calls stopPropogation', function () {
@@ -161,7 +153,7 @@ describeComponent(
         expect(
           stopPropagationSpy.called,
           'stopPropagation() was called'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('returns false', function () {
@@ -170,7 +162,7 @@ describeComponent(
         expect(
           component.keyPress(eventTestObject),
           'keyPress() returned false'
-        ).to.be.false
+        ).to.equal(false)
       })
 
       it('calls input() action', function () {

@@ -10,6 +10,8 @@ import {
 import PropTypeMixin from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
 
+import Component from 'ember-frost-core/components/frost-component'
+
 describeComponent(
   'frost-icon',
   'Unit: FrostIconComponent',
@@ -23,10 +25,6 @@ describeComponent(
       component = this.subject()
     })
 
-    it('includes className frost-icon', function () {
-      expect(component.classNames).to.include('frost-icon')
-    })
-
     it('sets default property values correctly', function () {
       expect(
         component.get('tagName'),
@@ -36,7 +34,7 @@ describeComponent(
       expect(
         component.get('hook'),
         'hook: "undefined"'
-      ).to.be.undefined
+      ).to.equal(undefined)
 
       expect(
         component.get('icon'),
@@ -47,6 +45,13 @@ describeComponent(
         component.get('pack'),
         'pack: "frost"'
       ).to.eql('frost')
+    })
+
+    it('extends the base frost component', function () {
+      expect(
+        component instanceof Component,
+        'is instance of Frost Component'
+      ).to.equal(true)
     })
 
     it('sets dependent keys correctly', function () {
@@ -65,12 +70,12 @@ describeComponent(
       expect(
         PropTypeMixin.detect(component),
         'PropTypeMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         SpreadMixin.detect(component),
         'SpreadMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     describe('"iconClass" computed property', function () {

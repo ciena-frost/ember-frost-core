@@ -23,7 +23,7 @@ describeComponent(
   function () {
     beforeEach(function () {
       const mockComponentTemplate = hbs`
-        {{input
+        {{hookable-input
           change=_eventProxy.change
           click=_eventProxy.click
           contextMenu=_eventProxy.contextMenu
@@ -63,7 +63,7 @@ describeComponent(
 
       // Create mock component to test the text support events
       const textSupportComponentTemplate = hbs`
-        {{input
+        {{hookable-input
           escape-press=_eventProxy.escape-press
           insert-newline=_eventProxy.enter
         }}
@@ -126,7 +126,7 @@ describeComponent(
           expect(
             externalActionSpy.called,
             `${test.in} closure action called`
-          ).to.true
+          ).to.equal(true)
         })
       })
     })
@@ -161,7 +161,7 @@ describeComponent(
           expect(
             externalActionSpy.called,
             `${test.in} closure action called`
-          ).to.true
+          ).to.equal(true)
         })
       })
     })

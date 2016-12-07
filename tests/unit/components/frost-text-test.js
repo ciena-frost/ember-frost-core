@@ -3,13 +3,13 @@ const {run} = Ember
 import Ember from 'ember'
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import {describeComponent} from 'ember-mocha'
-import PropTypeMixin from 'ember-prop-types'
 import {
   beforeEach,
   describe,
   it
 } from 'mocha'
-import SpreadMixin from 'ember-spread'
+
+import Component from 'ember-frost-core/components/frost-component'
 
 describeComponent(
   'frost-text',
@@ -21,10 +21,6 @@ describeComponent(
 
     beforeEach(function () {
       component = this.subject()
-    })
-
-    it('includes className frost-text', function () {
-      expect(component.classNames).to.include('frost-text')
     })
 
     it('sets default property values correctly', function () {
@@ -46,32 +42,32 @@ describeComponent(
       expect(
         component.get('autofocus'),
         'autofocus: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('isClearEnabled'),
         'isClearEnabled: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('isClearVisible'),
         'isClearVisible: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('isHookEmbedded'),
         'isHookEmbedded: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('readonly'),
         'readonly: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('required'),
         'required: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('selectionDirection'),
@@ -81,7 +77,7 @@ describeComponent(
       expect(
         component.get('spellcheck'),
         'spellcheck: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('tabindex'),
@@ -96,44 +92,41 @@ describeComponent(
       expect(
         component.get('form'),
         'form: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('maxlength'),
         'maxlength: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('placeholder'),
         'placeholder: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('title'),
         'title: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('value'),
         'value: null'
-      ).to.be.null
+      ).to.equal(null)
+    })
+
+    it('extends the commone frost component', function () {
+      expect(
+        component instanceof Component,
+        'is instance of Frost Component'
+      ).to.equal(true)
     })
 
     it('has the expect Mixins', function () {
       expect(
-        PropTypeMixin.detect(component),
-        'PropTypeMixin Mixin is present'
-      ).to.be.true
-
-      expect(
         FrostEventsProxy.detect(component),
         'FrostEventsProxy is present'
-      ).to.be.true
-
-      expect(
-        SpreadMixin.detect(component),
-        'SpreadMixin Mixin is present'
-      ).to.be.true
+      ).to.equal(true)
     })
 
     describe('when keyUp property is omitted', function () {

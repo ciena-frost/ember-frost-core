@@ -2,7 +2,6 @@ import {expect} from 'chai'
 import Ember from 'ember'
 const {run} = Ember
 import {describeComponent} from 'ember-mocha'
-import PropTypeMixin from 'ember-prop-types'
 import {
   afterEach,
   beforeEach,
@@ -10,7 +9,8 @@ import {
   it
 } from 'mocha'
 import sinon from 'sinon'
-import SpreadMixin from 'ember-spread'
+
+import Component from 'ember-frost-core/components/frost-component'
 
 describeComponent(
   'frost-button',
@@ -25,10 +25,6 @@ describeComponent(
       component = this.subject()
     })
 
-    it('includes className frost-button', function () {
-      expect(component.classNames).to.include('frost-button')
-    })
-
     it('sets default property values correctly', function () {
       expect(
         component.get('tagName'),
@@ -38,7 +34,7 @@ describeComponent(
       expect(
         component.get('autofocus'),
         'autofocus: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('design'),
@@ -48,12 +44,12 @@ describeComponent(
       expect(
         component.get('disabled'),
         'disabled: false'
-      ).to.be.false
+      ).to.equal(false)
 
       expect(
         component.get('hook'),
         'hook: "undefined"'
-      ).to.be.undefined
+      ).to.equal(undefined)
 
       expect(
         component.get('icon'),
@@ -83,7 +79,7 @@ describeComponent(
       expect(
         component.get('title'),
         'title: null'
-      ).to.be.null
+      ).to.equal(null)
 
       expect(
         component.get('type'),
@@ -93,7 +89,7 @@ describeComponent(
       expect(
         component.get('vertical'),
         'vertical: false'
-      ).to.be.false
+      ).to.equal(false)
     })
 
     it('sets dependent keys correctly', function () {
@@ -142,16 +138,11 @@ describeComponent(
       ).to.eql(extraClassesDependentKeys)
     })
 
-    it('has the expected Mixins', function () {
+    it('extends the commone frost component', function () {
       expect(
-        PropTypeMixin.detect(component),
-        'PropTypeMixin Mixin is present'
-      ).to.be.true
-
-      expect(
-        SpreadMixin.detect(component),
-        'SpreadMixin Mixin is present'
-      ).to.be.true
+        component instanceof Component,
+        'is instance of Frost Component'
+      ).to.equal(true)
     })
 
     describe('"isTextOnly" computed property', function () {
@@ -163,7 +154,7 @@ describeComponent(
         expect(
           component.get('isTextOnly'),
           'isTextOnly: true'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('is set to "false" when "icon" and "text" are both set', function () {
@@ -178,7 +169,7 @@ describeComponent(
         expect(
           component.get('isTextOnly'),
           'isTextOnly: false'
-        ).to.be.false
+        ).to.equal(false)
       })
     })
 
@@ -191,7 +182,7 @@ describeComponent(
         expect(
           component.get('isIconOnly'),
           'isIconOnly: true'
-        ).to.be.true
+        ).to.equal(true)
       })
 
       it('is set to "false" when "icon" and "text" are both set', function () {
@@ -206,7 +197,7 @@ describeComponent(
         expect(
           component.get('isIconOnly'),
           'isIconOnly: false'
-        ).to.be.false
+        ).to.equal(false)
       })
     })
 
@@ -219,7 +210,7 @@ describeComponent(
         expect(
           component.get('isIconAndText'),
           'isIconAndText: false'
-        ).to.be.false
+        ).to.equal(false)
       })
 
       it('is set to "false" when only "text" is set', function () {
@@ -230,7 +221,7 @@ describeComponent(
         expect(
           component.get('isIconAndText'),
           'isIconAndText: false'
-        ).to.be.false
+        ).to.equal(false)
       })
 
       it('is set to "true" when "icon" and "text" are both set', function () {
@@ -245,7 +236,7 @@ describeComponent(
         expect(
           component.get('isIconAndText'),
           'isIconAndText: true'
-        ).to.be.true
+        ).to.equal(true)
       })
     })
 
@@ -282,7 +273,7 @@ describeComponent(
             expect(
               component.get('extraClasses'),
               'Nothing is returned: must include either "text" or "icon"'
-            ).to.be.undefined
+            ).to.equal(undefined)
           })
 
           it('calls Ember.Logger.error if either "text" or "icon" are not also set', function () {
@@ -295,7 +286,7 @@ describeComponent(
             expect(
               EmberLoggerSpy.called,
               'Ember.Logger.error is called with error message'
-            ).to.be.true
+            ).to.equal(true)
 
             Ember.Logger.error.restore()
           })
@@ -328,7 +319,7 @@ describeComponent(
             expect(
               EmberLoggerSpy.called,
               'Ember.Logger.warn is called with warn message'
-            ).to.be.true
+            ).to.equal(true)
           })
 
           it('is used with "size" property', function () {
@@ -343,7 +334,7 @@ describeComponent(
             expect(
               EmberLoggerSpy.called,
               'Ember.Logger.warn is called with warn message'
-            ).to.be.true
+            ).to.equal(true)
           })
 
           it('is used with "priority" and "size" properties', function () {
@@ -359,7 +350,7 @@ describeComponent(
             expect(
               EmberLoggerSpy.called,
               'Ember.Logger.warn is called with warn message'
-            ).to.be.true
+            ).to.equal(true)
           })
         })
       })
@@ -430,7 +421,7 @@ describeComponent(
         expect(
           addPriorityClassSpy.calledWith(priority, testArray),
           'addPriorityClass method called'
-        ).to.be.true
+        ).to.equal(true)
       })
     })
 

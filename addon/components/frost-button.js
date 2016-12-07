@@ -2,11 +2,11 @@
  * Component definition for the frost-button component
  */
 import Ember from 'ember'
-const {Component, Logger, ViewUtils, isEmpty, typeOf} = Ember
+const {Logger, ViewUtils, isEmpty} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-import SpreadMixin from 'ember-spread'
+import {PropTypes} from 'ember-prop-types'
 
+import Component from './frost-component'
 import layout from '../templates/components/frost-button'
 
 /**
@@ -29,7 +29,7 @@ const validSizes = [
   'small'
 ]
 
-export default Component.extend(SpreadMixin, PropTypeMixin, {
+export default Component.extend({
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
@@ -45,10 +45,6 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
   classNameBindings: [
     'disabled',
     'extraClasses'
-  ],
-
-  classNames: [
-    'frost-button'
   ],
 
   layout,
@@ -229,9 +225,8 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
       return true
     }
 
-    const onClick = this.get('onClick')
-    if (typeOf(onClick) === 'function' && !this.get('disabled')) {
-      onClick(this.get('id'))
+    if (this.onClick && !this.get('disabled')) {
+      this.onClick(this.get('id'))
     }
   }),
 

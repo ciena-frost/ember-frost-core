@@ -1,29 +1,21 @@
 /**
  * Component definition for frost-radio-group component
  */
-import Ember from 'ember'
-const {Component} = Ember
 import computed from 'ember-computed-decorators'
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-import SpreadMixin from 'ember-spread'
+import {PropTypes} from 'ember-prop-types'
 
+import Component from './frost-component'
 import layout from '../templates/components/frost-radio-group'
 
-export default Component.extend(SpreadMixin, PropTypeMixin, {
+export default Component.extend({
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
 
-  classNames: ['frost-radio-group'],
   layout,
 
   // == PropTypes =============================================================
 
-  /**
-   * Properties for this component. Options are expected to be (potentially)
-   * passed in to the component. State properties are *not* expected to be
-   * passed in/overwritten.
-   */
   propTypes: {
     // options
     hook: PropTypes.string,
@@ -36,16 +28,11 @@ export default Component.extend(SpreadMixin, PropTypeMixin, {
       value: PropTypes.string.isRequired
     })),
     selectedValue: PropTypes.string,
-    onChange: PropTypes.func,
+    onChange: PropTypes.func
 
     // state
-
-    // keywords
-    classNames: PropTypes.arrayOf(PropTypes.string),
-    layout: PropTypes.any
   },
 
-  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
       // options
