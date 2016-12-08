@@ -1,3 +1,9 @@
+# 1.2.2
+
+* **Upgraded** `ember-cli-mocha` which pulls in a newer `ember-mocha` and deprecates `describeComponent` (PR coming in the next couple days to refactor our tests accordingly)
+* **Fixed** `CssMixin` test to test against a real component defined in the dummy app so that we catch when the `toString()` format changes. 
+
+
 # 1.2.1
 
 * **Fixed** a bug where the `addon/index.js` had a typo w.r.t. a module name and thus threw an error whenever anyone tried to import anything directly from `ember-frost-core`. 
