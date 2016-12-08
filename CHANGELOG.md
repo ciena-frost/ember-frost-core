@@ -1,3 +1,9 @@
+# 1.3.0
+
+* Updated frost-link to accept named parameters in addition to position parameters, which unblocks the `spread` use case
+
+
+
 # 1.2.3
 
 * **Added** missing `ember-prop-types: ^3.0.0` to blueprints when installing `ember-frost-core`
