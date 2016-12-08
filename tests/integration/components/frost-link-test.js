@@ -243,17 +243,26 @@ describeComponent(
 
     it('renders using spread', function () {
       this.render(hbs`
-        {{frost-link 'title' 'testRoute'
+        {{frost-link
           options=(hash
-            priority='primary'
+            priority='secondary'
+            route='testRoute'
+            text='title'
           )
         }}
       `)
 
       expect(
-        this.$('.frost-link').hasClass('primary'),
-        'primary class is set'
+        this.$('.frost-link').hasClass('secondary'),
+        'secondary class is set'
       ).to.equal(true)
+
+      expect(
+        this.$('.frost-link').text().trim(),
+        'text is set'
+      ).to.equal('title')
+
+      // The route href needs to be tested against a running application
     })
   }
 )

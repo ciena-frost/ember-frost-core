@@ -2,7 +2,7 @@
  * Component definition for frost-link component
  */
 import Ember from 'ember'
-const {LinkComponent, Logger, deprecate, get, run, set} = Ember
+const {LinkComponent, Logger, deprecate, get, isEmpty, isPresent, run, set} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
@@ -243,11 +243,48 @@ export default LinkComponent.extend(SpreadMixin, PropTypeMixin, {
 
   // == Lifecycle Hooks =======================================================
 
-  /* Ember.Component method */
+  /**
+   * Allow named parameters to be passed to the link instead of positional
+   * params.  Because the link-to expects positional params the named
+   * parameters must be set back against the component as a positional param
+   * array in the correct order (text, route, models, queryParams).  Once set
+   * we're free to hand control back to the parent function and it will react
+   * as if we used the original link-to interface.
+   */
+  didReceiveAttrs () {
+    if (isEmpty(this.get('params'))) {
+      let params = []
+
+      params.push(this.get('text'))
+
+      params.push(this.get('route'))
+
+      const models = this.get('routeModels')
+      if (!isEmpty(models)) {
+        models.forEach((model) => {
+          params.push(model)
+        })
+      }
+
+      const queryParams = this.get('routeQueryParams')
+      if (isPresent(queryParams)) {
+        params.push({
+          isQueryParams: true,
+          values: queryParams
+        })
+      }
+
+      this.set('params', params)
+    }
+
+    this._super(...arguments)
+  },
+
   init () {
     this._super(...arguments)
     this._setupRouting()
   }
 
   // == Actions ===============================================================
+
 })

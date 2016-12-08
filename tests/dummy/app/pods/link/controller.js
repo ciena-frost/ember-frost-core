@@ -6,6 +6,15 @@ export default Controller.extend({
 
   fontSize: 20,
 
+  first: {
+    id: 3,
+    text: 'custom first'
+  },
+  second: {
+    id: 4,
+    text: 'custom second'
+  },
+
   actions: {
     // BEGIN-SNIPPET pre-transition-action
     preTransition () {

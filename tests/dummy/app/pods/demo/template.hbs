@@ -1,12 +1,21 @@
 <div class="dummy-body">
   <div class="section-title">frost-core</div>
   <hr>
-  {{#each model.routes as |route|}}
-    <li class='list-item'>
-      {{#link-to route.routeName}}
-        {{route.label}}
-      {{/link-to}}
-    </li>
-  {{/each}}
+   <li class='list-item'>{{link-to 'Button' 'button'}}</li>
+   <li class='list-item'>{{link-to 'Checkbox' 'checkbox'}}</li>
+   <li class='list-item'>{{link-to 'Color palette' 'palette'}}</li>
+   <li class='list-item'>{{link-to 'Icons' 'icons'}}</li>
+   <li class='list-item'>{{link-to 'Layout' 'layout'}}</li>
+   <li class='list-item'>{{link-to 'Link' 'link'}}</li>
+   <li class='list-item'>{{link-to 'Loading' 'loading'}}</li>
+   <li class='list-item'>{{link-to 'Password' 'password'}}</li>
+   <li class='list-item'>{{link-to 'Radio' 'radio'}}</li>
+   <li class='list-item'>{{link-to 'Scroll' 'scroll'}}</li>
+   <li class='list-item'>{{link-to 'Select' 'select'}}</li>
+   <li class='list-item'>{{link-to 'Text area' 'area'}}</li>
+   <li class='list-item'>{{link-to 'Text field' 'field'}}</li>
+   <li class='list-item'>{{link-to 'Toggle' 'toggle'}}</li>
+   <li class='list-item'>{{link-to 'Typography' 'typography'}}</li>
+   <li class='list-item'>{{link-to 'Helpers' 'helpers'}}</li>
 </div>
 {{outlet}}

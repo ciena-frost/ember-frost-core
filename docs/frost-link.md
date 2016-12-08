@@ -95,10 +95,14 @@ The link component use ember-spread to `spread` a property object against the to
 
 ### Spread
 ```handlebars
-{{frost-link 'link title' 'route name'
+{{frost-link
   options=(hash
     priority='primary'
+    route='route name'
+    routeModels=(array ...)
+    routeQueryParams=(hash ...)
     size='small'
+    text='link title'
   )
 }}
 ```
