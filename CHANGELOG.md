@@ -1,3 +1,9 @@
+# 1.2.3
+
+* **Added** missing `ember-prop-types: ^3.0.0` to blueprints when installing `ember-frost-core`
+
+
+
 # 1.2.2
 
 * **Upgraded** `ember-cli-mocha` which pulls in a newer `ember-mocha` and deprecates `describeComponent` (PR coming in the next couple days to refactor our tests accordingly)
