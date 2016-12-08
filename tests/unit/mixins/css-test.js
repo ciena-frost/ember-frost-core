@@ -2,26 +2,18 @@
  * Unit test for the CssMixin
  */
 import {expect} from 'chai'
-import Ember from 'ember'
-const {Component} = Ember
-import PropTypesMixin from 'ember-prop-types'
+import {setupComponentTest} from 'ember-mocha'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
-
-import CssMixin from 'ember-frost-core/mixins/css'
-
-const CssComponent = Component.extend(PropTypesMixin, CssMixin, {
-  toString () {
-    return '<app-name@component:component-name::ember555>'
-  }
-})
 
 describe('Unit / Mixin / css', function () {
   let component, sandbox
 
+  setupComponentTest('css-component')
+
   beforeEach(function () {
     sandbox = sinon.sandbox.create()
-    component = CssComponent.create()
+    component = this.subject()
   })
 
   afterEach(function () {
@@ -33,7 +25,7 @@ describe('Unit / Mixin / css', function () {
   })
 
   it('defaults "css" to the component name', function () {
-    expect(component.get('css')).to.equal('component-name')
+    expect(component.get('css')).to.equal('css-component')
   })
 
   describe('.getComponentName()', function () {
@@ -43,7 +35,7 @@ describe('Unit / Mixin / css', function () {
     })
 
     it('should strip the junk from toString()', function () {
-      expect(componentName).to.equal('component-name')
+      expect(componentName).to.equal('css-component')
     })
   })
 
