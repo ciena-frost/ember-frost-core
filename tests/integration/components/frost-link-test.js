@@ -255,7 +255,7 @@ describeComponent(
       expect(
         this.$('.frost-link').hasClass('secondary'),
         'secondary class is set'
-      ).to.be.true
+      ).to.equal(true)
 
       expect(
         this.$('.frost-link').text().trim(),
