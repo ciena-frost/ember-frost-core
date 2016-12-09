@@ -270,11 +270,12 @@ hr {
   }
 }
 
-.dummy-svg-huge {
-  width: 800px;
-  height: 800px;
-  > rect {
-  fill: red;
+
+svg {
+  &.dummy-svg-huge {
+    width: 800px;
+    height: 800px;
+    fill: red;
   }
 }
 
