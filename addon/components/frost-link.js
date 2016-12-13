@@ -255,7 +255,9 @@ export default LinkComponent.extend(SpreadMixin, PropTypeMixin, {
     if (isEmpty(this.get('params'))) {
       let params = []
 
-      params.push(this.get('text'))
+      if (this.get('text')) {
+        params.push(this.get('text')) 
+      }
 
       params.push(this.get('route'))
 
