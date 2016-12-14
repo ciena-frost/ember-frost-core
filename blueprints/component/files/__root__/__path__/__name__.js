@@ -44,6 +44,9 @@ export default Component.extend({
   /**
    * A pretty silly computed property just as an example of one
    * it appends '-' to the css base
+   *
+   * NOTE: this computed property is only here as an examle and should be removed/replaced with a real one
+   *
    * @param {String} css - the base css class for this component (the component name)
    * @returns {String} a css prefix suitable for use within the template
    */

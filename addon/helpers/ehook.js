@@ -4,7 +4,7 @@
  * @see {@link https://github.com/Ticketfly/ember-hook/pull/35}
  */
 import Ember from 'ember'
-const {Helper} = Ember
+const {Helper, deprecate} = Ember
 import config from 'ember-get-config'
 import decorateHook from 'ember-hook/utils/decorate-hook'
 import delimit from 'ember-hook/utils/delimit'
@@ -31,6 +31,10 @@ function isEmpty (obj) {
 }
 
 export function ehook ([hook, qualifierObj = {}], attributes = {}) {
+  deprecate('The "ehook" helper is deprecated. The "hook" helper can and should now be used instead.', {
+    id: 'ember-frost-core.helpers.ehook',
+    until: '2.0.0'
+  })
   let qualifiers
 
   if (!isEmpty(qualifierObj) && !isEmpty(attributes)) {
