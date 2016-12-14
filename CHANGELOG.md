@@ -1,3 +1,9 @@
+# 1.3.1
+
+* **Updated** `ember-hook` to include the enhancement to the `hook` helper that renders `ehook` unnecessary
+* **Deprecated** `ehook` helper as it's no longer necessary
+
+
 # 1.3.0
 
 * Updated frost-link to accept named parameters in addition to position parameters, which unblocks the `spread` use case
