@@ -19,7 +19,7 @@ export default Component.extend(PropTypesMixin, HookMixin, SpreadMixin, CssMixin
 
   propTypes: {
     // options
-    hook: PropTypes.string,
+    hook: PropTypes.string.isRequired,
     hookPrefix: PropTypes.string,
     hookQualifiers: PropTypes.object,
 

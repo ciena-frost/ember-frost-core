@@ -1,3 +1,9 @@
+# 1.3.1
+
+* Marking `hook` as a required property for frost components (warning log)
+
+
+
 # 1.3.0
 
 * Updated frost-link to accept named parameters in addition to position parameters, which unblocks the `spread` use case
