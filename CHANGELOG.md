@@ -1,3 +1,8 @@
+# 1.3.4
+* **Added** more details in changelog for icon clean up
+* **Fixed** link when route/routeName is not set and that we are using `text` attribute
+
+
 # 1.3.3
 
 * **Fixed** border on `frost-text` input with a `type` of `number`.
