@@ -1,3 +1,9 @@
+# 1.3.2
+
+* **Fixed** typo in `frost-select` readme (#351) 
+
+
+
 # 1.3.1
 
 * Marking `hook` as a required property for frost components (warning log)
