@@ -1,3 +1,7 @@
+# 1.3.5
+- Add check for text to handle case where link is not inline before pushing it into positional params
+
+
 # 1.3.4
 * **Added** more details in changelog for icon clean up
 * **Fixed** link when route/routeName is not set and that we are using `text` attribute
