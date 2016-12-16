@@ -3,15 +3,7 @@ import Ember from 'ember'
 const {$, typeOf} = Ember
 import {$hook} from 'ember-hook'
 
-const assign = Object.assign || Ember.assign || Ember.merge || function (assignee, assigner) {
-  const target = Object(assignee)
-  const source = Object(assigner)
-
-  Object.keys(source).forEach(el => {
-    target[el] = source[el]
-  })
-  return target
-}
+const assign = Object.assign || Ember.assign || Ember.merge
 
 /**
  * @typedef {Object} FrostButtonState
