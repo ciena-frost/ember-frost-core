@@ -86,6 +86,21 @@ describeComponent(
           'target should not be set set'
         ).to.equal('')
       })
+
+      it('text is set', function () {
+        this.render(hbs`
+          {{frost-link
+            routeNames=(array 'testRoute')
+            priority='primary'
+            text='title'
+          }}
+        `)
+
+        expect(
+          this.$('.frost-link').text().trim(),
+          'text is set'
+        ).to.equal('title')
+      })
     })
 
     describe('Priority property', function () {

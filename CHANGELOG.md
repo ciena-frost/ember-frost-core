@@ -1,3 +1,26 @@
+# 1.3.4
+* **Added** more details in changelog for icon clean up
+* **Fixed** link when route/routeName is not set and that we are using `text` attribute
+
+
+# 1.3.3
+
+* **Fixed** border on `frost-text` input with a `type` of `number`.
+
+
+
+# 1.3.2
+
+* **Fixed** typo in `frost-select` readme (#351) 
+
+
+
+# 1.3.1
+
+* Marking `hook` as a required property for frost components (warning log)
+
+
+
 # 1.3.0
 
 * Updated frost-link to accept named parameters in addition to position parameters, which unblocks the `spread` use case
@@ -93,7 +116,6 @@
 - **UPDATED** existing component definitions to match recently updated generator.
 - **UPDATED/ADDED** hooks and qualifiers on all the components
 - **ADDED** a single export point at `addon/index.js`
-- **REMOVED** all the unnecessary frost-icons
 - **REMOVED** all the deprecated functionalities
 - **REMOVED** unnecessary code
 - **UPDATED** the dependencies
@@ -109,6 +131,44 @@
 - **ADDED** support for `required` and `error` for radio-button/radio-group
 - **ADDED** support for an inline version of radio-group
 - **ADDED** support for multiple routes on frost-link
+- Icon - application => **Moved** to ember-frost-navigation
+- Icon - arrow => **Deleted**
+- Icon - back => **Deleted**
+- Icon - chevron-left => **Renamed** chevron
+- Icon - close-circle => **Renamed** round-close
+- Icon - dialog-error => **Replaced** by error
+- Icon - double-chevron-left => **Renamed** chevron-double
+- Icon - hide => **Deleted**
+- Icon - home => **Deleted**
+- Icon - info => **Moved** to ember-frost-modal & ember-frost-notifier & ember-frost-fields
+- Icon - infobar-create => **Replaced** by add
+- Icon - infobar-find => **Moved** to ember-frost-info-bar
+- Icon - line => **Deleted**
+- Icon - list-large => **Renamed** view-large
+- Icon - list-medium => **Renamed** view-medium
+- Icon - list-small => **Renamed** view-small
+- Icon - new-tab => **Renamed** open-tabs
+- Icon - search => **Moved** to ember-frost-info-bar & **Replaced** by find
+- Icon - shield-full => **Moved** to internal repo
+- Icon - shield-half => **Moved** to internal repo
+- Icon - shield => **Deleted**
+- Icon - show => **Deleted**
+- Icon - sidebar-layer-normal => **Moved** to ember-frost-sidebar & **Renamed** layer-normal
+- Icon - sidebar-layer-open  => **Moved** to ember-frost-sidebar & **Renamed** layer-open
+- Icon - sort-direction => **Moved** to ember-frost-sort & **Renamed** direction
+- Icon - user => **Moved** to ember-frost-navigation
+- Icon - warning => **Moved** to ember-frost-modal & ember-frost-notifier & ember-frost-fields
+- Icon - app/company-strip => **Moved** to ember-frost-modal dummy
+- Icon - app/company => **Moved** to ember-frost-modal dummy
+- Icon - app/user => **Replaced** by user
+- Icon - frost/close => **Moved** to top level
+- Icon - frost/link => **Replaced** by open-tabs
+- Icon - launch/transition-arrow
+- Icon - loading/ring => **Moved** to top level & **Renamed** loading-ring
+- Icon - loading/ripple => **Moved** to top level & **Renamed** loading-ripple
+- Icon - notifications/error => **Moved** to ember-frost-modal & ember-frost-notifier & ember-frost-fields
+- Icon - notifications/info => **Replaced** by info
+- Icon - notifications/warning => **Replaced** by warning
 
 
 # 0.32.5

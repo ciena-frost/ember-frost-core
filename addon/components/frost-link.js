@@ -215,7 +215,6 @@ export default LinkComponent.extend(SpreadMixin, PropTypeMixin, {
 
         // Remove the link destination
         set(this, 'href', null)
-
         if (get(this, 'routeName')) {
           Logger.warn('Warning: The `routeNames` property takes precedence over `routeName`.')
         }
@@ -252,7 +251,8 @@ export default LinkComponent.extend(SpreadMixin, PropTypeMixin, {
    * as if we used the original link-to interface.
    */
   didReceiveAttrs () {
-    if (isEmpty(this.get('params'))) {
+    const numberOfParams = this.get('params').length
+    if (numberOfParams <= 1) {
       let params = []
       const text = this.get('text')
       if (text) {

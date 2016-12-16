@@ -69,6 +69,12 @@ $padding: 0 30px 0 8px;
     border: 0;
   }
 
+  // Note: without this Firefox ends up applying the read-only pseudo selector
+  // to number inputs which causes them not to get a border.
+  &[type='number'] {
+    border: 1px solid $frost-color-input-border;
+  }
+
   &:disabled {
     border: $disabled-border;
     background-color: $disabled-bg;
