@@ -61,7 +61,7 @@ multipleSelected = [1, 2]
   data=data
   selected=singleSelected
   onChange=(action 'yourCallbackAction')
-}}}
+}}
 ```
 
 ### Multi select
@@ -70,7 +70,7 @@ multipleSelected = [1, 2]
   data=data
   onChange=(action 'yourCallbackAction')
   selected=multipleSelected
-}}}
+}}
 ```
 
 ### Simple single select w/ external filtering
@@ -79,7 +79,7 @@ multipleSelected = [1, 2]
   data=data
   onChange=(action 'yourCallbackAction')
   onInput=(action 'yourInputFilterCallbackAction')
-}}}
+}}
 ```
 
 ### Selecting by value
