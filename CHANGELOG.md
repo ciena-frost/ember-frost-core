@@ -1,3 +1,9 @@
+# 1.3.3
+
+* **Fixed** border on `frost-text` input with a `type` of `number`.
+
+
+
 # 1.3.2
 
 * **Fixed** typo in `frost-select` readme (#351) 
