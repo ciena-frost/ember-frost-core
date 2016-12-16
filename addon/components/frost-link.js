@@ -254,11 +254,9 @@ export default LinkComponent.extend(SpreadMixin, PropTypeMixin, {
     const numberOfParams = this.get('params').length
     if (numberOfParams <= 1) {
       let params = []
-
-      if (numberOfParams === 1 && !this.get('text')) {
-        params.push(this.get('params').get(0))
-      } else {
-        params.push(this.get('text'))
+      const text = this.get('text')
+      if (text) {
+        params.push(text)
       }
 
       params.push(this.get('route'))
