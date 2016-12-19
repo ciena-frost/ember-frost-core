@@ -1,3 +1,8 @@
+# 1.3.6
+
+* **Fixed** dependencies to be included via blueprints instead of installed as direct npm dependencies of this addon.
+
+
 # 1.3.5
 - Add check for text to handle case where link is not inline before pushing it into positional params
 
