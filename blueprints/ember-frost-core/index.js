@@ -28,6 +28,7 @@ module.exports = {
             {name: 'ember-hook', target: '^1.4.0'},
             {name: 'ember-prop-types', target: '^3.0.0'},
             {name: 'ember-sinon', target: '^0.5.1'},
+            {name: 'ember-spread', target: '^1.0.0'},
             {name: 'ember-test-utils', target: '^1.1.2'},
             {name: 'ember-truth-helpers', target: '^1.2.0'}
           ]
