@@ -1,7 +1,7 @@
 /**
  * Component definition for the frost-password component
  */
-import computed from 'ember-computed-decorators'
+import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
 
@@ -84,6 +84,7 @@ export default Component.extend(FrostEventsProxy, {
 
   // == Computed properties  ==================================================
 
+  @readOnly
   @computed('isRevealed')
   /**
    * The message to display on the reveal button
@@ -94,6 +95,7 @@ export default Component.extend(FrostEventsProxy, {
     return isRevealed ? 'Hide' : 'Show'
   },
 
+  @readOnly
   @computed('isRevealed')
   /**
    * The type of the <input>

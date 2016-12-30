@@ -1,7 +1,7 @@
 /* jshint expr:true */
 import { expect } from 'chai'
 import Ember from 'ember'
-const { Component } = Ember
+const { Component, Handlebars } = Ember
 import {
   describeComponent,
   it
@@ -113,7 +113,7 @@ describeComponent(
       eventTypes.forEach((test) => {
         it(`calls ${test.in} closure action`, function () {
           const externalActionSpy = sinon.spy()
-          const template = Ember.Handlebars.compile(`
+          const template = Handlebars.compile(`
             {{mock-component ${test.in}=(action 'externalAction')}}
           `)
 
@@ -148,7 +148,7 @@ describeComponent(
       eventTypes.forEach((test) => {
         it(`calls ${test.in} closure action`, function () {
           const externalActionSpy = sinon.spy()
-          const template = Ember.Handlebars.compile(`
+          const template = Handlebars.compile(`
             {{text-support ${test.in}=(action 'externalAction')}}
           `)
 

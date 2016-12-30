@@ -2,7 +2,7 @@
  * Component definition for the frost-button component
  */
 import Ember from 'ember'
-const {Logger, ViewUtils, isEmpty} = Ember
+const {Logger, ViewUtils, isEmpty, on} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
 
@@ -220,7 +220,7 @@ export default Component.extend({
   // == DOM Events ============================================================
 
   // FIXME: jsdoc
-  onclick: Ember.on('click', function (event) {
+  onclick: on('click', function (event) {
     if (!ViewUtils.isSimpleClick(event)) {
       return true
     }
@@ -231,7 +231,7 @@ export default Component.extend({
   }),
 
   // FIXME: jsdoc
-  _onFocus: Ember.on('focusIn', function (e) {
+  _onFocus: on('focusIn', function (e) {
     // If an onFocus handler is defined, call it
     if (this.attrs.onFocus) {
       this.attrs.onFocus()

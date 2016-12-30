@@ -3,7 +3,7 @@
  */
 import Ember from 'ember'
 const {ViewUtils, assert, isPresent, typeOf} = Ember
-import computed from 'ember-computed-decorators'
+import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
 
@@ -72,16 +72,19 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
 
   @computed('trueValue', '_trueLabel')
   // FIXME: jsdoc
-  _trueValue (trueValue, _trueLabel) {
+  // TODO: make computed property readOnly
+  _trueValue (trueValue, _trueLabel) { // eslint-disable-line
     return trueValue || _trueLabel
   },
 
   @computed('falseValue', '_falseLabel')
   // FIXME: jsdoc
-  _falseValue (falseValue, _falseLabel) {
+  // TODO: make computed property readOnly
+  _falseValue (falseValue, _falseLabel) { // eslint-disable-line
     return falseValue || _falseLabel
   },
 
+  @readOnly
   @computed('value')
   // FIXME: jsdoc
   _isToggled (value) {

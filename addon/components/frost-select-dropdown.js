@@ -2,7 +2,7 @@
  * Component definition for frost-select-dropdown component
  */
 import Ember from 'ember'
-const {$, get} = Ember
+const {$, get, String: EmberString} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
@@ -91,7 +91,7 @@ export default Component.extend({
     ]
       .join(';')
 
-    return Ember.String.htmlSafe(style)
+    return EmberString.htmlSafe(style)
   },
 
   @readOnly
@@ -108,7 +108,7 @@ export default Component.extend({
       style.push(`bottom:${bottom - ARROW_HEIGHT + BORDER_HEIGHT}px`)
     }
 
-    return Ember.String.htmlSafe(style.join(';'))
+    return EmberString.htmlSafe(style.join(';'))
   },
 
   @readOnly

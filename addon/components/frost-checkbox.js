@@ -2,7 +2,7 @@
  * Component definition for the frost-checkbox component
  */
 import Ember from 'ember'
-const {isEmpty, run} = Ember
+const {isEmpty, run, on} = Ember
 import {PropTypes} from 'ember-prop-types'
 
 import Component from './frost-component'
@@ -62,7 +62,7 @@ export default Component.extend({
    * Handle the focusIn event
    * @params {Event} e - the event being handled
    */
-  _onFocus: Ember.on('focusIn', function (e) {
+  _onFocus: on('focusIn', function (e) {
     // If an onFocus handler is defined, call it
     if (this.attrs.onFocus) {
       this.attrs.onFocus()

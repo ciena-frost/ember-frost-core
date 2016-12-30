@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import Ember from 'ember'
-const {run} = Ember
+const {run, Logger} = Ember
 import {describeComponent} from 'ember-mocha'
 import {
   afterEach,
@@ -136,11 +136,11 @@ describeComponent(
         let EmberLoggerSpy
 
         beforeEach(function () {
-          EmberLoggerSpy = sinon.spy(Ember.Logger, 'warn')
+          EmberLoggerSpy = sinon.spy(Logger, 'warn')
         })
 
         afterEach(function () {
-          Ember.Logger.warn.restore()
+          Logger.warn.restore()
         })
 
         it('is used with "priority" property', function () {
@@ -389,11 +389,11 @@ describeComponent(
         let EmberLoggerSpy
 
         beforeEach(function () {
-          EmberLoggerSpy = sinon.spy(Ember.Logger, 'warn')
+          EmberLoggerSpy = sinon.spy(Logger, 'warn')
         })
 
         afterEach(function () {
-          Ember.Logger.warn.restore()
+          Logger.warn.restore()
         })
 
         it('user is getting a warning message when "routeNames" and "routeName" are set', function () {
@@ -423,12 +423,12 @@ describeComponent(
 
       beforeEach(function () {
         WindowOpenStub = sinon.stub(window, 'open', function () { return null })
-        EmberLoggerSpy = sinon.spy(Ember.Logger, 'warn')
+        EmberLoggerSpy = sinon.spy(Logger, 'warn')
       })
 
       afterEach(function () {
         window.open.restore()
-        Ember.Logger.warn.restore()
+        Logger.warn.restore()
       })
 
       it('do nothing when "routeNames" is empty', function () {

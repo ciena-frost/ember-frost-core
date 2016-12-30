@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import Ember from 'ember'
-const {run} = Ember
+const {run, Logger} = Ember
 import {describeComponent} from 'ember-mocha'
 import {
   afterEach,
@@ -277,7 +277,7 @@ describeComponent(
           })
 
           it('calls Ember.Logger.error if either "text" or "icon" are not also set', function () {
-            const EmberLoggerSpy = sinon.spy(Ember.Logger, 'error')
+            const EmberLoggerSpy = sinon.spy(Logger, 'error')
 
             run(() => component.set('design', design))
 
@@ -288,7 +288,7 @@ describeComponent(
               'Ember.Logger.error is called with error message'
             ).to.equal(true)
 
-            Ember.Logger.error.restore()
+            Logger.error.restore()
           })
         })
 
@@ -300,11 +300,11 @@ describeComponent(
           let EmberLoggerSpy
 
           beforeEach(function () {
-            EmberLoggerSpy = sinon.spy(Ember.Logger, 'warn')
+            EmberLoggerSpy = sinon.spy(Logger, 'warn')
           })
 
           afterEach(function () {
-            Ember.Logger.warn.restore()
+            Logger.warn.restore()
           })
 
           it('is used with "priority" property', function () {

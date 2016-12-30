@@ -2,7 +2,7 @@
  * Component definition for frost-select component
  */
 import Ember from 'ember'
-const {$, get, run, typeOf} = Ember
+const {$, get, run, typeOf, on} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
 
@@ -214,14 +214,14 @@ export default Component.extend({
   // == DOM Events ============================================================
 
   // FIXME: jsdoc
-  _onClick: Ember.on('click', function () {
+  _onClick: on('click', function () {
     if (!this.get('disabled')) {
       this.toggleProperty('opened')
     }
   }),
 
   // FIXME: jsdoc
-  _onKeyDown: Ember.on('keyDown', function (e) {
+  _onKeyDown: on('keyDown', function (e) {
     if (
       [DOWN_ARROW, UP_ARROW].indexOf(e.keyCode) !== -1 &&
       !this.get('openend')
@@ -233,7 +233,7 @@ export default Component.extend({
   }),
 
   // FIXME: jsdoc
-  _onKeyPress: Ember.on('keyPress', function (e) {
+  _onKeyPress: on('keyPress', function (e) {
     if (e.keyCode === SPACE) {
       e.preventDefault() // Keep space from scrolling page
       e.stopPropagation()
@@ -242,7 +242,7 @@ export default Component.extend({
   }),
 
   // FIXME: jsdoc
-  _onFocusIn: Ember.on('focusIn', function () {
+  _onFocusIn: on('focusIn', function () {
     // If select is disabled make sure it can't get focus
     if (this.get('disabled')) {
       this.$().blur()
@@ -258,7 +258,7 @@ export default Component.extend({
   }),
 
   // FIXME: jsdoc
-  _onFocusOut: Ember.on('focusOut', function () {
+  _onFocusOut: on('focusOut', function () {
     // We must use run.later so filter text input has time to focus when select
     // dropdown is being opened
     run.later(() => {

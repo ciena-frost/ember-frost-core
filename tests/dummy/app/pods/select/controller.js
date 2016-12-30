@@ -1,8 +1,8 @@
 import Ember from 'ember'
-const {computed, Controller} = Ember
+const {computed, Controller, inject} = Ember
 
 export default Controller.extend({
-  notifications: Ember.inject.service('notification-messages'),
+  notifications: inject.service('notification-messages'),
 
   data: computed('data', 'search', function () {
     let result = this.model.map((record) => {
@@ -18,7 +18,7 @@ export default Controller.extend({
       result = filteredResult
     }
     return result
-  }),
+  }).readOnly(),
 
   selectedIndex: 1,
   selectedIndices: [1, 2],

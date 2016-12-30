@@ -251,7 +251,7 @@ export default LinkComponent.extend(SpreadMixin, PropTypeMixin, {
    * as if we used the original link-to interface.
    */
   didReceiveAttrs () {
-    const numberOfParams = this.get('params').length
+    const numberOfParams = this.get('params.length')
     if (numberOfParams <= 1) {
       let params = []
       const text = this.get('text')

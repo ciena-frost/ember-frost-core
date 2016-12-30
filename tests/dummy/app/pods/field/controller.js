@@ -1,10 +1,10 @@
 import Ember from 'ember'
 const {
-  Controller
+  Controller, inject
 } = Ember
 
 export default Controller.extend({
-  notifications: Ember.inject.service('notification-messages'),
+  notifications: inject.service('notification-messages'),
   error: true,
 
   actions: {
