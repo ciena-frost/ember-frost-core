@@ -1,9 +1,11 @@
+/* eslint-disable ember-standard/destructure */
+
 import {expect} from 'chai'
 import Ember from 'ember'
 const {$, typeOf} = Ember
 import {$hook} from 'ember-hook'
 
-const assign = Ember.assign || Ember.merge
+const assign = Object.assign || Ember.assign || Ember.merge
 
 /**
  * @typedef {Object} FrostButtonState
