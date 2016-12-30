@@ -1,8 +1,5 @@
 import {expect} from 'chai'
-import {
-  expectSelectWithState,
-  filterSelect
-} from 'dummy/tests/helpers/ember-frost-core'
+import {expectSelectWithState, filterSelect} from 'dummy/tests/helpers/ember-frost-core'
 import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
 import Ember from 'ember'
 import {keyCodes} from 'ember-frost-core/utils'
