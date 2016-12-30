@@ -1,15 +1,14 @@
 /**
  * Component definition for frost-select component
  */
+import layout from '../templates/components/frost-select'
+import keyCodes from '../utils/key-codes'
+import Component from './frost-component'
 import Ember from 'ember'
-const {$, get, run, typeOf, on} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
+const {$, get, run, typeOf, on} = Ember
 
-import Component from './frost-component'
-import layout from '../templates/components/frost-select'
-
-import keyCodes from '../utils/key-codes'
 const {DOWN_ARROW, SPACE, UP_ARROW} = keyCodes
 
 /**

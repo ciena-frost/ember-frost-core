@@ -1,13 +1,14 @@
 import { expect } from 'chai'
 import Ember from 'ember'
-const {
-  $
-} = Ember
+import {cloneEvent} from 'ember-frost-core/utils'
 import {
   describe,
   it
 } from 'mocha'
-import {cloneEvent} from 'ember-frost-core/utils'
+
+const {
+  $
+} = Ember
 
 describe('cloneEvent', function () {
   it('target cloned and original target unchanged', function () {

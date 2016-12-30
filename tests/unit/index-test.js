@@ -4,8 +4,8 @@
  * Making it so that no one could import anything directly from 'ember-frost-core'
  */
 import {expect} from 'chai'
-import {describe, it} from 'mocha'
 import * as index from 'ember-frost-core'
+import {describe, it} from 'mocha'
 
 describe('Unit / index exports', function () {
   const componentNames = [

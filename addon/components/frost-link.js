@@ -1,13 +1,12 @@
 /**
  * Component definition for frost-link component
  */
+import layout from '../templates/components/frost-link'
 import Ember from 'ember'
-const {LinkComponent, Logger, deprecate, get, isEmpty, isPresent, run, set} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
-
-import layout from '../templates/components/frost-link'
+const {LinkComponent, Logger, deprecate, get, isEmpty, isPresent, run, set} = Ember
 
 /**
  * List of valid values to pass into `design` propery

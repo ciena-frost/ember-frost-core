@@ -1,12 +1,11 @@
 /**
  * Component definition for the frost-checkbox component
  */
-import Ember from 'ember'
-const {isEmpty, run, on} = Ember
-import {PropTypes} from 'ember-prop-types'
-
-import Component from './frost-component'
 import layout from '../templates/components/frost-checkbox'
+import Component from './frost-component'
+import Ember from 'ember'
+import {PropTypes} from 'ember-prop-types'
+const {isEmpty, run, on} = Ember
 
 export default Component.extend({
   // == Dependencies ==========================================================

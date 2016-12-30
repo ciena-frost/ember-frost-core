@@ -1,13 +1,12 @@
 /**
  * Component definition for the frost-password component
  */
+import FrostEventsProxy from '../mixins/frost-events-proxy'
+import layout from '../templates/components/frost-password'
+import Component from './frost-component'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
-
-import Component from './frost-component'
-import FrostEventsProxy from '../mixins/frost-events-proxy'
-import layout from '../templates/components/frost-password'
 
 export default Component.extend(FrostEventsProxy, {
 

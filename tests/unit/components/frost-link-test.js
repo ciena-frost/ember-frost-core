@@ -1,16 +1,17 @@
 import {expect} from 'chai'
 import Ember from 'ember'
-const {run, Logger} = Ember
 import {describeComponent} from 'ember-mocha'
+import PropTypeMixin from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
 import {
   afterEach,
   beforeEach,
   describe,
   it
 } from 'mocha'
-import PropTypeMixin from 'ember-prop-types'
 import sinon from 'sinon'
-import SpreadMixin from 'ember-spread'
+
+const {run, Logger} = Ember
 
 describeComponent(
   'frost-link',

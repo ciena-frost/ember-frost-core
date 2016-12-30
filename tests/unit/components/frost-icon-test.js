@@ -1,16 +1,16 @@
 import {expect} from 'chai'
 import Ember from 'ember'
-const {run} = Ember
+import Component from 'ember-frost-core/components/frost-component'
 import {describeComponent} from 'ember-mocha'
+import PropTypeMixin from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
 import {
   beforeEach,
   describe,
   it
 } from 'mocha'
-import PropTypeMixin from 'ember-prop-types'
-import SpreadMixin from 'ember-spread'
 
-import Component from 'ember-frost-core/components/frost-component'
+const {run} = Ember
 
 describeComponent(
   'frost-icon',

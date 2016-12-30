@@ -6,7 +6,9 @@
  * @see {@link https://github.com/Ticketfly/ember-hook/pull/35}
  */
 import Ember from 'ember'
-const {Helper, assign} = Ember
+const {Helper} = Ember
+
+const assign = Ember.assign || Ember.merge
 
 export function extend ([original], newProps) {
   return assign({}, original, newProps)

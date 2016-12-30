@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import Ember from 'ember'
-const {run} = Ember
+import Component from 'ember-frost-core/components/frost-component'
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import * as utils from 'ember-frost-core/utils'
 import {describeComponent} from 'ember-mocha'
@@ -11,7 +11,7 @@ import {
 } from 'mocha'
 import sinon from 'sinon'
 
-import Component from 'ember-frost-core/components/frost-component'
+const {run} = Ember
 
 describeComponent(
   'frost-toggle',

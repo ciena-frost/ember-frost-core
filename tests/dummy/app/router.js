@@ -1,6 +1,6 @@
+import config from './config/environment'
 import Ember from 'ember'
 const {Router: EmberRouter} = Ember
-import config from './config/environment'
 
 var Router = EmberRouter.extend({
   location: config.locationType,

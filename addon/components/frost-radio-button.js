@@ -1,14 +1,13 @@
 /**
  * Component definition for the frost-radio-button component
  */
-import Ember from 'ember'
-const {$} = Ember
-import computed, {readOnly} from 'ember-computed-decorators'
-import {PropTypes} from 'ember-prop-types'
-
-import Component from './frost-component'
 import layout from '../templates/components/frost-radio-button'
 import {cloneEvent} from '../utils'
+import Component from './frost-component'
+import Ember from 'ember'
+import computed, {readOnly} from 'ember-computed-decorators'
+import {PropTypes} from 'ember-prop-types'
+const {$} = Ember
 
 export default Component.extend({
   // == Dependencies ==========================================================

@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import Ember from 'ember'
-const {$, run} = Ember
+import Component from 'ember-frost-core/components/frost-component'
 import {describeComponent} from 'ember-mocha'
 import {
   beforeEach,
@@ -9,7 +9,7 @@ import {
 } from 'mocha'
 import sinon from 'sinon'
 
-import Component from 'ember-frost-core/components/frost-component'
+const {$, run} = Ember
 
 describeComponent(
   'frost-checkbox',

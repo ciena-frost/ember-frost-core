@@ -2,13 +2,12 @@
  * Component definition for the frost-component component
  */
 
-import Ember from 'ember'
-const {Component} = Ember
-import PropTypesMixin, {PropTypes} from 'ember-prop-types'
-import {HookMixin} from 'ember-hook'
-import SpreadMixin from 'ember-spread'
-
 import CssMixin from '../mixins/css'
+import Ember from 'ember'
+import {HookMixin} from 'ember-hook'
+import PropTypesMixin, {PropTypes} from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
+const {Component} = Ember
 
 export default Component.extend(PropTypesMixin, HookMixin, SpreadMixin, CssMixin, {
   // == Dependencies ==========================================================

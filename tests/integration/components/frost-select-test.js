@@ -1,3 +1,6 @@
+import {
+  $hook
+} from 'ember-hook'
 import {expect} from 'chai'
 import {
   expectSelectWithState,
@@ -5,12 +8,7 @@ import {
 } from 'dummy/tests/helpers/ember-frost-core'
 import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
 import Ember from 'ember'
-const {$} = Ember
 import {keyCodes} from 'ember-frost-core/utils'
-const {DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW, TAB} = keyCodes
-import {
-  $hook
-} from 'ember-hook'
 import {
   describeComponent,
   it
@@ -23,6 +21,9 @@ import {
   describe
 } from 'mocha'
 import sinon from 'sinon'
+
+const {$} = Ember
+const {DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW, TAB} = keyCodes
 
 /**
  * Blur element (ensuring it has focus first)

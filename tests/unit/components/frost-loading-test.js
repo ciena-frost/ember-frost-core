@@ -1,11 +1,10 @@
 import {expect} from 'chai'
+import Component from 'ember-frost-core/components/frost-component'
 import {describeComponent} from 'ember-mocha'
 import {
   beforeEach,
   it
 } from 'mocha'
-
-import Component from 'ember-frost-core/components/frost-component'
 
 describeComponent(
   'frost-loading',

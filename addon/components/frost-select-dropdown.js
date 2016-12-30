@@ -1,15 +1,15 @@
 /**
  * Component definition for frost-select-dropdown component
  */
+import layout from '../templates/components/frost-select-dropdown'
+import {keyCodes} from '../utils'
+import Component from './frost-component'
 import Ember from 'ember'
-const {$, get, String: EmberString} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
+const {$, get, String: EmberString} = Ember
 
-import Component from './frost-component'
-import layout from '../templates/components/frost-select-dropdown'
-import {keyCodes} from '../utils'
 const {DOWN_ARROW, ENTER, ESCAPE, UP_ARROW} = keyCodes
 
 const BORDER_HEIGHT = 1

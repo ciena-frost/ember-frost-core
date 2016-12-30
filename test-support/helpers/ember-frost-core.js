@@ -3,7 +3,7 @@ import Ember from 'ember'
 const {$, typeOf} = Ember
 import {$hook} from 'ember-hook'
 
-const assign = Object.assign || Ember.assign || Ember.merge
+const assign = Ember.assign || Ember.merge
 
 /**
  * @typedef {Object} FrostButtonState
