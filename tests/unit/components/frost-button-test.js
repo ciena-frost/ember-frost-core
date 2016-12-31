@@ -10,7 +10,7 @@ import {
 } from 'mocha'
 import sinon from 'sinon'
 
-const {run, Logger} = Ember
+const {Logger, run} = Ember
 
 describeComponent(
   'frost-button',

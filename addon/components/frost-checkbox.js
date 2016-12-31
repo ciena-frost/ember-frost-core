@@ -5,7 +5,7 @@ import layout from '../templates/components/frost-checkbox'
 import Component from './frost-component'
 import Ember from 'ember'
 import {PropTypes} from 'ember-prop-types'
-const {isEmpty, run, on} = Ember
+const {isEmpty, on, run} = Ember
 
 export default Component.extend({
   // == Dependencies ==========================================================

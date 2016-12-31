@@ -1,5 +1,5 @@
 import Ember from 'ember'
-const {computed, Controller, inject} = Ember
+const {Controller, computed, inject} = Ember
 
 export default Controller.extend({
   notifications: inject.service('notification-messages'),

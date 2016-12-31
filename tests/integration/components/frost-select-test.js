@@ -11,7 +11,7 @@ import {afterEach, beforeEach, describe} from 'mocha'
 import sinon from 'sinon'
 
 const {$} = Ember
-const {DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW, TAB} = keyCodes
+const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
 
 /**
  * Blur element (ensuring it has focus first)

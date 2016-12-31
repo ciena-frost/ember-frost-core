@@ -8,7 +8,7 @@ import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
-const {$, get, String: EmberString} = Ember
+const {$, String: EmberString, get} = Ember
 
 const {DOWN_ARROW, ENTER, ESCAPE, UP_ARROW} = keyCodes
 

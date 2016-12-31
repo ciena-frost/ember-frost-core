@@ -7,7 +7,7 @@ import Component from './frost-component'
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
-const {$, get, run, typeOf, on} = Ember
+const {$, get, on, run, typeOf} = Ember
 
 const {DOWN_ARROW, SPACE, UP_ARROW} = keyCodes
 

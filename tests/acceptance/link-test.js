@@ -1,7 +1,7 @@
 import destroyApp from '../helpers/destroy-app'
 import startApp from '../helpers/start-app'
 import { expect } from 'chai'
-import { describe, it, beforeEach, afterEach } from 'mocha'
+import { afterEach, beforeEach, describe, it } from 'mocha'
 
 describe('Acceptance | link', function () {
   let application
