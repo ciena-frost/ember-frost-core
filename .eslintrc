@@ -3,20 +3,7 @@
   "globals": {
     "CSS": true
   },
-  "plugins": [
-    "ember-standard",
-    "ocd"
-  ],
   "rules": {
-    "ember-standard/computed-property-readonly": [2, "always"],
-    "ember-standard/destructure": [2, "always"],
-    "ember-standard/import": [2, "always"],
-    "ember-standard/logger": [2, "always"],
-    "ember-standard/no-set-in-computed-property": 2,
-    "ember-standard/no-settimeout": 2,
-    "ember-standard/prop-types": 2,
-    "ember-standard/single-destructure": 2,
-    "ocd/sort-import-declaration-specifiers": 2,
     "ocd/sort-import-declarations": [
       2,
       {
@@ -27,7 +14,6 @@
           "ember-frost-core/"
         ]
       }
-    ],
-    "ocd/sort-variable-declarator-properties": 2,
+    ]
   }
 }
