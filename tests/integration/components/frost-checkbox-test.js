@@ -245,7 +245,7 @@ describeComponent(
     })
 
     // https://github.com/juwara0/ember-frost-core/issues/1
-    it('sets focus on render when autofocus is true', function () {
+    it.skip('sets focus on render when autofocus is true', function () {
       const focusSpy = sinon.spy(this.$.prototype, 'focus')
 
       this.render(hbs`
