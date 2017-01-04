@@ -1,14 +1,9 @@
 import {expect} from 'chai'
-import {
-  describeComponent,
-  it
-} from 'ember-mocha'
-import hbs from 'htmlbars-inline-precompile'
-import {
-  describe
-} from 'mocha'
-import sinon from 'sinon'
+import {describeComponent, it} from 'ember-mocha'
 import wait from 'ember-test-helpers/wait'
+import hbs from 'htmlbars-inline-precompile'
+import {describe} from 'mocha'
+import sinon from 'sinon'
 
 describeComponent(
   'frost-link',

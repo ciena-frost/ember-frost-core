@@ -2,15 +2,16 @@ import {expect} from 'chai'
 import {expectSelectWithState} from 'dummy/tests/helpers/ember-frost-core'
 import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
 import Ember from 'ember'
-const {$} = Ember
 import keyCodes from 'ember-frost-core/utils/key-codes'
-const {DOWN_ARROW, ENTER, ESCAPE, SPACE, UP_ARROW, TAB} = keyCodes
 import {$hook, initialize as initializeHook} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
 import wait from 'ember-test-helpers/wait'
 import hbs from 'htmlbars-inline-precompile'
 import {afterEach, beforeEach, describe} from 'mocha'
 import sinon from 'sinon'
+
+const {$} = Ember
+const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
 
 /**
  * Blur element (ensuring it has focus first)

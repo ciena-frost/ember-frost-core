@@ -1,15 +1,8 @@
 import {expect} from 'chai'
-import {
-  $hook
-} from 'ember-hook'
-import {
-  describeComponent,
-  it
-} from 'ember-mocha'
+import {$hook} from 'ember-hook'
+import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
-import {
-  describe
-} from 'mocha'
+import {describe} from 'mocha'
 import sinon from 'sinon'
 
 describeComponent(
@@ -511,7 +504,7 @@ describeComponent(
           {{/frost-radio-group}}
         `)
 
-        this.$('.frost-radio-button').trigger({ type: 'keypress', keyCode: 13 })
+        this.$('.frost-radio-button').trigger({type: 'keypress', keyCode: 13})
 
         expect(
           externalActionSpy.called,
@@ -534,7 +527,7 @@ describeComponent(
           {{/frost-radio-group}}
         `)
 
-        this.$('.frost-radio-button').trigger({ type: 'keypress', keyCode: 32 })
+        this.$('.frost-radio-button').trigger({type: 'keypress', keyCode: 32})
 
         expect(
           externalActionSpy.called,

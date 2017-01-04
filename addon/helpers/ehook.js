@@ -4,7 +4,7 @@
  * @see {@link https://github.com/Ticketfly/ember-hook/pull/35}
  */
 import Ember from 'ember'
-const {Helper, deprecate} = Ember
+const {Helper, deprecate, keys} = Ember
 import config from 'ember-get-config'
 import decorateHook from 'ember-hook/utils/decorate-hook'
 import delimit from 'ember-hook/utils/delimit'
@@ -20,8 +20,8 @@ import returnWhenTesting from 'ember-hook/utils/return-when-testing'
  */
 function isEmpty (obj) {
   // Ember.keys is being deprecated in favor of Object.keys, handle both cases
-  if (Ember.keys) {
-    return Ember.keys(obj).length === 0
+  if (keys) {
+    return keys(obj).length === 0
   } else if (Object.keys) {
     return Object.keys(obj).length === 0
   }

@@ -1,3 +1,5 @@
+/* eslint-disable ember-standard/destructure */
+
 import {expect} from 'chai'
 import Ember from 'ember'
 const {$, typeOf} = Ember

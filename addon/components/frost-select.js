@@ -1,15 +1,14 @@
 /**
  * Component definition for frost-select component
  */
+import layout from '../templates/components/frost-select'
+import keyCodes from '../utils/key-codes'
+import Component from './frost-component'
 import Ember from 'ember'
-const {$, get, run, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
+const {$, get, on, run, typeOf} = Ember
 
-import Component from './frost-component'
-import layout from '../templates/components/frost-select'
-
-import keyCodes from '../utils/key-codes'
 const {DOWN_ARROW, SPACE, UP_ARROW} = keyCodes
 
 /**
@@ -214,14 +213,14 @@ export default Component.extend({
   // == DOM Events ============================================================
 
   // FIXME: jsdoc
-  _onClick: Ember.on('click', function () {
+  _onClick: on('click', function () {
     if (!this.get('disabled')) {
       this.toggleProperty('opened')
     }
   }),
 
   // FIXME: jsdoc
-  _onKeyDown: Ember.on('keyDown', function (e) {
+  _onKeyDown: on('keyDown', function (e) {
     if (
       [DOWN_ARROW, UP_ARROW].indexOf(e.keyCode) !== -1 &&
       !this.get('openend')
@@ -233,7 +232,7 @@ export default Component.extend({
   }),
 
   // FIXME: jsdoc
-  _onKeyPress: Ember.on('keyPress', function (e) {
+  _onKeyPress: on('keyPress', function (e) {
     if (e.keyCode === SPACE) {
       e.preventDefault() // Keep space from scrolling page
       e.stopPropagation()
@@ -242,7 +241,7 @@ export default Component.extend({
   }),
 
   // FIXME: jsdoc
-  _onFocusIn: Ember.on('focusIn', function () {
+  _onFocusIn: on('focusIn', function () {
     // If select is disabled make sure it can't get focus
     if (this.get('disabled')) {
       this.$().blur()
@@ -258,7 +257,7 @@ export default Component.extend({
   }),
 
   // FIXME: jsdoc
-  _onFocusOut: Ember.on('focusOut', function () {
+  _onFocusOut: on('focusOut', function () {
     // We must use run.later so filter text input has time to focus when select
     // dropdown is being opened
     run.later(() => {

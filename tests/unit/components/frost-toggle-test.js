@@ -1,17 +1,12 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {run} = Ember
+import Component from 'ember-frost-core/components/frost-component'
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import * as utils from 'ember-frost-core/utils'
 import {describeComponent} from 'ember-mocha'
-import {
-  beforeEach,
-  describe,
-  it
-} from 'mocha'
+import {beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
-
-import Component from 'ember-frost-core/components/frost-component'
 
 describeComponent(
   'frost-toggle',
@@ -192,7 +187,7 @@ describeComponent(
     describe('_changeTarget()', function () {
       it('sets toggled state to "false"', function () {
         const cloneEventStub = sinon.stub(utils, 'cloneEvent').returns({
-          target: { value: null }
+          target: {value: null}
         })
 
         run(() => {
@@ -221,7 +216,7 @@ describeComponent(
 
       it('sets toggled state to "true"', function () {
         sinon.stub(utils, 'cloneEvent').returns({
-          target: { value: null }
+          target: {value: null}
         })
 
         run(() => {

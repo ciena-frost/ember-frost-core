@@ -1,7 +1,7 @@
 import Ember from 'ember'
 import iconPacks from 'ember-frost-core/icon-packs'
 
-const { computed, Controller } = Ember
+const {Controller, computed} = Ember
 
 export default Controller.extend({
   backgroundColors: [
@@ -25,7 +25,7 @@ export default Controller.extend({
         })
       }
     })
-  }),
+  }).readOnly(),
 
   actions: {
     colorSelected (color) {

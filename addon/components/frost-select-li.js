@@ -1,12 +1,12 @@
 /**
  * Component definition for the frost-select-li component
  */
+import layout from '../templates/components/frost-select-li'
+import Component from './frost-component'
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
-
-import Component from './frost-component'
-import layout from '../templates/components/frost-select-li'
+const {on} = Ember
 
 const regexEscapeChars = '-[]/{}()*+?.^$|'.split('')
 
@@ -59,14 +59,14 @@ export default Component.extend({
   // == DOM Events ============================================================
 
   // FIXME: jsdoc
-  _onMouseDown: Ember.on('mouseDown', function (e) {
+  _onMouseDown: on('mouseDown', function (e) {
     e.preventDefault() // Prevent dropdown overlay from receiving click
     const data = this.get('data')
     this.get('onSelect')(data.value)
   }),
 
   // FIXME: jsdoc
-  _onMouseEnter: Ember.on('mouseEnter', function () {
+  _onMouseEnter: on('mouseEnter', function () {
     const data = this.get('data')
     this.get('onItemOver')(data)
   }),

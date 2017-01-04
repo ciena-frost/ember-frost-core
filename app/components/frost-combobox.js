@@ -1,1 +1,1 @@
-export { default } from 'ember-frost-core/components/frost-combobox'
+export {default} from 'ember-frost-core/components/frost-combobox'

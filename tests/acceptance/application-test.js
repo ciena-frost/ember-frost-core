@@ -1,7 +1,7 @@
-import {expect} from 'chai'
-import {after, before, beforeEach, describe, it} from 'mocha'
 import destroyApp from '../helpers/destroy-app'
 import startApp from '../helpers/start-app'
+import {expect} from 'chai'
+import {after, before, beforeEach, describe, it} from 'mocha'
 
 describe('Acceptance: Application', function () {
   let application

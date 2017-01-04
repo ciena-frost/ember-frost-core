@@ -1,13 +1,12 @@
 /**
  * Component definition for frost-link component
  */
+import layout from '../templates/components/frost-link'
 import Ember from 'ember'
-const {LinkComponent, Logger, deprecate, get, isEmpty, isPresent, run, set} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
-
-import layout from '../templates/components/frost-link'
+const {LinkComponent, Logger, deprecate, get, isEmpty, isPresent, run, set} = Ember
 
 /**
  * List of valid values to pass into `design` propery
@@ -251,7 +250,7 @@ export default LinkComponent.extend(SpreadMixin, PropTypeMixin, {
    * as if we used the original link-to interface.
    */
   didReceiveAttrs () {
-    const numberOfParams = this.get('params').length
+    const numberOfParams = this.get('params.length')
     if (numberOfParams <= 1) {
       let params = []
       const text = this.get('text')

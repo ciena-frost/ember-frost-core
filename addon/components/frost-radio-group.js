@@ -1,11 +1,10 @@
 /**
  * Component definition for frost-radio-group component
  */
-import computed from 'ember-computed-decorators'
-import {PropTypes} from 'ember-prop-types'
-
-import Component from './frost-component'
 import layout from '../templates/components/frost-radio-group'
+import Component from './frost-component'
+import computed, {readOnly} from 'ember-computed-decorators'
+import {PropTypes} from 'ember-prop-types'
 
 export default Component.extend({
   // == Dependencies ==========================================================
@@ -46,6 +45,7 @@ export default Component.extend({
 
   // == Computed Properties ===================================================
 
+  @readOnly
   @computed('inputs')
   /**
    * Set the default values for the inputs.

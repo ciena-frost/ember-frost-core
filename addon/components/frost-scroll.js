@@ -1,10 +1,9 @@
 /**
  * Component definition for frost-scroll component
  */
+import Component from './frost-component'
 import Ember from 'ember'
 const {deprecate, run, typeOf} = Ember
-
-import Component from './frost-component'
 
 export default Component.extend({
 

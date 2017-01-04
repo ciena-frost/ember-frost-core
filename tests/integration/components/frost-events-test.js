@@ -1,18 +1,12 @@
-/* jshint expr:true */
-import { expect } from 'chai'
+import {expect} from 'chai'
 import Ember from 'ember'
-const { Component } = Ember
-import {
-  describeComponent,
-  it
-} from 'ember-mocha'
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
+import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
-import {
-  beforeEach,
-  describe
-} from 'mocha'
+import {beforeEach, describe} from 'mocha'
 import sinon from 'sinon'
+
+const {Component, Handlebars} = Ember
 
 describeComponent(
   'frost-events',
@@ -113,7 +107,7 @@ describeComponent(
       eventTypes.forEach((test) => {
         it(`calls ${test.in} closure action`, function () {
           const externalActionSpy = sinon.spy()
-          const template = Ember.Handlebars.compile(`
+          const template = Handlebars.compile(`
             {{mock-component ${test.in}=(action 'externalAction')}}
           `)
 
@@ -148,7 +142,7 @@ describeComponent(
       eventTypes.forEach((test) => {
         it(`calls ${test.in} closure action`, function () {
           const externalActionSpy = sinon.spy()
-          const template = Ember.Handlebars.compile(`
+          const template = Handlebars.compile(`
             {{text-support ${test.in}=(action 'externalAction')}}
           `)
 
@@ -156,7 +150,7 @@ describeComponent(
 
           this.render(template)
 
-          this.$('input').trigger({ type: 'keyup', keyCode: `${test.out}` })
+          this.$('input').trigger({type: 'keyup', keyCode: `${test.out}`})
 
           expect(
             externalActionSpy.called,

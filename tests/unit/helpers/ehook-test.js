@@ -3,9 +3,8 @@
  */
 
 import {expect} from 'chai'
-import {beforeEach, describe, it} from 'mocha'
-
 import {ehook} from 'ember-frost-core/helpers/ehook'
+import {beforeEach, describe, it} from 'mocha'
 
 describe('Unit / Helper / ehook', function () {
   let result
