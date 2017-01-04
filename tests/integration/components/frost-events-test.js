@@ -1,16 +1,9 @@
-/* jshint expr:true */
 import {expect} from 'chai'
 import Ember from 'ember'
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
-import {
-  describeComponent,
-  it
-} from 'ember-mocha'
+import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
-import {
-  beforeEach,
-  describe
-} from 'mocha'
+import {beforeEach, describe} from 'mocha'
 import sinon from 'sinon'
 
 const {Component, Handlebars} = Ember

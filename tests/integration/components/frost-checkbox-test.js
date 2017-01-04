@@ -1,8 +1,5 @@
 import {expect} from 'chai'
-import {
-  describeComponent,
-  it
-} from 'ember-mocha'
+import {describeComponent, it} from 'ember-mocha'
 import wait from 'ember-test-helpers/wait'
 import hbs from 'htmlbars-inline-precompile'
 import {describe} from 'mocha'
@@ -248,7 +245,7 @@ describeComponent(
     })
 
     // https://github.com/juwara0/ember-frost-core/issues/1
-    it.skip('sets focus on render when autofocus is true', function () {
+    it('sets focus on render when autofocus is true', function () {
       const focusSpy = sinon.spy(this.$.prototype, 'focus')
 
       this.render(hbs`

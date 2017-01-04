@@ -1,15 +1,10 @@
 import {expect} from 'chai'
 import Ember from 'ember'
+const {run} = Ember
 import Component from 'ember-frost-core/components/frost-component'
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import {describeComponent} from 'ember-mocha'
-import {
-  beforeEach,
-  describe,
-  it
-} from 'mocha'
-
-const {run} = Ember
+import {beforeEach, describe, it} from 'mocha'
 
 describeComponent(
   'frost-password',

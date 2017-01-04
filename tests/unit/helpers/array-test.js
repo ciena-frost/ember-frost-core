@@ -1,11 +1,6 @@
 import {expect} from 'chai'
-import {
-  array
-} from 'ember-frost-core/helpers/array'
-import {
-  describe,
-  it
-} from 'mocha'
+import {array} from 'ember-frost-core/helpers/array'
+import {describe, it} from 'mocha'
 
 const data = [42, 1, 2]
 
