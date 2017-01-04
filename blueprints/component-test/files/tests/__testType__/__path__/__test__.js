@@ -3,10 +3,10 @@
  */
 
 import {expect} from 'chai'
+<% if (testType === 'integration' ) { %>import {$hook, initialize as initializeHook} from 'ember-hook'<% } %>
 import {describeComponent, it} from 'ember-mocha'
-<% if (testType === 'integration' ) { %>import hbs from 'htmlbars-inline-precompile'
-import {$hook, initialize as initializeHook} from 'ember-hook'
-import wait from 'ember-test-helpers/wait'
+<% if (testType === 'integration' ) { %>import wait from 'ember-test-helpers/wait'
+import hbs from 'htmlbars-inline-precompile'
 import {afterEach, beforeEach, describe} from 'mocha'<% } else { %>
 import {afterEach, beforeEach, describe} from 'mocha'<% } %>
 import sinon from 'sinon'

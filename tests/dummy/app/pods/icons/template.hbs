@@ -30,6 +30,7 @@
       <div class="demo">
         {{!-- Using the legacy nested format until the feature is available and svgs can be moved --}}
         {{frost-icon
+          hook='myIconPackIcon'
           pack='frost'
           icon='round-add'
         }}
@@ -54,6 +55,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET icon-other-spread }}
         {{frost-icon
+          hook='mySpreadIcon'
           options=(hash
             pack='frost'
             icon='round-add'
@@ -89,7 +91,10 @@
                 {{format-markdown icon.markdown}}
               </div>
               <div class="content" class="{{backgroundColor}}">
-                {{frost-icon icon=icon.name}}
+                {{frost-icon
+                  hook=(concat icon.name 'Icon')
+                  icon=icon.name
+                }}
               </div>
             </div>
           {{/each}}

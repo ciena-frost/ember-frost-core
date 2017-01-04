@@ -34,11 +34,6 @@ describeComponent(
       ).to.equal(false)
 
       expect(
-        component.get('form'),
-        'form: "null"'
-      ).to.equal(null)
-
-      expect(
         component.get('hook'),
         'hook: "undefined"'
       ).to.equal(undefined)
@@ -47,16 +42,6 @@ describeComponent(
         component.get('isRevealed'),
         'isRevealed: false'
       ).to.equal(false)
-
-      expect(
-        component.get('maxlength'),
-        'maxlength: "null"'
-      ).to.equal(null)
-
-      expect(
-        component.get('placeholder'),
-        'placeholder: "null"'
-      ).to.equal(null)
 
       expect(
         component.get('readonly'),
@@ -84,19 +69,9 @@ describeComponent(
       ).to.eql(0)
 
       expect(
-        component.get('title'),
-        'title: "null"'
-      ).to.equal(null)
-
-      expect(
         component.get('type'),
         'type: "password"'
       ).to.eql('password')
-
-      expect(
-        component.get('value'),
-        'value: "null"'
-      ).to.equal(null)
     })
 
     it('extends the commone frost component', function () {

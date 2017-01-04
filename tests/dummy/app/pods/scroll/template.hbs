@@ -9,7 +9,11 @@
         {{#frost-scroll class='full'
           hook='myScroll'
         }}
-          {{frost-icon icon='add' class='dummy-svg-huge'}}
+          {{frost-icon
+            class='dummy-svg-huge'
+            hook='hugeIcon1'
+            icon='add'
+          }}
         {{/frost-scroll}}
         {{! END-SNIPPET }}
       </div>
@@ -27,13 +31,18 @@
       <div class="demo scroll-size">
         {{! BEGIN-SNIPPET scroll-events }}
         {{#frost-scroll class='full'
+          hook='myEventsScroll'
           onScrollUp=(action 'onScrollUp')
           onScrollDown=(action 'onScrollDown')
           onScrollYStart=(action 'onScrollYStart')
           onScrollYEnd=(action 'onScrollYEnd')
           on-scroll-y-end=(action 'yEndReached')
         }}
-          {{frost-icon icon='add' class='dummy-svg-huge'}}
+          {{frost-icon
+            class='dummy-svg-huge'
+            hook='hugeIcon2'
+            icon='add'
+          }}
         {{/frost-scroll}}
         {{! END-SNIPPET }}
       </div>
@@ -56,11 +65,16 @@
         {{! BEGIN-SNIPPET scroll-other-spread }}
         {{#frost-scroll
           class='full'
+          hook='mySpreadScroll'
           options=(hash
             hook='myScroll'
           )
         }}
-          {{frost-icon icon='add' class='dummy-svg-huge'}}
+          {{frost-icon
+            class='dummy-svg-huge'
+            hook='hugeIcon3'
+            icon='add'
+          }}
         {{/frost-scroll}}
         {{! END-SNIPPET }}
       </div>
