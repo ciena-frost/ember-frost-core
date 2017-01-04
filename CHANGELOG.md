@@ -1,3 +1,11 @@
+# 1.3.9
+
+* **Fixed** `frost-link` to require `hook` property in `propTypes` definition.
+* **Fixed** `frost-password` to not set properties to invalid values in `getDefaultProps()`.
+* **Fixed** most `ember-prop-types` warnings from dummy app by adding missing hooks.
+* **Fixed** component generator to sort imports.
+
+
 # 1.3.8
 
 * **Fixed** issue with `frost-button` where underlying icons weren't being provided the `hook` property.
