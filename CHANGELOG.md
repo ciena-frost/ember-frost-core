@@ -1,3 +1,8 @@
+# 1.3.7
+
+* Performed minor cleanup with `npm run eslint --- --fix` while running latest [eslint-config-frost-standard](https://github.com/ciena-frost/eslint-config-frost-standard) which includes new rules from [eslint-plugin-ember-standard](https://github.com/ciena-blueplanet/eslint-plugin-ember-standard) and [eslint-plugin-ocd](https://github.com/ciena-blueplanet/eslint-plugin-ocd).
+
+
 # 1.3.6
 
 * **Fixed** dependencies to be included via blueprints instead of installed as direct npm dependencies of this addon.
