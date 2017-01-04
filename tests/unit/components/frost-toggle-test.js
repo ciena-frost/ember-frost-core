@@ -192,7 +192,7 @@ describeComponent(
     describe('_changeTarget()', function () {
       it('sets toggled state to "false"', function () {
         const cloneEventStub = sinon.stub(utils, 'cloneEvent').returns({
-          target: { value: null }
+          target: {value: null}
         })
 
         run(() => {
@@ -221,7 +221,7 @@ describeComponent(
 
       it('sets toggled state to "true"', function () {
         sinon.stub(utils, 'cloneEvent').returns({
-          target: { value: null }
+          target: {value: null}
         })
 
         run(() => {

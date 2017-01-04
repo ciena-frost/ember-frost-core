@@ -190,7 +190,7 @@ module.exports = {
 
       return new SVGStore(svgFunnel, {
         outputFile: `/assets/icon-packs/${iconPack.name}.svg`,
-        svgstoreOpts: { customSymbolAttrs: ['preserveAspectRatio'] }
+        svgstoreOpts: {customSymbolAttrs: ['preserveAspectRatio']}
       })
     })
 
@@ -205,7 +205,7 @@ module.exports = {
       })
       iconPacks.push(new SVGStore(svgFunnel, {
         outputFile: `/assets/icon-packs/${localIconPackName}.svg`,
-        svgstoreOpts: { customSymbolAttrs: ['preserveAspectRatio'] }
+        svgstoreOpts: {customSymbolAttrs: ['preserveAspectRatio']}
       }))
     }
 

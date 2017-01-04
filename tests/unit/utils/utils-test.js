@@ -1,4 +1,4 @@
-import { expect } from 'chai'
+import {expect} from 'chai'
 import Ember from 'ember'
 import {cloneEvent} from 'ember-frost-core/utils'
 import {

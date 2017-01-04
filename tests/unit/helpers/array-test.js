@@ -1,4 +1,4 @@
-import { expect } from 'chai'
+import {expect} from 'chai'
 import {
   array
 } from 'ember-frost-core/helpers/array'

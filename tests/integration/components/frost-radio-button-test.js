@@ -511,7 +511,7 @@ describeComponent(
           {{/frost-radio-group}}
         `)
 
-        this.$('.frost-radio-button').trigger({ type: 'keypress', keyCode: 13 })
+        this.$('.frost-radio-button').trigger({type: 'keypress', keyCode: 13})
 
         expect(
           externalActionSpy.called,
@@ -534,7 +534,7 @@ describeComponent(
           {{/frost-radio-group}}
         `)
 
-        this.$('.frost-radio-button').trigger({ type: 'keypress', keyCode: 32 })
+        this.$('.frost-radio-button').trigger({type: 'keypress', keyCode: 32})
 
         expect(
           externalActionSpy.called,

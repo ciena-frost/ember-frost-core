@@ -1,7 +1,7 @@
 import Ember from 'ember'
 import iconPacks from 'ember-frost-core/icon-packs'
 
-const { Controller, String: EmberString, computed } = Ember
+const {Controller, String: EmberString, computed} = Ember
 
 export default Controller.extend({
   backgroundColors: [

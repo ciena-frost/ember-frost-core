@@ -1,1 +1,1 @@
-export { default } from 'ember-frost-core/components/frost-select-li'
+export {default} from 'ember-frost-core/components/frost-select-li'

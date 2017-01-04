@@ -1,8 +1,8 @@
 /* jshint expr:true */
-import { expect } from 'chai'
+import {expect} from 'chai'
 import Ember from 'ember'
 import Component from 'ember-frost-core/components/frost-component'
-import { describeComponent } from 'ember-mocha'
+import {describeComponent} from 'ember-mocha'
 import {
   beforeEach,
   describe,

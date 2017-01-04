@@ -1,5 +1,5 @@
 /* jshint expr:true */
-import { expect } from 'chai'
+import {expect} from 'chai'
 import keycodes from 'ember-frost-core/utils/key-codes'
 import {
   describe,

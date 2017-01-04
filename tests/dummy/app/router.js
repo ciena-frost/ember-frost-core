@@ -8,7 +8,7 @@ var Router = EmberRouter.extend({
 })
 
 Router.map(function () {
-  this.route('demo', { path: '/' })
+  this.route('demo', {path: '/'})
   this.route('button')
   this.route('checkbox')
   this.route('palette')

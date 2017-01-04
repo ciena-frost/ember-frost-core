@@ -1,5 +1,5 @@
 /* jshint expr:true */
-import { expect } from 'chai'
+import {expect} from 'chai'
 import Ember from 'ember'
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import {
@@ -13,7 +13,7 @@ import {
 } from 'mocha'
 import sinon from 'sinon'
 
-const { Component, Handlebars } = Ember
+const {Component, Handlebars} = Ember
 
 describeComponent(
   'frost-events',
@@ -157,7 +157,7 @@ describeComponent(
 
           this.render(template)
 
-          this.$('input').trigger({ type: 'keyup', keyCode: `${test.out}` })
+          this.$('input').trigger({type: 'keyup', keyCode: `${test.out}`})
 
           expect(
             externalActionSpy.called,

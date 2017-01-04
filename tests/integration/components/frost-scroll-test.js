@@ -1,5 +1,5 @@
 /* jshint expr:true */
-import { expect } from 'chai'
+import {expect} from 'chai'
 import {$hook} from 'ember-hook'
 import {
   describeComponent,

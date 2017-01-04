@@ -366,7 +366,7 @@ describeComponent(
         const currentRoute = 'my-route'
 
         run(() => {
-          component.set('_routing', { currentRouteName: currentRoute })
+          component.set('_routing', {currentRouteName: currentRoute})
           component.set('params', [])
           component.set('href', 'my-url')
           component.set('_shouldOpenInSameTab', function () { return false })
