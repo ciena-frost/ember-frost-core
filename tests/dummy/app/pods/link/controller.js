@@ -1,5 +1,6 @@
 import Ember from 'ember'
 const {Controller, inject} = Ember
+import computed, {readOnly} from 'ember-computed-decorators'
 
 export default Controller.extend({
   notifications: inject.service('notification-messages'),
@@ -13,6 +14,12 @@ export default Controller.extend({
   second: {
     id: 4,
     text: 'custom second'
+  },
+
+  @readOnly
+  @computed('fontSize')
+  fontSizeStyle (fontSize) {
+    return Ember.String.htmlSafe(`font-size: ${fontSize}px`)
   },
 
   actions: {

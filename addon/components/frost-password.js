@@ -67,17 +67,12 @@ export default Component.extend(FrostEventsProxy, {
       isRevealed: false,
       revealable: false,
       tabindex: 0,
-      value: null,
 
       // Setting these as part of establishing an initial value
       autofocus: false,
-      form: null,
-      maxlength: null,
-      placeholder: null,
       readonly: false,
       required: false,
-      selectionDirection: 'none',
-      title: null
+      selectionDirection: 'none'
     }
   },
 

@@ -4,6 +4,7 @@
 import layout from '../templates/components/frost-link'
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
+import {HookMixin} from 'ember-hook'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
 const {LinkComponent, Logger, deprecate, get, isEmpty, isPresent, run, set} = Ember
@@ -36,7 +37,7 @@ const validSizes = [
   'small'
 ]
 
-export default LinkComponent.extend(SpreadMixin, PropTypeMixin, {
+export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
@@ -64,7 +65,9 @@ export default LinkComponent.extend(SpreadMixin, PropTypeMixin, {
   propTypes: {
     // options
     design: PropTypes.oneOf(validDesigns),
-    hook: PropTypes.string,
+    hook: PropTypes.string.isRequired,
+    hookPrefix: PropTypes.string,
+    hookQualifiers: PropTypes.object,
     icon: PropTypes.string,
     priority: PropTypes.oneOf(validPriorities),
     routeNames: PropTypes.array,
@@ -84,6 +87,7 @@ export default LinkComponent.extend(SpreadMixin, PropTypeMixin, {
   getDefaultProps () {
     return {
       design: '',
+      hookPrefix: this.get('hook'),
       icon: '',
       priority: '',
       routeNames: [],

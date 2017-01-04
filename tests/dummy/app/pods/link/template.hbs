@@ -27,6 +27,7 @@
       <div class="title">medium</div>
       <div class="demo">
         {{frost-link 'Text' 'link.min'
+          hook='myMediumLink'
           priority='primary'
           size='medium'
         }}
@@ -34,6 +35,7 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-link 'Text' 'link.min'
+  hook='myMediumLink'
   priority='primary'
   size='medium'
 }}
@@ -45,6 +47,7 @@
       <div class="title">large</div>
       <div class="demo">
         {{frost-link 'Text' 'link.min'
+          hook='myLargeLink'
           priority='primary'
           size='large'
         }}
@@ -52,6 +55,7 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-link 'Text' 'link.min'
+  hook='myLargeLink'
   priority='primary'
   size='large'
 }}
@@ -63,6 +67,7 @@
       <div class="title">disabled</div>
       <div class="demo">
         {{frost-link 'Text' 'link.min'
+          hook='myDisabledLink'
           priority='primary'
           size='small'
           disabled=true
@@ -71,6 +76,7 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-link 'Text' 'link.min'
+  hook='myDisabledLink'
   priority='primary'
   size='small'
   disabled=true
@@ -83,6 +89,7 @@
       <div class="title">tabindex</div>
       <div class="demo">
         {{frost-link 'Text' 'link.min'
+          hook='myTabIndexLink'
           priority='primary'
           size='small'
           tabindex='-1'
@@ -91,6 +98,7 @@
       <div class="snippet">
         {{format-markdown "```handlebars
     {{frost-link 'Text' 'link.min'
+      hook='myTabIndexLink'
       priority='primary'
       size='small'
       tabindex='-1'
@@ -102,20 +110,24 @@
       <div class="title">multiple routes</div>
       <div class="demo">
         {{frost-link 'Text'
-          routeNames=(array 'link.min' 'link.max')
-          hook='mySmallLink'
+          hook='myMultipleRoutesLink'
           priority='primary'
+          routeNames=(array
+            'link.min'
+            'link.max'
+          )
           size='small'
         }}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
     {{frost-link 'Text'
+      hook='myMultipleRoutesLink'
+      priority='primary'
       routeNames=(array
         'link.min'
-        'link.max')
-      hook='mySmallLink'
-      priority='primary'
+        'link.max'
+      )
       size='small'
     }}
   ```"}}
@@ -125,9 +137,13 @@
       <div class="title">multiple routes - block format</div>
       <div class="demo">
         {{#frost-link
-          routeNames=(array 'link.min' 'link.max' 'link.middle')
-          hook='mySmallLink'
+          hook='myMultipleRoutesBlockFormatLink'
           priority='primary'
+          routeNames=(array
+            'link.min'
+            'link.max'
+            'link.middle'
+          )
           size='small'
         }}
           Text
@@ -136,12 +152,13 @@
       <div class="snippet">
         {{format-markdown "```handlebars
     {{#frost-link
+      hook='myMultipleRoutesBlockFormatLink'
+      priority='primary'
       routeNames=(array
         'link.min'
         'link.max'
-        'link.middle')
-      hook='mySmallLink'
-      priority='primary'
+        'link.middle'
+      )
       size='small'
     }}
       Text
@@ -159,6 +176,7 @@
       <div class="title">small</div>
       <div class="demo">
         {{frost-link 'Text' 'link.min'
+          hook='mySecondarySmallLink'
           priority='secondary'
           size='small'
         }}
@@ -166,6 +184,7 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-link 'Text' 'link.min'
+  hook='mySecondarySmallLink'
   priority='secondary'
   size='small'
 }}
@@ -177,6 +196,7 @@
       <div class="title">medium</div>
       <div class="demo">
         {{frost-link 'Text' 'link.min'
+          hook='mySecondaryMediumLink'
           priority='secondary'
           size='medium'
         }}
@@ -184,6 +204,7 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-link 'Text' 'link.min'
+  hook='mySecondaryMediumLink'
   priority='secondary'
   size='medium'
 }}
@@ -195,6 +216,7 @@
       <div class="title">large</div>
       <div class="demo">
         {{frost-link 'Text' 'link.min'
+          hook='mySecondaryLargeLink'
           priority='secondary'
           size='large'
         }}
@@ -202,6 +224,7 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{#frost-link 'Text' 'link.min'
+  hook='mySecondaryLargeLink'
   priority='secondary'
   size='large'
 }}
@@ -213,17 +236,19 @@
       <div class="title">disabled</div>
       <div class="demo">
         {{frost-link 'Text' 'link.min'
+          disabled=true
+          hook='mySecondaryDisabledLink'
           priority='secondary'
           size='small'
-          disabled=true
         }}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-link 'Text' 'link.min'
+  disabled=true
+  hook='mySecondaryDisabledLink'
   priority='secondary'
   size='small'
-  disabled=true
 }}
 ```"}}
       </div>
@@ -233,6 +258,7 @@
       <div class="title">tabindex</div>
       <div class="demo">
         {{frost-link 'Text' 'link.min'
+          hook='mySecondaryTabIndexLink'
           priority='secondary'
           size='small'
           tabindex='-1'
@@ -241,6 +267,7 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-link 'Text' 'link.min'
+  hook='mySecondaryTabIndexLink'
   priority='secondary'
   size='small'
   tabindex='-1'
@@ -259,10 +286,11 @@
       <div class="title">inline (font based on size)</div>
       <div class="demo">
         <div class='extra-padding'>
-          <span style="font-size: {{fontSize}}px">
+          <span style={{fontSizeStyle}}>
             lorem
             {{#frost-link 'link.min'
               design='inline'
+              hook='myInlineLink'
             }}
               link
             {{/frost-link}}
@@ -271,6 +299,7 @@
         </div>
         <div>
           {{frost-button
+            hook='increaseFontSizeButton'
             onClick=(action 'increase' fontSize)
             priority='primary'
             size='small'
@@ -278,6 +307,7 @@
           }}
 
           {{frost-button
+            hook='decreaseFontSizeButton'
             onClick=(action 'decrease' fontSize)
             priority='primary'
             size='small'
@@ -289,6 +319,7 @@
         {{format-markdown "```handlebars
 {{#frost-link 'link.min'
   design='inline'
+  hook='myInlineLink'
 }}
   link
 {{/frost-link}}
@@ -303,6 +334,7 @@
         {{#frost-link 'link.min'
           design='inline'
           disabled=true
+          hook='myDisabledInlineLink'
         }}
           link
         {{/frost-link}}
@@ -313,6 +345,7 @@
 {{#frost-link 'link.min'
   design='inline'
   disabled=true
+  hook='myDisabledInlineLink'
 }}
   link
 {{/frost-link}}
@@ -325,6 +358,7 @@
       <div class="demo">
         {{#frost-link 'link.min'
           design='info-bar'
+          hook='myInfoBarLink'
           icon='infobar-find'
         }}
           Action
@@ -334,6 +368,7 @@
         {{format-markdown "```handlebars
 {{#frost-link 'link.min'
   design='info-bar'
+  hook='myInfoBarLink'
   icon='infobar-find'
 }}
   Action
@@ -346,9 +381,10 @@
       <div class="title">disabled info-bar</div>
       <div class="demo">
         {{#frost-link 'link.min'
-          design='info-bar'
-          icon='infobar-find'
           disabled=true
+          design='info-bar'
+          hook='myDisabledInfoBarLink'
+          icon='infobar-find'
         }}
           Action
         {{/frost-link}}
@@ -356,9 +392,10 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{#frost-link 'link.min'
+  disabled=true
+  hook='myDisabledInfoBarLink'
   design='info-bar'
   icon='infobar-find'
-  disabled=true
 }}
   Action
 {{/frost-link}}
@@ -377,6 +414,7 @@
       <div class="demo">
         {{! BEGIN-SNIPPET pre-transition-action }}
         {{frost-link 'Watch for a notification' 'link.min'
+          hook='myOnClickActionLink'
           priority='secondary'
           size='small'
           onClick=(action 'preTransition')
@@ -397,6 +435,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET link-other-spread }}
         {{frost-link
+          hook='mySpreadLink'
           options=(hash
             priority='secondary'
             route='link.first'
@@ -421,32 +460,32 @@
       <div class='title'>Positional params</div>
       <div class='demo'>
         <div class='dummy-header'>Model - ID</div>
-        {{#frost-link 'link.first' 1 id='model-id'}}
+        {{#frost-link 'link.first' 1 hook='myLink1' id='model-id'}}
           First : 1
         {{/frost-link}}
 
         <div class='dummy-header'>Model - ID, Query params</div>
-        {{#frost-link 'link.first' 2 (query-params foo='bar') id='query-params'}}
+        {{#frost-link 'link.first' 2 (query-params foo='bar') hook='myLink2' id='query-params'}}
           First : 2 (?foo=bar)
         {{/frost-link}}
 
         <div class='dummy-header'>Model - Object</div>
-        {{#frost-link 'link.first' first id='model-object'}}
+        {{#frost-link 'link.first' first hook='myLink3' id='model-object'}}
           First : 'custom first'
         {{/frost-link}}
 
         <div class='dummy-header'>Nested Model - ID</div>
-        {{#frost-link 'link.first.second' 1 2 id='nested-model-id'}}
+        {{#frost-link 'link.first.second' 1 2 hook='myLink4' id='nested-model-id'}}
           First : 1 / Second : 2
         {{/frost-link}}
 
         <div class='dummy-header'>Nested Model - Object</div>
-        {{#frost-link 'link.first.second' first second id='nested-model-object'}}
+        {{#frost-link 'link.first.second' first second hook='myLink5' id='nested-model-object'}}
           First : 'custom first' / Second : 'custom second'
         {{/frost-link}}
 
         <div class='dummy-header'>Nested Model - Mixed ID/Object</div>
-        {{#frost-link 'link.first.second' first 2 id='nested-model-mixed'}}
+        {{#frost-link 'link.first.second' first 2 hook='myLink6' id='nested-model-mixed'}}
           First : 'custom first' / Second : 2
         {{/frost-link}}
       </div>
@@ -454,20 +493,20 @@
       <div class='title'>Spread</div>
       <div class='demo'>
         <div class='dummy-header'>Basic</div>
-        {{frost-link id='spread-basic' options=(hash
+        {{frost-link hook='myLink7' id='spread-basic' options=(hash
           route='link.min'
           text='Basic'
         )}}
 
         <div class='dummy-header'>Model - ID</div>
-        {{frost-link id='spread-model-id' options=(hash
+        {{frost-link hook='myLink8' id='spread-model-id' options=(hash
           route='link.first'
           routeModels=(array 1)
           text='First : 1'
         )}}
 
         <div class='dummy-header'>Model - ID, Query params</div>
-        {{frost-link id='spread-query-params' options=(hash
+        {{frost-link hook='myLink9' id='spread-query-params' options=(hash
           route='link.first'
           routeModels=(array (hash id=3 text='custom first'))
           routeQueryParams=(hash foo='bar')
@@ -475,28 +514,28 @@
         )}}
 
         <div class='dummy-header'>Model - Object</div>
-        {{frost-link id='spread-model-object' options=(hash
+        {{frost-link hook='myLink10' id='spread-model-object' options=(hash
           route='link.first'
           routeModels=(array (hash id=3 text='custom first'))
           text='First : custom first'
         )}}
 
         <div class='dummy-header'>Nested Model - ID</div>
-        {{frost-link id='spread-nested-model-id' options=(hash
+        {{frost-link hook='myLink11' id='spread-nested-model-id' options=(hash
           route='link.first.second'
           routeModels=(array 1 2)
           text='First : 1 / Second : 2'
         )}}
 
         <div class='dummy-header'>Nested Model - Object</div>
-        {{frost-link id='spread-nested-model-object' options=(hash
+        {{frost-link hook='myLink12' id='spread-nested-model-object' options=(hash
           route='link.first.second'
           routeModels=(array (hash id=3 text='custom first') (hash id=4 text='custom second'))
           text='First : custom first / Second : custom second'
         )}}
 
         <div class='dummy-header'>Nested Model - Mixed ID/Object</div>
-        {{frost-link id='spread-nested-model-mixed' options=(hash
+        {{frost-link hook='myLink13' id='spread-nested-model-mixed' options=(hash
           route='link.first.second'
           routeModels=(array (hash id=3 text='custom first') 2)
           text='First : custom first / Second : 2'

@@ -23,6 +23,7 @@
             <div class='demo'>
               {{! BEGIN-SNIPPET toggle-mut }}
               {{frost-toggle
+                hook='myToggle'
                 value=value2
                 onClick=(mut value2)
               }}
@@ -38,6 +39,7 @@
             <div class='demo'>
               {{! BEGIN-SNIPPET toggle-action-mut }}
               {{frost-toggle
+                hook='myToggle'
                 value=value3
                 onClick=(action (mut value3) value="target.value")
               }}
@@ -53,6 +55,7 @@
             <div class='demo'>
               {{! BEGIN-SNIPPET toggle-label }}
               {{frost-toggle
+                hook='myToggle'
                 value=value4
                 trueLabel='En'
                 falseLabel='Fr'
@@ -70,6 +73,7 @@
             <div class='demo'>
               {{! BEGIN-SNIPPET toggle-value }}
               {{frost-toggle
+                hook='myToggle'
                 value=value5
                 trueValue='true Value'
                 falseValue='false Value'
@@ -87,6 +91,7 @@
             <div class='demo'>
               {{! BEGIN-SNIPPET toggle-value-label }}
               {{frost-toggle
+                hook='myToggle'
                 value=value6
                 trueLabel='true'
                 falseLabel='false'
@@ -106,6 +111,7 @@
             <div class='demo'>
               {{! BEGIN-SNIPPET toggle-init }}
               {{frost-toggle
+                hook='myToggle'
                 value=value7
                 trueValue='trueValue'
                 falseValue='falseValue'
@@ -123,9 +129,10 @@
             <div class='demo'>
               {{! BEGIN-SNIPPET toggle-mapping }}
               {{frost-toggle
-              value=value8
-              trueValue='enable'
-              onClick=(mut value8)
+                hook='myToggle'
+                value=value8
+                trueValue='enable'
+                onClick=(mut value8)
               }}
               {{input value=value8}}
               {{! END-SNIPPET }}
@@ -140,6 +147,7 @@
             <div class='demo'>
               {{! BEGIN-SNIPPET toggle-disabled }}
               {{frost-toggle
+                hook='myToggle'
                 value=value9
                 disabled=true
                 onClick=(mut value9)
@@ -160,6 +168,7 @@
         <div class='demo'>
           {{! BEGIN-SNIPPET toggle-other-spread }}
           {{frost-toggle
+            hook='myToggle'
             options=(hash
               value=value9
               disabled=true
