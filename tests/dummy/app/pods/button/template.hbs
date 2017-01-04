@@ -25,6 +25,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-primary-medium }}
         {{frost-button
+          hook='myMediumButton'
           priority='primary'
           size='medium'
           text='Text'
@@ -42,6 +43,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-primary-large }}
         {{frost-button
+          hook='myLargeButton'
           priority='primary'
           size='large'
           text='Text'
@@ -60,6 +62,7 @@
         {{! BEGIN-SNIPPET button-primary-disabled }}
         {{frost-button
           disabled=true
+          hook='myDisabledButton'
           priority='primary'
           size='medium'
           text='Text'
@@ -81,6 +84,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-secondary-small }}
         {{frost-button
+          hook='mySecondarySmallButton'
           priority='secondary'
           size='small'
           text='Text'
@@ -97,6 +101,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-secondary-medium }}
         {{frost-button
+          hook='mySecondaryMediumButton'
           priority='secondary'
           size='medium'
           text='Text'
@@ -114,6 +119,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-secondary-large }}
         {{frost-button
+          hook='mySecondaryLargeButton'
           priority='secondary'
           size='large'
           text='Text'
@@ -131,6 +137,7 @@
         {{! BEGIN-SNIPPET button-secondary-disabled }}
         {{frost-button
           disabled=true
+          hook='mySecondaryDisabledButton'
           priority='secondary'
           size='medium'
           text='Text'
@@ -152,6 +159,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-tertiary-small }}
         {{frost-button
+          hook='myTertiarySmallButton'
           priority='tertiary'
           size='small'
           text='Text'
@@ -168,6 +176,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-tertiary-medium }}
         {{frost-button
+          hook='myTertiaryMediumButton'
           priority='tertiary'
           size='medium'
           text='Text'
@@ -185,6 +194,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-tertiary-large }}
         {{frost-button
+          hook='myTertiaryLargeButton'
           priority='tertiary'
           size='large'
           text='Text'
@@ -202,6 +212,7 @@
         {{! BEGIN-SNIPPET button-tertiary-disabled }}
         {{frost-button
           disabled=true
+          hook='myTertiaryDisabledButton'
           priority='tertiary'
           size='medium'
           text='Text'
@@ -223,6 +234,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-icon-small }}
         {{frost-button
+          hook='mySmallIconButton'
           icon='add'
           priority='primary'
           size='small'
@@ -239,6 +251,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-icon-medium }}
         {{frost-button
+          hook='myMediumIconButton'
           icon='add'
           priority='primary'
           size='medium'
@@ -256,6 +269,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-icon-large }}
         {{frost-button
+          hook='myLargeIconButton'
           icon='add'
           priority='primary'
           size='large'
@@ -273,6 +287,7 @@
         {{! BEGIN-SNIPPET button-icon-disabled }}
         {{frost-button
           disabled=true
+          hook='myDisabledIconButton'
           icon='add'
           priority='primary'
           size='medium'
@@ -293,6 +308,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-icon-text-small }}
         {{frost-button
+          hook='mySmallIconAndTextButton'
           icon='round-add'
           priority='tertiary'
           size='small'
@@ -311,6 +327,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-icon-text-medium }}
         {{frost-button
+          hook='myMediumIconAndTextButton'
           icon='round-add'
           priority='tertiary'
           size='medium'
@@ -328,6 +345,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-icon-text-large }}
         {{frost-button
+          hook='myLargeIconAndTextButton'
           icon='round-add'
           priority='tertiary'
           size='large'
@@ -346,6 +364,7 @@
         {{! BEGIN-SNIPPET button-icon-text-disabled }}
         {{frost-button
           disabled=true
+          hook='myDisabledIconAndTextButton'
           icon='round-add'
           priority='tertiary'
           size='medium'
@@ -368,6 +387,7 @@
         {{! BEGIN-SNIPPET button-design-info-bar }}
         {{frost-button
           design='info-bar'
+          hook='myInfoBarButton'
           icon='search'
           text='Text'
         }}
@@ -385,6 +405,7 @@
         {{frost-button
           design='info-bar'
           disabled=true
+          hook='myDisabledInfoBarButton'
           icon='search'
           text='Text'
         }}
@@ -404,6 +425,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-onClick }}
         {{frost-button
+          hook='myOnClickActionButton'
           priority='primary'
           size='medium'
           text='Action'
@@ -420,6 +442,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-onFocus }}
         {{frost-button
+          hook='myOnFocusActionButton'
           priority='primary'
           size='medium'
           text='Action'
@@ -440,6 +463,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET button-other-spread }}
         {{frost-button
+          hook='mySpreadButton'
           options= (hash
             priority='primary'
             size='medium'
