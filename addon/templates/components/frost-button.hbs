@@ -4,6 +4,7 @@
     <div class=' text'>
       <div class='svg'>
         {{frost-icon
+          hook=(concat hook '-icon')
           icon=icon
           pack=pack
         }}
@@ -20,6 +21,7 @@
   {{#if isIconOnly}}
     <div class="icon">
       {{frost-icon
+        hook=(concat hook '-icon')
         icon=icon
         pack=pack
       }}
@@ -28,6 +30,7 @@
   {{#if isIconAndText}}
     <div class="icon-text text">
       {{frost-icon
+        hook=(concat hook '-icon')
         icon=icon
         pack=pack
       }}
