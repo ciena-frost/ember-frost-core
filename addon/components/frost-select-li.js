@@ -6,7 +6,7 @@ import Component from './frost-component'
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
-const {String: EmberString, on} = Ember
+const {on} = Ember
 
 const regexEscapeChars = '-[]/{}()*+?.^$|'.split('')
 
@@ -48,7 +48,7 @@ export default Component.extend({
       const pattern = new RegExp(filter, 'gi')
       const label = data.label.replace(pattern, '<u>$&</u>')
 
-      return EmberString.htmlSafe(label)
+      return Ember.String.htmlSafe(label)
     }
 
     return data && data.label || ''
