@@ -1,12 +1,14 @@
 import {expect} from 'chai'
 import {$hook} from 'ember-hook'
-import {setupComponentTest} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
 import {describe, it} from 'mocha'
 import sinon from 'sinon'
 
-describe('Integration: FrostButtonComponent', function () {
-  setupComponentTest('frost-button', {integration: true})
+import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
+
+const test = integration('frost-button')
+describe(test.label, function () {
+  test.setup()
 
   it('renders a text button as expected', function () {
     this.render(hbs`

@@ -1,13 +1,15 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {Logger, run} = Ember
-import Component from 'ember-frost-core/components/frost-component'
-import {setupComponentTest} from 'ember-mocha'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
-describe('Unit: FrostButtonComponent', function () {
-  setupComponentTest('frost-button', {unit: true})
+import {unit} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
+import Component from 'ember-frost-core/components/frost-component'
+
+const test = unit('frost-button')
+describe(test.label, function () {
+  test.setup()
 
   let component
 
