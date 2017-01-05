@@ -25,12 +25,12 @@ module.exports = function (defaults) {
   app.import('bower_components/highlightjs/styles/github.css')
   app.import('bower_components/ember/ember-template-compiler.js')
 
-  if (app.env === 'test') {
+  if (['test', 'development'].includes(app.env)) {
     ;[
       'bower_components/sinon-chai/lib/sinon-chai.js',
       'bower_components/chai-jquery/chai-jquery.js'
     ].forEach((path) => {
-      app.import(path, {type: 'test'})
+      app.import(path)
     })
   }
 

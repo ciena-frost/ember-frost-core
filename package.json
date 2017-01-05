@@ -87,6 +87,7 @@
     "name": "frost"
   },
   "dependencies": {
+    "bluebird": "^3.4.6",
     "broccoli-file-creator": "^1.1.0",
     "broccoli-funnel": "^1.0.1",
     "broccoli-merge-trees": "^1.0.0",
@@ -99,6 +100,7 @@
     "ember-cli-sass": "^5.6.0",
     "ember-cli-string-utils": "^1.0.0",
     "ember-cli-valid-component-name": "^1.0.0",
+    "fs-extra-promise": "^0.4.0",
     "npm-install-security-check": "^1.0.0"
   }
 }
