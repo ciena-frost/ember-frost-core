@@ -1,7 +1,7 @@
 import {expect} from 'chai'
 import {$hook} from 'ember-hook'
 import hbs from 'htmlbars-inline-precompile'
-import {describe, it} from 'mocha'
+import {beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
 import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
@@ -10,335 +10,349 @@ const test = integration('frost-button')
 describe(test.label, function () {
   test.setup()
 
-  it('renders a text button as expected', function () {
-    this.render(hbs`
-      {{frost-button text='Text'}}
-    `)
+  describe('when setting text property', function () {
+    beforeEach(function () {
+      this.render(hbs`
+        {{frost-button text='Text'}}
+      `)
+    })
 
-    expect(
-      this.$('.text'),
-      'Text button has the correct class'
-    ).to.have.length(1)
+    it('should have the "text" class', function () {
+      expect(this.$('.text')).to.have.length(1)
+    })
 
-    expect(
-      this.$('.frost-button').text().trim(),
-      'Text is set correctly'
-    ).to.eql('Text')
+    it('should have the text set correctly', function () {
+      expect(this.$('.frost-button').text().trim()).to.equal('Text')
+    })
   })
 
-  it('renders an icon button as expected', function () {
-    this.render(hbs`
-      {{frost-button icon='icon'}}
-    `)
+  describe('when setting icon property', function () {
+    beforeEach(function () {
+      this.render(hbs`
+        {{frost-button icon='icon'}}
+      `)
+    })
 
-    expect(
-      this.$('.icon'),
-      'Icon button has the correct class'
-    ).to.have.length(1)
+    it('should have the "icon" class', function () {
+      expect(this.$('.icon')).to.have.length(1)
+    })
   })
 
-  it('renders a text and icon button as expected', function () {
-    this.render(hbs`
-      {{frost-button
-        icon='round-add'
-        text='Test'
-      }}
-    `)
+  describe('when setting text and icon together', function () {
+    beforeEach(function () {
+      this.render(hbs`
+        {{frost-button
+          icon='round-add'
+          text='Test'
+        }}
+      `)
+    })
 
-    expect(
-      this.$('.frost-icon-frost-round-add'),
-      'includes expected icon'
-    ).to.have.length(1)
+    it('should include the expected icon', function () {
+      expect(this.$('.frost-icon-frost-round-add')).to.have.length(1)
+    })
 
-    expect(
-      this.$('.icon-text'),
-      'Icon and Text button has the correct class'
-    ).to.have.length(1)
+    it('should have the "icon-text" class', function () {
+      expect(this.$('.icon-text')).to.have.length(1)
+    })
 
-    expect(
-      this.$('.frost-button').text().trim(),
-      'Button text is set'
-    ).to.eql('Test')
+    it('should have the proper button text', function () {
+      expect(this.$('.frost-button').text().trim()).to.equal('Test')
+    })
   })
 
-  it('sets the hook property', function () {
-    this.render(hbs`
-      {{frost-button
-        hook='my-button'
-        icon='round-add'
-        text='Test'
-      }}
-    `)
+  describe('when hook property is set', function () {
+    beforeEach(function () {
+      this.render(hbs`
+        {{frost-button
+          hook='my-button'
+          icon='round-add'
+          text='Test'
+        }}
+      `)
+    })
 
-    expect(
-      $hook('my-button').text().trim(),
-      'Hook is set correctly'
-    ).to.equal('Test')
+    it('should set the hook properly', function () {
+      expect($hook('my-button').text().trim()).to.equal('Test')
+    })
   })
 
   describe('Priority property', function () {
-    it('has primary class set', function () {
-      this.render(hbs`
-        {{frost-button
-          priority='primary'
-          size='medium'
-          text='Text'
-        }}
-      `)
+    describe('when it is "primary"', function () {
+      beforeEach(function () {
+        this.render(hbs`
+          {{frost-button
+            priority='primary'
+            size='medium'
+            text='Text'
+          }}
+        `)
+      })
 
-      expect(
-        this.$('.frost-button').hasClass('primary'),
-        'primary class is set'
-      ).to.equal(true)
+      it('should have "primary" class', function () {
+        expect(this.$('.frost-button')).to.have.class('primary')
+      })
     })
 
-    it('has secondary class set', function () {
-      this.render(hbs`
-        {{frost-button
-          priority='secondary'
-          size='medium'
-          text='Text'
-        }}
-      `)
+    describe('when it is "secondary"', function () {
+      beforeEach(function () {
+        this.render(hbs`
+          {{frost-button
+            priority='secondary'
+            size='medium'
+            text='Text'
+          }}
+        `)
+      })
 
-      expect(
-        this.$('.frost-button').hasClass('secondary'),
-        'secondary class is set'
-      ).to.equal(true)
+      it('should have "secondary" class', function () {
+        expect(this.$('.frost-button')).to.have.class('secondary')
+      })
     })
 
-    it('has tertiary class set', function () {
-      this.render(hbs`
-        {{frost-button
-          priority='tertiary'
-          size='medium'
-          text='Text'
-        }}
-      `)
+    describe('when it is "tertiary"', function () {
+      beforeEach(function () {
+        this.render(hbs`
+          {{frost-button
+            priority='tertiary'
+            size='medium'
+            text='Text'
+          }}
+        `)
+      })
 
-      expect(
-        this.$('.frost-button').hasClass('tertiary'),
-        'tertiary class is set'
-      ).to.equal(true)
+      it('should have "tertiary" class', function () {
+        expect(this.$('.frost-button')).to.have.class('tertiary')
+      })
     })
   })
 
   describe('Size property', function () {
-    it('has small class set', function () {
-      this.render(hbs`
-        {{frost-button
-          priority='primary'
-          size='small'
-          text='Text'
-        }}
-      `)
+    describe('when it is "small"', function () {
+      beforeEach(function () {
+        this.render(hbs`
+          {{frost-button
+            priority='primary'
+            size='small'
+            text='Text'
+          }}
+        `)
+      })
 
-      expect(
-        this.$('.frost-button').hasClass('small'),
-        'small class is set'
-      ).to.equal(true)
+      it('should have "small" class', function () {
+        expect(this.$('.frost-button')).to.have.class('small')
+      })
     })
 
-    it('has medium class set', function () {
-      this.render(hbs`
-        {{frost-button
-          priority='secondary'
-          size='medium'
-          text='Text'
-        }}
-      `)
+    describe('when it is "medium"', function () {
+      beforeEach(function () {
+        this.render(hbs`
+          {{frost-button
+            priority='primary'
+            size='medium'
+            text='Text'
+          }}
+        `)
+      })
 
-      expect(
-        this.$('.frost-button').hasClass('medium'),
-        'medium class is set'
-      ).to.equal(true)
+      it('should have "medium" class', function () {
+        expect(this.$('.frost-button')).to.have.class('medium')
+      })
     })
 
-    it('has large class set', function () {
-      this.render(hbs`
-        {{frost-button
-          priority='secondary'
-          size='large'
-          text='Text'
-        }}
-      `)
+    describe('when it is "large"', function () {
+      beforeEach(function () {
+        this.render(hbs`
+          {{frost-button
+            priority='primary'
+            size='large'
+            text='Text'
+          }}
+        `)
+      })
 
-      expect(
-        this.$('.frost-button').hasClass('large'),
-        'large class is set'
-      ).to.equal(true)
+      it('should have "large" class', function () {
+        expect(this.$('.frost-button')).to.have.class('large')
+      })
     })
   })
 
   describe('Design property', function () {
-    it('has info-bar class set', function () {
+    describe('when it is "info-bar"', function () {
+      beforeEach(function () {
+        this.render(hbs`
+          {{frost-button
+            design='info-bar'
+            icon='icon'
+            text='Text'
+          }}
+        `)
+      })
+
+      it('should have "info-bar" class', function () {
+        expect(this.$('.frost-button')).to.have.class('info-bar')
+      })
+    })
+
+    describe('when it is "app-bar"', function () {
+      beforeEach(function () {
+        this.render(hbs`
+          {{frost-button
+            design='app-bar'
+            icon='icon'
+            text='Text'
+          }}
+        `)
+      })
+
+      it('should have "app-bar" class', function () {
+        expect(this.$('.frost-button')).to.have.class('app-bar')
+      })
+    })
+
+    describe('when it is "tab"', function () {
+      beforeEach(function () {
+        this.render(hbs`
+          {{frost-button
+            design='tab'
+            icon='icon'
+            text='Text'
+          }}
+        `)
+      })
+
+      it('should have "tab" class', function () {
+        expect(this.$('.frost-button')).to.have.class('tab')
+      })
+    })
+  })
+
+  describe('when autofocus property is set', function () {
+    beforeEach(function () {
       this.render(hbs`
         {{frost-button
-          design='info-bar'
-          icon='icon'
+          priority='secondary'
+          size='small'
+          text='Testing'
+          autofocus=true
+        }}
+      `)
+    })
+
+    it('should set the "autofocus" property', function () {
+      expect(this.$('.frost-button')).to.have.prop('autofocus')
+    })
+  })
+
+  describe('when disabled property is set', function () {
+    beforeEach(function () {
+      this.render(hbs`
+        {{frost-button
+          priority='secondary'
+          size='small'
+          text='Testing'
+          disabled=true
+        }}
+      `)
+    })
+
+    it('should set the "disabled" property', function () {
+      expect(this.$('.frost-button')).to.have.prop('disabled')
+    })
+  })
+
+  describe('when title property is set', function () {
+    beforeEach(function () {
+      this.render(hbs`
+        {{frost-button
+          priority='secondary'
+          size='small'
+          text='Testing'
+          title="This is a button"
+        }}
+      `)
+    })
+
+    it('should set the "title" property', function () {
+      expect(this.$('.frost-button')).to.have.prop('title', 'This is a button')
+    })
+  })
+
+  describe('when veritcal property is set', function () {
+    beforeEach(function () {
+      this.render(hbs`
+        {{frost-button
+          icon='add'
+          priority='primary'
+          size='medium'
+          text='Testing'
+          vertical=true
+        }}
+      `)
+    })
+
+    it('should have the "vertical" class', function () {
+      expect(this.$('.frost-button')).to.have.class('vertical')
+    })
+  })
+
+  describe('when onClick is given and button is clicked', function () {
+    let handler
+    beforeEach(function () {
+      handler = sinon.spy()
+      this.setProperties({handler})
+      this.render(hbs`
+        {{frost-button
+          priority='primary'
+          size='medium'
           text='Text'
+          onClick=(action handler)
         }}
       `)
 
-      expect(
-        this.$('.frost-button').hasClass('info-bar'),
-        'info-bar class is set'
-      ).to.equal(true)
+      this.$('button').click()
     })
 
-    it('has app-bar class set', function () {
+    it('should call the handler', function () {
+      expect(handler).to.have.callCount(1)
+    })
+  })
+
+  describe('when onFocus is given and button is focused', function () {
+    let handler
+    beforeEach(function () {
+      handler = sinon.spy()
+      this.setProperties({handler})
       this.render(hbs`
         {{frost-button
-          design='app-bar'
-          icon='icon'
+          priority='primary'
+          size='medium'
           text='Text'
+          onFocus=(action handler)
         }}
       `)
 
-      expect(
-        this.$('.frost-button').hasClass('app-bar'),
-        'app-bar class is set'
-      ).to.equal(true)
+      this.$('button').trigger('focusin')
     })
 
-    it('has tab class set', function () {
+    it('should call the handler', function () {
+      expect(handler).to.have.callCount(1)
+    })
+  })
+
+  describe('when using spread to render a text button', function () {
+    beforeEach(function () {
       this.render(hbs`
-        {{frost-button
-          design='tab'
-          icon='icon'
-          text='Text'
-        }}
+        {{frost-button options=(hash text='Text')}}
       `)
-
-      expect(
-        this.$('.frost-button').hasClass('tab'),
-        'tab class is set'
-      ).to.equal(true)
     })
-  })
 
-  it('sets autofocus property', function () {
-    this.render(hbs`
-      {{frost-button
-        priority='secondary'
-        size='small'
-        text='Testing'
-        autofocus=true
-      }}
-    `)
+    it('should have the "text" class', function () {
+      expect(this.$('.text')).to.have.length(1)
+    })
 
-    expect(
-      this.$('.frost-button').prop('autofocus'),
-      'autofocus class is set'
-    ).to.equal(true)
-  })
-
-  it('sets disabled property', function () {
-    this.render(hbs`
-      {{frost-button
-        priority='secondary'
-        size='small'
-        text='Testing'
-        disabled=true
-      }}
-    `)
-
-    expect(
-      this.$('.frost-button').prop('disabled'),
-      'disabled class is set'
-    ).to.equal(true)
-  })
-
-  it('sets title property', function () {
-    this.render(hbs`
-      {{frost-button
-        priority='secondary'
-        size='small'
-        text='Testing'
-        title="This is a button"
-      }}
-    `)
-
-    expect(
-      this.$('.frost-button').prop('title'),
-      'title class is set'
-    ).to.eql('This is a button')
-  })
-
-  it('sets vertical property', function () {
-    this.render(hbs`
-      {{frost-button
-        icon='add'
-        priority='primary'
-        size='medium'
-        text='Testing'
-        vertical=true
-      }}
-    `)
-
-    expect(
-      this.$('.frost-button').hasClass('vertical'),
-      'vertical class is set'
-    ).to.equal(true)
-  })
-
-  it('fires onClick closure action', function () {
-    const externalActionSpy = sinon.spy()
-
-    this.on('externalAction', externalActionSpy)
-
-    this.render(hbs`
-      {{frost-button
-        priority='primary'
-        size='medium'
-        text='Text'
-        onClick=(action 'externalAction')
-      }}
-    `)
-
-    this.$('button').click()
-
-    expect(
-      externalActionSpy.called,
-      'onClick closure action called'
-    ).to.equal(true)
-  })
-
-  it('fires onFocus closure action', function () {
-    const externalActionSpy = sinon.spy()
-
-    this.on('externalAction', externalActionSpy)
-
-    this.render(hbs`
-      {{frost-button
-        priority='primary'
-        size='medium'
-        text='Text'
-        onFocus=(action 'externalAction')
-      }}
-    `)
-
-    this.$('button').trigger('focusin')
-
-    expect(
-      externalActionSpy.called,
-      'onFocus closure action called'
-    ).to.equal(true)
-  })
-
-  it('renders a text button as expected using spread', function () {
-    this.render(hbs`
-      {{frost-button options=(hash text='Text')}}
-    `)
-
-    expect(
-      this.$('.text'),
-      'Text button has the correct class'
-    ).to.have.length(1)
-
-    expect(
-      this.$('.frost-button').text().trim(),
-      'Text is set correctly'
-    ).to.eql('Text')
+    it('should have the proper text value', function () {
+      expect(this.$('.frost-button').text().trim()).to.equal('Text')
+    })
   })
 })
