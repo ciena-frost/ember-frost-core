@@ -1,3 +1,9 @@
+# 1.3.10
+
+* **Updated** `frost-button` tests to use `setupComponentTest` instead of `describeComponent`
+* **Updated** `frost-button` tests to use helpers from `ember-test-utils`
+* **Refactored** `frost-button` tests to use more `describe` and `beforeEach` blocks to align more with [our testing conventions](https://github.com/ciena-frost/ember-frost-test#testing-conventions)
+
 # 1.3.9
 
 * **Fixed** `frost-link` to require `hook` property in `propTypes` definition.
