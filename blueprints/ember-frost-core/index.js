@@ -24,7 +24,7 @@ module.exports = {
             {name: 'ember-concurrency', target: '~0.7.15'},
             {name: 'ember-computed-decorators', target: '~0.2.0'},
             {name: 'ember-elsewhere', target: '~0.4.1'},
-            {name: 'ember-frost-test', target: '^0.2.1'},
+            {name: 'ember-frost-test', target: '^1.0.0'},
             {name: 'ember-prop-types', target: '^3.0.0'},
             {name: 'ember-spread', target: '^1.0.0'},
             {name: 'ember-truth-helpers', target: '^1.2.0'}
