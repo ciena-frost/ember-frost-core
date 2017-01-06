@@ -15,15 +15,12 @@ describeComponent(
     let component
 
     beforeEach(function () {
-      component = this.subject()
+      component = this.subject({
+        hook: 'myRadioGroup'
+      })
     })
 
     it('sets default property values correctly', function () {
-      expect(
-        component.get('hook'),
-        'hook: undefined'
-      ).to.equal(undefined)
-
       expect(
         component.get('id'),
         'id: null'

@@ -13,7 +13,9 @@ describeComponent(
     let component
 
     beforeEach(function () {
-      component = this.subject()
+      component = this.subject({
+        hook: 'myLoader'
+      })
     })
 
     it('sets default property values correctly', function () {

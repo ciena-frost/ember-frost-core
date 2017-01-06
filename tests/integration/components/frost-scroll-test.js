@@ -18,6 +18,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-scroll
+          hook='myScroll'
           onScrollUp=(action 'externalAction')
         }}
       `)
@@ -37,6 +38,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-scroll
+          hook='myScroll'
           onScrollDown=(action 'externalAction')
         }}
       `)
@@ -56,6 +58,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-scroll
+          hook='myScroll'
           onScrollYStart=(action 'externalAction')
         }}
       `)
@@ -75,6 +78,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-scroll
+          hook='myScroll'
           onScrollYEnd=(action 'externalAction')
         }}
       `)

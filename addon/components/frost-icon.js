@@ -32,7 +32,6 @@ export default Component.extend({
   getDefaultProps () {
     return {
       // options
-      icon: '',
       pack: 'frost'
 
       // state

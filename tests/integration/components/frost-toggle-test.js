@@ -14,7 +14,7 @@ describeComponent(
   function () {
     it('renders default values', function () {
       this.render(hbs`
-        {{frost-toggle}}
+        {{frost-toggle hook='myToggle'}}
       `)
 
       expect(
@@ -45,6 +45,7 @@ describeComponent(
         () => {
           this.render(hbs`
             {{frost-toggle
+              hook='myToggle'
               trueValue='testValue'
               falseValue='testValue'
             }}
@@ -58,6 +59,7 @@ describeComponent(
       this.render(hbs`
         {{frost-toggle
           disabled=true
+          hook='myToggle'
         }}
      `)
 
@@ -102,6 +104,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-toggle
+          hook='myToggle'
           value=value
         }}
      `)
@@ -116,6 +119,7 @@ describeComponent(
       it('uses trueLabel property', function () {
         this.render(hbs`
           {{frost-toggle
+            hook='myToggle'
             trueLabel='Label On'
             value='on'
           }}
@@ -130,6 +134,7 @@ describeComponent(
       it('uses default on label of "On"', function () {
         this.render(hbs`
           {{frost-toggle
+            hook='myToggle'
             value='on'
           }}
        `)
@@ -144,6 +149,7 @@ describeComponent(
         this.render(hbs`
           {{frost-toggle
             falseLabel='Label Off'
+            hook='myToggle'
             value='on'
           }}
        `)
@@ -156,7 +162,7 @@ describeComponent(
 
       it('uses default off label of "Off"', function () {
         this.render(hbs`
-          {{frost-toggle}}
+          {{frost-toggle hook='myToggle'}}
        `)
 
         expect(
@@ -171,6 +177,7 @@ describeComponent(
 
       this.render(hbs`
           {{frost-toggle
+            hook='myToggle'
             trueValue='enabled'
             value=testValue
           }}
@@ -188,6 +195,7 @@ describeComponent(
       this.render(hbs`
           {{frost-toggle
             falseValue='disabled'
+            hook='myToggle'
             value=testValue
           }}
        `)
@@ -208,6 +216,7 @@ describeComponent(
       this.render(hbs`
           {{frost-toggle
             falseValue='disabled'
+            hook='myToggle'
             value=testValue
             onClick=(action 'externalAction')
           }}
@@ -224,6 +233,7 @@ describeComponent(
     it('renders using spread', function () {
       this.render(hbs`
         {{frost-toggle
+          hook='myToggle'
           options=(hash
             disabled=true
           )

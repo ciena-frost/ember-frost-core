@@ -19,7 +19,7 @@ describeComponent(
       //   {{/frost-select-li}}
       // `);
 
-      this.render(hbs`{{frost-select-li}}`)
+      this.render(hbs`{{frost-select-li hook='mySelectListItem'}}`)
       expect(this.$()).to.have.length(1)
     })
   }

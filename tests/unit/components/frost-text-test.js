@@ -15,7 +15,9 @@ describeComponent(
     let component
 
     beforeEach(function () {
-      component = this.subject()
+      component = this.subject({
+        hook: 'myTextInput'
+      })
     })
 
     it('sets default property values correctly', function () {

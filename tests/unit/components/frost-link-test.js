@@ -17,7 +17,9 @@ describeComponent(
     let component
 
     beforeEach(function () {
-      component = this.subject()
+      component = this.subject({
+        hook: 'myLink'
+      })
     })
 
     it('includes className frost-link', function () {
@@ -39,11 +41,6 @@ describeComponent(
         component.get('disabled'),
         'disabled: false'
       ).to.equal(false)
-
-      expect(
-        component.get('hook'),
-        'hook: "undefined"'
-      ).to.equal(undefined)
 
       expect(
         component.get('icon'),

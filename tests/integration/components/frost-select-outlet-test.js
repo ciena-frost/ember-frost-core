@@ -10,7 +10,7 @@ describeComponent(
   },
   function () {
     it('renders', function () {
-      this.render(hbs`{{frost-select-outlet}}`)
+      this.render(hbs`{{frost-select-outlet hook='mySelectOutlet'}}`)
       expect(this.$()).to.have.length(1)
     })
   }

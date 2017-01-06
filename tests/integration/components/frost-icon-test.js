@@ -12,7 +12,7 @@ describeComponent(
   function () {
     it('sets icon class', function () {
       this.render(hbs`
-        {{frost-icon icon='round-add'}}
+        {{frost-icon hook='myIcon' icon='round-add'}}
       `)
 
       expect(
@@ -24,6 +24,7 @@ describeComponent(
     it('sets the pack property', function () {
       this.render(hbs`
         {{frost-icon
+          hook='myIcon'
           pack='test'
           icon='round-add'
         }}
@@ -37,7 +38,7 @@ describeComponent(
 
     it('renders using spread', function () {
       this.render(hbs`
-        {{frost-icon options=(hash icon='round-add')}}
+        {{frost-icon hook='myIcon' options=(hash icon='round-add')}}
       `)
 
       expect(

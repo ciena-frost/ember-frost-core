@@ -19,7 +19,8 @@ describeComponent(
 
     beforeEach(function () {
       component = this.subject({
-        _setupAssertion: function () {}
+        _setupAssertion: function () {},
+        hook: 'myToggle'
       })
     })
 
@@ -38,11 +39,6 @@ describeComponent(
         component.get('_falseLabel'),
         '_falseLabel: false'
       ).to.equal(false)
-
-      expect(
-        component.get('hook'),
-        'hook: "undefined"'
-      ).to.equal(undefined)
 
       expect(
         component.get('size'),

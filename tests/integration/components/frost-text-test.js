@@ -16,7 +16,7 @@ describeComponent(
   function () {
     it('renders', function () {
       this.render(hbs`
-          {{frost-text}}
+          {{frost-text hook='myTextInput'}}
       `)
 
       expect(
@@ -53,6 +53,7 @@ describeComponent(
       this.render(hbs`
           {{frost-text
             align=align
+            hook='myTextInput'
           }}
       `)
 
@@ -96,6 +97,7 @@ describeComponent(
       this.render(hbs`
           {{frost-text
             autofocus=true
+            hook='myTextInput'
           }}
       `)
 
@@ -109,6 +111,7 @@ describeComponent(
       this.render(hbs`
         {{frost-text
           disabled=true
+          hook='myTextInput'
         }}
       `)
 
@@ -125,6 +128,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-text
+          hook='myTextInput'
           maxlength=maxlength
         }}
      `)
@@ -142,6 +146,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-text
+          hook='myTextInput'
           placeholder=placeholder
         }}
      `)
@@ -159,6 +164,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-text
+          hook='myTextInput'
           value=value
         }}
       `)
@@ -172,6 +178,7 @@ describeComponent(
     it('set readonly property', function () {
       this.render(hbs`
         {{frost-text
+          hook='myTextInput'
           readonly=true
         }}
       `)
@@ -185,6 +192,7 @@ describeComponent(
     it('set required property', function () {
       this.render(hbs`
         {{frost-text
+          hook='myTextInput'
           required=true
         }}
       `)
@@ -198,6 +206,7 @@ describeComponent(
     it('set spellcheck property', function () {
       this.render(hbs`
         {{frost-text
+          hook='myTextInput'
           spellcheck=true
         }}
       `)
@@ -215,6 +224,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-text
+          hook='myTextInput'
           tabindex=tabindex
         }}
       `)
@@ -232,6 +242,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-text
+          hook='myTextInput'
           title=title
         }}
       `)
@@ -244,7 +255,7 @@ describeComponent(
 
     it('only renders the clear icon in insert', function () {
       this.render(hbs`
-        {{frost-text}}
+        {{frost-text hook='myTextInput'}}
       `)
 
       expect(
@@ -272,7 +283,7 @@ describeComponent(
 
     it('runs clear() which clears the input value', function () {
       this.render(hbs`
-        {{frost-text}}
+        {{frost-text hook='myTextInput'}}
       `)
 
       run(() => {
@@ -311,6 +322,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-text
+          hook='myTextInput'
           onKeyUp=(action 'externalAction')
         }}
       `)
@@ -332,6 +344,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-text
+          hook='myTextInput'
           onInput=(action "externalAction")
           value=value
         }}
@@ -353,6 +366,7 @@ describeComponent(
     it('renders using spread', function () {
       this.render(hbs`
         {{frost-text
+          hook='myTextInput'
           options=(hash
             disabled=true
           )

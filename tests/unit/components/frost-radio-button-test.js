@@ -19,6 +19,7 @@ describeComponent(
         _setupAssertions: function () {
           return
         },
+        hook: 'myRadioButton',
         value: 'testValue'
       })
     })
@@ -120,28 +121,6 @@ describeComponent(
         component.get('tabindex'),
         'tabindex: -1'
       ).to.eql(-1)
-    })
-
-    describe('"hook" computed property', function () {
-      it('is set when "receivedHook" is not set', function () {
-        expect(
-          component.get('hook'),
-          'hook: -button-my-value'
-        ).to.eql('-button')
-      })
-
-      it('is set when "receivedHook" is set', function () {
-        const receivedHook = 'my-hook'
-
-        run(() => {
-          component.set('receivedHook', receivedHook)
-        })
-
-        expect(
-          component.get('hook'),
-          'hook: my-hook-button-my-value'
-        ).to.eql(`${receivedHook}-button`)
-      })
     })
 
     describe('"hookQualifiers" computed property', function () {

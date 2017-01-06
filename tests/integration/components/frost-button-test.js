@@ -14,7 +14,7 @@ describeComponent(
   function () {
     it('renders a text button as expected', function () {
       this.render(hbs`
-        {{frost-button text='Text'}}
+        {{frost-button hook='myButton' text='Text'}}
       `)
 
       expect(
@@ -30,7 +30,7 @@ describeComponent(
 
     it('renders an icon button as expected', function () {
       this.render(hbs`
-        {{frost-button icon='icon'}}
+        {{frost-button hook='myButton' icon='icon'}}
       `)
 
       expect(
@@ -42,6 +42,7 @@ describeComponent(
     it('renders a text and icon button as expected', function () {
       this.render(hbs`
         {{frost-button
+          hook='myButton'
           icon='round-add'
           text='Test'
         }}
@@ -82,6 +83,7 @@ describeComponent(
       it('has primary class set', function () {
         this.render(hbs`
           {{frost-button
+            hook='myButton'
             priority='primary'
             size='medium'
             text='Text'
@@ -97,6 +99,7 @@ describeComponent(
       it('has secondary class set', function () {
         this.render(hbs`
           {{frost-button
+            hook='myButton'
             priority='secondary'
             size='medium'
             text='Text'
@@ -112,6 +115,7 @@ describeComponent(
       it('has tertiary class set', function () {
         this.render(hbs`
           {{frost-button
+            hook='myButton'
             priority='tertiary'
             size='medium'
             text='Text'
@@ -129,6 +133,7 @@ describeComponent(
       it('has small class set', function () {
         this.render(hbs`
           {{frost-button
+            hook='myButton'
             priority='primary'
             size='small'
             text='Text'
@@ -144,6 +149,7 @@ describeComponent(
       it('has medium class set', function () {
         this.render(hbs`
           {{frost-button
+            hook='myButton'
             priority='secondary'
             size='medium'
             text='Text'
@@ -159,6 +165,7 @@ describeComponent(
       it('has large class set', function () {
         this.render(hbs`
           {{frost-button
+            hook='myButton'
             priority='secondary'
             size='large'
             text='Text'
@@ -177,6 +184,7 @@ describeComponent(
         this.render(hbs`
           {{frost-button
             design='info-bar'
+            hook='myButton'
             icon='icon'
             text='Text'
           }}
@@ -192,6 +200,7 @@ describeComponent(
         this.render(hbs`
           {{frost-button
             design='app-bar'
+            hook='myButton'
             icon='icon'
             text='Text'
           }}
@@ -207,6 +216,7 @@ describeComponent(
         this.render(hbs`
           {{frost-button
             design='tab'
+            hook='myButton'
             icon='icon'
             text='Text'
           }}
@@ -222,6 +232,7 @@ describeComponent(
     it('sets autofocus property', function () {
       this.render(hbs`
         {{frost-button
+          hook='myButton'
           priority='secondary'
           size='small'
           text='Testing'
@@ -238,6 +249,7 @@ describeComponent(
     it('sets disabled property', function () {
       this.render(hbs`
         {{frost-button
+          hook='myButton'
           priority='secondary'
           size='small'
           text='Testing'
@@ -254,6 +266,7 @@ describeComponent(
     it('sets title property', function () {
       this.render(hbs`
         {{frost-button
+          hook='myButton'
           priority='secondary'
           size='small'
           text='Testing'
@@ -270,6 +283,7 @@ describeComponent(
     it('sets vertical property', function () {
       this.render(hbs`
         {{frost-button
+          hook='myButton'
           icon='add'
           priority='primary'
           size='medium'
@@ -291,6 +305,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-button
+          hook='myButton'
           priority='primary'
           size='medium'
           text='Text'
@@ -313,6 +328,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-button
+          hook='myButton'
           priority='primary'
           size='medium'
           text='Text'
@@ -330,7 +346,7 @@ describeComponent(
 
     it('renders a text button as expected using spread', function () {
       this.render(hbs`
-        {{frost-button options=(hash text='Text')}}
+        {{frost-button hook='myButton' options=(hash text='Text')}}
       `)
 
       expect(

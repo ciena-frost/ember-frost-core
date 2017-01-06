@@ -17,7 +17,9 @@ describeComponent(
     let component
 
     beforeEach(function () {
-      component = this.subject()
+      component = this.subject({
+        hook: 'myTextarea'
+      })
     })
 
     it('sets default property values correctly', function () {
