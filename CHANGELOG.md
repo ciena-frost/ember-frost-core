@@ -1,3 +1,32 @@
+# 1.3.10
+
+* **Updated** `frost-button` tests to use `setupComponentTest` instead of `describeComponent`
+* **Updated** `frost-button` tests to use helpers from `ember-test-utils`
+* **Refactored** `frost-button` tests to use more `describe` and `beforeEach` blocks to align more with [our testing conventions](https://github.com/ciena-frost/ember-frost-test#testing-conventions)
+
+# 1.3.9
+
+* **Fixed** `frost-link` to require `hook` property in `propTypes` definition.
+* **Fixed** `frost-password` to not set properties to invalid values in `getDefaultProps()`.
+* **Fixed** most `ember-prop-types` warnings from dummy app by adding missing hooks.
+* **Fixed** component generator to sort imports.
+
+
+# 1.3.8
+
+* **Fixed** issue with `frost-button` where underlying icons weren't being provided the `hook` property.
+
+
+# 1.3.7
+
+* Performed minor cleanup with `npm run eslint --- --fix` while running latest [eslint-config-frost-standard](https://github.com/ciena-frost/eslint-config-frost-standard) which includes new rules from [eslint-plugin-ember-standard](https://github.com/ciena-blueplanet/eslint-plugin-ember-standard) and [eslint-plugin-ocd](https://github.com/ciena-blueplanet/eslint-plugin-ocd).
+
+
+# 1.3.6
+
+* **Fixed** dependencies to be included via blueprints instead of installed as direct npm dependencies of this addon.
+
+
 # 1.3.5
 - Add check for text to handle case where link is not inline before pushing it into positional params
 
