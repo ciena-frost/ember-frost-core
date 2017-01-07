@@ -257,9 +257,9 @@ describeComponent(
     it('renders using spread', function () {
       this.render(hbs`
         {{frost-password
-          hook='myPassword'
           options=(hash
             disabled=true
+            hook='myPassword'
           )
         }}
      `)

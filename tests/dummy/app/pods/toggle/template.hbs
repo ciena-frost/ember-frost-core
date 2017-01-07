@@ -168,10 +168,10 @@
         <div class='demo'>
           {{! BEGIN-SNIPPET toggle-other-spread }}
           {{frost-toggle
-            hook='myToggle'
             options=(hash
-              value=value9
               disabled=true
+              hook='myToggle'
+              value=value9
             )
             onClick=(mut value9)
           }}

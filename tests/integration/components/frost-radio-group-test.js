@@ -80,8 +80,8 @@ describeComponent(
 
       this.render(hbs`
         {{#frost-radio-group
-          hook='myRadioGroup'
           options=(hash
+            hook='myRadioGroup'
             id='radioGroup7'
             selectedValue=value
           )

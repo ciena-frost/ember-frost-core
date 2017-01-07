@@ -49,16 +49,6 @@ describeComponent(
         component.get('size'),
         'size: small'
       ).to.eql('small')
-
-      expect(
-        component.get('groupId'),
-        'groupId: null'
-      ).to.equal(null)
-
-      expect(
-        component.get('selectedValue'),
-        'selectedValue: null'
-      ).to.equal(null)
     })
 
     it('extends the commone frost component', function () {

@@ -252,9 +252,9 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET checkbox-other-spread }}
         {{frost-checkbox
-          hook='mySpreadCheckbox'
           options=(hash
             checked=true
+            hook='mySpreadCheckbox'
           )
           onInput=(action 'onInputHandler')
         }}

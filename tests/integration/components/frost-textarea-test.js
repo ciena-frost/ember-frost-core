@@ -366,9 +366,9 @@ describeComponent(
     it('renders using spread', function () {
       this.render(hbs`
         {{frost-textarea
-          hook='myTextarea'
           options=(hash
             disabled=true
+            hook='myTextarea'
           )
         }}
      `)

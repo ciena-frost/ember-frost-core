@@ -10,12 +10,12 @@
 />
 <div
   class='frost-select-dropdown'
-  data-test={{hook (concat receivedHook '-list')}}
+  data-test={{hook (concat hook '-list')}}
   onmousedown={{action 'mouseDown'}}
   style={{listStyle}}
 >
   {{frost-text
-    hook=(concat receivedHook '-list-input')
+    hook=(concat hook '-list-input')
     onInput=onFilterInput
     value=filter
   }}
@@ -45,7 +45,7 @@
         class=item.className
         data=item
         filter=filter
-        hook=(concat receivedHook '-item')
+        hook=(concat hook '-item')
         hookQualifiers=(hash index=index label=item.label value=item.value)
         multiselect=multiselect
         onItemOver=(action 'focusOnItem')

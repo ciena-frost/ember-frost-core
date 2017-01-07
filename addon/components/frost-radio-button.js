@@ -50,14 +50,10 @@ export default Component.extend({
 
   getDefaultProps () {
     return {
-      // Group properties
-      groupId: null,
-      selectedValue: null,
       // Radio properties
       disabled: false,
       required: false,
-      size: 'small',
-      value: null
+      size: 'small'
     }
   },
 

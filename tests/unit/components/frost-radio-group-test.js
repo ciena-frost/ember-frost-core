@@ -22,11 +22,6 @@ describeComponent(
 
     it('sets default property values correctly', function () {
       expect(
-        component.get('id'),
-        'id: null'
-      ).to.equal(null)
-
-      expect(
         component.get('inputs'),
         'inputs: []'
       ).to.be.eql([])
@@ -35,11 +30,6 @@ describeComponent(
         component.get('value'),
         'value: null'
       ).to.equal(null)
-
-      expect(
-        component.get('selectedValue'),
-        'selectedValue: undefined'
-      ).to.equal(undefined)
     })
 
     it('extends the commone frost component', function () {

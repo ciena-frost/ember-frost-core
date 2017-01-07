@@ -267,8 +267,8 @@ describeComponent(
     it('renders using spread', function () {
       this.render(hbs`
         {{frost-link
-          hook='myLink'
           options=(hash
+            hook='myLink'
             priority='secondary'
             route='testRoute'
             text='title'

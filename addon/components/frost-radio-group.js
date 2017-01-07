@@ -35,7 +35,6 @@ export default Component.extend({
   getDefaultProps () {
     return {
       // options
-      id: null,
       inputs: [],
       value: null
 

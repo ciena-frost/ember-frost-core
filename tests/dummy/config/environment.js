@@ -22,7 +22,8 @@ module.exports = function (environment) {
       autoClear: false
     },
     'ember-prop-types': {
-      throwErrors: false,
+      spreadProperty: 'options',
+      throwErrors: true,
       validateOnUpdate: false
     }
   }

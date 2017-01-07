@@ -1260,9 +1260,9 @@ describeComponent(...integration('frost-select'), function () {
         {{frost-select-outlet hook='mySelectOutlet'}}
         {{input hook='pre'}}
         {{frost-select
-          hook='select'
           options=(hash
             disabled=true
+            hook='select'
           )
         }}
         {{input hook='post'}}

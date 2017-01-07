@@ -37,8 +37,8 @@ describeComponent(
     it('renders using spread', function () {
       this.render(hbs`
         {{frost-loading
-          hook='myLoader'
           options=(hash
+            hook='myLoader'
             type='ring'
           )
         }}

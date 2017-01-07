@@ -271,9 +271,9 @@ describeComponent(
     it('renders using spread', function () {
       this.render(hbs`
         {{frost-checkbox
-          hook='myCheckbox'
           options=(hash
             checked=true
+            hook='myCheckbox'
           )
         }}
       `)

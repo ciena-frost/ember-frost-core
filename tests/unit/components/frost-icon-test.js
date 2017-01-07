@@ -18,7 +18,8 @@ describeComponent(
 
     beforeEach(function () {
       component = this.subject({
-        hook: 'myIcon'
+        hook: 'myIcon',
+        icon: 'round-add'
       })
     })
 

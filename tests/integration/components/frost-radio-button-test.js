@@ -15,7 +15,11 @@ describeComponent(
     describe('Checked property', function () {
       it('sets checked property', function () {
         this.render(hbs`
-          {{frost-radio-button checked=true hook='myRadioButton' value='testValue'}}
+          {{frost-radio-button
+            checked=true
+            hook='myRadioButton'
+            value='testValue'
+          }}
         `)
 
         expect(
@@ -31,7 +35,10 @@ describeComponent(
 
       it('does not set checked property', function () {
         this.render(hbs`
-            {{frost-radio-button hook='myRadioButton' value='testValue'}}
+            {{frost-radio-button
+              hook='myRadioButton'
+              value='testValue'
+            }}
         `)
 
         expect(
@@ -169,7 +176,10 @@ describeComponent(
 
     it('sets type to "radio"', function () {
       this.render(hbs`
-        {{frost-radio-button hook='myRadioButton' value='testValue'}}
+        {{frost-radio-button
+          hook='myRadioButton'
+          value='testValue'
+        }}
       `)
 
       expect(
@@ -484,7 +494,11 @@ describeComponent(
           this.on('externalAction', externalActionSpy)
 
           this.render(hbs`
-            {{frost-radio-button hook='myRadioButton' value='testValue' onChange=(action 'externalAction')}}
+            {{frost-radio-button
+              hook='myRadioButton'
+              value='testValue'
+              onChange=(action 'externalAction')
+            }}
           `)
 
           this.$('input').trigger('click')
@@ -600,9 +614,9 @@ describeComponent(
     it('renders using spread', function () {
       this.render(hbs`
         {{frost-radio-button
-          hook='myRadioButton'
           options=(hash
             disabled=true
+            hook='myRadioButton'
             value='testValue'
           )
         }}

@@ -16,7 +16,9 @@ describeComponent(...unit('frost-component'), function () {
 
   describe('when created with only defaults', function () {
     beforeEach(function () {
-      component = this.subject()
+      component = this.subject({
+        hook: 'myComponent'
+      })
     })
 
     it('should have the CssMixin', function () {

@@ -292,7 +292,6 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET select-other-spread }}
         {{frost-select
-          hook='mySelect'
           options=(hash
             data=data
             hook='mySelect'
@@ -545,10 +544,10 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET multi-select-other-spread }}
         {{frost-multi-select
-          hook='myMultiSelect'
           options=(hash
             data=data
             error=true
+            hook='myMultiSelect'
           )
         }}
         {{! END-SNIPPET }}

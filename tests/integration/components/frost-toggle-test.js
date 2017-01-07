@@ -233,9 +233,9 @@ describeComponent(
     it('renders using spread', function () {
       this.render(hbs`
         {{frost-toggle
-          hook='myToggle'
           options=(hash
             disabled=true
+            hook='myToggle'
           )
         }}
      `)
