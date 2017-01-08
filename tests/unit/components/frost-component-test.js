@@ -44,7 +44,7 @@ describeComponent(...unit('frost-component'), function () {
       'actions',
       'ariaRole',
       'attributeBindings',
-      'classNameBindings',
+      // 'classNameBindings',
       'classNames',
       'concatenatedProperties',
       // 'element',
