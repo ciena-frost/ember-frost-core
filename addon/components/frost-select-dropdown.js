@@ -42,6 +42,7 @@ export default Component.extend({
     onClose: PropTypes.func.isRequired,
     onFilterInput: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
+    receivedHook: PropTypes.string.isRequired,
     selectedItems: PropTypes.arrayOf(PropTypes.object),
 
     // state
