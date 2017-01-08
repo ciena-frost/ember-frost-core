@@ -41,7 +41,6 @@ export default Component.extend(FrostEventsProxy, {
   propTypes: {
     // options
     disabled: PropTypes.bool,
-    hook: PropTypes.string,
     isRevealed: PropTypes.bool,
     revealable: PropTypes.bool,
     tabindex: PropTypes.number,

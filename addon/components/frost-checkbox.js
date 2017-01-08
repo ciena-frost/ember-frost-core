@@ -22,7 +22,6 @@ export default Component.extend({
     autofocus: PropTypes.bool,
     checked: PropTypes.bool,
     disabled: PropTypes.bool,
-    hook: PropTypes.string,
     inputId: PropTypes.string,
     label: PropTypes.string,
     size: PropTypes.string

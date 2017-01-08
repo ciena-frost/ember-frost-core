@@ -73,14 +73,9 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
     routeNames: PropTypes.array,
     size: PropTypes.oneOf(validSizes),
     linkTitle: PropTypes.string,
-    onClick: PropTypes.func,
+    onClick: PropTypes.func
 
     // state
-
-    // keywords
-    classNameBindings: PropTypes.arrayOf(PropTypes.string),
-    classNames: PropTypes.arrayOf(PropTypes.string),
-    layout: PropTypes.any
   },
 
   /** @returns {Object} the default property values when not provided by consumer */

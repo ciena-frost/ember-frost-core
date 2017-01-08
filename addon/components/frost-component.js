@@ -34,7 +34,7 @@ export default Component.extend(PropTypesMixin, HookMixin, SpreadMixin, CssMixin
     // FIXME: the following property defined in propTypes cause validation errors
     // when ember-prop-types validateOnUpdate setting is set to true
     // classNameBindings: PropTypes.arrayOf(PropTypes.string),
-    classNames: PropTypes.arrayOf(PropTypes.string),
+    // classNames: PropTypes.arrayOf(PropTypes.string),
     concatenatedProperties: PropTypes.arrayOf(PropTypes.string),
     // FIXME: the following properties defined in propTypes cause validation errors
     // when ember-prop-types validateOnUpdate setting is set to true

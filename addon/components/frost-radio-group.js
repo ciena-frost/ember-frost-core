@@ -17,7 +17,6 @@ export default Component.extend({
 
   propTypes: {
     // options
-    hook: PropTypes.string,
     id: PropTypes.string,
     inputs: PropTypes.arrayOf(PropTypes.shape({
       disabled: PropTypes.bool,

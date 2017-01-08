@@ -38,7 +38,6 @@ export default Component.extend({
     // Radio properties
     checked: PropTypes.bool,
     disabled: PropTypes.bool,
-    hook: PropTypes.string,
     label: PropTypes.string,
     required: PropTypes.bool,
     size: PropTypes.string,

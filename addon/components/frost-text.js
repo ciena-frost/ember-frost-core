@@ -26,7 +26,6 @@ export default Component.extend(FrostEventsProxyMixin, {
   propTypes: {
     // options
     align: PropTypes.string,
-    hook: PropTypes.string,
     isClearEnabled: PropTypes.bool,
     isClearVisible: PropTypes.bool,
     isHookEmbedded: PropTypes.bool,
@@ -123,9 +122,9 @@ export default Component.extend(FrostEventsProxyMixin, {
 
   init () {
     this._super(...arguments)
-    this.receivedHook = this.hook
+    this.set('receivedHook', this.get('hook'))
     if (this.get('isHookEmbedded')) {
-      this.hook = ''
+      this.set('hook', '')
     }
   },
 

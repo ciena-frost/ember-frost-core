@@ -37,7 +37,6 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
       PropTypes.string,
       PropTypes.number
     ]),
-    hook: PropTypes.string,
     size: PropTypes.string,
     trueLabel: PropTypes.oneOfType([
       PropTypes.bool,
