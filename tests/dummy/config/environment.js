@@ -24,7 +24,7 @@ module.exports = function (environment) {
     'ember-prop-types': {
       spreadProperty: 'options',
       throwErrors: true,
-      validateOnUpdate: false
+      validateOnUpdate: true
     }
   }
 

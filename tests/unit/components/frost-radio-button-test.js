@@ -114,17 +114,6 @@ describeComponent(
     })
 
     describe('"hookQualifiers" computed property', function () {
-      it('is empty when "value" is not set', function () {
-        run(() => {
-          component.set('value', null)
-        })
-
-        expect(
-          component.get('hookQualifiers'),
-          'hookQualifiers: undefined'
-        ).to.eql(undefined)
-      })
-
       it('is set when "value" is set', function () {
         const value = 'my-value'
 

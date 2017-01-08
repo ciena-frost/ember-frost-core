@@ -34,16 +34,18 @@ export default Component.extend(PropTypesMixin, HookMixin, SpreadMixin, CssMixin
     classNameBindings: PropTypes.arrayOf(PropTypes.string),
     classNames: PropTypes.arrayOf(PropTypes.string),
     concatenatedProperties: PropTypes.arrayOf(PropTypes.string),
-    element: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.null
-    ]),
-    elementId: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.null
-    ]),
-    isDestroyed: PropTypes.bool,
-    isDestroying: PropTypes.bool,
+    // FIXME: the following properties defined in propType cause validation errors
+    // when ember-prop-types validateOnUpdate setting is set to true
+    // element: PropTypes.oneOfType([
+    //   PropTypes.element,
+    //   PropTypes.null
+    // ]),
+    // elementId: PropTypes.oneOfType([
+    //   PropTypes.string,
+    //   PropTypes.null
+    // ]),
+    // isDestroyed: PropTypes.bool,
+    // isDestroying: PropTypes.bool,
     isVisible: PropTypes.bool,
     mergedProperties: PropTypes.arrayOf(PropTypes.string),
     layout: PropTypes.any,
