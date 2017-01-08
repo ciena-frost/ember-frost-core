@@ -56,7 +56,7 @@ export default Component.extend(PropTypesMixin, HookMixin, SpreadMixin, CssMixin
 
   getDefaultProps () {
     return {
-      hookPrefix: this.get('hook')
+      hookPrefix: this.get('hook') || this.get('options.hook')
     }
   },
 

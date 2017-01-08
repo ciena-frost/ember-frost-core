@@ -24,6 +24,7 @@
       <span class='number-selected'>{{selectedItems.length}} selected</span>
       {{frost-button
         class='frost-select-clear'
+        hook=(concat hook '-list-clear')
         onClick=(action 'clear')
         priority='tertiary'
         text='Clear all'
