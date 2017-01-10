@@ -1,3 +1,16 @@
+# 1.4.0
+## New Dependency
+With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` blueprint must be run when updating to this version. You can do so with `ember g ember-frost-core`
+
+* **Added** `ember-frost-test` as a dependency
+* **Added** `addon-import` base blueprint to be used by future `-addon` blueprints (taken right out of `emberjs`
+* **Removed** `component-test` blueprint as it's now provided by `ember-frost-test`
+* **Added** `controller` blueprint
+* **Added** `helper`, and `helper-addon` blueprints
+* **Added** `mixin` blueprint
+* **Added** `service` blueprint
+* **Added** `util` blueprint
+
 # 1.3.11
 
 * **Enabled** new settings for `ember-prop-types` to throw errors instead of log warnings in tests and dummy app as well as work with `ember-spread`.
