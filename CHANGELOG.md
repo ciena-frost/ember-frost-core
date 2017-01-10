@@ -1,3 +1,9 @@
+# 1.3.11
+
+* **Enabled** new settings for `ember-prop-types` to throw errors instead of log warnings in tests and dummy app as well as work with `ember-spread`.
+* **Fixed** `ember-prop-type` warnings by adding missing required properties in tests and fixing invalid values in `getDefaultProps()`.
+
+
 # 1.3.10
 
 * **Updated** `frost-button` tests to use `setupComponentTest` instead of `describeComponent`
