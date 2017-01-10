@@ -22,7 +22,6 @@ export default Component.extend({
 
   propTypes: {
     // options
-    hook: PropTypes.string,
     pack: PropTypes.string,
     icon: PropTypes.string.isRequired
 
@@ -32,7 +31,6 @@ export default Component.extend({
   getDefaultProps () {
     return {
       // options
-      icon: '',
       pack: 'frost'
 
       // state

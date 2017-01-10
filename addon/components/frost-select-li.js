@@ -24,7 +24,6 @@ export default Component.extend({
     // options
     data: PropTypes.object.isRequired,
     filter: PropTypes.string,
-    hook: PropTypes.string.isRequired,
     multiselect: PropTypes.bool,
     onItemOver: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired

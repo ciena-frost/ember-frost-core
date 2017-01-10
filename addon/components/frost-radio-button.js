@@ -38,7 +38,6 @@ export default Component.extend({
     // Radio properties
     checked: PropTypes.bool,
     disabled: PropTypes.bool,
-    hook: PropTypes.string,
     label: PropTypes.string,
     required: PropTypes.bool,
     size: PropTypes.string,
@@ -50,14 +49,10 @@ export default Component.extend({
 
   getDefaultProps () {
     return {
-      // Group properties
-      groupId: null,
-      selectedValue: null,
       // Radio properties
       disabled: false,
       required: false,
-      size: 'small',
-      value: null
+      size: 'small'
     }
   },
 

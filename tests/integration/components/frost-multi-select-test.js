@@ -60,7 +60,6 @@ describeComponent(...integration('frost-multi-select'), function () {
       onFocus = sandbox.spy()
 
       this.setProperties({
-        hook: 'select',
         onBlur,
         onFocus,
         onChange,
@@ -68,13 +67,13 @@ describeComponent(...integration('frost-multi-select'), function () {
       })
 
       this.render(hbs`
-        {{frost-select-outlet}}
+        {{frost-select-outlet hook='mySelectOutlet'}}
         {{input hook='pre'}}
         {{frost-multi-select
           data=data
           disabled=disabled
           error=error
-          hook=hook
+          hook='select'
           onBlur=onBlur
           onChange=onChange
           onFocus=onFocus
@@ -1171,12 +1170,12 @@ describeComponent(...integration('frost-multi-select'), function () {
   describe('renders using spread', function () {
     it('renders as expected', function () {
       this.render(hbs`
-        {{frost-select-outlet}}
+        {{frost-select-outlet hook='mySelectOutlet'}}
         {{input hook='pre'}}
         {{frost-multi-select
           options=(hash
-            hook='select'
             disabled=true
+            hook='select'
           )
         }}
         {{input hook='post'}}

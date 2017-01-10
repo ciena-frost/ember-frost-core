@@ -18,7 +18,7 @@ describeComponent(
       this.set('value', value)
 
       this.render(hbs`
-        {{#frost-radio-group as |controls|}}
+        {{#frost-radio-group hook='myRadioGroup' as |controls|}}
           {{controls.button value=value label=label}}
         {{/frost-radio-group}}
       `)
@@ -42,7 +42,7 @@ describeComponent(
       this.set('inputs', inputs)
 
       this.render(hbs`
-        {{frost-radio-group inputs=inputs}}
+        {{frost-radio-group hook='myRadioGroup' inputs=inputs}}
       `)
 
       expect(
@@ -81,6 +81,7 @@ describeComponent(
       this.render(hbs`
         {{#frost-radio-group
           options=(hash
+            hook='myRadioGroup'
             id='radioGroup7'
             selectedValue=value
           )

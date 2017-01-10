@@ -13,7 +13,10 @@ describe(test.label, function () {
   describe('when setting text property', function () {
     beforeEach(function () {
       this.render(hbs`
-        {{frost-button text='Text'}}
+        {{frost-button
+          hook='myButton'
+          text='Text'
+        }}
       `)
     })
 
@@ -29,7 +32,10 @@ describe(test.label, function () {
   describe('when setting icon property', function () {
     beforeEach(function () {
       this.render(hbs`
-        {{frost-button icon='icon'}}
+        {{frost-button
+          hook='myButton'
+          icon='icon'
+        }}
       `)
     })
 
@@ -42,6 +48,7 @@ describe(test.label, function () {
     beforeEach(function () {
       this.render(hbs`
         {{frost-button
+          hook='myButton'
           icon='round-add'
           text='Test'
         }}
@@ -82,6 +89,7 @@ describe(test.label, function () {
       beforeEach(function () {
         this.render(hbs`
           {{frost-button
+            hook='myButton'
             priority='primary'
             size='medium'
             text='Text'
@@ -98,6 +106,7 @@ describe(test.label, function () {
       beforeEach(function () {
         this.render(hbs`
           {{frost-button
+            hook='myButton'
             priority='secondary'
             size='medium'
             text='Text'
@@ -114,6 +123,7 @@ describe(test.label, function () {
       beforeEach(function () {
         this.render(hbs`
           {{frost-button
+            hook='myButton'
             priority='tertiary'
             size='medium'
             text='Text'
@@ -132,6 +142,7 @@ describe(test.label, function () {
       beforeEach(function () {
         this.render(hbs`
           {{frost-button
+            hook='myButton'
             priority='primary'
             size='small'
             text='Text'
@@ -148,6 +159,7 @@ describe(test.label, function () {
       beforeEach(function () {
         this.render(hbs`
           {{frost-button
+            hook='myButton'
             priority='primary'
             size='medium'
             text='Text'
@@ -164,6 +176,7 @@ describe(test.label, function () {
       beforeEach(function () {
         this.render(hbs`
           {{frost-button
+            hook='myButton'
             priority='primary'
             size='large'
             text='Text'
@@ -183,6 +196,7 @@ describe(test.label, function () {
         this.render(hbs`
           {{frost-button
             design='info-bar'
+            hook='myButton'
             icon='icon'
             text='Text'
           }}
@@ -199,6 +213,7 @@ describe(test.label, function () {
         this.render(hbs`
           {{frost-button
             design='app-bar'
+            hook='myButton'
             icon='icon'
             text='Text'
           }}
@@ -215,6 +230,7 @@ describe(test.label, function () {
         this.render(hbs`
           {{frost-button
             design='tab'
+            hook='myButton'
             icon='icon'
             text='Text'
           }}
@@ -231,6 +247,7 @@ describe(test.label, function () {
     beforeEach(function () {
       this.render(hbs`
         {{frost-button
+          hook='myButton'
           priority='secondary'
           size='small'
           text='Testing'
@@ -248,6 +265,7 @@ describe(test.label, function () {
     beforeEach(function () {
       this.render(hbs`
         {{frost-button
+          hook='myButton'
           priority='secondary'
           size='small'
           text='Testing'
@@ -265,6 +283,7 @@ describe(test.label, function () {
     beforeEach(function () {
       this.render(hbs`
         {{frost-button
+          hook='myButton'
           priority='secondary'
           size='small'
           text='Testing'
@@ -282,6 +301,7 @@ describe(test.label, function () {
     beforeEach(function () {
       this.render(hbs`
         {{frost-button
+          hook='myButton'
           icon='add'
           priority='primary'
           size='medium'
@@ -303,6 +323,7 @@ describe(test.label, function () {
       this.setProperties({handler})
       this.render(hbs`
         {{frost-button
+          hook='myButton'
           priority='primary'
           size='medium'
           text='Text'
@@ -325,6 +346,7 @@ describe(test.label, function () {
       this.setProperties({handler})
       this.render(hbs`
         {{frost-button
+          hook='myButton'
           priority='primary'
           size='medium'
           text='Text'
@@ -343,7 +365,12 @@ describe(test.label, function () {
   describe('when using spread to render a text button', function () {
     beforeEach(function () {
       this.render(hbs`
-        {{frost-button options=(hash text='Text')}}
+        {{frost-button
+          options=(hash
+            hook='myButton'
+            text='Text'
+          )
+        }}
       `)
     })
 

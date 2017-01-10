@@ -16,7 +16,9 @@ describeComponent(...unit('frost-component'), function () {
 
   describe('when created with only defaults', function () {
     beforeEach(function () {
-      component = this.subject()
+      component = this.subject({
+        hook: 'myComponent'
+      })
     })
 
     it('should have the CssMixin', function () {
@@ -42,13 +44,13 @@ describeComponent(...unit('frost-component'), function () {
       'actions',
       'ariaRole',
       'attributeBindings',
-      'classNameBindings',
-      'classNames',
+      // 'classNameBindings',
+      // 'classNames',
       'concatenatedProperties',
-      'element',
-      'elementId',
-      'isDestroyed',
-      'isDestroying',
+      // 'element',
+      // 'elementId',
+      // 'isDestroyed',
+      // 'isDestroying',
       'isVisible',
       'mergedProperties',
       'layout',

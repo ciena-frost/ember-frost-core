@@ -75,7 +75,7 @@ describeComponent(...integration('frost-select'), function () {
       })
 
       this.render(hbs`
-        {{frost-select-outlet}}
+        {{frost-select-outlet hook='mySelectOutlet'}}
         {{input hook='pre'}}
         {{frost-select
           data=data
@@ -1257,12 +1257,12 @@ describeComponent(...integration('frost-select'), function () {
   describe('renders using spread', function () {
     it('renders as expected', function () {
       this.render(hbs`
-        {{frost-select-outlet}}
+        {{frost-select-outlet hook='mySelectOutlet'}}
         {{input hook='pre'}}
         {{frost-select
           options=(hash
-            hook='select'
             disabled=true
+            hook='select'
           )
         }}
         {{input hook='post'}}

@@ -15,20 +15,12 @@ describeComponent(
     let component
 
     beforeEach(function () {
-      component = this.subject()
+      component = this.subject({
+        hook: 'myRadioGroup'
+      })
     })
 
     it('sets default property values correctly', function () {
-      expect(
-        component.get('hook'),
-        'hook: undefined'
-      ).to.equal(undefined)
-
-      expect(
-        component.get('id'),
-        'id: null'
-      ).to.equal(null)
-
       expect(
         component.get('inputs'),
         'inputs: []'
@@ -38,11 +30,6 @@ describeComponent(
         component.get('value'),
         'value: null'
       ).to.equal(null)
-
-      expect(
-        component.get('selectedValue'),
-        'selectedValue: undefined'
-      ).to.equal(undefined)
     })
 
     it('extends the commone frost component', function () {

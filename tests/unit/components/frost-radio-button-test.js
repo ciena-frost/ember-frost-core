@@ -19,6 +19,7 @@ describeComponent(
         _setupAssertions: function () {
           return
         },
+        hook: 'myRadioButton',
         value: 'testValue'
       })
     })
@@ -48,16 +49,6 @@ describeComponent(
         component.get('size'),
         'size: small'
       ).to.eql('small')
-
-      expect(
-        component.get('groupId'),
-        'groupId: null'
-      ).to.equal(null)
-
-      expect(
-        component.get('selectedValue'),
-        'selectedValue: null'
-      ).to.equal(null)
     })
 
     it('extends the commone frost component', function () {
@@ -122,40 +113,7 @@ describeComponent(
       ).to.eql(-1)
     })
 
-    describe('"hook" computed property', function () {
-      it('is set when "receivedHook" is not set', function () {
-        expect(
-          component.get('hook'),
-          'hook: -button-my-value'
-        ).to.eql('-button')
-      })
-
-      it('is set when "receivedHook" is set', function () {
-        const receivedHook = 'my-hook'
-
-        run(() => {
-          component.set('receivedHook', receivedHook)
-        })
-
-        expect(
-          component.get('hook'),
-          'hook: my-hook-button-my-value'
-        ).to.eql(`${receivedHook}-button`)
-      })
-    })
-
     describe('"hookQualifiers" computed property', function () {
-      it('is empty when "value" is not set', function () {
-        run(() => {
-          component.set('value', null)
-        })
-
-        expect(
-          component.get('hookQualifiers'),
-          'hookQualifiers: undefined'
-        ).to.eql(undefined)
-      })
-
       it('is set when "value" is set', function () {
         const value = 'my-value'
 

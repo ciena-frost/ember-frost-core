@@ -15,7 +15,9 @@ describe(test.label, function () {
 
   beforeEach(function () {
     sandbox = sinon.sandbox.create()
-    component = this.subject()
+    component = this.subject({
+      hook: 'myButton'
+    })
   })
 
   afterEach(function () {
@@ -36,10 +38,6 @@ describe(test.label, function () {
 
   it('should default disabled to false', function () {
     expect(component.get('disabled')).to.equal(false)
-  })
-
-  it('should not default hook', function () {
-    expect(component.get('hook')).to.equal(undefined)
   })
 
   it('should default icon to empty string', function () {

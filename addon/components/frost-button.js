@@ -62,7 +62,6 @@ export default Component.extend({
     autofocus: PropTypes.bool,
     design: PropTypes.oneOf(validDesignClasses),
     disabled: PropTypes.bool,
-    hook: PropTypes.string,
     icon: PropTypes.string,
     pack: PropTypes.string,
     priority: PropTypes.string,
@@ -70,16 +69,9 @@ export default Component.extend({
     text: PropTypes.string,
     title: PropTypes.string,
     type: PropTypes.string,
-    vertical: PropTypes.bool,
+    vertical: PropTypes.bool
 
     // state
-
-    // keywords
-    attributeBindings: PropTypes.arrayOf(PropTypes.string),
-    classNameBindings: PropTypes.arrayOf(PropTypes.string),
-    classNames: PropTypes.arrayOf(PropTypes.string),
-    layout: PropTypes.any,
-    tagName: PropTypes.string
   },
 
   /** @returns {Object} the default values for properties when not provided by consumer */

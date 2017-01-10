@@ -16,14 +16,9 @@ describeComponent(
     let component
 
     beforeEach(function () {
-      component = this.subject()
-    })
-
-    it('sets default property values correctly', function () {
-      expect(
-        component.get('hook'),
-        'hook: "undefined"'
-      ).to.equal(undefined)
+      component = this.subject({
+        hook: 'myScroll'
+      })
     })
 
     it('extends the commone frost component', function () {

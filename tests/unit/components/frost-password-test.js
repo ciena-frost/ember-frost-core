@@ -19,7 +19,9 @@ describeComponent(
     let component
 
     beforeEach(function () {
-      component = this.subject()
+      component = this.subject({
+        hook: 'myPassword'
+      })
     })
 
     it('sets default property values correctly', function () {
@@ -32,11 +34,6 @@ describeComponent(
         component.get('disabled'),
         'disabled: "false"'
       ).to.equal(false)
-
-      expect(
-        component.get('hook'),
-        'hook: "undefined"'
-      ).to.equal(undefined)
 
       expect(
         component.get('isRevealed'),

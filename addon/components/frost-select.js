@@ -69,7 +69,6 @@ export default Component.extend({
     autofocus: PropTypes.bool,
     disabled: PropTypes.bool,
     error: PropTypes.bool,
-    hook: PropTypes.string.isRequired,
     multiselect: PropTypes.bool,
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
@@ -127,7 +126,7 @@ export default Component.extend({
   items (data, filter, onInput) {
     // If no data to filter we are done
     if (!data) {
-      return data
+      return []
     }
 
     // External filtering

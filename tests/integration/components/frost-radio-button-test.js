@@ -15,7 +15,11 @@ describeComponent(
     describe('Checked property', function () {
       it('sets checked property', function () {
         this.render(hbs`
-          {{frost-radio-button checked=true value='testValue'}}
+          {{frost-radio-button
+            checked=true
+            hook='myRadioButton'
+            value='testValue'
+          }}
         `)
 
         expect(
@@ -31,7 +35,10 @@ describeComponent(
 
       it('does not set checked property', function () {
         this.render(hbs`
-            {{frost-radio-button value='testValue'}}
+            {{frost-radio-button
+              hook='myRadioButton'
+              value='testValue'
+            }}
         `)
 
         expect(
@@ -51,6 +58,7 @@ describeComponent(
         this.render(hbs`
           {{frost-radio-button
             disabled=true
+            hook='myRadioButton'
             value='testValue'
           }}
         `)
@@ -95,6 +103,7 @@ describeComponent(
 
         this.render(hbs`
           {{frost-radio-button
+            hook='myRadioButton'
             size=size
             value='testValue'
           }}
@@ -113,6 +122,7 @@ describeComponent(
 
         this.render(hbs`
           {{frost-radio-button
+            hook='myRadioButton'
             size=size
             value='testValue'
           }}
@@ -131,6 +141,7 @@ describeComponent(
 
         this.render(hbs`
           {{frost-radio-button
+            hook='myRadioButton'
             size=size
             value='testValue'
           }}
@@ -146,6 +157,7 @@ describeComponent(
     it('sets required property', function () {
       this.render(hbs`
         {{frost-radio-button
+          hook='myRadioButton'
           required=true
           value='testValue'
         }}
@@ -164,7 +176,10 @@ describeComponent(
 
     it('sets type to "radio"', function () {
       this.render(hbs`
-        {{frost-radio-button value='testValue'}}
+        {{frost-radio-button
+          hook='myRadioButton'
+          value='testValue'
+        }}
       `)
 
       expect(
@@ -180,6 +195,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-radio-button
+          hook='myRadioButton'
           value=value
         }}
       `)
@@ -198,6 +214,7 @@ describeComponent(
 
         this.render(hbs`
           {{frost-radio-button
+            hook='myRadioButton'
             value='test value'
             label=text
           }}
@@ -216,6 +233,7 @@ describeComponent(
 
         this.render(hbs`
           {{#frost-radio-button
+            hook='myRadioButton'
             value='test value'
           }}
             {{text}}
@@ -234,6 +252,7 @@ describeComponent(
         it('sets checked property', function () {
           this.render(hbs`
             {{#frost-radio-group
+              hook='myRadioGroup'
               selectedValue='testValue'
               as |controls|
             }}
@@ -254,7 +273,7 @@ describeComponent(
 
         it('does not set checked property', function () {
           this.render(hbs`
-            {{#frost-radio-group as |controls|}}
+            {{#frost-radio-group hook='myRadioGroup' as |controls|}}
               {{controls.button value='testValue'}}
             {{/frost-radio-group}}
           `)
@@ -274,7 +293,7 @@ describeComponent(
       describe('Disabled property', function () {
         it('sets disabled property', function () {
           this.render(hbs`
-            {{#frost-radio-group as |controls|}}
+            {{#frost-radio-group hook='myRadioGroup' as |controls|}}
               {{controls.button
                 disabled=true
                 value='testValue'
@@ -330,7 +349,7 @@ describeComponent(
           this.set('size', size)
 
           this.render(hbs`
-            {{#frost-radio-group as |controls|}}
+            {{#frost-radio-group hook='myRadioGroup' as |controls|}}
               {{controls.button
                 size=size
                 value='testValue'
@@ -350,7 +369,7 @@ describeComponent(
           this.set('size', size)
 
           this.render(hbs`
-            {{#frost-radio-group as |controls|}}
+            {{#frost-radio-group hook='myRadioGroup' as |controls|}}
               {{controls.button
                 size=size
                 value='testValue'
@@ -370,7 +389,7 @@ describeComponent(
           this.set('size', size)
 
           this.render(hbs`
-            {{#frost-radio-group as |controls|}}
+            {{#frost-radio-group hook='myRadioGroup' as |controls|}}
               {{controls.button
                 size=size
                 value='testValue'
@@ -387,7 +406,7 @@ describeComponent(
 
       it('sets required property', function () {
         this.render(hbs`
-          {{#frost-radio-group as |controls|}}
+          {{#frost-radio-group hook='myRadioGroup' as |controls|}}
             {{controls.button
               required=true
               value='testValue'
@@ -412,7 +431,7 @@ describeComponent(
         this.set('value', value)
 
         this.render(hbs`
-          {{#frost-radio-group as |controls|}}
+          {{#frost-radio-group hook='myRadioGroup' as |controls|}}
             {{controls.button
               value=value
             }}
@@ -432,7 +451,7 @@ describeComponent(
           this.set('text', text)
 
           this.render(hbs`
-            {{#frost-radio-group as |controls|}}
+            {{#frost-radio-group hook='myRadioGroup' as |controls|}}
               {{controls.button
                 value='test value'
                 label=text
@@ -452,7 +471,7 @@ describeComponent(
           this.set('text', text)
 
           this.render(hbs`
-            {{#frost-radio-group as |controls|}}
+            {{#frost-radio-group hook='myRadioGroup' as |controls|}}
               {{#controls.button
                 value='test value'
               }}
@@ -475,7 +494,11 @@ describeComponent(
           this.on('externalAction', externalActionSpy)
 
           this.render(hbs`
-            {{frost-radio-button value='testValue' onChange=(action 'externalAction')}}
+            {{frost-radio-button
+              hook='myRadioButton'
+              value='testValue'
+              onChange=(action 'externalAction')
+            }}
           `)
 
           this.$('input').trigger('click')
@@ -496,6 +519,7 @@ describeComponent(
 
         this.render(hbs`
           {{#frost-radio-group
+            hook='myRadioGroup'
             id='groupId'
             onChange=(action 'externalAction')
             as |controls|
@@ -519,6 +543,7 @@ describeComponent(
 
         this.render(hbs`
           {{#frost-radio-group
+            hook='myRadioGroup'
             id='groupId'
             onChange=(action 'externalAction')
             as |controls|
@@ -542,6 +567,7 @@ describeComponent(
 
         this.render(hbs`
           {{#frost-radio-group
+            hook='myRadioGroup'
             id='groupId'
             onChange=(action 'externalAction')
             as |controls|
@@ -568,6 +594,7 @@ describeComponent(
 
       this.render(hbs`
         {{#frost-radio-group
+          hook='myRadioGroup'
           id=id
           onChange=(action 'externalAction')
           as |controls|
@@ -589,6 +616,7 @@ describeComponent(
         {{frost-radio-button
           options=(hash
             disabled=true
+            hook='myRadioButton'
             value='testValue'
           )
         }}

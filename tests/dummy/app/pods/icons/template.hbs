@@ -39,6 +39,7 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-icon
+  hook='myIconPackIcon'
   pack='frost'
   icon='round-add'
 }}
@@ -55,10 +56,10 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET icon-other-spread }}
         {{frost-icon
-          hook='mySpreadIcon'
           options=(hash
-            pack='frost'
+            hook='mySpreadIcon'
             icon='round-add'
+            pack='frost'
           )
         }}
         {{! END-SNIPPET }}

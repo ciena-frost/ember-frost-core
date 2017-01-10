@@ -15,7 +15,7 @@ describeComponent(
   function () {
     it('renders default values', function () {
       this.render(hbs`
-        {{frost-textarea}}
+        {{frost-textarea hook='myTextarea'}}
       `)
 
       expect(
@@ -38,6 +38,7 @@ describeComponent(
       this.render(hbs`
         {{frost-textarea
           autofocus=true
+          hook='myTextarea'
         }}
      `)
 
@@ -51,6 +52,7 @@ describeComponent(
       this.render(hbs`
         {{frost-textarea
           disabled=true
+          hook='myTextarea'
         }}
      `)
 
@@ -63,6 +65,7 @@ describeComponent(
     it('sets readonly property', function () {
       this.render(hbs`
         {{frost-textarea
+          hook='myTextarea'
           readonly=true
         }}
      `)
@@ -81,6 +84,7 @@ describeComponent(
       this.render(hbs`
         {{frost-textarea
           cols=cols
+          hook='myTextarea'
         }}
      `)
 
@@ -97,6 +101,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-textarea
+          hook='myTextarea'
           tabindex=tabindex
         }}
       `)
@@ -114,6 +119,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-textarea
+          hook='myTextarea'
           rows=rows
         }}
      `)
@@ -131,6 +137,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-textarea
+          hook='myTextarea'
           placeholder=placeholder
         }}
      `)
@@ -148,6 +155,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-textarea
+          hook='myTextarea'
           value=value
         }}
      `)
@@ -165,6 +173,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-textarea
+          hook='myTextarea'
           onFocus=(action 'externalAction')
         }}
       `)
@@ -184,6 +193,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-textarea
+          hook='myTextarea'
           onInput=(action 'externalAction')
         }}
       `)
@@ -203,6 +213,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-textarea
+          hook='myTextarea'
           onBlur=(action 'externalAction')
         }}
       `)
@@ -244,7 +255,7 @@ describeComponent(
 
     it('only renders the clear icon in insert', function () {
       this.render(hbs`
-        {{frost-textarea}}
+        {{frost-textarea hook='myTextarea'}}
       `)
 
       expect(
@@ -272,7 +283,7 @@ describeComponent(
 
     it('runs clear() which clears the input value', function () {
       this.render(hbs`
-        {{frost-textarea}}
+        {{frost-textarea hook='myTextarea'}}
       `)
 
       run(() => {
@@ -311,6 +322,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-textarea
+          hook='myTextarea'
           onKeyUp=(action 'externalAction')
         }}
       `)
@@ -332,6 +344,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-textarea
+          hook='myTextarea'
           onInput=(action "externalAction")
           value=value
         }}
@@ -355,6 +368,7 @@ describeComponent(
         {{frost-textarea
           options=(hash
             disabled=true
+            hook='myTextarea'
           )
         }}
      `)

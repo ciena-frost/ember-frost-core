@@ -12,7 +12,9 @@ describeComponent(...unit('hookable-textarea'), function () {
   let component
 
   beforeEach(function () {
-    component = this.subject()
+    component = this.subject({
+      hook: 'myTextarea'
+    })
   })
 
   it('should have the HookMixin', function () {

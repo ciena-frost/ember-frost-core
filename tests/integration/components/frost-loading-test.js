@@ -11,7 +11,7 @@ describeComponent(
   function () {
     it('renders default values', function () {
       this.render(hbs`
-        {{frost-loading}}
+        {{frost-loading hook='myLoader'}}
       `)
 
       expect(
@@ -23,6 +23,7 @@ describeComponent(
     it('type property sets class', function () {
       this.render(hbs`
         {{frost-loading
+          hook='myLoader'
           type='ring'
         }}
       `)
@@ -37,6 +38,7 @@ describeComponent(
       this.render(hbs`
         {{frost-loading
           options=(hash
+            hook='myLoader'
             type='ring'
           )
         }}
