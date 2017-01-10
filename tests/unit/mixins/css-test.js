@@ -20,10 +20,6 @@ describe('Unit / Mixin / css', function () {
     sandbox.restore()
   })
 
-  it('has classNameBindings set to include "css"', function () {
-    expect(component.get('classNameBindings')).to.include('css')
-  })
-
   it('defaults "css" to the component name', function () {
     expect(component.get('css')).to.equal('css-component')
   })
@@ -41,23 +37,23 @@ describe('Unit / Mixin / css', function () {
 
   describe('.init()', function () {
     beforeEach(function () {
-      sandbox.stub(component, 'maybeClearClassNameBindings')
+      sandbox.stub(component, 'setClassNameBindings')
       component.init()
     })
 
-    it('should call .maybeClearClassNameBindings()', function () {
-      expect(component.maybeClearClassNameBindings).to.have.callCount(1)
+    it('should call .setClassNameBindings()', function () {
+      expect(component.setClassNameBindings).to.have.callCount(1)
     })
   })
 
-  describe('.maybeClearClassNameBindings()', function () {
+  describe('.setClassNameBindings()', function () {
     describe('when "tagName" is set', function () {
       beforeEach(function () {
         component.set('tagName', 'div')
-        component.maybeClearClassNameBindings()
+        component.setClassNameBindings()
       })
 
-      it('should leave "classNameBindings" alone', function () {
+      it('has classNameBindings set to include "css"', function () {
         expect(component.get('classNameBindings')).to.include('css')
       })
     })
@@ -65,11 +61,25 @@ describe('Unit / Mixin / css', function () {
     describe('when "tagName" is not blank', function () {
       beforeEach(function () {
         component.set('tagName', '')
-        component.maybeClearClassNameBindings()
+        component.setClassNameBindings()
       })
 
-      it('should remove "classNameBindings"', function () {
-        expect(component.get('classNameBindings')).to.equal(undefined)
+      it('should have empty "classNameBindings"', function () {
+        expect(component.get('classNameBindings')).to.eql([])
+      })
+    })
+
+    describe('when other "classNameBindings" are present', function () {
+      beforeEach(function () {
+        component.set('tagName', 'div')
+        component.set('classNameBindings', ['foo', 'bar'])
+        component.setClassNameBindings()
+      })
+
+      it('should merge the "classNameBindings"', function () {
+        expect(component.get('classNameBindings')).to.include('css')
+        expect(component.get('classNameBindings')).to.include('foo')
+        expect(component.get('classNameBindings')).to.include('bar')
       })
     })
   })
