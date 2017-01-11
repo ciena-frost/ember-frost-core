@@ -1,6 +1,6 @@
 {
   "name": "ember-frost-core",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "dependencies": {
     "abbrev": {
       "version": "1.0.9",
@@ -325,9 +325,9 @@
       "dev": true,
       "dependencies": {
         "babylon": {
-          "version": "6.14.1",
+          "version": "6.15.0",
           "from": "babylon@>=6.0.18 <7.0.0",
-          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.14.1.tgz",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.15.0.tgz",
           "dev": true
         }
       }
@@ -465,9 +465,9 @@
       "dev": true,
       "dependencies": {
         "babylon": {
-          "version": "6.14.1",
+          "version": "6.15.0",
           "from": "babylon@^6.11.0",
-          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.14.1.tgz",
+          "resolved": "https://registry.npmjs.org/babylon/-/babylon-6.15.0.tgz",
           "dev": true
         },
         "globals": {
@@ -1293,9 +1293,9 @@
       "dev": true
     },
     "caniuse-db": {
-      "version": "1.0.30000604",
+      "version": "1.0.30000605",
       "from": "caniuse-db@>=1.0.30000604 <2.0.0",
-      "resolved": "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000604.tgz",
+      "resolved": "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000605.tgz",
       "dev": true
     },
     "cardinal": {
@@ -2542,9 +2542,9 @@
       "dev": true
     },
     "ember-frost-test": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "from": "ember-frost-test@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/ember-frost-test/-/ember-frost-test-1.0.0.tgz",
+      "resolved": "https://registry.npmjs.org/ember-frost-test/-/ember-frost-test-1.0.1.tgz",
       "dev": true
     },
     "ember-get-config": {
@@ -2596,9 +2596,9 @@
       "dev": true
     },
     "ember-prop-types": {
-      "version": "3.7.1",
+      "version": "3.9.0",
       "from": "ember-prop-types@>=3.6.0 <4.0.0",
-      "resolved": "https://registry.npmjs.org/ember-prop-types/-/ember-prop-types-3.7.1.tgz",
+      "resolved": "https://registry.npmjs.org/ember-prop-types/-/ember-prop-types-3.9.0.tgz",
       "dev": true,
       "dependencies": {
         "ember-get-config": {
@@ -4382,9 +4382,9 @@
       "resolved": "https://registry.npmjs.org/load-json-file/-/load-json-file-1.1.0.tgz"
     },
     "load-plugin": {
-      "version": "2.0.0",
+      "version": "2.1.0",
       "from": "load-plugin@>=2.0.0 <3.0.0",
-      "resolved": "https://registry.npmjs.org/load-plugin/-/load-plugin-2.0.0.tgz",
+      "resolved": "https://registry.npmjs.org/load-plugin/-/load-plugin-2.1.0.tgz",
       "dev": true,
       "dependencies": {
         "resolve-from": {

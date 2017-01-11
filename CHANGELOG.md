@@ -1,3 +1,8 @@
+# 1.5.0
+
+- Added svgs for checkboxes in various states
+
+
 # 1.4.0
 ## New Dependency
 With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` blueprint must be run when updating to this version. You can do so with `ember g ember-frost-core`
