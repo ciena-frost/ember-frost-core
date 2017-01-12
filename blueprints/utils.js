@@ -4,10 +4,8 @@
 
 'use strict'
 
-const Bluebird = require('bluebird')
 const normalizeEntityName = require('ember-cli-normalize-entity-name')
 const validComponentName = require('ember-cli-valid-component-name')
-const fs = require('fs-extra-promise').usePromise(Bluebird)
 const path = require('path')
 
 module.exports = {
@@ -34,25 +32,6 @@ module.exports = {
     normalizeEntityName (entityName) {
       entityName = normalizeEntityName(entityName)
       return validComponentName(entityName)
-    }
-  },
-
-  packages: {
-    /**
-     * Update the package.json file with the desired version number (keep semver range format).
-     * @param {Object[]} packages - a list of packages
-     * @returns {Promise} a promise to update the package file
-     */
-    updatePkgJsonFile (packages) {
-      const path = this.path + '/package.json'
-      delete require.cache[require.resolve(path)]
-      const pkgJson = require(path)
-      if (pkgJson && pkgJson.devDependencies) {
-        packages.forEach((pkg) => {
-          pkgJson.devDependencies[pkg.name] = pkg.target
-        })
-        return fs.outputJsonAsync(path, pkgJson)
-      }
     }
   }
 }
