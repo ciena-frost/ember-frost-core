@@ -1,3 +1,8 @@
+# 1.5.1
+
+- fs-extra-promise was using withPromise, which isn't a function, but usePromise is
+
+
 # 1.5.0
 
 - Added svgs for checkboxes in various states
