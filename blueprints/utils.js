@@ -7,7 +7,7 @@
 const Bluebird = require('bluebird')
 const normalizeEntityName = require('ember-cli-normalize-entity-name')
 const validComponentName = require('ember-cli-valid-component-name')
-const fs = require('fs-extra-promise').withPromise(Bluebird)
+const fs = require('fs-extra-promise').usePromise(Bluebird)
 const path = require('path')
 
 module.exports = {
