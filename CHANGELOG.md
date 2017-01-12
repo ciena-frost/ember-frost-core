@@ -1,3 +1,7 @@
+# 1.5.2
+* **Removed** unused code in blueprints that was accidentally checked in when adding the new generators. 
+
+
 # 1.5.1
 
 - fs-extra-promise was using withPromise, which isn't a function, but usePromise is

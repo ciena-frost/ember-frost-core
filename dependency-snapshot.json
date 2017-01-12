@@ -1,6 +1,6 @@
 {
   "name": "ember-frost-core",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "dependencies": {
     "abbrev": {
       "version": "1.0.9",
@@ -1293,9 +1293,9 @@
       "dev": true
     },
     "caniuse-db": {
-      "version": "1.0.30000605",
+      "version": "1.0.30000607",
       "from": "caniuse-db@>=1.0.30000604 <2.0.0",
-      "resolved": "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000605.tgz",
+      "resolved": "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000607.tgz",
       "dev": true
     },
     "cardinal": {
@@ -7008,9 +7008,9 @@
       "dev": true
     },
     "postcss": {
-      "version": "5.2.9",
+      "version": "5.2.10",
       "from": "postcss@>=5.2.2 <6.0.0",
-      "resolved": "https://registry.npmjs.org/postcss/-/postcss-5.2.9.tgz",
+      "resolved": "https://registry.npmjs.org/postcss/-/postcss-5.2.10.tgz",
       "dev": true,
       "dependencies": {
         "supports-color": {
