@@ -29,6 +29,8 @@ export default Component.extend(FrostEventsProxyMixin, {
     isClearEnabled: PropTypes.bool,
     isClearVisible: PropTypes.bool,
     isHookEmbedded: PropTypes.bool,
+    max: PropTypes.number,
+    min: PropTypes.number,
     receivedHook: PropTypes.string,
     tabindex: PropTypes.number,
     type: PropTypes.string,

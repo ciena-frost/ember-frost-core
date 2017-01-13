@@ -121,6 +121,24 @@ describeComponent(
       ).to.equal(true)
     })
 
+    it('sets max property', function () {
+      const max = 30
+
+      this.set('max', max)
+
+      this.render(hbs`
+        {{frost-text
+          hook='myTextInput'
+          max=max
+        }}
+     `)
+
+      expect(
+        Number(this.$('input').prop('max')),
+        'max is set'
+      ).to.eql(max)
+    })
+
     it('sets maxlength property', function () {
       const maxlength = 30
 
@@ -137,6 +155,24 @@ describeComponent(
         this.$('input').prop('maxlength'),
         'maxlength is set'
       ).to.eql(maxlength)
+    })
+
+    it('sets min property', function () {
+      const min = 0
+
+      this.set('min', min)
+
+      this.render(hbs`
+        {{frost-text
+          hook='myTextInput'
+          min=min
+        }}
+     `)
+
+      expect(
+        Number(this.$('input').prop('min')),
+        'min is set'
+      ).to.eql(min)
     })
 
     it('sets placeholder property', function () {

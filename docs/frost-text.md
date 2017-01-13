@@ -22,7 +22,9 @@
 | | | `true` | disabled text field |
 | `form` | `string` | `<form-owner>` | form element that this is associated with (its form owner) |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
+| `max` | `number` | `<maximum-numerical-value>` | the maximum value, relevant when `type='number'` |
 | `maxlength` | `number` | `<maxlength-value>` | maximum number of characters a user can enter |
+| `min` | `number` | `<minimum-numerical-value>` | the minimum value, relevant when `type='number'` |
 | `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `placeholder` | `string` | `<text>` | placeholder text |
 | `readonly` | `boolean` | `false` | **default** - normal text field |
@@ -34,6 +36,8 @@
 | | | `default` | defer to default behavior |
 | `tabindex` | `number` | `<tabindex-value>` | the tabindex value |
 | `title` | `string` | `<tooltip-text>` | tooltip text to display on hover |
+| `type` | `string` | `text` | **default** - normal text field |
+| | | `number` | text field for entering a number |
 | `value` | `string` | `<value-text>` | text to be displayed in text field |
 
 ### Event Handlers
