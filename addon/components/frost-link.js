@@ -7,7 +7,7 @@ import computed, {readOnly} from 'ember-computed-decorators'
 import {HookMixin} from 'ember-hook'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
-const {LinkComponent, Logger, deprecate, get, isEmpty, isPresent, run, set} = Ember
+const {LinkComponent, Logger, deprecate, isEmpty, isPresent, run, set} = Ember
 
 /**
  * List of valid values to pass into `design` propery
@@ -71,6 +71,11 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
     icon: PropTypes.string,
     priority: PropTypes.oneOf(validPriorities),
     routeNames: PropTypes.array,
+    routes: PropTypes.arrayOf(PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      models: PropTypes.array,
+      queryParams: PropTypes.object
+    })),
     size: PropTypes.oneOf(validSizes),
     linkTitle: PropTypes.string,
     onClick: PropTypes.func
@@ -86,6 +91,7 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
       icon: '',
       priority: '',
       routeNames: [],
+      routes: [],
       size: '',
       linkTitle: ''
     }
@@ -166,7 +172,7 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
    * @returns {boolean} true if we should open the link in the current tab and false otherwise
    */
   _shouldOpenInSameTab () {
-    return !(get(this, 'priority') === 'primary' && get(this, 'disabled') === false)
+    return !(this.get('priority') === 'primary' && this.get('disabled') === false)
   },
 
   /**
@@ -174,26 +180,45 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
    * @returns {boolean} true if we need to open multiple links on click and false otherwise
    */
   _hasMultipleLinks () {
-    return get(this, 'routeNames') !== undefined && get(this, 'routeNames').length !== 0
+    return (this.get('routeNames') !== undefined && this.get('routeNames').length !== 0) ||
+      (this.get('routes') !== undefined && this.get('routes').length !== 0)
   },
 
   /**
    * Open multiple links.
    */
   _openLinks () {
-    let routing = get(this, '_routing')
-    let models = get(this, 'models')
-    let queryParams = get(this, 'queryParams.values')
+    const routeNames = this.get('routeNames')
+    const routes = this.get('routes')
 
-    const routeNames = get(this, 'routeNames')
+    if (!isEmpty(routeNames)) {
+      let models = this.get('models')
+      let queryParams = this.get('queryParams.values')
 
-    if (routeNames) {
       routeNames.forEach((routeName) => {
-        const windowHandler = window.open(routing.generateURL(routeName, models, queryParams))
-        if (!windowHandler) {
-          Logger.warn('Warning: Make sure that the pop-ups are not blocked')
-        }
+        this._openLink(routeName, models, queryParams)
       })
+    } else if (!isEmpty(routes)) {
+      routes.forEach(({name, models, queryParams}) => {
+        this._openLink(name, models, queryParams)
+      })
+    }
+  },
+
+  /**
+   * Open a link in a new tabs.
+   * @param {String} routeName the name of the route
+   * @param {Array} models the route models
+   * @param {Object} queryParams the route queryParams
+   */
+  _openLink (routeName, models, queryParams) {
+    if (routeName) {
+      let routing = this.get('_routing')
+      const url = routing.generateURL(routeName, models, queryParams)
+      const windowHandler = window.open(url)
+      if (!windowHandler) {
+        Logger.warn('Warning: Make sure that the pop-ups are not blocked')
+      }
     }
   },
 
@@ -204,21 +229,33 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
   _setupRouting () {
     if (!this._shouldOpenInSameTab()) {
       if (this._hasMultipleLinks()) {
-        const params = get(this, 'params')
+        const params = this.get('params')
         // When we have the block format, LinkComponent expect a minimum of 1 element in params so we hardcode the
         // first parameter
         if (params && params.length === 0) {
-          params.push(get(this, '_routing.currentRouteName'))
+          params.push(this.get('_routing.currentRouteName'))
         }
 
         // Remove the link destination
         set(this, 'href', null)
-        if (get(this, 'routeName')) {
-          Logger.warn('Warning: The `routeNames` property takes precedence over `routeName`.')
-        }
+
+        this._warnPropertyPrecedence()
       } else {
         set(this, 'target', '_blank')
       }
+    }
+  },
+
+  _warnPropertyPrecedence () {
+    let attributeName
+    if (this.get('routeNames')) {
+      attributeName = 'routeNames'
+    } else if (this.get('routes')) {
+      attributeName = 'routes'
+    }
+
+    if (attributeName) {
+      Logger.warn(`Warning: The \`${attributeName}\` property takes precedence over \`routeName\`.`)
     }
   },
   // == DOM Events ============================================================
@@ -276,6 +313,9 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
 
       this.set('params', params)
     }
+
+    deprecate('routeNames attribute is deprecated, please use routes', isEmpty(this.get('routeNames')),
+      {id: 'ember-frost-core:link:routeNames', until: 'ember-frost-core@2.0.0'})
 
     this._super(...arguments)
   },

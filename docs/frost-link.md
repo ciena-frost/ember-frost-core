@@ -16,7 +16,8 @@
 | `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `priority` | `string` | `primary` | primary link - opens content in a new tab |
 |  |  | `secondary` | secondary link - opens content in the same tab |
-| `routeNames` | `array` | `[...]` | list of the routes to open in new tabs on click <i>(only available for non disabled primary link)</i>. |
+| `routeNames` | `array` | `[...]` | list of the route names to open in new tabs on click <i>(only available for non disabled primary link)</i>. |
+| `routes` | `array` | `[...]` | list of the routes to open in new tabs on click <i>(only available for non disabled primary link)</i>. |
 | `size` | `string` | `small` | small size link |
 |  |  | `medium` | medium size link |
 |  |  | `large` | large size link |
@@ -47,10 +48,30 @@ The link component use ember-spread to `spread` a property object against the to
 }}
 ```
 
-### Primary - multiple routes
+### Primary - multiple routes names
 ```handlebars
 {{frost-link 'Text'
   routeNames=(array 'route name 1' 'route name 2')
+  hook='mySmallLink'
+  priority='primary'
+  size='small'
+}}
+```
+
+### Primary - multiple routes
+```handlebars
+{{frost-link 'Text'
+  routes=(array
+    (hash
+      name= 'route name 1'
+      models= (array '1')
+    )
+    (hash
+      name= 'route name 2'
+      models= (array '1' '2')
+    )
+  )
+  routeNames=(array '' 'route name 2')
   hook='mySmallLink'
   priority='primary'
   size='small'

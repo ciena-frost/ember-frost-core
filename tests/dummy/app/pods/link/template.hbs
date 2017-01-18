@@ -107,7 +107,7 @@
       </div>
     </div>
     <div class="example">
-      <div class="title">multiple routes</div>
+      <div class="title">multiple routes names (deprecated)</div>
       <div class="demo">
         {{frost-link 'Text'
           hook='myMultipleRoutesLink'
@@ -134,7 +134,7 @@
       </div>
     </div>
     <div class="example">
-      <div class="title">multiple routes - block format</div>
+      <div class="title">multiple routes names - block format (deprecated)</div>
       <div class="demo">
         {{#frost-link
           hook='myMultipleRoutesBlockFormatLink'
@@ -163,6 +163,45 @@
     }}
       Text
     {{/frost-link}}
+  ```"}}
+      </div>
+    </div>
+    <div class="example">
+      <div class="title">multiple routes</div>
+      <div class="demo">
+        {{frost-link 'Text'
+          hook='myMultipleRoutesLink'
+          priority='primary'
+          routes=(array
+            (hash
+              name= 'link.first'
+              models= (array '1')
+            )
+            (hash
+              name= 'link.first.second'
+              models= (array '1' '2')
+            )
+          )
+          size='small'
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+    {{frost-link 'Text'
+      hook='myMultipleRoutesLink'
+      priority='primary'
+      routes=(array
+        (hash
+          name= 'link.first'
+          models= (array '1')
+        )
+        (hash
+          name= 'link.first.second'
+          models= (array '2')
+        )
+      )
+      size='small'
+    }}
   ```"}}
       </div>
     </div>
@@ -359,7 +398,7 @@
         {{#frost-link 'link.min'
           design='info-bar'
           hook='myInfoBarLink'
-          icon='infobar-find'
+          icon='round-add'
         }}
           Action
         {{/frost-link}}
@@ -369,7 +408,7 @@
 {{#frost-link 'link.min'
   design='info-bar'
   hook='myInfoBarLink'
-  icon='infobar-find'
+  icon='round-add'
 }}
   Action
 {{/frost-link}}
@@ -384,7 +423,7 @@
           disabled=true
           design='info-bar'
           hook='myDisabledInfoBarLink'
-          icon='infobar-find'
+          icon='round-add'
         }}
           Action
         {{/frost-link}}
@@ -395,7 +434,7 @@
   disabled=true
   hook='myDisabledInfoBarLink'
   design='info-bar'
-  icon='infobar-find'
+  icon='round-add'
 }}
   Action
 {{/frost-link}}
