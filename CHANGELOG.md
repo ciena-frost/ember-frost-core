@@ -1,3 +1,7 @@
+# 1.6.0
+* Added support for multiple routes for `frost-link`
+
+
 # 1.5.2
 * **Removed** unused code in blueprints that was accidentally checked in when adding the new generators. 
 
