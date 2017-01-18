@@ -3,7 +3,7 @@
  * The `css` property will be the introspected name of the component
  */
 import Ember from 'ember'
-const {Mixin} = Ember
+const {Mixin, isArray, isBlank} = Ember
 import {PropTypes} from 'ember-prop-types'
 
 export default Mixin.create({
@@ -11,8 +11,6 @@ export default Mixin.create({
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
-
-  classNameBindings: ['css'],
 
   // == PropTypes =============================================================
 
@@ -48,9 +46,16 @@ export default Mixin.create({
    * It lets us test the functionality in the `init()` method w/o having to call
    * the real this._super() which was breaking when testing with tagName === '' for some reason
    */
-  maybeClearClassNameBindings () {
-    if (this.get('tagName') === '') {
-      this.set('classNameBindings', undefined)
+  setClassNameBindings () {
+    if (isBlank(this.get('tagName'))) {
+      return
+    }
+
+    const classNameBindings = this.get('classNameBindings')
+    if (isArray(classNameBindings)) {
+      classNameBindings.push('css')
+    } else {
+      this.set('classNameBindings', ['css'])
     }
   },
 
@@ -61,7 +66,7 @@ export default Mixin.create({
   // Strip classNameBindings from tagless components
   init () {
     this._super(...arguments)
-    this.maybeClearClassNameBindings()
+    this.setClassNameBindings()
   },
 
   // == Actions ===============================================================
