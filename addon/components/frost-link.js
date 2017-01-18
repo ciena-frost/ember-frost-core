@@ -206,7 +206,7 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
   },
 
   /**
-   * Open a link in a new window.
+   * Open a link in a new tabs.
    * @param {String} routeName the name of the route
    * @param {Array} models the route models
    * @param {Object} queryParams the route queryParams
