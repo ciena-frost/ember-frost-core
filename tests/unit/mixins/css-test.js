@@ -69,7 +69,7 @@ describe('Unit / Mixin / css', function () {
       })
 
       it('should remove "classNameBindings"', function () {
-        expect(component.get('classNameBindings')).to.equal(undefined)
+        expect(component.get('classNameBindings')).to.eql([])
       })
     })
   })

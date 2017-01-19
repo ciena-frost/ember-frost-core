@@ -50,7 +50,7 @@ export default Mixin.create({
    */
   maybeClearClassNameBindings () {
     if (this.get('tagName') === '') {
-      this.set('classNameBindings', undefined)
+      this.set('classNameBindings', [])
     }
   },
 
