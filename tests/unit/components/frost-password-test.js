@@ -1,15 +1,10 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {run} = Ember
+import Component from 'ember-frost-core/components/frost-component'
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import {describeComponent} from 'ember-mocha'
-import {
-  beforeEach,
-  describe,
-  it
-} from 'mocha'
-
-import Component from 'ember-frost-core/components/frost-component'
+import {beforeEach, describe, it} from 'mocha'
 
 describeComponent(
   'frost-password',
@@ -24,7 +19,9 @@ describeComponent(
     let component
 
     beforeEach(function () {
-      component = this.subject()
+      component = this.subject({
+        hook: 'myPassword'
+      })
     })
 
     it('sets default property values correctly', function () {
@@ -39,29 +36,9 @@ describeComponent(
       ).to.equal(false)
 
       expect(
-        component.get('form'),
-        'form: "null"'
-      ).to.equal(null)
-
-      expect(
-        component.get('hook'),
-        'hook: "undefined"'
-      ).to.equal(undefined)
-
-      expect(
         component.get('isRevealed'),
         'isRevealed: false'
       ).to.equal(false)
-
-      expect(
-        component.get('maxlength'),
-        'maxlength: "null"'
-      ).to.equal(null)
-
-      expect(
-        component.get('placeholder'),
-        'placeholder: "null"'
-      ).to.equal(null)
 
       expect(
         component.get('readonly'),
@@ -89,19 +66,9 @@ describeComponent(
       ).to.eql(0)
 
       expect(
-        component.get('title'),
-        'title: "null"'
-      ).to.equal(null)
-
-      expect(
         component.get('type'),
         'type: "password"'
       ).to.eql('password')
-
-      expect(
-        component.get('value'),
-        'value: "null"'
-      ).to.equal(null)
     })
 
     it('extends the commone frost component', function () {

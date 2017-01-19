@@ -1,13 +1,12 @@
 /**
  * Component definition for frost-icon component
  */
+import layout from '../templates/components/frost-icon'
+import Component from './frost-component'
 import Ember from 'ember'
-const {deprecate, get} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
-
-import Component from './frost-component'
-import layout from '../templates/components/frost-icon'
+const {deprecate, get} = Ember
 
 export default Component.extend({
 
@@ -23,7 +22,6 @@ export default Component.extend({
 
   propTypes: {
     // options
-    hook: PropTypes.string,
     pack: PropTypes.string,
     icon: PropTypes.string.isRequired
 
@@ -33,7 +31,6 @@ export default Component.extend({
   getDefaultProps () {
     return {
       // options
-      icon: '',
       pack: 'frost'
 
       // state

@@ -1,12 +1,9 @@
 import {expect} from 'chai'
-import {
-  describeComponent,
-  it
-} from 'ember-mocha'
+import {describeComponent, it} from 'ember-mocha'
+import wait from 'ember-test-helpers/wait'
 import hbs from 'htmlbars-inline-precompile'
 import {describe} from 'mocha'
 import sinon from 'sinon'
-import wait from 'ember-test-helpers/wait'
 
 describeComponent(
   'frost-checkbox',
@@ -17,7 +14,7 @@ describeComponent(
   function () {
     it('renders default values', function () {
       this.render(hbs`
-        {{frost-checkbox}}
+        {{frost-checkbox hook='myCheckbox'}}
       `)
 
       expect(
@@ -42,7 +39,7 @@ describeComponent(
       this.set('size', 'medium')
 
       this.render(hbs`
-        {{frost-checkbox size=size}}
+        {{frost-checkbox hook='myCheckbox' size=size}}
       `)
 
       expect(
@@ -60,7 +57,7 @@ describeComponent(
 
     it('sets checked state property to input', function () {
       this.render(hbs`
-        {{frost-checkbox}}
+        {{frost-checkbox hook='myCheckbox'}}
       `)
 
       expect(
@@ -69,7 +66,7 @@ describeComponent(
       ).to.equal(false)
 
       this.render(hbs`
-        {{frost-checkbox checked=true}}
+        {{frost-checkbox checked=true hook='myCheckbox'}}
       `)
 
       expect(
@@ -80,7 +77,7 @@ describeComponent(
 
     it('sets error class correctly', function () {
       this.render(hbs`
-        {{frost-checkbox}}
+        {{frost-checkbox hook='myCheckbox'}}
       `)
 
       expect(
@@ -89,7 +86,7 @@ describeComponent(
       ).to.equal(false)
 
       this.render(hbs`
-        {{frost-checkbox class="error"}}
+        {{frost-checkbox class="error" hook='myCheckbox'}}
       `)
 
       expect(
@@ -100,7 +97,7 @@ describeComponent(
 
     it('sets disabled state property to input', function () {
       this.render(hbs`
-        {{frost-checkbox}}
+        {{frost-checkbox hook='myCheckbox'}}
       `)
 
       expect(
@@ -109,7 +106,7 @@ describeComponent(
       ).to.equal(false)
 
       this.render(hbs`
-        {{frost-checkbox disabled=true}}
+        {{frost-checkbox disabled=true hook='myCheckbox'}}
       `)
 
       expect(
@@ -120,7 +117,7 @@ describeComponent(
 
     it('renders label when it is set', function () {
       this.render(hbs`
-        {{frost-checkbox}}
+        {{frost-checkbox hook='myCheckbox'}}
       `)
 
       expect(
@@ -129,7 +126,7 @@ describeComponent(
       ).to.eql('')
 
       this.render(hbs`
-        {{frost-checkbox label="lorem ipsum"}}
+        {{frost-checkbox hook='myCheckbox' label="lorem ipsum"}}
       `)
 
       expect(
@@ -144,6 +141,7 @@ describeComponent(
         this.set('checkbox-value', attrs.value)
       })
       this.render(hbs`{{frost-checkbox
+        hook='myCheckbox'
         id="value"
         value="value"
         onInput=(action 'valueChange')
@@ -170,6 +168,7 @@ describeComponent(
 
         this.render(hbs`
           {{frost-checkbox
+            hook='myCheckbox'
             onInput=(action 'externalAction')
             value=testValue
           }}
@@ -193,6 +192,7 @@ describeComponent(
 
         this.render(hbs`
           {{frost-checkbox
+            hook='myCheckbox'
             onInput=(action 'externalAction')
           }}
         `)
@@ -216,6 +216,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-checkbox
+          hook='myCheckbox'
           onBlur=(action 'externalAction')
         }}
       `)
@@ -235,6 +236,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-checkbox
+          hook='myCheckbox'
           onFocus=(action 'externalAction')
         }}
       `)
@@ -254,6 +256,7 @@ describeComponent(
       this.render(hbs`
         {{frost-checkbox
           autofocus=true
+          hook='myCheckbox'
         }}
       `)
 
@@ -270,6 +273,7 @@ describeComponent(
         {{frost-checkbox
           options=(hash
             checked=true
+            hook='myCheckbox'
           )
         }}
       `)

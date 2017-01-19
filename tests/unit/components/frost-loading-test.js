@@ -1,11 +1,7 @@
 import {expect} from 'chai'
-import {describeComponent} from 'ember-mocha'
-import {
-  beforeEach,
-  it
-} from 'mocha'
-
 import Component from 'ember-frost-core/components/frost-component'
+import {describeComponent} from 'ember-mocha'
+import {beforeEach, it} from 'mocha'
 
 describeComponent(
   'frost-loading',
@@ -17,7 +13,9 @@ describeComponent(
     let component
 
     beforeEach(function () {
-      component = this.subject()
+      component = this.subject({
+        hook: 'myLoader'
+      })
     })
 
     it('sets default property values correctly', function () {

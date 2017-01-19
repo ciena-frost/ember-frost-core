@@ -1,11 +1,7 @@
-/* jshint expr:true */
-import { expect } from 'chai'
-import {
-  describeComponent,
-  it
-} from 'ember-mocha'
-import hbs from 'htmlbars-inline-precompile'
+import {expect} from 'chai'
 import {$hook} from 'ember-hook'
+import {describeComponent, it} from 'ember-mocha'
+import hbs from 'htmlbars-inline-precompile'
 import sinon from 'sinon'
 
 describeComponent(
@@ -22,6 +18,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-scroll
+          hook='myScroll'
           onScrollUp=(action 'externalAction')
         }}
       `)
@@ -41,6 +38,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-scroll
+          hook='myScroll'
           onScrollDown=(action 'externalAction')
         }}
       `)
@@ -60,6 +58,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-scroll
+          hook='myScroll'
           onScrollYStart=(action 'externalAction')
         }}
       `)
@@ -79,6 +78,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-scroll
+          hook='myScroll'
           onScrollYEnd=(action 'externalAction')
         }}
       `)

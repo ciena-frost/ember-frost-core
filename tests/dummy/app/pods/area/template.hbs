@@ -12,7 +12,9 @@
     <div class="example">
         <div class="demo">
           {{! BEGIN-SNIPPET textarea }}
-          {{frost-textarea}}
+          {{frost-textarea
+            hook='myTextarea'
+          }}
           {{! END-SNIPPET }}
         </div>
         <div class="snippet">
@@ -45,6 +47,7 @@
         {{! BEGIN-SNIPPET textarea-disabled }}
         {{frost-textarea
           disabled=true
+          hook='myTextarea'
         }}
         {{! END-SNIPPET }}
       </div>
@@ -58,8 +61,9 @@
       <div class="demo">
         {{! BEGIN-SNIPPET textarea-readonly }}
         {{frost-textarea
-          value='readonly'
+          hook='myTextarea'
           readonly=true
+          value='readonly'
         }}
         {{! END-SNIPPET }}
       </div>
@@ -78,6 +82,7 @@
         <div class="demo">
           {{! BEGIN-SNIPPET textarea-placeholder }}
           {{frost-textarea
+            hook='myTextarea'
             placeholder='Text goes here!'
           }}
           {{! END-SNIPPET }}
@@ -93,6 +98,7 @@
         {{! BEGIN-SNIPPET textarea-cols&rows }}
         {{frost-textarea
           cols=80
+          hook='myTextarea'
           rows=6
         }}
         {{! END-SNIPPET }}
@@ -107,6 +113,7 @@
       <div class="demo">
         {{! BEGIN-SNIPPET textarea-tabindex }}
         {{frost-textarea
+          hook='myTextarea'
           placeholder='Un-tabbable'
           tabindex=-1
         }}
@@ -123,6 +130,7 @@
         {{! BEGIN-SNIPPET textarea-autofocus }}
         {{frost-textarea
           autofocus=true
+          hook='myTextarea'
         }}
         {{! END-SNIPPET }}
       </div>
@@ -136,6 +144,7 @@
       <div class="demo">
         {{! BEGIN-SNIPPET textarea-value }}
         {{frost-textarea
+          hook='myTextarea'
           value='value'
         }}
         {{! END-SNIPPET }}
@@ -154,6 +163,7 @@
       <div class="demo">
         {{! BEGIN-SNIPPET textarea-dom-events }}
         {{frost-textarea
+          hook='myTextarea'
           onChange=(action 'event')
           onClick=(action 'event')
           onContextMenu=(action 'event')
@@ -198,6 +208,7 @@
       <div class="demo">
         {{! BEGIN-SNIPPET textarea-support-events }}
         {{frost-textarea
+          hook='myTextarea'
           onEnter=(action 'support' 'enter')
           onEscape=(action 'support' 'escape')
         }}
@@ -222,6 +233,7 @@
         {{frost-textarea
           options=(hash
             disabled=true
+            hook='myTextarea'
             value='this is my text area'
           )
         }}

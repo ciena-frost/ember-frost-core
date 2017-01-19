@@ -2,9 +2,9 @@
  * Component definition for the <%= dasherizedModuleName %> component
  */
 
-import {PropTypes} from 'ember-prop-types'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {Component} from 'ember-frost-core'
+import {PropTypes} from 'ember-prop-types'
 
 import layout from '<%= templatePath %>'
 

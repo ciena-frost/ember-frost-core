@@ -1,15 +1,15 @@
 /**
  * Component definition for frost-select-dropdown component
  */
+import layout from '../templates/components/frost-select-dropdown'
+import {keyCodes} from '../utils'
+import Component from './frost-component'
 import Ember from 'ember'
-const {$, get} = Ember
+const {$, deprecate, get} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
 
-import Component from './frost-component'
-import layout from '../templates/components/frost-select-dropdown'
-import {keyCodes} from '../utils'
 const {DOWN_ARROW, ENTER, ESCAPE, UP_ARROW} = keyCodes
 
 const BORDER_HEIGHT = 1
@@ -42,7 +42,7 @@ export default Component.extend({
     onClose: PropTypes.func.isRequired,
     onFilterInput: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
-    receivedHook: PropTypes.string.isRequired,
+    receivedHook: PropTypes.string,
     selectedItems: PropTypes.arrayOf(PropTypes.object),
 
     // state
@@ -275,6 +275,20 @@ export default Component.extend({
 
     if ($element) {
       this._updatePosition($element)
+    }
+
+    const receivedHook = get(attrs, 'newAttrs.receivedHook.value')
+
+    if (receivedHook && receivedHook !== this.get('hook')) {
+      deprecate(
+        'receivedHook has been deprecated in favor of hook',
+        false,
+        {
+          id: 'receivedHook-deprecated',
+          until: '2.0.0'
+        }
+      )
+      this.set('hook', receivedHook)
     }
   },
 

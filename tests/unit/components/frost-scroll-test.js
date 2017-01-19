@@ -1,14 +1,10 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {$} = Ember
-import {describeComponent} from 'ember-mocha'
-import {
-  beforeEach,
-  it
-} from 'mocha'
-import sinon from 'sinon'
-
 import Component from 'ember-frost-core/components/frost-component'
+import {describeComponent} from 'ember-mocha'
+import {beforeEach, it} from 'mocha'
+import sinon from 'sinon'
 
 describeComponent(
   'frost-scroll',
@@ -20,14 +16,9 @@ describeComponent(
     let component
 
     beforeEach(function () {
-      component = this.subject()
-    })
-
-    it('sets default property values correctly', function () {
-      expect(
-        component.get('hook'),
-        'hook: "undefined"'
-      ).to.equal(undefined)
+      component = this.subject({
+        hook: 'myScroll'
+      })
     })
 
     it('extends the commone frost component', function () {

@@ -1,14 +1,13 @@
 /**
  * Component definition for the frost-text component
  */
+import FrostEventsProxyMixin from '../mixins/frost-events-proxy'
+import layout from '../templates/components/frost-text'
+import Component from './frost-component'
 import Ember from 'ember'
-const {isPresent, on} = Ember
 import {task, timeout} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
-import FrostEventsProxyMixin from '../mixins/frost-events-proxy'
-
-import Component from './frost-component'
-import layout from '../templates/components/frost-text'
+const {isPresent, on} = Ember
 
 export default Component.extend(FrostEventsProxyMixin, {
   // == Dependencies ==========================================================
@@ -27,7 +26,6 @@ export default Component.extend(FrostEventsProxyMixin, {
   propTypes: {
     // options
     align: PropTypes.string,
-    hook: PropTypes.string,
     isClearEnabled: PropTypes.bool,
     isClearVisible: PropTypes.bool,
     isHookEmbedded: PropTypes.bool,
@@ -124,9 +122,9 @@ export default Component.extend(FrostEventsProxyMixin, {
 
   init () {
     this._super(...arguments)
-    this.receivedHook = this.hook
+    this.set('receivedHook', this.get('hook'))
     if (this.get('isHookEmbedded')) {
-      this.hook = ''
+      this.set('hook', '')
     }
   },
 

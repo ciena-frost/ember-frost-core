@@ -2,13 +2,12 @@
  * Component definition for the frost-component component
  */
 
-import Ember from 'ember'
-const {Component} = Ember
-import PropTypesMixin, {PropTypes} from 'ember-prop-types'
-import {HookMixin} from 'ember-hook'
-import SpreadMixin from 'ember-spread'
-
 import CssMixin from '../mixins/css'
+import Ember from 'ember'
+import {HookMixin} from 'ember-hook'
+import PropTypesMixin, {PropTypes} from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
+const {Component} = Ember
 
 export default Component.extend(PropTypesMixin, HookMixin, SpreadMixin, CssMixin, {
   // == Dependencies ==========================================================
@@ -32,19 +31,23 @@ export default Component.extend(PropTypesMixin, HookMixin, SpreadMixin, CssMixin
       PropTypes.null
     ]),
     attributeBindings: PropTypes.arrayOf(PropTypes.string),
-    classNameBindings: PropTypes.arrayOf(PropTypes.string),
-    classNames: PropTypes.arrayOf(PropTypes.string),
+    // FIXME: the following property defined in propTypes cause validation errors
+    // when ember-prop-types validateOnUpdate setting is set to true
+    // classNameBindings: PropTypes.arrayOf(PropTypes.string),
+    // classNames: PropTypes.arrayOf(PropTypes.string),
     concatenatedProperties: PropTypes.arrayOf(PropTypes.string),
-    element: PropTypes.oneOfType([
-      PropTypes.element,
-      PropTypes.null
-    ]),
-    elementId: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.null
-    ]),
-    isDestroyed: PropTypes.bool,
-    isDestroying: PropTypes.bool,
+    // FIXME: the following properties defined in propTypes cause validation errors
+    // when ember-prop-types validateOnUpdate setting is set to true
+    // element: PropTypes.oneOfType([
+    //   PropTypes.element,
+    //   PropTypes.null
+    // ]),
+    // elementId: PropTypes.oneOfType([
+    //   PropTypes.string,
+    //   PropTypes.null
+    // ]),
+    // isDestroyed: PropTypes.bool,
+    // isDestroying: PropTypes.bool,
     isVisible: PropTypes.bool,
     mergedProperties: PropTypes.arrayOf(PropTypes.string),
     layout: PropTypes.any,
@@ -57,7 +60,7 @@ export default Component.extend(PropTypesMixin, HookMixin, SpreadMixin, CssMixin
 
   getDefaultProps () {
     return {
-      hookPrefix: this.get('hook')
+      hookPrefix: this.get('hook') || this.get('options.hook')
     }
   },
 

@@ -1,14 +1,9 @@
 import {expect} from 'chai'
-import {
-  describeComponent,
-  it
-} from 'ember-mocha'
-import hbs from 'htmlbars-inline-precompile'
-import {
-  describe
-} from 'mocha'
-import sinon from 'sinon'
+import {describeComponent, it} from 'ember-mocha'
 import wait from 'ember-test-helpers/wait'
+import hbs from 'htmlbars-inline-precompile'
+import {describe} from 'mocha'
+import sinon from 'sinon'
 
 describeComponent(
   'frost-link',
@@ -19,7 +14,7 @@ describeComponent(
   function () {
     it('renders default values', function () {
       this.render(hbs`
-        {{frost-link 'title' 'testRoute'}}
+        {{frost-link 'title' 'testRoute' hook='myLink'}}
       `)
 
       expect(
@@ -30,7 +25,7 @@ describeComponent(
 
     it('yields content', function () {
       this.render(hbs`
-        {{#frost-link 'testRoute'}}
+        {{#frost-link 'testRoute' hook='myLink'}}
           Yielded title
         {{/frost-link}}
       `)
@@ -47,7 +42,7 @@ describeComponent(
       this.set('title', title)
 
       this.render(hbs`
-        {{frost-link title 'testRoute'}}
+        {{frost-link title 'testRoute' hook='myLink'}}
       `)
 
       expect(
@@ -60,6 +55,7 @@ describeComponent(
       it('target is not set', function () {
         this.render(hbs`
           {{frost-link 'title'
+            hook='myLink'
             routeNames=(array 'testRoute')
             priority='primary'
           }}
@@ -74,6 +70,7 @@ describeComponent(
       it('target is not set in block format', function () {
         this.render(hbs`
           {{#frost-link
+            hook='myLink'
             routeNames=(array 'testRoute')
             priority='primary'
           }}
@@ -86,12 +83,29 @@ describeComponent(
           'target should not be set set'
         ).to.equal('')
       })
+
+      it('text is set', function () {
+        this.render(hbs`
+          {{frost-link
+            hook='myLink'
+            routeNames=(array 'testRoute')
+            priority='primary'
+            text='title'
+          }}
+        `)
+
+        expect(
+          this.$('.frost-link').text().trim(),
+          'text is set'
+        ).to.equal('title')
+      })
     })
 
     describe('Priority property', function () {
       it('has primary class set', function () {
         this.render(hbs`
           {{frost-link 'title' 'testRoute'
+            hook='myLink'
             priority='primary'
           }}
         `)
@@ -105,6 +119,7 @@ describeComponent(
       it('has secondary class set', function () {
         this.render(hbs`
           {{frost-link 'title' 'testRoute'
+            hook='myLink'
             priority='secondary'
           }}
         `)
@@ -120,6 +135,7 @@ describeComponent(
       it('has small class set', function () {
         this.render(hbs`
           {{frost-link 'title' 'testRoute'
+            hook='myLink'
             size='small'
           }}
         `)
@@ -133,6 +149,7 @@ describeComponent(
       it('has medium class set', function () {
         this.render(hbs`
           {{frost-link 'title' 'testRoute'
+            hook='myLink'
             size='medium'
           }}
         `)
@@ -146,6 +163,7 @@ describeComponent(
       it('has large class set', function () {
         this.render(hbs`
           {{frost-link 'title' 'testRoute'
+            hook='myLink'
             size='large'
           }}
         `)
@@ -162,6 +180,7 @@ describeComponent(
         this.render(hbs`
           {{#frost-link 'testRoute'
             design='info-bar'
+            hook='myLink'
           }}
             Yielded content
           {{/frost-link}}
@@ -177,6 +196,7 @@ describeComponent(
         this.render(hbs`
           {{#frost-link 'testRoute'
             design='inline'
+            hook='myLink'
           }}
             Yielded content
           {{/frost-link}}
@@ -193,6 +213,7 @@ describeComponent(
       this.render(hbs`
         {{frost-link 'title' 'testRoute'
             disabled=true
+            hook='myLink'
         }}
       `)
 
@@ -209,7 +230,8 @@ describeComponent(
 
       this.render(hbs`
         {{frost-link 'title' 'testRoute'
-            priority=priority
+          hook='myLink'
+          priority=priority
         }}
       `)
 
@@ -226,6 +248,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-link 'title'
+          hook='myLink'
           onClick=(action 'externalAction')
         }}
       `)
@@ -245,6 +268,7 @@ describeComponent(
       this.render(hbs`
         {{frost-link
           options=(hash
+            hook='myLink'
             priority='secondary'
             route='testRoute'
             text='title'

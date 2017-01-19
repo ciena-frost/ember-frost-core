@@ -1,15 +1,10 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {$, run} = Ember
-import {describeComponent} from 'ember-mocha'
-import {
-  beforeEach,
-  describe,
-  it
-} from 'mocha'
-import sinon from 'sinon'
-
 import Component from 'ember-frost-core/components/frost-component'
+import {describeComponent} from 'ember-mocha'
+import {beforeEach, describe, it} from 'mocha'
+import sinon from 'sinon'
 
 describeComponent(
   'frost-checkbox',
@@ -25,7 +20,9 @@ describeComponent(
     let component
 
     beforeEach(function () {
-      component = this.subject()
+      component = this.subject({
+        hook: 'myCheckbox'
+      })
     })
 
     it('sets default property values correctly', function () {
@@ -53,11 +50,6 @@ describeComponent(
         component.get('disabled'),
         'disabled: "false"'
       ).to.equal(false)
-
-      expect(
-        component.get('hook'),
-        'hook: "undefined"'
-      ).to.equal(undefined)
 
       expect(
         component.get('inputId'),

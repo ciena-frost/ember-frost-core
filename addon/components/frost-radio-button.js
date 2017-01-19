@@ -1,14 +1,13 @@
 /**
  * Component definition for the frost-radio-button component
  */
-import Ember from 'ember'
-const {$} = Ember
-import computed from 'ember-computed-decorators'
-import {PropTypes} from 'ember-prop-types'
-
-import Component from './frost-component'
 import layout from '../templates/components/frost-radio-button'
 import {cloneEvent} from '../utils'
+import Component from './frost-component'
+import Ember from 'ember'
+import computed, {readOnly} from 'ember-computed-decorators'
+import {PropTypes} from 'ember-prop-types'
+const {$} = Ember
 
 export default Component.extend({
   // == Dependencies ==========================================================
@@ -39,7 +38,6 @@ export default Component.extend({
     // Radio properties
     checked: PropTypes.bool,
     disabled: PropTypes.bool,
-    hook: PropTypes.string,
     label: PropTypes.string,
     required: PropTypes.bool,
     size: PropTypes.string,
@@ -51,14 +49,10 @@ export default Component.extend({
 
   getDefaultProps () {
     return {
-      // Group properties
-      groupId: null,
-      selectedValue: null,
       // Radio properties
       disabled: false,
       required: false,
-      size: 'small',
-      value: null
+      size: 'small'
     }
   },
 
@@ -67,25 +61,28 @@ export default Component.extend({
   @computed('selectedValue', 'value')
   /**
    * Determine checked state
+   * TODO: make compued property readOnly
    * @param {String} selectedValue - which radio button in the group is selected
    * @param {String} value - radio button value
    * @returns {Boolean} whether this radio button is checked or not
    */
-  checked (selectedValue, value) {
+  checked (selectedValue, value) { // eslint-disable-line
     return selectedValue === value
   },
 
   @computed('receivedHook')
   /**
    * Determine hook name for radio-button
+   * TODO: make computed property readOnly
    * @param {String} receivedHook - hook received from parent
    * @returns {String} the concatenated hook name
    */
-  hook (receivedHook) {
+  hook (receivedHook) { // eslint-disable-line
     const radioGroupHook = receivedHook || ''
     return `${radioGroupHook}-button`
   },
 
+  @readOnly
   @computed('value')
   /**
    * Determine hook qualifiers for radio-button
@@ -98,6 +95,7 @@ export default Component.extend({
     }
   },
 
+  @readOnly
   @computed('disabled')
   /**
    * Determine tabindex value

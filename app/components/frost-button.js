@@ -1,2 +1,2 @@
-export { default } from 'ember-frost-core/components/frost-button'
+export {default} from 'ember-frost-core/components/frost-button'
 

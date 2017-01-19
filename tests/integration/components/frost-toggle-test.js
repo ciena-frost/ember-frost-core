@@ -1,15 +1,8 @@
 import {expect} from 'chai'
-import {
-  describeComponent,
-  it
-} from 'ember-mocha'
-import {
-  describe
-} from 'mocha'
+import {$hook} from 'ember-hook'
+import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
-import {
-  $hook
-} from 'ember-hook'
+import {describe} from 'mocha'
 import sinon from 'sinon'
 
 describeComponent(
@@ -21,7 +14,7 @@ describeComponent(
   function () {
     it('renders default values', function () {
       this.render(hbs`
-        {{frost-toggle}}
+        {{frost-toggle hook='myToggle'}}
       `)
 
       expect(
@@ -52,6 +45,7 @@ describeComponent(
         () => {
           this.render(hbs`
             {{frost-toggle
+              hook='myToggle'
               trueValue='testValue'
               falseValue='testValue'
             }}
@@ -65,6 +59,7 @@ describeComponent(
       this.render(hbs`
         {{frost-toggle
           disabled=true
+          hook='myToggle'
         }}
      `)
 
@@ -109,6 +104,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-toggle
+          hook='myToggle'
           value=value
         }}
      `)
@@ -123,6 +119,7 @@ describeComponent(
       it('uses trueLabel property', function () {
         this.render(hbs`
           {{frost-toggle
+            hook='myToggle'
             trueLabel='Label On'
             value='on'
           }}
@@ -137,6 +134,7 @@ describeComponent(
       it('uses default on label of "On"', function () {
         this.render(hbs`
           {{frost-toggle
+            hook='myToggle'
             value='on'
           }}
        `)
@@ -151,6 +149,7 @@ describeComponent(
         this.render(hbs`
           {{frost-toggle
             falseLabel='Label Off'
+            hook='myToggle'
             value='on'
           }}
        `)
@@ -163,7 +162,7 @@ describeComponent(
 
       it('uses default off label of "Off"', function () {
         this.render(hbs`
-          {{frost-toggle}}
+          {{frost-toggle hook='myToggle'}}
        `)
 
         expect(
@@ -178,6 +177,7 @@ describeComponent(
 
       this.render(hbs`
           {{frost-toggle
+            hook='myToggle'
             trueValue='enabled'
             value=testValue
           }}
@@ -195,6 +195,7 @@ describeComponent(
       this.render(hbs`
           {{frost-toggle
             falseValue='disabled'
+            hook='myToggle'
             value=testValue
           }}
        `)
@@ -215,6 +216,7 @@ describeComponent(
       this.render(hbs`
           {{frost-toggle
             falseValue='disabled'
+            hook='myToggle'
             value=testValue
             onClick=(action 'externalAction')
           }}
@@ -233,6 +235,7 @@ describeComponent(
         {{frost-toggle
           options=(hash
             disabled=true
+            hook='myToggle'
           )
         }}
      `)

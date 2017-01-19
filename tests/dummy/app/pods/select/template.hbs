@@ -5,7 +5,9 @@
 
   <div class="snippet">
     {{format-markdown "```handlebars
-{{frost-select-outlet}}
+{{frost-select-outlet
+  hook='selectOutlet'
+}}
 ```"}}
   </div>
 
@@ -13,9 +15,16 @@
 
   <div class="snippet">
     {{format-markdown "```handlebars
-{{frost-select-outlet name='foo-bar'}}
+{{frost-select-outlet
+  hook='namedSelectOutlet'
+  name='foo-bar'
+}}
 …
-{{frost-select renderTarget='foo-bar' …}}
+{{frost-select
+  hook='mySelect'
+  renderTarget='foo-bar'
+  …
+}}
 ```"}}
   </div>
 
@@ -53,6 +62,7 @@
           onChange=(action 'onChangeClearable')
         }}
         {{frost-button text='Clear'
+          hook='clearButton'
           onClick=(action 'onClearSelect')
           priority='secondary'
           size='small'
@@ -375,6 +385,7 @@
       <div class="demo">
         {{frost-multi-select
           data=data
+          hook='myMultiSelect'
           selected=selectedIndices
         }}
       </div>
@@ -382,6 +393,7 @@
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
+  hook='myMultiSelect'
   selected=selectedIndices
 }}
 ```"}}
@@ -393,6 +405,7 @@
       <div class="demo">
         {{frost-multi-select
           data=data
+          hook='myMultiSelect'
           selectedValue=selectedValues
         }}
       </div>
@@ -400,6 +413,7 @@
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
+  hook='myMultiSelect'
   selectedValue=selectedValues
 }}
 ```"}}
@@ -417,6 +431,7 @@
         {{frost-multi-select
           data=data
           error=true
+          hook='myMultiSelect'
         }}
       </div>
       <div class="snippet">
@@ -424,6 +439,7 @@
 {{frost-multi-select
   data=data
   error=true
+  hook='myMultiSelect'
 }}
 ```"}}
       </div>
@@ -434,16 +450,18 @@
       <div class="demo">
         {{frost-multi-select
           data=data
-          selectedValue=preSelectedValue
           disabled=true
+          hook='myMultiSelect'
+          selectedValue=preSelectedValue
         }}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
-  selectedValue=preSelectedValue
   disabled=true
+  hook='myMultiSelect'
+  selectedValue=preSelectedValue
 }}
 ```"}}
       </div>
@@ -460,6 +478,7 @@
       <div class="demo">
         {{frost-multi-select
           data=data
+          hook='myMultiSelect'
           onBlur=(action 'onBlurHandler')
         }}
       </div>
@@ -467,6 +486,7 @@
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
+  hook='myMultiSelect'
   onBlur=(action 'onBlurHandler')
 }}
 ```"}}
@@ -478,6 +498,7 @@
       <div class="demo">
         {{frost-multi-select
           data=data
+          hook='myMultiSelect'
           onChange=(action 'onChangeHandler')
         }}
       </div>
@@ -485,6 +506,7 @@
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
+  hook='myMultiSelect'
   onChange=(action 'onChangeHandler')
 }}
 ```"}}
@@ -496,6 +518,7 @@
       <div class="demo">
         {{frost-multi-select
           data=data
+          hook='myMultiSelect'
           onChange=(action 'onChangeHandler')
           onInput=(action 'onInputHandler')
         }}
@@ -504,6 +527,7 @@
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
+  hook='myMultiSelect'
   onChange=(action 'onChangeHandler')
   onInput=(action 'onInputHandler')
 }}
@@ -523,6 +547,7 @@
           options=(hash
             data=data
             error=true
+            hook='myMultiSelect'
           )
         }}
         {{! END-SNIPPET }}

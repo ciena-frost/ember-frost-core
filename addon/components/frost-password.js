@@ -1,13 +1,12 @@
 /**
  * Component definition for the frost-password component
  */
-import computed from 'ember-computed-decorators'
-import {task, timeout} from 'ember-concurrency'
-import {PropTypes} from 'ember-prop-types'
-
-import Component from './frost-component'
 import FrostEventsProxy from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-password'
+import Component from './frost-component'
+import computed, {readOnly} from 'ember-computed-decorators'
+import {task, timeout} from 'ember-concurrency'
+import {PropTypes} from 'ember-prop-types'
 
 export default Component.extend(FrostEventsProxy, {
 
@@ -42,7 +41,6 @@ export default Component.extend(FrostEventsProxy, {
   propTypes: {
     // options
     disabled: PropTypes.bool,
-    hook: PropTypes.string,
     isRevealed: PropTypes.bool,
     revealable: PropTypes.bool,
     tabindex: PropTypes.number,
@@ -68,22 +66,18 @@ export default Component.extend(FrostEventsProxy, {
       isRevealed: false,
       revealable: false,
       tabindex: 0,
-      value: null,
 
       // Setting these as part of establishing an initial value
       autofocus: false,
-      form: null,
-      maxlength: null,
-      placeholder: null,
       readonly: false,
       required: false,
-      selectionDirection: 'none',
-      title: null
+      selectionDirection: 'none'
     }
   },
 
   // == Computed properties  ==================================================
 
+  @readOnly
   @computed('isRevealed')
   /**
    * The message to display on the reveal button
@@ -94,6 +88,7 @@ export default Component.extend(FrostEventsProxy, {
     return isRevealed ? 'Hide' : 'Show'
   },
 
+  @readOnly
   @computed('isRevealed')
   /**
    * The type of the <input>

@@ -6,7 +6,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET radio-default }}
         {{#frost-radio-group
-          hook='myRBGroup'
+          hook='myDefaultRadioGroup'
           id='radioGroup1'
           selectedValue=model.radioGroup1
           onChange=(action 'change')
@@ -45,6 +45,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET radio-inline }}
         {{frost-radio-group
+          hook='myInlineRadioGroup'
           id='inline'
           inputs=(array
             (hash value='a')
@@ -70,6 +71,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET radio-small }}
         {{#frost-radio-group
+          hook='mySmallRadioGroup'
           id='radioGroup2'
           selectedValue=model.radioGroup2
           onChange=(action 'change')
@@ -95,6 +97,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET radio-medium }}
         {{#frost-radio-group
+          hook='myMediumRadioGroup'
           id='radioGroup3'
           selectedValue=model.radioGroup3
           onChange=(action 'change')
@@ -120,6 +123,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET radio-large }}
         {{#frost-radio-group
+          hook='myLargeRadioGroup'
           id='radioGroup4'
           selectedValue=model.radioGroup4
           onChange=(action 'change')
@@ -149,6 +153,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET radio-disabled }}
         {{#frost-radio-group
+          hook='myDisabledRadioGroup'
           id='radioGroup5'
           selectedValue=model.radioGroup5
           onChange=(action 'change')
@@ -175,6 +180,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET radio-error }}
         {{#frost-radio-group
+          hook='myErroredRadioGroup'
           id='radioGroup6'
           selectedValue=model.radioGroup6
           onChange=(action 'change')
@@ -201,6 +207,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET radio-required }}
         {{#frost-radio-group
+          hook='myRequiredRadioGroup'
           id='radioGroup7'
           selectedValue=model.radioGroup7
           onChange=(action 'change')
@@ -233,6 +240,7 @@
         {{#frost-radio-group
           options=(hash
             id='radioGroup7'
+            hook='mySpreadRadioGroup'
             selectedValue=model.radioGroup7
           )
           onChange=(action 'change')

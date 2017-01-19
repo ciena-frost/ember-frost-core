@@ -1,2 +1,1 @@
-blueprints/component/files/**/*
-blueprints/component-test/files/**/*
+blueprints/*/files/**/*

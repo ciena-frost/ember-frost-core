@@ -1,9 +1,5 @@
-/* jshint expr:true */
-import { expect } from 'chai'
-import {
-  describeComponent,
-  it
-} from 'ember-mocha'
+import {expect} from 'chai'
+import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
 
 describeComponent(
@@ -14,16 +10,22 @@ describeComponent(
   },
   function () {
     it('renders', function () {
-      // Set any properties with this.set('myProperty', 'value');
-      // Handle any actions with this.on('myAction', function(val) { ... });
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#frost-select-li}}
-      //     template content
-      //   {{/frost-select-li}}
-      // `);
+      this.setProperties({
+        data: {
+          label: 'Foo',
+          selected: false,
+          value: 'foo'
+        },
+        onItemOver () {},
+        onSelect () {}
+      })
 
-      this.render(hbs`{{frost-select-li}}`)
+      this.render(hbs`{{frost-select-li
+        data=data
+        hook='mySelectListItem'
+        onItemOver=onItemOver
+        onSelect=onSelect
+      }}`)
       expect(this.$()).to.have.length(1)
     })
   }

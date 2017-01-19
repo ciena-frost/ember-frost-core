@@ -1,3 +1,84 @@
+# 1.6.0
+* Added support for multiple routes for `frost-link`
+
+
+# 1.5.2
+* **Removed** unused code in blueprints that was accidentally checked in when adding the new generators. 
+
+
+# 1.5.1
+
+- fs-extra-promise was using withPromise, which isn't a function, but usePromise is
+
+
+# 1.5.0
+
+- Added svgs for checkboxes in various states
+
+
+# 1.4.0
+## New Dependency
+With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` blueprint must be run when updating to this version. You can do so with `ember g ember-frost-core`
+
+* **Added** `ember-frost-test` as a dependency
+* **Added** `addon-import` base blueprint to be used by future `-addon` blueprints (taken right out of `emberjs`
+* **Removed** `component-test` blueprint as it's now provided by `ember-frost-test`
+* **Added** `controller` blueprint
+* **Added** `helper`, and `helper-addon` blueprints
+* **Added** `mixin` blueprint
+* **Added** `service` blueprint
+* **Added** `util` blueprint
+
+# 1.3.11
+
+* **Enabled** new settings for `ember-prop-types` to throw errors instead of log warnings in tests and dummy app as well as work with `ember-spread`.
+* **Fixed** `ember-prop-type` warnings by adding missing required properties in tests and fixing invalid values in `getDefaultProps()`.
+
+
+# 1.3.10
+
+* **Updated** `frost-button` tests to use `setupComponentTest` instead of `describeComponent`
+* **Updated** `frost-button` tests to use helpers from `ember-test-utils`
+* **Refactored** `frost-button` tests to use more `describe` and `beforeEach` blocks to align more with [our testing conventions](https://github.com/ciena-frost/ember-frost-test#testing-conventions)
+
+# 1.3.9
+
+* **Fixed** `frost-link` to require `hook` property in `propTypes` definition.
+* **Fixed** `frost-password` to not set properties to invalid values in `getDefaultProps()`.
+* **Fixed** most `ember-prop-types` warnings from dummy app by adding missing hooks.
+* **Fixed** component generator to sort imports.
+
+
+# 1.3.8
+
+* **Fixed** issue with `frost-button` where underlying icons weren't being provided the `hook` property.
+
+
+# 1.3.7
+
+* Performed minor cleanup with `npm run eslint --- --fix` while running latest [eslint-config-frost-standard](https://github.com/ciena-frost/eslint-config-frost-standard) which includes new rules from [eslint-plugin-ember-standard](https://github.com/ciena-blueplanet/eslint-plugin-ember-standard) and [eslint-plugin-ocd](https://github.com/ciena-blueplanet/eslint-plugin-ocd).
+
+
+# 1.3.6
+
+* **Fixed** dependencies to be included via blueprints instead of installed as direct npm dependencies of this addon.
+
+
+# 1.3.5
+- Add check for text to handle case where link is not inline before pushing it into positional params
+
+
+# 1.3.4
+* **Added** more details in changelog for icon clean up
+* **Fixed** link when route/routeName is not set and that we are using `text` attribute
+
+
+# 1.3.3
+
+* **Fixed** border on `frost-text` input with a `type` of `number`.
+
+
+
 # 1.3.2
 
 * **Fixed** typo in `frost-select` readme (#351) 
@@ -105,7 +186,6 @@
 - **UPDATED** existing component definitions to match recently updated generator.
 - **UPDATED/ADDED** hooks and qualifiers on all the components
 - **ADDED** a single export point at `addon/index.js`
-- **REMOVED** all the unnecessary frost-icons
 - **REMOVED** all the deprecated functionalities
 - **REMOVED** unnecessary code
 - **UPDATED** the dependencies
@@ -121,6 +201,44 @@
 - **ADDED** support for `required` and `error` for radio-button/radio-group
 - **ADDED** support for an inline version of radio-group
 - **ADDED** support for multiple routes on frost-link
+- Icon - application => **Moved** to ember-frost-navigation
+- Icon - arrow => **Deleted**
+- Icon - back => **Deleted**
+- Icon - chevron-left => **Renamed** chevron
+- Icon - close-circle => **Renamed** round-close
+- Icon - dialog-error => **Replaced** by error
+- Icon - double-chevron-left => **Renamed** chevron-double
+- Icon - hide => **Deleted**
+- Icon - home => **Deleted**
+- Icon - info => **Moved** to ember-frost-modal & ember-frost-notifier & ember-frost-fields
+- Icon - infobar-create => **Replaced** by add
+- Icon - infobar-find => **Moved** to ember-frost-info-bar
+- Icon - line => **Deleted**
+- Icon - list-large => **Renamed** view-large
+- Icon - list-medium => **Renamed** view-medium
+- Icon - list-small => **Renamed** view-small
+- Icon - new-tab => **Renamed** open-tabs
+- Icon - search => **Moved** to ember-frost-info-bar & **Replaced** by find
+- Icon - shield-full => **Moved** to internal repo
+- Icon - shield-half => **Moved** to internal repo
+- Icon - shield => **Deleted**
+- Icon - show => **Deleted**
+- Icon - sidebar-layer-normal => **Moved** to ember-frost-sidebar & **Renamed** layer-normal
+- Icon - sidebar-layer-open  => **Moved** to ember-frost-sidebar & **Renamed** layer-open
+- Icon - sort-direction => **Moved** to ember-frost-sort & **Renamed** direction
+- Icon - user => **Moved** to ember-frost-navigation
+- Icon - warning => **Moved** to ember-frost-modal & ember-frost-notifier & ember-frost-fields
+- Icon - app/company-strip => **Moved** to ember-frost-modal dummy
+- Icon - app/company => **Moved** to ember-frost-modal dummy
+- Icon - app/user => **Replaced** by user
+- Icon - frost/close => **Moved** to top level
+- Icon - frost/link => **Replaced** by open-tabs
+- Icon - launch/transition-arrow
+- Icon - loading/ring => **Moved** to top level & **Renamed** loading-ring
+- Icon - loading/ripple => **Moved** to top level & **Renamed** loading-ripple
+- Icon - notifications/error => **Moved** to ember-frost-modal & ember-frost-notifier & ember-frost-fields
+- Icon - notifications/info => **Replaced** by info
+- Icon - notifications/warning => **Replaced** by warning
 
 
 # 0.32.5

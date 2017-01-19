@@ -4,9 +4,8 @@
  */
 
 import Ember from 'ember'
-const {Component} = Ember
-import PropTypesMixin from 'ember-prop-types'
-
 import CssMixin from 'ember-frost-core/mixins/css'
+import PropTypesMixin from 'ember-prop-types'
+const {Component} = Ember
 
 export default Component.extend(CssMixin, PropTypesMixin)

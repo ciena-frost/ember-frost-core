@@ -1,15 +1,8 @@
 import {expect} from 'chai'
-import {
-  describeComponent,
-  it
-} from 'ember-mocha'
-import {
-  describe
-} from 'mocha'
+import {$hook} from 'ember-hook'
+import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
-import {
-  $hook
-} from 'ember-hook'
+import {describe} from 'mocha'
 
 describeComponent(
   'frost-password',
@@ -20,7 +13,7 @@ describeComponent(
   function () {
     it('renders default values', function () {
       this.render(hbs`
-        {{frost-password}}
+        {{frost-password hook='myPassword'}}
       `)
 
       expect(
@@ -43,6 +36,7 @@ describeComponent(
       this.render(hbs`
         {{frost-password
           autofocus=true
+          hook='myPassword'
         }}
      `)
 
@@ -56,6 +50,7 @@ describeComponent(
       this.render(hbs`
         {{frost-password
           disabled=true
+          hook='myPassword'
         }}
      `)
 
@@ -106,6 +101,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-password
+          hook='myPassword'
           maxlength=maxlength
         }}
      `)
@@ -123,6 +119,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-password
+          hook='myPassword'
           placeholder=placeholder
         }}
      `)
@@ -136,6 +133,7 @@ describeComponent(
     it('sets readonly property', function () {
       this.render(hbs`
         {{frost-password
+          hook='myPassword'
           readonly=true
         }}
      `)
@@ -149,6 +147,7 @@ describeComponent(
     it('sets required property', function () {
       this.render(hbs`
         {{frost-password
+          hook='myPassword'
           required=true
         }}
      `)
@@ -163,6 +162,7 @@ describeComponent(
       it('sets revealable class and text to "Show"', function () {
         this.render(hbs`
           {{frost-password
+            hook='myPassword'
             revealable=true
           }}
        `)
@@ -181,6 +181,7 @@ describeComponent(
       it('changes text to "Hide" upon click and type="text"', function () {
         this.render(hbs`
           {{frost-password
+            hook='myPassword'
             revealable=true
           }}
        `)
@@ -206,6 +207,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-password
+          hook='myPassword'
           tabindex=tabindex
         }}
      `)
@@ -223,6 +225,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-password
+          hook='myPassword'
           title=title
         }}
      `)
@@ -240,6 +243,7 @@ describeComponent(
 
       this.render(hbs`
         {{frost-password
+          hook='myPassword'
           value=value
         }}
      `)
@@ -255,6 +259,7 @@ describeComponent(
         {{frost-password
           options=(hash
             disabled=true
+            hook='myPassword'
           )
         }}
      `)

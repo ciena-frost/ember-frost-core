@@ -3,21 +3,22 @@
  */
 
 import {expect} from 'chai'
+import {unit} from 'dummy/tests/helpers/ember-test-utils/describe-component'
+import CssMixin from 'ember-frost-core/mixins/css'
 import {HookMixin} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
 import PropTypesMixin from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
 import {beforeEach, describe} from 'mocha'
 
-import {unit} from 'dummy/tests/helpers/ember-test-utils/describe-component'
-import CssMixin from 'ember-frost-core/mixins/css'
-
 describeComponent(...unit('frost-component'), function () {
   let component
 
   describe('when created with only defaults', function () {
     beforeEach(function () {
-      component = this.subject()
+      component = this.subject({
+        hook: 'myComponent'
+      })
     })
 
     it('should have the CssMixin', function () {
@@ -43,13 +44,13 @@ describeComponent(...unit('frost-component'), function () {
       'actions',
       'ariaRole',
       'attributeBindings',
-      'classNameBindings',
-      'classNames',
+      // 'classNameBindings',
+      // 'classNames',
       'concatenatedProperties',
-      'element',
-      'elementId',
-      'isDestroyed',
-      'isDestroying',
+      // 'element',
+      // 'elementId',
+      // 'isDestroyed',
+      // 'isDestroying',
       'isVisible',
       'mergedProperties',
       'layout',

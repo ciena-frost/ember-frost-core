@@ -1,8 +1,5 @@
 import {expect} from 'chai'
-import {
-  describeComponent,
-  it
-} from 'ember-mocha'
+import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
 
 describeComponent(
@@ -14,7 +11,7 @@ describeComponent(
   function () {
     it('renders default values', function () {
       this.render(hbs`
-        {{frost-loading}}
+        {{frost-loading hook='myLoader'}}
       `)
 
       expect(
@@ -26,6 +23,7 @@ describeComponent(
     it('type property sets class', function () {
       this.render(hbs`
         {{frost-loading
+          hook='myLoader'
           type='ring'
         }}
       `)
@@ -40,6 +38,7 @@ describeComponent(
       this.render(hbs`
         {{frost-loading
           options=(hash
+            hook='myLoader'
             type='ring'
           )
         }}

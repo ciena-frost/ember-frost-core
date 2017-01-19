@@ -1,16 +1,15 @@
 /**
  * Component definition for the frost-toggle component
  */
-import Ember from 'ember'
-const {ViewUtils, assert, isPresent, typeOf} = Ember
-import computed from 'ember-computed-decorators'
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-import SpreadMixin from 'ember-spread'
-
-import Component from './frost-component'
 import FrostEventsProxyMixin from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-toggle'
 import {cloneEvent} from '../utils'
+import Component from './frost-component'
+import Ember from 'ember'
+import computed, {readOnly} from 'ember-computed-decorators'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
+const {ViewUtils, assert, isPresent, typeOf} = Ember
 
 export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixin, {
   // == Dependencies ==========================================================
@@ -38,7 +37,6 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
       PropTypes.string,
       PropTypes.number
     ]),
-    hook: PropTypes.string,
     size: PropTypes.string,
     trueLabel: PropTypes.oneOfType([
       PropTypes.bool,
@@ -72,16 +70,19 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
 
   @computed('trueValue', '_trueLabel')
   // FIXME: jsdoc
-  _trueValue (trueValue, _trueLabel) {
+  // TODO: make computed property readOnly
+  _trueValue (trueValue, _trueLabel) { // eslint-disable-line
     return trueValue || _trueLabel
   },
 
   @computed('falseValue', '_falseLabel')
   // FIXME: jsdoc
-  _falseValue (falseValue, _falseLabel) {
+  // TODO: make computed property readOnly
+  _falseValue (falseValue, _falseLabel) { // eslint-disable-line
     return falseValue || _falseLabel
   },
 
+  @readOnly
   @computed('value')
   // FIXME: jsdoc
   _isToggled (value) {

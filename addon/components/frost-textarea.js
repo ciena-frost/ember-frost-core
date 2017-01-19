@@ -1,14 +1,13 @@
 /**
  * Component definition for frost-textarea component
  */
-import Ember from 'ember'
-const {isPresent, on} = Ember
-import {task, timeout} from 'ember-concurrency'
-import {PropTypes} from 'ember-prop-types'
-
-import Component from './frost-component'
 import FrostEventsProxyMixin from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-textarea'
+import Component from './frost-component'
+import Ember from 'ember'
+import {task, timeout} from 'ember-concurrency'
+import {PropTypes} from 'ember-prop-types'
+const {isPresent, on} = Ember
 
 export default Component.extend(FrostEventsProxyMixin, {
   // == Dependencies ==========================================================
@@ -30,7 +29,6 @@ export default Component.extend(FrostEventsProxyMixin, {
     cols: PropTypes.number,
     disabled: PropTypes.bool,
     form: PropTypes.string,
-    hook: PropTypes.string,
     isClearEnabled: PropTypes.bool,
     isClearVisible: PropTypes.bool,
     placeholder: PropTypes.string,

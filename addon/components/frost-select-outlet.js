@@ -1,10 +1,9 @@
 /**
  * Component definition for the frost-select-outlet component
  */
-import {PropTypes} from 'ember-prop-types'
-
-import Component from './frost-component'
 import layout from '../templates/components/frost-select-outlet'
+import Component from './frost-component'
+import {PropTypes} from 'ember-prop-types'
 
 export default Component.extend({
   // == Dependencies ==========================================================

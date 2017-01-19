@@ -1,16 +1,11 @@
 import {expect} from 'chai'
 import Ember from 'ember'
-const {run} = Ember
+const {Logger, run} = Ember
 import {describeComponent} from 'ember-mocha'
-import {
-  afterEach,
-  beforeEach,
-  describe,
-  it
-} from 'mocha'
 import PropTypeMixin from 'ember-prop-types'
-import sinon from 'sinon'
 import SpreadMixin from 'ember-spread'
+import {afterEach, beforeEach, describe, it} from 'mocha'
+import sinon from 'sinon'
 
 describeComponent(
   'frost-link',
@@ -22,7 +17,9 @@ describeComponent(
     let component
 
     beforeEach(function () {
-      component = this.subject()
+      component = this.subject({
+        hook: 'myLink'
+      })
     })
 
     it('includes className frost-link', function () {
@@ -44,11 +41,6 @@ describeComponent(
         component.get('disabled'),
         'disabled: false'
       ).to.equal(false)
-
-      expect(
-        component.get('hook'),
-        'hook: "undefined"'
-      ).to.equal(undefined)
 
       expect(
         component.get('icon'),
@@ -136,11 +128,11 @@ describeComponent(
         let EmberLoggerSpy
 
         beforeEach(function () {
-          EmberLoggerSpy = sinon.spy(Ember.Logger, 'warn')
+          EmberLoggerSpy = sinon.spy(Logger, 'warn')
         })
 
         afterEach(function () {
-          Ember.Logger.warn.restore()
+          Logger.warn.restore()
         })
 
         it('is used with "priority" property', function () {
@@ -365,7 +357,7 @@ describeComponent(
         const currentRoute = 'my-route'
 
         run(() => {
-          component.set('_routing', { currentRouteName: currentRoute })
+          component.set('_routing', {currentRouteName: currentRoute})
           component.set('params', [])
           component.set('href', 'my-url')
           component.set('_shouldOpenInSameTab', function () { return false })
@@ -389,11 +381,11 @@ describeComponent(
         let EmberLoggerSpy
 
         beforeEach(function () {
-          EmberLoggerSpy = sinon.spy(Ember.Logger, 'warn')
+          EmberLoggerSpy = sinon.spy(Logger, 'warn')
         })
 
         afterEach(function () {
-          Ember.Logger.warn.restore()
+          Logger.warn.restore()
         })
 
         it('user is getting a warning message when "routeNames" and "routeName" are set', function () {
@@ -423,12 +415,12 @@ describeComponent(
 
       beforeEach(function () {
         WindowOpenStub = sinon.stub(window, 'open', function () { return null })
-        EmberLoggerSpy = sinon.spy(Ember.Logger, 'warn')
+        EmberLoggerSpy = sinon.spy(Logger, 'warn')
       })
 
       afterEach(function () {
         window.open.restore()
-        Ember.Logger.warn.restore()
+        Logger.warn.restore()
       })
 
       it('do nothing when "routeNames" is empty', function () {
