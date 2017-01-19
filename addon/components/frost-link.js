@@ -41,13 +41,13 @@ const validSizes = [
 
 /**
  * Add route hash options to link parameters.
- * @param {String} route - route
+ * @param {Array<Object>} routes - route
  * @param {Array<String>} routeNames - route names
  * @param {Array<Any>} params - link parameters
  */
-function addRouteToParams (route, routeNames, params) {
-  if (route) {
-    params.push(route)
+function addRouteToParams (routes, routeNames, params) {
+  if (isArray(routes) && routes.length !== 0) {
+    params.push(routes[0].name)
   } else if (isArray(routeNames) && routeNames.length !== 0) {
     params.push(routeNames[0])
   }
@@ -79,14 +79,14 @@ function getParams (newAttrs) {
   const models = getAttr(newAttrs, 'routeModels')
   const routeNames = getAttr(newAttrs, 'routeNames')
   const queryParams = getAttr(newAttrs, 'routeQueryParams')
-  const route = getAttr(newAttrs, 'route')
+  const routes = getAttr(newAttrs, 'routes')
   const text = getAttr(newAttrs, 'text')
 
   if (text) {
     params.push(text)
   }
 
-  addRouteToParams(route, routeNames, params)
+  addRouteToParams(routes, routeNames, params)
 
   if (!isEmpty(models)) {
     models.forEach((model) => {
