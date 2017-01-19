@@ -55,8 +55,6 @@ function addRouteToParams (params, {route, routes, routeNames}) {
     params.push(routes[0].name)
   } else if (isArray(routeNames) && routeNames.length !== 0) {
     params.push(routeNames[0])
-  } else {
-    params.push(this.get('_routing.currentRouteName'))
   }
 }
 
@@ -394,11 +392,6 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
       const params = getParams(newAttrs)
 
       this.set('params', params)
-
-      // Ember 2.10 will crash if params aren't present in the super call
-      if (newAttrs) {
-        set(arguments, 'params', params)
-      }
     }
 
     deprecate('routeNames attribute is deprecated, please use routes', isEmpty(this.get('routeNames')),
