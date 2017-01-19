@@ -3,11 +3,13 @@
  */
 import layout from '../templates/components/frost-link'
 import Ember from 'ember'
+const {LinkComponent, Logger, deprecate, get, isEmpty, isPresent, run, set} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {HookMixin} from 'ember-hook'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
-const {LinkComponent, Logger, deprecate, isEmpty, isPresent, run, set} = Ember
+
+const {isArray} = Array
 
 /**
  * List of valid values to pass into `design` propery
@@ -36,6 +38,45 @@ const validSizes = [
   'medium',
   'small'
 ]
+
+function getAttr (attrs, name) {
+  return get(attrs, name) || get(attrs, `options.${name}`)
+}
+
+function getParams (newAttrs) {
+  let params = []
+
+  const models = getAttr(newAttrs, 'routeModels')
+  const routeNames = getAttr(newAttrs, 'routeNames')
+  const queryParams = getAttr(newAttrs, 'routeQueryParams')
+  const route = getAttr(newAttrs, 'route')
+  const text = getAttr(newAttrs, 'text')
+
+  if (text) {
+    params.push(text)
+  }
+
+  if (route) {
+    params.push(route)
+  } else if (isArray(routeNames) && routeNames.length !== 0) {
+    params.push(routeNames[0])
+  }
+
+  if (!isEmpty(models)) {
+    models.forEach((model) => {
+      params.push(model)
+    })
+  }
+
+  if (isPresent(queryParams)) {
+    params.push({
+      isQueryParams: true,
+      values: queryParams
+    })
+  }
+
+  return params
+}
 
 export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
   // == Dependencies ==========================================================
@@ -284,34 +325,18 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
    * array in the correct order (text, route, models, queryParams).  Once set
    * we're free to hand control back to the parent function and it will react
    * as if we used the original link-to interface.
+   * @param {Object} newAttrs - incoming properties
    */
-  didReceiveAttrs () {
-    const numberOfParams = this.get('params.length')
-    if (numberOfParams <= 1) {
-      let params = []
-      const text = this.get('text')
-      if (text) {
-        params.push(text)
-      }
+  didReceiveAttrs ({newAttrs}) {
+    const params = getAttr(newAttrs, 'params')
 
-      params.push(this.get('route'))
-
-      const models = this.get('routeModels')
-      if (!isEmpty(models)) {
-        models.forEach((model) => {
-          params.push(model)
-        })
-      }
-
-      const queryParams = this.get('routeQueryParams')
-      if (isPresent(queryParams)) {
-        params.push({
-          isQueryParams: true,
-          values: queryParams
-        })
-      }
+    if (!isArray(params) || params.length === 0) {
+      const params = getParams(newAttrs)
 
       this.set('params', params)
+
+      // Ember 2.10 will crash if params aren't present in the super call
+      set(arguments, '0.newAttrs.params', params)
     }
 
     deprecate('routeNames attribute is deprecated, please use routes', isEmpty(this.get('routeNames')),
