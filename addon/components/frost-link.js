@@ -1,13 +1,15 @@
 /**
  * Component definition for frost-link component
  */
-import layout from '../templates/components/frost-link'
 import Ember from 'ember'
 const {LinkComponent, Logger, assign, deprecate, get, isEmpty, isPresent, run, set, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {HookMixin} from 'ember-hook'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
+
+import layout from '../templates/components/frost-link'
+import windowUtils from '../utils/window'
 
 const {isArray} = Array
 
@@ -53,6 +55,8 @@ function addRouteToParams (params, {route, routes, routeNames}) {
     params.push(routes[0].name)
   } else if (isArray(routeNames) && routeNames.length !== 0) {
     params.push(routeNames[0])
+  } else {
+    params.push(this.get('_routing.currentRouteName'))
   }
 }
 
@@ -303,7 +307,7 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
     if (routeName) {
       let routing = this.get('_routing')
       const url = routing.generateURL(routeName, models, queryParams)
-      const windowHandler = window.open(url)
+      const windowHandler = windowUtils.open(url)
       if (!windowHandler) {
         Logger.warn('Warning: Make sure that the pop-ups are not blocked')
       }
@@ -317,11 +321,15 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
   _setupRouting () {
     if (!this._shouldOpenInSameTab()) {
       if (this._hasMultipleLinks()) {
+        const currentRouteName = this.get('_routing.currentRouteName')
         const params = this.get('params')
+
         // When we have the block format, LinkComponent expect a minimum of 1 element in params so we hardcode the
         // first parameter
-        if (params && params.length === 0) {
-          params.push(this.get('_routing.currentRouteName'))
+        if (!params) {
+          set(this, 'params', [currentRouteName])
+        } else if (params.length === 0) {
+          params.push(currentRouteName)
         }
 
         // Remove the link destination

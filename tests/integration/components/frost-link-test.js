@@ -1,9 +1,32 @@
 import {expect} from 'chai'
+import Ember from 'ember'
 import {setupComponentTest} from 'ember-mocha'
 import wait from 'ember-test-helpers/wait'
 import hbs from 'htmlbars-inline-precompile'
-import {beforeEach, describe, it} from 'mocha'
+import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
+
+import windowUtils from 'ember-frost-core/utils/window'
+
+const RouterStub = Ember.Object.extend({
+  generateURL (endpoint, segments) {
+    let url = endpoint
+
+    if (segments.length !== 0) {
+      url = `${url}/${segments.join('/')}`
+    }
+
+    return url
+  },
+
+  hasRoute () {
+    return true
+  },
+
+  transitionTo () {
+    //
+  }
+})
 
 describe('Integration: FrostLinkComponent', function () {
   setupComponentTest('frost-link', {
@@ -13,22 +36,58 @@ describe('Integration: FrostLinkComponent', function () {
   let sandbox
 
   beforeEach(function () {
+    this.registry.register('service:-routing', RouterStub)
     sandbox = sinon.sandbox.create()
+    sandbox.stub(windowUtils, 'open')
   })
 
-  describe('when instantiated with routeNames', function () {
-    let props
+  afterEach(function () {
+    sandbox.restore()
+  })
 
+  describe('when instantiated using inline format', function () {
     beforeEach(function () {
-      props = {
-        openLink: sandbox.spy()
-      }
-
-      this.setProperties(props)
-
       this.render(hbs`
-        {{frost-link
-          _openLink=openLink
+        {{frost-link 'Test' 'link.min'
+          hook='myLink'
+        }}
+      `)
+    })
+
+    it('has expected class name', function () {
+      expect(this.$('> *').hasClass('frost-link')).to.equal(true)
+    })
+
+    it('has expected text content', function () {
+      expect(this.$('.frost-link').text().trim()).to.equal('Test')
+    })
+  })
+
+  describe('when instantiated using block format', function () {
+    beforeEach(function () {
+      this.render(hbs`
+        {{#frost-link 'link.min'
+          hook='myLink'
+        }}
+          <em>Test</em>
+        {{/frost-link}}
+      `)
+    })
+
+    it('has expected class name', function () {
+      expect(this.$('> *').hasClass('frost-link')).to.equal(true)
+    })
+
+    it('yields expected content', function () {
+      expect(this.$('.frost-link').html().trim()).to.equal('<em>Test</em>')
+      expect(this.$('.frost-link').text().trim()).to.equal('Test')
+    })
+  })
+
+  describe('when instantiated with routeNames in inline format', function () {
+    beforeEach(function () {
+      this.render(hbs`
+        {{frost-link 'Test'
           hook='myLink'
           routeNames=(array
             'link.min'
@@ -38,42 +97,89 @@ describe('Integration: FrostLinkComponent', function () {
       `)
     })
 
+    it('has expected class name', function () {
+      expect(this.$('> *').hasClass('frost-link')).to.equal(true)
+    })
+
+    it('has expected text content', function () {
+      expect(this.$('.frost-link').text().trim()).to.equal('Test')
+    })
+
+    it('does not set target', function () {
+      expect(this.$('.frost-link').prop('target')).to.equal('')
+    })
+
     describe('when clicked', function () {
       beforeEach(function () {
         this.$('.frost-link').click()
       })
 
       it('opens correct number of links', function () {
-        expect(props.openLink.callCount).to.equal(2)
+        expect(windowUtils.open.callCount).to.equal(2)
       })
 
       it('opens first link as expected', function () {
-        const actual = props.openLink.firstCall.args
-        const expected = ['link.min', [], {}]
-        expect(JSON.stringify(actual)).to.eql(JSON.stringify(expected))
+        expect(windowUtils.open.firstCall.args).to.eql(['link.min'])
       })
 
       it('opens second link as expected', function () {
-        const actual = props.openLink.lastCall.args
-        const expected = ['link.max', [], {}]
-        expect(JSON.stringify(actual)).to.eql(JSON.stringify(expected))
+        expect(windowUtils.open.lastCall.args).to.eql(['link.max'])
       })
     })
   })
 
-  describe('when instantiated with routes', function () {
-    let props
-
+  describe('when instantiated with routeNames in block format', function () {
     beforeEach(function () {
-      props = {
-        openLink: sandbox.spy()
-      }
-
-      this.setProperties(props)
-
       this.render(hbs`
-        {{frost-link
-          _openLink=openLink
+        {{#frost-link
+          hook='myLink'
+          priority='primary'
+          routeNames=(array
+            'link.min'
+            'link.max'
+          )
+          size='small'
+        }}
+          Test
+        {{/frost-link}}
+      `)
+    })
+
+    it('has expected class name', function () {
+      expect(this.$('> *').hasClass('frost-link')).to.equal(true)
+    })
+
+    it('yields expected content', function () {
+      expect(this.$('.frost-link').text().trim()).to.equal('Test')
+    })
+
+    it('does not set target', function () {
+      expect(this.$('.frost-link').prop('target')).to.equal('')
+    })
+
+    describe('when clicked', function () {
+      beforeEach(function () {
+        this.$('.frost-link').click()
+      })
+
+      it('opens correct number of links', function () {
+        expect(windowUtils.open.callCount).to.equal(2)
+      })
+
+      it('opens first link as expected', function () {
+        expect(windowUtils.open.firstCall.args).to.eql(['link.min'])
+      })
+
+      it('opens second link as expected', function () {
+        expect(windowUtils.open.lastCall.args).to.eql(['link.max'])
+      })
+    })
+  })
+
+  describe('when instantiated with routes in inline format', function () {
+    beforeEach(function () {
+      this.render(hbs`
+        {{frost-link 'Test'
           hook='myLink'
           routes=(array
             (hash
@@ -89,115 +195,87 @@ describe('Integration: FrostLinkComponent', function () {
       `)
     })
 
+    it('has expected class name', function () {
+      expect(this.$('> *').hasClass('frost-link')).to.equal(true)
+    })
+
+    it('has expected text content', function () {
+      expect(this.$('.frost-link').text().trim()).to.equal('Test')
+    })
+
+    it('does not set target', function () {
+      expect(this.$('.frost-link').prop('target')).to.equal('')
+    })
+
     describe('when clicked', function () {
       beforeEach(function () {
         this.$('.frost-link').click()
       })
 
       it('opens correct number of links', function () {
-        expect(props.openLink.callCount).to.equal(2)
+        expect(windowUtils.open.callCount).to.equal(2)
       })
 
       it('opens first link as expected', function () {
-        const actual = props.openLink.firstCall.args
-        const expected = ['link.first', ['1'], {}]
-        expect(JSON.stringify(actual)).to.eql(JSON.stringify(expected))
+        expect(windowUtils.open.firstCall.args).to.eql(['link.first/1'])
       })
 
       it('opens second link as expected', function () {
-        const actual = props.openLink.lastCall.args
-        const expected = ['link.first.second', ['2'], {}]
-        expect(JSON.stringify(actual)).to.eql(JSON.stringify(expected))
+        expect(windowUtils.open.lastCall.args).to.eql(['link.first.second/2'])
       })
     })
   })
 
-  it('renders default values', function () {
-    this.render(hbs`
-      {{frost-link 'title' 'testRoute' hook='myLink'}}
-    `)
-
-    expect(
-      this.$('.frost-link'),
-      'has the correct class'
-    ).to.have.length(1)
-  })
-
-  it('yields content', function () {
-    this.render(hbs`
-      {{#frost-link 'testRoute' hook='myLink'}}
-        Yielded title
-      {{/frost-link}}
-    `)
-
-    expect(
-      this.$('.frost-link').text().trim(),
-      'Yields content'
-    ).to.eql('Yielded title')
-  })
-
-  it('sets the link title', function () {
-    const title = 'Title'
-
-    this.set('title', title)
-
-    this.render(hbs`
-      {{frost-link title 'testRoute' hook='myLink'}}
-    `)
-
-    expect(
-      this.$('.frost-link').text().trim(),
-      'Link title is set'
-    ).to.eql(title)
-  })
-
-  describe('RouteNames property', function () {
-    it('target is not set', function () {
-      this.render(hbs`
-        {{frost-link 'title'
-          hook='myLink'
-          routeNames=(array 'testRoute')
-          priority='primary'
-        }}
-      `)
-
-      expect(
-        this.$('.frost-link').prop('target'),
-        'target should not be set set'
-      ).to.equal('')
-    })
-
-    it('target is not set in block format', function () {
+  describe('when instantiated with routes in block format', function () {
+    beforeEach(function () {
       this.render(hbs`
         {{#frost-link
           hook='myLink'
-          routeNames=(array 'testRoute')
-          priority='primary'
+          routes=(array
+            (hash
+              name='link.first'
+              models=(array '1')
+            )
+            (hash
+              name='link.first.second'
+              models=(array '2')
+            )
+          )
         }}
-          title
+          <em>Test</em>
         {{/frost-link}}
       `)
-
-      expect(
-        this.$('.frost-link').prop('target'),
-        'target should not be set set'
-      ).to.equal('')
     })
 
-    it('text is set', function () {
-      this.render(hbs`
-        {{frost-link
-          hook='myLink'
-          routeNames=(array 'testRoute')
-          priority='primary'
-          text='title'
-        }}
-      `)
+    it('has expected class name', function () {
+      expect(this.$('> *').hasClass('frost-link')).to.equal(true)
+    })
 
-      expect(
-        this.$('.frost-link').text().trim(),
-        'text is set'
-      ).to.equal('title')
+    it('yields expected content', function () {
+      expect(this.$('.frost-link').html().trim()).to.equal('<em>Test</em>')
+      expect(this.$('.frost-link').text().trim()).to.equal('Test')
+    })
+
+    it('does not set target', function () {
+      expect(this.$('.frost-link').prop('target')).to.equal('')
+    })
+
+    describe('when clicked', function () {
+      beforeEach(function () {
+        this.$('.frost-link').click()
+      })
+
+      it('opens correct number of links', function () {
+        expect(windowUtils.open.callCount).to.equal(2)
+      })
+
+      it('opens first link as expected', function () {
+        expect(windowUtils.open.firstCall.args).to.eql(['link.first/1'])
+      })
+
+      it('opens second link as expected', function () {
+        expect(windowUtils.open.lastCall.args).to.eql(['link.first.second/2'])
+      })
     })
   })
 
