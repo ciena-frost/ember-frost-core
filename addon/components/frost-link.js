@@ -345,7 +345,12 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
    * @param {Object} newAttrs - incoming properties
    */
   didReceiveAttrs ({newAttrs}) {
-    const params = getAttr(newAttrs, 'params')
+    let params = getAttr(newAttrs, 'params')
+
+    // On pre-Ember 2.10 params can be an array with undefined as an item
+    if (isArray(params)) {
+      params = params.filter((param) => param)
+    }
 
     if (!isArray(params) || params.length === 0) {
       const params = getParams(newAttrs)
