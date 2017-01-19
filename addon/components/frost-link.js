@@ -65,10 +65,6 @@ function addRouteToParams (params, {route, routes, routeNames}) {
  * @returns {Any} value of attribute
  */
 function getAttr (attrs, name) {
-  if (typeOf(attrs) !== 'object') {
-    return undefined
-  }
-
   return get(attrs, name) || get(attrs, `options.${name}`)
 }
 
@@ -206,7 +202,7 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
 
     if (classes.length !== 0) {
       // display warning when design property is used together with size and/or priority
-      if (priority !== '' || size !== '') {
+      if (priority || size) {
         Logger.warn('Warning: The `design` property takes precedence over `size` and `priority`.')
       }
 
@@ -283,14 +279,14 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
 
     if (!isEmpty(routeNames)) {
       let models = this.get('models')
-      let queryParams = this.get('queryParams.values') || {}
+      let queryParams = this.get('queryParams.values')
 
       routeNames.forEach((routeName) => {
         this._openLink(routeName, models, queryParams)
       })
     } else if (!isEmpty(routes)) {
       routes.forEach(({name, models, queryParams}) => {
-        this._openLink(name, models, queryParams || {})
+        this._openLink(name, models, queryParams)
       })
     }
   },

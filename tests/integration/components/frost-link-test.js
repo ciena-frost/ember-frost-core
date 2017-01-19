@@ -1,5 +1,6 @@
 import {expect} from 'chai'
 import Ember from 'ember'
+const {Logger} = Ember
 import {setupComponentTest} from 'ember-mocha'
 import wait from 'ember-test-helpers/wait'
 import hbs from 'htmlbars-inline-precompile'
@@ -38,7 +39,6 @@ describe('Integration: FrostLinkComponent', function () {
   beforeEach(function () {
     this.registry.register('service:-routing', RouterStub)
     sandbox = sinon.sandbox.create()
-    sandbox.stub(windowUtils, 'open')
   })
 
   afterEach(function () {
@@ -110,20 +110,60 @@ describe('Integration: FrostLinkComponent', function () {
     })
 
     describe('when clicked', function () {
-      beforeEach(function () {
-        this.$('.frost-link').click()
-      })
+      describe('when clicked', function () {
+        describe('when pop-up blocker enabled', function () {
+          beforeEach(function () {
+            sandbox.stub(Logger, 'warn')
+            sandbox.stub(windowUtils, 'open').returns(null)
+            this.$('.frost-link').click()
+          })
 
-      it('opens correct number of links', function () {
-        expect(windowUtils.open.callCount).to.equal(2)
-      })
+          it('tries to open correct number of links', function () {
+            expect(windowUtils.open.callCount).to.equal(2)
+          })
 
-      it('opens first link as expected', function () {
-        expect(windowUtils.open.firstCall.args).to.eql(['link.min'])
-      })
+          it('tries to open first link as expected', function () {
+            expect(windowUtils.open.firstCall.args).to.eql(['link.min'])
+          })
 
-      it('opens second link as expected', function () {
-        expect(windowUtils.open.lastCall.args).to.eql(['link.max'])
+          it('tries to open second link as expected', function () {
+            expect(windowUtils.open.lastCall.args).to.eql(['link.max'])
+          })
+
+          it('logs warning', function () {
+            expect(Logger.warn.callCount).to.equal(3)
+            expect(Logger.warn.secondCall.args).to.eql([
+              'Warning: Make sure that the pop-ups are not blocked'
+            ])
+            expect(Logger.warn.lastCall.args).to.eql([
+              'Warning: Make sure that the pop-ups are not blocked'
+            ])
+          })
+        })
+
+        describe('when pop-up blocker disabled', function () {
+          beforeEach(function () {
+            sandbox.stub(Logger, 'warn')
+            sandbox.stub(windowUtils, 'open').returns(1)
+            this.$('.frost-link').click()
+          })
+
+          it('opens correct number of links', function () {
+            expect(windowUtils.open.callCount).to.equal(2)
+          })
+
+          it('opens first link as expected', function () {
+            expect(windowUtils.open.firstCall.args).to.eql(['link.min'])
+          })
+
+          it('opens second link as expected', function () {
+            expect(windowUtils.open.lastCall.args).to.eql(['link.max'])
+          })
+
+          it('does not log warning', function () {
+            expect(Logger.warn.callCount).to.equal(1)
+          })
+        })
       })
     })
   })
@@ -158,20 +198,58 @@ describe('Integration: FrostLinkComponent', function () {
     })
 
     describe('when clicked', function () {
-      beforeEach(function () {
-        this.$('.frost-link').click()
+      describe('when pop-up blocker enabled', function () {
+        beforeEach(function () {
+          sandbox.stub(Logger, 'warn')
+          sandbox.stub(windowUtils, 'open').returns(null)
+          this.$('.frost-link').click()
+        })
+
+        it('tries to open correct number of links', function () {
+          expect(windowUtils.open.callCount).to.equal(2)
+        })
+
+        it('tries to open first link as expected', function () {
+          expect(windowUtils.open.firstCall.args).to.eql(['link.min'])
+        })
+
+        it('tries to open second link as expected', function () {
+          expect(windowUtils.open.lastCall.args).to.eql(['link.max'])
+        })
+
+        it('logs warning', function () {
+          expect(Logger.warn.callCount).to.equal(2)
+          expect(Logger.warn.secondCall.args).to.eql([
+            'Warning: Make sure that the pop-ups are not blocked'
+          ])
+          expect(Logger.warn.lastCall.args).to.eql([
+            'Warning: Make sure that the pop-ups are not blocked'
+          ])
+        })
       })
 
-      it('opens correct number of links', function () {
-        expect(windowUtils.open.callCount).to.equal(2)
-      })
+      describe('when pop-up blocker disabled', function () {
+        beforeEach(function () {
+          sandbox.stub(Logger, 'warn')
+          sandbox.stub(windowUtils, 'open').returns(1)
+          this.$('.frost-link').click()
+        })
 
-      it('opens first link as expected', function () {
-        expect(windowUtils.open.firstCall.args).to.eql(['link.min'])
-      })
+        it('opens correct number of links', function () {
+          expect(windowUtils.open.callCount).to.equal(2)
+        })
 
-      it('opens second link as expected', function () {
-        expect(windowUtils.open.lastCall.args).to.eql(['link.max'])
+        it('opens first link as expected', function () {
+          expect(windowUtils.open.firstCall.args).to.eql(['link.min'])
+        })
+
+        it('opens second link as expected', function () {
+          expect(windowUtils.open.lastCall.args).to.eql(['link.max'])
+        })
+
+        it('does not log warning', function () {
+          expect(Logger.warn.callCount).to.equal(0)
+        })
       })
     })
   })
@@ -208,20 +286,58 @@ describe('Integration: FrostLinkComponent', function () {
     })
 
     describe('when clicked', function () {
-      beforeEach(function () {
-        this.$('.frost-link').click()
+      describe('when pop-up blocker enabled', function () {
+        beforeEach(function () {
+          sandbox.stub(Logger, 'warn')
+          sandbox.stub(windowUtils, 'open').returns(null)
+          this.$('.frost-link').click()
+        })
+
+        it('tries to open correct number of links', function () {
+          expect(windowUtils.open.callCount).to.equal(2)
+        })
+
+        it('tries to open first link as expected', function () {
+          expect(windowUtils.open.firstCall.args).to.eql(['link.first/1'])
+        })
+
+        it('tries to open second link as expected', function () {
+          expect(windowUtils.open.lastCall.args).to.eql(['link.first.second/2'])
+        })
+
+        it('logs warning', function () {
+          expect(Logger.warn.callCount).to.equal(3)
+          expect(Logger.warn.secondCall.args).to.eql([
+            'Warning: Make sure that the pop-ups are not blocked'
+          ])
+          expect(Logger.warn.lastCall.args).to.eql([
+            'Warning: Make sure that the pop-ups are not blocked'
+          ])
+        })
       })
 
-      it('opens correct number of links', function () {
-        expect(windowUtils.open.callCount).to.equal(2)
-      })
+      describe('when pop-up blocker disabled', function () {
+        beforeEach(function () {
+          sandbox.stub(Logger, 'warn')
+          sandbox.stub(windowUtils, 'open').returns(1)
+          this.$('.frost-link').click()
+        })
 
-      it('opens first link as expected', function () {
-        expect(windowUtils.open.firstCall.args).to.eql(['link.first/1'])
-      })
+        it('opens correct number of links', function () {
+          expect(windowUtils.open.callCount).to.equal(2)
+        })
 
-      it('opens second link as expected', function () {
-        expect(windowUtils.open.lastCall.args).to.eql(['link.first.second/2'])
+        it('opens first link as expected', function () {
+          expect(windowUtils.open.firstCall.args).to.eql(['link.first/1'])
+        })
+
+        it('opens second link as expected', function () {
+          expect(windowUtils.open.lastCall.args).to.eql(['link.first.second/2'])
+        })
+
+        it('does not log warning', function () {
+          expect(Logger.warn.callCount).to.equal(1)
+        })
       })
     })
   })
@@ -261,21 +377,98 @@ describe('Integration: FrostLinkComponent', function () {
     })
 
     describe('when clicked', function () {
-      beforeEach(function () {
-        this.$('.frost-link').click()
+      describe('when pop-up blocker enabled', function () {
+        beforeEach(function () {
+          sandbox.stub(Logger, 'warn')
+          sandbox.stub(windowUtils, 'open').returns(null)
+          this.$('.frost-link').click()
+        })
+
+        it('tries to open correct number of links', function () {
+          expect(windowUtils.open.callCount).to.equal(2)
+        })
+
+        it('tries to open first link as expected', function () {
+          expect(windowUtils.open.firstCall.args).to.eql(['link.first/1'])
+        })
+
+        it('tries to open second link as expected', function () {
+          expect(windowUtils.open.lastCall.args).to.eql(['link.first.second/2'])
+        })
+
+        it('logs warning', function () {
+          expect(Logger.warn.callCount).to.equal(2)
+          expect(Logger.warn.lastCall.args).to.eql([
+            'Warning: Make sure that the pop-ups are not blocked'
+          ])
+        })
       })
 
-      it('opens correct number of links', function () {
-        expect(windowUtils.open.callCount).to.equal(2)
-      })
+      describe('when pop-up blocker disabled', function () {
+        beforeEach(function () {
+          sandbox.stub(Logger, 'warn')
+          sandbox.stub(windowUtils, 'open').returns(1)
+          this.$('.frost-link').click()
+        })
 
-      it('opens first link as expected', function () {
-        expect(windowUtils.open.firstCall.args).to.eql(['link.first/1'])
-      })
+        it('opens correct number of links', function () {
+          expect(windowUtils.open.callCount).to.equal(2)
+        })
 
-      it('opens second link as expected', function () {
-        expect(windowUtils.open.lastCall.args).to.eql(['link.first.second/2'])
+        it('opens first link as expected', function () {
+          expect(windowUtils.open.firstCall.args).to.eql(['link.first/1'])
+        })
+
+        it('opens second link as expected', function () {
+          expect(windowUtils.open.lastCall.args).to.eql(['link.first.second/2'])
+        })
+
+        it('does not log warning', function () {
+          expect(Logger.warn.callCount).to.equal(0)
+        })
       })
+    })
+  })
+
+  describe('when design used in conjunction with priority', function () {
+    beforeEach(function () {
+      sandbox.stub(Logger, 'warn')
+
+      this.render(hbs`
+        {{frost-link 'Test' 'link.min'
+          design='inline'
+          hook='myLink'
+          priority='primary'
+        }}
+      `)
+    })
+
+    it('logs warning', function () {
+      expect(Logger.warn.callCount).to.equal(1)
+      expect(Logger.warn.lastCall.args).eql([
+        'Warning: The `design` property takes precedence over `size` and `priority`.'
+      ])
+    })
+  })
+
+  describe('when design used in conjunction with size', function () {
+    beforeEach(function () {
+      sandbox.stub(Logger, 'warn')
+
+      this.render(hbs`
+        {{frost-link 'Test' 'link.min'
+          design='inline'
+          hook='myLink'
+          size='small'
+        }}
+      `)
+    })
+
+    it('logs warning', function () {
+      expect(Logger.warn.callCount).to.equal(1)
+      expect(Logger.warn.lastCall.args).eql([
+        'Warning: The `design` property takes precedence over `size` and `priority`.'
+      ])
     })
   })
 

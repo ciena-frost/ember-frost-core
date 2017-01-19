@@ -1,5 +1,5 @@
 export default {
   open () {
-    window.open(...arguments)
+    return window.open(...arguments)
   }
 }
