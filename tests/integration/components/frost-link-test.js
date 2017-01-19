@@ -50,13 +50,13 @@ describe('Integration: FrostLinkComponent', function () {
       it('opens first link as expected', function () {
         const actual = props.openLink.firstCall.args
         const expected = ['link.min', [], {}]
-        expect(actual).to.eql(expected)
+        expect(JSON.stringify(actual)).to.eql(JSON.stringify(expected))
       })
 
       it('opens second link as expected', function () {
         const actual = props.openLink.lastCall.args
         const expected = ['link.max', [], {}]
-        expect(actual).to.eql(expected)
+        expect(JSON.stringify(actual)).to.eql(JSON.stringify(expected))
       })
     })
   })
@@ -100,13 +100,13 @@ describe('Integration: FrostLinkComponent', function () {
 
       it('opens first link as expected', function () {
         const actual = props.openLink.firstCall.args
-        const expected = ['link.first', ['1'], null]
+        const expected = ['link.first', ['1'], {}]
         expect(JSON.stringify(actual)).to.eql(JSON.stringify(expected))
       })
 
       it('opens second link as expected', function () {
         const actual = props.openLink.lastCall.args
-        const expected = ['link.first.second', ['2'], null]
+        const expected = ['link.first.second', ['2'], {}]
         expect(JSON.stringify(actual)).to.eql(JSON.stringify(expected))
       })
     })

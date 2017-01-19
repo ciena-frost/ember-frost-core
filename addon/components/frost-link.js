@@ -281,14 +281,14 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
 
     if (!isEmpty(routeNames)) {
       let models = this.get('models')
-      let queryParams = this.get('queryParams.values')
+      let queryParams = this.get('queryParams.values') || {}
 
       routeNames.forEach((routeName) => {
         this._openLink(routeName, models, queryParams)
       })
     } else if (!isEmpty(routes)) {
       routes.forEach(({name, models, queryParams}) => {
-        this._openLink(name, models, queryParams)
+        this._openLink(name, models, queryParams || {})
       })
     }
   },
