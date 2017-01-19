@@ -50,7 +50,7 @@ export default Mixin.create({
    */
   maybeClearClassNameBindings () {
     if (this.get('tagName') === '') {
-      this.set('classNameBindings', [])
+      this.set('classNameBindings', []) // Ember 2.10 requires an array
     }
   },
 
