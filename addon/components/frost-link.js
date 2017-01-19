@@ -1,13 +1,17 @@
 /**
  * Component definition for frost-link component
  */
-import layout from '../templates/components/frost-link'
 import Ember from 'ember'
+const {LinkComponent, Logger, assign, deprecate, get, isEmpty, isPresent, run, set, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {HookMixin} from 'ember-hook'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
-const {LinkComponent, Logger, deprecate, isEmpty, isPresent, run, set} = Ember
+
+import layout from '../templates/components/frost-link'
+import windowUtils from '../utils/window'
+
+const {isArray} = Array
 
 /**
  * List of valid values to pass into `design` propery
@@ -36,6 +40,88 @@ const validSizes = [
   'medium',
   'small'
 ]
+
+/**
+ * Add route hash options to link parameters.
+ * @param {Array<Any>} params - link parameters
+ * @param {String} route - route
+ * @param {Array<Object>} routes - routes
+ * @param {Array<String>} routeNames - route names
+ */
+function addRouteToParams (params, {route, routes, routeNames}) {
+  if (route) {
+    params.push(route)
+  } else if (isArray(routes) && routes.length !== 0) {
+    params.push(routes[0].name)
+  } else if (isArray(routeNames) && routeNames.length !== 0) {
+    params.push(routeNames[0])
+  }
+}
+
+/**
+ * Get value of attribute from attributes object (also checking via spread options)
+ * @param {Object} attrs - attributes
+ * @param {String} name - name of attribute to get value of
+ * @returns {Any} value of attribute
+ */
+function getAttr (attrs, name) {
+  return get(attrs, name) || get(attrs, `options.${name}`)
+}
+
+/**
+ * Get link parameters. If not passed as positional arguments it will get them
+ * from other optional hash arguments such as "routes".
+ * @param {Object} newAttrs - attributes
+ * @returns {Array<Any>} link parameters
+ */
+function getParams (newAttrs) {
+  let params = []
+
+  const models = getAttr(newAttrs, 'routeModels')
+  const route = getAttr(newAttrs, 'route')
+  const routeNames = getAttr(newAttrs, 'routeNames')
+  const queryParams = getAttr(newAttrs, 'routeQueryParams')
+  const routes = getAttr(newAttrs, 'routes')
+  const text = getAttr(newAttrs, 'text')
+
+  if (text) {
+    params.push(text)
+  }
+
+  addRouteToParams(params, {route, routes, routeNames})
+
+  if (!isEmpty(models)) {
+    models.forEach((model) => {
+      params.push(model)
+    })
+  }
+
+  if (isPresent(queryParams)) {
+    params.push({
+      isQueryParams: true,
+      values: getPOJO(queryParams)
+    })
+  }
+
+  // Make sure no params are EmptyObject as it'll break in Ember 2.10
+  return params.map((param) => getPOJO(param))
+}
+
+/**
+ * Convert things like EmptyObject to a POJO so Ember 2.10 doesn't break.
+ * EmptyObject comes from using the "hash" helper, which doesn't return an
+ * object with the method "hasOwnProperty", which is necessary in the
+ * underlying Ember 2.10 implementation.
+ * @param {Object} object - object to convert to a POJO
+ * @returns {Object} object coverted to a POJO
+ */
+function getPOJO (object) {
+  if (typeOf(object) !== 'object' || object.hasOwnProperty) {
+    return object
+  }
+
+  return assign({}, object)
+}
 
 export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
   // == Dependencies ==========================================================
@@ -116,7 +202,7 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
 
     if (classes.length !== 0) {
       // display warning when design property is used together with size and/or priority
-      if (priority !== '' || size !== '') {
+      if (priority || size) {
         Logger.warn('Warning: The `design` property takes precedence over `size` and `priority`.')
       }
 
@@ -215,7 +301,7 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
     if (routeName) {
       let routing = this.get('_routing')
       const url = routing.generateURL(routeName, models, queryParams)
-      const windowHandler = window.open(url)
+      const windowHandler = windowUtils.open(url)
       if (!windowHandler) {
         Logger.warn('Warning: Make sure that the pop-ups are not blocked')
       }
@@ -229,11 +315,15 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
   _setupRouting () {
     if (!this._shouldOpenInSameTab()) {
       if (this._hasMultipleLinks()) {
+        const currentRouteName = this.get('_routing.currentRouteName')
         const params = this.get('params')
+
         // When we have the block format, LinkComponent expect a minimum of 1 element in params so we hardcode the
         // first parameter
-        if (params && params.length === 0) {
-          params.push(this.get('_routing.currentRouteName'))
+        if (!params) {
+          set(this, 'params', [currentRouteName])
+        } else if (params.length === 0) {
+          params.push(currentRouteName)
         }
 
         // Remove the link destination
@@ -284,32 +374,18 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
    * array in the correct order (text, route, models, queryParams).  Once set
    * we're free to hand control back to the parent function and it will react
    * as if we used the original link-to interface.
+   * @param {Object} newAttrs - incoming properties
    */
-  didReceiveAttrs () {
-    const numberOfParams = this.get('params.length')
-    if (numberOfParams <= 1) {
-      let params = []
-      const text = this.get('text')
-      if (text) {
-        params.push(text)
-      }
+  didReceiveAttrs ({newAttrs}) {
+    let params = getAttr(newAttrs, 'params')
 
-      params.push(this.get('route'))
+    // On pre-Ember 2.10 params can be an array with undefined as an item
+    if (isArray(params)) {
+      params = params.filter((param) => param)
+    }
 
-      const models = this.get('routeModels')
-      if (!isEmpty(models)) {
-        models.forEach((model) => {
-          params.push(model)
-        })
-      }
-
-      const queryParams = this.get('routeQueryParams')
-      if (isPresent(queryParams)) {
-        params.push({
-          isQueryParams: true,
-          values: queryParams
-        })
-      }
+    if (!isArray(params) || params.length === 0) {
+      const params = getParams(newAttrs)
 
       this.set('params', params)
     }

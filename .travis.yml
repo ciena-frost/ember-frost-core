@@ -33,6 +33,7 @@ after_success:
 env:
   matrix:
   - EMBER_TRY_SCENARIO=ember-2-3
+  - EMBER_TRY_SCENARIO=ember-2-8
   - EMBER_TRY_SCENARIO=default
   - EMBER_TRY_SCENARIO=ember-release
   global:
