@@ -18,7 +18,10 @@ describeComponent(
 
     beforeEach(function () {
       component = this.subject({
-        hook: 'myLink'
+        hook: 'myLink',
+        routeNames: [
+          'link.max'
+        ]
       })
     })
 

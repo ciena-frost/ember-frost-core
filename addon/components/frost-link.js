@@ -3,7 +3,7 @@
  */
 import layout from '../templates/components/frost-link'
 import Ember from 'ember'
-const {LinkComponent, Logger, deprecate, get, isEmpty, isPresent, run, set} = Ember
+const {LinkComponent, Logger, assign, deprecate, get, isEmpty, isPresent, run, set, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {HookMixin} from 'ember-hook'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
@@ -39,7 +39,19 @@ const validSizes = [
   'small'
 ]
 
+function addRouteToParams (route, routeNames, params) {
+  if (route) {
+    params.push(route)
+  } else if (isArray(routeNames) && routeNames.length !== 0) {
+    params.push(routeNames[0])
+  }
+}
+
 function getAttr (attrs, name) {
+  if (typeOf(attrs) !== 'object') {
+    return undefined
+  }
+
   return get(attrs, name) || get(attrs, `options.${name}`)
 }
 
@@ -56,11 +68,7 @@ function getParams (newAttrs) {
     params.push(text)
   }
 
-  if (route) {
-    params.push(route)
-  } else if (isArray(routeNames) && routeNames.length !== 0) {
-    params.push(routeNames[0])
-  }
+  addRouteToParams(route, routeNames, params)
 
   if (!isEmpty(models)) {
     models.forEach((model) => {
@@ -71,11 +79,20 @@ function getParams (newAttrs) {
   if (isPresent(queryParams)) {
     params.push({
       isQueryParams: true,
-      values: queryParams
+      values: getPOJO(queryParams)
     })
   }
 
-  return params
+  // Make sure no params are EmptyObject as it'll break in Ember 2.10
+  return params.map((param) => getPOJO(param))
+}
+
+function getPOJO (object) {
+  if (typeOf(object) !== 'object' || object.hasOwnProperty) {
+    return object
+  }
+
+  return assign({}, object)
 }
 
 export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
@@ -336,7 +353,9 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
       this.set('params', params)
 
       // Ember 2.10 will crash if params aren't present in the super call
-      set(arguments, '0.newAttrs.params', params)
+      if (newAttrs) {
+        set(arguments, 'params', params)
+      }
     }
 
     deprecate('routeNames attribute is deprecated, please use routes', isEmpty(this.get('routeNames')),

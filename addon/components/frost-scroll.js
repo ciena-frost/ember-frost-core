@@ -67,7 +67,7 @@ export default Component.extend({
       this.$().on('ps-y-reach-end', this._scrollYEndHandler)
     }
 
-    if (typeOf(this.attrs['on-scroll-y-end']) === 'function') {
+    if (typeOf(this['on-scroll-y-end']) === 'function') {
       deprecate('on-scroll-y-end has been deprecated in favor of onScrollYEnd',
         false,
         {
