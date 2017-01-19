@@ -39,6 +39,12 @@ const validSizes = [
   'small'
 ]
 
+/**
+ * Add route hash options to link parameters.
+ * @param {String} route - route
+ * @param {Array<String>} routeNames - route names
+ * @param {Array<Any>} params - link parameters
+ */
 function addRouteToParams (route, routeNames, params) {
   if (route) {
     params.push(route)
@@ -47,6 +53,12 @@ function addRouteToParams (route, routeNames, params) {
   }
 }
 
+/**
+ * Get value of attribute from attributes object (also checking via spread options)
+ * @param {Object} attrs - attributes
+ * @param {String} name - name of attribute to get value of
+ * @returns {Any} value of attribute
+ */
 function getAttr (attrs, name) {
   if (typeOf(attrs) !== 'object') {
     return undefined
@@ -55,6 +67,12 @@ function getAttr (attrs, name) {
   return get(attrs, name) || get(attrs, `options.${name}`)
 }
 
+/**
+ * Get link parameters. If not passed as positional arguments it will get them
+ * from other optional hash arguments such as "routes".
+ * @param {Object} newAttrs - attributes
+ * @returns {Array<Any>} link parameters
+ */
 function getParams (newAttrs) {
   let params = []
 
@@ -87,6 +105,14 @@ function getParams (newAttrs) {
   return params.map((param) => getPOJO(param))
 }
 
+/**
+ * Convert things like EmptyObject to a POJO so Ember 2.10 doesn't break.
+ * EmptyObject comes from using the "hash" helper, which doesn't return an
+ * object with the method "hasOwnProperty", which is necessary in the
+ * underlying Ember 2.10 implementation.
+ * @param {Object} object - object to convert to a POJO
+ * @returns {Object} object coverted to a POJO
+ */
 function getPOJO (object) {
   if (typeOf(object) !== 'object' || object.hasOwnProperty) {
     return object
