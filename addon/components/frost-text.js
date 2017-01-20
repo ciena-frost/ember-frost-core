@@ -62,7 +62,6 @@ export default Component.extend(FrostEventsProxyMixin, {
       isHookEmbedded: false,
       readonly: false,
       required: false,
-      selectionDirection: 'none',
       spellcheck: false,
       tabindex: 0,
       type: 'text',
