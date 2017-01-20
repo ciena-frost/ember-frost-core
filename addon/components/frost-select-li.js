@@ -1,14 +1,30 @@
 /**
  * Component definition for the frost-select-li component
  */
+import Ember from 'ember'
+const {get, on} = Ember
+import {PropTypes} from 'ember-prop-types'
+
 import layout from '../templates/components/frost-select-li'
 import Component from './frost-component'
-import Ember from 'ember'
-import computed, {readOnly} from 'ember-computed-decorators'
-import {PropTypes} from 'ember-prop-types'
-const {on} = Ember
 
 const regexEscapeChars = '-[]/{}()*+?.^$|'.split('')
+
+// FIXME: jsdoc
+function getLabel (data, filter) {
+  if (filter) {
+    // Make sure special chars are escaped in filter so we can use it as a
+    // regular expression pattern
+    filter = filter.replace(`[${regexEscapeChars.join('\\')}]`, 'g')
+
+    const pattern = new RegExp(filter, 'gi')
+    const label = data.label.replace(pattern, '<u>$&</u>')
+
+    return Ember.String.htmlSafe(label)
+  }
+
+  return data && data.label || ''
+}
 
 export default Component.extend({
   // == Dependencies ==========================================================
@@ -35,24 +51,6 @@ export default Component.extend({
 
   // == Computed Properties ===================================================
 
-  @readOnly
-  @computed('data', 'filter')
-  // FIXME: jsdoc
-  label (data, filter) {
-    if (filter) {
-      // Make sure special chars are escaped in filter so we can use it as a
-      // regular expression pattern
-      filter = filter.replace(`[${regexEscapeChars.join('\\')}]`, 'g')
-
-      const pattern = new RegExp(filter, 'gi')
-      const label = data.label.replace(pattern, '<u>$&</u>')
-
-      return Ember.String.htmlSafe(label)
-    }
-
-    return data && data.label || ''
-  },
-
   // == Functions =============================================================
 
   // == DOM Events ============================================================
@@ -71,6 +69,17 @@ export default Component.extend({
   }),
 
   // == Lifecycle Hooks =======================================================
+
+  didReceiveAttrs (attrs) {
+    const data = get(attrs, 'newAttrs.data')
+    const filter = get(attrs, 'newAttrs.filter.value')
+    const newLabel = getLabel(data, filter)
+    const oldLabel = this.get('label')
+
+    if (newLabel !== oldLabel) {
+      this.set('label', newLabel)
+    }
+  },
 
   // == Actions ===============================================================
   actions: {}
