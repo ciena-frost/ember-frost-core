@@ -14,6 +14,21 @@ describeComponent(
     integration: true
   },
   function () {
+    describe('when type is set to "number"', function () {
+      beforeEach(function () {
+        this.render(hbs`
+          {{frost-text
+            hook='myTextInput'
+            type='number'
+          }}
+        `)
+      })
+
+      it('renders', function () {
+        expect(this.$('.frost-text')).to.have.length(1)
+      })
+    })
+
     it('renders', function () {
       this.render(hbs`
           {{frost-text hook='myTextInput'}}

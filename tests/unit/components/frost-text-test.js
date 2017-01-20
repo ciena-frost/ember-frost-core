@@ -67,11 +67,6 @@ describeComponent(
       ).to.equal(false)
 
       expect(
-        component.get('selectionDirection'),
-        'selectionDirection: none'
-      ).to.be.eql('none')
-
-      expect(
         component.get('spellcheck'),
         'spellcheck: false'
       ).to.equal(false)
