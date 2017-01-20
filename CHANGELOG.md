@@ -1,3 +1,10 @@
+# 1.7.1
+
+* **Addedd** missing acceptance tests to visit remaining routes in demo app to ensure all pages continue to load without issue.
+* **Fixed** deprecation warning about modifying property twice in one render (which became an error in Ember 2.10).
+* **Fixed** select route in demo.
+
+
 # 1.7.0
 
 * **Fixed** bug in `frost-link` where text wasn't showing up when using `routes` or `routeNames` options while using an inline `frost-link`.
