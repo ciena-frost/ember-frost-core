@@ -1,3 +1,9 @@
+# 1.7.0
+
+* **Fixed** bug in `frost-link` where text wasn't showing up when using `routes` or `routeNames` options while using an inline `frost-link`.
+* **Fixed** code so that this addon will work in Ember 2.10 as well as versions dating all the way back to Ember 2.3.
+
+
 # 1.6.0
 * Added support for multiple routes for `frost-link`
 
