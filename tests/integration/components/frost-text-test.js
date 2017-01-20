@@ -78,36 +78,6 @@ describeComponent(
       ).to.equal(true)
     })
 
-    // "autocapitalize" only works in Chrome and iOS Safari Mobile
-
-    // it('sets autocapitalize property', function () {
-    //   this.render(hbs`
-    //       {{frost-text
-    //         autocapitalize='sentences'
-    //       }}
-    //   `)
-
-    //   expect(
-    //     this.$('input').prop('autocapitalize'),
-    //     'autocapitalize attribute is set'
-    //   ).to.eql('sentences')
-    // })
-
-    // "autocorrect" doesn't pass in Chrome, Safari and Firefox
-
-    // it('sets autocorrect property', function () {
-    //   this.render(hbs`
-    //       {{frost-text
-    //         autocorrect=true
-    //       }}
-    //   `)
-
-    //   expect(
-    //     this.$('input').prop('autocorrect'),
-    //     'autocorrect attribute is set'
-    //   ).to.equal(true)
-    // })
-
     it('sets autofocus property', function () {
       this.render(hbs`
           {{frost-text

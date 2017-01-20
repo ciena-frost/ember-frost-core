@@ -83,28 +83,28 @@ describeComponent(
 
       expect(
         component.get('form'),
-        'form: null'
-      ).to.equal(null)
+        'form: \'\''
+      ).to.equal('')
 
       expect(
         component.get('maxlength'),
-        'maxlength: null'
-      ).to.equal(null)
+        'maxlength: undefined'
+      ).to.equal(undefined)
 
       expect(
         component.get('placeholder'),
-        'placeholder: null'
-      ).to.equal(null)
+        'placeholder: \'\''
+      ).to.equal('')
 
       expect(
         component.get('title'),
-        'title: null'
-      ).to.equal(null)
+        'title: \'\''
+      ).to.equal('')
 
       expect(
         component.get('value'),
-        'value: null'
-      ).to.equal(null)
+        'value: \'\''
+      ).to.equal('')
     })
 
     it('extends the commone frost component', function () {
