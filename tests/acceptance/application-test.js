@@ -8,6 +8,7 @@ describe('Acceptance: Application', function () {
 
   before(function () {
     application = startApp()
+    server.loadFixtures()
   })
 
   after(function () {
@@ -29,10 +30,16 @@ describe('Acceptance: Application', function () {
     'button',
     'checkbox',
     'field',
+    'helpers',
     'icons',
     'layout',
+    'loading',
     'palette',
     'password',
+    'radio',
+    'scroll',
+    'select',
+    'toggle',
     'typography'
   ]
     .forEach((path) => {
