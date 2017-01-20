@@ -368,7 +368,9 @@ export default Component.extend({
       const onChange = this.get('onChange')
 
       if (typeOf(onChange) === 'function') {
-        this.onChange(selectedValue)
+        run.next(() => {
+          this.onChange(selectedValue)
+        })
       }
 
       // We need to make sure focus goes back to select since it is on the

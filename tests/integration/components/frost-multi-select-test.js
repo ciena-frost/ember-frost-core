@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import Ember from 'ember'
-const {$} = Ember
+const {$, run} = Ember
 import {$hook, initialize as initializeHook} from 'ember-hook'
 import {describeComponent, it} from 'ember-mocha'
 import wait from 'ember-test-helpers/wait'
@@ -94,7 +94,7 @@ describeComponent(...integration('frost-multi-select'), function () {
         })
 
         expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+        expect(onChange.callCount, 'onChange is not called').to.equal(0)
         expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
       })
 
@@ -116,7 +116,7 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
 
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onChange.callCount, 'onChange is not called').to.equal(0)
           expect(onFocus.callCount, 'onFocus is called').to.equal(1)
         })
 
@@ -138,7 +138,7 @@ describeComponent(...integration('frost-multi-select'), function () {
             })
 
             expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
@@ -177,7 +177,7 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
 
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onChange.callCount, 'onChange is not called').to.equal(0)
           expect(onFocus.callCount, 'onFocus is called').not.to.equal(0)
         })
       })
@@ -195,7 +195,7 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
 
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onChange.callCount, 'onChange is not called').to.equal(0)
           expect(onFocus.callCount, 'onFocus is called').not.to.equal(0)
         })
 
@@ -212,7 +212,7 @@ describeComponent(...integration('frost-multi-select'), function () {
             })
 
             expect(onBlur.callCount, 'onBlur is called').not.to.equal(0)
-            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
           })
         })
 
@@ -236,7 +236,7 @@ describeComponent(...integration('frost-multi-select'), function () {
             })
 
             expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
 
@@ -253,7 +253,7 @@ describeComponent(...integration('frost-multi-select'), function () {
               })
 
               expect(onBlur.callCount, 'onBlur is called').not.to.equal(0)
-              expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+              expect(onChange.callCount, 'onChange is not called').to.equal(0)
             })
           })
 
@@ -275,7 +275,7 @@ describeComponent(...integration('frost-multi-select'), function () {
               })
 
               expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-              expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+              expect(onChange.callCount, 'onChange is not called').to.equal(0)
               expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
             })
           })
@@ -299,7 +299,7 @@ describeComponent(...integration('frost-multi-select'), function () {
               })
 
               expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-              expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+              expect(onChange.callCount, 'onChange is not called').to.equal(0)
               expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
             })
           })
@@ -325,7 +325,7 @@ describeComponent(...integration('frost-multi-select'), function () {
             })
 
             expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
@@ -350,7 +350,7 @@ describeComponent(...integration('frost-multi-select'), function () {
             })
 
             expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
@@ -368,7 +368,7 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
 
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onChange.callCount, 'onChange is not called').to.equal(0)
           expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
         })
 
@@ -389,7 +389,7 @@ describeComponent(...integration('frost-multi-select'), function () {
             })
 
             expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
@@ -435,7 +435,7 @@ describeComponent(...integration('frost-multi-select'), function () {
               .to.equal(document.activeElement)
 
             expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
@@ -453,7 +453,7 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
 
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onChange.callCount, 'onChange is not called').to.equal(0)
           expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
         })
       })
@@ -470,7 +470,7 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
 
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onChange.callCount, 'onChange is not called').to.equal(0)
           expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
         })
       })
@@ -490,7 +490,7 @@ describeComponent(...integration('frost-multi-select'), function () {
         })
 
         expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-        expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+        expect(onChange.callCount, 'onChange is not called').to.equal(0)
         expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
       })
 
@@ -513,7 +513,7 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
 
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onChange.callCount, 'onChange is not called').to.equal(0)
           expect(onFocus.callCount, 'onFocus is called').to.equal(1)
         })
 
@@ -535,7 +535,7 @@ describeComponent(...integration('frost-multi-select'), function () {
             })
 
             expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
@@ -574,7 +574,7 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
 
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onChange.callCount, 'onChange is not called').to.equal(0)
           expect(onFocus.callCount, 'onFocus is called').not.to.equal(0)
         })
       })
@@ -592,7 +592,7 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
 
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onChange.callCount, 'onChange is not called').to.equal(0)
           expect(onFocus.callCount, 'onFocus is called').not.to.equal(0)
         })
 
@@ -609,7 +609,7 @@ describeComponent(...integration('frost-multi-select'), function () {
             })
 
             expect(onBlur.callCount, 'onBlur is called').not.to.equal(0)
-            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
           })
         })
 
@@ -631,7 +631,7 @@ describeComponent(...integration('frost-multi-select'), function () {
             })
 
             expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
@@ -657,7 +657,7 @@ describeComponent(...integration('frost-multi-select'), function () {
             })
 
             expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
 
@@ -674,7 +674,7 @@ describeComponent(...integration('frost-multi-select'), function () {
               })
 
               expect(onBlur.callCount, 'onBlur is called').not.to.equal(0)
-              expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+              expect(onChange.callCount, 'onChange is not called').to.equal(0)
             })
           })
 
@@ -697,13 +697,13 @@ describeComponent(...integration('frost-multi-select'), function () {
               })
 
               expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-              expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+              expect(onChange.callCount, 'onChange is not called').to.equal(0)
               expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
             })
           })
 
           describe('when enter key pressed', function () {
-            beforeEach(function () {
+            beforeEach(function (done) {
               [onBlur, onChange, onFocus].forEach((func) => func.reset())
 
               $(document)
@@ -712,6 +712,10 @@ describeComponent(...integration('frost-multi-select'), function () {
                     keyCode: ENTER
                   })
                 )
+
+              run.next(() => {
+                done()
+              })
             })
 
             it('renders as expected', function () {
@@ -758,8 +762,8 @@ describeComponent(...integration('frost-multi-select'), function () {
                 expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
               })
 
-              describe('when enter key is pressed', function () {
-                beforeEach(function () {
+              describe('when enter key pressed', function () {
+                beforeEach(function (done) {
                   [onBlur, onChange, onFocus].forEach((func) => func.reset())
 
                   $(document)
@@ -768,6 +772,10 @@ describeComponent(...integration('frost-multi-select'), function () {
                         keyCode: ENTER
                       })
                     )
+
+                  run.next(() => {
+                    done()
+                  })
                 })
 
                 it('renders as expected', function () {
@@ -813,7 +821,7 @@ describeComponent(...integration('frost-multi-select'), function () {
               })
 
               expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-              expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+              expect(onChange.callCount, 'onChange is not called').to.equal(0)
               expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
             })
           })
@@ -839,7 +847,7 @@ describeComponent(...integration('frost-multi-select'), function () {
               })
 
               expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-              expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+              expect(onChange.callCount, 'onChange is not called').to.equal(0)
               expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
             })
 
@@ -864,7 +872,7 @@ describeComponent(...integration('frost-multi-select'), function () {
                 })
 
                 expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-                expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+                expect(onChange.callCount, 'onChange is not called').to.equal(0)
                 expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
               })
             })
@@ -890,13 +898,13 @@ describeComponent(...integration('frost-multi-select'), function () {
                 })
 
                 expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-                expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+                expect(onChange.callCount, 'onChange is not called').to.equal(0)
                 expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
               })
             })
 
             describe('when enter key pressed', function () {
-              beforeEach(function () {
+              beforeEach(function (done) {
                 [onBlur, onChange, onFocus].forEach((func) => func.reset())
 
                 $(document)
@@ -905,6 +913,10 @@ describeComponent(...integration('frost-multi-select'), function () {
                       keyCode: ENTER
                     })
                   )
+
+                run.next(() => {
+                  done()
+                })
               })
 
               it('renders as expected', function () {
@@ -929,9 +941,12 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
 
           describe('when first item clicked', function () {
-            beforeEach(function () {
+            beforeEach(function (done) {
               [onBlur, onChange, onFocus].forEach((func) => func.reset())
               $hook('select-item', {index: 0}).trigger('mousedown')
+              run.next(() => {
+                done()
+              })
             })
 
             it('renders as expected', function () {
@@ -942,7 +957,6 @@ describeComponent(...integration('frost-multi-select'), function () {
                 text: 'Foo'
               })
 
-              expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
               expect(onChange.callCount, 'onChange is called').to.equal(1)
               expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
 
@@ -955,9 +969,12 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
 
           describe('when second item clicked', function () {
-            beforeEach(function () {
+            beforeEach(function (done) {
               [onBlur, onChange, onFocus].forEach((func) => func.reset())
               $hook('select-item', {index: 1}).trigger('mousedown')
+              run.next(() => {
+                done()
+              })
             })
 
             it('renders as expected', function () {
@@ -968,7 +985,6 @@ describeComponent(...integration('frost-multi-select'), function () {
                 text: 'Bar'
               })
 
-              expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
               expect(onChange.callCount, 'onChange is called').to.equal(1)
               expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
 
@@ -1002,7 +1018,7 @@ describeComponent(...integration('frost-multi-select'), function () {
             })
 
             expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
@@ -1028,7 +1044,7 @@ describeComponent(...integration('frost-multi-select'), function () {
             })
 
             expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
@@ -1046,7 +1062,7 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
 
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onChange.callCount, 'onChange is not called').to.equal(0)
           expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
         })
 
@@ -1067,7 +1083,7 @@ describeComponent(...integration('frost-multi-select'), function () {
             })
 
             expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
@@ -1113,7 +1129,7 @@ describeComponent(...integration('frost-multi-select'), function () {
               .to.equal(document.activeElement)
 
             expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-            expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
@@ -1131,7 +1147,7 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
 
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onChange.callCount, 'onChange is not called').to.equal(0)
           expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
         })
       })
@@ -1148,7 +1164,7 @@ describeComponent(...integration('frost-multi-select'), function () {
           })
 
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-          expect(onChange.callCount, 'OnChange is not called').to.equal(0)
+          expect(onChange.callCount, 'onChange is not called').to.equal(0)
           expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
         })
       })
