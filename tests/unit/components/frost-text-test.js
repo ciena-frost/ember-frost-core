@@ -82,29 +82,9 @@ describeComponent(
       ).to.be.eql('text')
 
       expect(
-        component.get('form'),
-        'form: \'\''
-      ).to.equal('')
-
-      expect(
         component.get('maxlength'),
         'maxlength: undefined'
       ).to.equal(undefined)
-
-      expect(
-        component.get('placeholder'),
-        'placeholder: \'\''
-      ).to.equal('')
-
-      expect(
-        component.get('title'),
-        'title: \'\''
-      ).to.equal('')
-
-      expect(
-        component.get('value'),
-        'value: \'\''
-      ).to.equal('')
     })
 
     it('extends the commone frost component', function () {

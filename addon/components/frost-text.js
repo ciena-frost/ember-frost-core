@@ -64,15 +64,7 @@ export default Component.extend(FrostEventsProxyMixin, {
       required: false,
       spellcheck: false,
       tabindex: 0,
-      type: 'text',
-
-      // Setting these as part of establishing an initial value
-      form: '',
-      placeholder: '',
-      title: '',
-      value: ''
-
-      // state
+      type: 'text'
     }
   },
 
