@@ -1,3 +1,12 @@
+# 1.7.2
+
+* **Fixed** bug when trying to use `frost-text` with `type="number"`. The error that was occurring was:
+
+  ```
+  Uncaught DOMException: Failed to set the 'selectionDirection' property on 'HTMLInputElement': The input element's type ('number') does not support selection.
+  ```
+
+
 # 1.7.1
 
 * **Addedd** missing acceptance tests to visit remaining routes in demo app to ensure all pages continue to load without issue.

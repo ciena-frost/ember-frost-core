@@ -1,6 +1,6 @@
 {
   "name": "ember-frost-core",
-  "version": "1.7.1",
+  "version": "1.7.2",
   "dependencies": {
     "abbrev": {
       "version": "1.0.9",
@@ -1374,9 +1374,9 @@
       "dev": true
     },
     "clean-css": {
-      "version": "3.4.23",
+      "version": "3.4.24",
       "from": "clean-css@>=3.4.5 <4.0.0",
-      "resolved": "https://registry.npmjs.org/clean-css/-/clean-css-3.4.23.tgz",
+      "resolved": "https://registry.npmjs.org/clean-css/-/clean-css-3.4.24.tgz",
       "dev": true,
       "dependencies": {
         "commander": {
@@ -7311,14 +7311,14 @@
       "dev": true
     },
     "postcss": {
-      "version": "5.2.10",
+      "version": "5.2.11",
       "from": "postcss@>=5.2.2 <6.0.0",
-      "resolved": "https://registry.npmjs.org/postcss/-/postcss-5.2.10.tgz",
+      "resolved": "https://registry.npmjs.org/postcss/-/postcss-5.2.11.tgz",
       "dev": true,
       "dependencies": {
         "supports-color": {
           "version": "3.2.3",
-          "from": "supports-color@>=3.1.2 <4.0.0",
+          "from": "supports-color@>=3.2.3 <4.0.0",
           "resolved": "https://registry.npmjs.org/supports-color/-/supports-color-3.2.3.tgz",
           "dev": true
         }
