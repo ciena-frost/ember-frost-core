@@ -1,12 +1,13 @@
 /**
  * Component definition for the frost-select-li component
  */
-import layout from '../templates/components/frost-select-li'
-import Component from './frost-component'
 import Ember from 'ember'
+const {on} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
-const {on} = Ember
+
+import layout from '../templates/components/frost-select-li'
+import Component from './frost-component'
 
 const regexEscapeChars = '-[]/{}()*+?.^$|'.split('')
 
