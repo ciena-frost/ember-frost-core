@@ -1,3 +1,9 @@
+# 1.7.3
+
+* in frost text:
+* removed null default value for maxLength, since that is propType.number, and the null default isn't needed
+* changed null default values to empty string for properties that are propType.string
+
 # 1.7.2
 
 * **Fixed** bug when trying to use `frost-text` with `type="number"`. The error that was occurring was:
