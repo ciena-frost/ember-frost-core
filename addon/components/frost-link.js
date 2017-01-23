@@ -379,18 +379,23 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
   didReceiveAttrs ({newAttrs}) {
     let params = getAttr(newAttrs, 'params')
 
+    // Ugly hack to get access to hasBlock so that we can determine if the text
+    // is coming from the block
+    const hasBlockKey = Object.keys(this).find(entry => entry.startsWith('HAS_BLOCK'))
+    const hasBlock = hasBlockKey && this[hasBlockKey]
+
     // On pre-Ember 2.10 params can be an array with undefined as an item
     if (isArray(params)) {
       params = params.filter((param) => param)
 
       // Handle the 'text' property being passed using positional params / block
       // mixed with named properties
-      if (params.length === 1 && isNone(newAttrs.text)) {
+      if (!hasBlock && params.length === 1 && isNone(newAttrs.text)) {
         newAttrs['text'] = params[0]
       }
     }
 
-    if (!isArray(params) || params.length <= 1) {
+    if (!isArray(params) || (!hasBlock && params.length <= 1)) {
       const params = getParams(newAttrs)
 
       this.set('params', params)
