@@ -1,6 +1,6 @@
 {
   "name": "ember-frost-core",
-  "version": "1.7.3",
+  "version": "1.7.4",
   "dependencies": {
     "abbrev": {
       "version": "1.0.9",
@@ -31,15 +31,15 @@
       "dev": true
     },
     "ajv": {
-      "version": "4.11.1",
+      "version": "4.11.2",
       "from": "ajv@>=4.7.0 <5.0.0",
-      "resolved": "https://registry.npmjs.org/ajv/-/ajv-4.11.1.tgz",
+      "resolved": "https://registry.npmjs.org/ajv/-/ajv-4.11.2.tgz",
       "dev": true
     },
     "ajv-keywords": {
-      "version": "1.5.0",
+      "version": "1.5.1",
       "from": "ajv-keywords@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/ajv-keywords/-/ajv-keywords-1.5.0.tgz",
+      "resolved": "https://registry.npmjs.org/ajv-keywords/-/ajv-keywords-1.5.1.tgz",
       "dev": true
     },
     "align-text": {
@@ -257,9 +257,9 @@
       "resolved": "https://registry.npmjs.org/asynckit/-/asynckit-0.4.0.tgz"
     },
     "autoprefixer": {
-      "version": "6.6.1",
+      "version": "6.7.0",
       "from": "autoprefixer@>=6.0.2 <7.0.0",
-      "resolved": "https://registry.npmjs.org/autoprefixer/-/autoprefixer-6.6.1.tgz",
+      "resolved": "https://registry.npmjs.org/autoprefixer/-/autoprefixer-6.7.0.tgz",
       "dev": true
     },
     "aws-sign2": {
@@ -1191,9 +1191,9 @@
       "dev": true
     },
     "browserslist": {
-      "version": "1.5.2",
-      "from": "browserslist@>=1.5.1 <1.6.0",
-      "resolved": "https://registry.npmjs.org/browserslist/-/browserslist-1.5.2.tgz",
+      "version": "1.6.0",
+      "from": "browserslist@>=1.6.0 <1.7.0",
+      "resolved": "https://registry.npmjs.org/browserslist/-/browserslist-1.6.0.tgz",
       "dev": true
     },
     "bser": {
@@ -1271,7 +1271,7 @@
     },
     "caniuse-db": {
       "version": "1.0.30000613",
-      "from": "caniuse-db@>=1.0.30000604 <2.0.0",
+      "from": "caniuse-db@>=1.0.30000613 <2.0.0",
       "resolved": "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000613.tgz",
       "dev": true
     },
@@ -2067,6 +2067,12 @@
       "version": "1.1.1",
       "from": "ee-first@1.1.1",
       "resolved": "https://registry.npmjs.org/ee-first/-/ee-first-1.1.1.tgz",
+      "dev": true
+    },
+    "electron-to-chromium": {
+      "version": "1.2.0",
+      "from": "electron-to-chromium@>=1.2.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.2.0.tgz",
       "dev": true
     },
     "ember-cli": {
@@ -3226,9 +3232,9 @@
       "dev": true
     },
     "filesize": {
-      "version": "3.4.1",
+      "version": "3.4.2",
       "from": "filesize@>=3.1.3 <4.0.0",
-      "resolved": "https://registry.npmjs.org/filesize/-/filesize-3.4.1.tgz",
+      "resolved": "https://registry.npmjs.org/filesize/-/filesize-3.4.2.tgz",
       "dev": true
     },
     "fill-range": {
@@ -5140,9 +5146,9 @@
       "dev": true
     },
     "nan": {
-      "version": "2.5.0",
+      "version": "2.5.1",
       "from": "nan@>=2.3.2 <3.0.0",
-      "resolved": "https://registry.npmjs.org/nan/-/nan-2.5.0.tgz"
+      "resolved": "https://registry.npmjs.org/nan/-/nan-2.5.1.tgz"
     },
     "natural-compare": {
       "version": "1.4.0",
@@ -8229,10 +8235,32 @@
       }
     },
     "serve-static": {
-      "version": "1.11.1",
+      "version": "1.11.2",
       "from": "serve-static@>=1.11.1 <1.12.0",
-      "resolved": "https://registry.npmjs.org/serve-static/-/serve-static-1.11.1.tgz",
-      "dev": true
+      "resolved": "https://registry.npmjs.org/serve-static/-/serve-static-1.11.2.tgz",
+      "dev": true,
+      "dependencies": {
+        "debug": {
+          "version": "2.2.0",
+          "from": "debug@~2.2.0",
+          "resolved": "https://registry.npmjs.org/debug/-/debug-2.2.0.tgz",
+          "dev": true,
+          "dependencies": {
+            "ms": {
+              "version": "0.7.1",
+              "from": "ms@0.7.1",
+              "resolved": "https://registry.npmjs.org/ms/-/ms-0.7.1.tgz",
+              "dev": true
+            }
+          }
+        },
+        "send": {
+          "version": "0.14.2",
+          "from": "send@0.14.2",
+          "resolved": "https://registry.npmjs.org/send/-/send-0.14.2.tgz",
+          "dev": true
+        }
+      }
     },
     "set-blocking": {
       "version": "2.0.0",
@@ -8705,9 +8733,9 @@
       }
     },
     "tap-parser": {
-      "version": "5.1.3",
+      "version": "5.2.0",
       "from": "tap-parser@>=5.1.0 <6.0.0",
-      "resolved": "https://registry.npmjs.org/tap-parser/-/tap-parser-5.1.3.tgz",
+      "resolved": "https://registry.npmjs.org/tap-parser/-/tap-parser-5.2.0.tgz",
       "dev": true
     },
     "tar": {

@@ -1,3 +1,8 @@
+# 1.7.4
+
+* Fixed frost-link to support providing text via name properties, positional params or the yield block
+
+
 # 1.7.3
 
 * in frost text:
