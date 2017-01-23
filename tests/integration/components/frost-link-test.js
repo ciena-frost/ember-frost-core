@@ -45,11 +45,31 @@ describe('Integration: FrostLinkComponent', function () {
     sandbox.restore()
   })
 
-  describe('when instantiated using inline format', function () {
+  describe('when instantiated using inline positional params format', function () {
     beforeEach(function () {
       this.render(hbs`
         {{frost-link 'Test' 'link.min'
           hook='myLink'
+        }}
+      `)
+    })
+
+    it('has expected class name', function () {
+      expect(this.$('> *').hasClass('frost-link')).to.equal(true)
+    })
+
+    it('has expected text content', function () {
+      expect(this.$('.frost-link').text().trim()).to.equal('Test')
+    })
+  })
+
+  describe('when instantiated using inline hash format', function () {
+    beforeEach(function () {
+      this.render(hbs`
+        {{frost-link
+          hook='myLink'
+          text='Test'
+          routeName='link.min'
         }}
       `)
     })
@@ -110,59 +130,57 @@ describe('Integration: FrostLinkComponent', function () {
     })
 
     describe('when clicked', function () {
-      describe('when clicked', function () {
-        describe('when pop-up blocker enabled', function () {
-          beforeEach(function () {
-            sandbox.stub(Logger, 'warn')
-            sandbox.stub(windowUtils, 'open').returns(null)
-            this.$('.frost-link').click()
-          })
-
-          it('tries to open correct number of links', function () {
-            expect(windowUtils.open.callCount).to.equal(2)
-          })
-
-          it('tries to open first link as expected', function () {
-            expect(windowUtils.open.firstCall.args).to.eql(['link.min'])
-          })
-
-          it('tries to open second link as expected', function () {
-            expect(windowUtils.open.lastCall.args).to.eql(['link.max'])
-          })
-
-          it('logs warning', function () {
-            expect(Logger.warn.callCount).to.equal(3)
-            expect(Logger.warn.secondCall.args).to.eql([
-              'Warning: Make sure that the pop-ups are not blocked'
-            ])
-            expect(Logger.warn.lastCall.args).to.eql([
-              'Warning: Make sure that the pop-ups are not blocked'
-            ])
-          })
+      describe('when pop-up blocker enabled', function () {
+        beforeEach(function () {
+          sandbox.stub(Logger, 'warn')
+          sandbox.stub(windowUtils, 'open').returns(null)
+          this.$('.frost-link').click()
         })
 
-        describe('when pop-up blocker disabled', function () {
-          beforeEach(function () {
-            sandbox.stub(Logger, 'warn')
-            sandbox.stub(windowUtils, 'open').returns(1)
-            this.$('.frost-link').click()
-          })
+        it('tries to open correct number of links', function () {
+          expect(windowUtils.open.callCount).to.equal(2)
+        })
 
-          it('opens correct number of links', function () {
-            expect(windowUtils.open.callCount).to.equal(2)
-          })
+        it('tries to open first link as expected', function () {
+          expect(windowUtils.open.firstCall.args).to.eql(['link.min'])
+        })
 
-          it('opens first link as expected', function () {
-            expect(windowUtils.open.firstCall.args).to.eql(['link.min'])
-          })
+        it('tries to open second link as expected', function () {
+          expect(windowUtils.open.lastCall.args).to.eql(['link.max'])
+        })
 
-          it('opens second link as expected', function () {
-            expect(windowUtils.open.lastCall.args).to.eql(['link.max'])
-          })
+        it('logs warning', function () {
+          expect(Logger.warn.callCount).to.equal(2)
+          expect(Logger.warn.secondCall.args).to.eql([
+            'Warning: Make sure that the pop-ups are not blocked'
+          ])
+          expect(Logger.warn.lastCall.args).to.eql([
+            'Warning: Make sure that the pop-ups are not blocked'
+          ])
+        })
+      })
 
-          it('does not log warning', function () {
-            expect(Logger.warn.callCount).to.equal(1)
-          })
+      describe('when pop-up blocker disabled', function () {
+        beforeEach(function () {
+          sandbox.stub(Logger, 'warn')
+          sandbox.stub(windowUtils, 'open').returns(1)
+          this.$('.frost-link').click()
+        })
+
+        it('opens correct number of links', function () {
+          expect(windowUtils.open.callCount).to.equal(2)
+        })
+
+        it('opens first link as expected', function () {
+          expect(windowUtils.open.firstCall.args).to.eql(['link.min'])
+        })
+
+        it('opens second link as expected', function () {
+          expect(windowUtils.open.lastCall.args).to.eql(['link.max'])
+        })
+
+        it('does not log warning', function () {
+          expect(Logger.warn.callCount).to.equal(0)
         })
       })
     })
@@ -306,7 +324,7 @@ describe('Integration: FrostLinkComponent', function () {
         })
 
         it('logs warning', function () {
-          expect(Logger.warn.callCount).to.equal(3)
+          expect(Logger.warn.callCount).to.equal(2)
           expect(Logger.warn.secondCall.args).to.eql([
             'Warning: Make sure that the pop-ups are not blocked'
           ])
@@ -336,7 +354,7 @@ describe('Integration: FrostLinkComponent', function () {
         })
 
         it('does not log warning', function () {
-          expect(Logger.warn.callCount).to.equal(1)
+          expect(Logger.warn.callCount).to.equal(0)
         })
       })
     })

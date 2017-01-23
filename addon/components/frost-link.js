@@ -2,7 +2,7 @@
  * Component definition for frost-link component
  */
 import Ember from 'ember'
-const {LinkComponent, Logger, assign, deprecate, get, isEmpty, isPresent, run, set, typeOf} = Ember
+const {LinkComponent, Logger, assign, deprecate, get, isEmpty, isNone, isPresent, run, set, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {HookMixin} from 'ember-hook'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
@@ -382,9 +382,15 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
     // On pre-Ember 2.10 params can be an array with undefined as an item
     if (isArray(params)) {
       params = params.filter((param) => param)
+
+      // Handle the 'text' property being passed using positional params / block
+      // mixed with named properties
+      if (params.length === 1 && isNone(newAttrs.text)) {
+        newAttrs['text'] = params[0]
+      }
     }
 
-    if (!isArray(params) || params.length === 0) {
+    if (!isArray(params) || params.length <= 1) {
       const params = getParams(newAttrs)
 
       this.set('params', params)
