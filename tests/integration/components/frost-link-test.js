@@ -150,13 +150,9 @@ describe('Integration: FrostLinkComponent', function () {
         })
 
         it('logs warning', function () {
-          expect(Logger.warn.callCount).to.equal(2)
-          expect(Logger.warn.secondCall.args).to.eql([
+          expect(Logger.warn.calledWith(
             'Warning: Make sure that the pop-ups are not blocked'
-          ])
-          expect(Logger.warn.lastCall.args).to.eql([
-            'Warning: Make sure that the pop-ups are not blocked'
-          ])
+          )).to.equal(true)
         })
       })
 
@@ -180,7 +176,9 @@ describe('Integration: FrostLinkComponent', function () {
         })
 
         it('does not log warning', function () {
-          expect(Logger.warn.callCount).to.equal(0)
+          expect(Logger.warn.calledWith(
+            'Warning: Make sure that the pop-ups are not blocked'
+          )).to.equal(false)
         })
       })
     })
@@ -236,13 +234,9 @@ describe('Integration: FrostLinkComponent', function () {
         })
 
         it('logs warning', function () {
-          expect(Logger.warn.callCount).to.equal(2)
-          expect(Logger.warn.secondCall.args).to.eql([
+          expect(Logger.warn.calledWith(
             'Warning: Make sure that the pop-ups are not blocked'
-          ])
-          expect(Logger.warn.lastCall.args).to.eql([
-            'Warning: Make sure that the pop-ups are not blocked'
-          ])
+          )).to.equal(true)
         })
       })
 
@@ -266,7 +260,9 @@ describe('Integration: FrostLinkComponent', function () {
         })
 
         it('does not log warning', function () {
-          expect(Logger.warn.callCount).to.equal(0)
+          expect(Logger.warn.calledWith(
+            'Warning: Make sure that the pop-ups are not blocked'
+          )).to.equal(false)
         })
       })
     })
@@ -324,13 +320,9 @@ describe('Integration: FrostLinkComponent', function () {
         })
 
         it('logs warning', function () {
-          expect(Logger.warn.callCount).to.equal(2)
-          expect(Logger.warn.secondCall.args).to.eql([
+          expect(Logger.warn.calledWith(
             'Warning: Make sure that the pop-ups are not blocked'
-          ])
-          expect(Logger.warn.lastCall.args).to.eql([
-            'Warning: Make sure that the pop-ups are not blocked'
-          ])
+          )).to.equal(true)
         })
       })
 
@@ -354,7 +346,9 @@ describe('Integration: FrostLinkComponent', function () {
         })
 
         it('does not log warning', function () {
-          expect(Logger.warn.callCount).to.equal(0)
+          expect(Logger.warn.calledWith(
+            'Warning: Make sure that the pop-ups are not blocked'
+          )).to.equal(false)
         })
       })
     })
@@ -415,10 +409,9 @@ describe('Integration: FrostLinkComponent', function () {
         })
 
         it('logs warning', function () {
-          expect(Logger.warn.callCount).to.equal(2)
-          expect(Logger.warn.lastCall.args).to.eql([
+          expect(Logger.warn.calledWith(
             'Warning: Make sure that the pop-ups are not blocked'
-          ])
+          )).to.equal(true)
         })
       })
 
@@ -442,7 +435,9 @@ describe('Integration: FrostLinkComponent', function () {
         })
 
         it('does not log warning', function () {
-          expect(Logger.warn.callCount).to.equal(0)
+          expect(Logger.warn.calledWith(
+            'Warning: Make sure that the pop-ups are not blocked'
+          )).to.equal(false)
         })
       })
     })
@@ -462,10 +457,9 @@ describe('Integration: FrostLinkComponent', function () {
     })
 
     it('logs warning', function () {
-      expect(Logger.warn.callCount).to.equal(1)
-      expect(Logger.warn.lastCall.args).eql([
+      expect(Logger.warn.calledWith(
         'Warning: The `design` property takes precedence over `size` and `priority`.'
-      ])
+      )).to.equal(true)
     })
   })
 
@@ -483,10 +477,9 @@ describe('Integration: FrostLinkComponent', function () {
     })
 
     it('logs warning', function () {
-      expect(Logger.warn.callCount).to.equal(1)
-      expect(Logger.warn.lastCall.args).eql([
+      expect(Logger.warn.calledWith(
         'Warning: The `design` property takes precedence over `size` and `priority`.'
-      ])
+      )).to.equal(true)
     })
   })
 
