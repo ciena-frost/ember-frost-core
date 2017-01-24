@@ -1,3 +1,8 @@
+# 1.7.5
+
+* **Fixed** bug that relied on Ember prototype extensions in `frost-link` and brought in `ember-disable-prototype-extensions` to prevent this kind of issue in the future.
+* **Upgraded** to Ember 2.11.
+
 # 1.7.4
 
 * Fixed frost-link to support providing text via name properties, positional params or the yield block
