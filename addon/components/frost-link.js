@@ -396,10 +396,17 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
     }
 
     const newAttrsKeys = Object.keys(newAttrs)
-    const hasNamedProperties = ['options', 'route', 'routeModels', 'routeNames', 'routeQueryParams', 'routes', 'text']
-      .any(namedPropertyKey => {
-        return newAttrsKeys.includes(namedPropertyKey)
-      })
+
+    const hasNamedProperties = [
+      'options',
+      'route',
+      'routeModels',
+      'routeNames',
+      'routeQueryParams',
+      'routes',
+      'text'
+    ]
+      .some(namedPropertyKey => newAttrsKeys.includes(namedPropertyKey))
 
     if (!isArray(params) || hasNamedProperties) {
       const params = getParams(newAttrs)
