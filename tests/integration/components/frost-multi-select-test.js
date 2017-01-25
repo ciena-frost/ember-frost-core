@@ -9,6 +9,7 @@ import {afterEach, beforeEach, describe} from 'mocha'
 import sinon from 'sinon'
 
 import {expectSelectWithState} from 'dummy/tests/helpers/ember-frost-core'
+import {selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
 import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
 import keyCodes from 'ember-frost-core/utils/key-codes'
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
@@ -943,10 +944,7 @@ describeComponent(...integration('frost-multi-select'), function () {
           describe('when first item clicked', function () {
             beforeEach(function (done) {
               [onBlur, onChange, onFocus].forEach((func) => func.reset())
-              $hook('select-item', {index: 0}).trigger('mousedown')
-              run.next(() => {
-                done()
-              })
+              return selectItemAtIndex('select', 0, done)
             })
 
             it('renders as expected', function () {
@@ -971,10 +969,7 @@ describeComponent(...integration('frost-multi-select'), function () {
           describe('when second item clicked', function () {
             beforeEach(function (done) {
               [onBlur, onChange, onFocus].forEach((func) => func.reset())
-              $hook('select-item', {index: 1}).trigger('mousedown')
-              run.next(() => {
-                done()
-              })
+              return selectItemAtIndex('select', 1, done)
             })
 
             it('renders as expected', function () {
