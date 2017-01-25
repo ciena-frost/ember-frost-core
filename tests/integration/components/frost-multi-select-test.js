@@ -9,7 +9,7 @@ import {afterEach, beforeEach, describe} from 'mocha'
 import sinon from 'sinon'
 
 import {expectSelectWithState} from 'dummy/tests/helpers/ember-frost-core'
-import {selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
+import {open, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
 import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
 import keyCodes from 'ember-frost-core/utils/key-codes'
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
@@ -101,12 +101,7 @@ describeComponent(...integration('frost-multi-select'), function () {
 
       describe('click on component', function () {
         beforeEach(function () {
-          // In a real browser when you click on the select with your mouse a
-          // focusin event is fired on the component. However when using jQuery's
-          // click() method the focusin is not fired so we are programitcally
-          // triggering that in this test.
-
-          $hook('select').click().trigger('focusin')
+          open('select')
         })
 
         it('renders as expected', function () {
@@ -375,12 +370,7 @@ describeComponent(...integration('frost-multi-select'), function () {
 
         describe('click on component', function () {
           beforeEach(function () {
-            // In a real browser when you click on the select with your mouse a
-            // focusin event is fired on the component. However when using jQuery's
-            // click() method the focusin is not fired so we are programitcally
-            // triggering that in this test.
-
-            $hook('select').click().trigger('focusin')
+            open('select')
           })
 
           it('renders as expected', function () {
@@ -497,12 +487,7 @@ describeComponent(...integration('frost-multi-select'), function () {
 
       describe('click on component', function () {
         beforeEach(function () {
-          // In a real browser when you click on the select with your mouse a
-          // focusin event is fired on the component. However when using jQuery's
-          // click() method the focusin is not fired so we are programitcally
-          // triggering that in this test.
-
-          $hook('select').click().trigger('focusin')
+          open('select')
         })
 
         it('renders as expected', function () {
@@ -1063,12 +1048,7 @@ describeComponent(...integration('frost-multi-select'), function () {
 
         describe('click on component', function () {
           beforeEach(function () {
-            // In a real browser when you click on the select with your mouse a
-            // focusin event is fired on the component. However when using jQuery's
-            // click() method the focusin is not fired so we are programitcally
-            // triggering that in this test.
-
-            $hook('select').click().trigger('focusin')
+            open('select')
           })
 
           it('renders as expected', function () {

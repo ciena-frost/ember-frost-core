@@ -94,6 +94,18 @@ export function filter (filter) {
 }
 
 /**
+ * Open frost-select dropdown
+ * @param {String} hook - frost-select hook
+ */
+export function open (hook) {
+  // In a real browser when you click on the select with your mouse a
+  // focusin event is fired on the component. However when using jQuery's
+  // click() method the focusin is not fired so we are programitcally
+  // triggering that in this test.
+  $hook('select').click().trigger('focusin')
+}
+
+/**
  * Select item in select dropdown at given index
  * NOTE: using done() instead of Promise based because promised based causes
  * select to lose focus for some reason. This may have something to with with
