@@ -1,3 +1,8 @@
+# 1.7.6
+
+* **Fixed** import path in the `helper-addon` blueprint
+
+
 # 1.7.5
 
 * **Fixed** bug that relied on Ember prototype extensions in `frost-link` and brought in `ember-disable-prototype-extensions` to prevent this kind of issue in the future.
