@@ -56,7 +56,7 @@ export function expectWithState (select, state) {
 
   if (state.focusedItem) {
     expect(
-      $('.frost-select-list-item-focused').text().trim(),
+      $('.frost-select-list-item-focused .frost-select-list-item-text').data('text'),
       'is focused on expected item'
     )
       .to.equal(state.focusedItem)
@@ -67,7 +67,7 @@ export function expectWithState (select, state) {
   if (state.items && state.items.length !== 0) {
     const labels = $('.frost-select-dropdown li')
       .toArray()
-      .map((element) => element.textContent.trim())
+      .map((element) => $(element).find('.frost-select-list-item-text').data('text'))
 
     expect(labels, 'has expected items').to.eql(state.items)
     expect($emptyMessage, 'does not show empty message').to.have.length(0)
