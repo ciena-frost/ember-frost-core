@@ -9,6 +9,7 @@ import {afterEach, beforeEach, describe} from 'mocha'
 import sinon from 'sinon'
 
 import {expectSelectWithState, filterSelect} from 'dummy/tests/helpers/ember-frost-core'
+import {open, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
 import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
 import {keyCodes} from 'ember-frost-core/utils'
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
@@ -49,7 +50,7 @@ function focusNext ($element) {
  * @returns {String} list item's HTML
  */
 function getItemHtml (index) {
-  return $(`.frost-select-dropdown li:nth-child(${index})`)
+  return $(`.frost-select-dropdown li:nth-child(${index}) .frost-select-list-item-text`)
     .html()
     .replace('<!---->', '')
     .trim()
@@ -108,12 +109,7 @@ describeComponent(...integration('frost-select'), function () {
 
       describe('click on component', function () {
         beforeEach(function () {
-          // In a real browser when you click on the select with your mouse a
-          // focusin event is fired on the component. However when using jQuery's
-          // click() method the focusin is not fired so we are programitcally
-          // triggering that in this test.
-
-          $hook('select').click().trigger('focusin')
+          open('select')
         })
 
         it('renders as expected', function () {
@@ -382,12 +378,7 @@ describeComponent(...integration('frost-select'), function () {
 
         describe('click on component', function () {
           beforeEach(function () {
-            // In a real browser when you click on the select with your mouse a
-            // focusin event is fired on the component. However when using jQuery's
-            // click() method the focusin is not fired so we are programitcally
-            // triggering that in this test.
-
-            $hook('select').click().trigger('focusin')
+            open('select')
           })
 
           it('renders as expected', function () {
@@ -550,12 +541,7 @@ describeComponent(...integration('frost-select'), function () {
 
       describe('click on component', function () {
         beforeEach(function () {
-          // In a real browser when you click on the select with your mouse a
-          // focusin event is fired on the component. However when using jQuery's
-          // click() method the focusin is not fired so we are programitcally
-          // triggering that in this test.
-
-          $hook('select').click().trigger('focusin')
+          open('select')
         })
 
         it('renders as expected', function () {
@@ -931,10 +917,7 @@ describeComponent(...integration('frost-select'), function () {
           describe('when first item clicked', function () {
             beforeEach(function (done) {
               [onBlur, onChange, onFocus].forEach((func) => func.reset())
-              $hook('select-item', {index: 0}).trigger('mousedown')
-              run.next(() => {
-                done()
-              })
+              return selectItemAtIndex('select', 0, done)
             })
 
             it('renders as expected', function () {
@@ -958,10 +941,7 @@ describeComponent(...integration('frost-select'), function () {
           describe('when second item clicked', function () {
             beforeEach(function (done) {
               [onBlur, onChange, onFocus].forEach((func) => func.reset())
-              $hook('select-item', {index: 1}).trigger('mousedown')
-              run.next(() => {
-                done()
-              })
+              selectItemAtIndex('select', 1, done)
             })
 
             it('renders as expected', function () {
@@ -1134,12 +1114,7 @@ describeComponent(...integration('frost-select'), function () {
 
         describe('click on component', function () {
           beforeEach(function () {
-            // In a real browser when you click on the select with your mouse a
-            // focusin event is fired on the component. However when using jQuery's
-            // click() method the focusin is not fired so we are programitcally
-            // triggering that in this test.
-
-            $hook('select').click().trigger('focusin')
+            open('select')
           })
 
           it('renders as expected', function () {

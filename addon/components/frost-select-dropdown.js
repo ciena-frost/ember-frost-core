@@ -46,11 +46,17 @@ export default Component.extend({
     selectedItems: PropTypes.arrayOf(PropTypes.object),
 
     // state
-    bottom: PropTypes.number,
+    bottom: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
     focusedIndex: PropTypes.number,
     left: PropTypes.number,
     maxHeight: PropTypes.number,
-    top: PropTypes.number,
+    top: PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.string
+    ]),
     width: PropTypes.number
   },
 
@@ -254,7 +260,7 @@ export default Component.extend({
     this._isUpdating = true
 
     while (Date.now() - this._lastInteraction < 250) {
-      const $element = get(this.attrs, '$element.value')
+      const $element = get(this.attrs, '$element.value') || get(this.attrs, '$element')
 
       if ($element) {
         this._updatePosition($element)
