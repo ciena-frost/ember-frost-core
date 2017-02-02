@@ -88,6 +88,7 @@ export function expectWithState (select, state) {
  * @param {String} filter - filter to apply to select
  */
 export function filter (filter) {
+  $(window).trigger('resize') // For some reason we need to do this in Ember 2.3
   $('.frost-select-dropdown .frost-text-input')
     .val(filter)
     .trigger('input')
