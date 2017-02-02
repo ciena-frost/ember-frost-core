@@ -2,11 +2,12 @@
  * Component definition for the frost-select-li component
  */
 import Ember from 'ember'
-const {on} = Ember
+const {on, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
 
 import layout from '../templates/components/frost-select-li'
+import {trimLongDataInElement} from '../utils/text'
 import Component from './frost-component'
 
 const regexEscapeChars = '-[]/{}()*+?.^$|'.split('')
@@ -16,6 +17,7 @@ export default Component.extend({
 
   // == Keyword Properties ====================================================
 
+  attributeBindings: ['data-text'],
   tagName: 'li',
   layout,
 
@@ -54,6 +56,13 @@ export default Component.extend({
     return data && data.label || ''
   },
 
+  @readOnly
+  @computed('data')
+  'data-text': function (data) {
+    if (typeOf(data) !== 'object') return ''
+    return data.label || ''
+  },
+
   // == Functions =============================================================
 
   // == DOM Events ============================================================
@@ -72,6 +81,18 @@ export default Component.extend({
   }),
 
   // == Lifecycle Hooks =======================================================
+
+  didRender () {
+    trimLongDataInElement(this.$().get(0))
+
+    const filter = this.get('filter')
+
+    if (filter) {
+      const pattern = new RegExp(filter, 'gi')
+      const textWithMatch = this.$().text().replace(pattern, '<u>$&</u>')
+      this.$().html(textWithMatch)
+    }
+  },
 
   // == Actions ===============================================================
   actions: {}
