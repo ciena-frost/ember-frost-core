@@ -50,7 +50,7 @@ function focusNext ($element) {
  * @returns {String} list item's HTML
  */
 function getItemHtml (index) {
-  return $(`.frost-select-dropdown li:nth-child(${index})`)
+  return $(`.frost-select-dropdown li:nth-child(${index}) .frost-select-list-item-text`)
     .html()
     .replace('<!---->', '')
     .trim()

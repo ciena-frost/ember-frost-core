@@ -17,7 +17,6 @@ export default Component.extend({
 
   // == Keyword Properties ====================================================
 
-  attributeBindings: ['data-text'],
   tagName: 'li',
   layout,
 
@@ -58,7 +57,7 @@ export default Component.extend({
 
   @readOnly
   @computed('data')
-  'data-text': function (data) {
+  fullText: function (data) {
     if (typeOf(data) !== 'object') return ''
     return data.label || ''
   },
@@ -83,14 +82,15 @@ export default Component.extend({
   // == Lifecycle Hooks =======================================================
 
   didRender () {
-    trimLongDataInElement(this.$().get(0))
-
+    const $text = this.$('.frost-select-list-item-text')
     const filter = this.get('filter')
+
+    trimLongDataInElement($text.get(0))
 
     if (filter) {
       const pattern = new RegExp(filter, 'gi')
-      const textWithMatch = this.$().text().replace(pattern, '<u>$&</u>')
-      this.$().html(textWithMatch)
+      const textWithMatch = $text.text().replace(pattern, '<u>$&</u>')
+      $text.html(textWithMatch)
     }
   },
 
