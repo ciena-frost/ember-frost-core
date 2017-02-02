@@ -1,3 +1,40 @@
+# 1.8.0
+
+* **Added** ellipsis in middle of select item labels when the text is trimmed instead of at the end as well as show the full label on mouseover. Prior to this change there was no way to see the full label when it is too wide.
+
+* **Added** new `open()` and `selectItemAtIndex()` test helpers for `frost-select` which can be used like so (in example the hook for the select being tested is `mySelect`):
+
+  ```js
+  import {
+    expectWithState as expectSelectWithState,
+    open,
+    selectItemAtIndex
+  } from 'dummy/tests/helpers/ember-frost-core/frost-select'
+
+  // before below test can run you'd need to render whatever DOM is necessary for your test
+
+  describe('when select opened', function () {
+    beforeEach(function () {
+      open('mySelect')
+    })
+
+    describe('when first item selected', function () {
+      beforeEach(function (done) {
+        selectItemAtIndex('mySelect', 0, done)
+      })
+
+      it('renders as expected', function () {
+        expectSelectWithState('mySelect', {
+          focused: true,
+          opened: false,
+          text: 'My first item'
+        })
+      })
+    })
+  })
+  ```
+
+
 # 1.7.6
 
 * **Fixed** import path in the `helper-addon` blueprint

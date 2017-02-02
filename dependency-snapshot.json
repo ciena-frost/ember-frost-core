@@ -1,6 +1,6 @@
 {
   "name": "ember-frost-core",
-  "version": "1.7.6",
+  "version": "1.8.0",
   "dependencies": {
     "abbrev": {
       "version": "1.0.9",
@@ -555,9 +555,9 @@
       "dev": true
     },
     "bcrypt-pbkdf": {
-      "version": "1.0.0",
+      "version": "1.0.1",
       "from": "bcrypt-pbkdf@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.0.tgz",
+      "resolved": "https://registry.npmjs.org/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.1.tgz",
       "optional": true
     },
     "better-assert": {
@@ -1278,9 +1278,9 @@
       "dev": true
     },
     "caniuse-db": {
-      "version": "1.0.30000618",
+      "version": "1.0.30000619",
       "from": "caniuse-db@>=1.0.30000618 <2.0.0",
-      "resolved": "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000618.tgz",
+      "resolved": "https://registry.npmjs.org/caniuse-db/-/caniuse-db-1.0.30000619.tgz",
       "dev": true
     },
     "capture-exit": {
@@ -2599,9 +2599,9 @@
       "dev": true
     },
     "ember-router-generator": {
-      "version": "1.2.2",
+      "version": "1.2.3",
       "from": "ember-router-generator@>=1.0.0 <2.0.0",
-      "resolved": "https://registry.npmjs.org/ember-router-generator/-/ember-router-generator-1.2.2.tgz",
+      "resolved": "https://registry.npmjs.org/ember-router-generator/-/ember-router-generator-1.2.3.tgz",
       "dev": true,
       "dependencies": {
         "esprima": {
@@ -2643,9 +2643,9 @@
       "dev": true
     },
     "ember-test-utils": {
-      "version": "1.6.1",
+      "version": "1.7.0",
       "from": "ember-test-utils@>=1.6.1 <2.0.0",
-      "resolved": "https://registry.npmjs.org/ember-test-utils/-/ember-test-utils-1.6.1.tgz",
+      "resolved": "https://registry.npmjs.org/ember-test-utils/-/ember-test-utils-1.7.0.tgz",
       "dev": true
     },
     "ember-truth-helpers": {
@@ -4539,12 +4539,6 @@
       "from": "lodash.foreach@>=4.3.0 <5.0.0",
       "resolved": "https://registry.npmjs.org/lodash.foreach/-/lodash.foreach-4.5.0.tgz"
     },
-    "lodash.indexof": {
-      "version": "4.0.5",
-      "from": "lodash.indexof@>=4.0.5 <5.0.0",
-      "resolved": "https://registry.npmjs.org/lodash.indexof/-/lodash.indexof-4.0.5.tgz",
-      "dev": true
-    },
     "lodash.isarguments": {
       "version": "3.1.0",
       "from": "lodash.isarguments@>=3.0.0 <4.0.0",
@@ -4823,9 +4817,9 @@
       "resolved": "https://registry.npmjs.org/matcher-collection/-/matcher-collection-1.0.4.tgz"
     },
     "math-expression-evaluator": {
-      "version": "1.2.15",
+      "version": "1.2.16",
       "from": "math-expression-evaluator@>=1.2.14 <2.0.0",
-      "resolved": "https://registry.npmjs.org/math-expression-evaluator/-/math-expression-evaluator-1.2.15.tgz",
+      "resolved": "https://registry.npmjs.org/math-expression-evaluator/-/math-expression-evaluator-1.2.16.tgz",
       "dev": true
     },
     "md5-hex": {
