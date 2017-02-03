@@ -3,12 +3,15 @@
  */
 
 import {expect} from 'chai'
-import {unit} from 'dummy/tests/helpers/ember-test-utils/describe-component'
 import {HookMixin} from 'ember-hook'
-import {describeComponent, it} from 'ember-mocha'
-import {beforeEach} from 'mocha'
+import {beforeEach, describe, it} from 'mocha'
 
-describeComponent(...unit('hookable-textarea'), function () {
+import {unit} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
+
+const test = unit('hookable-textarea')
+describe(test.label, function () {
+  test.setup()
+
   let component
 
   beforeEach(function () {

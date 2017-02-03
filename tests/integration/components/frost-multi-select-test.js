@@ -2,15 +2,14 @@ import {expect} from 'chai'
 import Ember from 'ember'
 const {$, run} = Ember
 import {$hook, initialize as initializeHook} from 'ember-hook'
-import {describeComponent, it} from 'ember-mocha'
 import wait from 'ember-test-helpers/wait'
 import hbs from 'htmlbars-inline-precompile'
-import {afterEach, beforeEach, describe} from 'mocha'
+import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
 import {expectSelectWithState} from 'dummy/tests/helpers/ember-frost-core'
 import {open, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
-import {integration} from 'dummy/tests/helpers/ember-test-utils/describe-component'
+import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 import keyCodes from 'ember-frost-core/utils/key-codes'
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
 
@@ -45,7 +44,10 @@ function focusNext ($element) {
   $firstFocusableElement.focusin()[0].focus()
 }
 
-describeComponent(...integration('frost-multi-select'), function () {
+const test = integration('frost-multi-select')
+describe(test.label, function () {
+  test.setup()
+
   beforeEach(function () {
     initializeHook()
   })
