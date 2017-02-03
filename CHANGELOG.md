@@ -1,3 +1,8 @@
+# 1.8.1
+
+* **Updated** integration and unit tests to remove the deprecated use of `describeComponent()`
+
+
 # 1.8.0
 
 * **Added** ellipsis in middle of select item labels when the text is trimmed instead of at the end as well as show the full label on mouseover. Prior to this change there was no way to see the full label when it is too wide.

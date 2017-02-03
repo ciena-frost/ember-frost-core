@@ -1,6 +1,6 @@
 {
   "name": "ember-frost-core",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "dependencies": {
     "abbrev": {
       "version": "1.0.9",
@@ -729,9 +729,9 @@
       }
     },
     "broccoli-builder": {
-      "version": "0.18.3",
+      "version": "0.18.4",
       "from": "broccoli-builder@>=0.18.0 <0.19.0",
-      "resolved": "https://registry.npmjs.org/broccoli-builder/-/broccoli-builder-0.18.3.tgz",
+      "resolved": "https://registry.npmjs.org/broccoli-builder/-/broccoli-builder-0.18.4.tgz",
       "dev": true
     },
     "broccoli-caching-writer": {
@@ -2527,9 +2527,9 @@
       "dev": true
     },
     "ember-get-config": {
-      "version": "0.2.0",
+      "version": "0.2.1",
       "from": "ember-get-config@>=0.2.0 <0.3.0",
-      "resolved": "https://registry.npmjs.org/ember-get-config/-/ember-get-config-0.2.0.tgz",
+      "resolved": "https://registry.npmjs.org/ember-get-config/-/ember-get-config-0.2.1.tgz",
       "dev": true
     },
     "ember-getowner-polyfill": {
@@ -2590,7 +2590,15 @@
       "version": "3.10.2",
       "from": "ember-prop-types@>=3.10.2 <4.0.0",
       "resolved": "https://registry.npmjs.org/ember-prop-types/-/ember-prop-types-3.10.2.tgz",
-      "dev": true
+      "dev": true,
+      "dependencies": {
+        "ember-get-config": {
+          "version": "0.2.0",
+          "from": "ember-get-config@0.2.0",
+          "resolved": "https://registry.npmjs.org/ember-get-config/-/ember-get-config-0.2.0.tgz",
+          "dev": true
+        }
+      }
     },
     "ember-resolver": {
       "version": "2.1.1",
@@ -2940,14 +2948,14 @@
       "dev": true
     },
     "espree": {
-      "version": "3.3.2",
+      "version": "3.4.0",
       "from": "espree@>=3.3.1 <4.0.0",
-      "resolved": "https://registry.npmjs.org/espree/-/espree-3.3.2.tgz",
+      "resolved": "https://registry.npmjs.org/espree/-/espree-3.4.0.tgz",
       "dev": true,
       "dependencies": {
         "acorn": {
           "version": "4.0.4",
-          "from": "acorn@^4.0.1",
+          "from": "acorn@4.0.4",
           "resolved": "https://registry.npmjs.org/acorn/-/acorn-4.0.4.tgz",
           "dev": true
         }
@@ -8036,9 +8044,9 @@
       "dev": true,
       "dependencies": {
         "acorn": {
-          "version": "4.0.4",
+          "version": "4.0.8",
           "from": "acorn@>=4.0.1 <5.0.0",
-          "resolved": "https://registry.npmjs.org/acorn/-/acorn-4.0.4.tgz",
+          "resolved": "https://registry.npmjs.org/acorn/-/acorn-4.0.8.tgz",
           "dev": true
         }
       }
