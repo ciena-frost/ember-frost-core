@@ -1,12 +1,12 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {Logger} = Ember
-import {setupComponentTest} from 'ember-mocha'
 import wait from 'ember-test-helpers/wait'
 import hbs from 'htmlbars-inline-precompile'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
+import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 import windowUtils from 'ember-frost-core/utils/window'
 
 const RouterStub = Ember.Object.extend({
@@ -29,10 +29,9 @@ const RouterStub = Ember.Object.extend({
   }
 })
 
-describe('Integration: FrostLinkComponent', function () {
-  setupComponentTest('frost-link', {
-    integration: true
-  })
+const test = integration('frost-link')
+describe(test.label, function () {
+  test.setup()
 
   let sandbox
 

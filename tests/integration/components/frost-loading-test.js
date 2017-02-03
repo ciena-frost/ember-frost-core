@@ -1,53 +1,51 @@
 import {expect} from 'chai'
-import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
+import {describe, it} from 'mocha'
 
-describeComponent(
-  'frost-loading',
-  'Integration: FrostLoadingComponent',
-  {
-    integration: true
-  },
-  function () {
-    it('renders default values', function () {
-      this.render(hbs`
-        {{frost-loading hook='myLoader'}}
-      `)
+import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 
-      expect(
-        this.$('.uil-ripple'),
-        'Has class "uil-ripple"'
-      ).to.have.length(1)
-    })
+const test = integration('frost-loading')
+describe(test.label, function () {
+  test.setup()
 
-    it('type property sets class', function () {
-      this.render(hbs`
-        {{frost-loading
+  it('renders default values', function () {
+    this.render(hbs`
+      {{frost-loading hook='myLoader'}}
+    `)
+
+    expect(
+      this.$('.uil-ripple'),
+      'Has class "uil-ripple"'
+    ).to.have.length(1)
+  })
+
+  it('type property sets class', function () {
+    this.render(hbs`
+      {{frost-loading
+        hook='myLoader'
+        type='ring'
+      }}
+    `)
+
+    expect(
+      this.$('.uil-ring'),
+      'Has class "uil-ring"'
+    ).to.have.length(1)
+  })
+
+  it('renders using spread', function () {
+    this.render(hbs`
+      {{frost-loading
+        options=(hash
           hook='myLoader'
           type='ring'
-        }}
-      `)
+        )
+      }}
+    `)
 
-      expect(
-        this.$('.uil-ring'),
-        'Has class "uil-ring"'
-      ).to.have.length(1)
-    })
-
-    it('renders using spread', function () {
-      this.render(hbs`
-        {{frost-loading
-          options=(hash
-            hook='myLoader'
-            type='ring'
-          )
-        }}
-      `)
-
-      expect(
-        this.$('.uil-ring'),
-        'Has class "uil-ring"'
-      ).to.have.length(1)
-    })
-  }
-)
+    expect(
+      this.$('.uil-ring'),
+      'Has class "uil-ring"'
+    ).to.have.length(1)
+  })
+})

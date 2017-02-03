@@ -1,112 +1,110 @@
 import {expect} from 'chai'
 import {$hook} from 'ember-hook'
-import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
+import {describe, it} from 'mocha'
 
-describeComponent(
-  'frost-radio-group',
-  'Integration: FrostRadioGroupComponent',
-  {
-    integration: true
-  },
-  function () {
-    it('block format', function () {
-      const label = 'b'
-      const value = 'a'
+import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 
-      this.set('label', label)
-      this.set('value', value)
+const test = integration('frost-radio-group')
+describe(test.label, function () {
+  test.setup()
 
-      this.render(hbs`
-        {{#frost-radio-group hook='myRadioGroup' as |controls|}}
-          {{controls.button value=value label=label}}
-        {{/frost-radio-group}}
-      `)
+  it('block format', function () {
+    const label = 'b'
+    const value = 'a'
 
-      expect(
-        this.$('.frost-radio-button-input').first().prop('value'),
-        'value is set'
-      ).to.eql(value)
+    this.set('label', label)
+    this.set('value', value)
 
-      expect(
-        this.$('.frost-radio-button').first().text().trim(),
-        'label is set'
-      ).to.eql(label)
-    })
+    this.render(hbs`
+      {{#frost-radio-group hook='myRadioGroup' as |controls|}}
+        {{controls.button value=value label=label}}
+      {{/frost-radio-group}}
+    `)
 
-    it('inline format', function () {
-      const inputs = [
-        {value: 'a', label: 'b'}
-      ]
+    expect(
+      this.$('.frost-radio-button-input').first().prop('value'),
+      'value is set'
+    ).to.eql(value)
 
-      this.set('inputs', inputs)
+    expect(
+      this.$('.frost-radio-button').first().text().trim(),
+      'label is set'
+    ).to.eql(label)
+  })
 
-      this.render(hbs`
-        {{frost-radio-group hook='myRadioGroup' inputs=inputs}}
-      `)
+  it('inline format', function () {
+    const inputs = [
+      {value: 'a', label: 'b'}
+    ]
 
-      expect(
-        this.$('.frost-radio-button-input').first().prop('value'),
-        'value is set'
-      ).to.eql(inputs[0].value)
+    this.set('inputs', inputs)
 
-      expect(
-        this.$('.frost-radio-button').first().text().trim(),
-        'label is set'
-      ).to.eql(inputs[0].label)
-    })
+    this.render(hbs`
+      {{frost-radio-group hook='myRadioGroup' inputs=inputs}}
+    `)
 
-    it('set hook property', function () {
-      const hook = 'my-hook'
+    expect(
+      this.$('.frost-radio-button-input').first().prop('value'),
+      'value is set'
+    ).to.eql(inputs[0].value)
 
-      this.set('hook', hook)
+    expect(
+      this.$('.frost-radio-button').first().text().trim(),
+      'label is set'
+    ).to.eql(inputs[0].label)
+  })
 
-      this.render(hbs`
-        {{frost-radio-group hook=hook}}
-      `)
+  it('set hook property', function () {
+    const hook = 'my-hook'
 
-      expect(
-        $hook(`${hook}`).hasClass('frost-radio-group'),
-        'radio button group is set'
-      ).to.equal(true)
-    })
+    this.set('hook', hook)
 
-    it('renders using spread', function () {
-      const value = 'b'
-      const label = `Label for ${value}`
+    this.render(hbs`
+      {{frost-radio-group hook=hook}}
+    `)
 
-      this.set('value', value)
-      this.set('label', label)
+    expect(
+      $hook(`${hook}`).hasClass('frost-radio-group'),
+      'radio button group is set'
+    ).to.equal(true)
+  })
 
-      this.render(hbs`
-        {{#frost-radio-group
-          options=(hash
-            hook='myRadioGroup'
-            id='radioGroup7'
-            selectedValue=value
-          )
-          as |controls|
-        }}
-            {{#controls.button
-              options=(hash
-                size='medium'
-              )
-              value=value
-            }}
-              {{label}}
-            {{/controls.button}}
-        {{/frost-radio-group}}
-      `)
+  it('renders using spread', function () {
+    const value = 'b'
+    const label = `Label for ${value}`
 
-      expect(
-        this.$('.frost-radio-button-input').first().prop('value'),
-        'value is set'
-      ).to.eql(value)
+    this.set('value', value)
+    this.set('label', label)
 
-      expect(
-        this.$('.frost-radio-button').first().text().trim(),
-        'label is set'
-      ).to.eql(label)
-    })
-  }
-)
+    this.render(hbs`
+      {{#frost-radio-group
+        options=(hash
+          hook='myRadioGroup'
+          id='radioGroup7'
+          selectedValue=value
+        )
+        as |controls|
+      }}
+          {{#controls.button
+            options=(hash
+              size='medium'
+            )
+            value=value
+          }}
+            {{label}}
+          {{/controls.button}}
+      {{/frost-radio-group}}
+    `)
+
+    expect(
+      this.$('.frost-radio-button-input').first().prop('value'),
+      'value is set'
+    ).to.eql(value)
+
+    expect(
+      this.$('.frost-radio-button').first().text().trim(),
+      'label is set'
+    ).to.eql(label)
+  })
+})

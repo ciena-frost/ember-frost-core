@@ -4,7 +4,7 @@ import {describe, it} from 'mocha'
 
 const data = [42, 1, 2]
 
-describe('ArrayHelper', function () {
+describe('Unit / Helper / array', function () {
   it('works', function () {
     let result = array(data)
     expect(result).to.have.length(data.length)
