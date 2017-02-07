@@ -1,3 +1,7 @@
+# 1.8.3
+- css mixin `getComponentName` returns clean className for nested components
+
+
 # 1.8.2
 * **Updated** `ember-spread` from devDependency to a dependency
 * **Removed** `ember-spread` from the blueprint
