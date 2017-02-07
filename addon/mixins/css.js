@@ -38,9 +38,11 @@ export default Mixin.create({
    * NOTE: This function relies on the speicifc format of the value from `toString()` which may change in future
    * @returns {String} the name of the component, parsed out of the toString() result
    */
-  getComponentName () {
-    return this.toString().replace(/^.+:(.+)::.+$/, '$1')
-  },
+   getComponentName () {
+     return this.toString()
+       .replace(/^.+:(.+)::.+$/, '$1')
+       .match(/(?!.*\/).+/)[0]
+   },
 
   /**
    * This function is really only here because we can't stub this._super

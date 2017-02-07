@@ -37,6 +37,13 @@ describe('Unit / Mixin / css', function () {
     it('should strip the junk from toString()', function () {
       expect(componentName).to.equal('css-component')
     })
+    it('should extract a className from a nested component', function () {
+      component.toString = function () {
+        return '<baz@component:deep/nested/component/foo-bar::id>'
+      }
+      const nestedComponentName = component.getComponentName()
+      expect(nestedComponentName).to.equal('foo-bar')
+    })
   })
 
   describe('.init()', function () {
