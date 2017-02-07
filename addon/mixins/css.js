@@ -39,7 +39,9 @@ export default Mixin.create({
    * @returns {String} the name of the component, parsed out of the toString() result
    */
   getComponentName () {
-    return this.toString().replace(/^.+:(.+)::.+$/, '$1')
+    return this.toString()
+      .replace(/^.+:(.+)::.+$/, '$1')
+      .match(/(?!.*\/).+/)[0]
   },
 
   /**
