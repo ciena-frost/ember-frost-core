@@ -1,3 +1,8 @@
+# 1.8.2
+* **Updated** `ember-spread` from devDependency to a dependency
+* **Removed** `ember-spread` from the blueprint
+
+
 # 1.8.1
 
 * **Updated** integration and unit tests to remove the deprecated use of `describeComponent()`
