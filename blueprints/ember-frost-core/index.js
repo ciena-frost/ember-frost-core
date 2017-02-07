@@ -26,7 +26,6 @@ module.exports = {
             {name: 'ember-elsewhere', target: '~0.4.1'},
             {name: 'ember-frost-test', target: '^1.0.0'},
             {name: 'ember-prop-types', target: '^3.0.0'},
-            {name: 'ember-spread', target: '^1.0.0'},
             {name: 'ember-truth-helpers', target: '^1.2.0'}
           ]
         })
