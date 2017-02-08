@@ -17,6 +17,10 @@ export default Component.extend({
 
   // == Keyword Properties ====================================================
 
+  attributeBindings: [
+    'role'
+  ],
+
   tagName: 'li',
   layout,
 
@@ -28,11 +32,14 @@ export default Component.extend({
     filter: PropTypes.string,
     multiselect: PropTypes.bool,
     onItemOver: PropTypes.func.isRequired,
-    onSelect: PropTypes.func.isRequired
+    onSelect: PropTypes.func.isRequired,
+    role: PropTypes.string
   },
 
   getDefaultProps () {
-    return {}
+    return {
+      role: 'option'
+    }
   },
 
   // == Computed Properties ===================================================

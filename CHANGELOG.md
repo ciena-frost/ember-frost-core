@@ -14,9 +14,11 @@
 
 # 1.8.0
 
-* **Added** ellipsis in middle of select item labels when the text is trimmed instead of at the end as well as show the full label on mouseover. Prior to this change there was no way to see the full label when it is too wide.
+* **Added** ellipsis in middle of select item labels when the text is trimmed instead of at the end as well as show
+the full label on mouseover. Prior to this change there was no way to see the full label when it is too wide.
 
-* **Added** new `open()` and `selectItemAtIndex()` test helpers for `frost-select` which can be used like so (in example the hook for the select being tested is `mySelect`):
+* **Added** new `open()` and `selectItemAtIndex()` test helpers for `frost-select` which can be used like so (in
+  example the hook for the select being tested is `mySelect`):
 
   ```js
   import {
@@ -56,7 +58,8 @@
 
 # 1.7.5
 
-* **Fixed** bug that relied on Ember prototype extensions in `frost-link` and brought in `ember-disable-prototype-extensions` to prevent this kind of issue in the future.
+* **Fixed** bug that relied on Ember prototype extensions in `frost-link` and brought in
+`ember-disable-prototype-extensions` to prevent this kind of issue in the future.
 * **Upgraded** to Ember 2.11.
 
 # 1.7.4
@@ -81,14 +84,16 @@
 
 # 1.7.1
 
-* **Addedd** missing acceptance tests to visit remaining routes in demo app to ensure all pages continue to load without issue.
+* **Addedd** missing acceptance tests to visit remaining routes in demo app to ensure all pages continue to load
+without issue.
 * **Fixed** deprecation warning about modifying property twice in one render (which became an error in Ember 2.10).
 * **Fixed** select route in demo.
 
 
 # 1.7.0
 
-* **Fixed** bug in `frost-link` where text wasn't showing up when using `routes` or `routeNames` options while using an inline `frost-link`.
+* **Fixed** bug in `frost-link` where text wasn't showing up when using `routes` or `routeNames` options while using
+an inline `frost-link`.
 * **Fixed** code so that this addon will work in Ember 2.10 as well as versions dating all the way back to Ember 2.3.
 
 
@@ -97,7 +102,7 @@
 
 
 # 1.5.2
-* **Removed** unused code in blueprints that was accidentally checked in when adding the new generators. 
+* **Removed** unused code in blueprints that was accidentally checked in when adding the new generators.
 
 
 # 1.5.1
@@ -112,7 +117,8 @@
 
 # 1.4.0
 ## New Dependency
-With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` blueprint must be run when updating to this version. You can do so with `ember g ember-frost-core`
+With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` blueprint must be run when updating to
+this version. You can do so with `ember g ember-frost-core`
 
 * **Added** `ember-frost-test` as a dependency
 * **Added** `addon-import` base blueprint to be used by future `-addon` blueprints (taken right out of `emberjs`
@@ -125,8 +131,10 @@ With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` 
 
 # 1.3.11
 
-* **Enabled** new settings for `ember-prop-types` to throw errors instead of log warnings in tests and dummy app as well as work with `ember-spread`.
-* **Fixed** `ember-prop-type` warnings by adding missing required properties in tests and fixing invalid values in `getDefaultProps()`.
+* **Enabled** new settings for `ember-prop-types` to throw errors instead of log warnings in tests and dummy app as
+well as work with `ember-spread`.
+* **Fixed** `ember-prop-type` warnings by adding missing required properties in tests and fixing invalid values in
+`getDefaultProps()`.
 
 
 # 1.3.10
@@ -150,7 +158,10 @@ With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` 
 
 # 1.3.7
 
-* Performed minor cleanup with `npm run eslint --- --fix` while running latest [eslint-config-frost-standard](https://github.com/ciena-frost/eslint-config-frost-standard) which includes new rules from [eslint-plugin-ember-standard](https://github.com/ciena-blueplanet/eslint-plugin-ember-standard) and [eslint-plugin-ocd](https://github.com/ciena-blueplanet/eslint-plugin-ocd).
+* Performed minor cleanup with `npm run eslint --- --fix` while running latest
+[eslint-config-frost-standard](https://github.com/ciena-frost/eslint-config-frost-standard) which includes new rules
+from [eslint-plugin-ember-standard](https://github.com/ciena-blueplanet/eslint-plugin-ember-standard) and
+[eslint-plugin-ocd](https://github.com/ciena-blueplanet/eslint-plugin-ocd).
 
 
 # 1.3.6
@@ -175,7 +186,7 @@ With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` 
 
 # 1.3.2
 
-* **Fixed** typo in `frost-select` readme (#351) 
+* **Fixed** typo in `frost-select` readme (#351)
 
 
 
@@ -187,7 +198,8 @@ With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` 
 
 # 1.3.0
 
-* Updated frost-link to accept named parameters in addition to position parameters, which unblocks the `spread` use case
+* Updated frost-link to accept named parameters in addition to position parameters, which unblocks the `spread` use
+case
 
 
 
@@ -199,20 +211,26 @@ With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` 
 
 # 1.2.2
 
-* **Upgraded** `ember-cli-mocha` which pulls in a newer `ember-mocha` and deprecates `describeComponent` (PR coming in the next couple days to refactor our tests accordingly)
-* **Fixed** `CssMixin` test to test against a real component defined in the dummy app so that we catch when the `toString()` format changes. 
+* **Upgraded** `ember-cli-mocha` which pulls in a newer `ember-mocha` and deprecates `describeComponent` (PR coming in
+  the next couple days to refactor our tests accordingly)
+* **Fixed** `CssMixin` test to test against a real component defined in the dummy app so that we catch when the
+`toString()` format changes.
 
 
 # 1.2.1
 
-* **Fixed** a bug where the `addon/index.js` had a typo w.r.t. a module name and thus threw an error whenever anyone tried to import anything directly from `ember-frost-core`. 
+* **Fixed** a bug where the `addon/index.js` had a typo w.r.t. a module name and thus threw an error whenever anyone
+tried to import anything directly from `ember-frost-core`.
 
 # 1.2.0
 
-* **Added** `extends` helper to allow adding properties to a pojo (for use with `hookQualifiers`. Will add docs to `README.md` in next PR
-* **Added** `ehook` helper to allow setting hookQualifiers as a POJO and not just key/value pairs (only useful until [this pr](https://github.com/Ticketfly/ember-hook/pull/35) is merged). Will add docs to `README.md` in next PR
+* **Added** `extends` helper to allow adding properties to a pojo (for use with `hookQualifiers`. Will add docs to
+  `README.md` in next PR
+* **Added** `ehook` helper to allow setting hookQualifiers as a POJO and not just key/value pairs (only useful until
+  [this pr](https://github.com/Ticketfly/ember-hook/pull/35) is merged). Will add docs to `README.md` in next PR
 * **Added** `CssMixin` - will add docs in `README.md` in next PR
-* **Added** `Component` base class `addon/components/frost-component.js` to easily include all desired/required mixins for our components (`CssMixin`, `HookMixin`, `PropTypesMixin`, and `SpreadMixin` currently).
+* **Added** `Component` base class `addon/components/frost-component.js` to easily include all desired/required mixins
+for our components (`CssMixin`, `HookMixin`, `PropTypesMixin`, and `SpreadMixin` currently).
  * **Updated** existing components to derive from `frost-component`
 
 # 1.1.5
@@ -249,7 +267,7 @@ With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` 
 
 # 1.0.5
 
- * **Undo** the change from [#168](https://github.com/ciena-frost/ember-frost-core/pull/168) as it has been [rendered unnecessary](https://github.com/null-null-null/ember-get-config/issues/10) 
+ * **Undo** the change from [#168](https://github.com/ciena-frost/ember-frost-core/pull/168) as it has been [rendered unnecessary](https://github.com/null-null-null/ember-get-config/issues/10)
 
 
 # 1.0.4
@@ -272,9 +290,12 @@ With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` 
 
 
 # 1.0.0
-- **UPDATED/ADDED** test suite for frost-button, frost-checkbox, frost-events, frost-icon, frost-link, frost-loading, frost-password, frost-radio-button, frost-group, frost-scroll, frost-text, frost-textarea, frost-toggle, utils
-- **UPDATED** README for frost-button, frost-checkbox, frost-events, frost-icon, frost-link, frost-loading, frost-password, frost-radio-button, frost-group, frost-scroll, frost-text, frost-textarea, frost-toggle
-- **UPDATED/ADDED** demo app for frost-button, frost-checkbox, frost-icon, frost-link, frost-loading, frost-password, frost-radio-button, frost-group, frost-scroll, frost-text, frost-textarea, frost-toggle
+- **UPDATED/ADDED** test suite for frost-button, frost-checkbox, frost-events, frost-icon, frost-link, frost-loading,
+frost-password, frost-radio-button, frost-group, frost-scroll, frost-text, frost-textarea, frost-toggle, utils
+- **UPDATED** README for frost-button, frost-checkbox, frost-events, frost-icon, frost-link, frost-loading,
+frost-password, frost-radio-button, frost-group, frost-scroll, frost-text, frost-textarea, frost-toggle
+- **UPDATED/ADDED** demo app for frost-button, frost-checkbox, frost-icon, frost-link, frost-loading, frost-password,
+frost-radio-button, frost-group, frost-scroll, frost-text, frost-textarea, frost-toggle
 - **REWORK** API of frost-toggle, frost-link, frost-radio-button, frost-radio-group
 - **UPDATED** general cleanup for destructing of `get`, `set`, `on` and `$`
 - **UPDATED** existing component definitions to match recently updated generator.
@@ -348,7 +369,8 @@ With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` 
 
 * **Fixed** `frost-select` to open dropdown when select is focused and user presses up/down arrow key.
 * **Fixed** selected item(s) in the select dropdown to have a heavier font weight.
-* **Removed** `ember-browserify` and `svg4everybody` npm dependencies in favor of including `svg4everybody` via `vendor` directory.
+* **Removed** `ember-browserify` and `svg4everybody` npm dependencies in favor of including `svg4everybody` via
+`vendor` directory.
 
 # 0.32.2
 
@@ -376,9 +398,12 @@ With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` 
     * Addon: `ember-test-utils`
     * Bower packages: `chai-jquery` and `sinon-chai`
  * **Added** a `component` generator which uses our lint rules and our comment blocks
- * **Added** a `component-test` generator which uses `mocha` and `ember-test-utils`. It also sets up `sinon` automatically and has a failing test to make developers add a real test.
- * **Added** a `component-addon` generator which does the re-export of a component in the `app` directory, basically the same as the default generator, minus the `;` at the end.
- * **Added** a `PULL_REQUEST_TEMPLATE.md` file to help contributors remember to put version-bump comments and changelog messages in their PR descriptions.
+ * **Added** a `component-test` generator which uses `mocha` and `ember-test-utils`. It also sets up `sinon`
+ automatically and has a failing test to make developers add a real test.
+ * **Added** a `component-addon` generator which does the re-export of a component in the `app` directory, basically
+ the same as the default generator, minus the `;` at the end.
+ * **Added** a `PULL_REQUEST_TEMPLATE.md` file to help contributors remember to put version-bump comments and
+ changelog messages in their PR descriptions.
 
 # 0.30.2
 
@@ -390,7 +415,9 @@ With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` 
 
 # 0.30.0
 
-* Rewrote `frost-select` from the ground up to make it keyboard friendly and fix all of the issues we have been having with it. However I kept the same component API so consuming apps should still just work. CSS selectors did change though which will break any overriding CSS and tests that depend on the old selectors.
+* Rewrote `frost-select` from the ground up to make it keyboard friendly and fix all of the issues we have been
+having with it. However I kept the same component API so consuming apps should still just work. CSS selectors did
+change though which will break any overriding CSS and tests that depend on the old selectors.
 
 # 0.29.1
 
@@ -425,7 +452,8 @@ With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` 
 
 # 0.28.2
 
-* **Updated** `frost-select` dropdown to update at 60 fps and stop using `element` property as it causes conflicts in Ember 2.9 beta 3.
+* **Updated** `frost-select` dropdown to update at 60 fps and stop using `element` property as it causes conflicts in
+Ember 2.9 beta 3.
 
 # 0.28.1
 
@@ -434,11 +462,14 @@ With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` 
 # 0.28.0
 
 * **Added** [ember-elsewhere](https://github.com/ef4/ember-elsewhere) as a new dependency.
-* **Changed** `frost-select` and `frost-multi-select` to render dropdown elsewhere in the DOM, using `ember-elsewhere`, in order to make them more flexible.
-* **Changed** minimum Ember version from `2.1` to `2.3` since `ember-elsewhere` doesn't appear to work on versions prior to `2.3`.
+* **Changed** `frost-select` and `frost-multi-select` to render dropdown elsewhere in the DOM, using
+`ember-elsewhere`, in order to make them more flexible.
+* **Changed** minimum Ember version from `2.1` to `2.3` since `ember-elsewhere` doesn't appear to work on versions
+prior to `2.3`.
 
 # 0.27.4
-* select value and prompt is now clearable by setting the 'selectedValue' property to an empty string in the consuming context
+* select value and prompt is now clearable by setting the 'selectedValue' property to an empty string in the
+consuming context
 
 # 0.27.3
 
@@ -446,7 +477,8 @@ With the addition of `ember-frost-test` as a dependency, the `ember-frost-core` 
 
 # 0.27.2
 
-* Pressing enter to select an item when there is no item hovered will no longer reset the selected value or cause an error
+* Pressing enter to select an item when there is no item hovered will no longer reset the selected value or cause an
+error
 * Changing select data after a selection has been made will no longer cause an error.
 
 # 0.27.1
@@ -544,11 +576,14 @@ guards added for any consuming app @ ember 2.7
 
 # 0.21.0
 
-- **Changed** from `ember-lodash` to `ember-lodash-shim`. This means upgrading from `lodash` version `3.x` to version `4.x` which could impact consumers relying on [things removed](https://github.com/lodash/lodash/wiki/Changelog#v400) in `lodash` version `4.0.0`.
+- **Changed** from `ember-lodash` to `ember-lodash-shim`. This means upgrading from `lodash` version `3.x` to version
+`4.x` which could impact consumers relying on [things removed](https://github.com/lodash/lodash/wiki/Changelog#v400)
+in `lodash` version `4.0.0`.
 
 # 0.20.0
 
-- **Added** Consumers can now use 'hook' attr of core components to enable easier testing with addons like ember-cli-page-object
+- **Added** Consumers can now use 'hook' attr of core components to enable easier testing with addons like
+ember-cli-page-object
 
 # 0.19.2
 
@@ -556,23 +591,28 @@ Fixed how negative indices are handled by frost-select.
 
 # 0.19.1
 
-* **Fixed** components that use `ember-prop-types` to work as expected in integration tests by explicitly consuming the `ember-prop-types` mixin instead of relying on the initializer which isn't executed in an integration test environment.
+* **Fixed** components that use `ember-prop-types` to work as expected in integration tests by explicitly consuming
+the `ember-prop-types` mixin instead of relying on the initializer which isn't executed in an integration test
+environment.
 
 # 0.19.0
 The select input widgets now use redux.
 
 # 0.18.1
 
-* **Fixed** `frost-textarea`'s `onInput` handler to propagate change immediately to consumer rather than wait for another Ember run loop to pass.
+* **Fixed** `frost-textarea`'s `onInput` handler to propagate change immediately to consumer rather than wait for
+another Ember run loop to pass.
 
 # 0.18.0
 
 ## Text/Password native event support
 - Mapped all available DOM events to Frost events (e.g. focusIn -> onFocusIn) see the demo for a full list
-- Event hooks respond with native DOM events instead of {id, value} object, this is still supported as a legacy usage, but please switch (no way to detect when the legacy attributes are used unfortunately)
+- Event hooks respond with native DOM events instead of {id, value} object, this is still supported as a legacy
+usage, but please switch (no way to detect when the legacy attributes are used unfortunately)
 - Deprecated `onFocus` (replaced by `onFocusIn`)
 - Deprecated `onBlur` (replaced by `onFocusOut`)
-- Removed the `excludedEvents` property from the FrostEvents mixin, this is covered automatically when local events are present
+- Removed the `excludedEvents` property from the FrostEvents mixin, this is covered automatically when local events
+are present
 
 ## Text/Password visual and behavioral updates
 - Added a new color (grey-7) to the palette for input borders
@@ -593,18 +633,22 @@ The select input widgets now use redux.
 - Moving towards dropping ember-one-way-controls from the dependency list (requires Ember 2.3.1+)
 
 # 0.17.3
- * **Fixes** a bug in `frost-select` where the options popover was closed whenever someone typed into the input (when `selectedValue` is passed in as props).
+ * **Fixes** a bug in `frost-select` where the options popover was closed whenever someone typed into the input (when
+   `selectedValue` is passed in as props).
  * **Updated** `eslint` within the project to `3.x`
  * **Added** some linting rules for `mocha` (via an update to `eslint-config-frost-standard`)
- * **Updated** `tests/` directory to no longer specify an `.eslintrc` with `globals` that shouldn't actually be globals.
+ * **Updated** `tests/` directory to no longer specify an `.eslintrc` with `globals` that shouldn't actually be
+ globals.
 
 # 0.17.2
 
-Added ember-code-snippets to allow demo documentation to reference the code as the sample text.  Cleaned up the button demo as an example.
+Added ember-code-snippets to allow demo documentation to reference the code as the sample text.  Cleaned up the
+button demo as an example.
 
 # 0.17.1
 
-Fixed the text clear icon to only append to the DOM on insertion of the text field (was occurring on every render/re-render)
+Fixed the text clear icon to only append to the DOM on insertion of the text field (was occurring on every
+  render/re-render)
 
 # 0.17.0
 
@@ -655,7 +699,8 @@ Added onEnter to frost-text so that actions can be triggered using the enter key
 
 # 0.11.17
 
-Reverted a move of component templates from the addon to app directory as this change broke downstream component extensions
+Reverted a move of component templates from the addon to app directory as this change broke downstream component
+extensions
 
 # 0.11.16
 
@@ -672,7 +717,8 @@ Reverted a move of component templates from the addon to app directory as this c
 
 # 0.11.13
 
-* **Added** section comments in components for *dependencies*, *properties*, *computed properties*, *functions*, *events*, and *actions*.
+* **Added** section comments in components for *dependencies*, *properties*, *computed properties*, *functions*,
+*events*, and *actions*.
 * **Fixed** bug where disabled text input with text could be cleared as clear icon was present when it shouldn't be.
 * **Updated** components to use `ember-computed-decorators`.
 * **Updated** `frost-icon` and `frost-link` to use `ember-prop-types`.
@@ -681,7 +727,8 @@ Reverted a move of component templates from the addon to app directory as this c
 
 * **Added** `unit: true` to all unit tests to explicitly mark them as unit tests.
 * **Moved** templates to `app/` directory so consumers can override them if they wish.
-* Started using destructuring for Ember properties such as `const {Component} = Ember` instead of using `Ember.Component`.
+* Started using destructuring for Ember properties such as `const {Component} = Ember` instead of using
+`Ember.Component`.
 
 # 0.11.11
 
@@ -712,11 +759,14 @@ Added a "more" svg to the frost icon pack
 
 # 0.11.5
 
-Fixed a broken build when a consuming app doesn't specify an application icon pack and doesn't contain the legacy `public/svgs` icons path
+Fixed a broken build when a consuming app doesn't specify an application icon pack and doesn't contain the legacy
+`public/svgs` icons path
 
 # 0.11.4
 
-Duplicated the icons in the `frost` icon pack - duplicates now exist in the legacy `frost/<icon>` nested paths and new `<icon>` flat path.  This allows icons from the `frost` icon pack to be migrated off the deprecated nested paths.  The nested duplicates will be removed in release 1.0.
+Duplicated the icons in the `frost` icon pack - duplicates now exist in the legacy `frost/<icon>` nested paths and
+new `<icon>` flat path.  This allows icons from the `frost` icon pack to be migrated off the deprecated nested
+paths. The nested duplicates will be removed in release 1.0.
 
 # 0.11.3
 
@@ -737,7 +787,8 @@ Deprecating in-line style for link in favour of inline.
 
 # 0.10.0
 
-Added the icon pack feature to `frost-icon`, see the documentation at http://ciena-frost.github.io/ember-frost-core/#/icons for details
+Added the icon pack feature to `frost-icon`, see the documentation at
+http://ciena-frost.github.io/ember-frost-core/#/icons for details
 
 # 0.9.3
 
@@ -848,7 +899,8 @@ Adjusting directory name to match UX components.
 # 0.2.2 (April 14, 2016)
 
 * **Added** first batch of snippets.
-* **Fixed** `onFocus` properties on components so consumer can process focus events without disrupting original focus event handlers.
+* **Fixed** `onFocus` properties on components so consumer can process focus events without disrupting original focus
+event handlers.
 
 # 0.2.1 (April 13, 2016)
 
@@ -857,7 +909,8 @@ Adjusting directory name to match UX components.
 
 # 0.2.0 (April 13, 2016)
 
-* **Added** `onBlur` property to `frost-password`, `frost-select`, `frost-text`, and `frost-textarea` so consumer can process blur events.
+* **Added** `onBlur` property to `frost-password`, `frost-select`, `frost-text`, and `frost-textarea` so consumer can
+process blur events.
 
 # 0.1.4 (April 13, 2016)
 
