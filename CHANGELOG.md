@@ -1,3 +1,14 @@
+# 1.9.0
+
+* **Added** some aria attributes to `frost-select` in order to make it a little bit more accessibility friendly.
+
+* **Updated** testem to use custom reporter for better DX.
+
+* **Updated** linting to leverage new linting tools provided by `ember-test-utils` which gives us the following output:
+
+  <img width="602" alt="screen shot 2017-02-07 at 10 46 33 pm" src="https://cloud.githubusercontent.com/assets/422902/22726266/70ca4fae-ed87-11e6-9048-ceaae7de790d.png">
+
+
 # 1.8.3
 - css mixin `getComponentName` returns clean className for nested components
 
