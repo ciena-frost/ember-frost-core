@@ -1,20 +1,21 @@
 sudo: required
 dist: trusty
+language: node_js
+node_js:
+  - '6.9'
+  - 'stable'
+branches:
+  except:
+    - /^v[0-9\.]+/
 addons:
   apt:
     sources:
-    - ubuntu-toolchain-r-test
-    - google-chrome
+      - google-chrome
+      - ubuntu-toolchain-r-test
     packages:
-    - google-chrome-stable
-    - g++-4.8
-language: node_js
-node_js:
-- '6.9'
-- 'stable'
-branches:
-  except:
-  - /^v[0-9\.]+/
+      - google-chrome-stable
+      - g++-4.8
+  firefox: 'latest-esr'
 before_install:
 - "export DISPLAY=:99.0"
 - "sh -e /etc/init.d/xvfb start"

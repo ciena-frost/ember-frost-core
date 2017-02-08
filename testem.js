@@ -1,11 +1,15 @@
+var Reporter = require('ember-test-utils/reporter')
+
 module.exports = {
+  disable_watching: true,
   framework: 'mocha',
-  'test_page': 'tests/index.html?hidepassed&coverage',
-  'disable_watching': true,
-  'launch_in_ci': [
+  launch_in_ci: [
+    'Chrome',
+    'Firefox'
+  ],
+  launch_in_dev: [
     'Chrome'
   ],
-  'launch_in_dev': [
-    'Chrome'
-  ]
+  reporter: new Reporter(),
+  test_page: 'tests/index.html?hidepassed'
 }
