@@ -1,6 +1,6 @@
 import {expect} from 'chai'
 import Ember from 'ember'
-const {$, run} = Ember
+const {$} = Ember
 import {$hook} from 'ember-hook'
 import wait from 'ember-test-helpers/wait'
 import hbs from 'htmlbars-inline-precompile'
@@ -745,7 +745,7 @@ describe(test.label, function () {
           })
 
           describe('when enter key pressed', function () {
-            beforeEach(function (done) {
+            beforeEach(function () {
               [onBlur, onChange, onFocus].forEach((func) => func.reset())
 
               $(document)
@@ -755,9 +755,7 @@ describe(test.label, function () {
                   })
                 )
 
-              run.next(() => {
-                done()
-              })
+              return wait()
             })
 
             it('renders as expected', function () {
@@ -882,7 +880,7 @@ describe(test.label, function () {
             })
 
             describe('when enter key pressed', function () {
-              beforeEach(function (done) {
+              beforeEach(function () {
                 [onBlur, onChange, onFocus].forEach((func) => func.reset())
 
                 $(document)
@@ -892,9 +890,7 @@ describe(test.label, function () {
                     })
                   )
 
-                run.next(() => {
-                  done()
-                })
+                return wait()
               })
 
               it('renders as expected', function () {
