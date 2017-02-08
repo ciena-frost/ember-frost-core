@@ -49,7 +49,10 @@ export default Component.extend({
   // == Keyword Properties ====================================================
 
   attributeBindings: [
-    'computedTabIndex:tabIndex'
+    'ariaLabel:aria-label',
+    'computedTabIndex:tabIndex',
+    'opened:aria-pressed',
+    'role'
   ],
 
   classNameBindings: [
@@ -69,12 +72,14 @@ export default Component.extend({
     autofocus: PropTypes.bool,
     disabled: PropTypes.bool,
     error: PropTypes.bool,
+    label: PropTypes.string,
     multiselect: PropTypes.bool,
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onInput: PropTypes.func,
     renderTarget: PropTypes.string,
+    role: PropTypes.string,
     selected: PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.number
@@ -111,6 +116,7 @@ export default Component.extend({
       error: false,
       multiselect: false,
       renderTarget: 'frost-select',
+      role: 'button',
       tabIndex: 0,
 
       // state
@@ -119,6 +125,18 @@ export default Component.extend({
   },
 
   // == Computed Properties ===================================================
+
+  @readOnly
+  @computed('label', 'opened')
+  ariaLabel (label, opened) {
+    const verb = opened ? 'Hide' : 'Show'
+
+    if (label) {
+      return `${verb} ${label} combobox`
+    }
+
+    return `${verb} combobox`
+  },
 
   @readOnly
   @computed('data', 'filter', 'onInput')

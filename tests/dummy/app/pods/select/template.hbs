@@ -22,6 +22,7 @@
 …
 {{frost-select
   hook='mySelect'
+  label='superhero'
   renderTarget='foo-bar'
   …
 }}
@@ -38,6 +39,7 @@
         {{frost-select
           data=data
           hook='mySelect'
+          label='superhero'
         }}
       </div>
       <div class="snippet">
@@ -45,6 +47,7 @@
 {{frost-select
   data=data
   hook='mySelect'
+  label='superhero'
 }}
 ```"}}
       </div>
@@ -58,6 +61,7 @@
         {{frost-select
           data=data
           hook='mySelect'
+          label='superhero'
           selectedValue=preSelectedValueForClearing
           onChange=(action 'onChangeClearable')
         }}
@@ -74,6 +78,7 @@
 {{frost-select
   data=data
   hook='mySelect'
+  label='superhero'
   selectedValue=preSelectedValueForClearing
 }}
 ```"}}
@@ -93,6 +98,7 @@
           autofocus=true
           data=data
           hook='mySelect'
+          label='superhero'
         }}
       </div>
       <div class="snippet">
@@ -101,6 +107,7 @@
   autofocus=true
   data=data
   hook='mySelect'
+  label='superhero'
 }}
 ```"}}
       </div>
@@ -112,6 +119,7 @@
         {{frost-select
           data=data
           hook='mySelect'
+          label='superhero'
           placeholder="Superhero"
         }}
       </div>
@@ -120,6 +128,7 @@
 {{frost-select
   data=data
   hook='mySelect'
+  label='superhero'
   placeholder='Superhero'
 }}
 ```"}}
@@ -132,6 +141,7 @@
         {{frost-select
           data=data
           hook='mySelect'
+          label='superhero'
           selected=selectedIndex
         }}
       </div>
@@ -140,6 +150,7 @@
 {{frost-select
   data=data
   hook='mySelect'
+  label='superhero'
   selected=selectedIndex
 }}
 ```"}}
@@ -152,6 +163,7 @@
         {{frost-select
           data=data
           hook='mySelect'
+          label='superhero'
           selectedValue=preSelectedValue
         }}
       </div>
@@ -160,6 +172,7 @@
 {{frost-select
   data=data
   hook='mySelect'
+  label='superhero'
   selectedValue=preSelectedValue
 }}
 ```"}}
@@ -177,6 +190,7 @@
         {{frost-select
           data=data
           hook='mySelect'
+          label='superhero'
           selected=selectedIndex
           error=true
         }}
@@ -186,6 +200,7 @@
 {{frost-select
   data=data
   hook='mySelect'
+  label='superhero'
   selected=selectedIndex
   error=true
 }}
@@ -199,6 +214,7 @@
         {{frost-select
           data=data
           hook='mySelect'
+          label='superhero'
           selectedValue=preSelectedValue
           disabled=true
         }}
@@ -208,6 +224,7 @@
 {{frost-select
   data=data
   hook='mySelect'
+  label='superhero'
   selectedValue=preSelectedValue
   disabled=true
 }}
@@ -226,6 +243,7 @@
         {{frost-select
           data=data
           hook='mySelect'
+          label='superhero'
           onBlur=(action 'onBlurHandler')
         }}
       </div>
@@ -234,6 +252,7 @@
 {{frost-select
   data=data
   hook='mySelect'
+  label='superhero'
   onBlur=(action 'onBlurHandler')
 }}
 ```"}}
@@ -246,6 +265,7 @@
         {{frost-select
           data=data
           hook='mySelect'
+          label='superhero'
           onChange=(action 'onChangeHandler')
         }}
       </div>
@@ -254,6 +274,7 @@
 {{frost-select
   data=data
   hook='mySelect'
+  label='superhero'
   onChange=(action 'onChangeHandler')
 }}
 ```"}}
@@ -266,6 +287,7 @@
         {{frost-select
           data=data
           hook='mySelect'
+          label='superhero'
           selectedValue=externalSelectedValue
           onChange=(action 'onChangeHandler')
           onInput=(action 'onInputHandler')
@@ -276,6 +298,7 @@
 {{frost-select
   data=data
   hook='mySelect'
+  label='superhero'
   onChange=(action 'onChangeHandler')
   onInput=(action 'onInputHandler')
 }}
@@ -295,6 +318,7 @@
           options=(hash
             data=data
             hook='mySelect'
+            label='superhero'
             selected=selectedIndex
             error=true
           )

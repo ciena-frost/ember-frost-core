@@ -5,7 +5,7 @@ import layout from '../templates/components/frost-select-dropdown'
 import {keyCodes} from '../utils'
 import Component from './frost-component'
 import Ember from 'ember'
-const {$, deprecate, get} = Ember
+const {$, deprecate, get, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
@@ -75,6 +75,13 @@ export default Component.extend({
   },
 
   // == Computed Properties ===================================================
+
+  @readOnly
+  @computed('focusedIndex')
+  ariaActiveDescendant (focusedIndex) {
+    const isNumber = typeOf(focusedIndex) === 'number'
+    return isNumber ? `frost-select-list-item-${focusedIndex}` : undefined
+  },
 
   @readOnly
   @computed('bottom', 'left', 'maxHeight', 'top', 'width')

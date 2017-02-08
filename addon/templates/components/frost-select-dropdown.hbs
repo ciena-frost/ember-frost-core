@@ -15,8 +15,14 @@
   style={{listStyle}}
 >
   {{frost-text
+    ariaActiveDescendant=ariaActiveDescendant
+    ariaAutocomplete='list'
+    ariaExpanded=true
+    ariaMultiselectable=true
+    ariaOwns='frost-select-list'
     hook=(concat hook '-list-input')
     onInput=onFilterInput
+    role='combobox'
     value=filter
   }}
   {{#if multiselect}}
@@ -31,7 +37,10 @@
       }}
     </div>
   {{/if}}
-  <ul>
+  <ul
+    id='frost-select-list'
+    role='listbox'
+  >
     {{#if showEmptyMessage}}
       <div class="frost-select-dropdown-empty-msg">
         {{#if filter}}
@@ -48,6 +57,7 @@
         filter=filter
         hook=(concat hook '-item')
         hookQualifiers=(hash index=index label=item.label value=item.value)
+        id=(concat 'frost-select-list-item-' index)
         multiselect=multiselect
         onItemOver=(action 'focusOnItem')
         onSelect=(action 'selectItem')
