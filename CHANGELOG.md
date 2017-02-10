@@ -1,3 +1,7 @@
+# 1.9.1
+
+* **Fixed** build to publish.
+
 # 1.9.0
 
 * **Added** some aria attributes to `frost-select` in order to make it a little bit more accessibility friendly.
