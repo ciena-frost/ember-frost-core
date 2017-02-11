@@ -2,10 +2,21 @@ import {expect} from 'chai'
 import Ember from 'ember'
 const {$} = Ember
 import {afterEach, beforeEach, describe, it} from 'mocha'
+import sinon from 'sinon'
 
 import {trimDataToFit, trimLongDataInElement} from 'ember-frost-core/utils/text'
 
 describe('Unit / Utils / text', () => {
+  let sandbox
+
+  beforeEach(function () {
+    sandbox = sinon.sandbox.create()
+  })
+
+  afterEach(function () {
+    sandbox.restore()
+  })
+
   describe('.trimDataToFit()', () => {
     it('does not throw an error when text is undefined', () => {
       expect(() => {
@@ -34,6 +45,7 @@ describe('Unit / Utils / text', () => {
       $element.css({
         font: 'normal normal normal 10px/14px Arial'
       })
+      $element.text(text)
     })
 
     afterEach(() => {
@@ -42,8 +54,11 @@ describe('Unit / Utils / text', () => {
 
     describe('when text fits within element', () => {
       beforeEach(() => {
+        sandbox.spy($element, 'text')
+        sandbox.spy($element, 'prop')
+        sandbox.stub(Ember, '$').withArgs($element.get(0)).returns($element)
         $element.width(200)
-        trimLongDataInElement($element.get(0))
+        trimLongDataInElement($element.get(0), Ember.$) // eslint-disable-line ember-standard/destructure
       })
 
       it('does not trim text', () => {
@@ -52,6 +67,16 @@ describe('Unit / Utils / text', () => {
 
       it('does not set title', () => {
         expect($element).to.have.prop('title', '')
+      })
+
+      it('should not call $element.text', function () {
+        // Make sure to avoid unnecessary performance penalty
+        expect($element.text).to.have.callCount(0)
+      })
+
+      it('should not call $element.prop', function () {
+        // Make sure to avoid unnecessary performance penalty
+        expect($element.prop).to.have.callCount(0)
       })
     })
 
