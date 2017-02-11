@@ -33,16 +33,13 @@
     </div>
   {{/if}}
   <ul>
-    {{#if showEmptyMessage}}
-      <div class="frost-select-dropdown-empty-msg">
-        {{#if filter}}
-          No items match your filter.
-        {{else}}
-          No items.
-        {{/if}}
-      </div>
-    {{/if}}
-    {{#each renderItems as |item index|}}
+    {{#vertical-collection
+      content=renderItems
+      defaultHeight=35
+      bufferSize=0.25
+      alwaysUseDefaultHeight=true
+      as |item index|
+    }}
       {{frost-select-li
         class=item.className
         data=item
@@ -53,6 +50,14 @@
         onItemOver=(action 'focusOnItem')
         onSelect=(action 'selectItem')
       }}
-    {{/each}}
+    {{else}}
+      <div class="frost-select-dropdown-empty-msg">
+        {{#if filter}}
+          No items match your filter.
+        {{else}}
+          No items.
+        {{/if}}
+      </div>
+    {{/vertical-collection}}
   </ul>
 </div>

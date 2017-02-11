@@ -73,7 +73,8 @@
     "remark-cli": "^2.1.0",
     "remark-lint": "^5.4.0",
     "sass-lint": "^1.10.2",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "smoke-and-mirrors": "0.6.2"
   },
   "keywords": [
     "ember-addon",

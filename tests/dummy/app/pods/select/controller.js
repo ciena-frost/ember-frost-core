@@ -3,7 +3,13 @@ const {Controller, computed, inject} = Ember
 
 export default Controller.extend({
   notifications: inject.service('notification-messages'),
-
+  longdata: computed('data', function () {
+    let data = this.get('data')
+    while (data.length < 500) {
+      data = data.concat(data)
+    }
+    return data
+  }),
   data: computed('data', 'search', function () {
     let result = this.model.map((record) => {
       return {
@@ -11,6 +17,7 @@ export default Controller.extend({
         value: record.get('value')
       }
     })
+
     if (this.get('search')) {
       let filteredResult = result.filter((item) => {
         return item.label.toLowerCase().indexOf(this.get('search').toLowerCase()) !== -1
