@@ -204,7 +204,7 @@ export default Component.extend({
 
     return {
       bottom,
-      maxHeight: $(window).height() - bottom - WINDOW_SPACE,
+      maxHeight: 400,
       top: 'auto'
     }
   },
@@ -221,7 +221,7 @@ export default Component.extend({
 
     return {
       bottom: 'auto',
-      maxHeight: $(window).height() - top - WINDOW_SPACE,
+      maxHeight: 400,
       top
     }
   },

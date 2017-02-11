@@ -2,7 +2,7 @@
  * Component definition for the frost-select-li component
  */
 import Ember from 'ember'
-const {on, typeOf} = Ember
+const {on, typeOf, run: {scheduleOnce}} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
 
@@ -14,10 +14,8 @@ const regexEscapeChars = '-[]/{}()*+?.^$|'.split('')
 
 export default Component.extend({
   // == Dependencies ==========================================================
-
   // == Keyword Properties ====================================================
 
-  tagName: 'li',
   layout,
 
   // == PropTypes =============================================================
@@ -79,19 +77,21 @@ export default Component.extend({
     this.get('onItemOver')(data)
   }),
 
-  // == Lifecycle Hooks =======================================================
+  // == Lifecycle Hooks =======================================================s
 
   didRender () {
-    const $text = this.$('.frost-select-list-item-text')
-    const filter = this.get('filter')
+    scheduleOnce('sync', this, function () {
+      const $text = this.$('.frost-select-list-item-text')
+      const filter = this.get('filter')
 
-    trimLongDataInElement($text.get(0))
+      trimLongDataInElement($text.get(0))
 
-    if (filter) {
-      const pattern = new RegExp(filter, 'gi')
-      const textWithMatch = $text.text().replace(pattern, '<u>$&</u>')
-      $text.html(textWithMatch)
-    }
+      if (filter) {
+        const pattern = new RegExp(filter, 'gi')
+        const textWithMatch = $text.text().replace(pattern, '<u>$&</u>')
+        $text.html(textWithMatch)
+      }
+    })
   },
 
   // == Actions ===============================================================

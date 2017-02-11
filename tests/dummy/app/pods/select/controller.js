@@ -5,9 +5,11 @@ export default Controller.extend({
   notifications: inject.service('notification-messages'),
   longdata: computed('data', function () {
     let data = this.get('data')
+
     while (data.length < 500) {
       data = data.concat(data)
     }
+    
     return data
   }),
   data: computed('data', 'search', function () {

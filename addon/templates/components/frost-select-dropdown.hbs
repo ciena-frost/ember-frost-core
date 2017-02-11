@@ -36,7 +36,6 @@
     {{#vertical-collection
       content=renderItems
       defaultHeight=35
-      bufferSize=0.25
       alwaysUseDefaultHeight=true
       as |item index|
     }}
@@ -44,7 +43,7 @@
         class=item.className
         data=item
         filter=filter
-        hook=(concat hook '-item')
+        hook=(concat hook '-item-' index)
         hookQualifiers=(hash index=index label=item.label value=item.value)
         multiselect=multiselect
         onItemOver=(action 'focusOnItem')

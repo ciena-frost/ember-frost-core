@@ -111,8 +111,6 @@ $frost-select-placeholder-color: $frost-color-grey-6;
   display: flex;
   position: fixed;
   flex-direction: column;
-  height: 300px;
-  overflow: hidden !important;
   transition: height .4s ease, opacity .2s ease;
   border: 1px solid $frost-color-lgrey-3;
   border-radius: 3px;
