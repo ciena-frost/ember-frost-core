@@ -7,7 +7,6 @@ import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
 
 import layout from '../templates/components/frost-select-li'
-import {trimLongDataInElement} from '../utils/text'
 import Component from './frost-component'
 
 const regexEscapeChars = '-[]/{}()*+?.^$|'.split('')
@@ -18,6 +17,7 @@ export default Component.extend({
   // == Keyword Properties ====================================================
 
   attributeBindings: [
+    'dataValue:data-value',
     'role'
   ],
 
@@ -43,6 +43,12 @@ export default Component.extend({
   },
 
   // == Computed Properties ===================================================
+
+  @readOnly
+  @computed('data')
+  dataValue (data) {
+    return data.value
+  },
 
   @readOnly
   @computed('data', 'filter')
@@ -87,23 +93,6 @@ export default Component.extend({
   }),
 
   // == Lifecycle Hooks =======================================================
-
-  didRender () {
-    const $text = this.$('.frost-select-list-item-text')
-    const filter = this.get('filter')
-
-    trimLongDataInElement($text.get(0))
-
-    if (filter) {
-      const pattern = new RegExp(filter, 'gi')
-      const textWithMatch = $text.text().replace(pattern, '<u>$&</u>')
-
-      // If rendered text has changed, update it
-      if ($text.html() !== textWithMatch) {
-        $text.html(textWithMatch)
-      }
-    }
-  },
 
   // == Actions ===============================================================
   actions: {}

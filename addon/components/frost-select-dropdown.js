@@ -1,14 +1,16 @@
 /**
  * Component definition for frost-select-dropdown component
  */
-import layout from '../templates/components/frost-select-dropdown'
-import {keyCodes} from '../utils'
-import Component from './frost-component'
 import Ember from 'ember'
-const {$, deprecate, get, typeOf} = Ember
+const {$, deprecate, get, merge, run, typeOf} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
+
+import layout from '../templates/components/frost-select-dropdown'
+import {keyCodes} from '../utils'
+import {trimLongDataInElement} from '../utils/text'
+import Component from './frost-component'
 
 const {DOWN_ARROW, ENTER, ESCAPE, UP_ARROW} = keyCodes
 
@@ -17,35 +19,6 @@ const ARROW_HEIGHT = 12
 const ARROW_WIDTH = 25
 const FPS = 1000 / 60 // Update at 60 frames per second
 const WINDOW_SPACE = 20
-
-/**
- * Get render items
- * @param {Array<Object>} items - items to render in select dropdown
- * @param {Array<Object>} selectedItems - items that are currently selected
- * @returns {Array<Object>} render items
- */
-function getRenderItems (items, selectedItems) {
-  if (!items) {
-    return []
-  }
-
-  return items.map((item, index) => {
-    const classNames = ['frost-select-list-item']
-    const value = get(item, 'value')
-    const isSelected = selectedItems.find((item) => item.value === value) !== undefined
-
-    if (isSelected) {
-      classNames.push('frost-select-list-item-selected')
-    }
-
-    return {
-      className: classNames.join(' '),
-      label: get(item, 'label'),
-      selected: isSelected,
-      value: get(item, 'value')
-    }
-  })
-}
 
 export default Component.extend({
   // == Dependencies ==========================================================
@@ -154,6 +127,37 @@ export default Component.extend({
   },
 
   @readOnly
+  @computed('items', 'selectedItems')
+  /**
+   * Get render items
+   * @param {Array<Object>} items - items to render in select dropdown
+   * @param {Array<Object>} selectedItems - items that are currently selected
+   * @returns {Array<Object>} render items
+   */
+  renderItems (items, selectedItems) {
+    if (!items) {
+      return []
+    }
+
+    return items.map((item, index) => {
+      const classNames = ['frost-select-list-item']
+      const value = get(item, 'value')
+      const isSelected = selectedItems.find((item) => item.value === value) !== undefined
+
+      if (isSelected) {
+        classNames.push('frost-select-list-item-selected')
+      }
+
+      return {
+        className: classNames.join(' '),
+        label: get(item, 'label'),
+        selected: isSelected,
+        value: get(item, 'value')
+      }
+    })
+  },
+
+  @readOnly
   @computed('items')
   // FIXME: jsdoc
   showEmptyMessage (items) {
@@ -200,24 +204,6 @@ export default Component.extend({
     }
   },
 
-  /**
-   * Update render items if anything driving them changed
-   * @param {Object} attrs - attrs argument from didReceiveAttrs hook
-   */
-  _maybeUpdateRenderItems (attrs) {
-    const newItems = get(attrs, 'newAttrs.items.value')
-    const newSelectedItems = get(attrs, 'newAttrs.selectedItems.value')
-    const oldItems = get(attrs, 'oldAttrs.items.value')
-    const oldSelectedItems = get(attrs, 'oldAttrs.selectedItems.value')
-
-    if (
-      newItems !== oldItems ||
-      newSelectedItems !== oldSelectedItems
-    ) {
-      this.set('renderItems', getRenderItems(newItems, newSelectedItems))
-    }
-  },
-
   // FIXME: jsdoc
   _positionAboveInput (top) {
     const bottom = $(window).height() - top + $(document).scrollTop() + ARROW_HEIGHT + BORDER_HEIGHT
@@ -250,8 +236,11 @@ export default Component.extend({
     }
   },
 
+  /* eslint-disable complexity */
   // FIXME: jsdoc
   _updatePosition ($element) {
+    if (this.isDestroyed || this.isDestroying) return {}
+
     $element = $element.first()
 
     const {center, height, left, top, width} = this._getElementDimensionsAndPosition($element)
@@ -268,13 +257,59 @@ export default Component.extend({
       props.width = width
     }
 
-    if (
-      Object.keys(props).length !== 0 &&
-      !this.get('isDestroyed') &&
-      !this.get('isDestroying')
-    ) {
-      this.setProperties(props)
+    return props
+  },
+  /* eslint-enable complexity */
+
+  _updateText () {
+    const filter = this.get('filter')
+    const dropdownElement = document.getElementsByClassName('frost-select-dropdown')[0]
+    const clonedDropdownElement = dropdownElement.cloneNode(true)
+
+    // Note: we must add the cloned dropdown to the DOM in order for it to have
+    // the proper dimensions but don't want it visible. Since it has a fixed
+    // position already it won't cause a reflow of the page.
+    clonedDropdownElement.style.visibility = 'hidden'
+
+    document.body.appendChild(clonedDropdownElement)
+
+    const textElements = clonedDropdownElement.querySelectorAll('.frost-select-list-item-text')
+
+    // Update the text of the list items in our cloned list
+    const listUpdated = Array.from(textElements).reduce((updated, textElement, index) => {
+      const textUpdated = trimLongDataInElement(textElement)
+
+      if (filter) {
+        const pattern = new RegExp(filter, 'gi')
+        const textWithMatch = textElement.textContent.replace(pattern, '<u>$&</u>')
+
+        // If rendered text has changed, update it
+        if (textElement.innerHTML !== textWithMatch) {
+          textElement.innerHTML = textWithMatch
+          return true
+        }
+      }
+
+      return updated || textUpdated
+    }, false)
+
+    // Replace the list in our DOM with the cloned list which has the correct
+    // text trimming
+    if (listUpdated) {
+      const dropdownListElement = dropdownElement.querySelector('#frost-select-list')
+      const scrollTop = dropdownListElement.scrollTop
+
+      dropdownListElement.replaceWith(
+        clonedDropdownElement.querySelector('#frost-select-list')
+      )
+
+      // Make sure we scroll back to where the user was
+      document.getElementById('frost-select-list').scrollTop = scrollTop
     }
+
+    // Now that the DOM contains the correct list item text remove our temporary
+    // container that held our cloned list
+    document.body.removeChild(clonedDropdownElement)
   },
 
   // == Tasks =================================================================
@@ -287,7 +322,8 @@ export default Component.extend({
       const $element = get(this.attrs, '$element.value') || get(this.attrs, '$element')
 
       if ($element) {
-        this._updatePosition($element)
+        const props = this._updatePosition($element)
+        this.setProperties(props)
       }
 
       yield timeout(FPS)
@@ -302,9 +338,10 @@ export default Component.extend({
 
   didReceiveAttrs (attrs) {
     const $element = get(attrs, 'newAttrs.$element.value')
+    let props = {}
 
     if ($element) {
-      this._updatePosition($element)
+      props = merge(props, this._updatePosition($element))
     }
 
     const receivedHook = get(attrs, 'newAttrs.receivedHook.value')
@@ -318,10 +355,13 @@ export default Component.extend({
           until: '2.0.0'
         }
       )
-      this.set('hook', receivedHook)
+
+      props.hook = receivedHook
     }
 
-    this._maybeUpdateRenderItems(attrs)
+    if (Object.keys(props).length !== 0) {
+      this.setProperties(props)
+    }
   },
 
   didInsertElement () {
@@ -360,6 +400,12 @@ export default Component.extend({
   },
 
   didRender () {
+    this._super(...arguments)
+
+    if (this.isDestroyed || this.isDestroying) return
+
+    this._updateText()
+
     const focusedClass = 'frost-select-list-item-focused'
     const focusedIndex = this.get('focusedIndex')
 
