@@ -91,6 +91,7 @@ export function trimLongDataInElement (element) {
     tooltip = $(element).data('text')
   }
 
+  // If rendered text has changed, update it
   if ($element.text() !== text) {
     $element
       .text(text)

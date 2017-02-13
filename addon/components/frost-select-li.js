@@ -98,6 +98,7 @@ export default Component.extend({
       const pattern = new RegExp(filter, 'gi')
       const textWithMatch = $text.text().replace(pattern, '<u>$&</u>')
 
+      // If rendered text has changed, update it
       if ($text.html() !== textWithMatch) {
         $text.html(textWithMatch)
       }
