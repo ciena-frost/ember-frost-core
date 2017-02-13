@@ -1213,6 +1213,48 @@ describe(test.label, function () {
       })
     })
 
+    describe('When label is too long to fit', function () {
+      beforeEach(function () {
+        this.set('data', [
+          {label: 'Baaaaaaaaaa baaaaaaaaaaaaaaa black sheep', value: 'sheep'}
+        ])
+        this.$('.frost-select').width(175)
+      })
+
+      describe('when select is opened', function () {
+        beforeEach(function () {
+          this.$('.frost-select').click()
+          return wait()
+        })
+
+        it('should truncate label but leave beginning and end', function () {
+          const indexOfElipsis = $hook('select-item', {index: 0}).text().indexOf('\u2026')
+          expect(indexOfElipsis).to.be.greaterThan(3).and.lessThan(this.get('data.0.label.length') - 3)
+        })
+
+        describe('when select is closed and made wide enough', function () {
+          beforeEach(function () {
+            this.$('.frost-select').click()
+            return wait().then(() => {
+              this.$('.frost-select').width(600)
+              return wait()
+            })
+          })
+
+          describe('when select is re-opened', function () {
+            beforeEach(function () {
+              this.$('.frost-select').click()
+              return wait()
+            })
+
+            it('should no longer truncate text', function () {
+              expect($hook('select-item', {index: 0}).text().trim()).to.equal(this.get('data.0.label'))
+            })
+          })
+        })
+      })
+    })
+
     describe('ember-hook selectors', function () {
       describe('when dropdown is open', function () {
         beforeEach(function () {
