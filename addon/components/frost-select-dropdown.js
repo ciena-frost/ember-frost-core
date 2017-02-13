@@ -18,6 +18,35 @@ const ARROW_WIDTH = 25
 const FPS = 1000 / 60 // Update at 60 frames per second
 const WINDOW_SPACE = 20
 
+/**
+ * Get render items
+ * @param {Array<Object>} items - items to render in select dropdown
+ * @param {Array<Object>} selectedItems - items that are currently selected
+ * @returns {Array<Object>} render items
+ */
+function getRenderItems (items, selectedItems) {
+  if (!items) {
+    return []
+  }
+
+  return items.map((item, index) => {
+    const classNames = ['frost-select-list-item']
+    const value = get(item, 'value')
+    const isSelected = selectedItems.find((item) => item.value === value) !== undefined
+
+    if (isSelected) {
+      classNames.push('frost-select-list-item-selected')
+    }
+
+    return {
+      className: classNames.join(' '),
+      label: get(item, 'label'),
+      selected: isSelected,
+      value: get(item, 'value')
+    }
+  })
+}
+
 export default Component.extend({
   // == Dependencies ==========================================================
 
@@ -125,36 +154,6 @@ export default Component.extend({
   },
 
   @readOnly
-  @computed('focusedIndex', 'items', 'selectedItems')
-  // FIXME: jsdoc
-  renderItems (focusedIndex, items, selectedItems) {
-    if (!items) {
-      return []
-    }
-
-    return items.map((item, index) => {
-      const classNames = ['frost-select-list-item']
-      const value = get(item, 'value')
-      const isSelected = selectedItems.find((item) => item.value === value) !== undefined
-
-      if (index === focusedIndex) {
-        classNames.push('frost-select-list-item-focused')
-      }
-
-      if (isSelected) {
-        classNames.push('frost-select-list-item-selected')
-      }
-
-      return {
-        className: classNames.join(' '),
-        label: get(item, 'label'),
-        selected: isSelected,
-        value: get(item, 'value')
-      }
-    })
-  },
-
-  @readOnly
   @computed('items')
   // FIXME: jsdoc
   showEmptyMessage (items) {
@@ -198,6 +197,24 @@ export default Component.extend({
       } else {
         $focusedListItem[0].scrollIntoView(upArrow)
       }
+    }
+  },
+
+  /**
+   * Update render items if anything driving them changed
+   * @param {Object} attrs - attrs argument from didReceiveAttrs hook
+   */
+  _maybeUpdateRenderItems (attrs) {
+    const newItems = get(attrs, 'newAttrs.items.value')
+    const newSelectedItems = get(attrs, 'newAttrs.selectedItems.value')
+    const oldItems = get(attrs, 'oldAttrs.items.value')
+    const oldSelectedItems = get(attrs, 'oldAttrs.selectedItems.value')
+
+    if (
+      newItems !== oldItems ||
+      newSelectedItems !== oldSelectedItems
+    ) {
+      this.set('renderItems', getRenderItems(newItems, newSelectedItems))
     }
   },
 
@@ -303,6 +320,8 @@ export default Component.extend({
       )
       this.set('hook', receivedHook)
     }
+
+    this._maybeUpdateRenderItems(attrs)
   },
 
   didInsertElement () {
@@ -338,6 +357,21 @@ export default Component.extend({
     $(window).on('resize', this._updateHandler)
     $(document).on('scroll', this._updateHandler)
     $(document).on('keydown', this._keyDownHandler)
+  },
+
+  didRender () {
+    const focusedClass = 'frost-select-list-item-focused'
+    const focusedIndex = this.get('focusedIndex')
+
+    // Get item that should currently be focused
+    const $focusedItem = $('.frost-select-list-item').eq(focusedIndex)
+
+    // If focused item is missing focus class add focus class to it and remove
+    // focus class from previosly focused item
+    if (!$focusedItem.hasClass(focusedClass)) {
+      $(`.${focusedClass}`).removeClass(focusedClass)
+      $focusedItem.addClass(focusedClass)
+    }
   },
 
   willDestroyElement () {
