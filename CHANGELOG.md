@@ -1,3 +1,8 @@
+# 1.9.3
+
+* fix for scroll error in modals.
+
+
 # 1.9.2
 
 * **Fixed** performance regression in `frost-select` that was introduced when adding text trimming.

@@ -1,6 +1,6 @@
 {
   "name": "ember-frost-core",
-  "version": "1.9.2",
+  "version": "1.9.3",
   "dependencies": {
     "abbrev": {
       "version": "1.0.9",
