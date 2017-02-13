@@ -1,3 +1,8 @@
+# 1.9.2
+
+* **Fixed** performance regression in `frost-select` that was introduced when adding text trimming.
+
+
 # 1.9.1
 
 * **Fixed** build to publish.
