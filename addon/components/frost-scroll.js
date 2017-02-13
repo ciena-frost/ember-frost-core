@@ -28,7 +28,9 @@ export default Component.extend({
     const debouncePeriod = 150
 
     run.scheduleOnce('afterRender', this, () => {
-      window.Ps.initialize(this.$()[0])
+      if (!this.isDestroying && !this.isDestroyed) {
+        window.Ps.initialize(this.$()[0])
+      }
     })
 
     this._legacyScrollYEndHandler = () => {
