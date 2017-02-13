@@ -363,16 +363,14 @@ export default Component.extend({
     const focusedClass = 'frost-select-list-item-focused'
     const focusedIndex = this.get('focusedIndex')
 
-    if (focusedIndex) {
-      // Get item that should currently be focused
-      const $focusedItem = $('.frost-select-list-item').eq(focusedIndex)
+    // Get item that should currently be focused
+    const $focusedItem = $('.frost-select-list-item').eq(focusedIndex)
 
-      // If focused item is missing focus class add focus class to it and remove
-      // focus class from previosly focused item
-      if (!$focusedItem.hasClass(focusedClass)) {
-        $(`.${focusedClass}`).removeClass(focusedClass)
-        $focusedItem.addClass(focusedClass)
-      }
+    // If focused item is missing focus class add focus class to it and remove
+    // focus class from previosly focused item
+    if (!$focusedItem.hasClass(focusedClass)) {
+      $(`.${focusedClass}`).removeClass(focusedClass)
+      $focusedItem.addClass(focusedClass)
     }
   },
 
