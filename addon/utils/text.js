@@ -73,26 +73,19 @@ export function trimDataToFit (text, width, font) {
  * @param {HTMLElement} element - HTML element to trim data within
  */
 export function trimLongDataInElement (element) {
-  let text = element.textContent
-  let $element = $(element)
-  let tooltip = ''
+  const $element = $(element)
+  const fullText = $(element).data('text')
   const width = $element.width()
 
   const fontFamily = $element.css('font-family')
   const fontSize = $element.css('font-size')
   ctx.font = `${fontSize} ${fontFamily}`
 
-  // Determine width of all text
-  let textWidth = ctx.measureText(text).width
-
-  // If text won't fit in cell figure out how much will
-  if (textWidth > width) {
-    text = trimDataToFit(text, width)
-    tooltip = $(element).data('text')
-  }
+  const text = trimDataToFit(fullText, width)
+  const tooltip = text === fullText ? '' : fullText
 
   // If rendered text has changed, update it
-  if ($element.text() !== text) {
+  if (element.textContent !== text) {
     $element
       .text(text)
       .prop('title', tooltip)
