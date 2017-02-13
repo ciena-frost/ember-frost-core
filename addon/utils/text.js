@@ -91,7 +91,9 @@ export function trimLongDataInElement (element) {
     tooltip = $(element).data('text')
   }
 
-  $element
-    .text(text)
-    .prop('title', tooltip)
+  if ($element.text() !== text) {
+    $element
+      .text(text)
+      .prop('title', tooltip)
+  }
 }

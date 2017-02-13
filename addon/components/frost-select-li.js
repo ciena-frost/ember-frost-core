@@ -97,7 +97,10 @@ export default Component.extend({
     if (filter) {
       const pattern = new RegExp(filter, 'gi')
       const textWithMatch = $text.text().replace(pattern, '<u>$&</u>')
-      $text.html(textWithMatch)
+
+      if ($text.html() !== textWithMatch) {
+        $text.html(textWithMatch)
+      }
     }
   },
 
