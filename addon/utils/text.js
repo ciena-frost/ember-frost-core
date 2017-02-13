@@ -1,3 +1,4 @@
+/* global jQuery */
 import Ember from 'ember'
 const {$} = Ember
 
@@ -71,8 +72,9 @@ export function trimDataToFit (text, width, font) {
  * Note: expects data-text attribute to be on element with full text
  *
  * @param {HTMLElement} element - HTML element to trim data within
+ * @param {jQuery} [$] - jQuery selector, can be stubbed for testing
  */
-export function trimLongDataInElement (element) {
+export function trimLongDataInElement (element, $ = jQuery) {
   let text = element.textContent
   let $element = $(element)
   let tooltip = ''
@@ -89,9 +91,8 @@ export function trimLongDataInElement (element) {
   if (textWidth > width) {
     text = trimDataToFit(text, width)
     tooltip = $(element).data('text')
+    $element
+      .text(text)
+      .prop('title', tooltip)
   }
-
-  $element
-    .text(text)
-    .prop('title', tooltip)
 }
