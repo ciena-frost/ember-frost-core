@@ -51,17 +51,25 @@
       </div>
     {{/if}}
     {{#each renderItems key='value' as |item index|}}
-      {{frost-select-li
-        class=item.className
-        data=item
-        filter=filter
-        hook=(concat hook '-item')
-        hookQualifiers=(hash index=index label=item.label value=item.value)
-        id=(concat 'frost-select-list-item-' index)
-        multiselect=multiselect
-        onItemOver=(action 'focusOnItem')
-        onSelect=(action 'selectItem')
-      }}
+      <li
+        class={{item.className}}
+        data-test={{hook (concat hook '-item') index=index label=item.label value=item.value}}
+      >
+        {{#if multiselect}}
+          {{frost-checkbox
+            checked=item.selected
+            hook=(concat hook '-item-checkbox')
+            hookQualifiers=(hash index=index label=item.label value=item.value)
+            size='medium'
+          }}
+        {{/if}}
+        <span
+          class="frost-select-list-item-text"
+          data-text={{item.label}}
+        >
+          {{item.label}}
+        </span>
+      </li>
     {{/each}}
   </ul>
 </div>

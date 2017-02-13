@@ -6,8 +6,6 @@ import sinon from 'sinon'
 
 import {trimDataToFit, trimLongDataInElement} from 'ember-frost-core/utils/text'
 
-const jQueryProto = Object.getPrototypeOf($('body'))
-
 describe('Unit / Utils / text', () => {
   let sandbox
 
@@ -57,34 +55,25 @@ describe('Unit / Utils / text', () => {
       describe('when text fits within element', () => {
         beforeEach(() => {
           $element.width(200)
-          trimLongDataInElement($element.get(0))
         })
 
-        it('does not trim text', () => {
-          expect($element).to.have.text(text)
-        })
-
-        it('does not set title', () => {
-          expect($element).to.have.prop('title', '')
+        it('does not trim text or set title', () => {
+          expect(trimLongDataInElement($element.get(0))).to.equal(null)
         })
       })
 
       describe('when text does not fit within element', () => {
         beforeEach(() => {
           $element.width(80)
-          trimLongDataInElement($element.get(0))
         })
 
-        it('trims text', () => {
-          let currentText = $element.text()
+        it('trims text and sets title', () => {
+          const result = trimLongDataInElement($element.get(0))
 
-          expect(currentText.indexOf('The')).to.eql(0)
-          expect(currentText.indexOf('…')).not.to.eql(-1)
-          expect(currentText.indexOf('fox')).to.eql(currentText.length - 3)
-        })
-
-        it('sets title to full text', () => {
-          expect($element).to.have.prop('title', text)
+          expect(result.text.indexOf('The')).to.eql(0)
+          expect(result.text.indexOf('…')).not.to.eql(-1)
+          expect(result.text.indexOf('fox')).to.eql(result.text.length - 3)
+          expect(result.tooltip).to.equal(text)
         })
       })
     })
@@ -101,7 +90,8 @@ describe('Unit / Utils / text', () => {
 
         // perform initial trimming of text
         $element.width(80)
-        trimLongDataInElement($element.get(0))
+        const initial = trimLongDataInElement($element.get(0))
+        $element.text(initial.text).prop('title', initial.tooltip)
       })
 
       afterEach(() => {
@@ -123,32 +113,22 @@ describe('Unit / Utils / text', () => {
       describe('when text fits within element', () => {
         beforeEach(() => {
           $element.width(200)
-          trimLongDataInElement($element.get(0))
         })
 
-        it('sets text back to full text', () => {
-          expect($element).to.have.text(text)
-        })
-
-        it('unsets the title', () => {
-          expect($element).to.have.prop('title', '')
+        it('sets text back to full text and unsets tooltip', () => {
+          const result = trimLongDataInElement($element.get(0))
+          expect(result.text).to.equal(text)
+          expect(result.tooltip).to.equal('')
         })
       })
 
       describe('when trimmed text remains the same', () => {
         beforeEach(() => {
           $element.width(80)
-          sandbox.spy(jQueryProto, 'prop')
-          sandbox.spy(jQueryProto, 'text')
-          trimLongDataInElement($element.get(0))
         })
 
-        it('does not update text', function () {
-          expect(jQueryProto.text.callCount).to.equal(0)
-        })
-
-        it('does not update title', function () {
-          expect(jQueryProto.prop.callCount).to.equal(0)
+        it('does not update text or tooltip', function () {
+          expect(trimLongDataInElement($element.get(0))).to.equal(null)
         })
 
         it('has same trimmed text', () => {
