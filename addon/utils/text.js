@@ -71,6 +71,7 @@ export function trimDataToFit (text, width, font) {
  * Note: expects data-text attribute to be on element with full text
  *
  * @param {HTMLElement} element - HTML element to trim data within
+ * @returns {Object} updated text and tooltip
  */
 export function trimLongDataInElement (element) {
   const $element = $(element)
@@ -85,9 +86,9 @@ export function trimLongDataInElement (element) {
   const tooltip = text === fullText ? '' : fullText
 
   // If rendered text has changed, update it
-  if (element.textContent !== text) {
-    $element
-      .text(text)
-      .prop('title', tooltip)
+  if (element.textContent.trim() !== text) {
+    return {text, tooltip}
   }
+
+  return null
 }

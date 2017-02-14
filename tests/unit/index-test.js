@@ -21,7 +21,6 @@ describe('Unit / index exports', function () {
     'RadioGroup',
     'Scroll',
     'SelectDropdown',
-    'SelectItem',
     'SelectOutlet',
     'Select',
     'Text',

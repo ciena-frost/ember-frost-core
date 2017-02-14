@@ -1,14 +1,16 @@
 /**
  * Component definition for frost-select-dropdown component
  */
-import layout from '../templates/components/frost-select-dropdown'
-import {keyCodes} from '../utils'
-import Component from './frost-component'
 import Ember from 'ember'
-const {$, deprecate, get, typeOf} = Ember
+const {$, deprecate, get, merge} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
+
+import layout from '../templates/components/frost-select-dropdown'
+import {keyCodes} from '../utils'
+import {trimLongDataInElement} from '../utils/text'
+import Component from './frost-component'
 
 const {DOWN_ARROW, ENTER, ESCAPE, UP_ARROW} = keyCodes
 
@@ -17,35 +19,6 @@ const ARROW_HEIGHT = 12
 const ARROW_WIDTH = 25
 const FPS = 1000 / 60 // Update at 60 frames per second
 const WINDOW_SPACE = 20
-
-/**
- * Get render items
- * @param {Array<Object>} items - items to render in select dropdown
- * @param {Array<Object>} selectedItems - items that are currently selected
- * @returns {Array<Object>} render items
- */
-function getRenderItems (items, selectedItems) {
-  if (!items) {
-    return []
-  }
-
-  return items.map((item, index) => {
-    const classNames = ['frost-select-list-item']
-    const value = get(item, 'value')
-    const isSelected = selectedItems.find((item) => item.value === value) !== undefined
-
-    if (isSelected) {
-      classNames.push('frost-select-list-item-selected')
-    }
-
-    return {
-      className: classNames.join(' '),
-      label: get(item, 'label'),
-      selected: isSelected,
-      value: get(item, 'value')
-    }
-  })
-}
 
 export default Component.extend({
   // == Dependencies ==========================================================
@@ -106,15 +79,16 @@ export default Component.extend({
   // == Computed Properties ===================================================
 
   @readOnly
-  @computed('focusedIndex')
-  ariaActiveDescendant (focusedIndex) {
-    const isNumber = typeOf(focusedIndex) === 'number'
-    return isNumber ? `frost-select-list-item-${focusedIndex}` : undefined
-  },
-
-  @readOnly
   @computed('bottom', 'left', 'maxHeight', 'top', 'width')
-  // FIXME: jsdoc
+  /**
+   * Get inline style to properly position dropdown relative to select input
+   * @param {Number} bottom - bottom position of dropdown
+   * @param {Number} left - left position of dropdown
+   * @param {Number} maxHeight - max height of dropdown
+   * @param {Number} top - top position of dropdown
+   * @param {Number} width - width of dropdown
+   * @returns {Handlebars.SafeString} position style/CSS for dropdown
+   */
   listStyle (bottom, left, maxHeight, top, width) {
     if (bottom !== 'auto') {
       bottom = `${bottom}px`
@@ -138,7 +112,14 @@ export default Component.extend({
 
   @readOnly
   @computed('bottom', 'left', 'top', 'width')
-  // FIXME: jsdoc
+  /**
+   * Get inline style to properly position arrow that connects dropdown to
+   * @param {Number} bottom - bottom position of arrow
+   * @param {Number} left - left position of arrow
+   * @param {Number} top - top position of arrow
+   * @param {Number} width - width of arrow
+   * @returns {Handlebars.SafeString} position style/CSS for arrow
+   */
   arrowStyle (bottom, left, top, width) {
     const style = [
       `left:${left + (width - ARROW_WIDTH) / 2}px`
@@ -154,13 +135,73 @@ export default Component.extend({
   },
 
   @readOnly
+  @computed('focusedIndex', 'items', 'selectedItems')
+  /**
+   * Get render items
+   * @param {Number} focusedIndex - index of focused item
+   * @param {Array<Object>} items - items to render in select dropdown
+   * @param {Array<Object>} selectedItems - items that are currently selected
+   * @returns {Array<Object>} render items
+   */
+  renderItems (focusedIndex, items, selectedItems) {
+    if (!items) {
+      return []
+    }
+
+    return items.map((item, index) => {
+      const classNames = ['frost-select-list-item']
+      const value = get(item, 'value')
+      const isSelected = selectedItems.find((item) => item.value === value) !== undefined
+
+      if (isSelected) {
+        classNames.push('frost-select-list-item-selected')
+      }
+
+      if (index === focusedIndex) {
+        classNames.push('frost-select-list-item-focused')
+      }
+
+      return {
+        className: classNames.join(' '),
+        label: get(item, 'label'),
+        selected: isSelected,
+        value: get(item, 'value')
+      }
+    })
+  },
+
+  @readOnly
   @computed('items')
-  // FIXME: jsdoc
+  /**
+   * Whether or not to show message for when no items are present
+   * @param {Array<Object>} items - items
+   * @returns {Boolean} whether or not to show empty message
+   */
   showEmptyMessage (items) {
     return !items || items.length === 0
   },
 
   // == Functions =============================================================
+
+  /**
+   * Bind event listeners to items in dropdown
+   * @param {HTMLElement} dropdownListElement - dropdown list element (ul)
+   */
+  _addListItemEventListeners (dropdownListElement) {
+    dropdownListElement.querySelectorAll('li').forEach((li, index) => {
+      $(li)
+        .mousedown(() => {
+          if (this.isDestroyed || this.isDestroying) return
+          const value = this.get(`items.${index}.value`)
+          this.set('focusedIndex', index)
+          this.send('selectItem', value)
+        })
+        .mouseenter(() => {
+          if (this.isDestroyed || this.isDestroying) return
+          this.set('focusedIndex', index)
+        })
+    })
+  },
 
   // FIXME: jsdoc
   _getElementDimensionsAndPosition ($element) {
@@ -181,44 +222,41 @@ export default Component.extend({
 
   // FIXME: jsdoc
   _handleArrowKey (upArrow) {
-    const focusedIndex = this.get('focusedIndex')
+    let focusedIndex = this.get('focusedIndex')
+
     const items = this.get('items')
     const newFocusedIndex = (
       upArrow ? Math.max(0, focusedIndex - 1) : Math.min(items.length - 1, focusedIndex + 1)
     )
 
     if (newFocusedIndex !== undefined && newFocusedIndex !== focusedIndex) {
+      const listItems = document.querySelectorAll('.frost-select-list-item')
+      const newFocusedListItem = listItems[newFocusedIndex]
+
       this.set('focusedIndex', newFocusedIndex)
 
-      const $focusedListItem = $('.frost-select-list-item').eq(newFocusedIndex)
-
       if (newFocusedIndex === 0) {
-        $('.frost-select-dropdown')[0].scrollTop = 0
+        document.getElementById('frost-select-list').scrollTop = 0
+      } else if (newFocusedListItem.scrollIntoViewIfNeeded) {
+        newFocusedListItem.scrollIntoViewIfNeeded(false)
       } else {
-        $focusedListItem[0].scrollIntoView(upArrow)
+        newFocusedListItem.scrollIntoView(upArrow)
       }
     }
   },
 
-  /**
-   * Update render items if anything driving them changed
-   * @param {Object} attrs - attrs argument from didReceiveAttrs hook
-   */
-  _maybeUpdateRenderItems (attrs) {
-    const newItems = get(attrs, 'newAttrs.items.value')
-    const newSelectedItems = get(attrs, 'newAttrs.selectedItems.value')
-    const oldItems = get(attrs, 'oldAttrs.items.value')
-    const oldSelectedItems = get(attrs, 'oldAttrs.selectedItems.value')
-
-    if (
-      newItems !== oldItems ||
-      newSelectedItems !== oldSelectedItems
-    ) {
-      this.set('renderItems', getRenderItems(newItems, newSelectedItems))
-    }
+  // FIXME: jsdoc
+  _handleEnterKey () {
+    const items = this.get('items') || []
+    const focusedIndex = this.get('focusedIndex')
+    this.send('selectItem', items[focusedIndex].value)
   },
 
-  // FIXME: jsdoc
+  /**
+   * Get necessary property values for positioning dropdown above select
+   * @param {Number} top - top position of select
+   * @returns {Object} property values
+   */
   _positionAboveInput (top) {
     const bottom = $(window).height() - top + $(document).scrollTop() + ARROW_HEIGHT + BORDER_HEIGHT
 
@@ -233,7 +271,12 @@ export default Component.extend({
     }
   },
 
-  // FIXME: jsdoc
+  /**
+   * Get necessary property values for positioning dropdown below select
+   * @param {Number} height - height of select
+   * @param {Number} top - top position of select
+   * @returns {Object} property values
+   */
   _positionBelowInput (height, top) {
     // Make sure dropdown is rendered below input and we leave space for arrow
     // that connects dropdown to input
@@ -250,8 +293,11 @@ export default Component.extend({
     }
   },
 
+  /* eslint-disable complexity */
   // FIXME: jsdoc
   _updatePosition ($element) {
+    if (this.isDestroyed || this.isDestroying) return {}
+
     $element = $element.first()
 
     const {center, height, left, top, width} = this._getElementDimensionsAndPosition($element)
@@ -268,13 +314,46 @@ export default Component.extend({
       props.width = width
     }
 
-    if (
-      Object.keys(props).length !== 0 &&
-      !this.get('isDestroyed') &&
-      !this.get('isDestroying')
-    ) {
-      this.setProperties(props)
-    }
+    return props
+  },
+  /* eslint-enable complexity */
+
+  _updateText () {
+    const filter = this.get('filter')
+    const dropdownListElement = document.getElementById('frost-select-list')
+    const clonedDropdownListElement = dropdownListElement.cloneNode(true)
+    const clonedTextElements = clonedDropdownListElement.querySelectorAll('.frost-select-list-item-text')
+    const textElements = dropdownListElement.querySelectorAll('.frost-select-list-item-text')
+    const scrollTop = dropdownListElement.scrollTop
+
+    dropdownListElement.replaceWith(clonedDropdownListElement)
+
+    textElements.forEach((textElement, index) => {
+      const clonedTextElement = clonedTextElements[index]
+      const updatedData = trimLongDataInElement(clonedTextElement)
+
+      if (updatedData) {
+        textElement.textContent = updatedData.text
+        textElement.setAttribute('title', updatedData.tooltip)
+      }
+
+      if (filter) {
+        const pattern = new RegExp(filter, 'gi')
+        const textWithMatch = textElement.textContent.replace(pattern, '<u>$&</u>')
+
+        // If rendered text has changed, update it
+        if (textElement.innerHTML !== textWithMatch) {
+          textElement.innerHTML = textWithMatch
+        }
+      }
+    })
+
+    clonedDropdownListElement.replaceWith(dropdownListElement)
+
+    this._addListItemEventListeners(dropdownListElement)
+
+    // Make sure we scroll back to where the user was
+    document.getElementById('frost-select-list').scrollTop = scrollTop
   },
 
   // == Tasks =================================================================
@@ -287,7 +366,8 @@ export default Component.extend({
       const $element = get(this.attrs, '$element.value') || get(this.attrs, '$element')
 
       if ($element) {
-        this._updatePosition($element)
+        const props = this._updatePosition($element)
+        this.setProperties(props)
       }
 
       yield timeout(FPS)
@@ -302,9 +382,10 @@ export default Component.extend({
 
   didReceiveAttrs (attrs) {
     const $element = get(attrs, 'newAttrs.$element.value')
+    let props = {}
 
     if ($element) {
-      this._updatePosition($element)
+      props = merge(props, this._updatePosition($element))
     }
 
     const receivedHook = get(attrs, 'newAttrs.receivedHook.value')
@@ -318,10 +399,13 @@ export default Component.extend({
           until: '2.0.0'
         }
       )
-      this.set('hook', receivedHook)
+
+      props.hook = receivedHook
     }
 
-    this._maybeUpdateRenderItems(attrs)
+    if (Object.keys(props).length !== 0) {
+      this.setProperties(props)
+    }
   },
 
   didInsertElement () {
@@ -335,7 +419,10 @@ export default Component.extend({
       }
     }
 
+    /* eslint-disable complexity */
     this._keyDownHandler = (e) => {
+      if (this.isDestroyed || this.isDestroying) return
+
       if ([DOWN_ARROW, UP_ARROW].indexOf(e.keyCode) !== -1) {
         e.preventDefault() // Keep arrow keys from scrolling document
         this._handleArrowKey(e.keyCode === UP_ARROW)
@@ -343,9 +430,7 @@ export default Component.extend({
 
       switch (e.keyCode) {
         case ENTER:
-          const items = this.get('items') || []
-          const focusedIndex = this.get('focusedIndex')
-          this.send('selectItem', items[focusedIndex].value)
+          this._handleEnterKey()
           return
 
         case ESCAPE:
@@ -353,6 +438,7 @@ export default Component.extend({
           return
       }
     }
+    /* eslint-enable complexity */
 
     $(window).on('resize', this._updateHandler)
     $(document).on('scroll', this._updateHandler)
@@ -360,18 +446,8 @@ export default Component.extend({
   },
 
   didRender () {
-    const focusedClass = 'frost-select-list-item-focused'
-    const focusedIndex = this.get('focusedIndex')
-
-    // Get item that should currently be focused
-    const $focusedItem = $('.frost-select-list-item').eq(focusedIndex)
-
-    // If focused item is missing focus class add focus class to it and remove
-    // focus class from previosly focused item
-    if (!$focusedItem.hasClass(focusedClass)) {
-      $(`.${focusedClass}`).removeClass(focusedClass)
-      $focusedItem.addClass(focusedClass)
-    }
+    this._super(...arguments)
+    this._updateText()
   },
 
   willDestroyElement () {
@@ -390,23 +466,6 @@ export default Component.extend({
       // Focus is now on clear all button so we need to put focus back on the
       // filter text input
       $('.frost-select-dropdown .frost-text-input').focus()
-    },
-
-    // FIXME: jsdoc
-    focusOnItem (item) {
-      const value = get(item, 'value')
-      const items = this.get('items')
-
-      if (!items) {
-        return
-      }
-
-      for (let i = 0; i < items.length; i++) {
-        if (get(items[i], 'value') === value) {
-          this.set('focusedIndex', i)
-          break
-        }
-      }
     },
 
     // FIXME: jsdoc
@@ -432,6 +491,8 @@ export default Component.extend({
       } else {
         selectedValue.splice(index, 1)
       }
+
+      this.rerender()
 
       this.get('onSelect')(selectedValue)
 

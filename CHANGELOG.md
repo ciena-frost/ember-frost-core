@@ -18,7 +18,8 @@
 
 * **Updated** testem to use custom reporter for better DX.
 
-* **Updated** linting to leverage new linting tools provided by `ember-test-utils` which gives us the following output:
+* **Updated** linting to leverage new linting tools provided by `ember-test-utils` which gives us the following
+output:
 
   <img width="602" alt="screen shot 2017-02-07 at 10 46 33 pm" src="https://cloud.githubusercontent.com/assets/422902/22726266/70ca4fae-ed87-11e6-9048-ceaae7de790d.png">
 
