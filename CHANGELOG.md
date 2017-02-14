@@ -1,3 +1,8 @@
+# 1.9.5
+
+* **Fixed** issues with Firefox and updated CI to test against Firefox as well as Chrome.
+
+
 # 1.9.4
 
 * **Fixed** performance issues with select by managing more the list items DOM instead of having Ember do so. This results in a lot list DOM manipulations going on which means less reflow.
