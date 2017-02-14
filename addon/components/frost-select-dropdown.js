@@ -7,6 +7,7 @@ import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
 
+import '../polyfills/replaceWith'
 import layout from '../templates/components/frost-select-dropdown'
 import {keyCodes} from '../utils'
 import {trimLongDataInElement} from '../utils/text'
@@ -188,7 +189,9 @@ export default Component.extend({
    * @param {HTMLElement} dropdownListElement - dropdown list element (ul)
    */
   _addListItemEventListeners (dropdownListElement) {
-    dropdownListElement.querySelectorAll('li').forEach((li, index) => {
+    const listItemElements = dropdownListElement.querySelectorAll('li')
+
+    Array.from(listItemElements).forEach((li, index) => {
       $(li)
         .mousedown(() => {
           if (this.isDestroyed || this.isDestroying) return
@@ -328,7 +331,7 @@ export default Component.extend({
 
     dropdownListElement.replaceWith(clonedDropdownListElement)
 
-    textElements.forEach((textElement, index) => {
+    Array.from(textElements).forEach((textElement, index) => {
       const clonedTextElement = clonedTextElements[index]
       const updatedData = trimLongDataInElement(clonedTextElement)
 
