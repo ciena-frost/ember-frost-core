@@ -1043,6 +1043,38 @@ describe(test.label, function () {
               expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
             })
           })
+
+          describe('when filter is applied and selection is made', function () {
+            beforeEach(function (done) {
+              onChange.reset()
+              filterSelect('b')
+              wait().then(() => {
+                filterSelect('ba')
+                wait().then(() => {
+                  filterSelect('bar')
+                  wait().then(() => {
+                    selectItemAtIndex('select', 0, done)
+                  })
+                })
+              })
+            })
+
+            it('renders as expected', function () {
+              expectSelectWithState('select', {
+                focused: true,
+                opened: false,
+                text: 'Bar'
+              })
+            })
+
+            it('should call onChange once', function () {
+              expect(onChange).to.have.callCount(1)
+            })
+
+            it('should call onChange with the correct value', function () {
+              expect(onChange).to.have.been.calledWith(['bar'])
+            })
+          })
         })
 
         describe('when down arrow pressed', function () {

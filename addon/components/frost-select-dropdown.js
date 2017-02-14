@@ -296,6 +296,20 @@ export default Component.extend({
     }
   },
 
+  /**
+   * Unbind event listeners to items in dropdown
+   * @param {HTMLElement} dropdownListElement - dropdown list element (ul)
+   */
+  _removeListItemEventListeners (dropdownListElement) {
+    const listItemElements = dropdownListElement.querySelectorAll('li')
+
+    Array.from(listItemElements).forEach((li, index) => {
+      $(li)
+        .off('mousedown')
+        .off('mouseenter')
+    })
+  },
+
   /* eslint-disable complexity */
   // FIXME: jsdoc
   _updatePosition ($element) {
@@ -328,6 +342,8 @@ export default Component.extend({
     const clonedTextElements = clonedDropdownListElement.querySelectorAll('.frost-select-list-item-text')
     const textElements = dropdownListElement.querySelectorAll('.frost-select-list-item-text')
     const scrollTop = dropdownListElement.scrollTop
+
+    this._removeListItemEventListeners(dropdownListElement)
 
     dropdownListElement.replaceWith(clonedDropdownListElement)
 
