@@ -1,3 +1,7 @@
+# 1.9.6
+
+* **Fixed** a bug causing frost-select's onSelect callback to trigger multiple times after filtering
+
 # 1.9.5
 
 * **Fixed** issues with Firefox and updated CI to test against Firefox as well as Chrome.
