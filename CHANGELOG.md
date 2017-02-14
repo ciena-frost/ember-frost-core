@@ -1,3 +1,8 @@
+# 1.9.4
+
+* **Fixed** performance issues with select by managing more the list items DOM instead of having Ember do so. This results in a lot list DOM manipulations going on which means less reflow.
+
+
 # 1.9.3
 
 * fix for scroll error in modals.
