@@ -89,6 +89,7 @@ describe(test.label, function () {
           onChange=onChange
           onFocus=onFocus
           tabIndex=tabIndex
+          wrapOptionText=wrapOptionText
         }}
         {{input hook='post'}}
       `)
@@ -1241,6 +1242,34 @@ describe(test.label, function () {
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
           expect(onChange.callCount, 'onChange is not called').to.equal(0)
           expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
+      })
+
+      describe('when wrapOptionText is true and data includes a long label', function () {
+        let longLabel
+        beforeEach(function () {
+          longLabel = 'Very very very very very very very very very very very very very very long label'
+          this.setProperties({
+            data: [
+              {label: 'Short Label', value: 'foo'},
+              {label: longLabel, value: 'bar'},
+              {label: 'Baz', value: 'baz'},
+              {label: 'Ba ba black sheep', value: 'sheep'}
+            ],
+            wrapOptionText: true
+          })
+
+          return open('select')
+        })
+
+        it('should show the entire label', function () {
+          expect($hook('select-item', {index: 1}).text().trim()).to.have.equal(longLabel)
+        })
+
+        it('should give that list item a larger height', function () {
+          const regularItemHeight = $hook('select-item', {index: 0}).height()
+          const wrappedItemHeight = $hook('select-item', {index: 1}).height()
+          expect(wrappedItemHeight).to.be.greaterThan(regularItemHeight)
         })
       })
     })

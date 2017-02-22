@@ -3,8 +3,8 @@ export default [
     type: 'nodes',
     id: '1',
     attributes: {
-      'value': 'Clark Kent',
-      'label': 'Superman'
+      'value': 'Super hero',
+      'label': 'My really really really really really really really really really really long label'
     }
   },
   {

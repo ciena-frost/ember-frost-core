@@ -9,6 +9,8 @@ $frost-select-focused-border-color: $frost-color-blue-1;
 $frost-select-height: 35px;
 $frost-select-normal-border-color: $frost-color-grey-7;
 $frost-select-placeholder-color: $frost-color-grey-6;
+$frost-checkbox-medium-width: 32px;
+$frost-select-list-item-horizontal-padding: 10px;
 
 @mixin triangle-down($color, $size) {
   width: 25px;
@@ -157,6 +159,14 @@ $frost-select-placeholder-color: $frost-color-grey-6;
       color: $frost-color-grey-5;
     }
   }
+
+  &-wrap-option-text {
+    .frost-select-list-item {
+      height: auto;
+      min-height: $frost-input-select-option-row-height;
+      white-space: normal;
+    }
+  }
 }
 
 .frost-select-list-item {
@@ -204,6 +214,13 @@ $frost-select-placeholder-color: $frost-color-grey-6;
 
 .frost-select-list-item-text {
   flex: 1 0 auto;
+  &:not(.frost-multi-select-list-item-text) {
+    max-width: calc(100% - #{$frost-select-list-item-horizontal-padding});
+  }
+}
+
+.frost-multi-select-list-item-text {
+  max-width: calc(100% - #{$frost-checkbox-medium-width} - #{$frost-select-list-item-horizontal-padding})
 }
 
 .frost-select-overlay {

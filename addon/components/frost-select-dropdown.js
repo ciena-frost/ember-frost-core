@@ -47,6 +47,7 @@ export default Component.extend({
     onSelect: PropTypes.func.isRequired,
     receivedHook: PropTypes.string,
     selectedItems: PropTypes.arrayOf(PropTypes.object),
+    wrapOptionText: PropTypes.bool,
 
     // state
     bottom: PropTypes.oneOfType([
@@ -78,6 +79,26 @@ export default Component.extend({
   },
 
   // == Computed Properties ===================================================
+
+  @readOnly
+  @computed('wrapOptionText')
+  dropdownClassNames (wrapOptionText) {
+    let classNames = 'frost-select-dropdown'
+    if (wrapOptionText) {
+      classNames += ' frost-select-dropdown-wrap-option-text'
+    }
+    return classNames
+  },
+
+  @readOnly
+  @computed('multiselect')
+  dropdownTextClassNames (multiSelect) {
+    let classNames = 'frost-select-list-item-text'
+    if (multiSelect) {
+      classNames += ' frost-multi-select-list-item-text'
+    }
+    return classNames
+  },
 
   @readOnly
   @computed('bottom', 'left', 'maxHeight', 'top', 'width')
@@ -342,18 +363,21 @@ export default Component.extend({
     const clonedTextElements = clonedDropdownListElement.querySelectorAll('.frost-select-list-item-text')
     const textElements = dropdownListElement.querySelectorAll('.frost-select-list-item-text')
     const scrollTop = dropdownListElement.scrollTop
+    const wrapOptionText = this.get('wrapOptionText')
 
     this._removeListItemEventListeners(dropdownListElement)
 
     dropdownListElement.replaceWith(clonedDropdownListElement)
 
     Array.from(textElements).forEach((textElement, index) => {
-      const clonedTextElement = clonedTextElements[index]
-      const updatedData = trimLongDataInElement(clonedTextElement)
+      if (!wrapOptionText) {
+        const clonedTextElement = clonedTextElements[index]
+        const updatedData = trimLongDataInElement(clonedTextElement)
 
-      if (updatedData) {
-        textElement.textContent = updatedData.text
-        textElement.setAttribute('title', updatedData.tooltip)
+        if (updatedData) {
+          textElement.textContent = updatedData.text
+          textElement.setAttribute('title', updatedData.tooltip)
+        }
       }
 
       if (filter) {
