@@ -81,7 +81,7 @@ $frost-color-button-info-content-subtext-color: rgba($frost-color-white, .8);
 
     &:focus {
       &:not(.disabled) {
-        outline: 2px $frost-color-blue-4;
+        border: 2px solid $frost-color-blue-4;
       }
     }
 
