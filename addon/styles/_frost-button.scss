@@ -79,6 +79,12 @@ $frost-color-button-info-content-subtext-color: rgba($frost-color-white, .8);
       }
     }
 
+    &:focus {
+      &:not(.disabled) {
+        outline: 2px $frost-color-blue-4;
+      }
+    }
+
     &:active {
       &:not(.disabled) {
         background: $frost-color-button-primary-active-bg;
