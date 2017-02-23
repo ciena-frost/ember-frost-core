@@ -14,6 +14,7 @@ import {expect} from 'chai'
 import Ember from 'ember'
 const {$, RSVP, run, typeOf} = Ember // eslint-disable-line
 import {$hook} from 'ember-hook'
+import wait from 'ember-test-helpers/wait'
 
 import {expectToggleClass} from './utils'
 
@@ -96,14 +97,16 @@ export function filter (filter) {
 
 /**
  * Open frost-select dropdown
- * @param {String} hook - frost-select hook
+ * @param {String} [hook='select'] - frost-select hook
+ * @returns {Promise} the resolved promise from ember-test-helpers/wait
  */
-export function open (hook) {
+export function open (hook = 'select') {
   // In a real browser when you click on the select with your mouse a
   // focusin event is fired on the component. However when using jQuery's
   // click() method the focusin is not fired so we are programitcally
   // triggering that in this test.
-  $hook('select').click().trigger('focusin')
+  $hook(hook).click().trigger('focusin')
+  return wait()
 }
 
 /**
