@@ -44,7 +44,7 @@ $frost-color-button-info-content-subtext-color: rgba($frost-color-white, .8);
   }
 
   &:focus {
-    box-shadow: 0 1px 6px 1px transparentize($frost-color-blue-1, .25);
+    box-shadow: 0 1px 6px transparentize($frost-color-blue-1, .25);
   }
 
   &.disabled {
@@ -81,8 +81,9 @@ $frost-color-button-info-content-subtext-color: rgba($frost-color-white, .8);
 
     &:focus {
       &:not(.disabled) {
-        border: 2px solid $frost-color-blue-4;
+        border: solid 2px $frost-color-blue-4;
       }
+
       &.small {
         padding: 0 8px;
       }
