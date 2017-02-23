@@ -47,7 +47,7 @@ export default Component.extend({
     onSelect: PropTypes.func.isRequired,
     receivedHook: PropTypes.string,
     selectedItems: PropTypes.arrayOf(PropTypes.object),
-    wrapOptionText: PropTypes.bool,
+    wrapLabels: PropTypes.bool,
 
     // state
     bottom: PropTypes.oneOfType([
@@ -81,18 +81,18 @@ export default Component.extend({
   // == Computed Properties ===================================================
 
   @readOnly
-  @computed('wrapOptionText')
+  @computed('wrapLabels')
   /**
    * The class names for the frost-select drop down
-   * @param {Boolean} wrapOptionText - whether or not select option text should wrap
+   * @param {Boolean} wrapLabels - whether or not select option text should wrap
    * @returns {string} the class names for the frost-select drop down
    */
-  dropdownClassNames (wrapOptionText) {
-    let classNames = 'frost-select-dropdown'
-    if (wrapOptionText) {
-      classNames += ' frost-select-dropdown-wrap-option-text'
+  dropdownClassNames (wrapLabels) {
+    const classNames = ['frost-select-dropdown']
+    if (wrapLabels) {
+      classNames.push('frost-select-dropdown-wrap-labels')
     }
-    return classNames
+    return classNames.join(' ')
   },
 
   @readOnly
@@ -103,11 +103,11 @@ export default Component.extend({
    * @returns {string} the class names for the frost select dropdown options
    */
   dropdownTextClassNames (multiSelect) {
-    let classNames = 'frost-select-list-item-text'
+    const classNames = ['frost-select-list-item-text']
     if (multiSelect) {
-      classNames += ' frost-multi-select-list-item-text'
+      classNames.push('frost-multi-select-list-item-text')
     }
-    return classNames
+    return classNames.join(' ')
   },
 
   @readOnly
@@ -373,14 +373,14 @@ export default Component.extend({
     const clonedTextElements = clonedDropdownListElement.querySelectorAll('.frost-select-list-item-text')
     const textElements = dropdownListElement.querySelectorAll('.frost-select-list-item-text')
     const scrollTop = dropdownListElement.scrollTop
-    const wrapOptionText = this.get('wrapOptionText')
+    const wrapLabels = this.get('wrapLabels')
 
     this._removeListItemEventListeners(dropdownListElement)
 
     dropdownListElement.replaceWith(clonedDropdownListElement)
 
     Array.from(textElements).forEach((textElement, index) => {
-      if (!wrapOptionText) {
+      if (!wrapLabels) {
         const clonedTextElement = clonedTextElements[index]
         const updatedData = trimLongDataInElement(clonedTextElement)
 
