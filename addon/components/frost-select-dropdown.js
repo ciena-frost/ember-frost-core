@@ -47,6 +47,7 @@ export default Component.extend({
     onSelect: PropTypes.func.isRequired,
     receivedHook: PropTypes.string,
     selectedItems: PropTypes.arrayOf(PropTypes.object),
+    wrapLabels: PropTypes.bool,
 
     // state
     bottom: PropTypes.oneOfType([
@@ -78,6 +79,36 @@ export default Component.extend({
   },
 
   // == Computed Properties ===================================================
+
+  @readOnly
+  @computed('wrapLabels')
+  /**
+   * The class names for the frost-select drop down
+   * @param {Boolean} wrapLabels - whether or not select option text should wrap
+   * @returns {string} the class names for the frost-select drop down
+   */
+  dropdownClassNames (wrapLabels) {
+    const classNames = ['frost-select-dropdown']
+    if (wrapLabels) {
+      classNames.push('frost-select-dropdown-wrap-labels')
+    }
+    return classNames.join(' ')
+  },
+
+  @readOnly
+  @computed('multiselect')
+  /**
+   * The class names for the frost select dropdown options
+   * @param {Boolean} multiSelect - whether or not this is a multiselect
+   * @returns {string} the class names for the frost select dropdown options
+   */
+  dropdownTextClassNames (multiSelect) {
+    const classNames = ['frost-select-list-item-text']
+    if (multiSelect) {
+      classNames.push('frost-multi-select-list-item-text')
+    }
+    return classNames.join(' ')
+  },
 
   @readOnly
   @computed('bottom', 'left', 'maxHeight', 'top', 'width')
@@ -342,18 +373,21 @@ export default Component.extend({
     const clonedTextElements = clonedDropdownListElement.querySelectorAll('.frost-select-list-item-text')
     const textElements = dropdownListElement.querySelectorAll('.frost-select-list-item-text')
     const scrollTop = dropdownListElement.scrollTop
+    const wrapLabels = this.get('wrapLabels')
 
     this._removeListItemEventListeners(dropdownListElement)
 
     dropdownListElement.replaceWith(clonedDropdownListElement)
 
     Array.from(textElements).forEach((textElement, index) => {
-      const clonedTextElement = clonedTextElements[index]
-      const updatedData = trimLongDataInElement(clonedTextElement)
+      if (!wrapLabels) {
+        const clonedTextElement = clonedTextElements[index]
+        const updatedData = trimLongDataInElement(clonedTextElement)
 
-      if (updatedData) {
-        textElement.textContent = updatedData.text
-        textElement.setAttribute('title', updatedData.tooltip)
+        if (updatedData) {
+          textElement.textContent = updatedData.text
+          textElement.setAttribute('title', updatedData.tooltip)
+        }
       }
 
       if (filter) {

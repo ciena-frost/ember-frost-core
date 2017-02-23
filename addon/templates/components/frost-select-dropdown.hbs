@@ -9,7 +9,7 @@
   style={{arrowStyle}}
 />
 <div
-  class='frost-select-dropdown'
+  class={{dropdownClassNames}}
   data-test={{hook (concat hook '-list')}}
   onmousedown={{action 'mouseDown'}}
   style={{listStyle}}
@@ -64,7 +64,7 @@
           }}
         {{/if}}
         <span
-          class="frost-select-list-item-text"
+          class={{dropdownTextClassNames}}
           data-text={{item.label}}
         >
           {{item.label}}

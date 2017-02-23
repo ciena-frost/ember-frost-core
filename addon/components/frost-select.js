@@ -93,6 +93,7 @@ export default Component.extend({
       PropTypes.string
     ]),
     tabIndex: PropTypes.number,
+    wrapLabels: PropTypes.bool,
 
     // state
     $element: PropTypes.object,
