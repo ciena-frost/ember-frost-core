@@ -82,6 +82,11 @@ export default Component.extend({
 
   @readOnly
   @computed('wrapOptionText')
+  /**
+   * The class names for the frost-select drop down
+   * @param {Boolean} wrapOptionText - whether or not select option text should wrap
+   * @returns {string} the class names for the frost-select drop down
+   */
   dropdownClassNames (wrapOptionText) {
     let classNames = 'frost-select-dropdown'
     if (wrapOptionText) {
@@ -92,6 +97,11 @@ export default Component.extend({
 
   @readOnly
   @computed('multiselect')
+  /**
+   * The class names for the frost select dropdown options
+   * @param {Boolean} multiSelect - whether or not this is a multiselect
+   * @returns {string} the class names for the frost select dropdown options
+   */
   dropdownTextClassNames (multiSelect) {
     let classNames = 'frost-select-list-item-text'
     if (multiSelect) {

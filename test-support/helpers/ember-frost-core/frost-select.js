@@ -98,8 +98,9 @@ export function filter (filter) {
 /**
  * Open frost-select dropdown
  * @param {String} [hook='select'] - frost-select hook
+ * @returns {Promise} the resolved promise from ember-test-helpers/wait
  */
-export function open (hook='select') {
+export function open (hook = 'select') {
   // In a real browser when you click on the select with your mouse a
   // focusin event is fired on the component. However when using jQuery's
   // click() method the focusin is not fired so we are programitcally

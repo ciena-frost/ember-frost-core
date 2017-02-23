@@ -214,13 +214,14 @@ $frost-select-list-item-horizontal-padding: 10px;
 
 .frost-select-list-item-text {
   flex: 1 0 auto;
+
   &:not(.frost-multi-select-list-item-text) {
     max-width: calc(100% - #{$frost-select-list-item-horizontal-padding});
   }
 }
 
 .frost-multi-select-list-item-text {
-  max-width: calc(100% - #{$frost-checkbox-medium-width} - #{$frost-select-list-item-horizontal-padding})
+  max-width: calc(100% - #{$frost-checkbox-medium-width} - #{$frost-select-list-item-horizontal-padding});
 }
 
 .frost-select-overlay {
