@@ -83,6 +83,17 @@ $frost-color-button-info-content-subtext-color: rgba($frost-color-white, .8);
       &:not(.disabled) {
         border: 2px solid $frost-color-blue-4;
       }
+      &.small {
+        padding: 0 8px;
+      }
+
+      &.medium {
+        padding: 0 18px;
+      }
+
+      &.large {
+        padding: 0 18px;
+      }
     }
 
     &:active {
