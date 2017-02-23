@@ -1,3 +1,10 @@
+# 1.9.7
+
+* **Fixed** pr-bumper configuration
+* From a previously unpublished PR:
+  * **Added** wrapLabels attribute to frost-select, which disables the text trimming for frost-select option labels and allows them to wrap.
+
+
 # 1.9.6
 
 * **Fixed** a bug causing frost-select's onSelect callback to trigger multiple times after filtering
