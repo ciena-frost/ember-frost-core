@@ -89,7 +89,7 @@ describe(test.label, function () {
           onChange=onChange
           onFocus=onFocus
           tabIndex=tabIndex
-          wrapOptionText=wrapOptionText
+          wrapLabels=wrapLabels
         }}
         {{input hook='post'}}
       `)
@@ -1245,7 +1245,7 @@ describe(test.label, function () {
         })
       })
 
-      describe('when wrapOptionText is true and data includes a long label', function () {
+      describe('when wrapLabels is true and data includes a long label', function () {
         let longLabel
         beforeEach(function () {
           longLabel = 'Very very very very very very very very very very very very very very long label'
@@ -1256,7 +1256,7 @@ describe(test.label, function () {
               {label: 'Baz', value: 'baz'},
               {label: 'Ba ba black sheep', value: 'sheep'}
             ],
-            wrapOptionText: true
+            wrapLabels: true
           })
 
           return open('select')
