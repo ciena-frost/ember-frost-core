@@ -18,6 +18,8 @@
 | `placeholder` | `string` | | Placeholder text for when nothing is selected. |
 | `selected`      | `number` or `array` | `1` or `[1, 2]` | The indices of the pre-selected values corresponding to values in the passed-in data. Passing negative values (e.g. `-1` or `[-1]`) to a single select will clear the current select state.|
 | `selectedValue` | `any`, `array` if using multi-select, `null` or `''` (empty string) to clear | `'bar'` or `['bar', 'buzz']` | A value to choose in the drop down programmatically, or an array of values if using multi-select. Takes precedence over `selected` attribute. Passing `null` or `''` (empty string) will clear the selected state. |
+| `wrapOptionText` | `boolean` | `false` | **default** - trim text to fit without wrapping |
+| | | `true` | Allow select option text to wrap |
 
 ## Testing with ember-hook
 The select component is accessible using ember-hook with the top level hook name or you can access the internal components as well -
