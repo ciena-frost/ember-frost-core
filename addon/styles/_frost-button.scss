@@ -16,6 +16,9 @@ $frost-color-button-tertiary-bg: inherit !global;
 $frost-color-button-tertiary-hover-bg: rgba($frost-color-blue-1, .05) !global;
 $frost-color-button-tertiary-active: $frost-color-blue-3 !global;
 $frost-color-button-tertiary-active-bg: #e7eef3 !global;
+$frost-button-small-padding: 10px;
+$frost-button-medium-padding: 20px;
+$frost-button-large-padding: 20px;
 
 // info-bar style
 $frost-color-button-info-bar-bg: $frost-color-white;
@@ -82,6 +85,18 @@ $frost-color-button-info-content-subtext-color: rgba($frost-color-white, .8);
     &:focus {
       &:not(.disabled) {
         border: solid 2px $frost-color-blue-4;
+      }
+
+      &.small {
+        padding: 0 $frost-button-small-padding - 2px;
+      }
+
+      &.medium {
+        padding: 0 $frost-button-medium-padding - 2px;
+      }
+
+      &.large {
+        padding: 0 $frost-button-large-padding - 2px;
       }
     }
 
@@ -170,7 +185,7 @@ $frost-color-button-info-content-subtext-color: rgba($frost-color-white, .8);
   // size = 'large'
   &.large {
     height: 50px;
-    padding: 0 20px;
+    padding: 0 $frost-button-large-padding;
     font-size: $frost-font-l;
 
     .frost-icon {
@@ -182,7 +197,7 @@ $frost-color-button-info-content-subtext-color: rgba($frost-color-white, .8);
   // size = 'medium'
   &.medium {
     height: 40px;
-    padding: 0 20px;
+    padding: 0 $frost-button-medium-padding;
     font-size: $frost-font-m;
 
     .frost-icon {
@@ -194,7 +209,7 @@ $frost-color-button-info-content-subtext-color: rgba($frost-color-white, .8);
   // size = 'small'
   &.small {
     height: 30px;
-    padding: 0 10px;
+    padding: 0 $frost-button-small-padding;
     font-size: $frost-font-s;
 
     .frost-icon {
