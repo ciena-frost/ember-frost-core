@@ -1,3 +1,8 @@
+# 1.9.8
+
+Fix button shifting when clicked
+
+
 # 1.9.7
 
 * **Fixed** pr-bumper configuration
