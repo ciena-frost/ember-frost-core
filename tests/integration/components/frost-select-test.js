@@ -60,7 +60,7 @@ describe(test.label, function () {
   test.setup()
 
   describe('renders', function () {
-    let onBlur, onChange, onFocus, sandbox
+    let onBlur, onChange, onFocus, onInput, sandbox
 
     beforeEach(function () {
       sandbox = sinon.sandbox.create()
@@ -68,12 +68,17 @@ describe(test.label, function () {
       onBlur = sandbox.spy()
       onChange = sandbox.spy()
       onFocus = sandbox.spy()
+      onInput = sandbox.spy((value) => {
+        expect(value).to.equal('hello')
+      })
 
       this.setProperties({
         hook: 'select',
         onBlur,
         onFocus,
         onChange,
+        onInput,
+        debounceInterval: 0,
         tabIndex: 0 // This is the default
       })
 
@@ -88,6 +93,8 @@ describe(test.label, function () {
           onBlur=onBlur
           onChange=onChange
           onFocus=onFocus
+          onInput=onInput
+          debounceInterval=debounceInterval
           tabIndex=tabIndex
           wrapLabels=wrapLabels
         }}
@@ -518,6 +525,26 @@ describe(test.label, function () {
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
           expect(onChange.callCount, 'onChange is not called').to.equal(0)
           expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
+      })
+      describe('when input is provided', function () {
+        beforeEach(function () {
+          this.setProperties({
+            debounceInterval: 200
+          })
+          return open('select').then(function () {
+            return filterSelect('hello')
+          })
+        })
+        it('waits until after debounce period', function (done) {
+          run.later(() => {
+            expect(onInput.called).to.equal(false)
+
+            run.later(() => {
+              expect(onInput.called).to.equal(true)
+              done()
+            }, 100)
+          }, 100)
         })
       })
     })
