@@ -106,7 +106,8 @@ export default Component.extend({
       PropTypes.object,
       PropTypes.string
     ]),
-    opened: PropTypes.bool
+    opened: PropTypes.bool,
+    debounceInterval: PropTypes.number
   },
 
   getDefaultProps () {
@@ -119,7 +120,7 @@ export default Component.extend({
       renderTarget: 'frost-select',
       role: 'button',
       tabIndex: 0,
-
+      debounceInterval: 0,
       // state
       focused: false
     }
@@ -364,7 +365,8 @@ export default Component.extend({
       const onInput = this.get('onInput')
 
       if (typeOf(onInput) === 'function') {
-        onInput(filter)
+        const debounceInterval = this.get('debounceInterval')
+        run.debounce(this, onInput, filter, debounceInterval)
       } else {
         this.set('filter', filter)
       }
