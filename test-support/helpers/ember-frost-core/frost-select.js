@@ -110,6 +110,16 @@ export function open (hook = 'select') {
 }
 
 /**
+ * Close frost-select dropdown
+ * @param {String} [hook='select'] - frost-select hook
+ * @returns {Promise} the resolved promise from ember-test-helpers/wait
+ */
+export function close (hook = 'select') {
+  $hook(hook).click().trigger('focusout')
+  return wait()
+}
+
+/**
  * Select item in select dropdown at given index
  * NOTE: using done() instead of Promise based because promised based causes
  * select to lose focus for some reason. This may have something to with with
