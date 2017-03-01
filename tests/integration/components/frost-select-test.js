@@ -1351,12 +1351,11 @@ describe(test.label, function () {
     })
 
     describe('fires onInput event after debounceInterval', function () {
-
       beforeEach(function () {
         this.setProperties({
           debounceInterval: 100
         })
-        
+
         return open().then(function () {
           return filterSelect('hello')
         })
