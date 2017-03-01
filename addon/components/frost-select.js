@@ -6,9 +6,8 @@ import keyCodes from '../utils/key-codes'
 import Component from './frost-component'
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
+import {task, timeout} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
-
-import {task, timeout} from 'ember-concurrency';
 
 const {$, get, on, run, typeOf} = Ember
 

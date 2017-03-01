@@ -543,7 +543,7 @@ describe(test.label, function () {
             run.later(() => {
               expect(onInput.called).to.equal(true)
               done()
-            }, 100)
+            }, 150)
           }, 100)
         })
       })
