@@ -1,3 +1,6 @@
+# 1.10.0
+- Added `debounceInterval` into `frost-select`
+
 # 1.9.8
 
 Fix button shifting when clicked
