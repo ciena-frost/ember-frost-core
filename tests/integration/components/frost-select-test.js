@@ -8,7 +8,7 @@ import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
 import {expectSelectWithState, filterSelect} from 'dummy/tests/helpers/ember-frost-core'
-import {open, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
+import {open, close, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
 import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 import {keyCodes} from 'ember-frost-core/utils'
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
@@ -1318,6 +1318,62 @@ describe(test.label, function () {
 
       expectSelectWithState('select', {
         disabled: true
+      })
+    })
+  })
+  describe('handles firing of events', function () {
+    let onInput, sandbox
+
+    beforeEach(function () {
+      sandbox = sinon.sandbox.create()
+
+      onInput = sandbox.spy((value) => {
+        expect(value).to.equal('hello')
+      })
+
+      this.setProperties({
+        hook: 'select',
+        onInput,
+        debounceInterval: 0
+      })
+
+      this.render(hbs`
+        {{frost-select-outlet hook='eventSelectOutlet'}}
+        {{frost-select
+          data=data
+          hook=hook
+          onInput=onInput
+          debounceInterval=debounceInterval
+          tabIndex=tabIndex
+          wrapLabels=wrapLabels
+        }}
+      `)
+    })
+
+    describe('fires onInput event after debounceInterval', function () {
+      beforeEach(function () {
+        this.setProperties({
+          debounceInterval: 100
+        })
+
+        return open().then(function () {
+          return filterSelect('hello')
+        })
+      })
+
+      afterEach(function () {
+        return close()
+      })
+
+      it('waits until after debounce period before firing', function (done) {
+        run.later(() => {
+          expect(onInput.called).to.equal(false)
+
+          run.later(() => {
+            expect(onInput.called).to.equal(true)
+            done()
+          }, 100)
+        }, 50)
       })
     })
   })

@@ -610,5 +610,22 @@
         {{code-snippet name='multi-select-other-wrap-labels.hbs'}}
       </div>
     </div>
+    <div class='example'>
+      <div class='title'>debounceInterval</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET debounce-interval }}
+        {{frost-select
+          data=data
+          hook='mySelect'
+          label='superhero'
+          debounceInterval=1000
+          onInput=(action 'onInputHandler')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='debounce-interval.hbs'}}
+      </div>
+    </div>
   </div>
 </div>

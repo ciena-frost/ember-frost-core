@@ -6,7 +6,9 @@ import keyCodes from '../utils/key-codes'
 import Component from './frost-component'
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
+import {task, timeout} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
+
 const {$, get, on, run, typeOf} = Ember
 
 const {DOWN_ARROW, SPACE, UP_ARROW} = keyCodes
@@ -106,7 +108,8 @@ export default Component.extend({
       PropTypes.object,
       PropTypes.string
     ]),
-    opened: PropTypes.bool
+    opened: PropTypes.bool,
+    debounceInterval: PropTypes.number
   },
 
   getDefaultProps () {
@@ -119,7 +122,7 @@ export default Component.extend({
       renderTarget: 'frost-select',
       role: 'button',
       tabIndex: 0,
-
+      debounceInterval: 0,
       // state
       focused: false
     }
@@ -225,6 +228,19 @@ export default Component.extend({
 
     return `${selectedItems.length} items selected`
   },
+  // == Tasks =================================================================
+
+  /**
+   * Fires input event after waiting for debounceInterval to clear
+   * @param {Function} cb - Reference to onInput
+   * @param {String} value - Filter String
+   */
+  inputTask: task(function * (cb, value) {
+    const debounceInterval = this.get('debounceInterval')
+
+    yield timeout(debounceInterval)
+    cb(value)
+  }).restartable(),
 
   // == Functions =============================================================
 
@@ -360,11 +376,13 @@ export default Component.extend({
 
     // FIXME: jsdoc
     filterInput (e) {
-      const filter = e.target.value
+      const inputTask = this.get('inputTask')
       const onInput = this.get('onInput')
 
+      const filter = e.target.value
+
       if (typeOf(onInput) === 'function') {
-        onInput(filter)
+        inputTask.perform(onInput, filter)
       } else {
         this.set('filter', filter)
       }
