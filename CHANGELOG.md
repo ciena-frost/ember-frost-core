@@ -1,3 +1,9 @@
+# 1.11.0 (2017-03-17)
+
+* **Fixed** #348 - Added info, warning and error icons
+* **Modified** dependency to `ember-cli` from `^2.11.0` to `~2.11.0`
+
+
 # 1.10.0
 - Added `debounceInterval` into `frost-select`
 
