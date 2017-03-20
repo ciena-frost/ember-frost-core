@@ -1,4 +1,3 @@
-
 <div class="dummy-body link">
   <div class="section-title">Primary</div>
   <hr>
@@ -205,6 +204,27 @@
   ```"}}
       </div>
     </div>
+    <div class="example">
+      <div class="title">external link</div>
+      <div class="demo">
+        {{frost-link 'Text'
+          hook='mySmallLink'
+          priority='primary'
+          size='small'
+          href='https://github.com/ciena-frost'
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-link 'Text'
+  hook='mySmallLink'
+  priority='primary'
+  size='small'
+  href='https://github.com/ciena-frost'
+}}
+```"}}
+      </div>
+    </div>
   </div>
 
   <div class="section-title">Secondary</div>
@@ -314,7 +334,29 @@
 ```"}}
       </div>
     </div>
-
+        <div class="example">
+      <div class="title">external link</div>
+      <div class="demo">
+        {{frost-link
+          text='Text'
+          hook='mySmallLink'
+          priority='secondary'
+          size='small'
+          href='https://github.com/ciena-frost'
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-link
+  text='Text'
+  hook='mySmallLink'
+  priority='secondary'
+  size='small'
+  href='https://github.com/ciena-frost'
+}}
+```"}}
+      </div>
+    </div>
   </div>
 
   <div class="section-title">Design</div>

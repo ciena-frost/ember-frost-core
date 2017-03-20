@@ -11,6 +11,7 @@
 | `disabled` | `boolean` | `false` | **default** - basic link |
 |  |  | `true` | disabled link |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
+| `href` | `string` | `<url>` | url to an external location |
 | `icon` | `string` | `<icon-name>` | the name of a frost-icon |
 | `onClick` |`string` | `<action-name>` | triggers associated action when the link is clicked prior to transition |
 | `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
@@ -92,6 +93,15 @@ The link component use ember-spread to `spread` a property object against the to
   priority='primary'
   size='small'
   disabled=true
+}}
+```
+
+### External link
+```handlebars
+{{frost-link 'link title'
+  priority='primary'
+  size='small'
+  href='https://github.com/ciena-frost'
 }}
 ```
 

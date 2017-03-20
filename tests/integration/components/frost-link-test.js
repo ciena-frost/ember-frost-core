@@ -1,6 +1,7 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {Logger} = Ember
+import {$hook} from 'ember-hook'
 import wait from 'ember-test-helpers/wait'
 import hbs from 'htmlbars-inline-precompile'
 import {afterEach, beforeEach, describe, it} from 'mocha'
@@ -482,6 +483,29 @@ describe(test.label, function () {
     })
   })
 
+  describe('when route used in conjunction with href', function () {
+    const hook = 'myLink'
+    const href = 'www.test.com'
+
+    beforeEach(function () {
+      this.setProperties({hook, href})
+      this.render(hbs`
+        {{frost-link 'Test' 'link.min'
+          hook=hook
+          size='small'
+          href=href
+        }}
+      `)
+    })
+
+    it('href set to external location', function () {
+      expect(
+        $hook(hook).attr('href'),
+        'href is set to a route'
+      ).to.equal(href)
+    })
+  })
+
   describe('Priority property', function () {
     it('has primary class set', function () {
       this.render(hbs`
@@ -556,6 +580,44 @@ describe(test.label, function () {
     })
   })
 
+  describe('Href property', function () {
+    it('has href set to an external location', function () {
+      const hook = 'myLink'
+      const href = 'www.test.com'
+
+      this.setProperties({hook, href})
+      this.render(hbs`
+        {{frost-link 'title'
+          hook=hook
+          size='small'
+          href=href
+        }}
+      `)
+
+      expect(
+        $hook(hook).attr('href'),
+        'href is set to an external location'
+      ).to.equal(href)
+    })
+
+    it('has href set to a route', function () {
+      const hook = 'myLink'
+      const route = 'testRoute'
+      this.setProperties({hook, route})
+      this.render(hbs`
+        {{frost-link 'title' route
+          hook=hook
+          size='small'
+        }}
+      `)
+
+      expect(
+        $hook(hook).attr('href'),
+        'href is set to a route'
+      ).to.equal(route)
+    })
+  })
+
   describe('Design property', function () {
     it('has info-bar class set', function () {
       this.render(hbs`
@@ -590,18 +652,39 @@ describe(test.label, function () {
     })
   })
 
-  it('sets disabled property', function () {
-    this.render(hbs`
-      {{frost-link 'title' 'testRoute'
+  describe('Disable property', function () {
+    const externalActionSpy = sinon.spy()
+
+    beforeEach(function () {
+      this.on('externalAction', externalActionSpy)
+      this.render(hbs`
+        {{frost-link 'title' 'testRoute'
+          priority='primary'
           disabled=true
           hook='myLink'
-      }}
-    `)
+          onClick=(action 'externalAction')
+        }}
+      `)
+    })
 
-    expect(
-      this.$('.frost-link').hasClass('disabled'),
-      'disabled class is set'
-    ).to.equal(true)
+    it('sets disabled property', function () {
+      expect(
+        this.$('.frost-link').hasClass('disabled'),
+        'disabled class is set'
+      ).to.equal(true)
+    })
+
+    it('onClick not called', function () {
+      this.$('a').trigger('click')
+
+      return wait()
+        .then(() => {
+          expect(
+            externalActionSpy.called,
+            'onClick closure action called'
+          ).to.equal(false)
+        })
+    })
   })
 
   it('sets icon property', function () {
