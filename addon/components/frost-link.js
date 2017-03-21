@@ -154,9 +154,6 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
     hook: PropTypes.string.isRequired,
     hookPrefix: PropTypes.string,
     hookQualifiers: PropTypes.object,
-    // The user can define href for external links, but we don't want to define in propTypes because the CP will get
-    // overwritten even in the non external link use case.
-    // href: PropTypes.string,
     icon: PropTypes.string,
     linkTitle: PropTypes.string,
     onClick: PropTypes.func,
@@ -277,16 +274,6 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
   },
 
   /**
-   * Returns true if is an external link and false otherwise.
-   * @returns {boolean} true if is an external link and false otherwise
-   */
-  _isExternal () {
-    // We are expecting to get a CP is href was not specified by the component consumer.
-    const href = this.href
-    return !isEmpty(href) && typeOf(href) === 'string'
-  },
-
-  /**
    * Open multiple links.
    */
   _openLinks () {
@@ -321,18 +308,6 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
       if (!windowHandler) {
         Logger.warn('Warning: Make sure that the pop-ups are not blocked')
       }
-    }
-  },
-
-  /**
-   * Open a link for an external location.
-   */
-  _openExternalLink () {
-    const href = this.get('href')
-    // If we want to open a new tab, the target will be set accordingly when we setup the routing.
-    // If we want to stay in the same tab, we will set the href.
-    if (this._shouldOpenInSameTab()) {
-      window.location.href = href
     }
   },
 
@@ -393,9 +368,7 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
         })
       }
 
-      if (this._isExternal()) {
-        this._openExternalLink()
-      } else if (this._hasMultipleLinks()) {
+      if (this._hasMultipleLinks()) {
         this._openLinks()
       }
     }
