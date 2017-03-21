@@ -1,3 +1,9 @@
+# 1.11.1 (2017-03-21)
+- Fix tabbing not dismissing dropdown
+
+Closes #388 
+
+
 # 1.11.0 (2017-03-17)
 
 * **Fixed** #348 - Added info, warning and error icons
