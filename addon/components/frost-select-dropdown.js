@@ -13,7 +13,7 @@ import {keyCodes} from '../utils'
 import {trimLongDataInElement} from '../utils/text'
 import Component from './frost-component'
 
-const {DOWN_ARROW, ENTER, ESCAPE, UP_ARROW} = keyCodes
+const {DOWN_ARROW, ENTER, TAB, ESCAPE, UP_ARROW} = keyCodes
 
 const BORDER_HEIGHT = 1
 const ARROW_HEIGHT = 12
@@ -487,6 +487,10 @@ export default Component.extend({
           return
 
         case ESCAPE:
+          this.get('onClose')()
+          return
+
+        case TAB:
           this.get('onClose')()
           return
       }
