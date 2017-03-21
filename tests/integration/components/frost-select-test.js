@@ -582,6 +582,30 @@ describe(test.label, function () {
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
+
+        describe('when tab key pressed', function () {
+          beforeEach(function () {
+            [onBlur, onChange, onFocus].forEach((func) => func.reset())
+            $(document)
+              .trigger(
+                $.Event('keydown', {
+                  keyCode: TAB
+                })
+              )
+            return wait()
+          })
+
+          it('renders as expected', function () {
+            expectSelectWithState('select', {
+              focused: true,
+              opened: false
+            })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+          })
+        })
       })
 
       // FIXME: tests for tabbing into components isn't working anymore, despite the fact that
