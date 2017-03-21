@@ -1,3 +1,11 @@
+# 1.11.2 (2017-03-21)
+- Get travis to build to gh-pages
+- Update license
+- Add CONTRIBUTING.md to .github directory
+
+Closes #409 
+
+
 # 1.11.1 (2017-03-21)
 - Fix tabbing not dismissing dropdown
 
