@@ -1,11 +1,16 @@
+// The content of this file must stay in sync
+// with app/styles/ember-frost-core/frost-theme
+// Any changes here should be duplicated in there
+$frost-font-xxl: 50px;
+
 @import 'colors';
 @import 'typography';
-
 // ================================================================
 // Aliased variables
 // ================================================================
 
-// Global
+// == Global ==================================================
+
 $frost-color-input: $frost-color-grey-2 !global;
 $frost-color-input-border: $frost-color-grey-7 !global;
 $frost-color-input-error-border: $frost-color-danger !global;
@@ -16,12 +21,34 @@ $frost-color-input-disabled-bg: $frost-color-lgrey-3 !global;
 $frost-color-selection: $frost-color-blue-1 !global;
 $frost-color-button-focus-shadow: rgba($frost-color-blue-1, .75) !global;
 
-// Select
+// == Select ==================================================
+
 $frost-color-select-container-background: $frost-color-white !global;
 $frost-color-select-container-shadow: $frost-color-grey-5 !global;
 $frost-color-select-footer-divider: $frost-color-blue-1 !global;
 $frost-color-select-indicator: $frost-color-grey-5 !global;
 $frost-color-select-item-divider: $frost-color-lgrey-1 !global;
+
+// == Checkbox ================================================
+
+$frost-checkbox-border-default: $frost-color-grey-6 !default;
+$frost-checkbox-border-active: $frost-color-grey-3 !default;
+$frost-checkbox-border-focus: $frost-color-grey-5 !default;
+$frost-checkbox-border-error: $frost-color-input-error-border !default;
+$frost-checkbox-border-disabled: $frost-color-lgrey-1 !default;
+$frost-checkbox-label-default: $frost-color-grey-5 !default;
+$frost-checkbox-selected: $frost-color-selection !default;
+$frost-checkbox-disabled: $frost-color-input-disabled-bg !default;
+$frost-checkbox-disabled-icon: $frost-color-grey-6 !default;
+
+// == Radio ===================================================
+
+$frost-radio-fill-error: $frost-color-input-error-border !default;
+$frost-radio-fill-default: $frost-color-grey-5 !default;
+$frost-radio-checked: $frost-color-blue-1 !default;
+$frost-radio-hover: $frost-color-blue-4 !default;
+$frost-radio-disabled: $frost-color-grey-5 !default;
+
 
 // ================================================================
 // Deprecated

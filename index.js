@@ -130,7 +130,10 @@ module.exports = {
 
     return iconNames
   },
-
+  treeForStyles: function (stylesTree) {
+    const myStylesTree = new Funnel('addon/styles')
+    return this._super.treeForStyles.call(this, myStylesTree)
+  },
   /* eslint-disable complexity */
   // Present purely to allow programmatic access to the icon packs and icon names (for demo purposes)
   treeForAddon: function (tree) {
