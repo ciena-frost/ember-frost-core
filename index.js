@@ -130,6 +130,7 @@ module.exports = {
 
     return iconNames
   },
+  // Point app/styles import to addon to avoid code duplication
   treeForStyles: function (stylesTree) {
     const myStylesTree = new Funnel('addon/styles')
     return this._super.treeForStyles.call(this, myStylesTree)
