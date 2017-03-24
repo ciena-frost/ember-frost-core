@@ -136,9 +136,9 @@ module.exports = {
   * are compiled by default
   * https://ember-cli.com/api/files/lib_models_addon.js.html#782
   * @private
-  * @method compileStyles
-  * @param {Tree} addonStylesTree
-  * @return {Tree} Compiled styles tree
+  * @function compileStyles
+  * @param {Tree} addonStylesTree Default tree
+  * @returns {Tree} Compiled styles tree
   */
   compileStyles: function () {
     if (this.options.excludeAddonStyles) {
@@ -152,9 +152,9 @@ module.exports = {
    * Point app/styles import to addon to avoid code duplication
    * https://ember-cli.com/api/files/lib_models_addon.js.html#677
    * @public
-   * @method treeForStyles
+   * @function treeForStyles
    * @param {Tree} appStyles Usually the `app/styles` directory tree
-   * @return {Tree} Compiled styles tree
+   * @returns {Tree} Compiled styles tree
    */
   treeForStyles: function () {
     const addonStyles = new Funnel(`${this.root}/addon/styles`)
