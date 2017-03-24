@@ -6,23 +6,23 @@
 
 // == Global ==================================================
 
-$frost-color-input: $frost-color-grey-2 !global;
-$frost-color-input-border: $frost-color-grey-7 !global;
-$frost-color-input-error-border: $frost-color-danger !global;
-$frost-color-input-hover-border: $frost-color-grey-5 !global;
-$frost-color-input-focus-border: $frost-color-blue-1 !global;
-$frost-color-input-disabled-border: $frost-color-lgrey-1 !global;
-$frost-color-input-disabled-bg: $frost-color-lgrey-3 !global;
-$frost-color-selection: $frost-color-blue-1 !global;
-$frost-color-button-focus-shadow: rgba($frost-color-blue-1, .75) !global;
+$frost-color-input: $frost-color-grey-2 !default;
+$frost-color-input-border: $frost-color-grey-7 !default;
+$frost-color-input-error-border: $frost-color-danger !default;
+$frost-color-input-hover-border: $frost-color-grey-5 !default;
+$frost-color-input-focus-border: $frost-color-blue-1 !default;
+$frost-color-input-disabled-border: $frost-color-lgrey-1 !default;
+$frost-color-input-disabled-bg: $frost-color-lgrey-3 !default;
+$frost-color-selection: $frost-color-blue-1 !default;
+$frost-color-button-focus-shadow: rgba($frost-color-blue-1, .75) !default;
 
 // == Select ==================================================
 
-$frost-color-select-container-background: $frost-color-white !global;
-$frost-color-select-container-shadow: $frost-color-grey-5 !global;
-$frost-color-select-footer-divider: $frost-color-blue-1 !global;
-$frost-color-select-indicator: $frost-color-grey-5 !global;
-$frost-color-select-item-divider: $frost-color-lgrey-1 !global;
+$frost-color-select-container-background: $frost-color-white !default;
+$frost-color-select-container-shadow: $frost-color-grey-5 !default;
+$frost-color-select-footer-divider: $frost-color-blue-1 !default;
+$frost-color-select-indicator: $frost-color-grey-5 !default;
+$frost-color-select-item-divider: $frost-color-lgrey-1 !default;
 
 // == Checkbox ================================================
 
