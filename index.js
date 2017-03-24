@@ -130,10 +130,36 @@ module.exports = {
 
     return iconNames
   },
-  // Point app/styles import to addon to avoid code duplication
-  treeForStyles: function (stylesTree) {
-    const myStylesTree = new Funnel('addon/styles')
-    return this._super.treeForStyles.call(this, myStylesTree)
+  /**
+  * Runs the styles tree through preprocessors.
+  * Overriding allows consumer to choose if `addon/styles`
+  * are compiled by default
+  * https://ember-cli.com/api/files/lib_models_addon.js.html#782
+  * @private
+  * @method compileStyles
+  * @param {Tree} addonStylesTree
+  * @return {Tree} Compiled styles tree
+  */
+  compileStyles: function () {
+    if (this.options.excludeAddonStyles) {
+      return null
+    }
+    return this._super.compileStyles.apply(this, arguments)
+  },
+  //
+  /**
+   * Returns the tree for all style files
+   * Point app/styles import to addon to avoid code duplication
+   * https://ember-cli.com/api/files/lib_models_addon.js.html#677
+   * @public
+   * @method treeForStyles
+   * @param {Tree} appStyles Usually the `app/styles` directory tree
+   * @return {Tree} Compiled styles tree
+   */
+  treeForStyles: function () {
+    const addonStyles = new Funnel(`${this.root}/addon/styles`)
+
+    return this._super.treeForStyles.call(this, addonStyles)
   },
   /* eslint-disable complexity */
   // Present purely to allow programmatic access to the icon packs and icon names (for demo purposes)
