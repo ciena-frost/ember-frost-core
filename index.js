@@ -141,12 +141,21 @@ module.exports = {
   * @returns {Tree} Compiled styles tree
   */
   compileStyles: function () {
-    if (this.options.excludeAddonStyles) {
+    var env = process.env.EMBER_ENV
+
+    var options = (this.app && this.app.options && this.app.options.frostCore) || {}
+    var envConfig = this.project.config(env).frostCore
+
+    if (envConfig) {
+      console.warn('Deprecation warning: frostCore should be moved to ember-cli-build')
+      Object.assign(options, envConfig)
+    }
+
+    if (options.excludeAddonStyles) {
       return null
     }
     return this._super.compileStyles.apply(this, arguments)
   },
-  //
   /**
    * Returns the tree for all style files
    * Point app/styles import to addon to avoid code duplication
