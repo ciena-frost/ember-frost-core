@@ -5,7 +5,7 @@
   &.error {
     svg {
       .ring {
-        fill: $frost-radio-fill-error;
+        fill: $frost-color-radio-fill-error;
       }
     }
   }
@@ -66,7 +66,7 @@
 
       .ring {
         transition: fill .2s ease;
-        fill: $frost-radio-fill-default;
+        fill: $frost-colorradio-fill-default;
       }
     }
   }
@@ -80,7 +80,7 @@
       label {
         svg {
           .inner {
-            fill: $frost-radio-checked;
+            fill: $frost-color-radio-checked;
           }
         }
       }
@@ -94,7 +94,7 @@
         label {
           svg {
             .inner {
-              fill: $frost-radio-hover;
+              fill: $frost-colo-radio-hover;
             }
           }
         }
@@ -104,7 +104,7 @@
 
   &.disabled {
     label {
-      color: $frost-radio-disabled;
+      color: $frost-color-radio-disabled;
       cursor: default;
     }
 
@@ -112,7 +112,7 @@
       label {
         svg {
           .inner {
-            fill: $frost-radio-disabled;
+            fill: $frost-color-radio-disabled;
           }
         }
       }

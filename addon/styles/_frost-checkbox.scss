@@ -5,7 +5,7 @@
   &.error {
     > .label {
       &::before {
-        border: 1px solid $frost-checkbox-border-error;
+        border: 1px solid $frost-color-checkbox-border-error;
       }
     }
   }
@@ -74,7 +74,7 @@
         + {
           .label {
             svg {
-              fill: $frost-checkbox-disabled-icon;
+              fill: $frost-color-checkbox-disabled-icon;
             }
           }
         }
@@ -85,8 +85,8 @@
       + {
         .label {
           &::before {
-            border: 1px solid $frost-checkbox-border-focus;
-            background-image: linear-gradient(lighten($frost-checkbox-selected, 50%), lighten($frost-checkbox-selected, 45%));
+            border: 1px solid $frost-color-checkbox-border-focus;
+            background-image: linear-gradient(lighten($frost-color-checkbox-selected, 50%), lighten($frost-color-checkbox-selected, 45%));
           }
         }
       }
@@ -96,7 +96,7 @@
   .label {
     display: inline-block;
     position: relative;
-    color: $frost-checkbox-label-default;
+    color: $frost-color-checkbox-label-default;
     font-size: $frost-font-s;
     cursor: pointer;
     user-select: none;
@@ -105,7 +105,7 @@
       display: inline-block;
       position: relative;
       margin-right: 5px;
-      border: 1px solid $frost-checkbox-border-default;
+      border: 1px solid $frost-color-checkbox-border-default;
       background-image: linear-gradient($frost-color-white, $frost-color-input-disabled-bg);
       content: '';
       vertical-align: middle;
@@ -115,14 +115,14 @@
       outline: none;
 
       &::before {
-        border: 1px solid $frost-checkbox-border-focus;
-        background-image: linear-gradient(lighten($frost-checkbox-selected, 50%), lighten($frost-checkbox-selected, 45%));
+        border: 1px solid $frost-color-checkbox-border-focus;
+        background-image: linear-gradient(lighten($frost-color-checkbox-selected, 50%), lighten($frost-color-checkbox-selected, 45%));
       }
     }
 
     &:active {
       &::before {
-        border: 1px solid $frost-checkbox-border-active;
+        border: 1px solid $frost-color-checkbox-border-active;
       }
     }
   }
@@ -132,8 +132,8 @@
       + {
         .label {
           &::before {
-            border: 1px solid $frost-checkbox-border-disabled;
-            background-image: linear-gradient($frost-checkbox-disabled, $frost-checkbox-disabled);
+            border: 1px solid $frost-color-checkbox-border-disabled;
+            background-image: linear-gradient($frost-color-checkbox-disabled, $frost-color-checkbox-disabled);
           }
         }
       }
@@ -145,7 +145,7 @@
           &.label {
             &:hover {
               &::before {
-                background-image: linear-gradient(lighten($frost-checkbox-selected, 50%), lighten($frost-checkbox-selected, 45%));
+                background-image: linear-gradient(lighten($frost-color-checkbox-selected, 50%), lighten($frost-color-checkbox-selected, 45%));
               }
             }
           }
@@ -159,6 +159,6 @@
     top: 0;
     left: 0;
     visibility: hidden;
-    fill: $frost-checkbox-selected;
+    fill: $frost-color-checkbox-selected;
   }
 }
