@@ -237,7 +237,7 @@ export default Component.extend({
   /**
    * Get a style string based on the presence of some properties
    * @param {String} width the width property specified
-   * @return {String} the completed style string
+   * @returns {String} the completed style string
    */
   style (width) {
     let styles = ''
