@@ -54,7 +54,8 @@ export default Component.extend({
     'ariaLabel:aria-label',
     'computedTabIndex:tabIndex',
     'opened:aria-pressed',
-    'role'
+    'role',
+    'style'
   ],
 
   classNameBindings: [
@@ -95,6 +96,7 @@ export default Component.extend({
       PropTypes.string
     ]),
     tabIndex: PropTypes.number,
+    width: PropTypes.oneOfType([PropTypes.number, PropTypes.null]),
     wrapLabels: PropTypes.bool,
 
     // state
@@ -227,6 +229,24 @@ export default Component.extend({
     }
 
     return `${selectedItems.length} items selected`
+  },
+
+  @readOnly
+  @computed('width')
+
+  /**
+   * Get a style string based on the presence of some properties
+   * @param {String} width the width property specified
+   * @returns {String} the completed style string
+   */
+  style (width) {
+    let styles = ''
+
+    // if a property is not falsy, append it to the style string
+    // note that in the width case, we want the component interface to have absolute power over the width
+    // so it will override any max or win widths to ensure ultimate control
+    if (width) styles += `width: ${width}px; max-width: initial; min-width:initial; `
+    return Ember.String.htmlSafe(styles)
   },
   // == Tasks =================================================================
 
