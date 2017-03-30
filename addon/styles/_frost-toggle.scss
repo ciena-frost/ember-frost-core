@@ -1,3 +1,6 @@
+$frost-toggle-button-height: 35px;
+$frost-toggle-button-switch-height: 27px;
+
 
 $frost-toggle-off-color: #000;
 $frost-toggle-on-color: #fff;
@@ -43,7 +46,7 @@ $frost-toggle-on-color: #fff;
 
     &.medium {
       width: 115px;
-      height: 35px;
+      height: $frost-toggle-button-height;
       padding: 3px;
       border-radius: 3px;
     }
@@ -53,12 +56,13 @@ $frost-toggle-on-color: #fff;
       display: block;
       position: absolute;
       width: 40px;
-      height: 27px;
+      height: $frost-toggle-button-switch-height;
       margin: 0 10px 0 0;
       content: '';
     }
 
     &:after {
+      top: calc(50% - (#{$frost-toggle-button-switch-height} / 2));
       right: 0;
       transition: right .2s;
       border-radius: 3px;
