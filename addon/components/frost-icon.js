@@ -6,14 +6,13 @@ import Component from './frost-component'
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
-const {deprecate, inject, get} = Ember
+const {deprecate, get} = Ember
 
 export default Component.extend({
 
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
-
   classNameBindings: ['iconClass'],
   layout,
   tagName: 'svg',
@@ -54,7 +53,7 @@ export default Component.extend({
   @readOnly
   @computed('pack')
   pathToIconPack (pack) {
-    return this.get('iconAssets')[`assets/icon-packs/${pack}.svg`]
+    return this._iconAssets[`assets/icon-packs/${pack}.svg`]
   },
 
   // == Functions =============================================================

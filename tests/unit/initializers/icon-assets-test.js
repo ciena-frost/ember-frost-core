@@ -1,28 +1,26 @@
-import { expect } from 'chai';
-import { describe, it, beforeEach } from 'mocha';
-import Ember from 'ember';
-import { initialize } from 'dummy/initializers/icon-assets';
-import destroyApp from '../../helpers/destroy-app';
+import { expect } from 'chai'
+import Ember from 'ember'
+import { describe, it, beforeEach, afterEach } from 'mocha'
+import destroyApp from '../../helpers/destroy-app'
+import { initialize } from 'dummy/initializers/icon-assets'
 
-describe('Unit | Initializer | icon assets', function() {
-  let application;
+describe('Unit | Initializer | icon assets', function () {
+  let application
 
-  beforeEach(function() {
-    Ember.run(function() {
-      application = Ember.Application.create();
-      application.deferReadiness();
-    });
-  });
+  beforeEach(function () {
+    Ember.run(function () {
+      application = Ember.Application.create()
+      application.deferReadiness()
+    })
+  })
 
-  afterEach(function() {
-    destroyApp(application);
-  });
+  afterEach(function () {
+    destroyApp(application)
+  })
 
-  // Replace this with your real tests.
-  it('works', function() {
-    initialize(application);
-
-    // you would normally confirm the results of the initializer here
-    expect(true).to.be.ok;
-  });
-});
+  // TODO: Add real tests
+  it('works', function () {
+    initialize(application)
+    expect(true).to.equal(true)
+  })
+})
