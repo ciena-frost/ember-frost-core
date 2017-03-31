@@ -6,7 +6,7 @@ import Component from './frost-component'
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
-const {deprecate, get} = Ember
+const {deprecate, inject, get} = Ember
 
 export default Component.extend({
 
@@ -49,6 +49,12 @@ export default Component.extend({
    */
   iconClass (icon, pack) {
     return `frost-icon-${pack}-${icon}`
+  },
+
+  @readOnly
+  @computed('pack')
+  pathToIconPack (pack) {
+    return this.get('iconAssets')[`assets/icon-packs/${pack}.svg`]
   },
 
   // == Functions =============================================================
