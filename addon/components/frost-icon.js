@@ -6,25 +6,23 @@ import Component from './frost-component'
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
-const {deprecate, get} = Ember
+const {deprecate, inject, get} = Ember
+import task from 'ember-concurrency'
 
 export default Component.extend({
 
   // == Dependencies ==========================================================
-
+  iconAssets: inject.service(),
   // == Keyword Properties ====================================================
 
-  classNameBindings: ['iconClass'],
   layout,
-  tagName: 'svg',
+  tagName: '',
 
   // == PropTypes =============================================================
-
   propTypes: {
     // options
     pack: PropTypes.string,
     icon: PropTypes.string.isRequired
-
     // state
   },
 
@@ -38,7 +36,6 @@ export default Component.extend({
   },
 
   // == Computed Properties ===================================================
-
   @readOnly
   @computed('icon', 'pack')
   /**
@@ -51,11 +48,20 @@ export default Component.extend({
     return `frost-icon-${pack}-${icon}`
   },
 
+  @readOnly
+  @computed('iconPath', 'icon')
+  pathToIcon (iconPath, icon) {
+    return `${iconPath}#${icon}`
+  },
   // == Functions =============================================================
 
   // == DOM Events ============================================================
 
   // == Lifecycle Hooks =======================================================
+  init () {
+    this._super(...arguments)
+    this.get('iconAssets').register(this)
+  },
 
   didReceiveAttrs (attrs) {
     const icon = get(attrs, 'newAttrs.icon.value') || ''

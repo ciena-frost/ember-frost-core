@@ -1,2 +1,6 @@
 {{! Template for the frost-icon component }}
-<use xlink:href="assets/icon-packs/{{pack}}.svg#{{icon}}" />
+{{#if iconPath}}
+  <svg class='frost-icon {{iconClass}}'>
+    <use xlink:href='{{pathToIcon}}' />
+  </svg>
+{{/if}}
