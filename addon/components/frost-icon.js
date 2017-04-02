@@ -5,9 +5,10 @@ import layout from '../templates/components/frost-icon'
 import Component from './frost-component'
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
+import {task} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
+
 const {deprecate, inject, get} = Ember
-import task from 'ember-concurrency'
 
 export default Component.extend({
 
@@ -15,14 +16,16 @@ export default Component.extend({
   iconAssets: inject.service(),
   // == Keyword Properties ====================================================
 
+  classNameBindings: ['iconClass'],
   layout,
-  tagName: '',
+  tagName: 'svg',
 
   // == PropTypes =============================================================
   propTypes: {
     // options
     pack: PropTypes.string,
     icon: PropTypes.string.isRequired
+
     // state
   },
 
@@ -47,15 +50,16 @@ export default Component.extend({
   iconClass (icon, pack) {
     return `frost-icon-${pack}-${icon}`
   },
-
-  @readOnly
-  @computed('iconPath', 'icon')
-  pathToIcon (iconPath, icon) {
-    return `${iconPath}#${icon}`
-  },
   // == Functions =============================================================
 
   // == DOM Events ============================================================
+
+  // == Tasks =================================================================
+
+  iconTask: task(function * (href) {
+    const icon = this.get('icon')
+    this.set('href', `${href}#${icon}`)
+  }),
 
   // == Lifecycle Hooks =======================================================
   init () {

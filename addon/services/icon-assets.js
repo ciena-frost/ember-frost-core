@@ -1,36 +1,38 @@
-/**
- * Service definition for the icon-assets service
- */
-
 import Ember from 'ember'
-import task from 'ember-concurrency'
-const {Service} = Ember
+const { Service } = Ember
 
+const ICON_PATH = 'assets/icon-packs'
+const ICON_ASSETS = 'assets/icon-assets.json'
 export default Service.extend({
   _icons: [],
   init () {
     this._super(...arguments)
-    Ember.$.get('assets/assetMap.json').then((assetMap) => {
+    Ember.$.getJSON(ICON_ASSETS).then((assetMap) => {
       this._assets = assetMap.assets
       this._icons.forEach(icon => {
         const pack = icon.get('pack')
-        icon.set('iconPath', assetMap.assets[`assets/icon-packs/${pack}.svg`])
+        const href = this._assets[`${ICON_PATH}/${pack}.svg`]
+        icon.get('iconTask').perform(href)
       })
     }).fail(() => {
       this._icons.forEach(icon => {
         const pack = icon.get('pack')
-        icon.set('iconPath', `assets/icon-packs/${pack}.svg`)
+        const href = `${ICON_PATH}/${pack}.svg`
+        icon.get('iconTask').perform(href)
       })
     }).always(() => delete this._icons)
   },
   register (icon) {
     const pack = icon.get('pack')
+    let href
     if (this._assets) {
-      icon.set('iconPath', this._assets[`assets/icon-packs/${pack}.svg`])
-    } else if (this._icons !== undefined) {
-      this._icons.push(icon)
+      href = this._assets[`${ICON_PATH}/${pack}.svg`]
+    } else if (this._icons !== undefined) { // assets have yet to resolve
+      this._icons.push(icon) // queue it up
+      return
     } else {
-      icon.set('iconPath', `assets/icon-packs/${pack}.svg`)
+      href = `${ICON_PATH}/${pack}.svg`
     }
+    icon.get('iconTask').perform(href)
   }
 })

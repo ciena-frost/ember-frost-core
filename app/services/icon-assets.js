@@ -1,1 +1,1 @@
-export { default } from 'ember-frost-core/services/icon-assets';
+export { default } from 'ember-frost-core/services/icon-assets'
