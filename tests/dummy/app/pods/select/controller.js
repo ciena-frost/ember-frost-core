@@ -26,6 +26,7 @@ export default Controller.extend({
   preSelectedValueForClearing: 'Arthur Curry',
   selectedValues: ['Arthur Curry', 'Ray Palmer'],
   clearSelectedValue: false,
+  width: 500,
   actions: {
     onBlurHandler () {
       this.get('notifications').success('blur event', {

@@ -1,3 +1,7 @@
+# 1.12.0 (2017-03-30)
+* adds `width` property to the `frost-select` component interface.  works by explicitly overriding any width/min/max width on that `frost-select` instance to explicitly set a desired width.
+
+
 # 1.11.2 (2017-03-21)
 - Get travis to build to gh-pages
 - Update license

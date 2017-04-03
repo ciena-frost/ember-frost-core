@@ -8,7 +8,7 @@ import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
 import {expectSelectWithState, filterSelect} from 'dummy/tests/helpers/ember-frost-core'
-import {open, close, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
+import {close, open, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
 import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 import {keyCodes} from 'ember-frost-core/utils'
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
@@ -89,6 +89,7 @@ describe(test.label, function () {
           onChange=onChange
           onFocus=onFocus
           tabIndex=tabIndex
+          width=width
           wrapLabels=wrapLabels
         }}
         {{input hook='post'}}
@@ -97,6 +98,45 @@ describe(test.label, function () {
 
     afterEach(function () {
       sandbox.restore()
+    })
+
+    describe('at correct width', function () {
+      const maximumWidth = 330
+      const minimumWidth = 175
+      const specifiedWidth = 500
+
+      it('if no width is specified, and container is small', function () {
+        this.$().css('width', '100px')
+        const actual = this.$('.frost-select')[0].getBoundingClientRect().width
+        expect(actual, 'it has the minimum width').to.equal(minimumWidth)
+      })
+
+      it('if no width is specified, and container is large', function () {
+        // simulate some app setting a max-width on .frost-select via CSS (as the dummy demo does)
+        this.$('.frost-select').css('max-width', `${maximumWidth}px`)
+
+        // set the container to some large width
+        this.$().css('width', `${specifiedWidth}px`)
+
+        // get the actual, factual horizontal space reserved in the layout for this element
+        const actual = this.$('.frost-select')[0].getBoundingClientRect().width
+
+        expect(actual, 'it respects max-width being set').to.equal(maximumWidth)
+      })
+
+      describe('when width is set as property', function () {
+        beforeEach(function () {
+          return this.set('width', specifiedWidth)
+        })
+
+        it('it has the specified width regardless of container size', function () {
+          // let's check both the element's style attr and what the browser layed out
+          const actualCSSValue = this.$('.frost-select').css('width')
+          const actualRenderedWidth = this.$('.frost-select')[0].getBoundingClientRect().width
+          expect(parseInt(actualCSSValue, 10), 'in the element\'s style attr').to.equal(specifiedWidth)
+          expect(parseInt(actualRenderedWidth, 10), 'and in the actual layout').to.equal(specifiedWidth)
+        })
+      })
     })
 
     describe('when data not present', function () {
