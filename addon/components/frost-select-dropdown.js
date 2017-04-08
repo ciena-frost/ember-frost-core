@@ -284,6 +284,8 @@ export default Component.extend(PropTypeMixin, {
   },
 
   willDestroyElement () {
+    const dropdownListElement = document.getElementById('frost-select-list')
+    this._removeListItemEventListeners(dropdownListElement)
     $(window).off('resize', this._updateHandler)
     $(document).off('scroll', this._updateHandler)
     $(document).off('keydown', this._keyDownHandler)
