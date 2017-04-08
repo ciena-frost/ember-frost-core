@@ -6,7 +6,9 @@
     <div class="example">
       <div class="demo">
         {{! BEGIN-SNIPPET text }}
-        {{frost-text}}
+        {{frost-text
+          hook='myTextfield'
+        }}
         {{! END-SNIPPET }}
       </div>
       <div class="snippet">
@@ -23,7 +25,7 @@
       <div class="demo">
         {{! BEGIN-SNIPPET text-error }}
         {{frost-text
-          class="error"
+          class='error'
           hook='myTextfield'
         }}
         {{! END-SNIPPET }}
@@ -39,7 +41,8 @@
         {{! BEGIN-SNIPPET text-disabled }}
         {{frost-text
           disabled=true
-          value="Disabled text"
+          hook='myTextfield'
+          value='Disabled text'
         }}
         {{! END-SNIPPET }}
       </div>
@@ -47,6 +50,23 @@
         {{code-snippet name='text-disabled.hbs'}}
       </div>
     </div>
+
+    <div class="example">
+      <div class="title">readonly</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET text-readonly }}
+        {{frost-text
+          hook='myTextfield'
+          readonly=true
+          value='readonly'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='text-readonly.hbs'}}
+      </div>
+    </div>
+
   </div>
 
   <div class="section-title">Options</div>
@@ -57,6 +77,7 @@
       <div class="demo">
         {{! BEGIN-SNIPPET text-placeholder }}
         {{frost-text
+          hook='myTextfield'
           placeholder='Placeholder'
         }}
         {{! END-SNIPPET }}
@@ -72,6 +93,7 @@
         {{! BEGIN-SNIPPET text-align }}
         {{frost-text
           align='right'
+          hook='myTextfield'
         }}
         {{! END-SNIPPET }}
       </div>
@@ -79,48 +101,61 @@
         {{code-snippet name='text-align.hbs'}}
       </div>
     </div>
-  </div>
-
-  <div class="example">
-    <div class="title">tabindex</div>
-    <div class="demo">
-      {{! BEGIN-SNIPPET text-tabindex }}
-      {{frost-text
-        tabindex='-1'
-      }}
-      {{! END-SNIPPET }}
+    <div class="example">
+      <div class="title">tabindex</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET text-tabindex }}
+        {{frost-text
+          hook='myTextfield'
+          tabindex=-1
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='text-tabindex.hbs'}}
+      </div>
     </div>
-    <div class="snippet">
-      {{code-snippet name='text-tabindex.hbs'}}
+
+    <div class="example">
+      <div class="title">autofocus</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET text-autofocus }}
+        {{frost-text
+          autofocus=true
+          hook='myTextfield'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='text-autofocus.hbs'}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">value</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET text-value }}
+        {{frost-text
+          hook='myTextfield'
+          value='value'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='text-value.hbs'}}
+      </div>
     </div>
   </div>
 
   <div class="section-title">Events</div>
   <hr>
   <div class='section'>
-    <div class='example'>
-      <div class='title'>Legacy events</div>
-      <div class='demo'>
-        {{! BEGIN-SNIPPET text-legacy-events }}
-        {{frost-text
-          onInput=(action 'legacy')
-        }}
-        {{! END-SNIPPET }}
-      </div>
-      <div class='snippet'>
-         <div>Template</div>
-        {{code-snippet name='text-legacy-events.hbs'}}
-        <br>
-        <div>Controller</div>
-        {{code-snippet name='text-legacy-events.js'}}
-      </div>
-    </div>
-
     <div class="example">
       <div class="title">DOM events</div>
       <div class="demo">
         {{! BEGIN-SNIPPET text-dom-events }}
         {{frost-text
+          hook='myTextfield'
           onChange=(action 'event')
           onClick=(action 'event')
           onContextMenu=(action 'event')
@@ -165,6 +200,7 @@
       <div class="demo">
         {{! BEGIN-SNIPPET text-support-events }}
         {{frost-text
+          hook='myTextfield'
           onEnter=(action 'support' 'enter')
           onEscape=(action 'support' 'escape')
         }}
@@ -178,23 +214,25 @@
         {{code-snippet name='text-support-events.js'}}
       </div>
     </div>
-
-    <div class="example">
-      <div class="title">Deprecated events</div>
-      <div class="demo">
-        {{! BEGIN-SNIPPET text-deprecated-events }}
+  </div>
+  <div class='section-title'>Other</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Spread</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET field-other-spread }}
         {{frost-text
-          onBlur=(action 'event')
-          onFocus=(action 'event')
+          options=(hash
+            disabled=true
+            hook='myTextfield'
+            value='value'
+          )
         }}
         {{! END-SNIPPET }}
       </div>
-      <div class="snippet">
-         <div>Template</div>
-        {{code-snippet name='text-deprecated-events.hbs'}}
-        <br>
-        <div>Controller</div>
-        {{code-snippet name='text-dom-events.js'}}
+      <div class='snippet'>
+        {{code-snippet name='field-other-spread.hbs'}}
       </div>
     </div>
   </div>

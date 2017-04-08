@@ -1,27 +1,45 @@
-{{#if (eq design 'info-bar')}}
-  <div class='content '>
-    <div class=' text'>
-      <div class='svg'>{{frost-icon icon=icon}}</div>
-      {{yield}}
-      </div>
-  </div>
-{{else if (eq design 'in-line')}}
-   <div class='content text'>
-      {{yield}}
+{{! Template for the frost-link component }}
+{{#if hasBlock}}
+  {{#if (eq design 'info-bar')}}
+    <div class='content '>
+      <div class=' text'>
+        <div class='svg'>{{frost-icon hook=(concat hook '-icon') icon=icon}}</div>
+        {{yield}}
+        </div>
     </div>
-{{else if priority}}
+  {{else if (eq design 'inline')}}
+     <div class='content text'>
+        {{yield}}
+      </div>
+  {{else if priority}}
+    {{#if (eq priority 'primary')}}
+      <div class='content text'>
+        {{yield}}
+          <div class='svg'>{{frost-icon hook=(concat hook '-icon') icon='open-tabs'}}</div>
+      </div>
+    {{else if (eq priority 'secondary')}}
+      <div class='content'>
+        <div class='text'>
+          {{yield}}
+        </div>
+      </div>
+    {{/if}}
+  {{else}}
+    {{yield}}
+  {{/if}}
+{{else}}
   {{#if (eq priority 'primary')}}
     <div class='content text'>
-      {{yield}}
-        <div class='svg'>{{frost-icon icon='new-tab'}}</div>
+      {{linkTitle}}
+        <div class='svg'>{{frost-icon hook=(concat hook '-icon') icon='open-tabs'}}</div>
     </div>
   {{else if (eq priority 'secondary')}}
     <div class='content'>
       <div class='text'>
-        {{yield}}
+        {{linkTitle}}
       </div>
     </div>
+  {{else}}
+    {{linkTitle}}
   {{/if}}
-{{else}}
-  {{yield}}
 {{/if}}

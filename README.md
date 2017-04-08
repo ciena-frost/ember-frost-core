@@ -23,11 +23,12 @@ The following components are available when you install ember-frost-core
 * [frost-link](docs/frost-link.md)
 * [frost-loading](docs/frost-loading.md)
 * [frost-password](docs/frost-password.md)
+* [frost-radio-group](docs/frost-radio.md)
 * [frost-scroll](docs/frost-scroll.md)
 * [frost-select](docs/frost-select.md)
 * [frost-text](docs/frost-text.md)
 * [frost-textarea](docs/frost-textarea.md)
-
+* [frost-toggle](docs/frost-toggle.md)
 
 ## Development
 
@@ -54,6 +55,6 @@ and output code coverage.
 [ci-url]: https://travis-ci.org/ciena-frost/ember-frost-core
 [cov-img]: https://img.shields.io/coveralls/ciena-frost/ember-frost-core.svg "Coveralls Code Coverage"
 [cov-url]: https://coveralls.io/github/ciena-frost/ember-frost-core
-[ember-img]: https://img.shields.io/badge/ember-2.3+-green.svg "Ember 2.3+"
+[ember-img]: https://img.shields.io/badge/ember-2.4+-green.svg "Ember 2.4+"
 [npm-img]: https://img.shields.io/npm/v/ember-frost-core.svg "NPM Version"
 [npm-url]: https://www.npmjs.com/package/ember-frost-core

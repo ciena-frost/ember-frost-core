@@ -1,38 +1,43 @@
-import Ember from 'ember'
-const {Component, deprecate, get} = Ember
-import computed, {readOnly} from 'ember-computed-decorators'
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+/**
+ * Component definition for frost-icon component
+ */
 import layout from '../templates/components/frost-icon'
+import Component from './frost-component'
+import Ember from 'ember'
+import computed, {readOnly} from 'ember-computed-decorators'
+import {PropTypes} from 'ember-prop-types'
+const {deprecate, get} = Ember
 
-export default Component.extend(PropTypeMixin, {
-  // ==========================================================================
-  // Dependencies
-  // ==========================================================================
+export default Component.extend({
 
-  // ==========================================================================
-  // Properties
-  // ==========================================================================
+  // == Dependencies ==========================================================
 
-  classNames: 'frost-icon',
+  // == Keyword Properties ====================================================
+
   classNameBindings: ['iconClass'],
   layout,
   tagName: 'svg',
 
+  // == PropTypes =============================================================
+
   propTypes: {
-    hook: PropTypes.string,
+    // options
     pack: PropTypes.string,
     icon: PropTypes.string.isRequired
+
+    // state
   },
 
   getDefaultProps () {
     return {
+      // options
       pack: 'frost'
+
+      // state
     }
   },
 
-  // ==========================================================================
-  // Computed Properties
-  // ==========================================================================
+  // == Computed Properties ===================================================
 
   @readOnly
   @computed('icon', 'pack')
@@ -46,11 +51,12 @@ export default Component.extend(PropTypeMixin, {
     return `frost-icon-${pack}-${icon}`
   },
 
-  // ==========================================================================
-  // Functions
-  // ==========================================================================
+  // == Functions =============================================================
 
-  /* Ember.Component method */
+  // == DOM Events ============================================================
+
+  // == Lifecycle Hooks =======================================================
+
   didReceiveAttrs (attrs) {
     const icon = get(attrs, 'newAttrs.icon.value') || ''
 
@@ -63,13 +69,10 @@ export default Component.extend(PropTypeMixin, {
         url: 'http://ciena-frost.github.io/ember-frost-core/#/icons'
       }
     )
+  },
+
+  // == Actions ===============================================================
+
+  actions: {
   }
-
-  // ==========================================================================
-  // Events
-  // ==========================================================================
-
-  // ==========================================================================
-  // Actions
-  // ==========================================================================
 })

@@ -1,10 +1,16 @@
-import Ember from 'ember'
-const {$, Component, get, run, typeOf} = Ember
-import computed, {readOnly} from 'ember-computed-decorators'
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-
+/**
+ * Component definition for frost-select component
+ */
 import layout from '../templates/components/frost-select'
-import keyCodes from '../utils/keycodes'
+import keyCodes from '../utils/key-codes'
+import Component from './frost-component'
+import Ember from 'ember'
+import computed, {readOnly} from 'ember-computed-decorators'
+import {task, timeout} from 'ember-concurrency'
+import {PropTypes} from 'ember-prop-types'
+
+const {$, get, on, run, typeOf} = Ember
+
 const {DOWN_ARROW, SPACE, UP_ARROW} = keyCodes
 
 /**
@@ -39,11 +45,17 @@ function compareSelectedValues (a, b) {
   return a === b
 }
 
-export default Component.extend(PropTypeMixin, {
-  // == Properties ============================================================
+export default Component.extend({
+  // == Dependencies ==========================================================
+
+  // == Keyword Properties ====================================================
 
   attributeBindings: [
-    'computedTabIndex:tabIndex'
+    'ariaLabel:aria-label',
+    'computedTabIndex:tabIndex',
+    'opened:aria-pressed',
+    'role',
+    'style'
   ],
 
   classNameBindings: [
@@ -54,24 +66,23 @@ export default Component.extend(PropTypeMixin, {
     'text::frost-select-placeholder'
   ],
 
-  classNames: [
-    'frost-select'
-  ],
-
   layout,
 
+  // == PropTypes =============================================================
+
   propTypes: {
-    // Public
+    // options
     autofocus: PropTypes.bool,
     disabled: PropTypes.bool,
     error: PropTypes.bool,
-    hook: PropTypes.string.isRequired,
+    label: PropTypes.string,
     multiselect: PropTypes.bool,
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
     onInput: PropTypes.func,
     renderTarget: PropTypes.string,
+    role: PropTypes.string,
     selected: PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.number
@@ -85,8 +96,10 @@ export default Component.extend(PropTypeMixin, {
       PropTypes.string
     ]),
     tabIndex: PropTypes.number,
+    width: PropTypes.oneOfType([PropTypes.number, PropTypes.null]),
+    wrapLabels: PropTypes.bool,
 
-    // Private
+    // state
     $element: PropTypes.object,
     focused: PropTypes.bool,
     internalSelectedValue: PropTypes.oneOfType([
@@ -97,29 +110,47 @@ export default Component.extend(PropTypeMixin, {
       PropTypes.object,
       PropTypes.string
     ]),
-    opened: PropTypes.bool
+    opened: PropTypes.bool,
+    debounceInterval: PropTypes.number
   },
 
   getDefaultProps () {
     return {
+      // options
       autofocus: false,
       disabled: false,
       error: false,
-      focused: false,
       multiselect: false,
       renderTarget: 'frost-select',
-      tabIndex: 0
+      role: 'button',
+      tabIndex: 0,
+      debounceInterval: 0,
+      // state
+      focused: false
     }
   },
 
   // == Computed Properties ===================================================
 
   @readOnly
+  @computed('label', 'opened')
+  ariaLabel (label, opened) {
+    const verb = opened ? 'Hide' : 'Show'
+
+    if (label) {
+      return `${verb} ${label} combobox`
+    }
+
+    return `${verb} combobox`
+  },
+
+  @readOnly
   @computed('data', 'filter', 'onInput')
+  // FIXME: jsdoc
   items (data, filter, onInput) {
     // If no data to filter we are done
     if (!data) {
-      return data
+      return []
     }
 
     // External filtering
@@ -145,6 +176,7 @@ export default Component.extend(PropTypeMixin, {
 
   @readOnly
   @computed('data', 'selected', 'internalSelectedValue')
+  // FIXME: jsdoc
   selectedItems (items, selected, selectedValue) {
     if (selectedValue) {
       return items.filter((item) => {
@@ -199,9 +231,118 @@ export default Component.extend(PropTypeMixin, {
     return `${selectedItems.length} items selected`
   },
 
+  @readOnly
+  @computed('width')
+
+  /**
+   * Get a style string based on the presence of some properties
+   * @param {String} width the width property specified
+   * @returns {String} the completed style string
+   */
+  style (width) {
+    let styles = ''
+
+    // if a property is not falsy, append it to the style string
+    // note that in the width case, we want the component interface to have absolute power over the width
+    // so it will override any max or win widths to ensure ultimate control
+    if (width) styles += `width: ${width}px; max-width: initial; min-width:initial; `
+    return Ember.String.htmlSafe(styles)
+  },
+  // == Tasks =================================================================
+
+  /**
+   * Fires input event after waiting for debounceInterval to clear
+   * @param {Function} cb - Reference to onInput
+   * @param {String} value - Filter String
+   */
+  inputTask: task(function * (cb, value) {
+    const debounceInterval = this.get('debounceInterval')
+
+    yield timeout(debounceInterval)
+    cb(value)
+  }).restartable(),
+
   // == Functions =============================================================
 
-  // == Events ================================================================
+  // == DOM Events ============================================================
+
+  // FIXME: jsdoc
+  _onClick: on('click', function () {
+    if (!this.get('disabled')) {
+      this.toggleProperty('opened')
+    }
+  }),
+
+  // FIXME: jsdoc
+  _onKeyDown: on('keyDown', function (e) {
+    if (
+      [DOWN_ARROW, UP_ARROW].indexOf(e.keyCode) !== -1 &&
+      !this.get('openend')
+    ) {
+      e.preventDefault() // Keep up/down arrow from scrolling page
+      e.stopPropagation()
+      this.set('opened', true)
+    }
+  }),
+
+  // FIXME: jsdoc
+  _onKeyPress: on('keyPress', function (e) {
+    if (e.keyCode === SPACE) {
+      e.preventDefault() // Keep space from scrolling page
+      e.stopPropagation()
+      this.toggleProperty('opened')
+    }
+  }),
+
+  // FIXME: jsdoc
+  _onFocusIn: on('focusIn', function () {
+    // If select is disabled make sure it can't get focus
+    if (this.get('disabled')) {
+      this.$().blur()
+    } else if (!this.get('focused')) {
+      this.set('focused', true)
+
+      const onFocus = this.get('onFocus')
+
+      if (typeOf(onFocus) === 'function') {
+        this.get('onFocus')()
+      }
+    }
+  }),
+
+  // FIXME: jsdoc
+  _onFocusOut: on('focusOut', function () {
+    // We must use run.later so filter text input has time to focus when select
+    // dropdown is being opened
+    run.later(() => {
+      if (this.isDestroyed || this.isDestroying) {
+        return
+      }
+
+      const focusedElement = $(':focus')[0]
+      const filterElement = $('.frost-select-dropdown .frost-text-input')[0]
+
+      // If focus has moved to filter in select dropdown then keep select
+      // visually focused and open
+      if (filterElement && focusedElement === filterElement) {
+        return
+      }
+
+      const isFocused = this.get('focused')
+      const onBlur = this.get('onBlur')
+
+      this.setProperties({
+        focused: false,
+        opened: false
+      })
+
+      if (typeOf(onBlur) === 'function' && isFocused) {
+        this.get('onBlur')()
+      }
+    })
+  }),
+
+  // == Lifecycle Hooks =======================================================
 
   didInsertElement () {
     this._super(...arguments)
@@ -238,80 +379,10 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
-  _onClick: Ember.on('click', function () {
-    if (!this.get('disabled')) {
-      this.toggleProperty('opened')
-    }
-  }),
-
-  _onKeyDown: Ember.on('keyDown', function (e) {
-    if (
-      [DOWN_ARROW, UP_ARROW].indexOf(e.keyCode) !== -1 &&
-      !this.get('openend')
-    ) {
-      e.preventDefault() // Keep up/down arrow from scrolling page
-      e.stopPropagation()
-      this.set('opened', true)
-    }
-  }),
-
-  _onKeyPress: Ember.on('keyPress', function (e) {
-    if (e.keyCode === SPACE) {
-      e.preventDefault() // Keep space from scrolling page
-      e.stopPropagation()
-      this.toggleProperty('opened')
-    }
-  }),
-
-  _onFocusIn: Ember.on('focusIn', function () {
-    // If select is disabled make sure it can't get focus
-    if (this.get('disabled')) {
-      this.$().blur()
-    } else if (!this.get('focused')) {
-      this.set('focused', true)
-
-      const onFocus = this.get('onFocus')
-
-      if (typeOf(onFocus) === 'function') {
-        this.get('onFocus')()
-      }
-    }
-  }),
-
-  _onFocusOut: Ember.on('focusOut', function () {
-    // We must use run.later so filter text input has time to focus when select
-    // dropdown is being opened
-    run.later(() => {
-      if (this.isDestroyed || this.isDestroying) {
-        return
-      }
-
-      const focusedElement = $(':focus')[0]
-      const filterElement = $('.frost-select-dropdown .frost-text-input')[0]
-
-      // If focus has moved to filter in select dropdown then keep select
-      // visually focused and open
-      if (filterElement && focusedElement === filterElement) {
-        return
-      }
-
-      const isFocused = this.get('focused')
-      const onBlur = this.get('onBlur')
-
-      this.setProperties({
-        focused: false,
-        opened: false
-      })
-
-      if (typeOf(onBlur) === 'function' && isFocused) {
-        this.get('onBlur')()
-      }
-    })
-  }),
-
   // == Actions ===============================================================
 
   actions: {
+    // FIXME: jsdoc
     closeDropDown () {
       this.setProperties({
         filter: '',
@@ -323,17 +394,21 @@ export default Component.extend(PropTypeMixin, {
       this.$().focus()
     },
 
+    // FIXME: jsdoc
     filterInput (e) {
-      const filter = e.target.value
+      const inputTask = this.get('inputTask')
       const onInput = this.get('onInput')
 
+      const filter = e.target.value
+
       if (typeOf(onInput) === 'function') {
-        onInput(filter)
+        inputTask.perform(onInput, filter)
       } else {
         this.set('filter', filter)
       }
     },
 
+    // FIXME: jsdoc
     selectItem (selectedValue) {
       const isMultiselect = this.get('multiselect')
       const props = {
@@ -350,7 +425,9 @@ export default Component.extend(PropTypeMixin, {
       const onChange = this.get('onChange')
 
       if (typeOf(onChange) === 'function') {
-        this.onChange(selectedValue)
+        run.next(() => {
+          this.onChange(selectedValue)
+        })
       }
 
       // We need to make sure focus goes back to select since it is on the

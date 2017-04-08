@@ -1,83 +1,167 @@
 import {expect} from 'chai'
 import Ember from 'ember'
-const {run} = Ember
-import {describeComponent} from 'ember-mocha'
+const {$, run} = Ember
 import {beforeEach, describe, it} from 'mocha'
+import sinon from 'sinon'
 
-describeComponent(
-  'frost-checkbox',
-  'FrostCheckboxComponent',
-  {
-    unit: true
-  },
-  function () {
-    let component
+import {unit} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
+import Component from 'ember-frost-core/components/frost-component'
+
+const test = unit('frost-checkbox', ['helper:hook'])
+describe(test.label, function () {
+  test.setup()
+
+  let component
+
+  beforeEach(function () {
+    component = this.subject({
+      hook: 'myCheckbox'
+    })
+  })
+
+  it('sets default property values correctly', function () {
+    expect(
+      component.get('size'),
+      'size: "small"'
+    ).to.eql('small')
+
+    expect(
+      component.get('label'),
+      'label: ""'
+    ).to.eql('')
+
+    expect(
+      component.get('autofocus'),
+      'autofocus: "false"'
+    ).to.equal(false)
+
+    expect(
+      component.get('checked'),
+      'checked: "false"'
+    ).to.equal(false)
+
+    expect(
+      component.get('disabled'),
+      'disabled: "false"'
+    ).to.equal(false)
+
+    expect(
+      component.get('inputId'),
+      'inputId: "null"'
+    ).not.to.equal(null)
+  })
+
+  it('extends the base frost component', function () {
+    expect(
+      component instanceof Component,
+      'is instance of Frost Component'
+    ).to.equal(true)
+  })
+
+  it('_setInputId() concatenates elmenentId to "_input"', function () {
+    const testInputId = component.get('elementId')
+
+    component._setInputId()
+
+    expect(
+      component.get('inputId')
+    ).to.eql(`${testInputId}_input`)
+  })
+
+  describe('when onBlur property is omitted', function () {
+    beforeEach(function () {
+      run(() => component.set('onBlur', undefined))
+    })
+
+    it('does not throw an error when onBlur action is triggered', function () {
+      expect(function () {
+        component.get('actions.onBlur').call(component)
+      }).not.to.throw(Error)
+    })
+  })
+
+  describe('keyPress()', function () {
+    const preventDefaultSpy = sinon.spy()
+    const stopPropagationSpy = sinon.spy()
+
+    const eventTestObject = {
+      keyCode: 32,
+      preventDefault: preventDefaultSpy,
+      stopPropagation: stopPropagationSpy
+    }
 
     beforeEach(function () {
-      component = this.subject()
+      preventDefaultSpy.reset()
+      stopPropagationSpy.reset()
     })
+    it('sets state to checked', function () {
+      this.render()
 
-    it('sets dependent keys correctly', function () {
-      const isCheckedDependentKeys = [
-        'checked'
-      ]
-
-      const sizeClassDependentKeys = [
-        'size'
-      ]
-
-      const inputIdDependentKeys = [
-        'id'
-      ]
+      component.keyPress(eventTestObject)
 
       expect(
-        component.isChecked._dependentKeys,
-        'Dependent keys are correct for isChecked()'
-      ).to.eql(isCheckedDependentKeys)
+        $('input').prop('checked'),
+        'keyPress() sets checked state'
+      ).to.equal(true)
+    })
+
+    it('does not set state to checked when disabled is true', function () {
+      const disabled = true
+
+      this.render()
+
+      run(() => component.set('disabled', disabled))
+
+      component.keyPress(eventTestObject)
 
       expect(
-        component.sizeClass._dependentKeys,
-        'Dependent keys are correct for sizeClass()'
-      ).to.eql(sizeClassDependentKeys)
+        $('input').prop('checked'),
+        'keyPress() did not set checked state'
+      ).to.equal(false)
+    })
+
+    it('calls preventDefault', function () {
+      this.render()
+
+      component.keyPress(eventTestObject)
 
       expect(
-        component.inputId._dependentKeys,
-        'Dependent keys are correct for inputId()'
-      ).to.eql(inputIdDependentKeys)
+        preventDefaultSpy.called,
+        'preventDefault() was called'
+      ).to.equal(true)
     })
 
-    it('defaults state to unchecked', function () {
-      expect(component.get('isChecked')).to.equal(false)
+    it('calls stopPropogation', function () {
+      this.render()
+
+      component.keyPress(eventTestObject)
+
+      expect(
+        stopPropagationSpy.called,
+        'stopPropagation() was called'
+      ).to.equal(true)
     })
 
-    describe('isChecked', function () {
-      [
-        {in: undefined, out: false},
-        {in: null, out: false},
-        {in: false, out: false},
-        {in: true, out: true}
-      ].forEach((test) => {
-        it(`returns ${test.out} when checked is ${test.in}`, function () {
-          run(() => {
-            component.set('checked', test.in)
-          })
-          expect(component.get('isChecked')).to.equal(test.out)
-        })
-      })
+    it('returns false', function () {
+      this.render()
+
+      expect(
+        component.keyPress(eventTestObject),
+        'keyPress() returned false'
+      ).to.equal(false)
     })
 
-    describe('when onBlur property is omitted', function () {
-      beforeEach(function () {
-        run(() => {
-          component.set('onBlur', undefined)
-        })
-      })
+    it('calls input() action', function () {
+      const spy = sinon.spy(component, 'send')
 
-      it('does not throw an error when onBlur action is triggered', function () {
-        expect(function () {
-          component.get('actions.onBlur').call(component)
-        }).not.to.throw(Error)
-      })
+      this.render()
+
+      component.keyPress(eventTestObject)
+
+      expect(
+        spy.args[0].join(),
+        'input() was called'
+      ).to.eql('input')
     })
-  }
-)
+  })
+})

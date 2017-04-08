@@ -1,10 +1,14 @@
+{{! Template for the frost-radio-button component }}
 <label>
-  {{frost-radio-button-input
-    disabled=disabled
-    groupId=groupId
-    groupValue=groupValue
-    value=value
-  }}
+  <input
+    checked={{checked}}
+    class="frost-radio-button-input"
+    data-test={{hook (concat hook '-input') value=value}}
+    disabled={{disabled}}
+    required={{required}}
+    type="radio"
+    value={{value}}
+  >
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 25">
     <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="12.5" y1="0" x2="12.5" y2="25">
       <stop offset="1.076729e-07" style="stop-color:#F5FCFF" />
@@ -15,5 +19,9 @@
       S5.6,25,12.5,25S25,19.4,25,12.5S19.4,0,12.5,0L12.5,0z" />
     <circle class="inner" cx="12.5" cy="12.5" r="7.5" />
   </svg>
-  {{yield}}
+  {{#if hasBlock}}
+    {{yield}}
+  {{else}}
+    {{label}}
+  {{/if}}
 </label>

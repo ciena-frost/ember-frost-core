@@ -1,26 +1,51 @@
 import {expect} from 'chai'
-import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
+import {describe, it} from 'mocha'
 
-describeComponent(
-  'frost-loading',
-  'Integration: EmberFrostLoadingComponent',
-  {
-    integration: true
-  },
-  function () {
-    it('renders', function () {
-      // Set any properties with this.set('myProperty', 'value')
-      // Handle any actions with this.on('myAction', function (val) { ... })
-      // Template block usage:
-      // this.render(hbs`
-      //   {{#frost-loading}}
-      //     template content
-      //   {{/frost-loading}}
-      // `)
+import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 
-      this.render(hbs`{{frost-loading}}`)
-      expect(this.$()).to.have.length(1)
-    })
-  }
-)
+const test = integration('frost-loading')
+describe(test.label, function () {
+  test.setup()
+
+  it('renders default values', function () {
+    this.render(hbs`
+      {{frost-loading hook='myLoader'}}
+    `)
+
+    expect(
+      this.$('.uil-ripple'),
+      'Has class "uil-ripple"'
+    ).to.have.length(1)
+  })
+
+  it('type property sets class', function () {
+    this.render(hbs`
+      {{frost-loading
+        hook='myLoader'
+        type='ring'
+      }}
+    `)
+
+    expect(
+      this.$('.uil-ring'),
+      'Has class "uil-ring"'
+    ).to.have.length(1)
+  })
+
+  it('renders using spread', function () {
+    this.render(hbs`
+      {{frost-loading
+        options=(hash
+          hook='myLoader'
+          type='ring'
+        )
+      }}
+    `)
+
+    expect(
+      this.$('.uil-ring'),
+      'Has class "uil-ring"'
+    ).to.have.length(1)
+  })
+})

@@ -1,3 +1,7 @@
+// The content of this file must stay in sync
+// with app/styles/ember-frost-core/frost-theme
+// Any changes here should be duplicated in there
+
 @import 'colors';
 @import 'typography';
 
@@ -14,7 +18,7 @@ $frost-color-input-focus-border: $frost-color-blue-1 !global;
 $frost-color-input-disabled-border: $frost-color-lgrey-1 !global;
 $frost-color-input-disabled-bg: $frost-color-lgrey-3 !global;
 $frost-color-selection: $frost-color-blue-1 !global;
-$frost-color-button-focus-shadow: rgba($frost-color-blue-1, 0.75) !global;
+$frost-color-button-focus-shadow: rgba($frost-color-blue-1, .75) !global;
 
 // Select
 $frost-color-select-container-background: $frost-color-white !global;

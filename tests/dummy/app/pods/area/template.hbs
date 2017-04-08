@@ -1,17 +1,24 @@
-<div class="dummy-body textarea">
+<div class="dummy-notification-container">
+{{#each notifications as |notification|}}
+  {{notification-message notification=notification}}
+{{/each}}
+</div>
+
+<div class="dummy-body textarea area">
 
   <div class="section-title">Default</div>
   <hr>
   <div class="section">
     <div class="example">
         <div class="demo">
-          {{frost-textarea}}
+          {{! BEGIN-SNIPPET textarea }}
+          {{frost-textarea
+            hook='myTextarea'
+          }}
+          {{! END-SNIPPET }}
         </div>
         <div class="snippet">
-          {{format-markdown "```handlebars
-{{frost-textarea}}
-  ```"
-          }}
+          {{code-snippet name='textarea.hbs'}}
         </div>
     </div>
   </div>
@@ -22,37 +29,49 @@
     <div class="example">
       <div class="title">error</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET textarea-error }}
         {{frost-textarea
           class='error'
+          hook='myTextarea'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-textarea
-  class='error'
-  hook='myTextarea'
-}}
-```"
-        }}
-      </div>
-    </div>
-    <div class="example">
-      <div class="title">disabled</div>
-      <div class="demo">
-        {{frost-textarea
-          disabled=true
-        }}
-      </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-textarea
-  disabled=true
-}}
-```"
-        }}
+        {{code-snippet name='textarea-error.hbs'}}
       </div>
     </div>
 
+    <div class="example">
+      <div class="title">disabled</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET textarea-disabled }}
+        {{frost-textarea
+          disabled=true
+          hook='myTextarea'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='textarea-disabled.hbs'}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">readonly</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET textarea-readonly }}
+        {{frost-textarea
+          hook='myTextarea'
+          readonly=true
+          value='readonly'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+
+      <div class="snippet">
+        {{code-snippet name='textarea-readonly.hbs'}}
+      </div>
+    </div>
   </div>
 
   <div class="section-title">Options</div>
@@ -61,97 +80,168 @@
     <div class="example">
         <div class="title">placeholder</div>
         <div class="demo">
+          {{! BEGIN-SNIPPET textarea-placeholder }}
           {{frost-textarea
+            hook='myTextarea'
             placeholder='Text goes here!'
           }}
+          {{! END-SNIPPET }}
         </div>
         <div class="snippet">
-          {{format-markdown "```handlebars
-{{frost-textarea
-  placeholder='Text goes here!'
-}}
-  ```"
-          }}
+          {{code-snippet name='textarea-placeholder.hbs'}}
         </div>
     </div>
+
     <div class="example">
       <div class="title">cols & rows</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET textarea-cols&rows }}
         {{frost-textarea
-          cols="80"
-          rows="6"
+          cols=80
+          hook='myTextarea'
+          rows=6
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-textarea
-  cols='80'
-  rows='6'
-}}
-```"
-        }}
-      </div>
-    </div>
-    <div class="example">
-      <div class="title">tabindex</div>
-      <div class="demo">
-        {{frost-textarea
-          placeholder='Un-tabbable'
-          tabindex='-1'
-        }}
-      </div>
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-textarea
-  placeholder='Un-tabbable'
-  tabindex='-1'
-}}
-  ```"
-        }}
+        {{code-snippet name='textarea-cols&rows.hbs'}}
       </div>
     </div>
 
+    <div class="example">
+      <div class="title">tabindex</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET textarea-tabindex }}
+        {{frost-textarea
+          hook='myTextarea'
+          placeholder='Un-tabbable'
+          tabindex=-1
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='textarea-tabindex.hbs'}}
+      </div>
+    </div>
+
+    <div class="example">
+    <div class="title">autofocus</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET textarea-autofocus }}
+        {{frost-textarea
+          autofocus=true
+          hook='myTextarea'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='textarea-autofocus.hbs'}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">value</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET textarea-value }}
+        {{frost-textarea
+          hook='myTextarea'
+          value='value'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='textarea-value.hbs'}}
+      </div>
+    </div>
   </div>
 
   <div class="section-title">Events</div>
   <hr>
-  <div class="section">
-
+  <div class='section'>
     <div class="example">
-      <div class="title">onFocus, onBlur</div>
+      <div class="title">DOM events</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET textarea-dom-events }}
         {{frost-textarea
-          onBlur=(action "onBlurHandler")
-          onFocus=(action "onFocusHandler")
+          hook='myTextarea'
+          onChange=(action 'event')
+          onClick=(action 'event')
+          onContextMenu=(action 'event')
+          onDoubleClick=(action 'event')
+          onDrag=(action 'event')
+          onDragEnd=(action 'event')
+          onDragEnter=(action 'event')
+          onDragLeave=(action 'event')
+          onDragOver=(action 'event')
+          onDragStart=(action 'event')
+          onDrop=(action 'event')
+          onFocusIn=(action 'event')
+          onFocusOut=(action 'event')
+          onInput=(action 'event')
+          onKeyDown=(action 'event')
+          onKeyPress=(action 'event')
+          onKeyUp=(action 'event')
+          onMouseDown=(action 'event')
+          onMouseEnter=(action 'event')
+          onMouseLeave=(action 'event')
+          onMouseMove=(action 'event')
+          onMouseUp=(action 'event')
+          onSubmit=(action 'event')
+          onTouchCancel=(action 'event')
+          onTouchEnd=(action 'event')
+          onTouchMove=(action 'event')
+          onTouchStart=(action 'event')
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-textarea
-  onBlur=(action 'onBlurHandler')
-  onFocus=(action 'onFocusHandler')
-}}
-```"
-        }}
+         <div>Template</div>
+        {{code-snippet name='textarea-dom-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='textarea-dom-events.js'}}
       </div>
     </div>
 
     <div class="example">
-      <div class="title">onInput</div>
+      <div class="title">Textarea support events</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET textarea-support-events }}
         {{frost-textarea
-          onInput=(action "onInputHandler")
+          hook='myTextarea'
+          onEnter=(action 'support' 'enter')
+          onEscape=(action 'support' 'escape')
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-textarea
-  onInput=(action 'onInputHandler')
-}}
-```"
-        }}
+        <div>Template</div>
+        {{code-snippet name='textarea-support-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='textarea-support-events.js'}}
       </div>
     </div>
-
+  </div>
+  <div class='section-title'>Other</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Spread</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET area-other-spread }}
+        {{frost-textarea
+          options=(hash
+            disabled=true
+            hook='myTextarea'
+            value='this is my text area'
+          )
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='area-other-spread.hbs'}}
+      </div>
+    </div>
   </div>
 </div>

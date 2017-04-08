@@ -1,13 +1,14 @@
-import {expect} from 'chai'
-import {after, before, beforeEach, describe, it} from 'mocha'
 import destroyApp from '../helpers/destroy-app'
 import startApp from '../helpers/start-app'
+import {expect} from 'chai'
+import {after, before, beforeEach, describe, it} from 'mocha'
 
 describe('Acceptance: Application', function () {
   let application
 
   before(function () {
     application = startApp()
+    server.loadFixtures()
   })
 
   after(function () {
@@ -29,10 +30,16 @@ describe('Acceptance: Application', function () {
     'button',
     'checkbox',
     'field',
+    'helpers',
     'icons',
     'layout',
+    'loading',
     'palette',
     'password',
+    'radio',
+    'scroll',
+    'select',
+    'toggle',
     'typography'
   ]
     .forEach((path) => {

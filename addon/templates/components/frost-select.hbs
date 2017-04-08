@@ -1,3 +1,4 @@
+{{! Template for the frost-select component }}
 <span class="frost-select-text">
   {{or text placeholder}}
 </span>
@@ -12,13 +13,14 @@
     send=(component 'frost-select-dropdown'
       $element=$element
       filter=filter
+      hook=hook
       items=items
       multiselect=multiselect
       onClose=(action 'closeDropDown')
       onFilterInput=(action 'filterInput')
       onSelect=(action 'selectItem')
-      receivedHook=hook
       selectedItems=selectedItems
+      wrapLabels=wrapLabels
     )
   }}
 {{/if}}

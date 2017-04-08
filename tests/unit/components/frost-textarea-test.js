@@ -1,49 +1,112 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {run} = Ember
-import {describeComponent} from 'ember-mocha'
 import {beforeEach, describe, it} from 'mocha'
 
-describeComponent(
-  'frost-textarea',
-  'FrostTextareaComponent',
-  {
-    unit: true
-  },
-  function () {
-    let component
+import {unit} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
+import Component from 'ember-frost-core/components/frost-component'
+import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 
+const test = unit('frost-textarea')
+describe(test.label, function () {
+  test.setup()
+
+  let component
+
+  beforeEach(function () {
+    component = this.subject({
+      hook: 'myTextarea'
+    })
+  })
+
+  it('sets default property values correctly', function () {
+    expect(
+      component.get('autofocus'),
+      'autofocus: false'
+    ).to.equal(false)
+
+    expect(
+      component.get('cols'),
+      'cols: null'
+    ).to.equal(null)
+
+    expect(
+      component.get('disabled'),
+      'disabled: false'
+    ).to.equal(false)
+
+    expect(
+      component.get('form'),
+      'form: null'
+    ).to.equal(null)
+
+    expect(
+      component.get('isClearEnabled'),
+      'isClearEnabled: false'
+    ).to.equal(false)
+
+    expect(
+      component.get('isClearVisible'),
+      'isClearVisible: false'
+    ).to.equal(false)
+
+    expect(
+      component.get('placeholder'),
+      'placeholder: null'
+    ).to.equal(null)
+
+    expect(
+      component.get('readonly'),
+      'readonly: false'
+    ).to.equal(false)
+
+    expect(
+      component.get('rows'),
+      'rows: null'
+    ).to.equal(null)
+
+    expect(
+      component.get('tabindex'),
+      'tabindex: 0'
+    ).to.be.eql(0)
+
+    expect(
+      component.get('value'),
+      'value: null'
+    ).to.equal(null)
+
+    expect(
+      component.get('wrap'),
+      'wrap: soft'
+    ).to.be.eql('soft')
+  })
+
+  it('extends the commone frost component', function () {
+    expect(
+      component instanceof Component,
+      'is instance of Frost Component'
+    ).to.equal(true)
+  })
+
+  it('has the expect Mixins', function () {
+    expect(
+      FrostEventsProxy.detect(component),
+      'FrostEventsProxy is present'
+    ).to.equal(true)
+  })
+
+  describe('when keyUp property is omitted', function () {
     beforeEach(function () {
-      component = this.subject()
+      run(() => component.set('keyUp', undefined))
     })
 
-    it('includes className frost-textarea', function () {
-      expect(component.classNames).to.include('frost-textarea')
+    it('does not throw an error when keyUp action is triggered', function () {
+      expect(
+        function () {
+          component.get('actions.keyUp').call(component)
+        },
+        'error not triggered by keyup()'
+      ).not.to.throw(Error)
     })
-
-    describe('when onBlur property is omitted', function () {
-      beforeEach(function () {
-        run(() => {
-          component.set('onBlur', undefined)
-        })
-      })
-
-      it('does not throw an error when onBlur action is triggered', function () {
-        expect(function () {
-          component.get('actions.onBlur').call(component)
-        }).not.to.throw(Error)
-      })
-    })
-
-    it('defaults to zero tabindex', function () {
-      expect(component.tabindex).to.equal(0)
-      expect(this.$('textarea').prop('tabindex')).to.equal(0)
-    })
-
-    it('passes tabindex to the underlying field', function () {
-      component.set('tabindex', -1)
-      expect(component.tabindex).to.equal(-1)
-      expect(this.$('textarea').prop('tabindex')).to.equal(-1)
-    })
-  }
-)
+  })
+})

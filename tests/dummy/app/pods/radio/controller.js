@@ -1,13 +1,28 @@
 import Ember from 'ember'
-const {Controller} = Ember
+const {Controller, inject} = Ember
 
+// BEGIN-SNIPPET radio-controller
 export default Controller.extend({
-  notifications: Ember.inject.service('notification-messages'),
+  notifications: inject.service('notification-messages'),
 
-  sampleList: ['a', 'b', 'c', 'd', 'e'],
+  inlineValue: 'a',
+
+  sampleList: [
+    {label: 'a', value: 'a'},
+    {label: 'b', value: 'b'},
+    {label: 'c', value: 'c'},
+    {label: 'd', value: 'd'},
+    {label: 'e', value: 'e'}
+  ],
 
   model: Ember.Object.create({
-    checkboxGroup: 'c'
+    radioGroup1: 'c',
+    radioGroup2: 'b',
+    radioGroup3: 'c',
+    radioGroup4: 'd',
+    radioGroup5: 'b',
+    radioGroup6: 'a',
+    radioGroup7: 'b'
   }),
 
   actions: {
@@ -22,3 +37,4 @@ export default Controller.extend({
     }
   }
 })
+// END-SNIPPET radio-controller

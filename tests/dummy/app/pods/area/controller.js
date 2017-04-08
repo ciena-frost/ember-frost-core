@@ -1,29 +1,25 @@
 import Ember from 'ember'
-const {Controller} = Ember
+const {Controller, inject} = Ember
 
 export default Controller.extend({
-  notifications: Ember.inject.service('notification-messages'),
+  notifications: inject.service('notification-messages'),
   actions: {
-    onBlurHandler () {
-      this.get('notifications').success('blur event', {
+    // BEGIN-SNIPPET textarea-support-events
+    support (type, value) {
+      this.get('notifications').success(`${type}: ${value}`, {
         autoClear: true,
         clearDuration: 2000
       })
     },
+    // END-SNIPPET textarea-support-events
 
-    onFocusHandler () {
-      this.get('notifications').success('focus event', {
-        autoClear: true,
-        clearDuration: 2000
-      })
-    },
-
-    onInputHandler (attrs) {
-      console.log('text area value: ' + attrs.value)
-      this.get('notifications').success('value: "' + attrs.value + '"', {
+    // BEGIN-SNIPPET textarea-dom-events
+    event (event) {
+      this.get('notifications').success(`${event.type}: ${event.target.value}`, {
         autoClear: true,
         clearDuration: 2000
       })
     }
+    // END-SNIPPET textarea-dom-events
   }
 })

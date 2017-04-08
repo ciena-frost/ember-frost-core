@@ -1,98 +1,145 @@
-import Ember from 'ember'
-const {
-  Component,
-  computed
-} = Ember
-const {
-  readOnly
-} = computed
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+/**
+ * Component definition for the frost-radio-button component
+ */
 import layout from '../templates/components/frost-radio-button'
+import {cloneEvent} from '../utils'
+import Component from './frost-component'
+import Ember from 'ember'
+import computed, {readOnly} from 'ember-computed-decorators'
+import {PropTypes} from 'ember-prop-types'
+const {$} = Ember
 
-export default Component.extend(PropTypeMixin, {
-  // == Properties  ============================================================
+export default Component.extend({
+  // == Dependencies ==========================================================
+
+  // == Keyword Properties ====================================================
 
   attributeBindings: [
     'tabindex'
   ],
-  classNames: [
-    'frost-radio-button'
-  ],
+
   classNameBindings: [
     'checked',
     'disabled',
-    'required'
+    'required',
+    'size'
   ],
+
   layout,
 
+  // == PropTypes =============================================================
+
   propTypes: {
-    hook: PropTypes.string,
+    // options
+    // Group properties
+    groupId: PropTypes.string,
+    selectedValue: PropTypes.string,
+    receivedHook: PropTypes.string,
+    // Radio properties
+    checked: PropTypes.bool,
     disabled: PropTypes.bool,
-    required: PropTypes.bool
+    label: PropTypes.string,
+    required: PropTypes.bool,
+    size: PropTypes.string,
+    value: PropTypes.string.isRequired,
+    onChange: PropTypes.func
+
+    // state
   },
 
   getDefaultProps () {
     return {
+      // Radio properties
       disabled: false,
-      required: false
+      required: false,
+      size: 'small'
     }
   },
 
   // == Computed properties  ===================================================
 
-  groupId: readOnly('parentView.id'),
-  groupValue: readOnly('parentView.value'),
-  onChange: readOnly('parentView.onChange'),
+  @computed('selectedValue', 'value')
+  /**
+   * Determine checked state
+   * TODO: make compued property readOnly
+   * @param {String} selectedValue - which radio button in the group is selected
+   * @param {String} value - radio button value
+   * @returns {Boolean} whether this radio button is checked or not
+   */
+  checked (selectedValue, value) { // eslint-disable-line
+    return selectedValue === value
+  },
 
-  checked: computed('groupValue', 'value', function () {
-    return this.get('groupValue') === this.get('value')
-  }),
+  @computed('receivedHook')
+  /**
+   * Determine hook name for radio-button
+   * TODO: make computed property readOnly
+   * @param {String} receivedHook - hook received from parent
+   * @returns {String} the concatenated hook name
+   */
+  hook (receivedHook) { // eslint-disable-line
+    const radioGroupHook = receivedHook || ''
+    return `${radioGroupHook}-button`
+  },
 
-  tabindex: Ember.computed('disabled', function () {
-    return this.get('disabled') ? -1 : 0
-  }),
+  @readOnly
+  @computed('value')
+  /**
+   * Determine hook qualifiers for radio-button
+   * @param {String} value - radio button's value
+   * @returns {String} the hook qualifiers
+   */
+  hookQualifiers (value) {
+    if (value) {
+      return {value}
+    }
+  },
+
+  @readOnly
+  @computed('disabled')
+  /**
+   * Determine tabindex value
+   * @param {Boolean} disabled - is this button disabled
+   * @returns {Number} the tabindex value
+   */
+  tabindex (disabled) {
+    return disabled ? -1 : 0
+  },
 
   // == Functions ===============================================================
 
-  _createEvent (_event, _target) {
-    let event = Ember.$.Event(null, _event)
-    let target = Ember.$.clone(_target)
-    target.id = this.get('groupId')
-    event.target = target
-    return event
+  // FIXME: jsdoc
+  _changeTarget (event, target) {
+    const e = cloneEvent(event, target)
+
+    const groupdId = this.get('groupId')
+    if (groupdId) {
+      e.target.id = this.get('groupId')
+    }
+
+    return e
   },
 
   // == Events ===============================================================
-
-  init () {
-    this._super(...arguments)
-    Ember.assert(
-      `${this.toString()} must be initialized in the yield block of 'frost-radio-group'`,
-      /frost-radio-group/.test(this.parentView.toString()))
-    Ember.assert(
-      `${this.toString()} must be initialized with a 'value' property`,
-      this.get('value')
-    )
-  },
-
   /* eslint-disable complexity */
-  keyPress (e) {
-    if (e.keyCode === 13 || e.keyCode === 32) {
-      if (this.get('disabled') || this.get('groupValue') === this.get('value')) {
+  // FIXME: jsdoc
+  keyPress (event) {
+    if (event.keyCode === 13 || event.keyCode === 32) {
+      if (this.get('disabled') || this.get('checked')) {
         return
       }
-      let change = this.get('onChange')
-      if (change && typeof change === 'function') {
-        change(this._createEvent(e, Ember.$(e.target).find('input')[0]))
+
+      if (this.onChange) {
+        this.onChange(this._changeTarget(event, $(event.target).find('input')[0]))
       }
     }
   },
   /* eslint-enable complexity */
 
+  // FIXME: jsdoc
   change (event) {
-    const onChange = this.get('onChange')
-    if (onChange && typeof onChange === 'function') {
-      onChange(this._createEvent(event, event.target))
+    if (this.onChange) {
+      this.onChange(this._changeTarget(event, event.target))
     }
   }
 })

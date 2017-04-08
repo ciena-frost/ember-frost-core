@@ -1,23 +1,53 @@
-{{textarea
+{{! Template for the frost-textarea component }}
+{{hookable-textarea
   autofocus=autofocus
+  class='frost-textarea-input'
   cols=cols
   disabled=disabled
-  focus-out=(action 'onBlur')
   form=form
   hook=(concat hook '-input')
-  value=value
   placeholder=placeholder
   readonly=readonly
   rows=rows
-  wrap=wrap
   tabindex=tabindex
+  value=value
+  wrap=wrap
+
+  change=_eventProxy.change
+  click=_eventProxy.click
+  contextMenu=_eventProxy.contextMenu
+  doubleClick=_eventProxy.doubleClick
+  drag=_eventProxy.drag
+  dragEnd=_eventProxy.dragEnd
+  dragEnter=_eventProxy.dragEnter
+  dragLeave=_eventProxy.dragLeave
+  dragOver=_eventProxy.dragOver
+  dragStart=_eventProxy.dragStart
+  drop=_eventProxy.drop
+  focusIn=_eventProxy.focusIn
+  focusOut=_eventProxy.focusOut
+  input=(action '_onInput')
+  keyDown=_eventProxy.keyDown
+  keyPress=_eventProxy.keyPress
+  key-up='keyUp'
+  mouseDown=_eventProxy.mouseDown
+  mouseEnter=_eventProxy.mouseEnter
+  mouseLeave=_eventProxy.mouseLeave
+  mouseMove=_eventProxy.mouseMove
+  mouseUp=_eventProxy.mouseUp
+  submit=_eventProxy.submit
+  touchCancel=_eventProxy.touchCancel
+  touchEnd=_eventProxy.touchEnd
+  touchMove=_eventProxy.touchMove
+  touchStart=_eventProxy.touchStart
+
+  escape-press=_eventProxy.escape-press
+  insert-newline=_eventProxy.enter
 }}
-{{#if showClear}}
-  {{! Using a div as a click target to workaround https://github.com/emberjs/ember.js/issues/13420 }}
-  <div class='frost-text-clear' data-test={{hook (concat hook '-clear')}} onclick={{action (action 'clear')}}>
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-      <path d="M0 0h24v24H0z" fill="none"/>
-    </svg>
-  </div>
-{{/if}}
+{{! Using a div as a click target to workaround https://github.com/emberjs/ember.js/issues/13420 }}
+<div class='frost-textarea-clear' data-test={{hook (concat hook '-clear')}} onclick={{action (action 'clear')}}>
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+    <path d="M0 0h24v24H0z" fill="none"/>
+  </svg>
+</div>

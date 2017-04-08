@@ -7,22 +7,79 @@
       <div class="demo scroll-size">
         {{! BEGIN-SNIPPET scroll }}
         {{#frost-scroll class='full'
+          hook='myScroll'
+        }}
+          {{frost-icon
+            class='dummy-svg-huge'
+            hook='hugeIcon1'
+            icon='add'
+          }}
+        {{/frost-scroll}}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        <div>Template</div>
+        {{code-snippet name='scroll.hbs'}}
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Events</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="demo scroll-size">
+        {{! BEGIN-SNIPPET scroll-events }}
+        {{#frost-scroll class='full'
+          hook='myEventsScroll'
           onScrollUp=(action 'onScrollUp')
           onScrollDown=(action 'onScrollDown')
           onScrollYStart=(action 'onScrollYStart')
           onScrollYEnd=(action 'onScrollYEnd')
           on-scroll-y-end=(action 'yEndReached')
         }}
-          {{frost-icon icon='frost/add' class='dummy-svg-huge'}}
+          {{frost-icon
+            class='dummy-svg-huge'
+            hook='hugeIcon2'
+            icon='add'
+          }}
         {{/frost-scroll}}
         {{! END-SNIPPET }}
       </div>
-
       <div class='snippet'>
         <div>Template</div>
-        {{code-snippet name='scroll.hbs'}}
+        {{code-snippet name='scroll-events.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='scroll-controller.js'}}
       </div>
     </div>
+  </div>
 
+  <div class='section-title'>Other</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Spread</div>
+      <div class='demo scroll-size'>
+        {{! BEGIN-SNIPPET scroll-other-spread }}
+        {{#frost-scroll
+          class='full'
+          options=(hash
+            hook='myScroll'
+          )
+        }}
+          {{frost-icon
+            class='dummy-svg-huge'
+            hook='hugeIcon3'
+            icon='add'
+          }}
+        {{/frost-scroll}}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='scroll-other-spread.hbs'}}
+      </div>
+    </div>
   </div>
 </div>

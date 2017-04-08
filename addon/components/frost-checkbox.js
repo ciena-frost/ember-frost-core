@@ -1,62 +1,77 @@
-import Ember from 'ember'
-const {Component, isEmpty, run, typeOf} = Ember
-import computed, {readOnly} from 'ember-computed-decorators'
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+/**
+ * Component definition for the frost-checkbox component
+ */
 import layout from '../templates/components/frost-checkbox'
+import Component from './frost-component'
+import Ember from 'ember'
+import {PropTypes} from 'ember-prop-types'
+const {isEmpty, on, run} = Ember
 
-export default Component.extend(PropTypeMixin, {
+export default Component.extend({
   // == Dependencies ==========================================================
 
-  // == Properties ============================================================
+  // == Keyword Properties ====================================================
 
-  classNames: ['frost-checkbox'],
-  classNameBindings: ['sizeClass'],
+  classNameBindings: ['size'],
   layout,
 
+  // == PropTypes =============================================================
+
   propTypes: {
-    hook: PropTypes.string
+    // options
+    autofocus: PropTypes.bool,
+    checked: PropTypes.bool,
+    disabled: PropTypes.bool,
+    inputId: PropTypes.string,
+    label: PropTypes.string,
+    size: PropTypes.string
+
+    // state
   },
 
   getDefaultProps () {
-    return {}
-  },
-
-  // == Computed properties  ===================================================
-
-  @computed('checked')
-  /**
-   * Determine whether or not input should be checked
-   * @param {Boolean|null|undefined} checked - desired checked state
-   * @returns {Boolean} whether or not input should be checked
-   */
-  isChecked (checked) {
-    return [null, undefined, false].indexOf(checked) === -1
-  },
-
-  @computed('id')
-  /**
-   * Get input ID
-   * @param {String} id - ID to use for input
-   * @returns {String} input ID
-   */
-  inputId (id) {
-    id = id || this.elementId
-    return `${id}_input`
-  },
-
-  @readOnly
-  @computed('size')
-  /**
-   * Get class for setting input size
-   * @param {String} size - desired size
-   * @returns {String} size class (defaults to small if not provided)
-   */
-  sizeClass (size) {
-    return size || 'small'
+    return {
+      // options
+      autofocus: false,
+      checked: false,
+      disabled: false,
+      inputId: null,
+      label: '',
+      size: 'small'
+    }
   },
 
   // == Functions =============================================================
 
+  /**
+   * Set unique inputId that will be set on label and input element
+   * @private
+   * @returns {undefined}
+   */
+  _setInputId () {
+    if (!this.get('inputId')) {
+      this.set('inputId', `${this.get('elementId')}_input`)
+    }
+  },
+
+  // == DOM Events ============================================================
+
+  /**
+   * Handle the focusIn event
+   * @params {Event} e - the event being handled
+   */
+  _onFocus: on('focusIn', function (e) {
+    // If an onFocus handler is defined, call it
+    if (this.attrs.onFocus) {
+      this.attrs.onFocus()
+    }
+  }),
+
+  /**
+   * Handle the keypress event
+   * @param {Event} e - the event being handled
+   * @returns {Boolean|undefined} false if we want to stop propagation
+   */
   keyPress (e) {
     if (e.keyCode === 32) {
       if (this.get('disabled') !== true) {
@@ -69,7 +84,8 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
-  /* Ember.Component method */
+  // == Lifecycle Hooks =======================================================
+
   didInsertElement () {
     if (this.get('autofocus')) {
       run.next('render', () => {
@@ -78,31 +94,31 @@ export default Component.extend(PropTypeMixin, {
     }
   },
 
-  // == Events ================================================================
-
-  _onFocus: Ember.on('focusIn', function (e) {
-    // If an onFocus handler is defined, call it
-    if (this.attrs.onFocus) {
-      this.attrs.onFocus()
-    }
-  }),
+  init () {
+    this._super(...arguments)
+    this._setInputId()
+  },
 
   // == Actions ===============================================================
 
   actions: {
+    /**
+     * Handle the blur event, calling passed in handler if provided
+     */
     onBlur () {
-      const onBlur = this.get('onBlur')
-
-      if (onBlur) {
-        onBlur()
+      if (this.onBlur) {
+        this.onBlur()
       }
     },
 
+    /**
+     * Handle the change event on the checkbox, calling onInput if provided
+     */
     input () {
       let id = this.get('value')
-      if (typeOf(this.attrs['onInput']) === 'function') {
-        this.attrs['onInput']({
-          id: isEmpty(id) ? this.get('id') : id,
+      if (this.onInput) {
+        this.onInput({
+          id: isEmpty(id) ? this.get('elementId') : id,
           value: this.$('input').prop('checked')
         })
       }

@@ -5,12 +5,16 @@
   <div class="section">
     <div class="example">
       <div class="demo">
-        {{frost-loading}}
+        {{frost-loading
+          hook='myDefaultLoader'
+        }}
       </div>
 
       <div class="snippet">
         {{format-markdown "```handlebars
-{{frost-loading}}
+{{frost-loading
+  hook='myDefaultLoader'
+}}
 ```"}}
       </div>
     </div>
@@ -24,6 +28,7 @@
       <div class='title'>type</div>
       <div class="demo">
         {{frost-loading
+          hook='myRingLoader'
           type='ring'
         }}
       </div>
@@ -31,9 +36,31 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-loading
+  hook='myRingLoader'
   type='ring'
 }}
 ```"}}
+      </div>
+    </div>
+  </div>
+
+  <div class='section-title'>Other</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Spread</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET loading-other-spread }}
+        {{frost-loading
+          options=(hash
+            hook='mySpreadLoader'
+            type='ring'
+          )
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='loading-other-spread.hbs'}}
       </div>
     </div>
   </div>

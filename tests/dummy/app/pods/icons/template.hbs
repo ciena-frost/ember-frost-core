@@ -21,7 +21,6 @@
 ```"}}
       </div>
     </div>
-
   </div>
 
   <div class="section-title">Icon pack</div>
@@ -31,6 +30,7 @@
       <div class="demo">
         {{!-- Using the legacy nested format until the feature is available and svgs can be moved --}}
         {{frost-icon
+          hook='myIconPackIcon'
           pack='frost'
           icon='round-add'
         }}
@@ -39,35 +39,35 @@
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-icon
+  hook='myIconPackIcon'
   pack='frost'
   icon='round-add'
 }}
 ```"}}
       </div>
     </div>
-
   </div>
 
-  <div class="section-title">Legacy (no icon pack, nested paths)</div>
+  <div class='section-title'>Other</div>
   <hr>
-  <div class="section">
-    <div class="example">
-      <div class="demo">
-        {{!-- Using the legacy nested format until the feature is available and svgs can be moved --}}
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Spread</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET icon-other-spread }}
         {{frost-icon
-          icon='frost/round-add'
+          options=(hash
+            hook='mySpreadIcon'
+            icon='round-add'
+            pack='frost'
+          )
         }}
+        {{! END-SNIPPET }}
       </div>
-
-      <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-icon
-  icon='frost/round-add'
-}}
-```"}}
+      <div class='snippet'>
+        {{code-snippet name='icon-other-spread.hbs'}}
       </div>
     </div>
-
   </div>
 
   <div class="section-title">Available Icons</div>
@@ -92,7 +92,10 @@
                 {{format-markdown icon.markdown}}
               </div>
               <div class="content" class="{{backgroundColor}}">
-                {{frost-icon icon=icon.name}}
+                {{frost-icon
+                  hook=(concat icon.name 'Icon')
+                  icon=icon.name
+                }}
               </div>
             </div>
           {{/each}}

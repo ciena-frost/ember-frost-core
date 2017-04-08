@@ -5,6 +5,18 @@ export default function () {
     this.namespace = config.mirageNamespace
   }
 
+  this.get('/links/:id', function (db, request) {
+    let id = request.params.id
+
+    return {
+      data: {
+        type: 'links',
+        id: id,
+        attributes: db.links.find(id)
+      }
+    }
+  })
+
   this.get('/nodes', function ({db}) {
     return {
       data: db.nodes

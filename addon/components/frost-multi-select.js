@@ -1,14 +1,30 @@
-import Ember from 'ember'
+/**
+ * Component definition for the frost-mult-select component
+ */
 import FrostSelect from './frost-select'
 
-const assign = Object.assign || Ember.assign || Ember.merge
-
 export default FrostSelect.extend({
-  getDefaultProps () {
-    const defaults = this._super(...arguments)
+  // == Dependencies ==========================================================
 
-    return assign(defaults, {
+  // == Keyword Properties ====================================================
+
+  // == PropTypes =============================================================
+
+  getDefaultProps () {
+    return {
+      css: 'frost-select', // the multi-select uses the same base class as frost-select
       multiselect: true
-    })
-  }
+    }
+  },
+
+  // == Computed Properties ===================================================
+
+  // == Functions =============================================================
+
+  // == DOM Events ============================================================
+
+  // == Lifecycle Hooks =======================================================
+
+  // == Actions ===============================================================
+  actions: {}
 })

@@ -2,58 +2,61 @@
  * Component definition for the <%= dasherizedModuleName %> component
  */
 
-import Ember from 'ember'
-const {Component} = Ember
-import PropTypesMixin, {PropTypes} from 'ember-prop-types'
 import computed, {readOnly} from 'ember-computed-decorators'
+import {Component} from 'ember-frost-core'
+import {PropTypes} from 'ember-prop-types'
 
 import layout from '<%= templatePath %>'
 
-export default Component.extend(PropTypesMixin, {
+export default Component.extend({
   // == Dependencies ==========================================================
 
-  // == Properties ============================================================
+  // == Keyword Properties ====================================================
+
+  layout,
+
+  // == PropTypes =============================================================
 
   /**
-   * Properties for this component. Public properties are expected to be
-   * (potentially) passed in to the component. Private properties are *not*
-   * expected to be passed in/overwritten.
+   * Properties for this component. Options are expected to be (potentially)
+   * passed in to the component. State properties are *not* expected to be
+   * passed in/overwritten.
    */
   propTypes: {
-    // public
-    hook: PropTypes.string.isRequired,
+    // options
 
-    // private
-    layout: PropTypes.any
+    // state
   },
 
-  /**
-   * @returns {Object} the default property values for this component
-   */
+  /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
-      // public
+      // options
 
-      // private
-      layout
+      // state
     }
   },
 
   // == Computed Properties ===================================================
 
   @readOnly
-  @computed('hook')
+  @computed('css')
   /**
    * A pretty silly computed property just as an example of one
-   * it appends '-' to the hook
-   * @param {String} hook - the hook for this component
-   * @returns {String} a hook prefix suitable for use within the template
+   * it appends '-' to the css base
+   *
+   * NOTE: this computed property is only here as an examle and should be removed/replaced with a real one
+   *
+   * @param {String} css - the base css class for this component (the component name)
+   * @returns {String} a css prefix suitable for use within the template
    */
-  hookPrefix (hook) {
-    return `${hook}-`
+  cssPrefix (css) {
+    return `${css}-`
   },
 
   // == Functions =============================================================
+
+  // == DOM Events ============================================================
 
   // == Lifecycle Hooks =======================================================
 

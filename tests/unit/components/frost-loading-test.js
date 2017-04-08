@@ -1,22 +1,32 @@
 import {expect} from 'chai'
-import {describeComponent} from 'ember-mocha'
-import {beforeEach, it} from 'mocha'
+import {beforeEach, describe, it} from 'mocha'
 
-describeComponent(
-  'frost-loading',
-  'FrostLoadingComponent',
-  {
-    unit: true
-  },
-  function () {
-    let component
+import {unit} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
+import Component from 'ember-frost-core/components/frost-component'
 
-    beforeEach(function () {
-      component = this.subject()
+const test = unit('frost-loading')
+describe(test.label, function () {
+  test.setup()
+
+  let component
+
+  beforeEach(function () {
+    component = this.subject({
+      hook: 'myLoader'
     })
+  })
 
-    it('includes className frost-loading', function () {
-      expect(component.classNames).to.include('frost-loading')
-    })
-  }
-)
+  it('sets default property values correctly', function () {
+    expect(
+      component.get('type'),
+      'type: "ripple"'
+    ).to.eql('ripple')
+  })
+
+  it('extends the commone frost component', function () {
+    expect(
+      component instanceof Component,
+      'is instance of Frost Component'
+    ).to.equal(true)
+  })
+})

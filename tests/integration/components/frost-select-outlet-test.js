@@ -1,17 +1,15 @@
 import {expect} from 'chai'
-import {describeComponent, it} from 'ember-mocha'
 import hbs from 'htmlbars-inline-precompile'
+import {describe, it} from 'mocha'
 
-describeComponent(
-  'frost-select-outlet',
-  'Integration: FrostSelectOutletComponent',
-  {
-    integration: true
-  },
-  function () {
-    it('renders', function () {
-      this.render(hbs`{{frost-select-outlet}}`)
-      expect(this.$()).to.have.length(1)
-    })
-  }
-)
+import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
+
+const test = integration('frost-select-outlet')
+describe(test.label, function () {
+  test.setup()
+
+  it('renders', function () {
+    this.render(hbs`{{frost-select-outlet hook='mySelectOutlet'}}`)
+    expect(this.$()).to.have.length(1)
+  })
+})

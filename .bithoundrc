@@ -1,0 +1,8 @@
+{
+  "critics": {
+    "lint": {"engine": "none"}
+  }
+  "dependencies": {
+    "mute": ["ember-cli"]
+  }
+}

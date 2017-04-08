@@ -1,10 +1,11 @@
-@import 'frost-theme';
-@import 'frost-app';
+@import 'ember-frost-core/frost-theme';
+@import 'ember-frost-core/frost-app';
 @import 'typography';
 @import 'layout';
 @import 'highlight';
 @import 'button';
 @import 'helpers';
+@import 'select';
 
 .dummy-notification-container {
   position: fixed;
@@ -270,11 +271,12 @@ hr {
   }
 }
 
-.dummy-svg-huge {
-  width: 800px;
-  height: 800px;
-  > rect {
-  fill: red;
+
+svg {
+  &.dummy-svg-huge {
+    width: 800px;
+    height: 800px;
+    fill: red;
   }
 }
 

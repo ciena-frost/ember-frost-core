@@ -1,10 +1,9 @@
-var routingConfig = require('./routing')
 module.exports = function (environment) {
   var ENV = {
     modulePrefix: 'dummy',
     podModulePrefix: 'dummy/pods',
     environment: environment,
-    baseURL: '/',
+    rootURL: '/',
     locationType: 'hash',
     EmberENV: {
       FEATURES: {
@@ -18,10 +17,14 @@ module.exports = function (environment) {
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
-      routingConfig: routingConfig
     },
     'ember-cli-notifications': {
       autoClear: false
+    },
+    'ember-prop-types': {
+      spreadProperty: 'options',
+      throwErrors: true,
+      validateOnUpdate: true
     }
   }
 
@@ -35,8 +38,12 @@ module.exports = function (environment) {
 
   if (environment === 'test') {
     // Testem prefers this...
-    ENV.baseURL = '/'
+    ENV.rootURL = '/'
     ENV.locationType = 'none'
+
+    ENV['ember-cli-mirage'] = {
+      enabled: true
+    }
 
     // keep test console output quieter
     ENV.APP.LOG_ACTIVE_GENERATION = false
@@ -46,7 +53,7 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
-    ENV.baseURL = '/ember-frost-core'
+    ENV.rootURL = '/ember-frost-core'
     ENV.isDemo = true
     ENV.mirageNamespace = 'https://ciena-frost.github.io'
     ENV['ember-cli-mirage'] = {

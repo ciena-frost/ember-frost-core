@@ -6,7 +6,9 @@
     <div class='example'>
       <div class='demo'>
         {{! BEGIN-SNIPPET password }}
-        {{frost-password}}
+        {{frost-password
+          hook='myDefaultPassword'
+        }}
         {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
@@ -24,7 +26,7 @@
         {{! BEGIN-SNIPPET password-error }}
         {{frost-password
           class='error'
-          hook='myPwdField'
+          hook='myErroredPassword'
         }}
         {{! END-SNIPPET }}
       </div>
@@ -39,6 +41,7 @@
         {{! BEGIN-SNIPPET password-disabled }}
         {{frost-password
           disabled=true
+          hook='myDisabledPassword'
         }}
         {{! END-SNIPPET }}
       </div>
@@ -52,10 +55,26 @@
   <hr>
   <div class='section'>
     <div class='example'>
+      <div class='title'>placeholder</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET password-placeholder }}
+        {{frost-password
+          hook='myPlaceholderPassword'
+          placeholder='Placeholder'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='password-placeholder.hbs'}}
+      </div>
+    </div>
+
+    <div class='example'>
       <div class='title'>revealable</div>
       <div class='demo'>
         {{! BEGIN-SNIPPET password-revealable }}
         {{frost-password
+          hook='myRevealablePassword'
           revealable=true
         }}
         {{! END-SNIPPET }}
@@ -70,7 +89,8 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET password-tabindex }}
         {{frost-password
-          tabindex='-1'
+          hook='myTabIndexPassword'
+          tabindex=-1
         }}
         {{! END-SNIPPET }}
       </div>
@@ -84,28 +104,11 @@
   <hr>
   <div class='section'>
     <div class='example'>
-      <div class='title'>Legacy events</div>
-      <div class='demo'>
-        {{! BEGIN-SNIPPET password-legacy-events }}
-        {{frost-password
-          onInput=(action 'legacy')
-        }}
-        {{! END-SNIPPET }}
-      </div>
-      <div class='snippet'>
-         <div>Template</div>
-        {{code-snippet name='password-legacy-events.hbs'}}
-        <br>
-        <div>Controller</div>
-        {{code-snippet name='password-legacy-events.js'}}
-      </div>
-    </div>
-
-    <div class='example'>
       <div class='title'>DOM events</div>
       <div class='demo'>
         {{! BEGIN-SNIPPET password-dom-events }}
         {{frost-password
+          hook='myEventsPassword'
           onChange=(action 'event')
           onClick=(action 'event')
           onContextMenu=(action 'event')
@@ -150,6 +153,7 @@
       <div class='demo'>
         {{! BEGIN-SNIPPET password-support-events }}
         {{frost-password
+          hook='myTextEventsPassword'
           onEnter=(action 'support' 'enter')
           onEscape=(action 'support' 'escape')
         }}
@@ -163,23 +167,26 @@
         {{code-snippet name='password-support-events.js'}}
       </div>
     </div>
+  </div>
 
+  <div class='section-title'>Other</div>
+  <hr>
+  <div class='section'>
     <div class='example'>
-      <div class='title'>Deprecated events</div>
+      <div class='title'>Spread</div>
       <div class='demo'>
-        {{! BEGIN-SNIPPET password-deprecated-events }}
+        {{! BEGIN-SNIPPET password-other-spread }}
         {{frost-password
-          onBlur=(action 'event')
-          onFocus=(action 'event')
+          options=(hash
+            hook='mySpreadPassword'
+            revealable=true
+            value='admin'
+          )
         }}
         {{! END-SNIPPET }}
       </div>
       <div class='snippet'>
-         <div>Template</div>
-        {{code-snippet name='password-deprecated-events.hbs'}}
-        <br>
-        <div>Controller</div>
-        {{code-snippet name='password-dom-events.js'}}
+        {{code-snippet name='password-other-spread.hbs'}}
       </div>
     </div>
   </div>

@@ -1,7 +1,5 @@
 import Ember from 'ember'
-const {
-  deprecate
-} = Ember
+const {deprecate} = Ember
 
 export default {
   addProperty: function (event, frostEvent) {

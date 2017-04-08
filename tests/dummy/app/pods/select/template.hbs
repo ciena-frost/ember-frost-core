@@ -5,7 +5,9 @@
 
   <div class="snippet">
     {{format-markdown "```handlebars
-{{frost-select-outlet}}
+{{frost-select-outlet
+  hook='selectOutlet'
+}}
 ```"}}
   </div>
 
@@ -13,9 +15,17 @@
 
   <div class="snippet">
     {{format-markdown "```handlebars
-{{frost-select-outlet name='foo-bar'}}
+{{frost-select-outlet
+  hook='namedSelectOutlet'
+  name='foo-bar'
+}}
 …
-{{frost-select renderTarget='foo-bar' …}}
+{{frost-select
+  hook='mySelect'
+  label='superhero'
+  renderTarget='foo-bar'
+  …
+}}
 ```"}}
   </div>
 
@@ -29,6 +39,7 @@
         {{frost-select
           data=data
           hook='mySelect'
+          label='superhero'
         }}
       </div>
       <div class="snippet">
@@ -36,6 +47,7 @@
 {{frost-select
   data=data
   hook='mySelect'
+  label='superhero'
 }}
 ```"}}
       </div>
@@ -49,10 +61,12 @@
         {{frost-select
           data=data
           hook='mySelect'
+          label='superhero'
           selectedValue=preSelectedValueForClearing
           onChange=(action 'onChangeClearable')
         }}
         {{frost-button text='Clear'
+          hook='clearButton'
           onClick=(action 'onClearSelect')
           priority='secondary'
           size='small'
@@ -64,6 +78,7 @@
 {{frost-select
   data=data
   hook='mySelect'
+  label='superhero'
   selectedValue=preSelectedValueForClearing
 }}
 ```"}}
@@ -82,6 +97,8 @@
         {{frost-select
           autofocus=true
           data=data
+          hook='mySelect'
+          label='superhero'
         }}
       </div>
       <div class="snippet">
@@ -89,6 +106,8 @@
 {{frost-select
   autofocus=true
   data=data
+  hook='mySelect'
+  label='superhero'
 }}
 ```"}}
       </div>
@@ -99,6 +118,8 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
+          label='superhero'
           placeholder="Superhero"
         }}
       </div>
@@ -106,6 +127,8 @@
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
+  label='superhero'
   placeholder='Superhero'
 }}
 ```"}}
@@ -117,6 +140,8 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
+          label='superhero'
           selected=selectedIndex
         }}
       </div>
@@ -124,6 +149,8 @@
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
+  label='superhero'
   selected=selectedIndex
 }}
 ```"}}
@@ -135,6 +162,8 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
+          label='superhero'
           selectedValue=preSelectedValue
         }}
       </div>
@@ -142,7 +171,31 @@
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
+  label='superhero'
   selectedValue=preSelectedValue
+}}
+```"}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">width</div>
+      <div class="demo">
+        {{frost-select
+          data=data
+          hook='mySelect'
+          label='superhero'
+          width=width
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-select
+  data=data
+  hook='mySelect'
+  label='superhero'
+  width=width
 }}
 ```"}}
       </div>
@@ -158,6 +211,8 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
+          label='superhero'
           selected=selectedIndex
           error=true
         }}
@@ -166,6 +221,8 @@
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
+  label='superhero'
   selected=selectedIndex
   error=true
 }}
@@ -178,6 +235,8 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
+          label='superhero'
           selectedValue=preSelectedValue
           disabled=true
         }}
@@ -186,6 +245,8 @@
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
+  label='superhero'
   selectedValue=preSelectedValue
   disabled=true
 }}
@@ -203,6 +264,8 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
+          label='superhero'
           onBlur=(action 'onBlurHandler')
         }}
       </div>
@@ -210,6 +273,8 @@
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
+  label='superhero'
   onBlur=(action 'onBlurHandler')
 }}
 ```"}}
@@ -221,6 +286,8 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
+          label='superhero'
           onChange=(action 'onChangeHandler')
         }}
       </div>
@@ -228,6 +295,8 @@
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
+  label='superhero'
   onChange=(action 'onChangeHandler')
 }}
 ```"}}
@@ -239,6 +308,8 @@
       <div class="demo">
         {{frost-select
           data=data
+          hook='mySelect'
+          label='superhero'
           selectedValue=externalSelectedValue
           onChange=(action 'onChangeHandler')
           onInput=(action 'onInputHandler')
@@ -248,15 +319,54 @@
         {{format-markdown "```handlebars
 {{frost-select
   data=data
+  hook='mySelect'
+  label='superhero'
   onChange=(action 'onChangeHandler')
   onInput=(action 'onInputHandler')
 }}
 ```"}}
       </div>
     </div>
-
   </div>
 
+  <div class='section-title'>Other</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Spread</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET select-other-spread }}
+        {{frost-select
+          options=(hash
+            data=data
+            hook='mySelect'
+            label='superhero'
+            selected=selectedIndex
+            error=true
+          )
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='select-other-spread.hbs'}}
+      </div>
+    </div>
+    <div class='example'>
+      <div class='title'>wrapLabels</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET select-other-wrap-labels }}
+        {{frost-select
+          data=data
+          hook='myMultiSelect'
+          wrapLabels=true
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='select-other-wrap-labels.hbs'}}
+      </div>
+    </div>
+  </div>
 </div>
 
 
@@ -287,8 +397,6 @@
 
   </div>
 
-
-
   <div class="section-title">Selection</div>
   <hr>
   <div class="section">
@@ -299,6 +407,7 @@
         {{frost-multi-select
           autofocus=true
           data=data
+          hook='myMultiSelect'
         }}
       </div>
       <div class="snippet">
@@ -306,6 +415,7 @@
 {{frost-multi-select
   autofocus=true
   data=data
+  hook='myMultiSelect'
 }}
 ```"}}
       </div>
@@ -316,6 +426,7 @@
       <div class="demo">
         {{frost-multi-select
           data=data
+          hook='myMultiSelect'
           placeholder="Superheroes"
         }}
       </div>
@@ -323,6 +434,7 @@
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
+  hook='myMultiSelect'
   placeholder='Superheroes'
 }}
 ```"}}
@@ -334,6 +446,7 @@
       <div class="demo">
         {{frost-multi-select
           data=data
+          hook='myMultiSelect'
           selected=selectedIndices
         }}
       </div>
@@ -341,6 +454,7 @@
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
+  hook='myMultiSelect'
   selected=selectedIndices
 }}
 ```"}}
@@ -352,6 +466,7 @@
       <div class="demo">
         {{frost-multi-select
           data=data
+          hook='myMultiSelect'
           selectedValue=selectedValues
         }}
       </div>
@@ -359,6 +474,7 @@
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
+  hook='myMultiSelect'
   selectedValue=selectedValues
 }}
 ```"}}
@@ -376,6 +492,7 @@
         {{frost-multi-select
           data=data
           error=true
+          hook='myMultiSelect'
         }}
       </div>
       <div class="snippet">
@@ -383,6 +500,7 @@
 {{frost-multi-select
   data=data
   error=true
+  hook='myMultiSelect'
 }}
 ```"}}
       </div>
@@ -393,16 +511,18 @@
       <div class="demo">
         {{frost-multi-select
           data=data
-          selectedValue=preSelectedValue
           disabled=true
+          hook='myMultiSelect'
+          selectedValue=preSelectedValue
         }}
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
-  selectedValue=preSelectedValue
   disabled=true
+  hook='myMultiSelect'
+  selectedValue=preSelectedValue
 }}
 ```"}}
       </div>
@@ -419,6 +539,7 @@
       <div class="demo">
         {{frost-multi-select
           data=data
+          hook='myMultiSelect'
           onBlur=(action 'onBlurHandler')
         }}
       </div>
@@ -426,6 +547,7 @@
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
+  hook='myMultiSelect'
   onBlur=(action 'onBlurHandler')
 }}
 ```"}}
@@ -437,6 +559,7 @@
       <div class="demo">
         {{frost-multi-select
           data=data
+          hook='myMultiSelect'
           onChange=(action 'onChangeHandler')
         }}
       </div>
@@ -444,6 +567,7 @@
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
+  hook='myMultiSelect'
   onChange=(action 'onChangeHandler')
 }}
 ```"}}
@@ -455,6 +579,7 @@
       <div class="demo">
         {{frost-multi-select
           data=data
+          hook='myMultiSelect'
           onChange=(action 'onChangeHandler')
           onInput=(action 'onInputHandler')
         }}
@@ -463,12 +588,66 @@
         {{format-markdown "```handlebars
 {{frost-multi-select
   data=data
+  hook='myMultiSelect'
   onChange=(action 'onChangeHandler')
   onInput=(action 'onInputHandler')
 }}
 ```"}}
       </div>
     </div>
+  </div>
 
+  <div class='section-title'>Other</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='title'>Spread</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET multi-select-other-spread }}
+        {{frost-multi-select
+          options=(hash
+            data=data
+            error=true
+            hook='myMultiSelect'
+          )
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='multi-select-other-spread.hbs'}}
+      </div>
+    </div>
+    <div class='example'>
+      <div class='title'>wrapLabels</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET multi-select-other-wrap-labels }}
+        {{frost-multi-select
+          data=data
+          hook='myMultiSelect'
+          wrapLabels=true
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='multi-select-other-wrap-labels.hbs'}}
+      </div>
+    </div>
+    <div class='example'>
+      <div class='title'>debounceInterval</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET debounce-interval }}
+        {{frost-select
+          data=data
+          hook='mySelect'
+          label='superhero'
+          debounceInterval=1000
+          onInput=(action 'onInputHandler')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='debounce-interval.hbs'}}
+      </div>
+    </div>
   </div>
 </div>

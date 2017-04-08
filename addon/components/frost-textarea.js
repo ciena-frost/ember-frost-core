@@ -1,95 +1,137 @@
-import Ember from 'ember'
-const {Component, typeOf} = Ember
-import computed, {readOnly} from 'ember-computed-decorators'
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+/**
+ * Component definition for frost-textarea component
+ */
+import FrostEventsProxyMixin from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-textarea'
+import Component from './frost-component'
+import Ember from 'ember'
+import {task, timeout} from 'ember-concurrency'
+import {PropTypes} from 'ember-prop-types'
+const {isPresent, on} = Ember
 
-export default Component.extend(PropTypeMixin, {
+export default Component.extend(FrostEventsProxyMixin, {
   // == Dependencies ==========================================================
 
-  // == Properties ============================================================
+  // == Keyword Properties ====================================================
 
-  attributeBindings: [
-    'autofocus',
-    'cols',
-    'disabled',
-    'placeholder',
-    'readonly',
-    'rows'
+  classNameBindings: [
+    'isClearVisible',
+    'isClearEnabled'
   ],
-  classNames: ['frost-textarea'],
+
   layout,
 
+  // == PropTypes =============================================================
+
   propTypes: {
+    // options
     autofocus: PropTypes.bool,
     cols: PropTypes.number,
     disabled: PropTypes.bool,
-    hook: PropTypes.string,
+    form: PropTypes.string,
+    isClearEnabled: PropTypes.bool,
+    isClearVisible: PropTypes.bool,
     placeholder: PropTypes.string,
     readonly: PropTypes.bool,
     rows: PropTypes.number,
-    tabindex: PropTypes.number
+    tabindex: PropTypes.number,
+    value: PropTypes.string,
+    wrap: PropTypes.string
+
+    // state
   },
 
   getDefaultProps () {
     return {
+      // options
       autofocus: false,
+      isClearEnabled: false,
+      isClearVisible: false,
       disabled: false,
-      tabindex: 0
+      readonly: false,
+      tabindex: 0,
+
+      // Setting these as part of establishing an initial value
+      cols: null,
+      form: null,
+      rows: null,
+      placeholder: null,
+      value: null,
+      wrap: 'soft'
+
+      // state
     }
   },
 
   // == Computed Properties ===================================================
 
-  @readOnly
-  @computed('disabled', 'value')
-  /**
-   * Determine whether or not to show button for clearing out text field
-   * @param {Boolean} disabled - whether or not input is disabled
-   * @param {String} value - value of text field
-   * @returns {Boolean} whether or not to show button for clearing out text field
-   */
-  showClear (disabled, value) {
-    return !disabled && Boolean(value)
-  },
-
   // == Functions =============================================================
 
-  // == Events ================================================================
+  // == Tasks ==================================================================
 
-  oninput: Ember.on('input', function (e) {
-    const onInput = this.attrs['onInput']
+  // FIXME: jsdoc
+  _clear: task(function * () {
+    this.$('textarea')
+      .focus()
+      .val('')
+      .trigger('input')
+  }).restartable(),
 
-    if (typeOf(onInput) === 'function') {
-      onInput({
-        id: this.get('id'),
-        value: e.target.value
-      })
+  // FIXME: jsdoc
+  _showClear: task(function * (isFocused) {
+    const showClear = isFocused && isPresent(this.get('value')) && !this.get('readonly')
+    if (this.get('isClearVisible') === showClear) {
+      return
     }
+
+    this.set('isClearVisible', showClear)
+
+    // If the clear button is clicked the focusOut event occurs before
+    // the click event, so delay disabling the clear so that the click
+    // can process first
+    if (!showClear) {
+      yield timeout(200) // Duration of the visibility animation
+    }
+    this.set('isClearEnabled', showClear)
+  }).restartable(),
+
+  // == DOM Events ============================================================
+
+  // FIXME: jsdoc
+  _showClearEvent: on('focusIn', 'focusOut', 'input', function (event) {
+    const isFocused = event.type !== 'focusout'
+    this.get('_showClear').perform(isFocused)
   }),
 
-  _onFocus: Ember.on('focusIn', function () {
-    // If an onFocus handler is defined, call it
-    if (this.attrs.onFocus) {
-      this.attrs.onFocus()
-    }
-  }),
+  // == Lifecycle Hooks =======================================================
 
   // == Actions ===============================================================
 
   actions: {
-    clear: function () {
-      this.set('value', '')
-      this.$('textarea').focus()
-      this.$('textarea').val('')
-      this.$('textarea').trigger('input')
+    // FIXME: jsdoc
+    clear () {
+      this.get('_clear').perform()
     },
 
-    onBlur () {
-      const onBlur = this.get('onBlur')
+    // Setting 'keyUp' directly on the {{input}} helper overwrites
+    // Ember's TextSupport keyUp property, which means that other
+    // TextSupport events (i.e. 'enter' and 'escape') don't fire.
+    // To avoid this, we use the TextSupport 'key-up' event and
+    // proxy the event to the keyUp handler.
+    // FIXME: jsdoc
+    keyUp (value, event) {
+      if (isPresent(this.get('_eventProxy.keyUp'))) {
+        this._eventProxy.keyUp(event)
+      }
+    },
 
-      if (onBlur) {
-        onBlur()
+    // FIXME: jsdoc
+    _onInput (event) {
+      if (isPresent(this.get('_eventProxy.input'))) {
+        // Add id and value for legacy support
+        event.id = this.get('elementId')
+        event.value = event.target.value
+        this._eventProxy.input(event)
       }
     }
   }
