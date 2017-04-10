@@ -13,7 +13,6 @@ export default Component.extend({
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
-
   classNameBindings: ['iconClass'],
   layout,
   tagName: 'svg',
@@ -49,6 +48,12 @@ export default Component.extend({
    */
   iconClass (icon, pack) {
     return `frost-icon-${pack}-${icon}`
+  },
+
+  @readOnly
+  @computed('pack')
+  pathToIconPack (pack) {
+    return this._iconAssets[`assets/icon-packs/${pack}.svg`]
   },
 
   // == Functions =============================================================
