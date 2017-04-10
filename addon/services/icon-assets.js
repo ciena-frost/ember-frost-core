@@ -23,7 +23,10 @@ export default Service.extend({
         return result
       })
       .then(iconMap => { this._assets = iconMap.assets || {} })
-      .finally(() => this._loadIcons())
+      .finally(() => {
+        this._requestResolved = true
+        this._loadIcons()
+      })
   },
   register (element) {
     return new RSVP.Promise(resolve => {
@@ -34,16 +37,15 @@ export default Service.extend({
         path
       }
 
-      if (this._icons !== undefined) { // assets have yet to resolve
-        this._icons.push(icon)
-      } else { // load immediately
+      if (this._requestResolved) {
         this._load(icon)
+      } else {
+        this._icons.push(icon)
       }
     })
   },
   _loadIcons () {
     this._icons.forEach(el => this._load(el))
-    delete this._icons
   },
   _load (icon) {
     const path = icon.path

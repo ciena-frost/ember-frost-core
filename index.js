@@ -185,7 +185,7 @@ module.exports = {
       return has(addonPackage.pkg, 'ember-frost-icon-pack')
     })
 
-    let iconPacks = Object.keys(addonPackages).map((addonName) => {
+    const iconPacks = Object.keys(addonPackages).map((addonName) => {
       const addonPackage = addonPackages[addonName]
       const iconPack = addonPackage.pkg['ember-frost-icon-pack']
       const iconPackPath = iconPack.path || 'svgs'
@@ -223,6 +223,12 @@ module.exports = {
       extensions: ['svg'],
       assetMapPath: 'assets/icon-assets.json'
     })
-    return mergeTrees([assetRevisedIconPacks, treeForPublic], {overwrite: true})
+    const treesToMerge = [assetRevisedIconPacks]
+
+    if (treeForPublic) {
+      treesToMerge.push(treeForPublic)
+    }
+
+    return mergeTrees(treesToMerge, { overwrite: true })
   }
 }
