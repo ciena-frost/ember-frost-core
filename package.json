@@ -98,6 +98,7 @@
     "ember-cli-sass": "^5.6.0",
     "ember-cli-string-utils": "^1.0.0",
     "ember-cli-valid-component-name": "^1.0.0",
+    "ember-fetch": "^1.4.0",
     "npm-install-security-check": "^1.0.0",
     "promise": "^7.1.1",
     "semver": "^5.3.0"
