@@ -1,3 +1,8 @@
+# 1.13.0 (2017-04-10)
+* **Added** blueprint helper
+* **Modified** blueprint to check if package to install already exists
+
+
 # 1.12.1 (2017-04-10)
 
 * **Fixes** small mem leak by cleaning up event listeners on `frost-select-list`.
