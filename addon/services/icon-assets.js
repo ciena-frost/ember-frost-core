@@ -1,18 +1,28 @@
 import Ember from 'ember'
-const { inject, Service } = Ember
+import fetch from 'fetch'
+
+const { Service } = Ember
 
 const iconPath = 'assets/icon-packs'
 const iconAssets = 'assets/icon-assets.json'
 
 export default Service.extend({
-  ajax: inject.service(),
+  _assets: {},
   _icons: [],
   init () {
     this._super(...arguments)
 
-    this.get('ajax')
-      .request(iconAssets)
-      .then((result) => {this._assets = result.assets})
+    fetch(iconAssets)
+      .then(result => result.text())
+      .then(raw => {
+        let result = {}
+        try {
+          result = JSON.parse(raw)
+        } catch (e) {}
+
+        return result
+      })
+      .then(iconMap => { this._assets = iconMap.assets || {} })
       .finally(() => this._loadIcons())
   },
   register (element) {
@@ -30,7 +40,6 @@ export default Service.extend({
     }
   },
   _loadIcons () {
-    const assets = this._assets || {}
     this._icons.forEach(el => this._load(el))
     delete this._icons
   },

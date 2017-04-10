@@ -35,7 +35,6 @@
   "devDependencies": {
     "broccoli-asset-rev": "^2.5.0",
     "chai-jquery": "^2.0.0",
-    "ember-ajax": "2.5.6",
     "ember-cli": "~2.11.0",
     "ember-cli-chai": "0.3.2",
     "ember-cli-code-coverage": "0.3.5",
@@ -55,6 +54,7 @@
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-elsewhere": "0.4.1",
     "ember-export-application-global": "^1.1.1",
+    "ember-fetch": "1.4.0",
     "ember-frost-test": "^1.0.0",
     "ember-hook": "^1.4.1",
     "ember-load-initializers": "0.6.3",
