@@ -136,13 +136,6 @@ describe('Unit / Lib / Utils / Package Handler', () => {
       const result = packageHandler._isPkgInstalled(pkg, ['0.0.1'], {'pkg1': '0.0.1'})
       expect(result).to.eql(true)
     })
-
-    it('invalid package', () => {
-      const pkg = {name: 'pkg1', target: '0.0.1'}
-      const result = packageHandler._isPkgInstalled(pkg, ['0.0.2'], {'pkg1': '0.0.2'})
-      expect(consoleOutput).to.eql('Invalid package pkg1@0.0.1')
-      expect(result).to.eql(true)
-    })
   })
 
   describe('_getPackagesVersions', () => {
