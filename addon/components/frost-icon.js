@@ -7,7 +7,7 @@ import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
 
-const {deprecate, inject, get} = Ember
+const {deprecate, inject, get, run} = Ember
 
 export default Component.extend({
 
@@ -59,10 +59,12 @@ export default Component.extend({
     this.get('iconAssets')
       .register(this)
       .then(href => {
-        if (!this.isDestroyed && !this.isDestroying) {
-          const icon = this.get('icon')
-          this.set('href', `${href}#${icon}`)
-        }
+        run.scheduleOnce('sync', () => {
+          if (!this.isDestroyed && !this.isDestroying) {
+            const icon = this.get('icon')
+            this.set('href', `${href}#${icon}`)
+          }
+        })
       })
   },
 
