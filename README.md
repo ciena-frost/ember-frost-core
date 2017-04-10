@@ -12,6 +12,9 @@
 ember install ember-frost-core
 ```
 
+_Note:_ Packages that are already installed in the consumer within the required semver range will not be re-installed or
+      have blueprints re-run. ([blueprint](blueprint/ember-frost-core/index.js))
+
 ## Components
 
 The following components are available when you install ember-frost-core
