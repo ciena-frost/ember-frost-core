@@ -1,3 +1,6 @@
+# 1.14.0 (2017-04-10)
+- Resolve icon assets async
+
 # 1.13.0 (2017-04-10)
 * **Added** blueprint helper
 * **Modified** blueprint to check if package to install already exists
