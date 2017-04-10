@@ -1,3 +1,8 @@
+# 1.12.1 (2017-04-10)
+
+* **Fixes** small mem leak by cleaning up event listeners on `frost-select-list`.
+
+
 # 1.12.0 (2017-03-30)
 * adds `width` property to the `frost-select` component interface.  works by explicitly overriding any width/min/max width on that `frost-select` instance to explicitly set a desired width.
 
