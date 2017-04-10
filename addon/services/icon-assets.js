@@ -1,7 +1,7 @@
 import Ember from 'ember'
 import fetch from 'fetch'
 
-const { Service } = Ember
+const { RSVP, Service } = Ember
 
 const iconPath = 'assets/icon-packs'
 const iconAssets = 'assets/icon-assets.json'
@@ -26,26 +26,27 @@ export default Service.extend({
       .finally(() => this._loadIcons())
   },
   register (element) {
-    const path = `${iconPath}/${element.get('pack')}.svg`
+    return new RSVP.Promise(resolve => {
+      const path = `${iconPath}/${element.get('pack')}.svg`
 
-    const icon = {
-      element,
-      path
-    }
+      const icon = {
+        resolve,
+        path
+      }
 
-    if (this._icons !== undefined) { // assets have yet to resolve
-      this._icons.push(icon)
-    } else {
-      this._load(icon)
-    }
+      if (this._icons !== undefined) { // assets have yet to resolve
+        this._icons.push(icon)
+      } else { // load immediately
+        this._load(icon)
+      }
+    })
   },
   _loadIcons () {
     this._icons.forEach(el => this._load(el))
     delete this._icons
   },
   _load (icon) {
-    const {element, path} = icon
-    const href = this._assets[path] || path
-    element.get('iconTask').perform(href)
+    const path = icon.path
+    icon.resolve(this._assets[path] || path)
   }
 })

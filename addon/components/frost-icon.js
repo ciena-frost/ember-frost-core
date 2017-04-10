@@ -5,7 +5,6 @@ import layout from '../templates/components/frost-icon'
 import Component from './frost-component'
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
-import {task} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
 
 const {deprecate, inject, get} = Ember
@@ -54,17 +53,17 @@ export default Component.extend({
 
   // == DOM Events ============================================================
 
-  // == Tasks =================================================================
-
-  iconTask: task(function * (href) {
-    const icon = this.get('icon')
-    this.set('href', `${href}#${icon}`)
-  }),
-
   // == Lifecycle Hooks =======================================================
   init () {
     this._super(...arguments)
-    this.get('iconAssets').register(this)
+    this.get('iconAssets')
+      .register(this)
+      .then(href => {
+        if (!this.isDestroyed && !this.isDestroying) {
+          const icon = this.get('icon')
+          this.set('href', `${href}#${icon}`)
+        }
+      })
   },
 
   didReceiveAttrs (attrs) {
