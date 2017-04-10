@@ -103,13 +103,9 @@ describe('Unit / Lib / Utils / Package Handler', () => {
   })
 
   describe('_isPkgInstalled', () => {
-    let consoleOutput
     beforeEach(() => {
       sandbox.stub(packageHandler, '_getTargetVersion', (target) => {
         return target
-      })
-      sandbox.stub(console, 'error', (output) => {
-        consoleOutput = output
       })
     })
 
