@@ -6,13 +6,12 @@ import Component from './frost-component'
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
-
-const {deprecate, inject, get, run} = Ember
+const {deprecate, get} = Ember
 
 export default Component.extend({
 
   // == Dependencies ==========================================================
-  iconAssets: inject.service(),
+
   // == Keyword Properties ====================================================
 
   classNameBindings: ['iconClass'],
@@ -20,6 +19,7 @@ export default Component.extend({
   tagName: 'svg',
 
   // == PropTypes =============================================================
+
   propTypes: {
     // options
     pack: PropTypes.string,
@@ -38,6 +38,7 @@ export default Component.extend({
   },
 
   // == Computed Properties ===================================================
+
   @readOnly
   @computed('icon', 'pack')
   /**
@@ -49,24 +50,12 @@ export default Component.extend({
   iconClass (icon, pack) {
     return `frost-icon-${pack}-${icon}`
   },
+
   // == Functions =============================================================
 
   // == DOM Events ============================================================
 
   // == Lifecycle Hooks =======================================================
-  init () {
-    this._super(...arguments)
-    this.get('iconAssets')
-      .register(this)
-      .then(href => {
-        run.scheduleOnce('sync', () => {
-          if (!this.isDestroyed && !this.isDestroying) {
-            const icon = this.get('icon')
-            this.set('href', `${href}#${icon}`)
-          }
-        })
-      })
-  },
 
   didReceiveAttrs (attrs) {
     const icon = get(attrs, 'newAttrs.icon.value') || ''

@@ -2,7 +2,7 @@
 
 // 'use strict'
 
-const AssetRev = require('broccoli-asset-rev')
+// const AssetRev = require('broccoli-asset-rev')
 const writeFile = require('broccoli-file-creator')
 const Funnel = require('broccoli-funnel')
 const mergeTrees = require('broccoli-merge-trees')
@@ -218,12 +218,13 @@ module.exports = {
 
     const mergedIconPacks = mergeTrees(iconPacks, {overwrite: true})
 
-    const assetRevisedIconPacks = new AssetRev(mergedIconPacks, {
-      generateAssetMap: true,
-      extensions: ['svg'],
-      assetMapPath: 'assets/icon-assets.json'
-    })
-    const treesToMerge = [assetRevisedIconPacks]
+    // const assetRevisedIconPacks = new AssetRev(mergedIconPacks, {
+    //   generateAssetMap: true,
+    //   extensions: ['svg'],
+    //   assetMapPath: 'assets/icon-assets.json'
+    // })
+
+    const treesToMerge = [mergedIconPacks]
 
     if (treeForPublic) {
       treesToMerge.push(treeForPublic)
