@@ -1,3 +1,7 @@
+# 1.14.1 (2017-04-11)
+- treeForPublic might not exist, check if it is there before attempting to merge
+- Fix logic surrounding fetch request resolved, so load icons based on cached asset map
+
 # 1.14.0 (2017-04-10)
 - Resolve icon assets async
 
