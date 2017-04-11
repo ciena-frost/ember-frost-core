@@ -17,11 +17,11 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
   // == Keyword Properties ====================================================
 
   attributeBindings: [
-    '_isToggled:toggled',
     'disabled'
   ],
 
   classNameBindings: [
+    '_isToggled:toggled',
     'disabled'
   ],
 
