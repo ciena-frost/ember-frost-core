@@ -8,7 +8,7 @@ import {beforeEach, describe, it} from 'mocha'
 import {unit} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 import Component from 'ember-frost-core/components/frost-component'
 
-const test = unit('frost-icon', ['service:icon-assets'])
+const test = unit('frost-icon')
 describe(test.label, function () {
   test.setup()
 
