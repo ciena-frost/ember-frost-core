@@ -137,6 +137,9 @@ module.exports = {
   treeForAddon: function (tree) {
     var addonTree = this._super.treeForAddon.call(this, tree)
 
+    // We only need this access for this addons dummy app
+    if (this.project.name() === 'ember-frost-core') return addonTree
+
     var iconNames = {}
 
     var addonPackages = pickBy(this.project.addonPackages, (addonPackage) => {
@@ -166,7 +169,7 @@ module.exports = {
     }
 
     const iconNameJson = JSON.stringify(iconNames, null, 2)
-    const iconNameTree = writeFile('modules/ember-frost-core/icon-packs.js', `export default ${iconNameJson}`)
+    const iconNameTree = writeFile('modules/ember-frost-core/icon-packs.js', `window.frostIconPacks = ${iconNameJson}`)
 
     return mergeTrees([addonTree, iconNameTree], {overwrite: true})
   },
