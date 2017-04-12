@@ -138,7 +138,7 @@ module.exports = {
     var addonTree = this._super.treeForAddon.call(this, tree)
 
     // We only need this access for this addons dummy app
-    if (this.project.name() === 'ember-frost-core') return addonTree
+    if (this.project.name() !== 'ember-frost-core') return addonTree
 
     var iconNames = {}
 

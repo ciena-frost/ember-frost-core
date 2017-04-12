@@ -21,7 +21,7 @@ describe('Unit / Lib / Utils / Package Handler', () => {
 
   describe('getPkgsToInstall', () => {
     beforeEach(() => {
-      sandbox.stub(packageHandler, '_getPackagesVersions', (pkgs) => {
+      sandbox.stub(packageHandler, '_getPackagesVersions').callsFake((pkgs) => {
         const promises = []
         pkgs.forEach((pkg) => {
           promises.push(Promise.resolve({
@@ -35,7 +35,7 @@ describe('Unit / Lib / Utils / Package Handler', () => {
 
     describe('package not installed', () => {
       beforeEach(() => {
-        sandbox.stub(packageHandler, '_isPkgInstalled', () => {
+        sandbox.stub(packageHandler, '_isPkgInstalled').callsFake(() => {
           return false
         })
       })
@@ -66,10 +66,10 @@ describe('Unit / Lib / Utils / Package Handler', () => {
     describe('package installed', () => {
       let consoleOutputs = []
       beforeEach(() => {
-        sandbox.stub(packageHandler, '_isPkgInstalled', () => {
+        sandbox.stub(packageHandler, '_isPkgInstalled').callsFake(() => {
           return true
         })
-        sandbox.stub(console, 'log', (output) => {
+        sandbox.stub(console, 'log').callsFake((output) => {
           consoleOutputs.push(output)
         })
       })
@@ -104,7 +104,7 @@ describe('Unit / Lib / Utils / Package Handler', () => {
 
   describe('_isPkgInstalled', () => {
     beforeEach(() => {
-      sandbox.stub(packageHandler, '_getTargetVersion', (target) => {
+      sandbox.stub(packageHandler, '_getTargetVersion').callsFake((target) => {
         return target
       })
     })
@@ -139,7 +139,7 @@ describe('Unit / Lib / Utils / Package Handler', () => {
     let packageHandlerMock
     beforeEach(() => {
       npm = require(npmModuleLocation)
-      sandbox.stub(npm, 'getVersions', (pkg) => {
+      sandbox.stub(npm, 'getVersions').callsFake((pkg) => {
         return Promise.resolve({
           pkg: pkg,
           result: ['0.0.1', '0.0.2']
@@ -181,10 +181,10 @@ describe('Unit / Lib / Utils / Package Handler', () => {
 
     beforeEach(() => {
       semver = require(semverModuleLocation)
-      sandbox.stub(semver, 'maxSatisfying', (target) => {
+      sandbox.stub(semver, 'maxSatisfying').callsFake((target) => {
         return '0.0.1'
       })
-      sandbox.stub(semver, 'valid', (target) => {
+      sandbox.stub(semver, 'valid').callsFake((target) => {
         return target
       })
     })
@@ -196,7 +196,7 @@ describe('Unit / Lib / Utils / Package Handler', () => {
 
     describe('not a range', () => {
       beforeEach(() => {
-        sandbox.stub(semver, 'validRange', (target) => {
+        sandbox.stub(semver, 'validRange').callsFake((target) => {
           return undefined
         })
         packageHandlerMock = require(packageHandlerModuleLocation)
@@ -210,7 +210,7 @@ describe('Unit / Lib / Utils / Package Handler', () => {
 
     describe('range', () => {
       beforeEach(() => {
-        sandbox.stub(semver, 'validRange', (target) => {
+        sandbox.stub(semver, 'validRange').callsFake((target) => {
           return target
         })
         packageHandlerMock = require(packageHandlerModuleLocation)

@@ -1,7 +1,9 @@
 import {expect} from 'chai'
+import Ember from 'ember'
+const {Test} = Ember
 import {$hook} from 'ember-hook'
 import hbs from 'htmlbars-inline-precompile'
-import {describe, it} from 'mocha'
+import {after, before, describe, it} from 'mocha'
 import sinon from 'sinon'
 
 import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
@@ -9,6 +11,22 @@ import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-
 const test = integration('frost-toggle')
 describe(test.label, function () {
   test.setup()
+
+  let originalAdapter
+
+  before(function () {
+    originalAdapter = Test.adapter
+
+    Test.adapter = Test.MochaAdapter.extend({
+      exception (error) {
+        throw error
+      }
+    }).create()
+  })
+
+  after(function () {
+    Test.adapter = originalAdapter
+  })
 
   it('renders default values', function () {
     this.render(hbs`
