@@ -58,6 +58,13 @@ $frost-toggle-on-color: #fff;
       content: '';
     }
 
+    @-moz-document url-prefix() {
+      &:before,
+      &:after {
+        margin-top: -14px;
+      }
+    }
+
     &:after {
       right: 0;
       transition: right .2s;
