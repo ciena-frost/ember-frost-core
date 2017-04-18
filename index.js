@@ -2,6 +2,7 @@
 
 // 'use strict'
 
+// const AssetRev = require('broccoli-asset-rev')
 const writeFile = require('broccoli-file-creator')
 const Funnel = require('broccoli-funnel')
 const mergeTrees = require('broccoli-merge-trees')
@@ -169,9 +170,15 @@ module.exports = {
 
     return mergeTrees([addonTree, iconNameTree], {overwrite: true})
   },
-  /* eslint-enable complexity */
-
-  treeForPublic: function (tree) {
+  /**
+   * Override of `treeForPublic` is to merge the
+   * existing tree for public files with the set of
+   * svg assets, supplied in the `svg` directory
+   * @param  {[type]} treeForPublic [description]
+   * @return {[type]}               [description]
+   */
+   /* eslint-enable complexity */
+  treeForPublic: function (treeForPublic) {
     const isAddon = this.project.isEmberCLIAddon()
 
     const addonPackages = pickBy(this.project.addonPackages, (addonPackage) => {
@@ -209,6 +216,20 @@ module.exports = {
       }))
     }
 
-    return mergeTrees(iconPacks, {overwrite: true})
+    const mergedIconPacks = mergeTrees(iconPacks, {overwrite: true})
+
+    // const assetRevisedIconPacks = new AssetRev(mergedIconPacks, {
+    //   generateAssetMap: true,
+    //   extensions: ['svg'],
+    //   assetMapPath: 'assets/icon-assets.json'
+    // })
+
+    const treesToMerge = [mergedIconPacks]
+
+    if (treeForPublic) {
+      treesToMerge.push(treeForPublic)
+    }
+
+    return mergeTrees(treesToMerge, { overwrite: true })
   }
 }

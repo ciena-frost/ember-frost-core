@@ -1,3 +1,39 @@
+# 1.14.3 (2017-04-11)
+- Fix positioning of `:after` selector in firefox
+
+### Chrome
+![screen shot 2017-03-30 at 5 15 54 pm](https://cloud.githubusercontent.com/assets/7063255/24526565/9803c9d0-156c-11e7-84cd-2ce7456a3e0b.png)
+
+![screen shot 2017-03-30 at 5 16 31 pm](https://cloud.githubusercontent.com/assets/7063255/24526576/a393fb6c-156c-11e7-8e5e-4c4ed4d9fc58.png)
+
+### Firefox
+
+<img width="138" alt="screen shot 2017-03-30 at 5 16 52 pm" src="https://cloud.githubusercontent.com/assets/7063255/24526606/b49b185a-156c-11e7-9ddc-0ca8d5f2b097.png">
+<img width="144" alt="screen shot 2017-03-30 at 5 16 56 pm" src="https://cloud.githubusercontent.com/assets/7063255/24526605/b49a95f6-156c-11e7-9502-cd1db080b2d1.png">
+
+Closes #224 
+
+# 1.14.2 (2017-04-11)
+- Revert changes to reimplement strategy
+
+
+# 1.14.1 (2017-04-11)
+- treeForPublic might not exist, check if it is there before attempting to merge
+- Fix logic surrounding fetch request resolved, so load icons based on cached asset map
+
+# 1.14.0 (2017-04-10)
+- Resolve icon assets async
+
+# 1.13.0 (2017-04-10)
+* **Added** blueprint helper
+* **Modified** blueprint to check if package to install already exists
+
+
+# 1.12.1 (2017-04-10)
+
+* **Fixes** small mem leak by cleaning up event listeners on `frost-select-list`.
+
+
 # 1.12.0 (2017-03-30)
 * adds `width` property to the `frost-select` component interface.  works by explicitly overriding any width/min/max width on that `frost-select` instance to explicitly set a desired width.
 
