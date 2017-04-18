@@ -63,12 +63,22 @@
             size='medium'
           }}
         {{/if}}
-        <span
+        <div class="frost-select-list-item-container">
+        <div
           class={{dropdownTextClassNames}}
           data-text={{item.label}}
         >
           {{item.label}}
-        </span>
+        </div>
+        {{#if item.hasSecondaryLabels}}
+        <div
+          class={{dropdownSecondaryLabelsTextClassNames}}
+          data-text={{item.displaySecondaryLabels}}
+        >
+          {{item.displaySecondaryLabels}}
+        </div>
+        {{/if}}
+        </div>
       </li>
     {{/each}}
   </ul>
