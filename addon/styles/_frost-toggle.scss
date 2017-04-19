@@ -28,6 +28,18 @@ $frost-toggle-on-color: #fff;
         }
       }
     }
+
+    &:not(.is-toggled) {
+      + {
+        .frost-toggle-button {
+          .frost-toggle-text {
+            &.on {
+              visibility: hidden;
+            }
+          }
+        }
+      }
+    }
   }
 
   .frost-toggle-button {
