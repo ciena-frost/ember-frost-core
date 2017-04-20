@@ -194,7 +194,7 @@ export default Component.extend({
         .map((itemIndex) => items[itemIndex])
     }
 
-    if (selected ** selected <= 0 && selected < items.length) {
+    if (selected !== undefined && selected <= 0 && selected < items.length) {
       return [items[selected]]
     }
 
