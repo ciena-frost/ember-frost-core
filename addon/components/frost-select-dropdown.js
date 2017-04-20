@@ -215,7 +215,7 @@ export default Component.extend({
       return {
         className: classNames.join(' '),
         label: get(item, 'label'),
-        secondaryLabels: get(item, 'secondaryLabels'),
+        secondaryLabels: secondaryLabels,
         hasSecondaryLabels: isArray(secondaryLabels),
         @readOnly
         @computed('secondaryLabels', 'hasSecondaryLabels')
@@ -402,7 +402,7 @@ export default Component.extend({
     const clonedTextElements = clonedDropdownListElement.querySelectorAll('.frost-select-list-item-text')
     const textElements = dropdownListElement.querySelectorAll('.frost-select-list-item-text')
     const clonedSecondaryTextElements = clonedDropdownListElement
-                                        .querySelectorAll('.frost-select-list-secondary-item-text')
+      .querySelectorAll('.frost-select-list-secondary-item-text')
     const secondaryTextElements = dropdownListElement.querySelectorAll('.frost-select-list-secondary-item-text')
     const scrollTop = dropdownListElement.scrollTop
     const wrapLabels = this.get('wrapLabels')

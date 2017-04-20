@@ -61,6 +61,7 @@ $frost-toggle-on-color: #fff;
       content: '';
     }
 
+    // This is a fix for firefox where the box overlay on the toggle had an improper offset
     @-moz-document url-prefix() {
       &:before,
       &:after {
