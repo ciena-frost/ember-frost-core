@@ -1,3 +1,8 @@
+# 1.14.4 (2017-04-20)
+
+* **Fixed** a typo that was introducing exponents in an if statement for no good reason.
+
+
 # 1.14.3 (2017-04-11)
 - Fix positioning of `:after` selector in firefox
 

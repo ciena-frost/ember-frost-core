@@ -189,7 +189,7 @@ export default Component.extend({
   @computed('data', 'selected', 'internalSelectedValue')
   // FIXME: jsdoc
   selectedItems (items, selected, selectedValue) {
-    if (selectedValue) {
+    if (selectedValue !== undefined) {
       return items.filter((item) => {
         if (typeOf(selectedValue) === 'array') {
           return selectedValue.indexOf(item.value) !== -1
@@ -205,7 +205,7 @@ export default Component.extend({
         .map((itemIndex) => items[itemIndex])
     }
 
-    if (selected ** selected <= 0 && selected < items.length) {
+    if (selected !== undefined && selected <= 0 && selected < items.length) {
       return [items[selected]]
     }
 
