@@ -64,19 +64,19 @@
           }}
         {{/if}}
         <div class="frost-select-list-item-container">
-        <div
-          class={{dropdownTextClassNames}}
-          data-text={{item.label}}
-        >
-          {{item.label}}
-        </div>
-        {{#if item.hasSecondaryLabels}}
-        <div
-          class={{dropdownSecondaryLabelsTextClassNames}}
-          data-text={{item.displaySecondaryLabels}}
-        >
-          {{item.displaySecondaryLabels}}
-        </div>
+          <div
+            class={{dropdownTextClassNames}}
+            data-text={{item.label}}
+          >
+            {{item.label}}
+          </div>
+          {{#if item.hasSecondaryLabels}}
+          <div
+            class={{dropdownSecondaryLabelsTextClassNames}}
+            data-text={{item.displaySecondaryLabels}}
+          >
+            {{item.displaySecondaryLabels}}
+          </div>
         {{/if}}
         </div>
       </li>

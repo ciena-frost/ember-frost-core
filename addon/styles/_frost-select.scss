@@ -1,5 +1,5 @@
 $frost-input-select-option-row-height: 35px;
-$frost-input-select-option-with-secondary-labels-row-height: 42px;
+$frost-input-select-option-with-secondary-labels-row-height: 45px;
 $frost-select-arrow-box-shadow: 0 0 7px 3px transparentize($frost-select-container-shadow, .4);
 $frost-select-disabled-background-color: $frost-color-lgrey-3;
 $frost-select-disabled-border-color: $frost-color-lgrey-1;
@@ -215,14 +215,14 @@ $frost-select-list-item-horizontal-padding: 10px;
   .frost-select-list-item-text, .frost-multi-select-list-item-text {
     line-height: $frost-font-m;
     min-height: $frost-font-m;
-    padding-top: 2px;
+    padding-top: 5px;
   }
 
   .frost-select-list-secondary-item-text, .frost-multi-select-list-secondary-item-text {
     line-height: $frost-font-s;
     min-height: $frost-font-s;
     font-size: $frost-font-s;
-    padding-top: 5px;
+    padding-top: 2px;
     padding-bottom: 3px;
     color: $frost-color-grey-5;
     font-weight: 100;

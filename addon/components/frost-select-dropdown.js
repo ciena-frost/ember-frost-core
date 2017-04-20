@@ -216,20 +216,11 @@ export default Component.extend({
         className: classNames.join(' '),
         label: get(item, 'label'),
         secondaryLabels: get(item, 'secondaryLabels'),
-
+        hasSecondaryLabels: isArray(secondaryLabels),
         @readOnly
-        @computed('secondaryLabels')
-        hasSecondaryLabels (secondaryLabels) {
-          if (isArray(secondaryLabels)) {
-            return true
-          }
-          return false
-        },
-
-        @readOnly
-        @computed('secondaryLabels')
-        displaySecondaryLabels (secondaryLabels) {
-          if (isArray(secondaryLabels)) {
+        @computed('secondaryLabels', 'hasSecondaryLabels')
+        displaySecondaryLabels (secondaryLabels, hasSecondaryLabels) {
+          if (hasSecondaryLabels) {
             return secondaryLabels.join(' | ')
           }
           return ''
@@ -415,54 +406,37 @@ export default Component.extend({
     const secondaryTextElements = dropdownListElement.querySelectorAll('.frost-select-list-secondary-item-text')
     const scrollTop = dropdownListElement.scrollTop
     const wrapLabels = this.get('wrapLabels')
+    const updateText = function (texElements, clonedTextElements) {
+      Array.from(texElements).forEach((textElement, index) => {
+        if (!wrapLabels) {
+          const clonedTextElement = clonedTextElements[index]
+          const updatedData = trimLongDataInElement(clonedTextElement)
+
+          if (updatedData) {
+            textElement.textContent = updatedData.text
+            textElement.setAttribute('title', updatedData.tooltip)
+          }
+        }
+
+        if (filter) {
+          const pattern = new RegExp(filter, 'gi')
+          const textWithMatch = textElement.textContent.replace(pattern, '<u>$&</u>')
+
+          // If rendered text has changed, update it
+          if (textElement.innerHTML !== textWithMatch) {
+            textElement.innerHTML = textWithMatch
+          }
+        }
+      })
+    }
 
     this._removeListItemEventListeners(dropdownListElement)
 
     dropdownListElement.replaceWith(clonedDropdownListElement)
 
-    Array.from(textElements).forEach((textElement, index) => {
-      if (!wrapLabels) {
-        const clonedTextElement = clonedTextElements[index]
-        const updatedData = trimLongDataInElement(clonedTextElement)
+    updateText(textElements, clonedTextElements)
+    updateText(secondaryTextElements, clonedSecondaryTextElements)
 
-        if (updatedData) {
-          textElement.textContent = updatedData.text
-          textElement.setAttribute('title', updatedData.tooltip)
-        }
-      }
-
-      if (filter) {
-        const pattern = new RegExp(filter, 'gi')
-        const textWithMatch = textElement.textContent.replace(pattern, '<u>$&</u>')
-
-        // If rendered text has changed, update it
-        if (textElement.innerHTML !== textWithMatch) {
-          textElement.innerHTML = textWithMatch
-        }
-      }
-    })
-
-    Array.from(secondaryTextElements).forEach((secondaryTextElement, index) => {
-      if (!wrapLabels) {
-        const clonedSecondaryTextElement = clonedSecondaryTextElements[index]
-        const updatedData = trimLongDataInElement(clonedSecondaryTextElement)
-
-        if (updatedData) {
-          secondaryTextElement.textContent = updatedData.text
-          secondaryTextElement.setAttribute('title', updatedData.tooltip)
-        }
-      }
-
-      if (filter) {
-        const pattern = new RegExp(filter, 'gi')
-        const textWithMatch = secondaryTextElement.textContent.replace(pattern, '<u>$&</u>')
-
-        // If rendered text has changed, update it
-        if (secondaryTextElement.innerHTML !== textWithMatch) {
-          secondaryTextElement.innerHTML = textWithMatch
-        }
-      }
-    })
     clonedDropdownListElement.replaceWith(dropdownListElement)
 
     this._addListItemEventListeners(dropdownListElement)
