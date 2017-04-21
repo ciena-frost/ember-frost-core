@@ -1,3 +1,8 @@
+# 1.14.5 (2017-04-21)
+
+* **Fixed** a typo that was introducing exponents in an if statement for no good reason.
+
+
 # 1.14.4 (2017-04-20)
 
 * **Fixed** a typo that was introducing exponents in an if statement for no good reason.
