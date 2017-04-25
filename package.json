@@ -1,6 +1,6 @@
 {
   "name": "ember-frost-core",
-  "version": "1.14.4",
+  "version": "1.15.0",
   "description": "The library of core frost components",
   "directories": {
     "doc": "doc",
@@ -84,6 +84,7 @@
     "name": "frost"
   },
   "dependencies": {
+    "broccoli-autoprefixer": "^4.1.0",
     "broccoli-file-creator": "^1.1.0",
     "broccoli-funnel": "^1.0.1",
     "broccoli-merge-trees": "^1.0.0",

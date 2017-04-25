@@ -5,7 +5,7 @@ module.exports = {
     const addonsToAdd = [
       {name: 'ember-computed-decorators', target: '~0.2.0'},
       {name: 'ember-concurrency', target: '~0.7.15'},
-      {name: 'ember-elsewhere', target: '~0.4.1'},
+      {name: 'ember-elsewhere', target: '~1.0.1'},
       {name: 'ember-hook', target: '^1.4.1'},
       {name: 'ember-prop-types', target: '^3.0.0'},
       {name: 'ember-spread', target: '^1.1.1'},
