@@ -212,20 +212,20 @@ $frost-select-list-item-horizontal-padding: 10px;
   min-height: $frost-input-select-option-with-secondary-labels-row-height;
   line-height: $frost-input-select-option-with-secondary-labels-row-height;
 
-  .frost-select-list-item-text, .frost-multi-select-list-item-text {
-    line-height: $frost-font-m;
+  .frost-select-list-item-text {
     min-height: $frost-font-m;
     padding-top: 5px;
+    line-height: $frost-font-m;
   }
 
-  .frost-select-list-secondary-item-text, .frost-multi-select-list-secondary-item-text {
-    line-height: $frost-font-s;
+  .frost-select-list-secondary-item-text {
     min-height: $frost-font-s;
-    font-size: $frost-font-s;
     padding-top: 2px;
     padding-bottom: 3px;
     color: $frost-color-grey-5;
+    font-size: $frost-font-s;
     font-weight: 100;
+    line-height: $frost-font-s;
 
     u {
       color: $frost-color-grey-3;
