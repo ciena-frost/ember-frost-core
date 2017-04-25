@@ -4,9 +4,8 @@
 
 import {expect} from 'chai'
 import {HookMixin} from 'ember-hook'
+import {unit} from 'ember-test-utils/test-support/setup-component-test'
 import {beforeEach, describe, it} from 'mocha'
-
-import {unit} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 
 const test = unit('hookable-textarea')
 describe(test.label, function () {

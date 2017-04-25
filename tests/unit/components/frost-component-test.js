@@ -3,12 +3,13 @@
  */
 
 import {expect} from 'chai'
-import {unit} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
-import CssMixin from 'ember-frost-core/mixins/css'
 import {HookMixin} from 'ember-hook'
 import PropTypesMixin from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
+import {unit} from 'ember-test-utils/test-support/setup-component-test'
 import {beforeEach, describe, it} from 'mocha'
+
+import CssMixin from 'ember-frost-core/mixins/css'
 
 const test = unit('frost-component')
 describe(test.label, function () {

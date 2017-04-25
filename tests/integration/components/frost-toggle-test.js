@@ -1,10 +1,9 @@
 import {expect} from 'chai'
 import {$hook} from 'ember-hook'
+import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'
 import {describe, it} from 'mocha'
 import sinon from 'sinon'
-
-import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 
 const test = integration('frost-toggle')
 describe(test.label, function () {

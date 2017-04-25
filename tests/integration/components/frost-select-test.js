@@ -3,13 +3,13 @@ import Ember from 'ember'
 const {$, run} = Ember
 import {$hook} from 'ember-hook'
 import wait from 'ember-test-helpers/wait'
+import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
 import {expectSelectWithState, filterSelect} from 'dummy/tests/helpers/ember-frost-core'
 import {close, open, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
-import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 import {keyCodes} from 'ember-frost-core/utils'
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
 

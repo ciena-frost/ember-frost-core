@@ -3,9 +3,9 @@ import Ember from 'ember'
 const {run} = Ember
 import PropTypeMixin from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
+import {unit} from 'ember-test-utils/test-support/setup-component-test'
 import {beforeEach, describe, it} from 'mocha'
 
-import {unit} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 import Component from 'ember-frost-core/components/frost-component'
 
 const test = unit('frost-icon')

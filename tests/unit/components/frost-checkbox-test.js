@@ -1,10 +1,10 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {$, run} = Ember
+import {unit} from 'ember-test-utils/test-support/setup-component-test'
 import {beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
-import {unit} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 import Component from 'ember-frost-core/components/frost-component'
 
 const test = unit('frost-checkbox', ['helper:hook'])
