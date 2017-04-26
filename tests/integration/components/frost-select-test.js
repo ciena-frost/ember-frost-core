@@ -579,7 +579,8 @@ describe(test.label, function () {
         this.set('data', [
           {label: 'Foo', value: 'foo', secondaryLabels: ['Foo1-1', 'Foo1-2']},
           {label: 'Bar', value: 'bar', secondaryLabels: ['Bar1-1', 'Bar1-2']},
-          {label: 'Ba ba', value: 'baba', secondaryLabels: ['Ba', 'Ba', 'Black Sheep']}
+          {label: 'Ba ba', value: 'baba', secondaryLabels: ['Ba', 'Ba', 'Black Sheep']},
+          {label: 'Superman', value: 'Clark Kent', secondaryLabels: ['Man of Steel']}
         ])
       })
 
@@ -592,8 +593,8 @@ describe(test.label, function () {
           expectSelectWithState('select', {
             focused: true,
             focusedItem: 'Foo',
-            items: ['Foo', 'Bar', 'Ba ba'],
-            secondaryLabels: ['Foo1-1 | Foo1-2', 'Bar1-1 | Bar1-2', 'Ba | Ba | Black Sheep'],
+            items: ['Foo', 'Bar', 'Ba ba', 'Superman'],
+            secondaryLabels: ['Foo1-1 | Foo1-2', 'Bar1-1 | Bar1-2', 'Ba | Ba | Black Sheep', 'Man of Steel'],
             opened: true
           })
         })
@@ -632,7 +633,7 @@ describe(test.label, function () {
             expectSelectWithState('select', {
               focused: true,
               focusedItem: 'Foo',
-              items: ['Foo', 'Bar', 'Ba ba'],
+              items: ['Foo', 'Bar', 'Ba ba', 'Superman'],
               opened: true
             })
 
@@ -656,7 +657,71 @@ describe(test.label, function () {
             })
           })
 
-          describe('when filter applied with one match', function () {
+          describe('when filter applied with one match for primary label', function () {
+            beforeEach(function () {
+              filterSelect('Superman')
+            })
+
+            it('renders as expected', function () {
+              expectSelectWithState('select', {
+                focused: true,
+                focusedItem: 'Superman',
+                items: ['Superman'],
+                secondaryLabels: ['Man of Steel'],
+                opened: true
+              })
+
+              expect(
+                getItemHtml(1),
+                'underlines matching text'
+              )
+                .to.eql('<u>Superman</u>')
+
+              expect(
+                getSecondaryItemHtml(1),
+                'underlines matching text'
+              )
+                .to.eql('Man of Steel')
+
+              expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+              expect(onChange.callCount, 'onChange is not called').to.equal(0)
+              expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+            })
+          })
+
+          describe('when filter applied with one match for secondary label', function () {
+            beforeEach(function () {
+              filterSelect('Steel')
+            })
+
+            it('renders as expected', function () {
+              expectSelectWithState('select', {
+                focused: true,
+                focusedItem: 'Superman',
+                items: ['Superman'],
+                secondaryLabels: ['Man of Steel'],
+                opened: true
+              })
+
+              expect(
+                getItemHtml(1),
+                'underlines matching text'
+              )
+                .to.eql('Superman')
+
+              expect(
+                getSecondaryItemHtml(1),
+                'underlines matching text'
+              )
+                .to.eql('Man of <u>Steel</u>')
+
+              expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+              expect(onChange.callCount, 'onChange is not called').to.equal(0)
+              expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+            })
+          })
+
+          describe('when filter applied with one match for both labels', function () {
             beforeEach(function () {
               filterSelect('Bar')
             })
