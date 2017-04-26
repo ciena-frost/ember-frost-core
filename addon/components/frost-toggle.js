@@ -142,9 +142,9 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
       event.stopPropagation()
       event.preventDefault()
 
-      const onClick = this.attrs['onClick']
-      if (onClick && onClick.update) {
-        onClick.update(this.get('_isToggled') ? this.get('_falseValue') : this.get('_trueValue'))
+      if (this.onClick) {
+        const value = this.get('_isToggled') ? this.get('_falseValue') : this.get('_trueValue')
+        this.onClick(value)
       } else if (isPresent(this.get('_eventProxy.click'))) {
         //  override target to make sure it's always the <input> field
         const target = this.$('input')[0]

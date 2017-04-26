@@ -255,6 +255,68 @@ describe(test.label, function () {
     })
   })
 
+  describe('when given a closure function', function () {
+    let stub
+    beforeEach(function () {
+      stub = sinon.stub()
+      this.set('myAction', stub)
+
+      this.render(hbs`
+        {{frost-toggle
+          trueValue='enabled'
+          falseValue='disabled'
+          hook='myToggle'
+          value='disabled'
+          onClick=(action myAction)
+        }}
+      `)
+
+      return wait()
+    })
+
+    describe('when the label is clicked', function () {
+      beforeEach(function () {
+        this.$('label').click()
+        return wait()
+      })
+
+      it('should call the action', function () {
+        expect(stub).to.have.callCount(1)
+      })
+    })
+  })
+
+  describe('when given a raw function', function () {
+    let stub
+    beforeEach(function () {
+      stub = sinon.stub()
+      this.set('myAction', stub)
+
+      this.render(hbs`
+        {{frost-toggle
+          trueValue='enabled'
+          falseValue='disabled'
+          hook='myToggle'
+          value='disabled'
+          onClick=myAction
+        }}
+      `)
+
+      return wait()
+    })
+
+    describe('when the label is clicked', function () {
+      beforeEach(function () {
+        this.$('label').click()
+        return wait()
+      })
+
+      it('should call the action', function () {
+        expect(stub).to.have.been.calledWith('enabled')
+      })
+    })
+  })
+
   describe('when rendering using spread', function () {
     beforeEach(function () {
       this.render(hbs`
