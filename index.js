@@ -231,7 +231,7 @@ module.exports = {
       treesToMerge.push(treeForPublic)
     }
 
-    return mergeTrees(treesToMerge, { overwrite: true })
+    return mergeTrees(treesToMerge, {overwrite: true})
   },
   /**
    * Post process a given addon tree
