@@ -68,30 +68,26 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
 
   // == Computed Properties ===================================================
 
+  @readOnly
   @computed('trueValue', '_trueLabel')
-  // FIXME: jsdoc
-  // TODO: make computed property readOnly
   _trueValue (trueValue, _trueLabel) { // eslint-disable-line
     return trueValue || _trueLabel
   },
 
+  @readOnly
   @computed('falseValue', '_falseLabel')
-  // FIXME: jsdoc
-  // TODO: make computed property readOnly
   _falseValue (falseValue, _falseLabel) { // eslint-disable-line
     return falseValue || _falseLabel
   },
 
   @readOnly
   @computed('value')
-  // FIXME: jsdoc
   _isToggled (value) {
     return this._preferBoolean(value) === this.get('_trueValue')
   },
 
   // == Functions =============================================================
 
-  // FIXME: jsdoc
   _changeTarget (event, target) {
     const e = cloneEvent(event, target)
     const toggled = this.get('_isToggled')
@@ -102,7 +98,6 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
     return e
   },
 
-  // FIXME: jsdoc
   _preferBoolean (value) {
     if (value === 'true') return true
     if (value === 'false') return false
@@ -110,7 +105,6 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
     return value
   },
 
-  // FIXME: jsdoc
   _setupAssertion () {
     assert(`Same value has been assigned to both ${this.toString()}.trueValue and ${this.toString()}.falseValue`,
       (typeOf(this.get('trueValue')) === 'undefined' && typeOf(this.get('falseValue')) === 'undefined') ||
@@ -131,7 +125,6 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
 
   actions: {
     /* eslint-disable complexity */
-    // FIXME: eslint
     _onClick (event) {
       if (this.get('disabled')) return
 

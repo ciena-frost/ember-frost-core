@@ -237,7 +237,6 @@ export default Component.extend({
     })
   },
 
-  // FIXME: jsdoc
   _getElementDimensionsAndPosition ($element) {
     const height = $element.height()
     const offset = $element.offset()
@@ -254,7 +253,6 @@ export default Component.extend({
     }
   },
 
-  // FIXME: jsdoc
   _handleArrowKey (upArrow) {
     let focusedIndex = this.get('focusedIndex')
 
@@ -279,7 +277,6 @@ export default Component.extend({
     }
   },
 
-  // FIXME: jsdoc
   _handleEnterKey () {
     const items = this.get('items') || []
     const focusedIndex = this.get('focusedIndex')
@@ -342,7 +339,6 @@ export default Component.extend({
   },
 
   /* eslint-disable complexity */
-  // FIXME: jsdoc
   _updatePosition ($element) {
     if (this.isDestroyed || this.isDestroying) return {}
 
@@ -411,7 +407,6 @@ export default Component.extend({
 
   // == Tasks =================================================================
 
-  // FIXME: jsdoc
   updateTask: task(function * () {
     this._isUpdating = true
 
@@ -518,7 +513,6 @@ export default Component.extend({
   // == Actions ===============================================================
 
   actions: {
-    // FIXME: jsdoc
     clear (e) {
       this.get('onSelect')([])
 
@@ -527,13 +521,11 @@ export default Component.extend({
       $('.frost-select-dropdown .frost-text-input').focus()
     },
 
-    // FIXME: jsdoc
     mouseDown (e) {
       // This keeps the overlay from swallowing clicks on the clear button
       e.preventDefault()
     },
 
-    // FIXME: jsdoc
     selectItem (value) {
       // Single select
       if (!this.get('multiselect')) {
