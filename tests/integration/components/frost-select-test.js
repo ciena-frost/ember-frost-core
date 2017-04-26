@@ -598,6 +598,7 @@ describe(test.label, function () {
           })
         })
       })
+
       describe('programatically focus component', function () {
         beforeEach(function () {
           // We must use jQuery's focusin() method for Ember event to fire and the
@@ -614,6 +615,7 @@ describe(test.label, function () {
           expect(onChange.callCount, 'onChange is not called').to.equal(0)
           expect(onFocus.callCount, 'onFocus is called').not.to.equal(0)
         })
+
         describe('when space bar pressed', function () {
           beforeEach(function () {
             [onBlur, onChange, onFocus].forEach((func) => func.reset())
@@ -1559,12 +1561,12 @@ describe(test.label, function () {
         })
 
         it('should show the entire label', function () {
-          expect($hook('select-secondaryLabel', {index: 1}).text().trim()).to.have.equal(longSecondaryLabel)
+          expect($hook('select-secondaryLabels', {index: 1}).text().trim()).to.have.equal(longSecondaryLabel)
         })
 
         it('should give that list item a larger height', function () {
-          const regularItemHeight = $hook('select-secondaryLabel', {index: 0}).height()
-          const wrappedItemHeight = $hook('select-secondaryLabel', {index: 1}).height()
+          const regularItemHeight = $hook('select-secondaryLabels', {index: 0}).height()
+          const wrappedItemHeight = $hook('select-secondaryLabels', {index: 1}).height()
           expect(wrappedItemHeight).to.be.greaterThan(regularItemHeight)
         })
       })

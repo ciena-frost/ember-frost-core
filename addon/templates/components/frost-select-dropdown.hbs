@@ -75,7 +75,7 @@
           <div
             class={{dropdownSecondaryLabelsTextClassNames}}
             data-text={{item.displaySecondaryLabels}}
-            data-test={{hook (concat hookPrefix '-secondaryLabel') index=index}}
+            data-test={{hook (concat hookPrefix '-secondaryLabels') index=index}}
           >
             {{item.displaySecondaryLabels}}
           </div>
@@ -84,6 +84,7 @@
         <div
           class={{dropdownTextClassNames}}
           data-text={{item.label}}
+          data-test={{hook (concat hookPrefix '-label') index=index}}
         >
           {{item.label}}
         </div>
