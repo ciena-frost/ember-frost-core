@@ -1,3 +1,8 @@
+# 1.16.0 (2017-04-27)
+- Added secondary labels in select #281 
+
+
+
 # 1.15.0 (2017-04-25)
 - Consume broccoli-autoprefixer
 
