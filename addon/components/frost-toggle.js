@@ -1,15 +1,16 @@
 /**
  * Component definition for the frost-toggle component
  */
+import Ember from 'ember'
+const {ViewUtils, assert, deprecate, isPresent, typeOf} = Ember
+import computed, {readOnly} from 'ember-computed-decorators'
+import PropTypeMixin, {PropTypes} from 'ember-prop-types'
+import SpreadMixin from 'ember-spread'
+
 import FrostEventsProxyMixin from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-toggle'
 import {cloneEvent} from '../utils'
 import Component from './frost-component'
-import Ember from 'ember'
-import computed, {readOnly} from 'ember-computed-decorators'
-import PropTypeMixin, {PropTypes} from 'ember-prop-types'
-import SpreadMixin from 'ember-spread'
-const {ViewUtils, assert, isPresent, typeOf} = Ember
 
 export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixin, {
   // == Dependencies ==========================================================
@@ -37,6 +38,8 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
       PropTypes.string,
       PropTypes.number
     ]),
+    onClick: PropTypes.func,
+    onToggle: PropTypes.func,
     size: PropTypes.string,
     trueLabel: PropTypes.oneOfType([
       PropTypes.bool,
@@ -59,6 +62,7 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
       _falseLabel: this.get('falseLabel') !== undefined &&
       (typeOf(this.get('falseLabel') === 'string') || typeOf(this.get('falseLabel') === 'number'))
                 ? this.get('falseLabel') : false,
+      onToggle () {},
       size: 'medium',
       _trueLabel: this.get('trueLabel') !== undefined &&
       (typeOf(this.get('trueLabel') === 'string') || typeOf(this.get('trueLabel') === 'number'))
@@ -115,9 +119,17 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
 
   // == Lifecycle Hooks =======================================================
 
-  /* Ember.Component method */
   init () {
     this._super(...arguments)
+    const onClick = this.get('onClick')
+    deprecate(
+      '"frost-toggle" property "onClick" is deprecated. Please use the "onToggle" property instead.',
+      onClick === undefined,
+      {
+        id: 'frost-toggle-onClick-deprecated',
+        until: '2.0.0'
+      }
+    )
     this._setupAssertion()
   },
 
@@ -135,13 +147,19 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
       event.stopPropagation()
       event.preventDefault()
 
-      if (this.onClick) {
-        const value = this.get('_isToggled') ? this.get('_falseValue') : this.get('_trueValue')
-        this.onClick(value)
+      const value = this.get('_isToggled') ? this.get('_falseValue') : this.get('_trueValue')
+
+      if (this.onToggle) {
+        this.onToggle(value)
+      }
+
+      const onClick = this.attrs['onClick']
+      if (onClick && onClick.update) {
+        onClick.update(value)
       } else if (isPresent(this.get('_eventProxy.click'))) {
         //  override target to make sure it's always the <input> field
         const target = this.$('input')[0]
-        this._eventProxy.click(this._changeTarget(event, target))
+        this._eventProxy.click(this._changeTarget(event, target, value))
       }
     },
     /* eslint-enable complexity */

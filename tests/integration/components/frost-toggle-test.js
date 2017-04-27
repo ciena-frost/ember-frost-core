@@ -224,99 +224,6 @@ describe(test.label, function () {
     })
   })
 
-  describe('when given a closure action', function () {
-    let stub
-    beforeEach(function () {
-      stub = sinon.stub()
-      this.on('myAction', stub)
-
-      this.render(hbs`
-        {{frost-toggle
-          trueValue='enabled'
-          falseValue='disabled'
-          hook='myToggle'
-          value='disabled'
-          onClick=(action 'myAction')
-        }}
-      `)
-
-      return wait()
-    })
-
-    describe('when the label is clicked', function () {
-      beforeEach(function () {
-        this.$('label').click()
-        return wait()
-      })
-
-      it('should call the action', function () {
-        expect(stub).to.have.callCount(1)
-      })
-    })
-  })
-
-  describe('when given a closure function', function () {
-    let stub
-    beforeEach(function () {
-      stub = sinon.stub()
-      this.set('myAction', stub)
-
-      this.render(hbs`
-        {{frost-toggle
-          trueValue='enabled'
-          falseValue='disabled'
-          hook='myToggle'
-          value='disabled'
-          onClick=(action myAction)
-        }}
-      `)
-
-      return wait()
-    })
-
-    describe('when the label is clicked', function () {
-      beforeEach(function () {
-        this.$('label').click()
-        return wait()
-      })
-
-      it('should call the action', function () {
-        expect(stub).to.have.callCount(1)
-      })
-    })
-  })
-
-  describe('when given a raw function', function () {
-    let stub
-    beforeEach(function () {
-      stub = sinon.stub()
-      this.set('myAction', stub)
-
-      this.render(hbs`
-        {{frost-toggle
-          trueValue='enabled'
-          falseValue='disabled'
-          hook='myToggle'
-          value='disabled'
-          onClick=myAction
-        }}
-      `)
-
-      return wait()
-    })
-
-    describe('when the label is clicked', function () {
-      beforeEach(function () {
-        this.$('label').click()
-        return wait()
-      })
-
-      it('should call the action', function () {
-        expect(stub).to.have.been.calledWith('enabled')
-      })
-    })
-  })
-
   describe('when rendering using spread', function () {
     beforeEach(function () {
       this.render(hbs`
@@ -333,6 +240,135 @@ describe(test.label, function () {
 
     it('should pass along the disabled property', function () {
       expect(this.$('.frost-toggle input')).to.have.prop('disabled', true)
+    })
+  })
+
+  describe('onClick', function () {
+    let stub
+    beforeEach(function () {
+      stub = sinon.stub()
+    })
+
+    describe('when given a closure action', function () {
+      beforeEach(function () {
+        this.on('myAction', stub)
+
+        this.render(hbs`
+          {{frost-toggle
+            trueValue='enabled'
+            falseValue='disabled'
+            hook='myToggle'
+            value='disabled'
+            onClick=(action 'myAction')
+          }}
+        `)
+
+        return wait()
+      })
+
+      describe('when the label is clicked', function () {
+        beforeEach(function () {
+          this.$('label').click()
+          return wait()
+        })
+
+        it('should call the action', function () {
+          expect(stub).to.have.callCount(1)
+        })
+      })
+    })
+
+    describe('when given a closure function', function () {
+      beforeEach(function () {
+        this.set('myAction', stub)
+
+        this.render(hbs`
+          {{frost-toggle
+            trueValue='enabled'
+            falseValue='disabled'
+            hook='myToggle'
+            value='disabled'
+            onClick=(action myAction)
+          }}
+        `)
+
+        return wait()
+      })
+
+      describe('when the label is clicked', function () {
+        beforeEach(function () {
+          this.$('label').click()
+          return wait()
+        })
+
+        it('should call the action', function () {
+          expect(stub).to.have.callCount(1)
+        })
+      })
+    })
+
+    describe('when using mut helper', function () {
+      beforeEach(function () {
+        this.set('myValue', 'disabled')
+
+        this.render(hbs`
+          {{frost-toggle
+            trueValue='enabled'
+            falseValue='disabled'
+            hook='myToggle'
+            value='disabled'
+            onClick=(action (mut myValue) value="target.value")
+          }}
+        `)
+
+        return wait()
+      })
+
+      describe('when the label is clicked', function () {
+        beforeEach(function () {
+          this.$('label').click()
+          return wait()
+        })
+
+        it('should mutate the value', function () {
+          expect(this.get('myValue')).to.equal('enabled')
+        })
+      })
+    })
+  })
+
+  describe('onToggle', function () {
+    let stub
+    beforeEach(function () {
+      stub = sinon.stub()
+    })
+
+    describe('with raw function', function () {
+      beforeEach(function () {
+        this.set('myAction', stub)
+        this.render(hbs`
+          {{frost-toggle
+            trueValue='enabled'
+            falseValue='disabled'
+            hook='myToggle'
+            value='disabled'
+            onToggle=myAction
+          }}
+        `)
+
+        return wait()
+      })
+
+      describe('when the label is clicked', function () {
+        beforeEach(function () {
+          this.$('label').click()
+          return wait()
+        })
+
+        it('should mutate the value', function () {
+          expect(stub).to.have.been.calledWith('enabled')
+        })
+      })
     })
   })
 })
