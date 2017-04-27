@@ -1,9 +1,11 @@
 import {expect} from 'chai'
+import Ember from 'ember'
+const {ViewUtils} = Ember
 import {$hook} from 'ember-hook'
 import wait from 'ember-test-helpers/wait'
 import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'
-import {beforeEach, describe, it} from 'mocha'
+import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
 /**
@@ -28,15 +30,41 @@ function itShouldCallOnToggleWithProperValue (ctx, expectedValue) {
   })
 }
 
+/**
+ * Helper to streamline tests for onToggle callback
+ * Triggers a click on the label and then checks the onToggle stub for expected behavior
+ * @param {Object} ctx - the context object for the test
+ * @param {Sinon.Stub} ctx.stub - the sinon stub to inspect
+ */
+function itShouldNotCallOnToggle (ctx) {
+  describe('when the label is clicked', function () {
+    let stub
+    beforeEach(function () {
+      stub = ctx.stub
+      $hook('myToggle-toggle-label').click()
+      return wait()
+    })
+
+    it('should not call onToggle with the new value', function () {
+      expect(stub).to.have.callCount(0)
+    })
+  })
+}
+
 const test = integration('frost-toggle')
 describe(test.label, function () {
   test.setup()
 
   const ctx = {}
-  let stub
+  let stub, sandbox
   beforeEach(function () {
-    stub = ctx.stub = sinon.stub()
+    sandbox = sinon.sandbox.create()
+    stub = ctx.stub = sandbox.stub()
     this.set('myActionStub', stub)
+  })
+
+  afterEach(function () {
+    sandbox.restore()
   })
 
   describe('when rendered with defaults', function () {
@@ -277,7 +305,7 @@ describe(test.label, function () {
       this.render(hbs`
         {{frost-toggle
           hook='myToggle'
-          value=true
+          value='false'
           onToggle=myActionStub
         }}
       `)
@@ -285,7 +313,24 @@ describe(test.label, function () {
       return wait()
     })
 
-    itShouldCallOnToggleWithProperValue(ctx, false)
+    itShouldCallOnToggleWithProperValue(ctx, true)
+  })
+
+  describe('when given an onToggle, but disabled', function () {
+    beforeEach(function () {
+      this.render(hbs`
+        {{frost-toggle
+          disabled=true
+          hook='myToggle'
+          value='false'
+          onToggle=myActionStub
+        }}
+      `)
+
+      return wait()
+    })
+
+    itShouldNotCallOnToggle(ctx)
   })
 
   // NOTE: this is exercising a bug found in v1.16.0 to make sure it doesn't regress
@@ -319,7 +364,7 @@ describe(test.label, function () {
           trueValue=true
           falseValue=false
           hook='myToggle'
-          value=true
+          value='true'
           onToggle=myActionStub
         }}
       `)
@@ -341,7 +386,7 @@ describe(test.label, function () {
             trueValue='enabled'
             falseValue='disabled'
             hook='myToggle'
-            value='disabled'
+            value='enabled'
             onClick=(action 'myAction')
           }}
         `)
@@ -357,6 +402,36 @@ describe(test.label, function () {
 
         it('should call the action', function () {
           expect(stub).to.have.callCount(1)
+        })
+      })
+    })
+
+    describe('when click is not simple', function () {
+      beforeEach(function () {
+        sandbox.stub(ViewUtils, 'isSimpleClick').returns(false)
+        this.on('myAction', stub)
+
+        this.render(hbs`
+          {{frost-toggle
+            trueValue='enabled'
+            falseValue='disabled'
+            hook='myToggle'
+            value='enabled'
+            onClick=(action 'myAction')
+          }}
+        `)
+
+        return wait()
+      })
+
+      describe('when the label is clicked', function () {
+        beforeEach(function () {
+          this.$('label').click()
+          return wait()
+        })
+
+        it('should not call the action', function () {
+          expect(stub).to.have.callCount(0)
         })
       })
     })
