@@ -1,3 +1,13 @@
+# 1.17.0 (2017-04-27)
+
+* **Upgraded** to `ember-test-utils@4.x`
+* **Upgraded** to `ember-cli-code-coverage@0.3.12` (using a pinned `ember-code-snippet@1.7.0` so as to avoid overwriting `require` and breaking `ember-cli-code-coverage`)
+* **Enabled** code coverage gating in PRs. 
+* **Added** `onToggle` callback which is called with the new value whenever toggled
+* **Deprecated** `onClick` callback, which wasn't handling raw functions very well when going through the event proxy
+* **Fixed** [#439](https://github.com/ciena-frost/ember-frost-core/issues/439) Properly handle falsy `trueValue`/`falseValue` when `trueLabel`/`falseLabel` are set
+
+
 # 1.16.0 (2017-04-27)
 - Added secondary labels in select #281 
 
