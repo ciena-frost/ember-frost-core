@@ -76,6 +76,7 @@ export default Component.extend({
     disabled: PropTypes.bool,
     error: PropTypes.bool,
     label: PropTypes.string,
+    secondaryLabels: PropTypes.arrayOf(PropTypes.string),
     multiselect: PropTypes.bool,
     onBlur: PropTypes.func,
     onChange: PropTypes.func,
@@ -169,8 +170,18 @@ export default Component.extend({
         }
 
         const label = item.label || ''
+        const secondaryLabels = item.secondaryLabels || []
 
-        return label.toLowerCase().indexOf(filter) !== -1
+        if (label.toLowerCase().indexOf(filter) !== -1) {
+          return true
+        }
+
+        const filteredSecondaryLabels = secondaryLabels.filter(function (secondaryLabel) {
+          if (secondaryLabel.toLowerCase().indexOf(filter) !== -1) {
+            return true
+          }
+        })
+        return filteredSecondaryLabels.length > 0
       })
   },
 

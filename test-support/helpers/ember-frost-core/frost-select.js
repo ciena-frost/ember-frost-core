@@ -72,6 +72,14 @@ export function expectWithState (select, state) {
 
     expect(labels, 'has expected items').to.eql(state.items)
     expect($emptyMessage, 'does not show empty message').to.have.length(0)
+
+    if (state.secondaryLabels) {
+      const secondaryLabels = $('.frost-select-dropdown li')
+        .toArray()
+        .map((element) => $(element).find('.frost-select-list-secondary-item-text').data('text'))
+
+      expect(secondaryLabels, 'has expected items').to.eql(state.secondaryLabels)
+    }
   } else if (state.opened) {
     expect($emptyMessage, 'shows empty message').to.have.length(1)
   }
