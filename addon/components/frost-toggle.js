@@ -38,6 +38,7 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
       PropTypes.string,
       PropTypes.number
     ]),
+    falseValue: PropTypes.any,
     onClick: PropTypes.func,
     onToggle: PropTypes.func,
     size: PropTypes.string,
@@ -46,6 +47,7 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
       PropTypes.string,
       PropTypes.number
     ]),
+    trueValue: PropTypes.any,
     value: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.string,
@@ -56,17 +58,19 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
   },
 
   getDefaultProps () {
+    const falseLabel = this.get('falseLabel')
+    const trueLabel = this.get('trueLabel')
+    const validTypes = ['string', 'number', 'boolean']
+
     return {
       // options
       disabled: false,
-      _falseLabel: this.get('falseLabel') !== undefined &&
-      (typeOf(this.get('falseLabel') === 'string') || typeOf(this.get('falseLabel') === 'number'))
-                ? this.get('falseLabel') : false,
       onToggle () {},
       size: 'medium',
-      _trueLabel: this.get('trueLabel') !== undefined &&
-      (typeOf(this.get('trueLabel') === 'string') || typeOf(this.get('trueLabel') === 'number'))
-                ? this.get('trueLabel') : true
+
+      // state
+      _falseLabel: validTypes.includes(typeOf(falseLabel)) ? falseLabel : false,
+      _trueLabel: validTypes.includes(typeOf(trueLabel)) ? trueLabel : true
     }
   },
 
@@ -74,14 +78,14 @@ export default Component.extend(SpreadMixin, PropTypeMixin, FrostEventsProxyMixi
 
   @readOnly
   @computed('trueValue', '_trueLabel')
-  _trueValue (trueValue, _trueLabel) { // eslint-disable-line
-    return trueValue || _trueLabel
+  _trueValue (trueValue, _trueLabel) {
+    return (trueValue === undefined) ? _trueLabel : trueValue
   },
 
   @readOnly
   @computed('falseValue', '_falseLabel')
-  _falseValue (falseValue, _falseLabel) { // eslint-disable-line
-    return falseValue || _falseLabel
+  _falseValue (falseValue, _falseLabel) {
+    return (falseValue === undefined) ? _falseLabel : falseValue
   },
 
   @readOnly
