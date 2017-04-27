@@ -7,6 +7,8 @@ import startApp from '../helpers/start-app'
 describe('Acceptance: Application', function () {
   let application
 
+  this.timeout(5000)
+
   before(function () {
     application = startApp()
     server.loadFixtures()

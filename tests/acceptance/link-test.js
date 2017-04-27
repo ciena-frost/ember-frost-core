@@ -6,12 +6,15 @@ import {afterEach, beforeEach, describe, it} from 'mocha'
 describe('Acceptance | link', function () {
   let application
 
+  this.timeout(5000)
+
   beforeEach(function () {
     application = startApp()
   })
 
   afterEach(function () {
     destroyApp(application)
+    application = null
   })
 
   describe('when rendering a link using spread options', function () {
