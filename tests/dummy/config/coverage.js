@@ -2,11 +2,14 @@ module.exports = {
   coverageEnvVar: 'COVERAGE',
   coverageFolder: 'coverage',
   excludes: [
-    'tests/dummy/**/*',
-    '**/mirage/**/*'
+    '**/dummy/**/*',
+    '**/mirage/**/*',
+    '**/polyfills/**/*'
   ],
   useBabelInstrumenter: true,
   reporters: [
+    'html',
+    'json-summary',
     'lcov',
     'text-summary'
   ]
