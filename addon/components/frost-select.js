@@ -147,7 +147,6 @@ export default Component.extend({
 
   @readOnly
   @computed('data', 'filter', 'onInput')
-  // FIXME: jsdoc
   items (data, filter, onInput) {
     // If no data to filter we are done
     if (!data) {
@@ -187,7 +186,6 @@ export default Component.extend({
 
   @readOnly
   @computed('data', 'selected', 'internalSelectedValue')
-  // FIXME: jsdoc
   selectedItems (items, selected, selectedValue) {
     if (selectedValue !== undefined) {
       return items.filter((item) => {
@@ -277,14 +275,12 @@ export default Component.extend({
 
   // == DOM Events ============================================================
 
-  // FIXME: jsdoc
   _onClick: on('click', function () {
     if (!this.get('disabled')) {
       this.toggleProperty('opened')
     }
   }),
 
-  // FIXME: jsdoc
   _onKeyDown: on('keyDown', function (e) {
     if (
       [DOWN_ARROW, UP_ARROW].indexOf(e.keyCode) !== -1 &&
@@ -296,7 +292,6 @@ export default Component.extend({
     }
   }),
 
-  // FIXME: jsdoc
   _onKeyPress: on('keyPress', function (e) {
     if (e.keyCode === SPACE) {
       e.preventDefault() // Keep space from scrolling page
@@ -305,7 +300,6 @@ export default Component.extend({
     }
   }),
 
-  // FIXME: jsdoc
   _onFocusIn: on('focusIn', function () {
     // If select is disabled make sure it can't get focus
     if (this.get('disabled')) {
@@ -321,7 +315,6 @@ export default Component.extend({
     }
   }),
 
-  // FIXME: jsdoc
   _onFocusOut: on('focusOut', function () {
     // We must use run.later so filter text input has time to focus when select
     // dropdown is being opened
@@ -393,7 +386,6 @@ export default Component.extend({
   // == Actions ===============================================================
 
   actions: {
-    // FIXME: jsdoc
     closeDropDown () {
       this.setProperties({
         filter: '',
@@ -405,7 +397,6 @@ export default Component.extend({
       this.$().focus()
     },
 
-    // FIXME: jsdoc
     filterInput (e) {
       const inputTask = this.get('inputTask')
       const onInput = this.get('onInput')
@@ -419,7 +410,6 @@ export default Component.extend({
       }
     },
 
-    // FIXME: jsdoc
     selectItem (selectedValue) {
       const isMultiselect = this.get('multiselect')
       const props = {

@@ -1,10 +1,13 @@
-import destroyApp from '../helpers/destroy-app'
-import startApp from '../helpers/start-app'
 import {expect} from 'chai'
 import {after, before, beforeEach, describe, it} from 'mocha'
 
+import destroyApp from '../helpers/destroy-app'
+import startApp from '../helpers/start-app'
+
 describe('Acceptance: Application', function () {
   let application
+
+  this.timeout(5000)
 
   before(function () {
     application = startApp()
@@ -13,6 +16,7 @@ describe('Acceptance: Application', function () {
 
   after(function () {
     destroyApp(application)
+    application = null
   })
 
   describe('visit /', function () {

@@ -36,9 +36,10 @@
   "devDependencies": {
     "broccoli-asset-rev": "^2.5.0",
     "chai-jquery": "^2.0.0",
+    "ember-browserify": "^1.1.13",
     "ember-cli": "~2.11.0",
     "ember-cli-chai": "0.3.2",
-    "ember-cli-code-coverage": "0.3.5",
+    "ember-cli-code-coverage": "0.3.12",
     "ember-cli-dependency-checker": "^1.3.0",
     "ember-cli-htmlbars-inline-precompile": "0.3.6",
     "ember-cli-inject-live-reload": "^1.4.1",
@@ -47,7 +48,7 @@
     "ember-cli-notifications": "^4.1.6",
     "ember-cli-test-loader": "^1.1.1",
     "ember-cli-uglify": "^1.2.0",
-    "ember-code-snippet": "^1.8.0",
+    "ember-code-snippet": "1.7.0",
     "ember-computed-decorators": "~0.3.0",
     "ember-concurrency": "~0.7.15",
     "ember-data": "^2.11.0",
@@ -62,7 +63,7 @@
     "ember-resolver": "^2.1.1",
     "ember-sinon": "0.6.0",
     "ember-spread": "^1.1.1",
-    "ember-test-utils": "^1.10.3",
+    "ember-test-utils": "^4.0.0",
     "ember-truth-helpers": "^1.3.0",
     "frost-guide-custom-routing": "0.0.4",
     "loader.js": "^4.1.0",
@@ -102,5 +103,8 @@
     "npm-install-security-check": "^1.0.0",
     "promise": "^7.1.1",
     "semver": "^5.3.0"
+  },
+  "pr-bumper": {
+    "coverage": 95.76
   }
 }

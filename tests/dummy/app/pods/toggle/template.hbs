@@ -132,7 +132,7 @@
                 hook='myToggle'
                 value=value8
                 trueValue='enable'
-                onClick=(mut value8)
+                onClick=(action (mut value8) value="target.value")
               }}
               {{input value=value8}}
               {{! END-SNIPPET }}

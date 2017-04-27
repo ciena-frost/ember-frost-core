@@ -210,7 +210,6 @@ export default Component.extend({
 
   // == DOM Events ============================================================
 
-  // FIXME: jsdoc
   onclick: on('click', function (event) {
     if (!ViewUtils.isSimpleClick(event)) {
       return true
@@ -221,7 +220,6 @@ export default Component.extend({
     }
   }),
 
-  // FIXME: jsdoc
   _onFocus: on('focusIn', function (e) {
     // If an onFocus handler is defined, call it
     if (this.attrs.onFocus) {

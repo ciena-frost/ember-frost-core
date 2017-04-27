@@ -108,7 +108,6 @@ export default Component.extend({
 
   // == Functions ===============================================================
 
-  // FIXME: jsdoc
   _changeTarget (event, target) {
     const e = cloneEvent(event, target)
 
@@ -122,7 +121,6 @@ export default Component.extend({
 
   // == Events ===============================================================
   /* eslint-disable complexity */
-  // FIXME: jsdoc
   keyPress (event) {
     if (event.keyCode === 13 || event.keyCode === 32) {
       if (this.get('disabled') || this.get('checked')) {
@@ -136,7 +134,6 @@ export default Component.extend({
   },
   /* eslint-enable complexity */
 
-  // FIXME: jsdoc
   change (event) {
     if (this.onChange) {
       this.onChange(this._changeTarget(event, event.target))
