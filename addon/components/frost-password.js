@@ -101,7 +101,6 @@ export default Component.extend(FrostEventsProxy, {
 
   // == Tasks =================================================================
 
-  // FIXME: jsdoc
   _toggleReveal: task(function * (isVisible) {
     this.toggleProperty('isRevealed')
 

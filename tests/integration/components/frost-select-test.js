@@ -3,13 +3,13 @@ import Ember from 'ember'
 const {$, run} = Ember
 import {$hook} from 'ember-hook'
 import wait from 'ember-test-helpers/wait'
+import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
 import {expectSelectWithState, filterSelect} from 'dummy/tests/helpers/ember-frost-core'
 import {close, open, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
-import {integration} from 'dummy/tests/helpers/ember-test-utils/setup-component-test'
 import {keyCodes} from 'ember-frost-core/utils'
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
 
@@ -50,6 +50,18 @@ function focusNext ($element) {
  */
 function getItemHtml (index) {
   return $(`.frost-select-dropdown li:nth-child(${index}) .frost-select-list-item-text`)
+    .html()
+    .replace('<!---->', '')
+    .trim()
+}
+
+/**
+ * Get HTML for list secondary item
+ * @param {Number} index - secondary item index (1 based)
+ * @returns {String} list secondary item's HTML
+ */
+function getSecondaryItemHtml (index) {
+  return $(`.frost-select-dropdown li:nth-child(${index}) .frost-select-list-secondary-item-text`)
     .html()
     .replace('<!---->', '')
     .trim()
@@ -558,6 +570,264 @@ describe(test.label, function () {
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
           expect(onChange.callCount, 'onChange is not called').to.equal(0)
           expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+        })
+      })
+    })
+
+    describe('when secondary data present', function () {
+      beforeEach(function () {
+        this.set('data', [
+          {label: 'Foo', value: 'foo', secondaryLabels: ['Foo1-1', 'Foo1-2']},
+          {label: 'Bar', value: 'bar', secondaryLabels: ['Bar1-1', 'Bar1-2']},
+          {label: 'Ba ba', value: 'baba', secondaryLabels: ['Ba', 'Ba', 'Black Sheep']},
+          {label: 'Superman', value: 'Clark Kent', secondaryLabels: ['Man of Steel']}
+        ])
+      })
+
+      describe('click on component', function () {
+        beforeEach(function () {
+          open('select')
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true,
+            focusedItem: 'Foo',
+            items: ['Foo', 'Bar', 'Ba ba', 'Superman'],
+            secondaryLabels: ['Foo1-1 | Foo1-2', 'Bar1-1 | Bar1-2', 'Ba | Ba | Black Sheep', 'Man of Steel'],
+            opened: true
+          })
+        })
+      })
+
+      describe('programatically focus component', function () {
+        beforeEach(function () {
+          // We must use jQuery's focusin() method for Ember event to fire and the
+          // HTMLElement's focus() method to ensure the element is actually focused
+          $hook('select').focusin()[0].focus()
+        })
+
+        it('renders as expected', function () {
+          expectSelectWithState('select', {
+            focused: true
+          })
+
+          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+          expect(onChange.callCount, 'onChange is not called').to.equal(0)
+          expect(onFocus.callCount, 'onFocus is called').not.to.equal(0)
+        })
+
+        describe('when space bar pressed', function () {
+          beforeEach(function () {
+            [onBlur, onChange, onFocus].forEach((func) => func.reset())
+
+            $hook('select')
+              .trigger(
+                $.Event('keypress', {
+                  keyCode: SPACE
+                })
+              )
+          })
+
+          it('renders as expected', function () {
+            expectSelectWithState('select', {
+              focused: true,
+              focusedItem: 'Foo',
+              items: ['Foo', 'Bar', 'Ba ba', 'Superman'],
+              opened: true
+            })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
+            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+          })
+
+          describe('when filter applied with no matches', function () {
+            beforeEach(function () {
+              filterSelect('asdf')
+            })
+
+            it('renders as expected', function () {
+              expectSelectWithState('select', {
+                focused: true,
+                items: [],
+                secondaryLabels: [],
+                opened: true
+              })
+            })
+          })
+
+          describe('when filter applied with one match for primary label', function () {
+            beforeEach(function () {
+              filterSelect('Superman')
+            })
+
+            it('renders as expected', function () {
+              expectSelectWithState('select', {
+                focused: true,
+                focusedItem: 'Superman',
+                items: ['Superman'],
+                secondaryLabels: ['Man of Steel'],
+                opened: true
+              })
+
+              expect(
+                getItemHtml(1),
+                'underlines matching text'
+              )
+                .to.eql('<u>Superman</u>')
+
+              expect(
+                getSecondaryItemHtml(1),
+                'underlines matching text'
+              )
+                .to.eql('Man of Steel')
+
+              expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+              expect(onChange.callCount, 'onChange is not called').to.equal(0)
+              expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+            })
+          })
+
+          describe('when filter applied with one match for secondary label', function () {
+            beforeEach(function () {
+              filterSelect('Steel')
+            })
+
+            it('renders as expected', function () {
+              expectSelectWithState('select', {
+                focused: true,
+                focusedItem: 'Superman',
+                items: ['Superman'],
+                secondaryLabels: ['Man of Steel'],
+                opened: true
+              })
+
+              expect(
+                getItemHtml(1),
+                'underlines matching text'
+              )
+                .to.eql('Superman')
+
+              expect(
+                getSecondaryItemHtml(1),
+                'underlines matching text'
+              )
+                .to.eql('Man of <u>Steel</u>')
+
+              expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+              expect(onChange.callCount, 'onChange is not called').to.equal(0)
+              expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+            })
+          })
+
+          describe('when filter applied with one match for both labels', function () {
+            beforeEach(function () {
+              filterSelect('Bar')
+            })
+
+            it('renders as expected', function () {
+              expectSelectWithState('select', {
+                focused: true,
+                focusedItem: 'Bar',
+                items: ['Bar'],
+                secondaryLabels: ['Bar1-1 | Bar1-2'],
+                opened: true
+              })
+
+              expect(
+                getItemHtml(1),
+                'underlines matching text'
+              )
+                .to.eql('<u>Bar</u>')
+
+              expect(
+                getSecondaryItemHtml(1),
+                'underlines matching text'
+              )
+                .to.eql('<u>Bar</u>1-1 | <u>Bar</u>1-2')
+
+              expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+              expect(onChange.callCount, 'onChange is not called').to.equal(0)
+              expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+            })
+          })
+
+          describe('when filter applied with more than one match', function () {
+            beforeEach(function () {
+              filterSelect('ba')
+            })
+
+            it('renders as expected', function () {
+              expectSelectWithState('select', {
+                focused: true,
+                focusedItem: 'Bar',
+                items: ['Bar', 'Ba ba'],
+                secondaryLabels: ['Bar1-1 | Bar1-2', 'Ba | Ba | Black Sheep'],
+                opened: true
+              })
+
+              expect(
+                getItemHtml(1),
+                'underlines matching text in first item'
+              )
+                .to.eql('<u>Ba</u>r')
+
+              expect(
+                getSecondaryItemHtml(1),
+                'underlines matching text in first item'
+              )
+                .to.eql('<u>Ba</u>r1-1 | <u>Ba</u>r1-2')
+
+              expect(
+                getItemHtml(2),
+                'underlines matching text in second item'
+              )
+                .to.eql('<u>Ba</u> <u>ba</u>')
+
+              expect(
+                getSecondaryItemHtml(2),
+                'underlines matching text in second item'
+              )
+                .to.eql('<u>Ba</u> | <u>Ba</u> | Black Sheep')
+
+              expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+              expect(onChange.callCount, 'onChange is not called').to.equal(0)
+              expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
+            })
+          })
+
+          describe('when filter is applied and selection is made', function () {
+            beforeEach(function (done) {
+              onChange.reset()
+              filterSelect('b')
+              wait().then(() => {
+                filterSelect('ba')
+                wait().then(() => {
+                  filterSelect('bar')
+                  wait().then(() => {
+                    selectItemAtIndex('select', 0, done)
+                  })
+                })
+              })
+            })
+
+            it('renders as expected', function () {
+              expectSelectWithState('select', {
+                focused: true,
+                opened: false,
+                text: 'Bar'
+              })
+            })
+
+            it('should call onChange once', function () {
+              expect(onChange).to.have.callCount(1)
+            })
+
+            it('should call onChange with the correct value', function () {
+              expect(onChange).to.have.been.calledWith(['bar'])
+            })
+          })
         })
       })
     })
@@ -1333,6 +1603,35 @@ describe(test.label, function () {
         it('should give that list item a larger height', function () {
           const regularItemHeight = $hook('select-item', {index: 0}).height()
           const wrappedItemHeight = $hook('select-item', {index: 1}).height()
+          expect(wrappedItemHeight).to.be.greaterThan(regularItemHeight)
+        })
+      })
+
+      describe('when wrapLabels is true and data includes a long secondary label', function () {
+        let longLabel
+        let longSecondaryLabel
+        beforeEach(function () {
+          longLabel = 'Very very very very very very very very very very very very very very long label'
+          longSecondaryLabel =
+            'Very very very very very very very very very very very very very very long secondary label'
+          this.setProperties({
+            data: [
+              {label: 'Short Label', value: 'foo', secondaryLabels: ['secondary label']},
+              {label: longLabel, value: 'bar', secondaryLabels: [longSecondaryLabel]}
+            ],
+            wrapLabels: true
+          })
+
+          return open('select')
+        })
+
+        it('should show the entire label', function () {
+          expect($hook('select-secondaryLabels', {index: 1}).text().trim()).to.have.equal(longSecondaryLabel)
+        })
+
+        it('should give that list item a larger height', function () {
+          const regularItemHeight = $hook('select-secondaryLabels', {index: 0}).height()
+          const wrappedItemHeight = $hook('select-secondaryLabels', {index: 1}).height()
           expect(wrappedItemHeight).to.be.greaterThan(regularItemHeight)
         })
       })

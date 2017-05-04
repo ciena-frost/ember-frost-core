@@ -12,7 +12,10 @@ export default [
     id: '2',
     attributes: {
       'value': 'Bruce Wayne',
-      'label': 'Batman'
+      'label': 'Batman',
+      'secondary-labels': [
+        'DC', 'Human', 'Dark Knight', 'Utility Belt'
+      ]
     }
   },
   {
@@ -20,7 +23,10 @@ export default [
     id: '3',
     attributes: {
       'value': 'Tony Starks',
-      'label': 'Ironman'
+      'label': 'Ironman',
+      'secondary-labels': [
+        'Marvel', 'Human', 'Repulsor technology'
+      ]
     }
   },
   {
@@ -28,7 +34,10 @@ export default [
     id: '4',
     attributes: {
       'value': 'Princess Diana',
-      'label': 'Wonder Woman'
+      'label': 'Wonder Woman',
+      'secondary-labels': [
+        'DC', 'Amazonian', 'Lasso of Truth', 'Flight', 'Super Strength'
+      ]
     }
   },
   {
@@ -36,7 +45,10 @@ export default [
     id: '5',
     attributes: {
       'value': 'Barry Allen',
-      'label': 'The Flash'
+      'label': 'The Flash',
+      'secondary-labels': [
+        'DC', 'Meta-Human', 'Speedforce', 'Fastest man alive'
+      ]
     }
   },
   {
@@ -44,7 +56,10 @@ export default [
     id: '6',
     attributes: {
       'value': 'Arthur Curry',
-      'label': 'Aquaman'
+      'label': 'Aquaman',
+      'secondary-labels': [
+        'DC', 'Atlantian', 'Can ride a dolphin'
+      ]
     }
   },
   {
@@ -52,7 +67,10 @@ export default [
     id: '7',
     attributes: {
       'value': 'Hal Jordan',
-      'label': 'Green Lantern'
+      'label': 'Green Lantern',
+      'secondary-labels': [
+        'DC', 'Human', 'Power of will'
+      ]
     }
   },
   {
@@ -60,7 +78,10 @@ export default [
     id: '8',
     attributes: {
       'value': 'Ray Palmer',
-      'label': 'Atom'
+      'label': 'Atom',
+      'secondary-labels': [
+        'DC', 'Human', 'Atom manipulation'
+      ]
     }
   },
   {
@@ -68,7 +89,10 @@ export default [
     id: '9',
     attributes: {
       'value': 'Jaime Reyes',
-      'label': 'Blue Beetle'
+      'label': 'Blue Beetle',
+      'secondary-labels': [
+        'DC', 'Human', 'Blue scarab symbiot'
+      ]
     }
   },
   {
@@ -76,7 +100,21 @@ export default [
     id: '10',
     attributes: {
       'value': 'Leonard Snart',
-      'label': 'Captain Cold'
+      'label': 'Captain Cold',
+      'secondary-labels': [
+        'DC', 'Human', 'Freeze gun'
+      ]
+    }
+  },
+  {
+    type: 'nodes',
+    id: '11',
+    attributes: {
+      'value': 'Super secondary hero',
+      'label': 'My really really really really really really really really really really long label',
+      'secondary-labels': [
+        'My really really really really really really really really really really long secondary label'
+      ]
     }
   }
 ]

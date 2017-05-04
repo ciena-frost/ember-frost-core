@@ -74,7 +74,6 @@ export default Component.extend(FrostEventsProxyMixin, {
 
   // == Tasks ==================================================================
 
-  // FIXME: jsdoc
   _clear: task(function * () {
     this.$('input')
       .focus()
@@ -82,7 +81,6 @@ export default Component.extend(FrostEventsProxyMixin, {
       .trigger('input')
   }).restartable(),
 
-  // FIXME: jsdoc
   _showClear: task(function * (isFocused) {
     const showClear = isFocused && isPresent(this.get('value')) && !this.get('readonly')
     if (this.get('isClearVisible') === showClear) {
@@ -102,7 +100,6 @@ export default Component.extend(FrostEventsProxyMixin, {
 
   // == DOM Events ============================================================
 
-  // FIXME: jsdoc
   _showClearEvent: on('focusIn', 'focusOut', 'input', function (event) {
     const isFocused = event.type !== 'focusout'
     this.get('_showClear').perform(isFocused)
@@ -126,19 +123,16 @@ export default Component.extend(FrostEventsProxyMixin, {
   // To avoid this, we use the TextSupport 'key-up' event and
   // proxy the event to the keyUp handler.
   actions: {
-    // FIXME: jsdoc
     clear () {
       this.get('_clear').perform()
     },
 
-    // FIXME: jsdoc
     keyUp (value, event) {
       if (isPresent(this.get('_eventProxy.keyUp'))) {
         this._eventProxy.keyUp(event)
       }
     },
 
-    // FIXME: jsdoc
     _onInput (event) {
       if (isPresent(this.get('_eventProxy.input'))) {
         // Add id and value for legacy support

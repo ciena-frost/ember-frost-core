@@ -1,3 +1,35 @@
+# 1.17.0 (2017-04-27)
+
+* **Upgraded** to `ember-test-utils@4.x`
+* **Upgraded** to `ember-cli-code-coverage@0.3.12` (using a pinned `ember-code-snippet@1.7.0` so as to avoid overwriting `require` and breaking `ember-cli-code-coverage`)
+* **Enabled** code coverage gating in PRs. 
+* **Added** `onToggle` callback which is called with the new value whenever toggled
+* **Deprecated** `onClick` callback, which wasn't handling raw functions very well when going through the event proxy
+* **Fixed** [#439](https://github.com/ciena-frost/ember-frost-core/issues/439) Properly handle falsy `trueValue`/`falseValue` when `trueLabel`/`falseLabel` are set
+
+
+# 1.16.0 (2017-04-27)
+- Added secondary labels in select #281 
+
+
+
+# 1.15.0 (2017-04-25)
+- Consume broccoli-autoprefixer
+
+
+# 1.14.6 (2017-04-21)
+- Bumped ember-elsewhere version
+
+# 1.14.5 (2017-04-21)
+
+* **Fixed** a typo that was introducing exponents in an if statement for no good reason.
+
+
+# 1.14.4 (2017-04-20)
+
+* **Fixed** a typo that was introducing exponents in an if statement for no good reason.
+
+
 # 1.14.3 (2017-04-11)
 - Fix positioning of `:after` selector in firefox
 

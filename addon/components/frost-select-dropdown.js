@@ -2,7 +2,7 @@
  * Component definition for frost-select-dropdown component
  */
 import Ember from 'ember'
-const {$, deprecate, get, merge} = Ember
+const {$, deprecate, get, isArray, isEmpty, merge} = Ember
 import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
@@ -13,7 +13,7 @@ import {keyCodes} from '../utils'
 import {trimLongDataInElement} from '../utils/text'
 import Component from './frost-component'
 
-const {DOWN_ARROW, ENTER, TAB, ESCAPE, UP_ARROW} = keyCodes
+const {DOWN_ARROW, ENTER, ESCAPE, TAB, UP_ARROW} = keyCodes
 
 const BORDER_HEIGHT = 1
 const ARROW_HEIGHT = 12
@@ -79,7 +79,6 @@ export default Component.extend({
   },
 
   // == Computed Properties ===================================================
-
   @readOnly
   @computed('wrapLabels')
   /**
@@ -106,6 +105,21 @@ export default Component.extend({
     const classNames = ['frost-select-list-item-text']
     if (multiSelect) {
       classNames.push('frost-multi-select-list-item-text')
+    }
+    return classNames.join(' ')
+  },
+
+  @readOnly
+  @computed('multiselect')
+  /**
+   * The class names for the frost select dropdown secondary options
+   * @param {Boolean} multiSelect - whether or not this is a multiselect
+   * @returns {string} the class names for the frost select dropdown secondary options
+   */
+  dropdownSecondaryLabelsTextClassNames (multiSelect) {
+    const classNames = ['frost-select-list-secondary-item-text']
+    if (multiSelect) {
+      classNames.push('frost-multi-select-list-secondary-item-text')
     }
     return classNames.join(' ')
   },
@@ -184,6 +198,11 @@ export default Component.extend({
       const classNames = ['frost-select-list-item']
       const value = get(item, 'value')
       const isSelected = selectedItems.find((item) => item.value === value) !== undefined
+      const secondaryLabels = get(item, 'secondaryLabels')
+
+      if (!isEmpty(secondaryLabels)) {
+        classNames.push('frost-select-list-secondary-item')
+      }
 
       if (isSelected) {
         classNames.push('frost-select-list-item-selected')
@@ -196,6 +215,16 @@ export default Component.extend({
       return {
         className: classNames.join(' '),
         label: get(item, 'label'),
+        secondaryLabels: secondaryLabels,
+        hasSecondaryLabels: isArray(secondaryLabels),
+        @readOnly
+        @computed('secondaryLabels', 'hasSecondaryLabels')
+        displaySecondaryLabels (secondaryLabels, hasSecondaryLabels) {
+          if (hasSecondaryLabels) {
+            return secondaryLabels.join(' | ')
+          }
+          return ''
+        },
         selected: isSelected,
         value: get(item, 'value')
       }
@@ -237,7 +266,6 @@ export default Component.extend({
     })
   },
 
-  // FIXME: jsdoc
   _getElementDimensionsAndPosition ($element) {
     const height = $element.height()
     const offset = $element.offset()
@@ -254,7 +282,6 @@ export default Component.extend({
     }
   },
 
-  // FIXME: jsdoc
   _handleArrowKey (upArrow) {
     let focusedIndex = this.get('focusedIndex')
 
@@ -279,7 +306,6 @@ export default Component.extend({
     }
   },
 
-  // FIXME: jsdoc
   _handleEnterKey () {
     const items = this.get('items') || []
     const focusedIndex = this.get('focusedIndex')
@@ -342,7 +368,6 @@ export default Component.extend({
   },
 
   /* eslint-disable complexity */
-  // FIXME: jsdoc
   _updatePosition ($element) {
     if (this.isDestroyed || this.isDestroying) return {}
 
@@ -372,34 +397,41 @@ export default Component.extend({
     const clonedDropdownListElement = dropdownListElement.cloneNode(true)
     const clonedTextElements = clonedDropdownListElement.querySelectorAll('.frost-select-list-item-text')
     const textElements = dropdownListElement.querySelectorAll('.frost-select-list-item-text')
+    const clonedSecondaryTextElements = clonedDropdownListElement
+      .querySelectorAll('.frost-select-list-secondary-item-text')
+    const secondaryTextElements = dropdownListElement.querySelectorAll('.frost-select-list-secondary-item-text')
     const scrollTop = dropdownListElement.scrollTop
     const wrapLabels = this.get('wrapLabels')
+    const updateText = function (texElements, clonedTextElements) {
+      Array.from(texElements).forEach((textElement, index) => {
+        if (!wrapLabels) {
+          const clonedTextElement = clonedTextElements[index]
+          const updatedData = trimLongDataInElement(clonedTextElement)
+
+          if (updatedData) {
+            textElement.textContent = updatedData.text
+            textElement.setAttribute('title', updatedData.tooltip)
+          }
+        }
+
+        if (filter) {
+          const pattern = new RegExp(filter, 'gi')
+          const textWithMatch = textElement.textContent.replace(pattern, '<u>$&</u>')
+
+          // If rendered text has changed, update it
+          if (textElement.innerHTML !== textWithMatch) {
+            textElement.innerHTML = textWithMatch
+          }
+        }
+      })
+    }
 
     this._removeListItemEventListeners(dropdownListElement)
 
     dropdownListElement.replaceWith(clonedDropdownListElement)
 
-    Array.from(textElements).forEach((textElement, index) => {
-      if (!wrapLabels) {
-        const clonedTextElement = clonedTextElements[index]
-        const updatedData = trimLongDataInElement(clonedTextElement)
-
-        if (updatedData) {
-          textElement.textContent = updatedData.text
-          textElement.setAttribute('title', updatedData.tooltip)
-        }
-      }
-
-      if (filter) {
-        const pattern = new RegExp(filter, 'gi')
-        const textWithMatch = textElement.textContent.replace(pattern, '<u>$&</u>')
-
-        // If rendered text has changed, update it
-        if (textElement.innerHTML !== textWithMatch) {
-          textElement.innerHTML = textWithMatch
-        }
-      }
-    })
+    updateText(textElements, clonedTextElements)
+    updateText(secondaryTextElements, clonedSecondaryTextElements)
 
     clonedDropdownListElement.replaceWith(dropdownListElement)
 
@@ -411,7 +443,6 @@ export default Component.extend({
 
   // == Tasks =================================================================
 
-  // FIXME: jsdoc
   updateTask: task(function * () {
     this._isUpdating = true
 
@@ -518,7 +549,6 @@ export default Component.extend({
   // == Actions ===============================================================
 
   actions: {
-    // FIXME: jsdoc
     clear (e) {
       this.get('onSelect')([])
 
@@ -527,13 +557,11 @@ export default Component.extend({
       $('.frost-select-dropdown .frost-text-input').focus()
     },
 
-    // FIXME: jsdoc
     mouseDown (e) {
       // This keeps the overlay from swallowing clicks on the clear button
       e.preventDefault()
     },
 
-    // FIXME: jsdoc
     selectItem (value) {
       // Single select
       if (!this.get('multiselect')) {

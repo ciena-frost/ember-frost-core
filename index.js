@@ -3,6 +3,7 @@
 // 'use strict'
 
 // const AssetRev = require('broccoli-asset-rev')
+const autoprefixer = require('broccoli-autoprefixer')
 const writeFile = require('broccoli-file-creator')
 const Funnel = require('broccoli-funnel')
 const mergeTrees = require('broccoli-merge-trees')
@@ -230,6 +231,21 @@ module.exports = {
       treesToMerge.push(treeForPublic)
     }
 
-    return mergeTrees(treesToMerge, { overwrite: true })
+    return mergeTrees(treesToMerge, {overwrite: true})
+  },
+  /**
+   * Post process a given addon tree
+   * @param {String} type Type of tree being processed
+   * @param {Tree} tree Current tree being processed
+   * @returns {Tree} Autoprefixed css tree
+   */
+  postprocessTree (type, tree) {
+    if (type === 'css') {
+      const options = this.app.options.autoprefixer || {
+        browsers: ['last 2 versions']
+      }
+      tree = autoprefixer(tree, options)
+    }
+    return tree
   }
 }
