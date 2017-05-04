@@ -29,7 +29,7 @@ export default Component.extend({
 
     run.scheduleOnce('afterRender', this, () => {
       if (!this.isDestroying && !this.isDestroyed) {
-        window.Ps.initialize(this.$()[0])
+        window.Ps.initialize(this.$()[0], this.get('psOptions') || {})
       }
     })
 
