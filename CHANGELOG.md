@@ -1,3 +1,8 @@
+# 1.18.0 (2017-05-04)
+
+* **added** ability to pass specific options to frost-scroll
+
+
 # 1.17.0 (2017-04-27)
 
 * **Upgraded** to `ember-test-utils@4.x`
