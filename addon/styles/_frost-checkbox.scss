@@ -1,5 +1,3 @@
-$error-border: 1px solid $frost-color-input-error-border;
-
 .frost-checkbox {
   display: inline-block;
   position: relative;
@@ -7,7 +5,7 @@ $error-border: 1px solid $frost-color-input-error-border;
   &.error {
     > .label {
       &::before {
-        border: $error-border;
+        border: 1px solid $frost-color-checkbox-border-error;
       }
     }
   }
@@ -76,7 +74,7 @@ $error-border: 1px solid $frost-color-input-error-border;
         + {
           .label {
             svg {
-              fill: $frost-color-grey-6;
+              fill: $frost-color-checkbox-disabled-icon;
             }
           }
         }
@@ -87,8 +85,8 @@ $error-border: 1px solid $frost-color-input-error-border;
       + {
         .label {
           &::before {
-            border: 1px solid $frost-color-grey-5;
-            background-image: linear-gradient(lighten($frost-color-blue-1, 50%), lighten($frost-color-blue-1, 45%));
+            border: 1px solid $frost-color-checkbox-border-focus;
+            background-image: linear-gradient(lighten($frost-color-checkbox-selected, 50%), lighten($frost-color-checkbox-selected, 45%));
           }
         }
       }
@@ -98,7 +96,7 @@ $error-border: 1px solid $frost-color-input-error-border;
   .label {
     display: inline-block;
     position: relative;
-    color: $frost-color-grey-5;
+    color: $frost-color-checkbox-label-default;
     font-size: $frost-font-s;
     cursor: pointer;
     user-select: none;
@@ -107,7 +105,7 @@ $error-border: 1px solid $frost-color-input-error-border;
       display: inline-block;
       position: relative;
       margin-right: 5px;
-      border: 1px solid $frost-color-grey-6;
+      border: 1px solid $frost-color-checkbox-border-default;
       background-image: linear-gradient($frost-color-white, $frost-color-input-disabled-bg);
       content: '';
       vertical-align: middle;
@@ -117,8 +115,14 @@ $error-border: 1px solid $frost-color-input-error-border;
       outline: none;
 
       &::before {
-        border: 1px solid $frost-color-grey-5;
-        background-image: linear-gradient(lighten($frost-color-blue-1, 50%), lighten($frost-color-blue-1, 45%));
+        border: 1px solid $frost-color-checkbox-border-focus;
+        background-image: linear-gradient(lighten($frost-color-checkbox-selected, 50%), lighten($frost-color-checkbox-selected, 45%));
+      }
+    }
+
+    &:active {
+      &::before {
+        border: 1px solid $frost-color-checkbox-border-active;
       }
     }
   }
@@ -128,8 +132,8 @@ $error-border: 1px solid $frost-color-input-error-border;
       + {
         .label {
           &::before {
-            border: 1px solid $frost-color-lgrey-1;
-            background-image: linear-gradient($frost-color-input-disabled-bg, $frost-color-input-disabled-bg);
+            border: 1px solid $frost-color-checkbox-border-disabled;
+            background-image: linear-gradient($frost-color-checkbox-disabled, $frost-color-checkbox-disabled);
           }
         }
       }
@@ -141,7 +145,7 @@ $error-border: 1px solid $frost-color-input-error-border;
           &.label {
             &:hover {
               &::before {
-                background-image: linear-gradient(lighten($frost-color-blue-1, 50%), lighten($frost-color-blue-1, 45%));
+                background-image: linear-gradient(lighten($frost-color-checkbox-selected, 50%), lighten($frost-color-checkbox-selected, 45%));
               }
             }
           }
@@ -155,6 +159,6 @@ $error-border: 1px solid $frost-color-input-error-border;
     top: 0;
     left: 0;
     visibility: hidden;
-    fill: $frost-color-blue-1;
+    fill: $frost-color-checkbox-selected;
   }
 }

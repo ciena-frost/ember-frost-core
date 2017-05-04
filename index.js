@@ -132,7 +132,46 @@ module.exports = {
 
     return iconNames
   },
+  /**
+  * Runs the styles tree through preprocessors.
+  * Overriding allows consumer to choose if `addon/styles`
+  * are compiled by default
+  * https://ember-cli.com/api/files/lib_models_addon.js.html#782
+  * @private
+  * @function compileStyles
+  * @param {Tree} addonStylesTree Default tree
+  * @returns {Tree} Compiled styles tree
+  */
+  compileStyles: function () {
+    var env = process.env.EMBER_ENV
 
+    var options = (this.app && this.app.options && this.app.options.frostCore) || {}
+    var envConfig = this.project.config(env).frostCore
+
+    if (envConfig) {
+      console.warn('Deprecation warning: frostCore should be moved to ember-cli-build')
+      Object.assign(options, envConfig)
+    }
+
+    if (options.excludeAddonStyles) {
+      return null
+    }
+    return this._super.compileStyles.apply(this, arguments)
+  },
+  /**
+   * Returns the tree for all style files
+   * Point app/styles import to addon to avoid code duplication
+   * https://ember-cli.com/api/files/lib_models_addon.js.html#677
+   * @public
+   * @function treeForStyles
+   * @param {Tree} appStyles Usually the `app/styles` directory tree
+   * @returns {Tree} Compiled styles tree
+   */
+  treeForStyles: function () {
+    const addonStyles = new Funnel(`${this.root}/addon/styles`)
+
+    return this._super.treeForStyles.call(this, addonStyles)
+  },
   /* eslint-disable complexity */
   // Present purely to allow programmatic access to the icon packs and icon names (for demo purposes)
   treeForAddon: function (tree) {

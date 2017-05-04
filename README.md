@@ -33,6 +33,27 @@ The following components are available when you install ember-frost-core
 * [frost-textarea](docs/frost-textarea.md)
 * [frost-toggle](docs/frost-toggle.md)
 
+
+## Custom Styling
+
+By default, the styles will be baked in. But if you wish to customize:
+
+#### `ember-cli-build.js`
+
+```js
+var app = new EmberAddon(defaults, {
+  frostCore: {
+    excludeAddonStyles: true
+  }
+})
+```
+
+Then, to include the stylesheet:
+#### `app.scss`
+```scss
+@import 'ember-frost-core';
+```
+
 ## Development
 
 ### Setup
