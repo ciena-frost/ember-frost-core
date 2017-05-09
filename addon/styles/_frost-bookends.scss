@@ -1,0 +1,61 @@
+//
+// Styles for the frost-bookends component
+//
+
+// TODO: move all these variables out to a common variables definition file, so it can be consusmed easier
+// (@job13er 2017-05-09)
+$frost-bookends-footer-background-color: rgba($frost-color-white, .95) !default;
+$frost-bookends-overflow-shadow-color: rgba(0, 0, 0, .13) !default;
+$frost-bookends-footer-height: 70px !default;
+
+.frost-bookends {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+
+  &-content {
+    padding: 0 20px;
+  }
+
+  &-footer {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: flex-end;
+    height: $frost-bookends-footer-height;
+    padding: 0 20px;
+    border-top: 1px solid $frost-color-lgrey-1;
+    background-color: $frost-bookends-footer-background-color;
+  }
+
+  &-header {
+    position: relative;
+    padding: 0 20px;
+    border-bottom: 1px solid $frost-color-lgrey-1;
+  }
+
+  &-content-beneath-header-effect,
+  &-content-beneath-footer-effect {
+    position: absolute;
+    right: 0;
+    left: 0;
+    transition: opacity 300ms; // TODO Animate in/out
+    opacity: 1;
+    z-index: 1;
+  }
+
+  &-content-beneath-footer-effect {
+    top: 0;
+    box-shadow: 0 -4px 10px 2px $frost-bookends-overflow-shadow-color;
+  }
+
+  &-content-beneath-header-effect {
+    bottom: 0;
+    box-shadow: 0 4px 10px 2px $frost-bookends-overflow-shadow-color;
+  }
+
+  &-scroll {
+    position: relative;
+    flex: 1;
+  }
+}

@@ -104,20 +104,20 @@ export default Component.extend(FrostEventsProxy, {
   _toggleReveal: task(function * (isVisible) {
     this.toggleProperty('isRevealed')
 
-    const $input = this.$('input').get(0)
+    const input = this.$('input').get(0)
 
     // Capture the current cursor selection/position
-    const selectionStart = $input.selectionStart
-    const selectionEnd = $input.selectionEnd
+    const selectionStart = input.selectionStart
+    const selectionEnd = input.selectionEnd
 
     // Re-focus the input
-    $input.focus()
+    input.focus()
 
     yield timeout(0) // Let focus resolve prior to setting the cursor
 
     // Restore the cursor selection/position
-    $input.selectionStart = selectionStart
-    $input.selectionEnd = selectionEnd
+    input.selectionStart = selectionStart
+    input.selectionEnd = selectionEnd
   }).restartable(),
 
   // == DOM Events ============================================================

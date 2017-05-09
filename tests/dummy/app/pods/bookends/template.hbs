@@ -1,0 +1,32 @@
+<div class='dummy-body bookends'>
+
+  <div class='section-title'>Bookends</div>
+  <hr>
+  <div class='section'>
+    <div class='example'>
+      <div class='demo'>
+        <h2>Demo</h2>
+        {{! BEGIN-SNIPPET bookends }}
+        {{frost-bookends
+          content=(component 'my-content'
+            tall=true
+          )
+          header=(component 'my-header'
+            title='My Title'
+          )
+          hook='defaultBookends'
+          hookQualifiers=(hash)
+          footer=(component 'my-footer'
+            onCancel=(action 'showNotification' 'Cancel clicked')
+            onSave=(action 'showNotification' 'Save clicked')
+          )
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        <h2>Template</h2>
+        {{code-snippet name='bookends.hbs'}}
+      </div>
+    </div>
+  </div>
+</div>

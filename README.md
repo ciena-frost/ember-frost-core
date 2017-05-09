@@ -19,6 +19,7 @@ _Note:_ Packages that are already installed in the consumer within the required 
 
 The following components are available when you install ember-frost-core
 
+* [frost-bookends](docs/frost-bookends.md)
 * [frost-button](docs/frost-button.md)
 * [frost-checkbox](docs/frost-checkbox.md)
 * [frost-theme](docs/frost-css.md)

@@ -1,0 +1,54 @@
+{{! Template for the frost-bookends component }}
+<div
+  class='{{concat css '-header'}}'
+  data-test={{hook (concat hookPrefix '-headerWrapper') hookQualifiers}}
+>
+  {{component header
+    hook=(concat hookPrefix '-header')
+    hookQualifiers=hookQualifiers
+  }}
+
+  {{#if isContentScrolledBeneathHeader}}
+    <div class='{{concat css '-content-beneath-header-effect'}}'
+      data-test={{hook (concat hookPrefix '-contentBeneathHeaderEffect') hookQualifiers}}
+    >
+    </div>
+  {{/if}}
+</div>
+
+{{#frost-scroll
+  class=(concat css '-scroll')
+  hook=(concat hookPrefix '-scroll')
+  hookQualifiers=hookQualifiers
+  onScrollDown=(action 'showContentBeneathHeaderEffect')
+  onScrollUp=(action 'showContentBeneathFooterEffect')
+  onScrollYEnd=(action 'hideContentBeneathFooterEffect')
+  onScrollYStart=(action 'hideContentBeneathHeaderEffect')
+}}
+  <div
+    class='{{concat css '-content'}}'
+    data-test={{hook (concat hookPrefix '-contentWrapper') hookQualifiers}}
+  >
+    {{component content
+      hook=(concat hookPrefix '-content')
+      hookQualifiers=hookQualifiers
+    }}
+  </div>
+{{/frost-scroll}}
+
+<div
+  class='{{concat css '-footer'}}'
+  data-test={{hook (concat hookPrefix '-footerWrapper') hookQualifiers}}
+>
+  {{#if isContentScrolledBeneathFooter}}
+    <div class='{{concat css '-content-beneath-footer-effect'}}'
+      data-test={{hook (concat hookPrefix '-contentBeneathFooterEffect') hookQualifiers}}
+    >
+    </div>
+  {{/if}}
+
+  {{component footer
+    hook=(concat hookPrefix '-footer')
+    hookQualifiers=hookQualifiers
+  }}
+</div>

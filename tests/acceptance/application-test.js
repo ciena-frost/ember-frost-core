@@ -31,6 +31,7 @@ describe('Acceptance: Application', function () {
 
   ;[
     'area',
+    'bookends',
     'button',
     'checkbox',
     'field',
