@@ -275,9 +275,12 @@ export default Component.extend({
 
   // == DOM Events ============================================================
 
-  _onClick: on('click', function () {
+  _onClick: on('click', function (e) {
     if (!this.get('disabled')) {
       this.toggleProperty('opened')
+    }
+    if (this.onClick) {
+      this.onClick(e)
     }
   }),
 

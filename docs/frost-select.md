@@ -13,6 +13,7 @@
 |    | | `true` | sets select component to error state |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `onChange`     | `string` | `<action-name>` | The action callback to call when the value of the select component changes |
+| `onClick`      | `string` | `<action-name>` | The action callback to call when the select component is clicked. Fires even if select is disabled. |
 | `onInput`      | `string` | `<action-name>` | The action callback to call when the value of the filter changes as the user types |
 | `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `placeholder` | `string` | | Placeholder text for when nothing is selected. |
