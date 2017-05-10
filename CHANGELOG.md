@@ -1,3 +1,9 @@
+# 1.19.0 (2017-05-10)
+
+* **Added** `frost-bookends` component, implementing the pattern used by `ember-frost-modal` for a fixed header/footer with scrolling content in between. Complete with the shadow effect on the header/footer when content is scrolled beneath it. One notable difference between the styling of `frost-bookends` and that of `ember-frost-modal` is the lack of transparency in the footer, with content scrolling beneath it. This was intentional, as directed by UX (@baconC)
+* **Refactored** tests for `frost-password` to make them a little DRYer, and added a test (currently only in Chrome) for the feature that maintains selected text across reveal toggles. 
+
+
 # 1.18.0 (2017-05-04)
 
 * **added** ability to pass specific options to frost-scroll
