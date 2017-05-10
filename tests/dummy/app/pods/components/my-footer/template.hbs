@@ -1,0 +1,19 @@
+{{! Template for the my-footer component }}
+
+{{frost-button
+  hook=(concat hookPrefix '-cancelButton')
+  hookQualifiers=hookQualifiers
+  size='medium'
+  priority='tertiary'
+  onClick=onCancel
+  text='Cancel'
+}}
+
+{{frost-button
+  hook=(concat hookPrefix '-saveButton')
+  hookQualifiers=hookQualifiers
+  size='medium'
+  priority='primary'
+  onClick=onSave
+  text='Save'
+}}
