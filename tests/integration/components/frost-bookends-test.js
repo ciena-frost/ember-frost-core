@@ -110,7 +110,6 @@ function itShouldHandleScrolling (q) {
   })
 }
 
-
 const test = integration('frost-bookends')
 describe(test.label, function () {
   test.setup()
