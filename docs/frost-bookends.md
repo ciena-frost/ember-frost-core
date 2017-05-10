@@ -7,7 +7,7 @@
 
 | Attribute   | Type | Value | Description |
 | ----------- | ---- | ----- | ----------- |
-| `content` | `component` | | **required** - component to render as the content (between header and footer) |
+| `content` | `component` | | component to render as the content (when not using block syntax) |
 | `header` | `component` | | **required** - component to render as the header (probably a `frost-info-bar`) |
 | `hook` | `string` | | name used for testing with `ember-hook` |
 | `hookQualifiers` | `object` | | key/value pairs used for testing with `ember-hook` |
@@ -32,7 +32,7 @@ top-level `hook` of `ends` has been given to the `frost-bookends` component.
 
 ## Examples
 
-### Default
+### Content Property
 
 ```handlebars
 {{frost-bookends
@@ -46,6 +46,23 @@ top-level `hook` of `ends` has been given to the `frost-bookends` component.
   hookQualifiers=(hash)
   footer=(component 'my-footer')
 }}
+```
+
+### Content Block
+
+```handlebars
+{{#frost-bookends
+  header=(component 'my-header'
+    title='Howdy'
+  )
+  hook='ends'
+  hookQualifiers=(hash)
+  footer=(component 'my-footer')
+}}
+  {{my-content
+    tall=true
+  }}
+{{/frost-bookends}}
 ```
 
 ### Spread

@@ -20,7 +20,7 @@ export default Component.extend({
 
   propTypes: {
     // options
-    content: PropTypes.EmberComponent.isRequired,
+    content: PropTypes.EmberComponent,
     footer: PropTypes.EmberComponent.isRequired,
     header: PropTypes.EmberComponent.isRequired,
 

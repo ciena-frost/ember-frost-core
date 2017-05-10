@@ -29,10 +29,14 @@
     class='{{concat css '-content'}}'
     data-test={{hook (concat hookPrefix '-contentWrapper') hookQualifiers}}
   >
-    {{component content
-      hook=(concat hookPrefix '-content')
-      hookQualifiers=hookQualifiers
-    }}
+    {{#if hasBlock}}
+      {{yield}}
+    {{else}}
+      {{component content
+        hook=(concat hookPrefix '-content')
+        hookQualifiers=hookQualifiers
+      }}
+    {{/if}}
   </div>
 {{/frost-scroll}}
 
