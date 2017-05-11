@@ -1,33 +1,15 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {Logger} = Ember
+import {$hook} from 'ember-hook'
 import wait from 'ember-test-helpers/wait'
 import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
+import {stubRoutingService} from 'ember-frost-core/test-support/frost-link'
 import windowUtils from 'ember-frost-core/utils/window'
-
-const RouterStub = Ember.Object.extend({
-  generateURL (endpoint, segments) {
-    let url = endpoint
-
-    if (segments.length !== 0) {
-      url = `${url}/${segments.join('/')}`
-    }
-
-    return url
-  },
-
-  hasRoute () {
-    return true
-  },
-
-  transitionTo () {
-    //
-  }
-})
 
 const test = integration('frost-link')
 describe(test.label, function () {
@@ -36,8 +18,8 @@ describe(test.label, function () {
   let sandbox
 
   beforeEach(function () {
-    this.registry.register('service:-routing', RouterStub)
     sandbox = sinon.sandbox.create()
+    stubRoutingService(this)
   })
 
   afterEach(function () {
@@ -53,12 +35,39 @@ describe(test.label, function () {
       `)
     })
 
-    it('has expected class name', function () {
-      expect(this.$('> *').hasClass('frost-link')).to.equal(true)
+    it('should have expected class name', function () {
+      expect($hook('myLink')).to.have.class('frost-link')
     })
 
-    it('has expected text content', function () {
-      expect(this.$('.frost-link').text().trim()).to.equal('Test')
+    it('should have expected text content', function () {
+      expect($hook('myLink')).to.have.text('Test')
+    })
+  })
+
+  describe('when instantiated using inline positional params format (as a primary link)', function () {
+    beforeEach(function () {
+      this.render(hbs`
+        {{frost-link 'Test' 'link.min'
+          hook='myLink'
+          priority='primary'
+        }}
+      `)
+    })
+
+    it('should have expected class name', function () {
+      expect($hook('myLink')).to.have.class('frost-link')
+    })
+
+    it('should have expected text content', function () {
+      expect($hook('myLink')).to.have.text('Test')
+    })
+
+    it('should have expected href content', function () {
+      expect($hook('myLink')).to.have.attr('href', 'link.min')
+    })
+
+    it('should have proper target', function () {
+      expect($hook('myLink')).to.have.attr('target', '_blank')
     })
   })
 
@@ -73,12 +82,12 @@ describe(test.label, function () {
       `)
     })
 
-    it('has expected class name', function () {
-      expect(this.$('> *').hasClass('frost-link')).to.equal(true)
+    it('should have expected class name', function () {
+      expect($hook('myLink')).to.have.class('frost-link')
     })
 
-    it('has expected text content', function () {
-      expect(this.$('.frost-link').text().trim()).to.equal('Test')
+    it('should have expected text content', function () {
+      expect($hook('myLink')).to.have.text('Test')
     })
   })
 
@@ -93,13 +102,12 @@ describe(test.label, function () {
       `)
     })
 
-    it('has expected class name', function () {
-      expect(this.$('> *').hasClass('frost-link')).to.equal(true)
+    it('should have expected class name', function () {
+      expect($hook('myLink')).to.have.class('frost-link')
     })
 
-    it('yields expected content', function () {
-      expect(this.$('.frost-link').html().trim()).to.equal('<em>Test</em>')
-      expect(this.$('.frost-link').text().trim()).to.equal('Test')
+    it('should yield expected content', function () {
+      expect($hook('myLink').html().trim()).to.equal('<em>Test</em>')
     })
   })
 
@@ -116,16 +124,16 @@ describe(test.label, function () {
       `)
     })
 
-    it('has expected class name', function () {
-      expect(this.$('> *').hasClass('frost-link')).to.equal(true)
+    it('should have expected class name', function () {
+      expect($hook('myLink')).to.have.class('frost-link')
     })
 
-    it('has expected text content', function () {
-      expect(this.$('.frost-link').text().trim()).to.equal('Test')
+    it('should have expected text content', function () {
+      expect($hook('myLink')).to.have.text('Test')
     })
 
-    it('does not set target', function () {
-      expect(this.$('.frost-link').prop('target')).to.equal('')
+    it('should not set target', function () {
+      expect($hook('myLink')).to.have.prop('target', '')
     })
 
     describe('when clicked', function () {
@@ -136,22 +144,20 @@ describe(test.label, function () {
           this.$('.frost-link').click()
         })
 
-        it('tries to open correct number of links', function () {
+        it('should try to open correct number of links', function () {
           expect(windowUtils.open.callCount).to.equal(2)
         })
 
-        it('tries to open first link as expected', function () {
+        it('should try to open first link as expected', function () {
           expect(windowUtils.open.firstCall.args).to.eql(['link.min'])
         })
 
-        it('tries to open second link as expected', function () {
+        it('should try to open second link as expected', function () {
           expect(windowUtils.open.lastCall.args).to.eql(['link.max'])
         })
 
-        it('logs warning', function () {
-          expect(Logger.warn.calledWith(
-            'Warning: Make sure that the pop-ups are not blocked'
-          )).to.equal(true)
+        it('should log a warning', function () {
+          expect(Logger.warn).to.have.been.calledWith('Warning: Make sure that the pop-ups are not blocked')
         })
       })
 
@@ -162,22 +168,20 @@ describe(test.label, function () {
           this.$('.frost-link').click()
         })
 
-        it('opens correct number of links', function () {
+        it('should open correct number of links', function () {
           expect(windowUtils.open.callCount).to.equal(2)
         })
 
-        it('opens first link as expected', function () {
+        it('should open first link as expected', function () {
           expect(windowUtils.open.firstCall.args).to.eql(['link.min'])
         })
 
-        it('opens second link as expected', function () {
+        it('should open second link as expected', function () {
           expect(windowUtils.open.lastCall.args).to.eql(['link.max'])
         })
 
-        it('does not log warning', function () {
-          expect(Logger.warn.calledWith(
-            'Warning: Make sure that the pop-ups are not blocked'
-          )).to.equal(false)
+        it('should not log warning', function () {
+          expect(Logger.warn).to.have.callCount(0)
         })
       })
     })
@@ -200,16 +204,16 @@ describe(test.label, function () {
       `)
     })
 
-    it('has expected class name', function () {
-      expect(this.$('> *').hasClass('frost-link')).to.equal(true)
+    it('should have expected class name', function () {
+      expect($hook('myLink')).to.have.class('frost-link')
     })
 
-    it('yields expected content', function () {
-      expect(this.$('.frost-link').text().trim()).to.equal('Test')
+    it('should yield expected content', function () {
+      expect($hook('myLink').text().trim()).to.equal('Test')
     })
 
-    it('does not set target', function () {
-      expect(this.$('.frost-link').prop('target')).to.equal('')
+    it('should not set target', function () {
+      expect($hook('myLink')).to.have.prop('target', '')
     })
 
     describe('when clicked', function () {
@@ -220,22 +224,20 @@ describe(test.label, function () {
           this.$('.frost-link').click()
         })
 
-        it('tries to open correct number of links', function () {
+        it('should try to open correct number of links', function () {
           expect(windowUtils.open.callCount).to.equal(2)
         })
 
-        it('tries to open first link as expected', function () {
+        it('should try to open first link as expected', function () {
           expect(windowUtils.open.firstCall.args).to.eql(['link.min'])
         })
 
-        it('tries to open second link as expected', function () {
+        it('should try to open second link as expected', function () {
           expect(windowUtils.open.lastCall.args).to.eql(['link.max'])
         })
 
-        it('logs warning', function () {
-          expect(Logger.warn.calledWith(
-            'Warning: Make sure that the pop-ups are not blocked'
-          )).to.equal(true)
+        it('should log a warning', function () {
+          expect(Logger.warn).to.have.been.calledWith('Warning: Make sure that the pop-ups are not blocked')
         })
       })
 
@@ -246,22 +248,20 @@ describe(test.label, function () {
           this.$('.frost-link').click()
         })
 
-        it('opens correct number of links', function () {
+        it('should open correct number of links', function () {
           expect(windowUtils.open.callCount).to.equal(2)
         })
 
-        it('opens first link as expected', function () {
+        it('should open first link as expected', function () {
           expect(windowUtils.open.firstCall.args).to.eql(['link.min'])
         })
 
-        it('opens second link as expected', function () {
+        it('should open second link as expected', function () {
           expect(windowUtils.open.lastCall.args).to.eql(['link.max'])
         })
 
-        it('does not log warning', function () {
-          expect(Logger.warn.calledWith(
-            'Warning: Make sure that the pop-ups are not blocked'
-          )).to.equal(false)
+        it('should not log warning', function () {
+          expect(Logger.warn).to.have.callCount(0)
         })
       })
     })
@@ -286,12 +286,12 @@ describe(test.label, function () {
       `)
     })
 
-    it('has expected class name', function () {
-      expect(this.$('> *').hasClass('frost-link')).to.equal(true)
+    it('should have expected class name', function () {
+      expect($hook('myLink')).to.have.class('frost-link')
     })
 
-    it('has expected text content', function () {
-      expect(this.$('.frost-link').text().trim()).to.equal('Test')
+    it('should have expected text content', function () {
+      expect($hook('myLink')).to.have.text('Test')
     })
 
     it('does not set target', function () {
@@ -306,22 +306,20 @@ describe(test.label, function () {
           this.$('.frost-link').click()
         })
 
-        it('tries to open correct number of links', function () {
+        it('should try to open correct number of links', function () {
           expect(windowUtils.open.callCount).to.equal(2)
         })
 
-        it('tries to open first link as expected', function () {
+        it('should try to open first link as expected', function () {
           expect(windowUtils.open.firstCall.args).to.eql(['link.first/1'])
         })
 
-        it('tries to open second link as expected', function () {
+        it('should try to open second link as expected', function () {
           expect(windowUtils.open.lastCall.args).to.eql(['link.first.second/2'])
         })
 
-        it('logs warning', function () {
-          expect(Logger.warn.calledWith(
-            'Warning: Make sure that the pop-ups are not blocked'
-          )).to.equal(true)
+        it('should log a warning', function () {
+          expect(Logger.warn).to.have.been.calledWith('Warning: Make sure that the pop-ups are not blocked')
         })
       })
 
@@ -332,22 +330,20 @@ describe(test.label, function () {
           this.$('.frost-link').click()
         })
 
-        it('opens correct number of links', function () {
+        it('should open correct number of links', function () {
           expect(windowUtils.open.callCount).to.equal(2)
         })
 
-        it('opens first link as expected', function () {
+        it('should open first link as expected', function () {
           expect(windowUtils.open.firstCall.args).to.eql(['link.first/1'])
         })
 
-        it('opens second link as expected', function () {
+        it('should open second link as expected', function () {
           expect(windowUtils.open.lastCall.args).to.eql(['link.first.second/2'])
         })
 
-        it('does not log warning', function () {
-          expect(Logger.warn.calledWith(
-            'Warning: Make sure that the pop-ups are not blocked'
-          )).to.equal(false)
+        it('should not log warning', function () {
+          expect(Logger.warn).to.have.callCount(0)
         })
       })
     })
@@ -374,13 +370,12 @@ describe(test.label, function () {
       `)
     })
 
-    it('has expected class name', function () {
-      expect(this.$('> *').hasClass('frost-link')).to.equal(true)
+    it('should have expected class name', function () {
+      expect($hook('myLink')).to.have.class('frost-link')
     })
 
-    it('yields expected content', function () {
-      expect(this.$('.frost-link').html().trim()).to.equal('<em>Test</em>')
-      expect(this.$('.frost-link').text().trim()).to.equal('Test')
+    it('should yield expected content', function () {
+      expect($hook('myLink').html().trim()).to.equal('<em>Test</em>')
     })
 
     it('does not set target', function () {
@@ -395,22 +390,20 @@ describe(test.label, function () {
           this.$('.frost-link').click()
         })
 
-        it('tries to open correct number of links', function () {
+        it('should try to open correct number of links', function () {
           expect(windowUtils.open.callCount).to.equal(2)
         })
 
-        it('tries to open first link as expected', function () {
+        it('should try to open first link as expected', function () {
           expect(windowUtils.open.firstCall.args).to.eql(['link.first/1'])
         })
 
-        it('tries to open second link as expected', function () {
+        it('should try to open second link as expected', function () {
           expect(windowUtils.open.lastCall.args).to.eql(['link.first.second/2'])
         })
 
-        it('logs warning', function () {
-          expect(Logger.warn.calledWith(
-            'Warning: Make sure that the pop-ups are not blocked'
-          )).to.equal(true)
+        it('should log a warning', function () {
+          expect(Logger.warn).to.have.been.calledWith('Warning: Make sure that the pop-ups are not blocked')
         })
       })
 
@@ -421,22 +414,20 @@ describe(test.label, function () {
           this.$('.frost-link').click()
         })
 
-        it('opens correct number of links', function () {
+        it('should open correct number of links', function () {
           expect(windowUtils.open.callCount).to.equal(2)
         })
 
-        it('opens first link as expected', function () {
+        it('should open first link as expected', function () {
           expect(windowUtils.open.firstCall.args).to.eql(['link.first/1'])
         })
 
-        it('opens second link as expected', function () {
+        it('should open second link as expected', function () {
           expect(windowUtils.open.lastCall.args).to.eql(['link.first.second/2'])
         })
 
-        it('does not log warning', function () {
-          expect(Logger.warn.calledWith(
-            'Warning: Make sure that the pop-ups are not blocked'
-          )).to.equal(false)
+        it('should not log warning', function () {
+          expect(Logger.warn).to.have.callCount(0)
         })
       })
     })

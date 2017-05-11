@@ -11,7 +11,7 @@ module.exports = {
           '../',
           './',
           'dummy/',
-          'ember-frost-core/'
+          'ember-frost-core'
         ]
       }
     ]
