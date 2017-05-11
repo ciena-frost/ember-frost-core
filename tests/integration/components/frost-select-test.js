@@ -72,13 +72,14 @@ describe(test.label, function () {
   test.setup()
 
   describe('renders', function () {
-    let onBlur, onChange, onFocus, sandbox
+    let onBlur, onChange, onClick, onFocus, sandbox
 
     beforeEach(function () {
       sandbox = sinon.sandbox.create()
 
       onBlur = sandbox.spy()
       onChange = sandbox.spy()
+      onClick = sandbox.stub()
       onFocus = sandbox.spy()
 
       this.setProperties({
@@ -86,6 +87,7 @@ describe(test.label, function () {
         onBlur,
         onFocus,
         onChange,
+        onClick,
         tabIndex: 0 // This is the default
       })
 
@@ -99,6 +101,7 @@ describe(test.label, function () {
           hook=hook
           onBlur=onBlur
           onChange=onChange
+          onClick=onClick
           onFocus=onFocus
           tabIndex=tabIndex
           width=width
@@ -176,6 +179,7 @@ describe(test.label, function () {
 
           expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
           expect(onChange.callCount, 'onChange is not called').to.equal(0)
+          expect(onClick.callCount, 'onClick is called').to.equal(1)
           expect(onFocus.callCount, 'onFocus is called').to.equal(1)
         })
 
@@ -444,6 +448,7 @@ describe(test.label, function () {
 
             expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
             expect(onChange.callCount, 'onChange is not called').to.equal(0)
+            expect(onClick.callCount, 'onClick is called').to.equal(1)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
@@ -1494,6 +1499,7 @@ describe(test.label, function () {
 
             expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
             expect(onChange.callCount, 'onChange is not called').to.equal(0)
+            expect(onClick.callCount, 'onClick is called').to.equal(1)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
@@ -1737,6 +1743,33 @@ describe(test.label, function () {
             done()
           }, 100)
         }, 50)
+      })
+    })
+  })
+
+  describe('when onClick is not defined and select is opened', function () {
+    beforeEach(function () {
+      this.setProperties({
+        data: [],
+        hook: 'select'
+      })
+
+      this.render(hbs`
+        {{frost-select-outlet hook='eventSelectOutlet'}}
+        {{frost-select
+          data=data
+          hook=hook
+        }}
+      `)
+
+      return open('select')
+    })
+
+    it('renders as expected', function () {
+      expectSelectWithState('select', {
+        focused: true,
+        items: [],
+        opened: true
       })
     })
   })
