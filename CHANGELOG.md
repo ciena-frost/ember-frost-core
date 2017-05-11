@@ -1,3 +1,19 @@
+# 1.20.0 (2017-05-11)
+
+* **Added** missing export of `windowUtils` inside `utils` that's exported from `addon/index.js`. Consumers can now import the `windowUtils` without needing to know the   path in the filesystem:
+  ```js
+  import {utils} from 'ember-frost-core'
+  const {windowUtils} = utils
+  ``` 
+  instead of
+  ```js
+  import windowUtils from 'ember-frost-core/utils/window'
+  ```
+ * **Added** `frost-link` test helpers to `addon-test-support`, specifically just a `stubRouteService` helper method to allow consumers of `frost-link` to check the routes passed into it. 
+* **Cleaned** up the integration tests for `frost-link` a little. 
+
+
+
 # 1.19.1 (2017-05-11)
 
 * **Added** onClick callback for frost-select
