@@ -23,9 +23,7 @@ export function stubRoutingService (context) {
       return true
     },
 
-    transitionTo () {
-      //
-    }
+    transitionTo () {}
   })
 
   context.registry.register('service:-routing', RouterStub)
