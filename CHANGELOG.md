@@ -1,3 +1,8 @@
+# 1.19.1 (2017-05-11)
+
+* **Added** onClick callback for frost-select
+
+
 # 1.19.0 (2017-05-10)
 
 * **Added** `frost-bookends` component, implementing the pattern used by `ember-frost-modal` for a fixed header/footer with scrolling content in between. Complete with the shadow effect on the header/footer when content is scrolled beneath it. One notable difference between the styling of `frost-bookends` and that of `ember-frost-modal` is the lack of transparency in the footer, with content scrolling beneath it. This was intentional, as directed by UX (@baconC)
