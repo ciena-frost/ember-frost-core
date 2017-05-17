@@ -36,7 +36,6 @@ export default Component.extend({
     form: PropTypes.string,
     maxlength: PropTypes.number,
     placeholder: PropTypes.string,
-    readonly: PropTypes.bool,
     required: PropTypes.bool,
     selectionDirection: PropTypes.string,
     spellcheck: PropTypes.bool,
@@ -59,7 +58,6 @@ export default Component.extend({
       showError: false,
       errorMessage: 'Cannot input invalid character',
       isHookEmbedded: false,
-      readonly: false,
       required: false,
       spellcheck: false,
       tabindex: 0,
@@ -71,25 +69,26 @@ export default Component.extend({
 
   _isNumberKey (e) {
     let decimalExist = this.get('value') && this.get('value').indexOf('.') >=0
-    let charCode = (e.which) ? e.which : e.keyCode;
+    let charCode = (e.which) ? e.which : e.keyCode
+
     if(!this.get('isAllowInputNegative')){
       if (charCode != 46 && charCode > 31
         && (charCode < 48 || charCode > 57)) {
-          return false;
+          return false
        } else if (charCode == 46 && decimalExist) {//check if user can enter decimal point
-         return false;
+         return false
        }
-      return true;
+      return true
     } else {
       if (charCode == 45 && !this.get('value')) {//check if user can enter negative symbol
-        return true;
+        return true
       } else if (charCode == 46 && decimalExist) {
-        return false;
+        return false
       } else if (charCode != 46 && charCode > 31
         && (charCode < 48 || charCode > 57))
-         return false;
+         return false
 
-      return true;
+      return true
     }
   },
 
