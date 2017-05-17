@@ -1,3 +1,13 @@
+# 1.20.1 (2017-05-17)
+* **Updated** `ember` from `bower.json` to `ember-source` from `package.json`
+* **Updated** ember-try config matrix for `ember-source`
+* **Updated** `ember-cli-shims` to the npm package instead of the bower package
+* **Updated** path to the test resolver
+* **Updated** path to `ember-template-compiler` needed for `frost-events-tests.js` integration tests
+* **Removed** unneeded mocha packages from bower that are now included
+
+
+
 # 1.20.0 (2017-05-11)
 
 * **Added** missing export of `windowUtils` inside `utils` that's exported from `addon/index.js`. Consumers can now import the `windowUtils` without needing to know the   path in the filesystem:
