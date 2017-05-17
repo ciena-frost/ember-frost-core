@@ -23,7 +23,7 @@ module.exports = function (defaults) {
   })
 
   app.import('bower_components/highlightjs/styles/github.css')
-  app.import('bower_components/ember/ember-template-compiler.js')
+  app.import('vendor/ember/ember-template-compiler.js')
 
   return app.toTree()
 }
