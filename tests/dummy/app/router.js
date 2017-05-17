@@ -33,6 +33,7 @@ Router.map(function () {
   this.route('toggle')
   this.route('typography')
   this.route('helpers')
+  this.route('numeric-select')
 })
 
 export default Router

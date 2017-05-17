@@ -1,0 +1,78 @@
+  {{hookable-input
+    ariaActiveDescendant=ariaActiveDescendant
+    ariaAutocomplete=ariaAutocomplete
+    ariaExpanded=ariaExpanded
+    ariaMultiselectable=ariaMultiselectable
+    ariaOwns=ariaOwns
+    autocapitalize=autocapitalize
+    autocorrect=autocorrect
+    autofocus=autofocus
+    hook=hook
+    class=class
+    disabled=disabled
+    form=form
+    hook=hook
+    isHookEmbedded=true
+    maxlength=maxlength
+    placeholder=placeholder
+    readonly=readonly
+    required=required
+    selectionDirection=selectionDirection
+    tabindex=tabindex
+    title=title
+    type=type
+    value=value
+
+    change=_eventProxy.change
+    click=_eventProxy.click
+    contextMenu=_eventProxy.contextMenu
+    doubleClick=_eventProxy.doubleClick
+    drag=_eventProxy.drag
+    dragEnd=_eventProxy.dragEnd
+    dragEnter=_eventProxy.dragEnter
+    dragLeave=_eventProxy.dragLeave
+    dragOver=_eventProxy.dragOver
+    dragStart=_eventProxy.dragStart
+    drop=_eventProxy.drop
+    focusIn=_eventProxy.focusIn
+    focusOut=_eventProxy.focusOut
+    input=(action '_onInput')
+    keyDown=_eventProxy.keyDown
+    keyPress=(action '_onKeyPress')
+    key-up='keyUp'
+    mouseDown=_eventProxy.mouseDown
+    mouseEnter=_eventProxy.mouseEnter
+    mouseLeave=_eventProxy.mouseLeave
+    mouseMove=_eventProxy.mouseMove
+    mouseUp=_eventProxy.mouseUp
+    submit=_eventProxy.submit
+    touchCancel=_eventProxy.touchCancel
+    touchEnd=_eventProxy.touchEnd
+    touchMove=_eventProxy.touchMove
+    touchStart=_eventProxy.touchStart
+
+    onEnter=_eventProxy.enter
+    onEscape=_eventProxy.escape-press}}
+  <div class='container'>
+    {{#if isArrowVisible}}
+      {{frost-button
+        hook='arrowDown'
+        class='plusButton'
+        icon='numeric-chevron'
+        pack='frost'
+        onClick= (action '_onPlusClick')
+      }}
+      {{frost-button
+        hook='arrowDown'
+        class='minusButton'
+        icon='numeric-chevron'
+        pack='frost'
+        onClick= (action '_onMinusClick')
+      }}
+    {{/if}}
+  </div>
+  {{#if showError}}
+    <div class='error'>
+        {{errorMessage}}
+    </div>
+  {{/if}}
