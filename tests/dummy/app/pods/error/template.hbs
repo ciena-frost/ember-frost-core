@@ -1,0 +1,47 @@
+<div class='dummy-body error'>
+
+  <div class='section-title'>Error</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="demo">
+        {{frost-error
+          hook='myError'
+          description='Service is currently unavailable.'
+          suggestion='Try again later.'
+          errorCode=500
+          errorTitle='Internal server error'
+          errorMessage='Failure to retrieve network elements'
+          errorDetails='Detailed information would be displayed here.'
+          showDetails=showDetails
+        }}
+      </div>
+      <br/>
+      <div class="snippet">
+        Template
+        {{format-markdown "```handlebars
+{{frost-error
+  hook='myError'
+  description='Service is currently unavailable.'
+  suggestion='Try again later.'
+  errorCode=500
+  errorTitle='Internal server error'
+  errorMessage='Failure to retrieve network elements'
+  errorDetails='Detailed information would be displayed here.'
+  showDetails=showDetails
+}}
+```"}}
+        <br/>
+        Controller
+        {{format-markdown "```javascript
+queryParams: {
+  showDetails: {
+    replace: true
+  }
+},
+showDetails: false,
+```"}}
+      </div>
+    </div>
+  </div>
+</div>

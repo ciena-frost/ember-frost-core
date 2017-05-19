@@ -1,0 +1,313 @@
+<div class='dummy-body expand'>
+
+  <div class='section-title'>Expression</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="title">text</div>
+      <div class="demo">
+        {{frost-expand
+          hook='myExpand'
+          content='Expanded content.'
+        }}
+      </div>
+      <br/>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-expand
+  hook='myExpand'
+  content='Expanded content.'
+}}
+```"}}
+      </div>
+    </div>
+    <div class="example">
+      <div class="title">component</div>
+      <div class="demo">
+        {{frost-expand
+          hook='myExpand'
+          content=(component 'frost-icon'
+                    hook='myIcon'
+                    icon='error'
+                  )
+        }}
+      </div>
+      <br/>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-expand
+  hook='myExpand'
+  content=(component 'frost-icon'
+            hook='myIcon'
+            icon='error'
+          )
+}}
+```"}}
+      </div>
+    </div>
+  </div>
+
+  <div class='section-title'>Block</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="title">text</div>
+      <div class="demo">
+        {{#frost-expand
+          hook='myExpand'
+        }}
+          Expanded content.
+        {{/frost-expand}}
+      </div>
+      <br/>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{#frost-expand
+  hook='myExpand'
+}}
+  Expanded content.
+{{/frost-expand}}
+```"}}
+      </div>
+    </div>
+    <div class="example">
+      <div class="title">component</div>
+      <div class="demo">
+        {{#frost-expand
+          hook='myExpand'
+        }}
+          {{frost-icon
+            hook='myIcon'
+            icon='error'
+          }}
+        {{/frost-expand}}
+      </div>
+      <br/>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{#frost-expand
+  hook='myExpand'
+}}
+  {{frost-icon
+    hook='myIcon'
+    icon='error'
+  }}
+{{/frost-expand}}
+```"}}
+      </div>
+    </div>
+  </div>
+
+  <div class='section-title'>Initially Expanded</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="demo">
+        {{#frost-expand
+          hook='myExpand'
+          expanded=true
+        }}
+          Expanded content.
+        {{/frost-expand}}
+      </div>
+      <br/>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{#frost-expand
+  hook='myExpand'
+  expanded=true
+}}
+  Expanded content.
+{{/frost-expand}}
+  ```"}}
+      </div>
+    </div>
+  </div>
+
+  <div class='section-title'>Set Labels</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="demo">
+        {{#frost-expand
+          hook='myExpand'
+          expandLabel='View information'
+          collapseLabel='Hide information'
+        }}
+          Detailed information.
+        {{/frost-expand}}
+      </div>
+      <br/>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{#frost-expand
+  hook='myExpand'
+  expandLabel='View information'
+  collapseLabel='Hide information'
+}}
+  Detailed information.
+{{/frost-expand}}
+  ```"}}
+      </div>
+    </div>
+  </div>
+
+  <div class='section-title'>Set Duration</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="title">default</div>
+      <div class="demo">
+        {{#frost-expand
+          hook='myExpand'
+        }}
+          Expanded content.
+        {{/frost-expand}}
+      </div>
+      <br/>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{#frost-expand
+  hook='myExpand'
+}}
+  Expanded content.
+{{/frost-expand}}
+  ```"}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">slow</div>
+      <div class="demo">
+        {{#frost-expand
+          hook='myExpand'
+          duration='slow'
+        }}
+          Expanded content.
+        {{/frost-expand}}
+      </div>
+      <br/>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{#frost-expand
+  hook='myExpand'
+  duration='slow'
+}}
+  Expanded content.
+{{/frost-expand}}
+  ```"}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">fast</div>
+      <div class="demo">
+        {{#frost-expand
+          hook='myExpand'
+          duration='fast'
+        }}
+          Expanded content.
+        {{/frost-expand}}
+      </div>
+      <br/>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{#frost-expand
+  hook='myExpand'
+  duration='fast'
+}}
+  Expanded content.
+{{/frost-expand}}
+  ```"}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">none</div>
+      <div class="demo">
+        {{#frost-expand
+          hook='myExpand'
+          duration='none'
+        }}
+          Expanded content.
+        {{/frost-expand}}
+      </div>
+      <br/>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{#frost-expand
+  hook='myExpand'
+  duration='none'
+}}
+  Expanded content.
+{{/frost-expand}}
+  ```"}}
+      </div>
+    </div>
+  </div>
+
+  <div class='section-title'>Events</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="demo">
+        {{#frost-expand
+          hook='myExpand'
+          onExpand=(action 'onExpandHandler')
+          onCollapse=(action 'onCollapseHandler')
+        }}
+          Expanded content.
+        {{/frost-expand}}
+      </div>
+      <br/>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{#frost-expand
+  hook='myExpand'
+  onExpand=(action 'onExpandHandler')
+  onCollapse=(action 'onCollapseHandler')
+}}
+  Expanded content.
+{{/frost-expand}}
+  ```"}}
+      </div>
+    </div>
+  </div>
+
+  <div class='section-title'>Query Parameter</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="demo">
+        {{#frost-expand
+          hook='myExpand'
+          expanded=exp
+        }}
+          Expanded content.
+        {{/frost-expand}}
+      </div>
+      <br/>
+      <div class="snippet">
+        Template
+        {{format-markdown "```handlebars
+{{#frost-expand
+  hook='myExpand'
+  expanded=exp
+}}
+  Expanded content.
+{{/frost-expand}}
+  ```"}}
+        <br/>
+        Controller
+        {{format-markdown "```javascript
+queryParams: {
+  exp: {
+    replace: true
+  }
+},
+exp: false,
+```"}}
+      </div>
+    </div>
+  </div>
+</div>
