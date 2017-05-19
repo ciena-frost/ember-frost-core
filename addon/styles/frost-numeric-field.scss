@@ -1,0 +1,90 @@
+$frost-number-select-height: 31px;
+$frost-number-select-container-border: 0.3px solid $frost-color-input-border;
+$frost-number-select-input-focus-border: 1px solid $frost-color-blue-1 !global;
+$frost-color-button-hover-bg: rgba($frost-color-blue-1, .1) !global;
+$frost-number-select-arrow-focus-color: $frost-color-blue-1 !global;
+$error-text-color: $frost-color-input-error-border;
+$frost-number-select-input-disabled-border: 1px solid $frost-color-input-disabled-border;
+$frost-number-select-input-disabled-bg: $frost-color-input-disabled-bg;
+
+.frost-numeric-field {
+  display: block;
+  position: relative;
+  width: 60px;
+  outline: none;
+
+  .field-input {
+    width: 100%;
+    height: $frost-number-select-height;
+    margin-bottom: 15px;
+    outline: none;
+    text-align: center;
+
+    &.arrow-visible {
+      padding-right: 26px;
+      text-align: left;
+    }
+
+    &:focus {
+      border: $frost-number-select-input-focus-border;
+    }
+  }
+
+  &:disabled {
+    border: $frost-number-select-input-disabled-border;
+    background-color: $frost-number-select-input-disabled-bg;
+  }
+
+  .frost-numeric-field-container {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+    flex-direction: column;
+    border-top: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-left: $frost-number-select-container-border;
+
+    .frost-numeric-field-minus-button,
+    .frost-numeric-field-plus-button {
+      width: 25px;
+      height: 14px;
+      margin-top: 1px;
+      border-radius: 0;
+      font-size: 14px;
+      box-shadow: none;
+
+      &:hover {
+        background-color: $frost-color-button-hover-bg;
+      }
+
+      &:focus {
+        &:not(.disabled) {
+          outline: 0;
+          box-shadow: none;
+        }
+
+        .frost-icon-frost-numeric-chevron {
+          color: $frost-number-select-arrow-focus-color;
+        }
+      }
+    }
+
+    .frost-numeric-field-minus-button {
+      padding: 0 7px 0 6px;
+      transform: rotate(180deg);
+    }
+
+    .frost-numeric-field-plus-button {
+      padding: 0 6px 0 7px;
+    }
+  }
+
+  .frost-numeric-select-error {
+    width: 175px;
+    height: $frost-number-select-height;
+    color: $error-text-color;
+    font-size: 13px;
+  }
+}

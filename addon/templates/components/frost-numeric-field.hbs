@@ -52,26 +52,28 @@
 
     onEnter=_eventProxy.enter
     onEscape=_eventProxy.escape-press}}
-  <div class='container'>
-    {{#if isArrowVisible}}
+  <div class='frost-numeric-field-container'>
+    {{#if isIncrementControlVisible}}
       {{frost-button
         hook='arrowDown'
-        class='plusButton'
+        class='frost-numeric-field-plus-button'
         icon='numeric-chevron'
         pack='frost'
+        disabled=increaseButtonDisable
         onClick= (action '_onPlusClick')
       }}
       {{frost-button
         hook='arrowDown'
-        class='minusButton'
+        class='frost-numeric-field-minus-button'
         icon='numeric-chevron'
+        disabled=decreaseButtonDisable
         pack='frost'
         onClick= (action '_onMinusClick')
       }}
     {{/if}}
   </div>
-  {{#if showError}}
-    <div class='error'>
-        {{errorMessage}}
+  {{#if _errorMessage}}
+    <div class='frost-numeric-select-error'>
+        {{_errorMessage}}
     </div>
   {{/if}}
