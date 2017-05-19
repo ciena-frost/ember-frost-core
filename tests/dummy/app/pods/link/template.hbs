@@ -1,4 +1,3 @@
-
 <div class="dummy-body link">
   <div class="section-title">Primary</div>
   <hr>
@@ -13,7 +12,7 @@
         }}
       </div>
       <div class="snippet">
-        {{format-markdown "```handlebars
+      {{format-markdown "```handlebars
 {{frost-link 'Text' 'link.min'
   hook='mySmallLink'
   priority='primary'
@@ -97,12 +96,12 @@
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
-    {{frost-link 'Text' 'link.min'
-      hook='myTabIndexLink'
-      priority='primary'
-      size='small'
-      tabindex='-1'
-    }}
+{{frost-link 'Text' 'link.min'
+  hook='myTabIndexLink'
+  priority='primary'
+  size='small'
+  tabindex='-1'
+}}
   ```"}}
       </div>
     </div>
@@ -121,15 +120,15 @@
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
-    {{frost-link 'Text'
-      hook='myMultipleRoutesLink'
-      priority='primary'
-      routeNames=(array
-        'link.min'
-        'link.max'
-      )
-      size='small'
-    }}
+{{frost-link 'Text'
+  hook='myMultipleRoutesLink'
+  priority='primary'
+  routeNames=(array
+    'link.min'
+    'link.max'
+  )
+  size='small'
+}}
   ```"}}
       </div>
     </div>
@@ -151,18 +150,18 @@
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
-    {{#frost-link
-      hook='myMultipleRoutesBlockFormatLink'
-      priority='primary'
-      routeNames=(array
-        'link.min'
-        'link.max'
-        'link.middle'
-      )
-      size='small'
-    }}
-      Text
-    {{/frost-link}}
+{{#frost-link
+  hook='myMultipleRoutesBlockFormatLink'
+  priority='primary'
+  routeNames=(array
+    'link.min'
+    'link.max'
+    'link.middle'
+  )
+  size='small'
+}}
+  Text
+{{/frost-link}}
   ```"}}
       </div>
     </div>
@@ -187,22 +186,70 @@
       </div>
       <div class="snippet">
         {{format-markdown "```handlebars
-    {{frost-link 'Text'
-      hook='myMultipleRoutesLink'
-      priority='primary'
-      routes=(array
-        (hash
-          name= 'link.first'
-          models= (array '1')
-        )
-        (hash
-          name= 'link.first.second'
-          models= (array '2')
-        )
-      )
-      size='small'
-    }}
+{{frost-link 'Text'
+  hook='myMultipleRoutesLink'
+  priority='primary'
+  routes=(array
+    (hash
+      name= 'link.first'
+      models= (array '1')
+    )
+    (hash
+      name= 'link.first.second'
+      models= (array '2')
+    )
+  )
+  size='small'
+}}
   ```"}}
+      </div>
+    </div>
+    <div class="example">
+      <div class="title">external link</div>
+      <div class="demo">
+        {{frost-external-link
+          hook='mySmallLink'
+          href='https://github.com/ciena-frost'
+          priority='primary'
+          size='small'
+          text='Text'
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-external-link
+  hook='mySmallLink'
+  href='https://github.com/ciena-frost'
+  priority='primary'
+  size='small'
+  text='Text'
+}}
+```"}}
+      </div>
+    </div>
+    <div class="example">
+      <div class="title">external link - custom target</div>
+      <div class="demo">
+        {{frost-external-link
+          hook='mySmallLink'
+          href='https://github.com/ciena-frost'
+          priority='primary'
+          size='small'
+          target='_self'
+          text='Text'
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-external-link
+  hook='mySmallLink'
+  href='https://github.com/ciena-frost'
+  priority='primary'
+  size='small'
+  target='_self'
+  text='Text'
+}}
+```"}}
       </div>
     </div>
   </div>
@@ -314,7 +361,29 @@
 ```"}}
       </div>
     </div>
-
+        <div class="example">
+      <div class="title">external link</div>
+      <div class="demo">
+        {{frost-external-link
+          hook='mySmallLink'
+          href='https://github.com/ciena-frost'
+          priority='secondary'
+          size='small'
+          text='Text'
+        }}
+      </div>
+      <div class="snippet">
+        {{format-markdown "```handlebars
+{{frost-external-link
+  hook='mySmallLink'
+  href='https://github.com/ciena-frost'
+  priority='secondary'
+  size='small'
+  text='Text'
+}}
+```"}}
+      </div>
+    </div>
   </div>
 
   <div class="section-title">Design</div>

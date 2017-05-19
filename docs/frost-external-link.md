@@ -1,4 +1,4 @@
-# frost-link 
+# frost-external-link 
 * [API](#api)
 * [Examples](#examples)
 
@@ -11,17 +11,18 @@
 | `disabled` | `boolean` | `false` | **default** - basic link |
 |  |  | `true` | disabled link |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
+| `href` | `string` | `<url>` | url to an external location |
 | `icon` | `string` | `<icon-name>` | the name of a frost-icon |
 | `onClick` |`string` | `<action-name>` | triggers associated action when the link is clicked prior to transition |
 | `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `priority` | `string` | `primary` | primary link - opens content in a new tab |
 |  |  | `secondary` | secondary link - opens content in the same tab |
-| `routeNames` | `array` | `[...]` | list of the route names to open in new tabs on click <i>(only available for non disabled primary link)</i>. |
-| `routes` | `array` | `[...]` | list of the routes to open in new tabs on click <i>(only available for non disabled primary link)</i>. |
 | `size` | `string` | `small` | small size link |
 |  |  | `medium` | medium size link |
 |  |  | `large` | large size link |
 | `tabindex` | `string` | `<tabindex-value>` | the tabindex value |
+| `target` | `string` | `<target-value>` | the target value |
+| `text` | `string` | `<text-value>` | the text value |
 
 ## Testing with ember-hook
 The link component is accessible using ember-hook:
@@ -34,94 +35,83 @@ The link component use ember-spread to `spread` a property object against the to
 
 ### Primary - small
 ```handlebars
-{{frost-link 'link title' 'route name'
+{{frost-external-link
+  href='https://github.com/ciena-frost'
   priority='primary'
   size='small'
+  text='link title'
 }}
 ```
 
 ### Primary - medium
 ```handlebars
-{{frost-link 'link title' 'route name'
+{{frost-external-link
+  href='https://github.com/ciena-frost'
   priority='primary'
   size='medium'
-}}
-```
-
-### Primary - multiple routes names
-```handlebars
-{{frost-link 'Text'
-  routeNames=(array 'route name 1' 'route name 2')
-  hook='mySmallLink'
-  priority='primary'
-  size='small'
-}}
-```
-
-### Primary - multiple routes
-```handlebars
-{{frost-link 'Text'
-  routes=(array
-    (hash
-      name= 'route name 1'
-      models= (array '1')
-    )
-    (hash
-      name= 'route name 2'
-      models= (array '1' '2')
-    )
-  )
-  routeNames=(array '' 'route name 2')
-  hook='mySmallLink'
-  priority='primary'
-  size='small'
+  text='link title'
 }}
 ```
 
 ### Secondary - large
 ```handlebars
-{{frost-link 'link title' 'route name'
+{{frost-external-link
+  href='https://github.com/ciena-frost'
   priority='secondary'
   size='large'
+  text='link title'
 }}
 ```
 
 ### Disabled
 ```handlebars
-{{frost-link 'link title' 'route name'
+{{frost-external-link
+  disabled=true
+  href='https://github.com/ciena-frost'
   priority='primary'
   size='small'
-  disabled=true
+  text='link title'
+}}
+```
+
+### Target
+```handlebars
+{{frost-external-link
+  href='https://github.com/ciena-frost'
+  priority='primary'
+  size='small'
+  target='_self'
+  text='link title'
 }}
 ```
 
 ### Design - inline (font based on size)
 ```handlebars
-{{#frost-link 'route name'
+{{#frost-external-link
   design='inline'
+  href='https://github.com/ciena-frost'
 }}
   link
-{{/frost-link}}
+{{/frost-external-link}}
 ```
 
 ### Design - info-bar
 ```handlebars
-{{#frost-link 'route name'
+{{#frost-external-link
   design='info-bar'
+  href='https://github.com/ciena-frost'
   icon='icon'
 }}
   Action
-{{/frost-link}}
+{{/frost-external-link}}
 ```
 
 ### Spread
 ```handlebars
-{{frost-link
+{{frost-external-link
   options=(hash
+    href='https://github.com/ciena-frost'
     priority='primary'
-    route='route name'
-    routeModels=(array ...)
-    routeQueryParams=(hash ...)
     size='small'
     text='link title'
   )

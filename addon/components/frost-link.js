@@ -155,6 +155,8 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
     hookPrefix: PropTypes.string,
     hookQualifiers: PropTypes.object,
     icon: PropTypes.string,
+    linkTitle: PropTypes.string,
+    onClick: PropTypes.func,
     priority: PropTypes.oneOf(validPriorities),
     routeNames: PropTypes.array,
     routes: PropTypes.arrayOf(PropTypes.shape({
@@ -162,9 +164,7 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
       models: PropTypes.array,
       queryParams: PropTypes.object
     })),
-    size: PropTypes.oneOf(validSizes),
-    linkTitle: PropTypes.string,
-    onClick: PropTypes.func
+    size: PropTypes.oneOf(validSizes)
 
     // state
   },
@@ -172,14 +172,17 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
   /** @returns {Object} the default property values when not provided by consumer */
   getDefaultProps () {
     return {
+      // options
       design: '',
       hookPrefix: this.get('hook'),
       icon: '',
+      linkTitle: '',
       priority: '',
       routeNames: [],
       routes: [],
-      size: '',
-      linkTitle: ''
+      size: ''
+
+      // state
     }
   },
 
@@ -258,7 +261,7 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
    * @returns {boolean} true if we should open the link in the current tab and false otherwise
    */
   _shouldOpenInSameTab () {
-    return !(this.get('priority') === 'primary' && this.get('disabled') === false)
+    return this.get('priority') !== 'primary'
   },
 
   /**
@@ -352,16 +355,22 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
 
   /**
    * Handle the click event
+   * @returns {boolean} false if the link is disabled
    */
   click () {
-    if (this._hasMultipleLinks()) {
-      this._openLinks()
-    }
+    if (this.get('disabled')) {
+      // Stop propagation
+      return false
+    } else {
+      if (this.onClick) {
+        run.next(() => {
+          this.onClick()
+        })
+      }
 
-    if (this.onClick) {
-      run.next(() => {
-        this.onClick()
-      })
+      if (this._hasMultipleLinks()) {
+        this._openLinks()
+      }
     }
   },
 

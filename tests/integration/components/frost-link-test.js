@@ -581,18 +581,39 @@ describe(test.label, function () {
     })
   })
 
-  it('sets disabled property', function () {
-    this.render(hbs`
-      {{frost-link 'title' 'testRoute'
+  describe('Disable property', function () {
+    const externalActionSpy = sinon.spy()
+
+    beforeEach(function () {
+      this.on('externalAction', externalActionSpy)
+      this.render(hbs`
+        {{frost-link 'title' 'testRoute'
+          priority='primary'
           disabled=true
           hook='myLink'
-      }}
-    `)
+          onClick=(action 'externalAction')
+        }}
+      `)
+    })
 
-    expect(
-      this.$('.frost-link').hasClass('disabled'),
-      'disabled class is set'
-    ).to.equal(true)
+    it('sets disabled property', function () {
+      expect(
+        this.$('.frost-link').hasClass('disabled'),
+        'disabled class is set'
+      ).to.equal(true)
+    })
+
+    it('onClick not called', function () {
+      this.$('a').trigger('click')
+
+      return wait()
+        .then(() => {
+          expect(
+            externalActionSpy.called,
+            'onClick closure action called'
+          ).to.equal(false)
+        })
+    })
   })
 
   it('sets icon property', function () {
