@@ -96,9 +96,9 @@ export default Component.extend({
 
   updateVisibility (expand, duration = 0) {
     if (expand) {
-      this.$().find('.frost-expand-content-scroll').slideDown(duration)
+      this.$().find('.frost-expand-scroll').slideDown(duration)
     } else {
-      this.$().find('.frost-expand-content-scroll').slideUp(duration)
+      this.$().find('.frost-expand-scroll').slideUp(duration)
     }
   },
 

@@ -4,32 +4,31 @@ $frost-color-error-http: $frost-color-grey-5 !global;
 $frost-color-error-server-message: $frost-color-grey-6 !global;
 
 .frost-error {
-  font-family: $frost-font-family;
   display: inline-block;
-
+  font-family: $frost-font-family;
 
   .frost-error-description {
+    margin-bottom: 10px;
     color: $frost-color-error-description;
     font-size: $frost-font-xxl;
-    margin-bottom: 10px;
   }
 
   .frost-error-suggestion {
+    margin-bottom: 15px;
     color: $frost-color-error-suggestion;
     font-size: $frost-font-l;
-    margin-bottom: 15px;
   }
 
   .frost-error-http-error {
+    margin-bottom: 5px;
     color: $frost-color-error-http;
     font-size: $frost-font-m;
-    margin-bottom: 5px;
   }
 
   .frost-error-message {
+    margin-bottom: 20px;
     color: $frost-color-error-server-message;
     font-size: $frost-font-s;
-    margin-bottom: 20px;
   }
 
   .frost-error-expand {

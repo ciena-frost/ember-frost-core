@@ -81,7 +81,7 @@ describe(test.label, function () {
     })
 
     it('additional details should be collapsed', function () {
-      expect($hook('myError-details')).to.be.hidden
+      expect(this.$('.frost-expand')).to.have.class('collapsed')
     })
   })
 
@@ -107,7 +107,7 @@ describe(test.label, function () {
     })
 
     it('additional details text should be set correctly', function () {
-      expect($hook('myError-details')).to.be.visible
+      expect(this.$('.frost-expand')).to.have.class('expanded')
       expect($hook('myError-details').text().trim()).to.equal('Detailed information would be displayed here.')
     })
   })

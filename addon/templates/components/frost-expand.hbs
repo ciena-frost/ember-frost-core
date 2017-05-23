@@ -14,10 +14,10 @@
   </div>
 </div>
 {{#frost-scroll
-  class="frost-expand-content-scroll"
+  class="frost-expand-scroll"
   hook=(concat hook '-scroll')
 }}
-  <div class="frost-expand-content" data-test={{hook (concat hook '-content')}}>
+  <div class="frost-expand-scroll-content" data-test={{hook (concat hook '-content')}}>
     {{#if hasBlock}}
       {{yield}}
     {{else if isComponentContent}}

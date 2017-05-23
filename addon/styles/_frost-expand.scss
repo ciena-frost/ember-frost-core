@@ -1,5 +1,5 @@
 $frost-color-expand-label-text: $frost-color-blue-1 !global;
-$frost-color-expand-content-scroll-border: $frost-color-lgrey-3 !global;
+$frost-color-expand-scroll-border: $frost-color-lgrey-3 !global;
 $frost-color-expand-content-bg: $frost-color-lgrey-4 !global;
 $frost-color-expand-content-text: $frost-color-grey-3 !global;
 
@@ -21,31 +21,30 @@ $frost-color-expand-content-text: $frost-color-grey-3 !global;
     }
   }
 
-  .frost-expand-label {
-    flex-shrink: 0;
+  &-label {
     display: flex;
-    justify-content: flex-start;
     flex-direction: row;
-    cursor: pointer;
+    flex-shrink: 0;
+    justify-content: flex-start;
     margin-bottom: 5px;
+    cursor: pointer;
 
-    .frost-expand-label-text {
-      color: $frost-color-expand-label-text;
+    &-text {
       padding-left: 10px;
+      color: $frost-color-expand-label-text;
     }
 
-    .frost-expand-label-icon {
-      height: 20px;
+    &-icon {
       width: 20px;
-      -webkit-transition: transform .2s ;
+      height: 20px;
       transition: transform .2s;
     }
   }
 
-  .frost-expand-content-scroll {
-    border: 1px ridge $frost-color-expand-content-scroll-border;
+  &-scroll {
+    border: 1px ridge $frost-color-expand-scroll-border;
 
-    .frost-expand-content {
+    &-content {
       height: 100%;
       padding: 15px;
       background-color: $frost-color-expand-content-bg;

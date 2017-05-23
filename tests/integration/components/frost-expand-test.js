@@ -31,7 +31,7 @@ describe(test.label, function () {
     })
 
     it('should add hook to content', function () {
-      expect($hook('fe-content')).to.have.class('frost-expand-content')
+      expect($hook('fe-content')).to.have.class('frost-expand-scroll-content')
     })
   })
 
@@ -49,7 +49,7 @@ describe(test.label, function () {
     })
 
     it('should not show content', function () {
-      expect($hook('myExpand-content')).to.be.hidden
+      expect(this.$('.frost-expand')).to.have.class('collapsed')
     })
   })
 
@@ -105,7 +105,7 @@ describe(test.label, function () {
     })
 
     it('should show content', function () {
-      expect($hook('myExpand-content')).to.be.visible
+      expect(this.$('.frost-expand')).to.have.class('expanded')
       expect($hook('myExpand-content').text().trim()).to.equal('Content would be displayed here.')
     })
   })
@@ -127,7 +127,7 @@ describe(test.label, function () {
     })
 
     it('should show content', function () {
-      expect($hook('myExpand-content')).to.be.visible
+      expect(this.$('.frost-expand')).to.have.class('expanded')
       expect($hook('myExpand-content').text().trim()).to.equal('Content would be displayed here.')
     })
   })
@@ -152,7 +152,7 @@ describe(test.label, function () {
     })
 
     it('should not show content', function () {
-      expect($hook('myExpand-content')).to.be.hidden
+      expect(this.$('.frost-expand')).to.have.class('collapsed')
     })
   })
 
@@ -174,7 +174,7 @@ describe(test.label, function () {
     })
 
     it('should not show details', function () {
-      expect($hook('myExpand-content')).to.be.hidden
+      expect(this.$('.frost-expand')).to.have.class('collapsed')
     })
   })
 
@@ -191,7 +191,7 @@ describe(test.label, function () {
 
     it('should have the overwritten expand label text set correctly and content hidden', function () {
       expect($hook('myExpand-label-text').text().trim()).to.equal('View information')
-      expect($hook('myExpand-content')).to.be.hidden
+      expect(this.$('.frost-expand')).to.have.class('collapsed')
     })
   })
 
@@ -210,7 +210,7 @@ describe(test.label, function () {
 
     it('should have the overwritten collapse label text set correctly and content visible', function () {
       expect($hook('myExpand-label-text').text().trim()).to.equal('Hide information')
-      expect($hook('myExpand-content')).to.be.visible
+      expect(this.$('.frost-expand')).to.have.class('expanded')
       expect($hook('myExpand-content').text().trim()).to.equal('Content would be displayed here.')
     })
   })
