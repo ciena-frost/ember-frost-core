@@ -6,24 +6,22 @@
     <div class="example">
       <div class="title">text</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET expand-expression-text}}
         {{frost-expand
           hook='myExpand'
           content='Expanded content.'
         }}
+        {{! END-SNIPPET expand-expression-text}}
       </div>
       <br/>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-expand
-  hook='myExpand'
-  content='Expanded content.'
-}}
-```"}}
+        {{code-snippet name="expand-expression-text.hbs"}}
       </div>
     </div>
     <div class="example">
       <div class="title">component</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET expand-expression-component}}
         {{frost-expand
           hook='myExpand'
           content=(component 'frost-icon'
@@ -31,18 +29,11 @@
                     icon='error'
                   )
         }}
+        {{! END-SNIPPET expand-expression-component}}
       </div>
       <br/>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-expand
-  hook='myExpand'
-  content=(component 'frost-icon'
-            hook='myIcon'
-            icon='error'
-          )
-}}
-```"}}
+        {{code-snippet name="expand-expression-component.hbs"}}
       </div>
     </div>
   </div>
@@ -53,26 +44,23 @@
     <div class="example">
       <div class="title">text</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET expand-block-text}}
         {{#frost-expand
           hook='myExpand'
         }}
           Expanded content.
         {{/frost-expand}}
+        {{! END-SNIPPET expand-block-text}}
       </div>
       <br/>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{#frost-expand
-  hook='myExpand'
-}}
-  Expanded content.
-{{/frost-expand}}
-```"}}
+        {{code-snippet name="expand-block-text.hbs"}}
       </div>
     </div>
     <div class="example">
       <div class="title">component</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET expand-block-component}}
         {{#frost-expand
           hook='myExpand'
         }}
@@ -81,19 +69,11 @@
             icon='error'
           }}
         {{/frost-expand}}
+        {{! END-SNIPPET expand-block-component}}
       </div>
       <br/>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{#frost-expand
-  hook='myExpand'
-}}
-  {{frost-icon
-    hook='myIcon'
-    icon='error'
-  }}
-{{/frost-expand}}
-```"}}
+        {{code-snippet name="expand-block-component.hbs"}}
       </div>
     </div>
   </div>
@@ -103,23 +83,18 @@
   <div class="section">
     <div class="example">
       <div class="demo">
+        {{! BEGIN-SNIPPET expand-expanded}}
         {{#frost-expand
           hook='myExpand'
           expanded=true
         }}
           Expanded content.
         {{/frost-expand}}
+        {{! END-SNIPPET expand-expanded}}
       </div>
       <br/>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{#frost-expand
-  hook='myExpand'
-  expanded=true
-}}
-  Expanded content.
-{{/frost-expand}}
-  ```"}}
+        {{code-snippet name="expand-expanded.hbs"}}
       </div>
     </div>
   </div>
@@ -129,6 +104,7 @@
   <div class="section">
     <div class="example">
       <div class="demo">
+        {{! BEGIN-SNIPPET expand-set-labels}}
         {{#frost-expand
           hook='myExpand'
           expandLabel='View information'
@@ -136,18 +112,11 @@
         }}
           Detailed information.
         {{/frost-expand}}
+        {{! END-SNIPPET expand-set-labels}}
       </div>
       <br/>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{#frost-expand
-  hook='myExpand'
-  expandLabel='View information'
-  collapseLabel='Hide information'
-}}
-  Detailed information.
-{{/frost-expand}}
-  ```"}}
+        {{code-snippet name="expand-set-labels.hbs"}}
       </div>
     </div>
   </div>
@@ -158,90 +127,71 @@
     <div class="example">
       <div class="title">default</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET expand-default-duration}}
         {{#frost-expand
           hook='myExpand'
         }}
           Expanded content.
         {{/frost-expand}}
+        {{! END-SNIPPET expand-default-duration}}
       </div>
       <br/>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{#frost-expand
-  hook='myExpand'
-}}
-  Expanded content.
-{{/frost-expand}}
-  ```"}}
+        {{code-snippet name="expand-default-duration.hbs"}}
       </div>
     </div>
 
     <div class="example">
       <div class="title">slow</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET expand-slow-duration}}
         {{#frost-expand
           hook='myExpand'
           duration='slow'
         }}
           Expanded content.
         {{/frost-expand}}
+        {{! END-SNIPPET expand-slow-duration}}
       </div>
       <br/>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{#frost-expand
-  hook='myExpand'
-  duration='slow'
-}}
-  Expanded content.
-{{/frost-expand}}
-  ```"}}
+        {{code-snippet name="expand-slow-duration.hbs"}}
       </div>
     </div>
 
     <div class="example">
       <div class="title">fast</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET expand-fast-duration}}
         {{#frost-expand
           hook='myExpand'
           duration='fast'
         }}
           Expanded content.
         {{/frost-expand}}
+        {{! END-SNIPPET expand-fast-duration}}
       </div>
       <br/>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{#frost-expand
-  hook='myExpand'
-  duration='fast'
-}}
-  Expanded content.
-{{/frost-expand}}
-  ```"}}
+        {{code-snippet name="expand-fast-duration.hbs"}}
       </div>
     </div>
 
     <div class="example">
       <div class="title">none</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET expand-none-duration}}
         {{#frost-expand
           hook='myExpand'
           duration='none'
         }}
           Expanded content.
         {{/frost-expand}}
+        {{! END-SNIPPET expand-none-duration}}
       </div>
       <br/>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{#frost-expand
-  hook='myExpand'
-  duration='none'
-}}
-  Expanded content.
-{{/frost-expand}}
-  ```"}}
+        {{code-snippet name="expand-none-duration.hbs"}}
       </div>
     </div>
   </div>
@@ -251,6 +201,7 @@
   <div class="section">
     <div class="example">
       <div class="demo">
+        {{! BEGIN-SNIPPET expand-events}}
         {{#frost-expand
           hook='myExpand'
           onExpand=(action 'onExpandHandler')
@@ -258,18 +209,11 @@
         }}
           Expanded content.
         {{/frost-expand}}
+        {{! END-SNIPPET expand-events}}
       </div>
       <br/>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{#frost-expand
-  hook='myExpand'
-  onExpand=(action 'onExpandHandler')
-  onCollapse=(action 'onCollapseHandler')
-}}
-  Expanded content.
-{{/frost-expand}}
-  ```"}}
+        {{code-snippet name="expand-events.hbs"}}
       </div>
     </div>
   </div>
@@ -279,34 +223,22 @@
   <div class="section">
     <div class="example">
       <div class="demo">
+        {{! BEGIN-SNIPPET expand-query}}
         {{#frost-expand
           hook='myExpand'
           expanded=exp
         }}
           Expanded content.
         {{/frost-expand}}
+        {{! END-SNIPPET expand-query}}
       </div>
       <br/>
       <div class="snippet">
         Template
-        {{format-markdown "```handlebars
-{{#frost-expand
-  hook='myExpand'
-  expanded=exp
-}}
-  Expanded content.
-{{/frost-expand}}
-  ```"}}
+          {{code-snippet name="expand-expression-text.hbs"}}
         <br/>
         Controller
-        {{format-markdown "```javascript
-queryParams: {
-  exp: {
-    replace: true
-  }
-},
-exp: false,
-```"}}
+          {{code-snippet name="expand-query-controller.js"}}
       </div>
     </div>
   </div>

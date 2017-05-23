@@ -2,12 +2,14 @@ import Ember from 'ember'
 const {Controller, inject} = Ember
 
 export default Controller.extend({
+  // BEGIN-SNIPPET expand-query-controller
   queryParams: {
     exp: {
       replace: true
     }
   },
   exp: false,
+  // END-SNIPPET expand-query-controller
   notifications: inject.service('notification-messages'),
 
   actions: {
