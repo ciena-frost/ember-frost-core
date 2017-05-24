@@ -24,7 +24,6 @@ export default Component.extend({
     type: PropTypes.string,
     isIncrementControlVisible: PropTypes.bool,
     allowNegativeValues: PropTypes.bool,
-    isAllowUseDownButtonToNegative: PropTypes.bool,
     showError: PropTypes.bool,
     errorMessage: PropTypes.string,
     class: PropTypes.string,
@@ -61,7 +60,6 @@ export default Component.extend({
       autofocus: false,
       isIncrementControlVisible: false,
       allowNegativeValues: false,
-      isAllowUseDownButtonToNegative: false,
       showError: false,
       isHookEmbedded: false,
       required: false,
@@ -76,7 +74,6 @@ export default Component.extend({
   _isNumberKey (e) {
     const value = this.get('value')
     let decimalExist = value && value.indexOf('.') >= 0
-    let dashExist = value && value.indexOf('-') >= 0
     let charCode = e.which || e.keyCode
     let symbolCharCode = {
       dash: 45,
@@ -87,10 +84,11 @@ export default Component.extend({
     }
     let returnValue = true
     if (this.get('allowNegativeValues')) {
-      /* check if user can enter negative symbol,
-        (for now, this can allow user enter dash symbol if there isn't any in the input value)
-      */
-      if (charCode === symbolCharCode.dash && !dashExist) {
+      /* check if user can enter negative symbol*/
+
+      /* get the cursor position to see if the negative sign is placed at the front of the numbers */
+      let cursorPos = this.$()[0].getElementsByTagName('input')[0].selectionStart
+      if (charCode === symbolCharCode.dash && cursorPos === 0) {
         return true
       }
       return returnValue && this.checkIfKeyInvalid(symbolCharCode.period, symbolCharCode.dash,
@@ -146,15 +144,15 @@ export default Component.extend({
   },
 
   @readOnly
-  @computed('value', 'isAllowUseDownButtonToNegative')
+  @computed('value', 'allowNegativeValues')
   /**
    * Determine if the decrease button should be disabled
    * @param {string} value - if the value was less or equal to zero, the decrease button will be disabled
-   * @param {bool} isAllowUseDownButtonToNegative - if the user is allowed to use decrease button to get negative number, then the button dont't need to be disabled
+   * @param {bool} allowNegativeValues - if the user is allowed to enter negative numbers, the button will be enabled
    * @returns {bool} - set decrease button disabled
    */
-  decreaseButtonDisable (value, isAllowUseDownButtonToNegative) {
-    return (parseFloat(value) <= 0 && !isAllowUseDownButtonToNegative) || !value
+  decreaseButtonDisable (value, allowNegativeValues) {
+    return (parseFloat(value) <= 0 && !allowNegativeValues) || !value
   },
 
   @readOnly
@@ -212,6 +210,7 @@ export default Component.extend({
     },
 
     _onInput (event) {
+      this.set('value', event.target.value)
     },
 
     _onPlusClick (event) {
@@ -225,12 +224,7 @@ export default Component.extend({
     _onMinusClick (event) {
       let numberOfDigit = this._calculateDigit(this.get('value'))
       let value = parseFloat(this.get('value')) - 1
-
-      if (!this.get('isAllowUseDownButtonToNegative')) {
-        if (value >= 0) {
-          this._setCalculatedValue(value, numberOfDigit)
-        }
-      } else {
+      if ((!this.get('allowNegativeValues') && (value >= 0)) || (this.get('allowNegativeValues'))) {
         this._setCalculatedValue(value, numberOfDigit)
       }
     }
