@@ -1,1 +1,1 @@
-export {default} from 'ember-frost-core/components/frost-numeric-field';
+export {default} from 'ember-frost-core/components/frost-numeric-field'

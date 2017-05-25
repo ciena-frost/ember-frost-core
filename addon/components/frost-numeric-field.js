@@ -24,11 +24,8 @@ export default Component.extend({
     type: PropTypes.string,
     isIncrementControlVisible: PropTypes.bool,
     allowNegativeValues: PropTypes.bool,
-    showError: PropTypes.bool,
     errorMessage: PropTypes.string,
     class: PropTypes.string,
-    decreaseButtonDisable: PropTypes.bool,
-    increaseButtonDisable: PropTypes.bool,
 
     // Setting these as part of establishing an inital value
     autocapitalize: PropTypes.string,
@@ -37,6 +34,7 @@ export default Component.extend({
     form: PropTypes.string,
     maxlength: PropTypes.number,
     placeholder: PropTypes.string,
+    readonly: PropTypes.bool,
     required: PropTypes.bool,
     selectionDirection: PropTypes.string,
     spellcheck: PropTypes.bool,
@@ -44,11 +42,13 @@ export default Component.extend({
     title: PropTypes.string,
 
     // state
-    _numericErrorMessage: PropTypes.string,
+    _internalErrorMessage: PropTypes.string,
     _errorMessage: PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.bool
-    ])
+    ]),
+    _decreaseButtonDisable: PropTypes.bool,
+    _increaseButtonDisable: PropTypes.bool
   },
 
   getDefaultProps () {
@@ -60,8 +60,8 @@ export default Component.extend({
       autofocus: false,
       isIncrementControlVisible: false,
       allowNegativeValues: false,
-      showError: false,
       isHookEmbedded: false,
+      readonly: false,
       required: false,
       spellcheck: false,
       tabindex: 0,
@@ -75,35 +75,26 @@ export default Component.extend({
     const value = this.get('value')
     let decimalExist = value && value.indexOf('.') >= 0
     let charCode = e.which || e.keyCode
-    let symbolCharCode = {
-      dash: 45,
-      period: 46,
-      unitSeperator: 31,
-      number_0: 48,
-      number_9: 57
-    }
     let returnValue = true
     if (this.get('allowNegativeValues')) {
       /* check if user can enter negative symbol*/
 
       /* get the cursor position to see if the negative sign is placed at the front of the numbers */
       let cursorPos = this.$()[0].getElementsByTagName('input')[0].selectionStart
-      if (charCode === symbolCharCode.dash && cursorPos === 0) {
+      if (String.fromCharCode(charCode) === '-' && cursorPos === 0) {
         return true
       }
-      return returnValue && this.checkIfKeyInvalid(symbolCharCode.period, symbolCharCode.dash,
-        symbolCharCode.number_0, symbolCharCode.number_9, symbolCharCode.unitSeperator, charCode, decimalExist)
+      return returnValue && this.checkIfKeyInvalid(charCode, decimalExist)
     } else {
-      return returnValue && this.checkIfKeyInvalid(symbolCharCode.period, symbolCharCode.dash,
-        symbolCharCode.number_0, symbolCharCode.number_9, symbolCharCode.unitSeperator, charCode, decimalExist)
+      return returnValue && this.checkIfKeyInvalid(charCode, decimalExist)
     }
   },
 
-  checkIfKeyInvalid (period, dash, number0, number9, unitSeperator, charCode, decimalExist) {
-    if (charCode === period && decimalExist) {
+  checkIfKeyInvalid (charCode, decimalExist) {
+    if (String.fromCharCode(charCode) === '.' && decimalExist) {
       return false
-    } else if (charCode !== period && charCode > unitSeperator &&
-      (charCode < number0 || charCode > number9)) {
+    } else if (String.fromCharCode(charCode) !== '.' && charCode > 31 &&
+      (String.fromCharCode(charCode) < '0' || String.fromCharCode(charCode) > '9')) {
       return false
     } else {
       return true
@@ -151,7 +142,7 @@ export default Component.extend({
    * @param {bool} allowNegativeValues - if the user is allowed to enter negative numbers, the button will be enabled
    * @returns {bool} - set decrease button disabled
    */
-  decreaseButtonDisable (value, allowNegativeValues) {
+  _decreaseButtonDisable (value, allowNegativeValues) {
     return (parseFloat(value) <= 0 && !allowNegativeValues) || !value
   },
 
@@ -162,23 +153,23 @@ export default Component.extend({
    * @param {string} value - if the value was less or equal to zero, the decrease button will be disabled
    * @returns {bool} - set increase button disabled
    */
-  increaseButtonDisable (value) {
+  _increaseButtonDisable (value) {
     return !value
   },
 
   @readOnly
-  @computed('errorMessage', '_numericErrorMessage')
+  @computed('errorMessage', '_internalErrorMessage')
   /**
    * Determine if the decrease button should be disabled
    * @param {string} errorMessage - custom error message
-   * @param {string} _numericErrorMessage - default error message
+   * @param {string} _internalErrorMessage - default error message
    * @returns {bool} {string} - if error message exist, return message, otherwise return false
    */
-  _errorMessage (errorMessage, _numericErrorMessage) {
-    if (errorMessage) {
+  _errorMessage (errorMessage, _internalErrorMessage) {
+    if (errorMessage && isPresent(_internalErrorMessage)) {
       return errorMessage
-    } else if (isPresent(_numericErrorMessage)) {
-      return _numericErrorMessage
+    } else if (isPresent(_internalErrorMessage)) {
+      return _internalErrorMessage
     } else {
       return false
     }
@@ -194,23 +185,26 @@ export default Component.extend({
   // == Actions ===============================================================
 
   actions: {
-    keyUp (value, event) {
-      if (isPresent(this.get('_eventProxy.keyUp'))) {
-        this._eventProxy.keyUp(event)
-      }
-    },
-
     _onKeyPress (event) {
       if (!this._isNumberKey(event)) {
-        this.set('_numericErrorMessage', 'Input must be numeric')
+        this.set('_internalErrorMessage', 'Input must be numeric')
         event.preventDefault()
       } else {
-        this.set('_numericErrorMessage', '')
+        this.set('_internalErrorMessage', '')
       }
     },
 
     _onInput (event) {
-      this.set('value', event.target.value)
+      if (isPresent(this.get('_eventProxy.input'))) {
+        this._eventProxy.input(event)
+      }
+    },
+
+    _onFocusOut (event) {
+      /* Check if there is a decimal point at the end of the value */
+      if (this.get('value').slice(-1) === '.') {
+        this.set('_internalErrorMessage', 'Input can not end with decimal point')
+      }
     },
 
     _onPlusClick (event) {

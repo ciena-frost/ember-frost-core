@@ -4,6 +4,7 @@
     ariaExpanded=ariaExpanded
     ariaMultiselectable=ariaMultiselectable
     ariaOwns=ariaOwns
+    classNameBindings='align'
     autocapitalize=autocapitalize
     autocorrect=autocorrect
     autofocus=autofocus
@@ -15,6 +16,7 @@
     isHookEmbedded=true
     maxlength=maxlength
     placeholder=placeholder
+    readonly=readonly
     required=required
     selectionDirection=selectionDirection
     tabindex=tabindex
@@ -34,11 +36,11 @@
     dragStart=_eventProxy.dragStart
     drop=_eventProxy.drop
     focusIn=_eventProxy.focusIn
-    focusOut=_eventProxy.focusOut
+    focusOut=(action '_onFocusOut')
     input=(action '_onInput')
     keyDown=_eventProxy.keyDown
     keyPress=(action '_onKeyPress')
-    key-up='keyUp'
+    key-up=_eventProxy.keyUp
     mouseDown=_eventProxy.mouseDown
     mouseEnter=_eventProxy.mouseEnter
     mouseLeave=_eventProxy.mouseLeave
@@ -52,28 +54,28 @@
 
     onEnter=_eventProxy.enter
     onEscape=_eventProxy.escape-press}}
-  <div class='frost-numeric-field-container'>
+  <div class='frost-numeric-field-container' data-test={{hook (concat hook '-button')}} >
     {{#if isIncrementControlVisible}}
       {{frost-button
         hook='arrowDown'
         class='frost-numeric-field-plus-button'
         icon='numeric-chevron'
         pack='frost'
-        disabled=increaseButtonDisable
+        disabled=_increaseButtonDisable
         onClick= (action '_onPlusClick')
       }}
       {{frost-button
         hook='arrowDown'
         class='frost-numeric-field-minus-button'
         icon='numeric-chevron'
-        disabled=decreaseButtonDisable
+        disabled=_decreaseButtonDisable
         pack='frost'
         onClick= (action '_onMinusClick')
       }}
     {{/if}}
   </div>
   {{#if _errorMessage}}
-    <div class='frost-numeric-select-error'>
+    <div class='frost-numeric-select-error' data-test={{hook (concat hook '-error')}}>
         {{_errorMessage}}
     </div>
   {{/if}}
