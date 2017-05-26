@@ -143,7 +143,7 @@ export default Component.extend({
    * @returns {bool} - set decrease button disabled
    */
   _decreaseButtonDisable (value, allowNegativeValues) {
-    return (parseFloat(value) <= 0 && !allowNegativeValues) || !value
+    return (parseFloat(value) <= 0 && !allowNegativeValues) || !isPresent(value)
   },
 
   @readOnly
@@ -154,7 +154,7 @@ export default Component.extend({
    * @returns {bool} - set increase button disabled
    */
   _increaseButtonDisable (value) {
-    return !value
+    return !isPresent(value)
   },
 
   @readOnly

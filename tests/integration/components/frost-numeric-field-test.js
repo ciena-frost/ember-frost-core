@@ -9,7 +9,7 @@ import {beforeEach, describe, it} from 'mocha'
 
 // import Component from 'ember-frost-core/components/frost-component'
 const test = integration('frost-numeric-field')
-describe.only(test.label, function () {
+describe(test.label, function () {
   test.setup()
 
   describe('when type is set to "number"', function () {
@@ -273,14 +273,27 @@ describe.only(test.label, function () {
     expect($hook('myNumericField-error')).to.have.class('frost-numeric-select-error')
   })
 
-  it('Disable decrease button when allowNegativeValues is false and value is zero'
+  it('Disable buttons when value is null'
   , function () {
     this.render(hbs`
       {{frost-numeric-field
         hook='myNumericField'
+        isIncrementControlVisible=true
+        value=''}}
+    `)
+    expect($('.frost-numeric-field-plus-button')).to.have.prop('disabled', true)
+  })
+
+  it('Disable decrease button when allowNegativeValues is false and value is zero'
+  , function (done) {
+    this.render(hbs`
+      {{frost-numeric-field
+        hook='myNumericField'
+        isIncrementControlVisible=true
         allowNegativeValues=false
         value='0'}}
     `)
     expect($('.frost-numeric-field-minus-button')).to.have.prop('disabled', true)
+    done()
   })
 })

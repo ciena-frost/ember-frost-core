@@ -1,9 +1,6 @@
 import {expect} from 'chai'
-// import Ember from 'ember'
-// const {$, run} = Ember
 import {unit} from 'ember-test-utils/test-support/setup-component-test'
 import {beforeEach, describe, it} from 'mocha'
-// import sinon from 'sinon'
 
 import Component from 'ember-frost-core/components/frost-component'
 
