@@ -1,3 +1,8 @@
+# 1.21.0 (2017-05-26)
+* **Removed** blueprints for generating tests, they are now provided by `ember-cli-frost-blueprints`
+* **Added** `ember-cli-frost-blueprints` to the `dependencies` so that the same blueprints are still available to consumers of this addon. 
+* **Fixed** [#374](https://github.com/ciena-frost/ember-frost-core/issues/374) by doing the above. 
+
 # 1.20.1 (2017-05-17)
 * **Updated** `ember` from `bower.json` to `ember-source` from `package.json`
 * **Updated** ember-try config matrix for `ember-source`
