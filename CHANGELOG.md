@@ -1,3 +1,7 @@
+# 1.21.1 (2017-05-26)
+* Set notification z-index to appear above modals
+
+
 # 1.21.0 (2017-05-26)
 * **Removed** blueprints for generating tests, they are now provided by `ember-cli-frost-blueprints`
 * **Added** `ember-cli-frost-blueprints` to the `dependencies` so that the same blueprints are still available to consumers of this addon. 
