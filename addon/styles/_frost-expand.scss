@@ -1,53 +1,50 @@
 $frost-color-expand-label-text: $frost-color-blue-1 !global;
-$frost-color-expand-scroll-border: $frost-color-lgrey-3 !global;
-$frost-color-expand-content-bg: $frost-color-lgrey-4 !global;
+$frost-color-expand-content-bg: $frost-color-lgrey-3 !global;
 $frost-color-expand-content-text: $frost-color-grey-3 !global;
 
 .frost-expand {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   font-family: $frost-font-family;
 
   &.collapsed {
-    .frost-expand-label-icon {
+    .frost-icon-frost-expand-collapse {
       transform: rotate(-90deg);
     }
   }
 
   &.expanded {
-    .frost-expand-label-icon {
+    .frost-icon-frost-expand-collapse {
       transform: rotate(0deg);
     }
   }
 
-  &-label {
+  .frost-expand-label {
     display: flex;
     flex-direction: row;
     flex-shrink: 0;
+    align-items: center;
     justify-content: flex-start;
     margin-bottom: 5px;
     cursor: pointer;
 
-    &-text {
+    .frost-expand-label-text {
       padding-left: 10px;
       color: $frost-color-expand-label-text;
     }
 
-    &-icon {
+    .frost-icon-frost-expand-collapse {
       width: 20px;
       height: 20px;
       transition: transform .2s;
     }
   }
 
-  &-scroll {
-    border: 1px ridge $frost-color-expand-scroll-border;
+  .frost-expand-scroll {
+    background-color: $frost-color-expand-content-bg;
 
-    &-content {
-      height: 100%;
+    .frost-expand-content {
       padding: 15px;
-      background-color: $frost-color-expand-content-bg;
       color: $frost-color-expand-content-text;
       font-size: $frost-font-s;
       line-height: 1.4em;

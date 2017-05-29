@@ -2,11 +2,12 @@
  * Component definition for the frost-expand component
  */
 import Ember from 'ember'
-const {observer} = Ember
+const {run} = Ember
 import layout from '../templates/components/frost-expand'
 import computed, {readOnly} from 'ember-computed-decorators'
 import Component from './frost-component'
 import {PropTypes} from 'ember-prop-types'
+import {validators} from 'ember-prop-types/utils/prop-types'
 
 export default Component.extend({
   // == Dependencies ==========================================================
@@ -14,8 +15,7 @@ export default Component.extend({
   // == Keyword Properties ====================================================
 
   layout,
-  tagName: 'div',
-  classNameBindings: ['cssStateClass'],
+  classNameBindings: ['expanded:expanded:collapsed'],
 
   // == PropTypes =============================================================
 
@@ -26,16 +26,12 @@ export default Component.extend({
    */
   propTypes: {
     // options
-    onExpand: PropTypes.func,
-    onCollapse: PropTypes.func,
-    expanded: PropTypes.bool,
-    duration: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+    expanded: PropTypes.bool.isRequired,
+    animationDuration: PropTypes.number,
     expandLabel: PropTypes.string,
     collapseLabel: PropTypes.string,
-    content: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.EmberComponent
-    ])
+    content: PropTypes.any
     // state
   },
 
@@ -43,25 +39,14 @@ export default Component.extend({
   getDefaultProps () {
     return {
       // options
-      onExpand () {},
-      onCollapse () {},
-      expanded: false
+      expandLabel: 'Expand',
+      collapseLabel: 'Collapse',
+      animationDuration: 300
       // state
     }
   },
 
   // == Computed Properties ===================================================
-
-  @readOnly
-  @computed('expanded')
-  /**
-   * Determine CSS state class name to use
-   * @param {Boolean} expanded - whether in expanded state or not
-   * @returns {String} the CSS class name to use
-   */
-  cssStateClass (expanded) {
-    return expanded ? 'expanded' : 'collapsed'
-  },
 
   @readOnly
   @computed('content')
@@ -71,69 +56,44 @@ export default Component.extend({
    * @returns {Boolean} whether or not the content is a component
    */
   isComponentContent (content) {
-    return content !== null && typeof content !== 'string'
-  },
-
-  @readOnly
-  @computed('duration')
-  /**
-   * Determine duration of expansion animation
-   * @param {String} duration - duration string
-   * @returns {Number} duration in milliseconds of animation
-   */
-  durationTime (duration) {
-    if (duration === 'fast') {
-      return 250
-    } else if (duration === 'slow') {
-      return 1000
-    } else if (duration === 'none') {
-      return 0
-    }
-    return 500
+    return validators.EmberComponent(null, 'content', content, null, false, false)
   },
 
   // == Functions =============================================================
-
-  updateVisibility (expand, duration = 0) {
-    if (expand) {
-      this.$().find('.frost-expand-scroll').slideDown(duration)
-    } else {
-      this.$().find('.frost-expand-scroll').slideUp(duration)
-    }
-  },
-
-  stateChanged: observer('expanded', function () {
-    this.updateVisibility(this.get('expanded'), this.get('durationTime'))
-  }),
 
   // == DOM Events ============================================================
 
   // == Lifecycle Hooks =======================================================
 
-  didInsertElement (model, transition) {
-    const startExpanded = this.get('expanded')
-    if (!startExpanded) {
-      this.updateVisibility(startExpanded)
+  // TODO measure content size and update animation speed accordingly, maybe
+  // instead of allowing the client to specify speed in ms, create some preset
+  // values (ex. 'fast', 'slow') like jquery provides
+  didReceiveAttrs () {
+    const _expanded = this.get('_expanded')
+    const expanded = this.get('expanded')
+
+    if (_expanded !== expanded) {
+      this.set('_expanded', expanded)
     }
+
+    run.scheduleOnce('afterRender', this, () => {
+      const expand = this.get('_expanded')
+      const animationDuration = _expanded !== undefined ? this.get('animationDuration') : 0
+      if (expand) {
+        this.$().find('.frost-expand-scroll').slideDown(animationDuration)
+      } else {
+        this.$().find('.frost-expand-scroll').slideUp(animationDuration)
+      }
+    })
   },
 
   // == Actions ===============================================================
 
   actions: {
     _onClick () {
-      const expand = !this.get('expanded')
-
-      if (expand) {
-        if (this.onExpand) {
-          this.onExpand()
-        }
-      } else {
-        if (this.onCollapse) {
-          this.onCollapse()
-        }
+      if (this.onChange) {
+        this.onChange(!this.get('expanded'))
       }
-
-      this.set('expanded', expand)
     }
   }
 })

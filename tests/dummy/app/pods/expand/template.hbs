@@ -10,6 +10,8 @@
         {{frost-expand
           hook='myExpand'
           content='Expanded content.'
+          expanded=expanded1
+          onChange=(action 'onChangeHandler1')
         }}
         {{! END-SNIPPET expand-expression-text}}
       </div>
@@ -24,6 +26,8 @@
         {{! BEGIN-SNIPPET expand-expression-component}}
         {{frost-expand
           hook='myExpand'
+          expanded=expanded2
+          onChange=(action 'onChangeHandler2')
           content=(component 'frost-icon'
                     hook='myIcon'
                     icon='error'
@@ -31,7 +35,7 @@
         }}
         {{! END-SNIPPET expand-expression-component}}
       </div>
-      <br/>
+      <br>
       <div class="snippet">
         {{code-snippet name="expand-expression-component.hbs"}}
       </div>
@@ -47,12 +51,14 @@
         {{! BEGIN-SNIPPET expand-block-text}}
         {{#frost-expand
           hook='myExpand'
+          expanded=expanded3
+          onChange=(action 'onChangeHandler3')
         }}
           Expanded content.
         {{/frost-expand}}
         {{! END-SNIPPET expand-block-text}}
       </div>
-      <br/>
+      <br>
       <div class="snippet">
         {{code-snippet name="expand-block-text.hbs"}}
       </div>
@@ -63,6 +69,8 @@
         {{! BEGIN-SNIPPET expand-block-component}}
         {{#frost-expand
           hook='myExpand'
+          expanded=expanded4
+          onChange=(action 'onChangeHandler4')
         }}
           {{frost-icon
             hook='myIcon'
@@ -71,30 +79,9 @@
         {{/frost-expand}}
         {{! END-SNIPPET expand-block-component}}
       </div>
-      <br/>
+      <br>
       <div class="snippet">
         {{code-snippet name="expand-block-component.hbs"}}
-      </div>
-    </div>
-  </div>
-
-  <div class='section-title'>Initially Expanded</div>
-  <hr>
-  <div class="section">
-    <div class="example">
-      <div class="demo">
-        {{! BEGIN-SNIPPET expand-expanded}}
-        {{#frost-expand
-          hook='myExpand'
-          expanded=true
-        }}
-          Expanded content.
-        {{/frost-expand}}
-        {{! END-SNIPPET expand-expanded}}
-      </div>
-      <br/>
-      <div class="snippet">
-        {{code-snippet name="expand-expanded.hbs"}}
       </div>
     </div>
   </div>
@@ -109,19 +96,21 @@
           hook='myExpand'
           expandLabel='View information'
           collapseLabel='Hide information'
+          expanded=expanded5
+          onChange=(action 'onChangeHandler5')
         }}
           Detailed information.
         {{/frost-expand}}
         {{! END-SNIPPET expand-set-labels}}
       </div>
-      <br/>
+      <br>
       <div class="snippet">
         {{code-snippet name="expand-set-labels.hbs"}}
       </div>
     </div>
   </div>
 
-  <div class='section-title'>Set Duration</div>
+  <div class='section-title'>Set Animation Duration</div>
   <hr>
   <div class="section">
     <div class="example">
@@ -130,68 +119,36 @@
         {{! BEGIN-SNIPPET expand-default-duration}}
         {{#frost-expand
           hook='myExpand'
+          expanded=expanded6
+          onChange=(action 'onChangeHandler6')
         }}
           Expanded content.
         {{/frost-expand}}
         {{! END-SNIPPET expand-default-duration}}
       </div>
-      <br/>
+      <br>
       <div class="snippet">
         {{code-snippet name="expand-default-duration.hbs"}}
       </div>
     </div>
 
     <div class="example">
-      <div class="title">slow</div>
+      <div class="title">custom</div>
       <div class="demo">
-        {{! BEGIN-SNIPPET expand-slow-duration}}
+        {{! BEGIN-SNIPPET expand-custom-duration}}
         {{#frost-expand
           hook='myExpand'
-          duration='slow'
+          animationDuration=2000
+          expanded=expanded6
+          onChange=(action 'onChangeHandler6')
         }}
           Expanded content.
         {{/frost-expand}}
-        {{! END-SNIPPET expand-slow-duration}}
+        {{! END-SNIPPET expand-custom-duration}}
       </div>
-      <br/>
+      <br>
       <div class="snippet">
-        {{code-snippet name="expand-slow-duration.hbs"}}
-      </div>
-    </div>
-
-    <div class="example">
-      <div class="title">fast</div>
-      <div class="demo">
-        {{! BEGIN-SNIPPET expand-fast-duration}}
-        {{#frost-expand
-          hook='myExpand'
-          duration='fast'
-        }}
-          Expanded content.
-        {{/frost-expand}}
-        {{! END-SNIPPET expand-fast-duration}}
-      </div>
-      <br/>
-      <div class="snippet">
-        {{code-snippet name="expand-fast-duration.hbs"}}
-      </div>
-    </div>
-
-    <div class="example">
-      <div class="title">none</div>
-      <div class="demo">
-        {{! BEGIN-SNIPPET expand-none-duration}}
-        {{#frost-expand
-          hook='myExpand'
-          duration='none'
-        }}
-          Expanded content.
-        {{/frost-expand}}
-        {{! END-SNIPPET expand-none-duration}}
-      </div>
-      <br/>
-      <div class="snippet">
-        {{code-snippet name="expand-none-duration.hbs"}}
+        {{code-snippet name="expand-custom-duration.hbs"}}
       </div>
     </div>
   </div>
@@ -204,14 +161,14 @@
         {{! BEGIN-SNIPPET expand-events}}
         {{#frost-expand
           hook='myExpand'
-          onExpand=(action 'onExpandHandler')
-          onCollapse=(action 'onCollapseHandler')
+          onChange=(action 'onChangeHandler7')
+          expanded=expanded7
         }}
           Expanded content.
         {{/frost-expand}}
         {{! END-SNIPPET expand-events}}
       </div>
-      <br/>
+      <br>
       <div class="snippet">
         {{code-snippet name="expand-events.hbs"}}
       </div>
@@ -227,18 +184,20 @@
         {{#frost-expand
           hook='myExpand'
           expanded=exp
+          onChange=(action 'onChangeHandler8')
         }}
           Expanded content.
         {{/frost-expand}}
         {{! END-SNIPPET expand-query}}
       </div>
-      <br/>
+      <br>
       <div class="snippet">
         Template
-          {{code-snippet name="expand-expression-text.hbs"}}
+        {{code-snippet name="expand-query.hbs"}}
         <br/>
         Controller
-          {{code-snippet name="expand-query-controller.js"}}
+        {{code-snippet name="expand-query-controller.js"}}
+        {{code-snippet name="expand-query-controller2.js"}}
       </div>
     </div>
   </div>

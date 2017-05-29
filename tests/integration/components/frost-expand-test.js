@@ -9,37 +9,54 @@ import hbs from 'htmlbars-inline-precompile'
 import {beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
+const componentClass = 'frost-expand'
+const labelClass = componentClass + '-label'
+const labelTextClass = componentClass + '-label-text'
+const contentClass = componentClass + '-content'
+
 const test = integration('frost-expand')
 describe(test.label, function () {
   test.setup()
 
   describe('when hook is passed in', function () {
+    let changeStub, sandbox
     beforeEach(function () {
+      sandbox = sinon.sandbox.create()
+      changeStub = sandbox.stub()
+      this.on('myChangeAction', changeStub)
       this.render(hbs`
         {{frost-expand
           hook="fe"
+          expanded=false
+          onChange=(action 'myChangeAction')
         }}
       `)
     })
 
     it('should add hook to label', function () {
-      expect($hook('fe-label')).to.have.class('frost-expand-label')
+      expect($hook('fe-label')).to.have.class(labelClass)
     })
 
     it('should add hook to label text', function () {
-      expect($hook('fe-label-text')).to.have.class('frost-expand-label-text')
+      expect($hook('fe-label-text')).to.have.class(labelTextClass)
     })
 
     it('should add hook to content', function () {
-      expect($hook('fe-content')).to.have.class('frost-expand-scroll-content')
+      expect($hook('fe-content')).to.have.class(contentClass)
     })
   })
 
   describe('when using default properties', function () {
+    let changeStub, sandbox
     beforeEach(function () {
+      sandbox = sinon.sandbox.create()
+      changeStub = sandbox.stub()
+      this.on('myChangeAction', changeStub)
       this.render(hbs`
         {{frost-expand
           hook="myExpand"
+          expanded=false
+          onChange=(action 'myChangeAction')
         }}
       `)
     })
@@ -49,16 +66,21 @@ describe(test.label, function () {
     })
 
     it('should not show content', function () {
-      expect(this.$('.frost-expand')).to.have.class('collapsed')
+      expect(this.$('.' + componentClass)).to.have.class('collapsed')
     })
   })
 
   describe('when using expression form', function () {
+    let changeStub, sandbox
     beforeEach(function () {
+      sandbox = sinon.sandbox.create()
+      changeStub = sandbox.stub()
+      this.on('myChangeAction', changeStub)
       this.render(hbs`
         {{frost-expand
           hook="myExpand"
           expanded=true
+          onChange=(action 'myChangeAction')
           content="Content would be displayed here."
         }}
       `)
@@ -70,11 +92,16 @@ describe(test.label, function () {
   })
 
   describe('when using block form', function () {
+    let changeStub, sandbox
     beforeEach(function () {
+      sandbox = sinon.sandbox.create()
+      changeStub = sandbox.stub()
+      this.on('myChangeAction', changeStub)
       this.render(hbs`
         {{#frost-expand
           hook="myExpand"
           expanded=true
+          onChange=(action 'myChangeAction')
         }}
           Content would be displayed here.
         {{/frost-expand}}
@@ -88,10 +115,20 @@ describe(test.label, function () {
 
   describe('when changing to expanded state', function () {
     beforeEach(function () {
+      this.setProperties({
+        expanded: false
+      })
+      this.on('myChangeAction', function (e) {
+        this.setProperties({
+          expanded: e
+        })
+      })
       this.render(hbs`
         {{#frost-expand
           hook="myExpand"
-          duration="none"
+          animationDuration=0
+          expanded=expanded
+          onChange=(action 'myChangeAction')
         }}
           Content would be displayed here.
         {{/frost-expand}}
@@ -105,17 +142,26 @@ describe(test.label, function () {
     })
 
     it('should show content', function () {
-      expect(this.$('.frost-expand')).to.have.class('expanded')
+      expect(this.$('.' + componentClass)).to.have.class('expanded')
       expect($hook('myExpand-content').text().trim()).to.equal('Content would be displayed here.')
     })
   })
 
   describe('when starting in expanded state', function () {
     beforeEach(function () {
+      this.setProperties({
+        expanded: true
+      })
+      this.on('myChangeAction', function (e) {
+        this.setProperties({
+          expanded: e
+        })
+      })
       this.render(hbs`
         {{#frost-expand
           hook="myExpand"
-          expanded=true
+          expanded=expanded
+          onChange=(action 'myChangeAction')
         }}
           Content would be displayed here.
         {{/frost-expand}}
@@ -127,18 +173,27 @@ describe(test.label, function () {
     })
 
     it('should show content', function () {
-      expect(this.$('.frost-expand')).to.have.class('expanded')
+      expect(this.$('.' + componentClass)).to.have.class('expanded')
       expect($hook('myExpand-content').text().trim()).to.equal('Content would be displayed here.')
     })
   })
 
   describe('when changing to collapsed state', function () {
     beforeEach(function () {
+      this.setProperties({
+        expanded: true
+      })
+      this.on('myChangeAction', function (e) {
+        this.setProperties({
+          expanded: e
+        })
+      })
       this.render(hbs`
         {{#frost-expand
           hook="myExpand"
-          expanded=true
-          duration="none"
+          expanded=expanded
+          onChange=(action 'myChangeAction')
+          animationDuration=0
         }}
           Content would be displayed here.
         {{/frost-expand}}
@@ -152,16 +207,26 @@ describe(test.label, function () {
     })
 
     it('should not show content', function () {
-      expect(this.$('.frost-expand')).to.have.class('collapsed')
+      expect(this.$('.' + componentClass)).to.have.class('collapsed')
     })
   })
 
   describe('when changing to expanded state then back to collapsed state', function () {
     beforeEach(function () {
+      this.setProperties({
+        expanded: false
+      })
+      this.on('myChangeAction', function (e) {
+        this.setProperties({
+          expanded: e
+        })
+      })
       this.render(hbs`
         {{frost-expand
           hook="myExpand"
-          duration="none"
+          animationDuration=0
+          expanded=expanded
+          onChange=(action 'myChangeAction')
         }}
       `)
 
@@ -174,34 +239,44 @@ describe(test.label, function () {
     })
 
     it('should not show details', function () {
-      expect(this.$('.frost-expand')).to.have.class('collapsed')
+      expect(this.$('.' + componentClass)).to.have.class('collapsed')
     })
   })
 
   describe('when overwriting default expand label', function () {
+    let changeStub, sandbox
     beforeEach(function () {
+      sandbox = sinon.sandbox.create()
+      changeStub = sandbox.stub()
+      this.on('myChangeAction', changeStub)
       this.render(hbs`
         {{frost-expand
           hook="myExpand"
-          duration="none"
           expandLabel="View information"
+          expanded=false
+          onChange=(action 'myChangeAction')
         }}
       `)
     })
 
     it('should have the overwritten expand label text set correctly and content hidden', function () {
       expect($hook('myExpand-label-text').text().trim()).to.equal('View information')
-      expect(this.$('.frost-expand')).to.have.class('collapsed')
+      expect(this.$('.' + componentClass)).to.have.class('collapsed')
     })
   })
 
   describe('when overwriting default collapse label', function () {
+    let changeStub, sandbox
     beforeEach(function () {
+      sandbox = sinon.sandbox.create()
+      changeStub = sandbox.stub()
+      this.on('myChangeAction', changeStub)
       this.render(hbs`
         {{frost-expand
           hook="myExpand"
-          duration="none"
+          animationDuration=0
           expanded=true
+          onChange=(action 'myChangeAction')
           collapseLabel="Hide information"
           content="Content would be displayed here."
         }}
@@ -210,52 +285,23 @@ describe(test.label, function () {
 
     it('should have the overwritten collapse label text set correctly and content visible', function () {
       expect($hook('myExpand-label-text').text().trim()).to.equal('Hide information')
-      expect(this.$('.frost-expand')).to.have.class('expanded')
+      expect(this.$('.' + componentClass)).to.have.class('expanded')
       expect($hook('myExpand-content').text().trim()).to.equal('Content would be displayed here.')
     })
   })
 
-  describe('when setting expand event handler', function () {
-    let expandStub, collapseStub, sandbox
+  describe('when expanding, event handler should be called passing true', function () {
+    let changeStub, sandbox
     beforeEach(function () {
       sandbox = sinon.sandbox.create()
-      expandStub = sandbox.stub()
-      collapseStub = sandbox.stub()
-      this.on('myExpandAction', expandStub)
-      this.on('myCollapseAction', collapseStub)
+      changeStub = sandbox.stub()
+      this.on('myChangeAction', changeStub)
       this.render(hbs`
         {{frost-expand
           hook="myExpand"
-          duration="none"
-          onExpand=(action 'myExpandAction')
-          onCollapse=(action 'myCollapseAction')
-        }}
-      `)
-
-      $hook('myExpand-label').click()
-    })
-
-    it('should only call expand event handler', function () {
-      expect(expandStub).to.have.callCount(1)
-      expect(collapseStub).to.have.callCount(0)
-    })
-  })
-
-  describe('when setting collapse event handler', function () {
-    let expandStub, collapseStub, sandbox
-    beforeEach(function () {
-      sandbox = sinon.sandbox.create()
-      expandStub = sandbox.stub()
-      collapseStub = sandbox.stub()
-      this.on('myExpandAction', expandStub)
-      this.on('myCollapseAction', collapseStub)
-      this.render(hbs`
-        {{frost-expand
-          hook="myExpand"
-          duration="none"
-          expanded=true
-          onExpand=(action 'myExpandAction')
-          onCollapse=(action 'myCollapseAction')
+          animationDuration=0
+          expanded=false
+          onChange=(action 'myChangeAction')
         }}
       `)
 
@@ -263,8 +309,30 @@ describe(test.label, function () {
     })
 
     it('should only call collapse event handler', function () {
-      expect(expandStub).to.have.callCount(0)
-      expect(collapseStub).to.have.callCount(1)
+      expect(changeStub).to.have.been.calledWith(true)
+    })
+  })
+
+  describe('when collapsing, event handler should be called passing false', function () {
+    let changeStub, sandbox
+    beforeEach(function () {
+      sandbox = sinon.sandbox.create()
+      changeStub = sandbox.stub()
+      this.on('myChangeAction', changeStub)
+      this.render(hbs`
+        {{frost-expand
+          hook="myExpand"
+          animationDuration=0
+          expanded=true
+          onChange=(action 'myChangeAction')
+        }}
+      `)
+
+      $hook('myExpand-label').click()
+    })
+
+    it('should only call collapse event handler', function () {
+      expect(changeStub).to.have.been.calledWith(false)
     })
   })
 })

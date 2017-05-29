@@ -1,7 +1,7 @@
 /**
- * Component definition for the frost-error component
+ * Component definition for the frost-ajax-error-page component
  */
-import layout from '../templates/components/frost-error'
+import layout from '../templates/components/frost-ajax-error-page'
 import Component from './frost-component'
 import {PropTypes} from 'ember-prop-types'
 
@@ -11,7 +11,6 @@ export default Component.extend({
   // == Keyword Properties ====================================================
 
   layout,
-  tagName: 'div',
 
   // == PropTypes =============================================================
 
@@ -22,13 +21,12 @@ export default Component.extend({
    */
   propTypes: {
     // options
-    description: PropTypes.string,
+    description: PropTypes.string.isRequired,
     suggestion: PropTypes.string,
-    errorCode: PropTypes.number,
-    errorTitle: PropTypes.string,
-    errorMessage: PropTypes.string,
-    errorDetails: PropTypes.string,
-    showDetails: PropTypes.bool
+    errorCode: PropTypes.number.isRequired,
+    errorTitle: PropTypes.string.isRequired,
+    errorMessage: PropTypes.string.isRequired,
+    errorDetails: PropTypes.string.isRequired
     // state
   },
 
@@ -36,14 +34,9 @@ export default Component.extend({
   getDefaultProps () {
     return {
       // options
-      description: '',
       suggestion: '',
-      errorCode: -1,
-      errorTitle: '',
-      errorMessage: '',
-      errorDetails: '',
-      showDetails: false
       // state
+      showDetails: false
     }
   },
 
@@ -58,5 +51,8 @@ export default Component.extend({
   // == Actions ===============================================================
 
   actions: {
+    onChangeHandler (expanded) {
+      this.set('showDetails', expanded)
+    }
   }
 })

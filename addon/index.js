@@ -20,7 +20,7 @@ export {default as Text} from './components/frost-text'
 export {default as Textarea} from './components/frost-textarea'
 export {default as Toggle} from './components/frost-toggle'
 export {default as Expand} from './components/frost-expand'
-export {default as Error} from './components/frost-error'
+export {default as AjaxErrorPage} from './components/frost-ajax-error-page'
 
 export {default as HookableInput} from './components/hookable-input'
 export {default as HookableTextarea} from './components/hookable-textarea'

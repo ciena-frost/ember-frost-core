@@ -8,47 +8,60 @@ import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'
 import {beforeEach, describe, it} from 'mocha'
 
-const test = integration('frost-error')
+const test = integration('frost-ajax-error-page')
 describe(test.label, function () {
   test.setup()
   describe('when hook is passed in', function () {
     beforeEach(function () {
       this.render(hbs`
-        {{frost-error
+        {{frost-ajax-error-page
           hook="fe"
+          description=""
+          errorCode=-1
+          errorTitle=""
+          errorMessage=""
+          errorDetails=""
         }}
       `)
     })
 
+    const componentClass = 'frost-ajax-error-page'
+    const descriptionClass = componentClass + '-description'
+    const suggestionClass = componentClass + '-suggestion'
+    const httpErrorClass = componentClass + '-http-error'
+    const errorMessageClass = componentClass + '-message'
+    const frostExpandClass = 'frost-expand'
+    const detailsClass = componentClass + '-details'
+
     it('should add hook to description', function () {
-      expect($hook('fe-description')).to.have.class('frost-error-description')
+      expect($hook('fe-description')).to.have.class(descriptionClass)
     })
 
     it('should add hook to suggestion', function () {
-      expect($hook('fe-suggestion')).to.have.class('frost-error-suggestion')
+      expect($hook('fe-suggestion')).to.have.class(suggestionClass)
     })
 
     it('should add hook to HTTP error', function () {
-      expect($hook('fe-http-error')).to.have.class('frost-error-http-error')
+      expect($hook('fe-http-error')).to.have.class(httpErrorClass)
     })
 
     it('should add hook to error message', function () {
-      expect($hook('fe-message')).to.have.class('frost-error-message')
+      expect($hook('fe-message')).to.have.class(errorMessageClass)
     })
 
     it('should add hook to hidden details component', function () {
-      expect($hook('fe-expand')).to.have.class('frost-expand')
+      expect($hook('fe-expand')).to.have.class(frostExpandClass)
     })
 
     it('should add hook to hidden details text', function () {
-      expect($hook('fe-details')).to.have.class('frost-error-details')
+      expect($hook('fe-details')).to.have.class(detailsClass)
     })
   })
 
   describe('when setting properties', function () {
     beforeEach(function () {
       this.render(hbs`
-        {{frost-error
+        {{frost-ajax-error-page
           hook='myError'
           description='Blue Planet is currently unavailable.'
           suggestion='Try again later.'
@@ -88,7 +101,7 @@ describe(test.label, function () {
   describe('when expanding details', function () {
     beforeEach(function () {
       this.render(hbs`
-        {{frost-error
+        {{frost-ajax-error-page
           hook='myError'
           description='Blue Planet is currently unavailable.'
           suggestion='Try again later.'

@@ -6,7 +6,7 @@
     <div class="example">
       <div class="demo">
         {{! BEGIN-SNIPPET error }}
-        {{frost-error
+        {{frost-ajax-error-page
           hook='myError'
           description='Service is currently unavailable.'
           suggestion='Try again later.'
@@ -14,17 +14,12 @@
           errorTitle='Internal server error'
           errorMessage='Failure to retrieve network elements'
           errorDetails='Detailed information would be displayed here.'
-          showDetails=showDetails
         }}
         {{! END-SNIPPET }}
       </div>
-      <br/>
+      <br>
       <div class="snippet">
-        Template
         {{code-snippet name='error.hbs'}}
-        <br/>
-        Controller
-        {{code-snippet name='error-query-params.js'}}
       </div>
     </div>
   </div>
