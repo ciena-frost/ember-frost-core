@@ -8,14 +8,14 @@ $frost-color-expand-content-text: $frost-color-grey-3 !global;
   font-family: $frost-font-family;
 
   &.collapsed {
-    .frost-icon-frost-expand-collapse {
-      transform: rotate(-90deg);
+    .frost-icon-frost-chevron {
+      transform: rotate(-180deg);
     }
   }
 
   &.expanded {
-    .frost-icon-frost-expand-collapse {
-      transform: rotate(0deg);
+    .frost-icon-frost-chevron {
+      transform: rotate(-90deg);
     }
   }
 
@@ -33,10 +33,10 @@ $frost-color-expand-content-text: $frost-color-grey-3 !global;
       color: $frost-color-expand-label-text;
     }
 
-    .frost-icon-frost-expand-collapse {
-      width: 20px;
-      height: 20px;
-      transition: transform .2s;
+    .frost-icon-frost-chevron {
+      width: 30px;
+      height: 30px;
+      transition: transform .3s;
     }
   }
 
