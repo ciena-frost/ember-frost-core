@@ -3,13 +3,14 @@
  */
 import Ember from 'ember'
 const {isPresent} = Ember
+import FrostEventsProxyMixin from '../mixins/frost-events-proxy'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
 
 import layout from '../templates/components/frost-numeric-field'
 import Component from './frost-component'
 
-export default Component.extend({
+export default Component.extend(FrostEventsProxyMixin, {
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
@@ -40,7 +41,6 @@ export default Component.extend({
     spellcheck: PropTypes.bool,
     value: PropTypes.string.isRequired,
     title: PropTypes.string,
-
     // state
     _internalErrorMessage: PropTypes.string,
     _errorMessage: PropTypes.oneOfType([
@@ -75,7 +75,6 @@ export default Component.extend({
     const value = this.get('value')
     let decimalExist = value && value.indexOf('.') >= 0
     let charCode = e.which || e.keyCode
-    let returnValue = true
     if (this.get('allowNegativeValues')) {
       /* check if user can enter negative symbol*/
 
@@ -84,9 +83,9 @@ export default Component.extend({
       if (String.fromCharCode(charCode) === '-' && cursorPos === 0) {
         return true
       }
-      return returnValue && this.checkIfKeyInvalid(charCode, decimalExist)
+      return this.checkIfKeyInvalid(charCode, decimalExist)
     } else {
-      return returnValue && this.checkIfKeyInvalid(charCode, decimalExist)
+      return this.checkIfKeyInvalid(charCode, decimalExist)
     }
   },
 
@@ -109,15 +108,16 @@ export default Component.extend({
     return value.slice(value.indexOf('.') + 1).length
   },
 
-  /** calculate how many digit a value has
+  /** format decimal
     * @param {string} value - value of the input
     * @param {number} numberOfDigit - number of digit
+      @returns {string} - formatted digit
  */
   _setCalculatedValue (value, numberOfDigit) {
     if (this.get('value').indexOf('.') > -1) {
-      this.set('value', value.toFixed(numberOfDigit).toString())
+      return value.toFixed(numberOfDigit).toString()
     } else {
-      this.set('value', value.toString())
+      return value.toString()
     }
   },
 
@@ -166,7 +166,7 @@ export default Component.extend({
    * @returns {bool} {string} - if error message exist, return message, otherwise return false
    */
   _errorMessage (errorMessage, _internalErrorMessage) {
-    if (errorMessage && isPresent(_internalErrorMessage)) {
+    if (errorMessage) {
       return errorMessage
     } else if (isPresent(_internalErrorMessage)) {
       return _internalErrorMessage
@@ -211,8 +211,7 @@ export default Component.extend({
       /** calculate how many digit a value has */
       let numberOfDigit = this._calculateDigit(this.get('value'))
       var value = parseFloat(this.get('value')) + 1
-
-      this._setCalculatedValue(value, numberOfDigit)
+      this._setCalculatedValue(event, value, numberOfDigit)
     },
 
     _onMinusClick (event) {

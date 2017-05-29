@@ -9,7 +9,7 @@ import {beforeEach, describe, it} from 'mocha'
 
 // import Component from 'ember-frost-core/components/frost-component'
 const test = integration('frost-numeric-field')
-describe(test.label, function () {
+describe.only(test.label, function () {
   test.setup()
 
   describe('when type is set to "number"', function () {
@@ -47,6 +47,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
   })
+
   it('sets align property', function () {
     const align = 'right'
 
@@ -234,7 +235,20 @@ describe(test.label, function () {
     ).to.eql(title)
   })
 
-  it('renders the arrow buttons when isIncrementControlVisible is true', function () {
+  it('only renders the arrow buttons when isIncrementControlVisible is true', function () {
+    this.render(hbs`
+      {{frost-numeric-field
+        hook='myNumericField'
+        isIncrementControlVisible=false
+        value='2'}}
+    `)
+
+    expect(this.$('input').hasClass('arrow-visible'),
+    'class "arrow-visible" is set'
+  ).to.equal(false)
+
+    expect($hook('myNumericField-button').find('frost-numeric-field-container')).to.have.length(0)
+
     this.render(hbs`
       {{frost-numeric-field
         hook='myNumericField'
@@ -243,7 +257,7 @@ describe(test.label, function () {
     `)
 
     expect(this.$('input').hasClass('arrow-visible'),
-    'class "frost-text-input" is set'
+    'class "arrow-visible" is set'
     ).to.equal(true)
 
     expect($hook('myNumericField-button')).to.have.class('frost-numeric-field-container')

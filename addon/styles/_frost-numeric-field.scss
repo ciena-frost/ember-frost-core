@@ -55,6 +55,10 @@ $frost-number-select-input-disabled-bg: $frost-color-input-disabled-bg;
       font-size: 14px;
       box-shadow: none;
 
+      .frost-icon-frost-numeric-chevron {
+        height: 20px;
+      }
+
       &:hover {
         background-color: $frost-color-button-hover-bg;
       }
