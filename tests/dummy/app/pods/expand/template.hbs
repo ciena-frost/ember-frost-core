@@ -174,31 +174,4 @@
       </div>
     </div>
   </div>
-
-  <div class='section-title'>Query Parameter</div>
-  <hr>
-  <div class="section">
-    <div class="example">
-      <div class="demo">
-        {{! BEGIN-SNIPPET expand-query}}
-        {{#frost-expand
-          hook='myExpand'
-          expanded=exp
-          onChange=(action 'onChangeHandler8')
-        }}
-          Expanded content.
-        {{/frost-expand}}
-        {{! END-SNIPPET expand-query}}
-      </div>
-      <br>
-      <div class="snippet">
-        Template
-        {{code-snippet name="expand-query.hbs"}}
-        <br/>
-        Controller
-        {{code-snippet name="expand-query-controller.js"}}
-        {{code-snippet name="expand-query-controller2.js"}}
-      </div>
-    </div>
-  </div>
 </div>
