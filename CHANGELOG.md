@@ -1,3 +1,7 @@
+# 1.21.3 (2017-05-30)
+
+ * **Moved** `ember-cli-frost-blueprints` from `dependencies` in `package.json` to being installed as a blueprint. It turns out that [`ember-cli` cheats w.r.t. `ember-cli-legacy-blueprints`](https://github.com/ember-cli/ember-cli/blob/v2.8.0/lib/models/project.js#L347) and so we can't follow that pattern (of just making it an `npm` dep). 
+
 # 1.21.2 (2017-05-30)
 
 * **Updated** `ember-cli-forst-blueprints` to `1.x`
