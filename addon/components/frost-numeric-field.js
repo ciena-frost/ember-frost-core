@@ -41,7 +41,7 @@ export default Component.extend(FrostEventsProxyMixin, {
     spellcheck: PropTypes.bool,
     value: PropTypes.string.isRequired,
     title: PropTypes.string,
-    // state
+
     _internalErrorMessage: PropTypes.string,
     _errorMessage: PropTypes.oneOfType([
       PropTypes.string,
@@ -111,14 +111,21 @@ export default Component.extend(FrostEventsProxyMixin, {
   /** format decimal
     * @param {string} value - value of the input
     * @param {number} numberOfDigit - number of digit
-      @returns {string} - formatted digit
  */
   _setCalculatedValue (value, numberOfDigit) {
+    let formattedValue
     if (this.get('value').indexOf('.') > -1) {
-      return value.toFixed(numberOfDigit).toString()
+      formattedValue = value.toFixed(numberOfDigit).toString()
     } else {
-      return value.toString()
+      formattedValue = value.toString()
     }
+    let event = {
+      id: this.get('elementId'),
+      target: {
+        value: formattedValue
+      }
+    }
+    this.onInput(event)
   },
 
   // == Computed Properties ===================================================
@@ -207,14 +214,14 @@ export default Component.extend(FrostEventsProxyMixin, {
       }
     },
 
-    _onPlusClick (event) {
+    _onPlusClick () {
       /** calculate how many digit a value has */
       let numberOfDigit = this._calculateDigit(this.get('value'))
       var value = parseFloat(this.get('value')) + 1
-      this._setCalculatedValue(event, value, numberOfDigit)
+      this._setCalculatedValue(value, numberOfDigit)
     },
 
-    _onMinusClick (event) {
+    _onMinusClick () {
       let numberOfDigit = this._calculateDigit(this.get('value'))
       let value = parseFloat(this.get('value')) - 1
       if ((!this.get('allowNegativeValues') && (value >= 0)) || (this.get('allowNegativeValues'))) {

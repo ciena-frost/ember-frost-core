@@ -7,7 +7,6 @@ export default Controller.extend({
 
   actions: {
     foo (event) {
-      debugger
       this.set('value', event.target.value)
     }
   }
