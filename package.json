@@ -95,7 +95,7 @@
     "chalk": "^1.1.3",
     "child-process-promise": "^2.2.1",
     "ember-cli-babel": "^5.1.6",
-    "ember-cli-frost-blueprints": "^0.1.0",
+    "ember-cli-frost-blueprints": "^1.0.0",
     "ember-cli-get-component-path-option": "1.0.0",
     "ember-cli-htmlbars": "^1.0.3",
     "ember-cli-normalize-entity-name": "^1.0.0",
