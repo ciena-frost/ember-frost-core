@@ -1,3 +1,8 @@
+# 1.21.2 (2017-05-30)
+
+* **Updated** `ember-cli-forst-blueprints` to `1.x`
+
+
 # 1.21.1 (2017-05-26)
 * Set notification z-index to appear above modals
 
