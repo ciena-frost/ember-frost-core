@@ -1,0 +1,42 @@
+$frost-color-error-description: $frost-color-grey-1 !global;
+$frost-color-error-suggestion: $frost-color-grey-1 !global;
+$frost-color-error-http: $frost-color-grey-5 !global;
+$frost-color-error-server-message: $frost-color-grey-6 !global;
+
+.frost-ajax-error-page {
+  display: inline-block;
+  font-family: $frost-font-family;
+
+  &-description {
+    margin-bottom: 10px;
+    color: $frost-color-error-description;
+    font-size: $frost-font-xxl;
+  }
+
+  &-suggestion {
+    margin-bottom: 15px;
+    color: $frost-color-error-suggestion;
+    font-size: $frost-font-l;
+  }
+
+  &-http-error {
+    margin-bottom: 5px;
+    color: $frost-color-error-http;
+    font-size: $frost-font-m;
+  }
+
+  &-message {
+    margin-bottom: 20px;
+    color: $frost-color-error-server-message;
+    font-size: $frost-font-s;
+  }
+
+  &-expand {
+    width: 600px;
+    max-height: 400px;
+  }
+
+  &-details {
+    white-space: pre-line;
+  }
+}

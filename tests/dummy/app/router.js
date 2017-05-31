@@ -31,6 +31,8 @@ Router.map(function () {
   this.route('area')
   this.route('field')
   this.route('toggle')
+  this.route('expand')
+  this.route('ajax-error-page')
   this.route('typography')
   this.route('helpers')
 })
