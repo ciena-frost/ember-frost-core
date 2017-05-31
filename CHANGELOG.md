@@ -1,3 +1,8 @@
+# 1.22.0 (2017-05-31)
+
+* **Added** `frost-expand` component and `frost-error` component
+
+
 # 1.21.3 (2017-05-30)
 
  * **Moved** `ember-cli-frost-blueprints` from `dependencies` in `package.json` to being installed as a blueprint. It turns out that [`ember-cli` cheats w.r.t. `ember-cli-legacy-blueprints`](https://github.com/ember-cli/ember-cli/blob/v2.8.0/lib/models/project.js#L347) and so we can't follow that pattern (of just making it an `npm` dep). 
