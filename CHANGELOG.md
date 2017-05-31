@@ -1,3 +1,7 @@
+# 1.22.1 (2017-05-31)
+* **Updated** the lgrey colours
+
+
 # 1.22.0 (2017-05-31)
 
 * **Added** `frost-expand` component and `frost-error` component
