@@ -1,3 +1,6 @@
+# 1.22.2 (2017-06-01)
+  * Fix select search by escaping regex special characters. Fixes https://github.com/ciena-frost/ember-frost-core/issues/455
+
 # 1.22.1 (2017-05-31)
 * **Updated** the lgrey colours
 
