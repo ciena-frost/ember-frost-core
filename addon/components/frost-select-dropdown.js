@@ -415,7 +415,7 @@ export default Component.extend({
         }
 
         if (filter) {
-          const pattern = new RegExp(filter, 'gi')
+          const pattern = new RegExp(filter.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'), 'gi')
           const textWithMatch = textElement.textContent.replace(pattern, '<u>$&</u>')
 
           // If rendered text has changed, update it
