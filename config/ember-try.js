@@ -3,7 +3,7 @@ module.exports = {
     {
       name: 'default',
       npm: {
-        dependencies: {}
+        devDependencies: {}
       }
     },
     {
