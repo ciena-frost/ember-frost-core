@@ -1,3 +1,7 @@
+# 1.22.3 (2017-06-05)
+* **Removed** unneeded dependencies left over from when blueprints were moved to another repo: https://github.com/ciena-frost/ember-frost-core/pull/457/files
+* **Updated** ember-try config to correct syntax for `default`.
+
 # 1.22.2 (2017-06-01)
   * Fix select search by escaping regex special characters. Fixes https://github.com/ciena-frost/ember-frost-core/issues/455
 
