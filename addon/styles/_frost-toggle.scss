@@ -5,6 +5,9 @@ $frost-toggle-button-switch-height: 27px;
 $frost-toggle-off-color: #000;
 $frost-toggle-on-color: #fff;
 
+$frost-toggle-button-hover-color: #c6eafc;
+$frost-toggle-button-hover-shadow: rgba(0, 0, 0, .2);
+
 .frost-toggle {
   display: inline-flex;
   align-items: center;
@@ -59,6 +62,16 @@ $frost-toggle-on-color: #fff;
       height: $frost-toggle-button-switch-height;
       margin: 0 10px 0 0;
       content: '';
+    }
+
+    &:hover {
+      &:not(.disabled) {
+        &:before,
+        &:after {
+          background-color: $frost-toggle-button-hover-color;
+          box-shadow: 0 2px 4px $frost-toggle-button-hover-shadow;
+        }
+      }
     }
 
     &:after {
