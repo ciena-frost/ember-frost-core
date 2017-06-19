@@ -1,3 +1,7 @@
+# 1.22.4 (2017-06-19)
+
+Added style rules for the hover state of the frost-toggle button switch. The switch will now turn a light blue color when the user mouses over the toggle. If the toggle is disabled, the switch will not change color. 
+
 # 1.22.3 (2017-06-05)
 * **Removed** unneeded dependencies left over from when blueprints were moved to another repo: https://github.com/ciena-frost/ember-frost-core/pull/457/files
 * **Updated** ember-try config to correct syntax for `default`.
