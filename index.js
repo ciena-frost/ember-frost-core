@@ -169,7 +169,10 @@ module.exports = {
     const iconNameJson = JSON.stringify(iconNames, null, 2)
     const iconNameTree = writeFile('modules/ember-frost-core/icon-packs.js', `export default ${iconNameJson}`)
 
-    return mergeTrees([addonTree, iconNameTree], {overwrite: true})
+    let BabelTranspiler = require('broccoli-babel-transpiler')
+    let output = new BabelTranspiler(iconNameTree, this.app.options.babel)
+
+    return mergeTrees([addonTree, output], {overwrite: true})
   },
   /**
    * Override of `treeForPublic` is to merge the

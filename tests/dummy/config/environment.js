@@ -12,6 +12,10 @@ module.exports = function (environment) {
       },
       iconPacks: {
         inline: true
+      },
+      EXTEND_PROTOTYPES: {
+        // Prevent Ember Data from overriding Date.parse.
+        Date: false
       }
     },
     APP: {

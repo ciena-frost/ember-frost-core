@@ -1,5 +1,6 @@
 import Ember from 'ember'
-import iconPacks from 'ember-frost-core/icon-packs'
+// import iconPacks from 'modules/ember-frost-core/icon-packs'
+import iconPacks from 'modules/ember-frost-core/icon-packs'
 
 const {Controller, computed} = Ember
 
