@@ -20,3 +20,4 @@ coverage.json
 .DS_Store
 /typings/*
 .vscode
+**.ember-try
