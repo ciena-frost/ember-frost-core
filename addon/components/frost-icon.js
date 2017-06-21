@@ -6,7 +6,7 @@ import Component from './frost-component'
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
-const {deprecate, get} = Ember
+const {deprecate} = Ember
 
 export default Component.extend({
 
