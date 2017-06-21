@@ -376,8 +376,11 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
    * as if we used the original link-to interface.
    * @param {Object} newAttrs - incoming properties
    */
-  didReceiveAttrs ({newAttrs}) {
-    let params = getAttr(newAttrs, 'params')
+  didReceiveAttrs () {
+    let params = getAttr(this, 'params')
+
+    // This function is modifying the params so We setup the routing only after fetching the exiting params.
+    this._setupRouting()
 
     // Ugly hack to get access to hasBlock so that we can determine if the text
     // is coming from the block
@@ -390,12 +393,10 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
 
       // Handle the 'text' property being passed using positional params / block
       // mixed with named properties
-      if (!hasBlock && params.length === 1 && isNone(newAttrs.text)) {
-        newAttrs['text'] = params[0]
+      if (!hasBlock && params.length === 1 && isNone(this.get('text'))) {
+        this.set('text', params[0])
       }
     }
-
-    const newAttrsKeys = Object.keys(newAttrs)
 
     const hasNamedProperties = [
       'options',
@@ -406,10 +407,13 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
       'routes',
       'text'
     ]
-      .some(namedPropertyKey => newAttrsKeys.includes(namedPropertyKey))
+      .some(namedPropertyKey => {
+        const value = this.get(namedPropertyKey)
+        return !isEmpty(value) || isPresent(value)
+      })
 
     if (!isArray(params) || hasNamedProperties) {
-      const params = getParams(newAttrs)
+      const params = getParams(this)
 
       this.set('params', params)
     }
@@ -422,7 +426,6 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
 
   init () {
     this._super(...arguments)
-    this._setupRouting()
   }
 
   // == Actions ===============================================================

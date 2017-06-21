@@ -57,8 +57,8 @@ export default Component.extend({
 
   // == Lifecycle Hooks =======================================================
 
-  didReceiveAttrs (attrs) {
-    const icon = get(attrs, 'newAttrs.icon.value') || ''
+  didReceiveAttrs () {
+    const icon = this.get('icon') || ''
 
     deprecate(
       'nested icon paths have been deprecated in favor of flat icon packs',

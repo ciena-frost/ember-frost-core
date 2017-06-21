@@ -364,13 +364,13 @@ export default Component.extend({
     }
   },
 
-  didReceiveAttrs (attrs) {
+  didReceiveAttrs () {
     this._super(...arguments)
 
     const props = {}
 
-    let newSelectedValue = get(attrs, 'newAttrs.selectedValue.value')
-    let oldSelectedValue = get(attrs, 'oldAttrs.selectedValue.value')
+    let newSelectedValue = this.get('selectedValue')
+    let oldSelectedValue = this.get('_oldSelectedValue')
 
     // If user provided a new selected value and it doesn't match the internal
     // selected value then update internal selected value
@@ -384,6 +384,8 @@ export default Component.extend({
     if (Object.keys(props).length !== 0) {
       this.setProperties(props)
     }
+
+    this.set('_oldSelectedValue', newSelectedValue)
   },
 
   // == Actions ===============================================================
