@@ -86,6 +86,10 @@ function defaultBabel (options) {
 module.exports = {
   name: 'ember-frost-core',
 
+  _getAddonOptions: function () {
+    return (this.parent && this.parent.options) || (this.app && this.app.options) || {}
+  },
+
   included: function (app) {
     // Addons - see: https://github.com/ember-cli/ember-cli/issues/3718
     if (typeof app.import !== 'function' && app.app) {
@@ -169,8 +173,10 @@ module.exports = {
     const iconNameJson = JSON.stringify(iconNames, null, 2)
     const iconNameTree = writeFile('modules/ember-frost-core/icon-packs.js', `export default ${iconNameJson}`)
 
+    // The transpiling was done on the output of `treeForAddon` < `ember-cli@2.12.0`. We need to manually transpile
+    // for >= `embe-cli@2.12.0` - @dafortin 2017.06.21
     let BabelTranspiler = require('broccoli-babel-transpiler')
-    let output = new BabelTranspiler(iconNameTree, this.app.options.babel)
+    let output = new BabelTranspiler(iconNameTree, this._getAddonOptions().babel)
 
     return mergeTrees([addonTree, output], {overwrite: true})
   },
@@ -244,7 +250,7 @@ module.exports = {
    */
   postprocessTree (type, tree) {
     if (type === 'css') {
-      const options = this.app.options.autoprefixer || {
+      const options = this._getAddonOptions().autoprefixer || {
         browsers: ['last 2 versions']
       }
       tree = autoprefixer(tree, options)
