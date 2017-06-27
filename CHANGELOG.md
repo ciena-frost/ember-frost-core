@@ -1,3 +1,7 @@
+# 1.22.5 (2017-06-27)
+* Added x-axis scroll event handlers to frost-scroll
+* Added tests for new scroll events
+
 # 1.22.4 (2017-06-19)
 
 Added style rules for the hover state of the frost-toggle button switch. The switch will now turn a light blue color when the user mouses over the toggle. If the toggle is disabled, the switch will not change color. 
