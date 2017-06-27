@@ -53,6 +53,18 @@ export default Component.extend({
       run.debounce(this, this.onScrollYStart, debouncePeriod, true)
     }
 
+    this._scrollXHandler = () => {
+      run.debounce(this, this.onScrollX, debouncePeriod, true)
+    }
+
+    this._scrollRightHandler = () => {
+      run.debounce(this, this.onScrollRight, debouncePeriod, true)
+    }
+
+    this._scrollLeftHandler = () => {
+      run.debounce(this, this.onScrollLeft, debouncePeriod, true)
+    }
+
     if (typeOf(this.onScrollUp) === 'function') {
       this.$().on('ps-scroll-up', this._scrollUpHandler)
     }
@@ -67,6 +79,18 @@ export default Component.extend({
 
     if (typeOf(this.onScrollYEnd) === 'function') {
       this.$().on('ps-y-reach-end', this._scrollYEndHandler)
+    }
+
+    if (typeOf(this.onScrollX) === 'function') {
+      this.$().on('ps-scroll-x', this._scrollXHandler)
+    }
+
+    if (typeOf(this.onScrollRight) === 'function') {
+      this.$().on('ps-scroll-right', this._scrollRightHandler)
+    }
+
+    if (typeOf(this.onScrollLeft) === 'function') {
+      this.$().on('ps-scroll-left', this._scrollLeftHandler)
     }
 
     if (typeOf(this['on-scroll-y-end']) === 'function') {
@@ -104,6 +128,18 @@ export default Component.extend({
 
     if (typeOf(this.onScrollYEnd) === 'function') {
       this.$().off('ps-y-reach-end', this._scrollYEndHandler)
+    }
+
+    if (typeOf(this.onScrollX) === 'function') {
+      this.$().off('ps-scroll-x', this._scrollXHandler)
+    }
+
+    if (typeOf(this.onScrollRight) === 'function') {
+      this.$().off('ps-scroll-right', this._scrollRightHandler)
+    }
+
+    if (typeOf(this.onScrollLeft) === 'function') {
+      this.$().off('ps-scroll-left', this._scrollLeftHandler)
     }
   },
   /* eslint-enable complexity */
