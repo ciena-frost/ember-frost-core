@@ -121,7 +121,9 @@ export default Component.extend({
     this._super(...arguments)
     this._unregisterEvents()
   },
-
+  didRender () {
+    window.Ps.update(this.$()[0])
+  },
   // == Actions ===============================================================
 
   actions: {
