@@ -89,6 +89,66 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
+  it('onScrollX closure action is called', function () {
+    const externalActionSpy = sinon.spy()
+
+    this.on('externalAction', externalActionSpy)
+
+    this.render(hbs`
+      {{frost-scroll
+        hook='myScroll'
+        onScrollX=(action 'externalAction')
+      }}
+    `)
+
+    this.$('.frost-scroll').trigger('ps-scroll-x')
+
+    expect(
+      externalActionSpy.called,
+      'onScrollX closure action called on ps-scroll-x'
+    ).to.equal(true)
+  })
+
+  it('onScrollRight closure action is called', function () {
+    const externalActionSpy = sinon.spy()
+
+    this.on('externalAction', externalActionSpy)
+
+    this.render(hbs`
+      {{frost-scroll
+        hook='myScroll'
+        onScrollRight=(action 'externalAction')
+      }}
+    `)
+
+    this.$('.frost-scroll').trigger('ps-scroll-right')
+
+    expect(
+      externalActionSpy.called,
+      'onScrollRight closure action called on ps-scroll-right'
+    ).to.equal(true)
+  })
+
+  it('onScrollLeft closure action is called', function () {
+    const externalActionSpy = sinon.spy()
+
+    this.on('externalAction', externalActionSpy)
+
+    this.render(hbs`
+      {{frost-scroll
+        hook='myScroll'
+        onScrollLeft=(action 'externalAction')
+      }}
+    `)
+
+    this.$('.frost-scroll').trigger('ps-scroll-left')
+
+    expect(
+      externalActionSpy.called,
+      'onScrollLeft closure action called on ps-scroll-left'
+    ).to.equal(true)
+  })
+
   it('renders using spread', function () {
     const hook = 'my-hook'
 

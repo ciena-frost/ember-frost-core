@@ -34,6 +34,27 @@ export default Controller.extend({
       })
     },
 
+    onScrollX () {
+      this.get('notifications').success('Scrolled x axis', {
+        autoClear: true,
+        clearDuration: 2000
+      })
+    },
+
+    onScrollRight () {
+      this.get('notifications').success('Scrolled right', {
+        autoClear: true,
+        clearDuration: 2000
+      })
+    },
+
+    onScrollLeft () {
+      this.get('notifications').success('Scrolled left', {
+        autoClear: true,
+        clearDuration: 2000
+      })
+    },
+
     yEndReached () {
       this.get('notifications').success('Scroll reached end of y axis', {
         autoClear: true,
@@ -43,4 +64,3 @@ export default Controller.extend({
   }
 })
 // END-SNIPPET scroll-controller
-
