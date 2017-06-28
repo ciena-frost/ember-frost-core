@@ -1,3 +1,10 @@
+# 1.23.0 (2017-06-28)
+ * fix frost-scroll content size being reduced by calling perfect-scrollbar `update` when renders
+   * Fixes BPSO-54864
+
+
+
+
 # 1.22.5 (2017-06-27)
 * Added x-axis scroll event handlers to frost-scroll
 * Added tests for new scroll events
