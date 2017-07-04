@@ -19,7 +19,7 @@ describe(test.label, function () {
     })
   })
 
-  it('extends the commone frost component', function () {
+  it('extends the common frost component', function () {
     expect(
       component instanceof Component,
       'is instance of Frost Component'
@@ -140,6 +140,96 @@ describe(test.label, function () {
     expect(
       spyOff.calledWith("ps-y-reach-end"), // eslint-disable-line
       'off() was called with "ps-y-reach-end" event'
+    ).to.equal(true)
+
+    $.fn.on.restore()
+    $.fn.off.restore()
+  })
+
+  it('registers and unregisters "ps-scroll-x" event handlers', function () {
+    const spyOn = sinon.spy($.fn, 'on')
+    const spyOff = sinon.spy($.fn, 'off')
+
+    component.set('onScrollX', function () { return })
+
+    this.render()
+
+    spyOn.reset()
+
+    component.trigger('didInsertElement')
+
+    expect(
+      spyOn.calledWith("ps-scroll-x"), // eslint-disable-line
+      'on() was called with "ps-scroll-x" event'
+    ).to.equal(true)
+
+    spyOff.reset()
+
+    component.trigger('willDestroyElement')
+
+    expect(
+      spyOff.calledWith("ps-scroll-x"), // eslint-disable-line
+      'off() was called with "ps-scroll-x" event'
+    ).to.equal(true)
+
+    $.fn.on.restore()
+    $.fn.off.restore()
+  })
+
+  it('registers and unregisters "ps-scroll-right" event handlers', function () {
+    const spyOn = sinon.spy($.fn, 'on')
+    const spyOff = sinon.spy($.fn, 'off')
+
+    component.set('onScrollRight', function () { return })
+
+    this.render()
+
+    spyOn.reset()
+
+    component.trigger('didInsertElement')
+
+    expect(
+      spyOn.calledWith("ps-scroll-right"), // eslint-disable-line
+      'on() was called with "ps-scroll-right" event'
+    ).to.equal(true)
+
+    spyOff.reset()
+
+    component.trigger('willDestroyElement')
+
+    expect(
+      spyOff.calledWith("ps-scroll-right"), // eslint-disable-line
+      'off() was called with "ps-scroll-right" event'
+    ).to.equal(true)
+
+    $.fn.on.restore()
+    $.fn.off.restore()
+  })
+
+  it('registers and unregisters "ps-scroll-left" event handlers', function () {
+    const spyOn = sinon.spy($.fn, 'on')
+    const spyOff = sinon.spy($.fn, 'off')
+
+    component.set('onScrollLeft', function () { return })
+
+    this.render()
+
+    spyOn.reset()
+
+    component.trigger('didInsertElement')
+
+    expect(
+      spyOn.calledWith("ps-scroll-left"), // eslint-disable-line
+      'on() was called with "ps-scroll-left" event'
+    ).to.equal(true)
+
+    spyOff.reset()
+
+    component.trigger('willDestroyElement')
+
+    expect(
+      spyOff.calledWith("ps-scroll-left"), // eslint-disable-line
+      'off() was called with "ps-scroll-left" event'
     ).to.equal(true)
 
     $.fn.on.restore()
