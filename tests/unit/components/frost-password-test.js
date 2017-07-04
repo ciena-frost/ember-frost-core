@@ -1,11 +1,10 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {run} = Ember
-import {unit} from 'ember-test-utils/test-support/setup-component-test'
-import {beforeEach, describe, it} from 'mocha'
-
 import Component from 'ember-frost-core/components/frost-component'
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
+import {unit} from 'ember-test-utils/test-support/setup-component-test'
+import {beforeEach, describe, it} from 'mocha'
 
 const test = unit('frost-password')
 describe(test.label, function () {
