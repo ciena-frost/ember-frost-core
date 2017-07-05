@@ -1,3 +1,6 @@
+# 1.23.1 (2017-07-05)
+* **Upgrade** to ember 2.12.3
+
 # 1.23.0 (2017-06-28)
  * fix frost-scroll content size being reduced by calling perfect-scrollbar `update` when renders
    * Fixes BPSO-54864
