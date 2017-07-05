@@ -1,9 +1,9 @@
 /* eslint-env node */
 /* global require, module */
-const EmberApp = require('ember-cli/lib/broccoli/ember-addon')
+const EmberAddon = require('ember-cli/lib/broccoli/ember-addon')
 
 module.exports = function (defaults) {
-  var app = new EmberApp(defaults, {
+  var app = new EmberAddon(defaults, {
     babel: {
       optional: ['es7.decorators']
     },

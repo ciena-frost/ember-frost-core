@@ -1,5 +1,4 @@
 /* eslint-env node */
-/* globals module */
 
 // 'use strict'
 
