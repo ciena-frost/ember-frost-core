@@ -1,10 +1,9 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {run} = Ember
+import Component from 'ember-frost-core/components/frost-component'
 import {unit} from 'ember-test-utils/test-support/setup-component-test'
 import {beforeEach, describe, it} from 'mocha'
-
-import Component from 'ember-frost-core/components/frost-component'
 
 const test = unit('frost-radio-button')
 describe(test.label, function () {

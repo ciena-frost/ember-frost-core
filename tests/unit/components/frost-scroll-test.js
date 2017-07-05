@@ -1,11 +1,10 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {$} = Ember
+import Component from 'ember-frost-core/components/frost-component'
 import {unit} from 'ember-test-utils/test-support/setup-component-test'
 import {beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
-
-import Component from 'ember-frost-core/components/frost-component'
 
 const test = unit('frost-scroll')
 describe(test.label, function () {

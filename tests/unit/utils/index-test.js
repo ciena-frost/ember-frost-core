@@ -3,13 +3,12 @@
  */
 
 import {expect} from 'chai'
-import {describe, it} from 'mocha'
-
 import {utils} from 'ember-frost-core'
 import events from 'ember-frost-core/utils/events'
 import {cloneEvent} from 'ember-frost-core/utils/index'
 import keyCodes from 'ember-frost-core/utils/key-codes'
 import windowUtils from 'ember-frost-core/utils/window'
+import {describe, it} from 'mocha'
 
 describe('Unit / util exports', function () {
   it('should export events', function () {

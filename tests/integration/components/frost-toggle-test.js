@@ -1,12 +1,20 @@
 import {expect} from 'chai'
 import Ember from 'ember'
-const {ViewUtils} = Ember
+const {Test, ViewUtils} = Ember
 import {$hook} from 'ember-hook'
 import wait from 'ember-test-helpers/wait'
 import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
+
+// Hack to fix test failing when using `throw` - @dafortin 2017.06.21
+// Issue introduced by https://github.com/emberjs/ember.js/pull/14898
+Test.adapter = Test.MochaAdapter.extend({
+  exception (error) {
+    throw error
+  }
+}).create()
 
 /**
  * Helper to streamline tests for onToggle callback

@@ -1,12 +1,11 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {Component, Handlebars} = Ember
+import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'
 import {beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
-
-import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 
 const test = integration('frost-events')
 describe(test.label, function () {

@@ -464,15 +464,15 @@ export default Component.extend({
 
   // == Lifecycle Hooks =======================================================
 
-  didReceiveAttrs (attrs) {
-    const $element = get(attrs, 'newAttrs.$element.value')
+  didReceiveAttrs () {
+    const $element = this.get('$element')
     let props = {}
 
     if ($element) {
       props = merge(props, this._updatePosition($element))
     }
 
-    const receivedHook = get(attrs, 'newAttrs.receivedHook.value')
+    const receivedHook = this.get('receivedHook')
 
     if (receivedHook && receivedHook !== this.get('hook')) {
       deprecate(
