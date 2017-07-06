@@ -114,10 +114,6 @@ module.exports = {
   },
 
   init: function (app) {
-    // Determine if the ember version is >= 2.12
-    const checker = new VersionChecker(this)
-    this.isEmberCliAbove12 = checker.for('ember-cli').satisfies('>= 2.12.0')
-
     this.options = this.options || {}
     defaultBabel(this.options)
 
@@ -180,8 +176,10 @@ module.exports = {
 
     // The transpiling was done on the output of `treeForAddon` < `ember-cli@2.12.0`. We need to manually transpile
     // for >= `embe-cli@2.12.0` - @dafortin 2017.06.21
+    const checker = new VersionChecker(this)
+    const isEmberCliAbove12 = checker.for('ember-cli').satisfies('>= 2.12.0')
     let output = iconNameTree
-    if (this.isEmberCliAbove12) {
+    if (isEmberCliAbove12) {
       const addonOptions = this._getAddonOptions()
       if (addonOptions && addonOptions.babel) {
         const BabelTranspiler = require('broccoli-babel-transpiler')
