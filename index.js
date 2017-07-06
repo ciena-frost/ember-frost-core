@@ -10,6 +10,7 @@ const mergeTrees = require('broccoli-merge-trees')
 const SVGStore = require('broccoli-svgstore')
 const fs = require('fs')
 const path = require('path')
+const VersionChecker = require('ember-cli-version-checker')
 
 /**
  * Creates an object composed of the object properties predicate returns truthy for. The predicate is invoked with two arguments: (value, key).
@@ -175,8 +176,16 @@ module.exports = {
 
     // The transpiling was done on the output of `treeForAddon` < `ember-cli@2.12.0`. We need to manually transpile
     // for >= `embe-cli@2.12.0` - @dafortin 2017.06.21
-    let BabelTranspiler = require('broccoli-babel-transpiler')
-    let output = new BabelTranspiler(iconNameTree, this._getAddonOptions().babel)
+    const checker = new VersionChecker(this)
+    const isEmberCliAbove12 = checker.for('ember-cli').satisfies('>= 2.12.0')
+    let output = iconNameTree
+    if (isEmberCliAbove12) {
+      const addonOptions = this._getAddonOptions()
+      if (addonOptions && addonOptions.babel) {
+        const BabelTranspiler = require('broccoli-babel-transpiler')
+        output = new BabelTranspiler(iconNameTree, addonOptions.babel)
+      }
+    }
 
     return mergeTrees([addonTree, output], {overwrite: true})
   },
