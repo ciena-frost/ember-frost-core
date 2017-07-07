@@ -1,3 +1,7 @@
+# 1.23.2 (2017-07-07)
+* **Fixed** transpilation issue for ember-cli < 12.0.0
+
+
 # 1.23.1 (2017-07-05)
 * **Upgrade** to ember 2.12.3
 
