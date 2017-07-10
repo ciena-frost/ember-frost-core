@@ -1,3 +1,9 @@
+# 1.23.3 (2017-07-10)
+
+* **Fixed** tests
+* **Removed** `ember-release` from `.travis.yml`
+
+
 # 1.23.2 (2017-07-07)
 * **Fixed** transpilation issue for ember-cli < 12.0.0
 
