@@ -1,3 +1,9 @@
+# 1.23.4 (2017-07-14)
+
+* update svg foreverbody
+  * Fixes issues with `linearGradients` rendering
+
+
 # 1.23.3 (2017-07-10)
 
 * **Fixed** tests
