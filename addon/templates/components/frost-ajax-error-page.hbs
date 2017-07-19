@@ -1,0 +1,22 @@
+<div class="{{css}}-description" data-test={{hook (concat hookPrefix '-description')}}>
+  {{description}}
+</div>
+<div class="{{css}}-suggestion" data-test={{hook (concat hookPrefix '-suggestion')}}>
+  {{suggestion}}
+</div>
+<div class="{{css}}-http-error" data-test={{hook (concat hookPrefix '-http-error')}}>
+  Error {{errorCode}} - {{errorTitle}}
+</div>
+<div class="{{css}}-message" data-test={{hook (concat hookPrefix '-message')}}>
+  {{errorMessage}}
+</div>
+{{#frost-expand
+  class=(concat css "-expand")
+  hook=(concat hookPrefix '-expand')
+  expanded=showDetails
+  onChange=(action 'onChangeHandler')
+  expandLabel="Show details"
+  collapseLabel="Hide details"
+}}
+  <div class="frost-ajax-error-page-details" data-test={{hook (concat hookPrefix '-details')}}>{{errorDetails}}</div>
+{{/frost-expand}}

@@ -1,6 +1,8 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {$, run} = Ember
+import {keyCodes} from 'ember-frost-core/utils'
+const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
 import {$hook} from 'ember-hook'
 import wait from 'ember-test-helpers/wait'
 import {integration} from 'ember-test-utils/test-support/setup-component-test'
@@ -10,8 +12,6 @@ import sinon from 'sinon'
 
 import {expectSelectWithState, filterSelect} from 'dummy/tests/helpers/ember-frost-core'
 import {close, open, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
-import {keyCodes} from 'ember-frost-core/utils'
-const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
 
 /**
  * Blur element (ensuring it has focus first)
@@ -122,7 +122,7 @@ describe(test.label, function () {
 
       it('if no width is specified, and container is small', function () {
         this.$().css('width', '100px')
-        const actual = this.$('.frost-select')[0].getBoundingClientRect().width
+        const actual = Math.floor(this.$('.frost-select')[0].getBoundingClientRect().width)
         expect(actual, 'it has the minimum width').to.equal(minimumWidth)
       })
 
@@ -134,7 +134,7 @@ describe(test.label, function () {
         this.$().css('width', `${specifiedWidth}px`)
 
         // get the actual, factual horizontal space reserved in the layout for this element
-        const actual = this.$('.frost-select')[0].getBoundingClientRect().width
+        const actual = Math.floor(this.$('.frost-select')[0].getBoundingClientRect().width)
 
         expect(actual, 'it respects max-width being set').to.equal(maximumWidth)
       })

@@ -1,0 +1,28 @@
+<div class="{{css}}-label"  data-test={{hook (concat hookPrefix '-label')}} onClick={{action '_onClick'}}>
+  {{frost-icon
+    hook=(concat hookPrefix '-label-icon')
+    pack='frost'
+    icon='chevron'
+  }}
+  <div class="{{css}}-label-text" data-test={{hook (concat hookPrefix '-label-text')}}>
+    {{#if expanded}}
+      {{collapseLabel}}
+    {{else}}
+      {{expandLabel}}
+    {{/if}}
+  </div>
+</div>
+{{#frost-scroll
+  class=(concat css "-scroll")
+  hook=(concat hookPrefix '-scroll')
+}}
+  <div class="{{css}}-content" data-test={{hook (concat hookPrefix '-content')}}>
+    {{#if hasBlock}}
+      {{yield}}
+    {{else if isComponentContent}}
+      {{component content}}
+    {{else}}
+      {{content}}
+    {{/if}}
+  </div>
+{{/frost-scroll}}

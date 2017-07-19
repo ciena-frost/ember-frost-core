@@ -1,10 +1,9 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {$} = Ember
+import {trimDataToFit, trimLongDataInElement} from 'ember-frost-core/utils/text'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
-
-import {trimDataToFit, trimLongDataInElement} from 'ember-frost-core/utils/text'
 
 describe('Unit / Utils / text', () => {
   let sandbox

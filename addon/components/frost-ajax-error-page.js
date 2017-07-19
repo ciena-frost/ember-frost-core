@@ -1,12 +1,9 @@
 /**
- * Component definition for the <%= dasherizedModuleName %> component
+ * Component definition for the frost-ajax-error-page component
  */
-
-import computed, {readOnly} from 'ember-computed-decorators'
-import {Component} from 'ember-frost-core'
+import layout from '../templates/components/frost-ajax-error-page'
+import Component from './frost-component'
 import {PropTypes} from 'ember-prop-types'
-
-import layout from '<%= templatePath %>'
 
 export default Component.extend({
   // == Dependencies ==========================================================
@@ -24,7 +21,12 @@ export default Component.extend({
    */
   propTypes: {
     // options
-
+    description: PropTypes.string.isRequired,
+    suggestion: PropTypes.string,
+    errorCode: PropTypes.number.isRequired,
+    errorTitle: PropTypes.string.isRequired,
+    errorMessage: PropTypes.string.isRequired,
+    errorDetails: PropTypes.string.isRequired
     // state
   },
 
@@ -32,27 +34,13 @@ export default Component.extend({
   getDefaultProps () {
     return {
       // options
-
+      suggestion: '',
       // state
+      showDetails: false
     }
   },
 
   // == Computed Properties ===================================================
-
-  @readOnly
-  @computed('css')
-  /**
-   * A pretty silly computed property just as an example of one
-   * it appends '-' to the css base
-   *
-   * NOTE: this computed property is only here as an examle and should be removed/replaced with a real one
-   *
-   * @param {String} css - the base css class for this component (the component name)
-   * @returns {String} a css prefix suitable for use within the template
-   */
-  cssPrefix (css) {
-    return `${css}-`
-  },
 
   // == Functions =============================================================
 
@@ -63,5 +51,8 @@ export default Component.extend({
   // == Actions ===============================================================
 
   actions: {
+    onChangeHandler (expanded) {
+      this.set('showDetails', expanded)
+    }
   }
 })

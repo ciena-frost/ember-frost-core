@@ -1,4 +1,4 @@
-/* globals module */
+/* eslint-env node */
 
 // 'use strict'
 
@@ -10,6 +10,7 @@ const mergeTrees = require('broccoli-merge-trees')
 const SVGStore = require('broccoli-svgstore')
 const fs = require('fs')
 const path = require('path')
+const VersionChecker = require('ember-cli-version-checker')
 
 /**
  * Creates an object composed of the object properties predicate returns truthy for. The predicate is invoked with two arguments: (value, key).
@@ -85,6 +86,10 @@ function defaultBabel (options) {
 
 module.exports = {
   name: 'ember-frost-core',
+
+  _getAddonOptions: function () {
+    return (this.parent && this.parent.options) || (this.app && this.app.options) || {}
+  },
 
   included: function (app) {
     // Addons - see: https://github.com/ember-cli/ember-cli/issues/3718
@@ -169,7 +174,20 @@ module.exports = {
     const iconNameJson = JSON.stringify(iconNames, null, 2)
     const iconNameTree = writeFile('modules/ember-frost-core/icon-packs.js', `export default ${iconNameJson}`)
 
-    return mergeTrees([addonTree, iconNameTree], {overwrite: true})
+    // The transpiling was done on the output of `treeForAddon` < `ember-cli@2.12.0`. We need to manually transpile
+    // for >= `embe-cli@2.12.0` - @dafortin 2017.06.21
+    const checker = new VersionChecker(this)
+    const isEmberCliAbove12 = checker.for('ember-cli').satisfies('>= 2.12.0')
+    let output = iconNameTree
+    if (isEmberCliAbove12) {
+      const addonOptions = this._getAddonOptions()
+      if (addonOptions && addonOptions.babel) {
+        const BabelTranspiler = require('broccoli-babel-transpiler')
+        output = new BabelTranspiler(iconNameTree, addonOptions.babel)
+      }
+    }
+
+    return mergeTrees([addonTree, output], {overwrite: true})
   },
   /**
    * Override of `treeForPublic` is to merge the
@@ -241,7 +259,7 @@ module.exports = {
    */
   postprocessTree (type, tree) {
     if (type === 'css') {
-      const options = this.app.options.autoprefixer || {
+      const options = this._getAddonOptions().autoprefixer || {
         browsers: ['last 2 versions']
       }
       tree = autoprefixer(tree, options)

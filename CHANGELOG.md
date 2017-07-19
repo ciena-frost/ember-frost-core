@@ -1,3 +1,86 @@
+# 1.23.5 (2017-07-19)
+
+* **Added** Indigo, pink and lilac-4 to the color scheme
+
+
+# 1.23.4 (2017-07-14)
+
+* update svg foreverbody
+  * Fixes issues with `linearGradients` rendering
+
+
+# 1.23.3 (2017-07-10)
+
+* **Fixed** tests
+* **Removed** `ember-release` from `.travis.yml`
+
+
+# 1.23.2 (2017-07-07)
+* **Fixed** transpilation issue for ember-cli < 12.0.0
+
+
+# 1.23.1 (2017-07-05)
+* **Upgrade** to ember 2.12.3
+
+# 1.23.0 (2017-06-28)
+ * fix frost-scroll content size being reduced by calling perfect-scrollbar `update` when renders
+   * Fixes BPSO-54864
+
+
+
+
+# 1.22.5 (2017-06-27)
+* Added x-axis scroll event handlers to frost-scroll
+* Added tests for new scroll events
+
+# 1.22.4 (2017-06-19)
+
+Added style rules for the hover state of the frost-toggle button switch. The switch will now turn a light blue color when the user mouses over the toggle. If the toggle is disabled, the switch will not change color. 
+
+# 1.22.3 (2017-06-05)
+* **Removed** unneeded dependencies left over from when blueprints were moved to another repo: https://github.com/ciena-frost/ember-frost-core/pull/457/files
+* **Updated** ember-try config to correct syntax for `default`.
+
+# 1.22.2 (2017-06-01)
+  * Fix select search by escaping regex special characters. Fixes https://github.com/ciena-frost/ember-frost-core/issues/455
+
+# 1.22.1 (2017-05-31)
+* **Updated** the lgrey colours
+
+
+# 1.22.0 (2017-05-31)
+
+* **Added** `frost-expand` component and `frost-error` component
+
+
+# 1.21.3 (2017-05-30)
+
+ * **Moved** `ember-cli-frost-blueprints` from `dependencies` in `package.json` to being installed as a blueprint. It turns out that [`ember-cli` cheats w.r.t. `ember-cli-legacy-blueprints`](https://github.com/ember-cli/ember-cli/blob/v2.8.0/lib/models/project.js#L347) and so we can't follow that pattern (of just making it an `npm` dep). 
+
+# 1.21.2 (2017-05-30)
+
+* **Updated** `ember-cli-forst-blueprints` to `1.x`
+
+
+# 1.21.1 (2017-05-26)
+* Set notification z-index to appear above modals
+
+
+# 1.21.0 (2017-05-26)
+* **Removed** blueprints for generating tests, they are now provided by `ember-cli-frost-blueprints`
+* **Added** `ember-cli-frost-blueprints` to the `dependencies` so that the same blueprints are still available to consumers of this addon. 
+* **Fixed** [#374](https://github.com/ciena-frost/ember-frost-core/issues/374) by doing the above. 
+
+# 1.20.1 (2017-05-17)
+* **Updated** `ember` from `bower.json` to `ember-source` from `package.json`
+* **Updated** ember-try config matrix for `ember-source`
+* **Updated** `ember-cli-shims` to the npm package instead of the bower package
+* **Updated** path to the test resolver
+* **Updated** path to `ember-template-compiler` needed for `frost-events-tests.js` integration tests
+* **Removed** unneeded mocha packages from bower that are now included
+
+
+
 # 1.20.0 (2017-05-11)
 
 * **Added** missing export of `windowUtils` inside `utils` that's exported from `addon/index.js`. Consumers can now import the `windowUtils` without needing to know the   path in the filesystem:

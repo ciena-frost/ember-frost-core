@@ -1,6 +1,8 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {$, run} = Ember
+import keyCodes from 'ember-frost-core/utils/key-codes'
+const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
 import {$hook, initialize as initializeHook} from 'ember-hook'
 import wait from 'ember-test-helpers/wait'
 import {integration} from 'ember-test-utils/test-support/setup-component-test'
@@ -10,8 +12,6 @@ import sinon from 'sinon'
 
 import {expectSelectWithState} from 'dummy/tests/helpers/ember-frost-core'
 import {open, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
-import keyCodes from 'ember-frost-core/utils/key-codes'
-const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
 
 /**
  * Blur element (ensuring it has focus first)

@@ -6,7 +6,7 @@ import Component from './frost-component'
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
-const {deprecate, get} = Ember
+const {deprecate} = Ember
 
 export default Component.extend({
 
@@ -57,8 +57,8 @@ export default Component.extend({
 
   // == Lifecycle Hooks =======================================================
 
-  didReceiveAttrs (attrs) {
-    const icon = get(attrs, 'newAttrs.icon.value') || ''
+  didReceiveAttrs () {
+    const icon = this.get('icon') || ''
 
     deprecate(
       'nested icon paths have been deprecated in favor of flat icon packs',

@@ -1,15 +1,14 @@
 import {expect} from 'chai'
 import Ember from 'ember'
 const {Logger} = Ember
+import {stubRoutingService} from 'ember-frost-core/test-support/frost-link'
+import windowUtils from 'ember-frost-core/utils/window'
 import {$hook} from 'ember-hook'
 import wait from 'ember-test-helpers/wait'
 import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
-
-import {stubRoutingService} from 'ember-frost-core/test-support/frost-link'
-import windowUtils from 'ember-frost-core/utils/window'
 
 const test = integration('frost-link')
 describe(test.label, function () {

@@ -1,0 +1,26 @@
+<div class='dummy-body error'>
+
+  <div class='section-title'>Error</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="demo">
+        {{! BEGIN-SNIPPET error }}
+        {{frost-ajax-error-page
+          hook='myError'
+          description='Service is currently unavailable.'
+          suggestion='Try again later.'
+          errorCode=500
+          errorTitle='Internal server error'
+          errorMessage='Failure to retrieve network elements'
+          errorDetails='Detailed information would be displayed here.'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <br>
+      <div class="snippet">
+        {{code-snippet name='error.hbs'}}
+      </div>
+    </div>
+  </div>
+</div>
