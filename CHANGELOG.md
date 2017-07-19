@@ -1,3 +1,8 @@
+# 1.23.5 (2017-07-19)
+
+* **Added** Indigo, pink and lilac-4 to the color scheme
+
+
 # 1.23.4 (2017-07-14)
 
 * update svg foreverbody
