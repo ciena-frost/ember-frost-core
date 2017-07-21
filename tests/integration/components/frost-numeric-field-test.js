@@ -17,7 +17,7 @@ describe.only(test.label, function () {
       this.render(hbs`
         {{frost-numeric-field
           hook='myNumericField'
-          value='2'
+          value=2
           type='number'
         }}
       `)
@@ -56,7 +56,7 @@ describe.only(test.label, function () {
     this.render(hbs`
         {{frost-numeric-field
           align=align
-          value='2'
+          value=2
           hook='myNumericField'
         }}
     `)
@@ -84,7 +84,7 @@ describe.only(test.label, function () {
   it('set disabled property', function () {
     this.render(hbs`
       {{frost-numeric-field
-        value='2'
+        value=2
         disabled=true
         hook='myNumericField'
       }}
@@ -103,7 +103,7 @@ describe.only(test.label, function () {
 
     this.render(hbs`
       {{frost-numeric-field
-        value='2'
+        value=2
         hook='myNumericField'
         maxlength=maxlength
       }}
@@ -122,7 +122,7 @@ describe.only(test.label, function () {
 
     this.render(hbs`
       {{frost-numeric-field
-        value='2'
+        value=2
         hook='myNumericField'
         placeholder=placeholder
       }}
@@ -155,7 +155,7 @@ describe.only(test.label, function () {
   it('set readonly property', function () {
     this.render(hbs`
       {{frost-numeric-field
-        value='2'
+        value=2
         hook='myNumericField'
         readonly=true
       }}
@@ -170,7 +170,7 @@ describe.only(test.label, function () {
   it('set required property', function () {
     this.render(hbs`
       {{frost-numeric-field
-        value='2'
+        value=2
         hook='myNumericField'
         required=true
       }}
@@ -185,7 +185,7 @@ describe.only(test.label, function () {
   it('set spellcheck property', function () {
     this.render(hbs`
       {{frost-numeric-field
-        value='2'
+        value=2
         hook='myNumericField'
         spellcheck=true
       }}
@@ -204,7 +204,7 @@ describe.only(test.label, function () {
 
     this.render(hbs`
       {{frost-numeric-field
-        value='2'
+        value=2
         hook='myNumericField'
         tabindex=tabindex
       }}
@@ -223,7 +223,7 @@ describe.only(test.label, function () {
 
     this.render(hbs`
       {{frost-numeric-field
-        value='2'
+        value=2
         hook='myNumericField'
         title=title
       }}
@@ -240,7 +240,7 @@ describe.only(test.label, function () {
       {{frost-numeric-field
         hook='myNumericField'
         isIncrementControlVisible=false
-        value='2'}}
+        value=2}}
     `)
 
     expect(this.$('input').hasClass('arrow-visible'),
@@ -253,7 +253,7 @@ describe.only(test.label, function () {
       {{frost-numeric-field
         hook='myNumericField'
         isIncrementControlVisible=true
-        value='2'}}
+        value=2}}
     `)
 
     expect(this.$('input').hasClass('arrow-visible'),
@@ -268,7 +268,7 @@ describe.only(test.label, function () {
       {{frost-numeric-field
         hook='myNumericField'
         allowNegativeValues=false
-        value='2'}}
+        value=2}}
     `)
     run(() => this.$('input').trigger({type: 'keypress', keyCode: 65, which: 65, charCode: 65}))
     expect($hook('myNumericField-error')).to.have.class('frost-numeric-select-error')
@@ -281,7 +281,7 @@ describe.only(test.label, function () {
       {{frost-numeric-field
         hook='myNumericField'
         allowNegativeValues=false
-        value='2'}}
+        value=2}}
     `)
     run(() => this.$('input').val('2.').trigger('input').blur())
     expect($hook('myNumericField-error')).to.have.class('frost-numeric-select-error')
@@ -305,7 +305,7 @@ describe.only(test.label, function () {
         hook='myNumericField'
         isIncrementControlVisible=true
         allowNegativeValues=false
-        value='0'}}
+        value=0}}
     `)
     expect($('.frost-numeric-field-minus-button')).to.have.prop('disabled', true)
     done()
