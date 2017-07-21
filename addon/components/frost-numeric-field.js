@@ -39,7 +39,10 @@ export default Component.extend(FrostEventsProxyMixin, {
     required: PropTypes.bool,
     selectionDirection: PropTypes.string,
     spellcheck: PropTypes.bool,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.number
+    ]).isRequired,
     title: PropTypes.string,
 
     _internalErrorMessage: PropTypes.string,
@@ -73,7 +76,7 @@ export default Component.extend(FrostEventsProxyMixin, {
 
   _isNumberKey (e) {
     const value = this.get('value')
-    let decimalExist = value && value.indexOf('.') >= 0
+    let decimalExist = value && String(value).indexOf('.') >= 0
     let charCode = e.which || e.keyCode
     if (this.get('allowNegativeValues')) {
       /* check if user can enter negative symbol*/
@@ -105,7 +108,7 @@ export default Component.extend(FrostEventsProxyMixin, {
   * @returns {number} - number of digits
  */
   _calculateDigit (value) {
-    return value.slice(value.indexOf('.') + 1).length
+    return String(value).slice(String(value).indexOf('.') + 1).length
   },
 
   /** format decimal
@@ -114,7 +117,7 @@ export default Component.extend(FrostEventsProxyMixin, {
  */
   _setCalculatedValue (value, numberOfDigit) {
     let formattedValue
-    if (this.get('value').indexOf('.') > -1) {
+    if (String(this.get('value')).indexOf('.') > -1) {
       formattedValue = value.toFixed(numberOfDigit).toString()
     } else {
       formattedValue = value.toString()
@@ -184,6 +187,7 @@ export default Component.extend(FrostEventsProxyMixin, {
 
   // == Lifecycle Hooks =======================================================
   init () {
+    // this.set('value', String(this.get('value')))
     this._super(...arguments)
     if (this.get('isHookEmbedded')) {
       this.set('hook', '')
