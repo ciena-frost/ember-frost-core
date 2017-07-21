@@ -187,7 +187,6 @@ export default Component.extend(FrostEventsProxyMixin, {
 
   // == Lifecycle Hooks =======================================================
   init () {
-    // this.set('value', String(this.get('value')))
     this._super(...arguments)
     if (this.get('isHookEmbedded')) {
       this.set('hook', '')
