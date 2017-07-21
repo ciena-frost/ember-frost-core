@@ -9,7 +9,7 @@ import {beforeEach, describe, it} from 'mocha'
 
 // import Component from 'ember-frost-core/components/frost-component'
 const test = integration('frost-numeric-field')
-describe.only(test.label, function () {
+describe(test.label, function () {
   test.setup()
 
   describe('when type is set to "number"', function () {
