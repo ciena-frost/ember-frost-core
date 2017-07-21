@@ -1,7 +1,7 @@
 import Ember from 'ember'
 const {$} = Ember
 
-const ctx = $('<canvas />').get(0).getContext('2d')
+const ctx = document.createElement('canvas').getContext('2d')
 
 /**
  * Get width of text for a specific font

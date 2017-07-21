@@ -1,3 +1,7 @@
+# 1.23.6 (2017-07-20)
+
+* The JQuery creation of a canvas element was behaving oddly in some apps on Firefox.
+
 # 1.23.5 (2017-07-19)
 
 * **Added** Indigo, pink and lilac-4 to the color scheme
