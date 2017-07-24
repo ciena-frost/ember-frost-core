@@ -13,8 +13,8 @@ describe(test.label, function () {
     `)
 
     expect(
-      this.$('.uil-ripple'),
-      'Has class "uil-ripple"'
+      this.$('.frost-icon-frost-loading-ripple'),
+      'Has class "frost-icon-frost-loading-ripple"'
     ).to.have.length(1)
   })
 
@@ -27,8 +27,8 @@ describe(test.label, function () {
     `)
 
     expect(
-      this.$('.uil-ring'),
-      'Has class "uil-ring"'
+      this.$('.frost-icon-frost-loading-ring'),
+      'Has class "frost-icon-frost-loading-ring"'
     ).to.have.length(1)
   })
 
@@ -43,8 +43,8 @@ describe(test.label, function () {
     `)
 
     expect(
-      this.$('.uil-ring'),
-      'Has class "uil-ring"'
+      this.$('.frost-icon-frost-loading-ring'),
+      'Has class "frost-icon-frost-loading-ring"'
     ).to.have.length(1)
   })
 })
