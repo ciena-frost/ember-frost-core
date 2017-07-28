@@ -13,7 +13,7 @@ module.exports = {
       },
       npm: {
         devDependencies: {
-          'source': null
+          'ember-source': null
         }
       }
     },
