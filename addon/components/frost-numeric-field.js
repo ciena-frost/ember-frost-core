@@ -176,10 +176,12 @@ export default Component.extend(FrostEventsProxyMixin, {
    * @returns {bool} {string} - if error message exist, return message, otherwise return false
    */
   _errorMessage (errorMessage, _internalErrorMessage) {
-    if (errorMessage) {
-      return errorMessage
-    } else if (isPresent(_internalErrorMessage)) {
-      return _internalErrorMessage
+    if (isPresent(_internalErrorMessage)) {
+      if (errorMessage) {
+        return errorMessage
+      } else {
+        return _internalErrorMessage
+      }
     } else {
       return false
     }

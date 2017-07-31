@@ -9,7 +9,7 @@ import {beforeEach, describe, it} from 'mocha'
 
 // import Component from 'ember-frost-core/components/frost-component'
 const test = integration('frost-numeric-field')
-describe(test.label, function () {
+describe.only(test.label, function () {
   test.setup()
 
   describe('when type is set to "number"', function () {
@@ -263,12 +263,25 @@ describe(test.label, function () {
     expect($hook('myNumericField-button')).to.have.class('frost-numeric-field-container')
   })
 
-  it('renders the errorMessage when enter invalid character', function (done) {
+  it('renders the errorMessage when user enters invalid character', function (done) {
     this.render(hbs`
       {{frost-numeric-field
         hook='myNumericField'
         allowNegativeValues=false
         value=2}}
+    `)
+    run(() => this.$('input').trigger({type: 'keypress', keyCode: 65, which: 65, charCode: 65}))
+    expect($hook('myNumericField-error')).to.have.class('frost-numeric-select-error')
+    done()
+  })
+
+  it('renders the custom errorMessage if it is defined', function (done) {
+    this.render(hbs`
+      {{frost-numeric-field
+        hook='myNumericField'
+        allowNegativeValues=false
+        value=2
+        errorMessage='Error!'}}
     `)
     run(() => this.$('input').trigger({type: 'keypress', keyCode: 65, which: 65, charCode: 65}))
     expect($hook('myNumericField-error')).to.have.class('frost-numeric-select-error')
