@@ -104,6 +104,6 @@
     "semver": "^5.3.0"
   },
   "pr-bumper": {
-    "coverage": 96.1
+    "coverage": 96.18
   }
 }
