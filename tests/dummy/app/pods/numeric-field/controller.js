@@ -3,7 +3,7 @@ const {Controller} = Ember
 
 export default Controller.extend({
   queryParams: ['value'],
-  value: 3,
+  value: '9',
 
   actions: {
     foo (event) {

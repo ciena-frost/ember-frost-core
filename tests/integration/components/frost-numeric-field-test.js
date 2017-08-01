@@ -17,7 +17,7 @@ describe(test.label, function () {
       this.render(hbs`
         {{frost-numeric-field
           hook='myNumericField'
-          value=2
+          value='2'
           type='number'
         }}
       `)
@@ -26,7 +26,7 @@ describe(test.label, function () {
     it('renders', function () {
       expect(this.$('.frost-numeric-field')).to.have.length(1)
     })
-    it('renders', function () {
+    it('renders default settings', function () {
       this.render(hbs`
           {{frost-numeric-field hook='myNumericField' value='2'}}
       `)
@@ -42,9 +42,24 @@ describe(test.label, function () {
       ).to.eql('text')
 
       expect(
+        this.$('input').prop('spellcheck'),
+        'spellcheck is set'
+      ).to.eql(false)
+
+      expect(
+        this.$('input').hasClass('autocorrect'),
+        'class "autocorrect" is set'
+      ).to.equal(false)
+
+      expect(
         this.$('input').hasClass('field-input'),
         'class "field-input" is set'
       ).to.equal(true)
+
+      expect(
+        this.$('input').hasClass('autocapitalize'),
+        'class "autocapitalize" is set'
+      ).to.equal(false)
     })
   })
 
@@ -56,7 +71,7 @@ describe(test.label, function () {
     this.render(hbs`
         {{frost-numeric-field
           align=align
-          value=2
+          value='2'
           hook='myNumericField'
         }}
     `)
@@ -84,7 +99,7 @@ describe(test.label, function () {
   it('set disabled property', function () {
     this.render(hbs`
       {{frost-numeric-field
-        value=2
+        value='2'
         disabled=true
         hook='myNumericField'
       }}
@@ -103,7 +118,7 @@ describe(test.label, function () {
 
     this.render(hbs`
       {{frost-numeric-field
-        value=2
+        value='2'
         hook='myNumericField'
         maxlength=maxlength
       }}
@@ -122,7 +137,7 @@ describe(test.label, function () {
 
     this.render(hbs`
       {{frost-numeric-field
-        value=2
+        value='2'
         hook='myNumericField'
         placeholder=placeholder
       }}
@@ -134,28 +149,10 @@ describe(test.label, function () {
     ).to.eql(placeholder)
   })
 
-  it('sets value property', function () {
-    const value = 'Testing'
-
-    this.set('value', value)
-
-    this.render(hbs`
-      {{frost-numeric-field
-        hook='myNumericField'
-        value=value
-      }}
-    `)
-
-    expect(
-      this.$('input').val(),
-      'value is set'
-    ).to.eql(value)
-  })
-
   it('set readonly property', function () {
     this.render(hbs`
       {{frost-numeric-field
-        value=2
+        value='2'
         hook='myNumericField'
         readonly=true
       }}
@@ -170,7 +167,7 @@ describe(test.label, function () {
   it('set required property', function () {
     this.render(hbs`
       {{frost-numeric-field
-        value=2
+        value='2'
         hook='myNumericField'
         required=true
       }}
@@ -185,7 +182,7 @@ describe(test.label, function () {
   it('set spellcheck property', function () {
     this.render(hbs`
       {{frost-numeric-field
-        value=2
+        value='2'
         hook='myNumericField'
         spellcheck=true
       }}
@@ -204,7 +201,7 @@ describe(test.label, function () {
 
     this.render(hbs`
       {{frost-numeric-field
-        value=2
+        value='2'
         hook='myNumericField'
         tabindex=tabindex
       }}
@@ -223,7 +220,7 @@ describe(test.label, function () {
 
     this.render(hbs`
       {{frost-numeric-field
-        value=2
+        value='2'
         hook='myNumericField'
         title=title
       }}
@@ -240,7 +237,7 @@ describe(test.label, function () {
       {{frost-numeric-field
         hook='myNumericField'
         isIncrementControlVisible=false
-        value=2}}
+        value='2'}}
     `)
 
     expect(this.$('input').hasClass('arrow-visible'),
@@ -253,7 +250,7 @@ describe(test.label, function () {
       {{frost-numeric-field
         hook='myNumericField'
         isIncrementControlVisible=true
-        value=2}}
+        value='2'}}
     `)
 
     expect(this.$('input').hasClass('arrow-visible'),
@@ -268,8 +265,9 @@ describe(test.label, function () {
       {{frost-numeric-field
         hook='myNumericField'
         allowNegativeValues=false
-        value=2}}
+        value='2'}}
     `)
+    expect($hook('myNumericField-error')).not.to.have.class('frost-numeric-select-error')
     run(() => this.$('input').trigger({type: 'keypress', keyCode: 65, which: 65, charCode: 65}))
     expect($hook('myNumericField-error')).to.have.class('frost-numeric-select-error')
     done()
@@ -280,7 +278,7 @@ describe(test.label, function () {
       {{frost-numeric-field
         hook='myNumericField'
         allowNegativeValues=false
-        value=2
+        value='2'
         errorMessage='Error!'}}
     `)
     run(() => this.$('input').trigger({type: 'keypress', keyCode: 65, which: 65, charCode: 65}))
@@ -288,16 +286,29 @@ describe(test.label, function () {
     done()
   })
 
-  it('renders the errorMessage when value is a number with a period at the end after input field lost focus'
+  it('render decimal number'
   , function () {
     this.render(hbs`
       {{frost-numeric-field
         hook='myNumericField'
         allowNegativeValues=false
-        value=2}}
+        value='0.8'}}
     `)
-    run(() => this.$('input').val('2.').trigger('input').blur())
-    expect($hook('myNumericField-error')).to.have.class('frost-numeric-select-error')
+    expect($hook('myNumericField-error')).not.to.have.class('frost-numeric-select-error')
+  })
+
+  it('render negative number when allowNegativeValue is true'
+  , function () {
+    this.render(hbs`
+      {{frost-numeric-field
+        hook='myNumericField'
+        allowNegativeValues=true
+        value='-1'}}
+    `)
+    expect(
+      this.$('input').val(),
+      'value is set'
+    ).to.eql('-1')
   })
 
   it('Disable buttons when value is null'
@@ -311,6 +322,31 @@ describe(test.label, function () {
     expect($('.frost-numeric-field-plus-button')).to.have.prop('disabled', true)
   })
 
+  it('Dash will be valid if it is a negative sign'
+  , function () {
+    this.render(hbs`
+      {{frost-numeric-field
+        hook='myNumericField'
+        allowNegativeValues=true
+        isIncrementControlVisible=true
+        value='-2'}}
+    `)
+    expect($hook('myNumericField-error')).not.to.have.class('frost-numeric-select-error')
+  })
+
+  it('Dash will be invalid if it is not a negative sign'
+  , function () {
+    this.render(hbs`
+      {{frost-numeric-field
+        hook='myNumericField'
+        allowNegativeValues=true
+        isIncrementControlVisible=true
+        value='2'}}
+    `)
+    run(() => this.$('input').trigger({type: 'keypress', keyCode: 189, which: 189, charCode: 189}))
+    expect($hook('myNumericField-error')).to.have.class('frost-numeric-select-error')
+  })
+
   it('Disable decrease button when allowNegativeValues is false and value is zero'
   , function (done) {
     this.render(hbs`
@@ -318,7 +354,7 @@ describe(test.label, function () {
         hook='myNumericField'
         isIncrementControlVisible=true
         allowNegativeValues=false
-        value=0}}
+        value='0'}}
     `)
     expect($('.frost-numeric-field-minus-button')).to.have.prop('disabled', true)
     done()

@@ -12,7 +12,7 @@ describe(test.label, function () {
   beforeEach(function () {
     component = this.subject({
       hook: 'myNumericField',
-      value: 3
+      value: '3'
     })
   })
 

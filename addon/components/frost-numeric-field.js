@@ -40,8 +40,7 @@ export default Component.extend(FrostEventsProxyMixin, {
     selectionDirection: PropTypes.string,
     spellcheck: PropTypes.bool,
     value: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.number
+      PropTypes.string
     ]).isRequired,
     title: PropTypes.string,
 
@@ -76,7 +75,7 @@ export default Component.extend(FrostEventsProxyMixin, {
 
   _isNumberKey (e) {
     const value = this.get('value')
-    let decimalExist = value && String(value).indexOf('.') >= 0
+    let decimalExist = (value && String(value).indexOf('.') >= 0) !== ''
     let charCode = e.which || e.keyCode
     if (this.get('allowNegativeValues')) {
       /* check if user can enter negative symbol*/
