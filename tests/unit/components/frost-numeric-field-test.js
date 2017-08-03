@@ -1,5 +1,8 @@
 import {expect} from 'chai'
+import Ember from 'ember'
+const {run} = Ember
 import Component from 'ember-frost-core/components/frost-component'
+import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import {unit} from 'ember-test-utils/test-support/setup-component-test'
 import {beforeEach, describe, it} from 'mocha'
 
@@ -86,6 +89,13 @@ describe(test.label, function () {
     expect(
       component instanceof Component,
       'is instance of Frost Component'
+    ).to.equal(true)
+  })
+
+  it('has the expect Mixins', function () {
+    expect(
+      FrostEventsProxy.detect(component),
+      'FrostEventsProxy is present'
     ).to.equal(true)
   })
 })
