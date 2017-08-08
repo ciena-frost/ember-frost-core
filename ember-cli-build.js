@@ -7,6 +7,9 @@ module.exports = function (defaults) {
     babel: {
       optional: ['es7.decorators']
     },
+    'ember-cli-babel': {
+      includePolyfill: true
+    },
     'ember-cli-mocha': {
       useLintTree: false
     },
