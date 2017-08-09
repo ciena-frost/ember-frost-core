@@ -1,3 +1,7 @@
+# 1.23.8 (2017-08-09)
+ * **Updated** the pink and lilac color palettes for better contrast
+
+
 # 1.23.7 (2017-08-08)
 
 * **Updated** dependency versions to match verions currently being installed
