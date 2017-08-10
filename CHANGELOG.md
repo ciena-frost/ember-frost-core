@@ -1,3 +1,8 @@
+# 1.23.9 (2017-08-10)
+* **Updated** packages to reflect Ember CLI 2.12.x versions
+* **Updated** blueprints to match devDependency versions
+
+
 # 1.23.8 (2017-08-09)
  * **Updated** the pink and lilac color palettes for better contrast
 
