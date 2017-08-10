@@ -1,3 +1,7 @@
+# 1.23.10 (2017-08-10)
+* **Updated** pin `ember-elsewhere` to pre-babel 6 version
+
+
 # 1.23.9 (2017-08-10)
 * **Updated** packages to reflect Ember CLI 2.12.x versions
 * **Updated** blueprints to match devDependency versions
