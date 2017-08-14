@@ -322,7 +322,7 @@ describe(test.label, function () {
     expect($('.frost-numeric-field-plus-button')).to.have.prop('disabled', true)
   })
 
-  it('Dash will be valid if it is a negative sign'
+  it('Dash will be valid if it is a negative sign, otherwise it will be invalid'
   , function () {
     this.render(hbs`
       {{frost-numeric-field
@@ -332,10 +332,6 @@ describe(test.label, function () {
         value='-2'}}
     `)
     expect($hook('myNumericField-error')).not.to.have.class('frost-numeric-select-error')
-  })
-
-  it('Dash will be invalid if it is not a negative sign'
-  , function () {
     this.render(hbs`
       {{frost-numeric-field
         hook='myNumericField'
