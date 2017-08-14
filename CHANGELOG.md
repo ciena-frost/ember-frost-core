@@ -1,3 +1,22 @@
+# 1.23.10 (2017-08-10)
+* **Updated** pin `ember-elsewhere` to pre-babel 6 version
+
+
+# 1.23.9 (2017-08-10)
+* **Updated** packages to reflect Ember CLI 2.12.x versions
+* **Updated** blueprints to match devDependency versions
+
+
+# 1.23.8 (2017-08-09)
+ * **Updated** the pink and lilac color palettes for better contrast
+
+
+# 1.23.7 (2017-08-08)
+
+* **Updated** dependency versions to match verions currently being installed
+* **Updated** `ember-cli-htmlbars-inline-precompile` to pin to version `0.3.12` until ember-cli/ember-cli-htmlbars-inline-precompile#90 is resolved. (See issue: https://github.com/ciena-frost/ember-frost-core/issues/488)
+* **Updated** `ember-cli-build.js` to `includePolyfill: true` for `ember-cli-babel` as part of issue: https://github.com/ciena-frost/ember-frost-core/issues/488
+
 # 1.23.6 (2017-07-20)
 
 * The JQuery creation of a canvas element was behaving oddly in some apps on Firefox.
