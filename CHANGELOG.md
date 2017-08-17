@@ -1,3 +1,11 @@
+# 1.23.11 (2017-08-17)
+
+* **Reduced** the height of buttons within an info bar from 75px to 60px
+* **Added** a right margin of 5px to buttons within an info bar to give them space from their right boundary
+* **Added** a 5px padding to the left and right sides of the info bar buttons so that the text of the buttons is not pushed right up against the boundary of the button
+* **Removed** padding on the text within the info bar
+* **Reduced** the bottom margin on the SVG elements in buttons within an info bar from 10px to 5px
+
 # 1.23.10 (2017-08-10)
 * **Updated** pin `ember-elsewhere` to pre-babel 6 version
 
