@@ -246,7 +246,9 @@ $frost-color-button-info-content-subtext-color: rgba($frost-color-white, .8);
     flex-direction: column;
     align-items: center;
     width: 75px;
-    height: 75px;
+    height: 60px;
+    margin-right: 5px;
+    padding: 0 5px;
     background-color: $frost-color-button-info-bar-bg;
     color: $frost-color-blue-1;
 
@@ -274,13 +276,12 @@ $frost-color-button-info-content-subtext-color: rgba($frost-color-white, .8);
       box-sizing: border-box;
 
       .text {
-        padding: 0 1px 2px;
         text-align: center;
         vertical-align: middle;
       }
 
       .svg {
-        margin-bottom: 10px;
+        margin-bottom: 5px;
         margin-left: 10px;
 
         .frost-icon {
