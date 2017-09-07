@@ -14,7 +14,7 @@ export default Component.extend({
 
   // == PropTypes =============================================================
   propTypes: {
-    refreshOnMouseEnter: PropTypes.bool.optional
+    refreshOnMouseEnter: PropTypes.bool
   },
 
   getDefaultProps () {
