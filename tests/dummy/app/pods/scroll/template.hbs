@@ -84,5 +84,21 @@
         {{code-snippet name='scroll-other-spread.hbs'}}
       </div>
     </div>
+    <div class='example'>
+      <div class='title'>Refresh on mouse enter</div>
+      <div style='display: none'>
+        {{! BEGIN-SNIPPET scroll-other-refreshOnMouseEnter }}
+        {{#frost-scroll
+          class='full'
+          hook='refreshOnMouseEnter'
+          refreshOnMouseEnter=true
+        }}
+        {{/frost-scroll}}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='scroll-other-refreshOnMouseEnter.hbs'}}
+      </div>
+    </div>
   </div>
 </div>
