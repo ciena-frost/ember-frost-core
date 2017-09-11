@@ -1,3 +1,7 @@
+# 1.23.12 (2017-09-11)
+* **Added** an optional **mouseenter** event for the ps-container to update which can then remove or add scrollbars
+
+
 # 1.23.11 (2017-08-17)
 
 * **Reduced** the height of buttons within an info bar from 75px to 60px
