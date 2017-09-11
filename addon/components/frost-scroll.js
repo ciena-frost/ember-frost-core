@@ -14,14 +14,9 @@ export default Component.extend({
 
   // == PropTypes =============================================================
   propTypes: {
-    refreshOnMouseEnter: PropTypes.bool
+    onMouseEnter: PropTypes.func
   },
 
-  getDefaultProps () {
-    return {
-      refreshOnMouseEnter: false
-    }
-  },
   // == Computed Properties ===================================================
 
   // == Functions =============================================================
@@ -75,7 +70,7 @@ export default Component.extend({
     }
 
     this._mouseEnterHandler = () => {
-      window.Ps.update(this.get('element'))
+      this.get('onMouseEnter')(this.get('element'))
     }
 
     if (typeOf(this.onScrollUp) === 'function') {
@@ -106,7 +101,7 @@ export default Component.extend({
       this.$().on('ps-scroll-left', this._scrollLeftHandler)
     }
 
-    if (this.refreshOnMouseEnter) {
+    if (typeOf(this.get('onMouseEnter')) === 'function') {
       this.$().on('mouseenter', this._mouseEnterHandler)
     }
 
@@ -159,7 +154,7 @@ export default Component.extend({
       this.$().off('ps-scroll-left', this._scrollLeftHandler)
     }
 
-    if (this.refreshOnMouseEnter) {
+    if (typeOf(this.get('onMouseEnter')) === 'function') {
       this.$().off('mouseenter', this._mouseEnterHandler)
     }
   },

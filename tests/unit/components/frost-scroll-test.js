@@ -234,4 +234,34 @@ describe(test.label, function () {
     $.fn.on.restore()
     $.fn.off.restore()
   })
+
+  it('registers and unregisters "mouseenter" event handlers', function () {
+    const spyOn = sinon.spy($.fn, 'on')
+    const spyOff = sinon.spy($.fn, 'off')
+
+    component.set('onMouseEnter', function () { return })
+
+    this.render()
+
+    spyOn.reset()
+
+    component.trigger('didInsertElement')
+
+    expect(
+      spyOn.calledWith("mouseenter"), // eslint-disable-line
+      'on() was called with "mouseenter" event'
+    ).to.equal(true)
+
+    spyOff.reset()
+
+    component.trigger('willDestroyElement')
+
+    expect(
+      spyOff.calledWith("mouseenter"), // eslint-disable-line
+      'off() was called with "mouseenter" event'
+    ).to.equal(true)
+
+    $.fn.on.restore()
+    $.fn.off.restore()
+  })
 })

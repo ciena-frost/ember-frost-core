@@ -60,6 +60,11 @@ export default Controller.extend({
         autoClear: true,
         clearDuration: 2000
       })
+    },
+
+    onMouseEnterHandler (element) {
+      element.innerHTML = 'mouse entered and will update the scrollbars'
+      window.Ps.update(element)
     }
   }
 })
