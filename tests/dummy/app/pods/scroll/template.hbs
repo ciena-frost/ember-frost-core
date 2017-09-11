@@ -84,5 +84,22 @@
         {{code-snippet name='scroll-other-spread.hbs'}}
       </div>
     </div>
+    <div class='example'>
+      <div class='title'>onMouseEnter</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET scroll-other-onMouseEnter }}
+        {{#frost-scroll
+          class='full'
+          hook='OnMouseEnter'
+          onMouseEnter=(action 'onMouseEnterHandler')
+        }}
+          <div>Mouse over me!</div>
+        {{/frost-scroll}}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='scroll-other-onMouseEnter.hbs'}}
+      </div>
+    </div>
   </div>
 </div>

@@ -167,4 +167,24 @@ describe(test.label, function () {
       'scroll has been rendered'
     ).to.equal(true)
   })
+
+  it('onMouseEnter closure action is called', function () {
+    const externalActionSpy = sinon.spy()
+
+    this.on('externalAction', externalActionSpy)
+
+    this.render(hbs`
+      {{frost-scroll
+        hook='myScroll'
+        onMouseEnter=(action 'externalAction')
+      }}
+    `)
+
+    this.$('.frost-scroll').trigger('mouseenter')
+
+    expect(
+      externalActionSpy.called,
+      'onMouseEnter closure action called on mouseenter'
+    ).to.equal(true)
+  })
 })

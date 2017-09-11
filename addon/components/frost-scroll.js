@@ -4,6 +4,7 @@
 import Component from './frost-component'
 import Ember from 'ember'
 const {deprecate, run, typeOf} = Ember
+import {PropTypes} from 'ember-prop-types'
 
 export default Component.extend({
 
@@ -12,6 +13,9 @@ export default Component.extend({
   // == Keyword Properties ====================================================
 
   // == PropTypes =============================================================
+  propTypes: {
+    onMouseEnter: PropTypes.func
+  },
 
   // == Computed Properties ===================================================
 
@@ -65,6 +69,10 @@ export default Component.extend({
       run.debounce(this, this.onScrollLeft, debouncePeriod, true)
     }
 
+    this._mouseEnterHandler = () => {
+      this.get('onMouseEnter')(this.get('element'))
+    }
+
     if (typeOf(this.onScrollUp) === 'function') {
       this.$().on('ps-scroll-up', this._scrollUpHandler)
     }
@@ -91,6 +99,10 @@ export default Component.extend({
 
     if (typeOf(this.onScrollLeft) === 'function') {
       this.$().on('ps-scroll-left', this._scrollLeftHandler)
+    }
+
+    if (typeOf(this.get('onMouseEnter')) === 'function') {
+      this.$().on('mouseenter', this._mouseEnterHandler)
     }
 
     if (typeOf(this['on-scroll-y-end']) === 'function') {
@@ -140,6 +152,10 @@ export default Component.extend({
 
     if (typeOf(this.onScrollLeft) === 'function') {
       this.$().off('ps-scroll-left', this._scrollLeftHandler)
+    }
+
+    if (typeOf(this.get('onMouseEnter')) === 'function') {
+      this.$().off('mouseenter', this._mouseEnterHandler)
     }
   },
   /* eslint-enable complexity */
