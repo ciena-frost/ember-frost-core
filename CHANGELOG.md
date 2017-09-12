@@ -1,3 +1,8 @@
+# 1.23.13 (2017-09-12)
+
+* Use ember-cli-notifications v4.2.1 - 4.2.0 was using a beta version of ember-css-modules
+
+
 # 1.23.12 (2017-09-11)
 * **Added** an optional **mouseenter** event for the ps-container to update which can then remove or add scrollbars
 
