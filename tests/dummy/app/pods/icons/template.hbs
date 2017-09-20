@@ -74,7 +74,7 @@
   <hr>
   <div class="background-chooser {{ backgroundColor }}-selected">
     <h3>Background Color</h3>
-    {{#each backgroundColors as |bgColor index| }}
+    {{#each backgroundColors as |bgColor| }}
       <button {{ action 'colorSelected' bgColor }} class="{{ bgColor }}"></button>
     {{/each}}
   </div>
@@ -99,7 +99,7 @@
               </div>
             </div>
           {{/each}}
-         </div>
+        </div>
       </div>
     {{/each}}
   </div>

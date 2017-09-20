@@ -19,7 +19,7 @@ describe('Unit / Lib / Utils / Npm', () => {
 
   describe('_run', () => {
     beforeEach(() => {
-      sandbox.stub(childProcessPromise, 'exec', (cmd) => {
+      sandbox.stub(childProcessPromise, 'exec').callsFake((cmd) => {
         return Promise.resolve(cmd)
       })
       npm = require(npmModuleLocation)
@@ -65,7 +65,7 @@ describe('Unit / Lib / Utils / Npm', () => {
 
     beforeEach(() => {
       npm = require(npmModuleLocation)
-      sandbox.stub(npm, '_run', () => {
+      sandbox.stub(npm, '_run').callsFake(() => {
         return Promise.resolve({stdout: packageJson})
       })
     })
@@ -84,7 +84,7 @@ describe('Unit / Lib / Utils / Npm', () => {
   describe('getVersions', () => {
     beforeEach(() => {
       npm = require(npmModuleLocation)
-      sandbox.stub(npm, 'view', () => {
+      sandbox.stub(npm, 'view').callsFake(() => {
         return 'test'
       })
     })
@@ -97,7 +97,7 @@ describe('Unit / Lib / Utils / Npm', () => {
 
   describe('install', () => {
     beforeEach(() => {
-      sandbox.stub(childProcessPromise, 'exec', (cmd) => {
+      sandbox.stub(childProcessPromise, 'exec').callsFake((cmd) => {
         return cmd
       })
       npm = require(npmModuleLocation)
