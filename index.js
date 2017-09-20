@@ -1,6 +1,5 @@
 /* eslint-env node */
-
-// 'use strict'
+'use strict'
 
 // const AssetRev = require('broccoli-asset-rev')
 const autoprefixer = require('broccoli-autoprefixer')

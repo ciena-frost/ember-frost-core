@@ -17,7 +17,13 @@
 npm-debug.log*
 testem.log
 coverage.json
+yarn-error.log
 .DS_Store
 /typings/*
 .vscode
 **.ember-try
+
+# ember-try
+.node_modules.ember-try/
+bower.json.ember-try
+package.json.ember-try
