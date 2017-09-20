@@ -10,6 +10,7 @@
 />
 <div
   class={{dropdownClassNames}}
+  role="button"
   data-test={{hook (concat hook '-list')}}
   onmousedown={{action 'mouseDown'}}
   style={{listStyle}}
@@ -64,22 +65,22 @@
           }}
         {{/if}}
         {{#if item.hasSecondaryLabels}}
-        <div class="frost-select-list-item-container">
-          <div
-            class={{dropdownTextClassNames}}
-            data-text={{item.label}}
-            data-test={{hook (concat hookPrefix '-label') index=index}}
-          >
-            {{item.label}}
+          <div class="frost-select-list-item-container">
+            <div
+              class={{dropdownTextClassNames}}
+              data-text={{item.label}}
+              data-test={{hook (concat hookPrefix '-label') index=index}}
+            >
+              {{item.label}}
+            </div>
+            <div
+              class={{dropdownSecondaryLabelsTextClassNames}}
+              data-text={{item.displaySecondaryLabels}}
+              data-test={{hook (concat hookPrefix '-secondaryLabels') index=index}}
+            >
+              {{item.displaySecondaryLabels}}
+            </div>
           </div>
-          <div
-            class={{dropdownSecondaryLabelsTextClassNames}}
-            data-text={{item.displaySecondaryLabels}}
-            data-test={{hook (concat hookPrefix '-secondaryLabels') index=index}}
-          >
-            {{item.displaySecondaryLabels}}
-          </div>
-        </div>
         {{else}}
         <div
           class={{dropdownTextClassNames}}

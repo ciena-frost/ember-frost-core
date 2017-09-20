@@ -1,7 +1,7 @@
 <div class="dummy-notification-container">
-{{#each notifications as |notification|}}
-  {{notification-message notification=notification}}
-{{/each}}
+  {{#each notifications as |notification|}}
+    {{notification-message notification=notification}}
+  {{/each}}
 </div>
 
 <div class="dummy-body textarea area">
@@ -10,16 +10,16 @@
   <hr>
   <div class="section">
     <div class="example">
-        <div class="demo">
-          {{! BEGIN-SNIPPET textarea }}
-          {{frost-textarea
-            hook='myTextarea'
-          }}
-          {{! END-SNIPPET }}
-        </div>
-        <div class="snippet">
-          {{code-snippet name='textarea.hbs'}}
-        </div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET textarea }}
+        {{frost-textarea
+          hook='myTextarea'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='textarea.hbs'}}
+      </div>
     </div>
   </div>
 
@@ -78,18 +78,18 @@
   <hr>
   <div class="section">
     <div class="example">
-        <div class="title">placeholder</div>
-        <div class="demo">
-          {{! BEGIN-SNIPPET textarea-placeholder }}
-          {{frost-textarea
-            hook='myTextarea'
-            placeholder='Text goes here!'
-          }}
-          {{! END-SNIPPET }}
-        </div>
-        <div class="snippet">
-          {{code-snippet name='textarea-placeholder.hbs'}}
-        </div>
+      <div class="title">placeholder</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET textarea-placeholder }}
+        {{frost-textarea
+          hook='myTextarea'
+          placeholder='Text goes here!'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='textarea-placeholder.hbs'}}
+      </div>
     </div>
 
     <div class="example">
@@ -125,7 +125,7 @@
     </div>
 
     <div class="example">
-    <div class="title">autofocus</div>
+      <div class="title">autofocus</div>
       <div class="demo">
         {{! BEGIN-SNIPPET textarea-autofocus }}
         {{frost-textarea
@@ -195,7 +195,7 @@
         {{! END-SNIPPET }}
       </div>
       <div class="snippet">
-         <div>Template</div>
+        <div>Template</div>
         {{code-snippet name='textarea-dom-events.hbs'}}
         <br>
         <div>Controller</div>
