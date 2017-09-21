@@ -80,7 +80,7 @@ function isObject (object) {
  */
 function defaultBabel (options) {
   options.babel = options.babel || {}
-  options.babel.optional = options.babel.optional || []
+  options.babel.plugins = options.babel.plugins || []
 }
 
 module.exports = {
@@ -116,9 +116,14 @@ module.exports = {
     this.options = this.options || {}
     defaultBabel(this.options)
 
-    if (this.options.babel.optional.indexOf('es7.decorators') === -1) {
-      this.options.babel.optional.push('es7.decorators')
+    if (this.options.babel.plugins.indexOf('transform-decorators-legacy') === -1) {
+      this.options.babel.plugins.push('transform-decorators-legacy')
     }
+
+    if (this.options.babel.plugins.indexOf('transform-class-properties') === -1) {
+      this.options.babel.plugins.push('transform-class-properties')
+    }
+
     if (this._super.init) {
       this._super.init.apply(this, arguments)
     }
@@ -176,10 +181,19 @@ module.exports = {
     // The transpiling was done on the output of `treeForAddon` < `ember-cli@2.12.0`. We need to manually transpile
     // for >= `embe-cli@2.12.0` - @dafortin 2017.06.21
     const checker = new VersionChecker(this)
-    const isEmberCliAbove12 = checker.for('ember-cli').satisfies('>= 2.12.0')
+    const emberCliVersion = checker.for('ember-cli')
+
     let output = iconNameTree
-    if (isEmberCliAbove12) {
+    if (emberCliVersion.satisfies('>=2.14.0')) {
       const addonOptions = this._getAddonOptions()
+
+      if (addonOptions && addonOptions.babel) {
+        const addon = this.addons.find(addon => addon.name === 'ember-cli-babel')
+        output = addon.transpileTree(iconNameTree, addonOptions.babel)
+      }
+    } else if (emberCliVersion.satisfies('>=2.12.0 <2.14.0')) {
+      const addonOptions = this._getAddonOptions()
+
       if (addonOptions && addonOptions.babel) {
         const BabelTranspiler = require('broccoli-babel-transpiler')
         output = new BabelTranspiler(iconNameTree, addonOptions.babel)
