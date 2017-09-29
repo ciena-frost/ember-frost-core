@@ -88,7 +88,7 @@
     "name": "frost"
   },
   "dependencies": {
-    "broccoli-autoprefixer": "^4.1.0",
+    "broccoli-autoprefixer": "^5.0.0",
     "broccoli-babel-transpiler": "^5.0.0",
     "broccoli-file-creator": "^1.1.1",
     "broccoli-funnel": "^1.2.0",
