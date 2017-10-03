@@ -1,8 +1,6 @@
-import Ember from 'ember'
-const {$, typeOf} = Ember // eslint-disable-line
-import {$hook} from 'ember-hook'
+import {typeOf} from '@ember/utils'
 
-const assign = Object.assign || Ember.assign || Ember.merge // eslint-disable-line
+import {$hook} from 'ember-hook'
 
 import {
   expectWithState as _expectButtonWithState,
@@ -48,7 +46,7 @@ export function focusout (element) {
 }
 
 // TODO: Remove these as part of next major release, expecting consumers to
-// import {expectWithState} from 'dummy/tests/helpers/ember-frost-core/frost-select'
+// import { expectWithState } from 'dummy/tests/helpers/ember-frost-core/frost-select'
 // instead so we don't have to manange this import/re-export madness.
 export const expectButtonWithState = _expectButtonWithState
 export const expectSelectWithState = _expectSelectWithState

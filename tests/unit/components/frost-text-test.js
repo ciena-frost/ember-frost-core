@@ -1,6 +1,5 @@
+import {run} from '@ember/runloop'
 import {expect} from 'chai'
-import Ember from 'ember'
-const {run} = Ember
 import Component from 'ember-frost-core/components/frost-component'
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import {unit} from 'ember-test-utils/test-support/setup-component-test'

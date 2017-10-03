@@ -2,8 +2,8 @@
  * Component definition for the frost-bookends component
  */
 
-import Ember from 'ember'
-const {run} = Ember
+import {run} from '@ember/runloop'
+
 import {Component} from 'ember-frost-core'
 import {PropTypes} from 'ember-prop-types'
 

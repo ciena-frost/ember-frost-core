@@ -1,8 +1,8 @@
 /**
  * Utility methods/modules
  */
-import Ember from 'ember'
-const {$} = Ember
+
+import $ from 'jquery'
 
 export {default as events} from './events'
 export {default as keyCodes} from './key-codes'

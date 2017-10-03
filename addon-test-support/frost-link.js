@@ -1,14 +1,15 @@
 /**
  * Test helpers for frost-link
  */
-import Ember from 'ember'
+
+import EmberObject from '@ember/object'
 
 /**
  * Stub the routing service so we can test the route given to a frost-link
  * @param {*} context - the testing context (`this` from within your beforeEach())
  */
 export function stubRoutingService (context) {
-  const RouterStub = Ember.Object.extend({
+  const RouterStub = EmberObject.extend({
     generateURL (endpoint, segments) {
       let url = endpoint
 

@@ -1,13 +1,15 @@
 /**
  * Component definition for the frost-text component
  */
+
+import {on} from '@ember/object/evented'
+import {isPresent} from '@ember/utils'
+
 import FrostEventsProxyMixin from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-text'
 import Component from './frost-component'
-import Ember from 'ember'
 import {task, timeout} from 'ember-concurrency'
 import {PropTypes} from 'ember-prop-types'
-const {isPresent, on} = Ember
 
 export default Component.extend(FrostEventsProxyMixin, {
   // == Dependencies ==========================================================

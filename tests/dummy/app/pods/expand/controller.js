@@ -1,5 +1,5 @@
-import Ember from 'ember'
-const {Controller, inject} = Ember
+import Controller from '@ember/controller'
+import {inject as service} from '@ember/service'
 
 export default Controller.extend({
   // BEGIN-SNIPPET expand-query-controller
@@ -17,7 +17,7 @@ export default Controller.extend({
   expanded5: false,
   expanded6: false,
   expanded7: false,
-  notifications: inject.service('notification-messages'),
+  notifications: service('notification-messages'),
 
   actions: {
     onChangeHandler1 (expanded) {

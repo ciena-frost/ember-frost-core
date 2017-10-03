@@ -1,6 +1,7 @@
 /**
  * Component definition for the frost-password component
  */
+
 import FrostEventsProxy from '../mixins/frost-events-proxy'
 import layout from '../templates/components/frost-password'
 import Component from './frost-component'

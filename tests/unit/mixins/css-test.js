@@ -1,6 +1,7 @@
 /**
  * Unit test for the CssMixin
  */
+
 import {expect} from 'chai'
 import {setupComponentTest} from 'ember-mocha'
 import {afterEach, beforeEach, describe, it} from 'mocha'

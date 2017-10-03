@@ -1,12 +1,16 @@
 /**
  * Component definition for the frost-button component
  */
+
+import {on} from '@ember/object/evented'
+import {isEmpty} from '@ember/utils'
+
 import layout from '../templates/components/frost-button'
 import Component from './frost-component'
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
-const {Logger, ViewUtils, isEmpty, on} = Ember
+const {Logger, ViewUtils} = Ember
 
 /**
  * List of valid values to pass into `design` propery

@@ -1,7 +1,6 @@
 import {expect} from 'chai'
-import Ember from 'ember'
-const {$} = Ember
 import {trimDataToFit, trimLongDataInElement} from 'ember-frost-core/utils/text'
+import $ from 'jquery'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 

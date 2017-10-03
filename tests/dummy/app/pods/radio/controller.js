@@ -1,9 +1,10 @@
-import Ember from 'ember'
-const {Controller, inject} = Ember
+import Controller from '@ember/controller'
+import EmberObject from '@ember/object'
+import {inject as service} from '@ember/service'
 
 // BEGIN-SNIPPET radio-controller
 export default Controller.extend({
-  notifications: inject.service('notification-messages'),
+  notifications: service('notification-messages'),
 
   inlineValue: 'a',
 
@@ -15,7 +16,7 @@ export default Controller.extend({
     {label: 'e', value: 'e'}
   ],
 
-  model: Ember.Object.create({
+  model: EmberObject.create({
     radioGroup1: 'c',
     radioGroup2: 'b',
     radioGroup3: 'c',

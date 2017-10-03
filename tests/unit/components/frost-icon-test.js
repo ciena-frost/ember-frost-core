@@ -1,6 +1,5 @@
+import {run} from '@ember/runloop'
 import {expect} from 'chai'
-import Ember from 'ember'
-const {run} = Ember
 import Component from 'ember-frost-core/components/frost-component'
 import PropTypeMixin from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
