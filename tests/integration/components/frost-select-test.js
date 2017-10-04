@@ -1,5 +1,12 @@
 import {run} from '@ember/runloop'
 import {expect} from 'chai'
+import {
+  close,
+  expectWithState as expectSelectWithState,
+  filter as filterSelect,
+  open,
+  selectItemAtIndex
+} from 'ember-frost-core/test-support/frost-select'
 import {keyCodes} from 'ember-frost-core/utils'
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
 import {$hook} from 'ember-hook'
@@ -9,9 +16,6 @@ import hbs from 'htmlbars-inline-precompile'
 import $ from 'jquery'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
-
-import {expectSelectWithState, filterSelect} from 'dummy/tests/helpers/ember-frost-core'
-import {close, open, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
 
 /**
  * Blur element (ensuring it has focus first)
