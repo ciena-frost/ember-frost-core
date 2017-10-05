@@ -10,7 +10,7 @@ import {run} from '@ember/runloop'
 import {isEmpty, isNone, isPresent, typeOf} from '@ember/utils'
 import Ember from 'ember'
 const {Logger} = Ember
-import computed, {readOnly} from 'ember-computed-decorators'
+import {computed, readOnly} from 'ember-decorators/object'
 import {HookMixin} from 'ember-hook'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'

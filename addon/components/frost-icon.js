@@ -6,7 +6,7 @@ import {deprecate} from '@ember/application/deprecations'
 
 import layout from '../templates/components/frost-icon'
 import Component from './frost-component'
-import computed, {readOnly} from 'ember-computed-decorators'
+import {computed, readOnly} from 'ember-decorators/object'
 import {PropTypes} from 'ember-prop-types'
 
 export default Component.extend({

@@ -5,12 +5,6 @@ const EmberAddon = require('ember-cli/lib/broccoli/ember-addon')
 
 module.exports = function (defaults) {
   let app = new EmberAddon(defaults, {
-    babel6: {
-      plugins: [
-        'transform-decorators-legacy',
-        'transform-class-properties'
-      ]
-    },
     'ember-cli-babel': {
       includePolyfill: true
     },

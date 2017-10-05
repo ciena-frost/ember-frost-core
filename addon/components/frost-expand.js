@@ -5,7 +5,7 @@
 import {run} from '@ember/runloop'
 
 import layout from '../templates/components/frost-expand'
-import computed, {readOnly} from 'ember-computed-decorators'
+import {computed, readOnly} from 'ember-decorators/object'
 import Component from './frost-component'
 import {PropTypes} from 'ember-prop-types'
 import {validators} from 'ember-prop-types/utils/prop-types'

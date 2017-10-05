@@ -7,7 +7,7 @@ import {assert} from '@ember/debug'
 import {isPresent, typeOf} from '@ember/utils'
 import Ember from 'ember'
 const {ViewUtils} = Ember
-import computed, {readOnly} from 'ember-computed-decorators'
+import {computed, readOnly} from 'ember-decorators/object'
 import PropTypeMixin, {PropTypes} from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
 

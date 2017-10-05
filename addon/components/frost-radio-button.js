@@ -5,7 +5,7 @@
 import layout from '../templates/components/frost-radio-button'
 import {cloneEvent} from '../utils'
 import Component from './frost-component'
-import computed, {readOnly} from 'ember-computed-decorators'
+import {computed, readOnly} from 'ember-decorators/object'
 import {PropTypes} from 'ember-prop-types'
 import $ from 'jquery'
 
