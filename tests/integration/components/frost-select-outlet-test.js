@@ -7,7 +7,7 @@ const test = integration('frost-select-outlet')
 describe(test.label, function () {
   test.setup()
 
-  it('renders', function () {
+  it('should render', function () {
     this.render(hbs`{{frost-select-outlet hook='mySelectOutlet'}}`)
     expect(this.$()).to.have.length(1)
   })

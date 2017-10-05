@@ -529,7 +529,7 @@ export default Component.extend({
 
         case TAB:
           this.get('onClose')()
-          return
+          return // eslint-disable-line no-useless-return
       }
     }
     /* eslint-enable complexity */

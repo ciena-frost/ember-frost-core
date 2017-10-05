@@ -20,12 +20,12 @@ describe(test.label, function () {
       `)
     })
 
-    it('renders', function () {
+    it('should render', function () {
       expect(this.$('.frost-text')).to.have.length(1)
     })
   })
 
-  it('renders', function () {
+  it('should render', function () {
     this.render(hbs`
         {{frost-text hook='myTextInput'}}
     `)
@@ -56,7 +56,7 @@ describe(test.label, function () {
     ).to.have.length(1)
   })
 
-  it('sets align property', function () {
+  it('should set align property', function () {
     const align = 'right'
 
     this.set('align', align)
@@ -74,7 +74,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('sets autofocus property', function () {
+  it('should set autofocus property', function () {
     this.render(hbs`
         {{frost-text
           autofocus=true
@@ -88,7 +88,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('set disabled property', function () {
+  it('should set disabled property', function () {
     this.render(hbs`
       {{frost-text
         disabled=true
@@ -102,7 +102,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('sets maxlength property', function () {
+  it('should set maxlength property', function () {
     const maxlength = 30
 
     this.set('maxlength', maxlength)
@@ -120,7 +120,7 @@ describe(test.label, function () {
     ).to.eql(maxlength)
   })
 
-  it('sets placeholder property', function () {
+  it('should set placeholder property', function () {
     const placeholder = 'Enter here'
 
     this.set('placeholder', placeholder)
@@ -138,7 +138,7 @@ describe(test.label, function () {
     ).to.eql(placeholder)
   })
 
-  it('sets value property', function () {
+  it('should set value property', function () {
     const value = 'Testing'
 
     this.set('value', value)
@@ -156,7 +156,7 @@ describe(test.label, function () {
     ).to.eql(value)
   })
 
-  it('set readonly property', function () {
+  it('should set readonly property', function () {
     this.render(hbs`
       {{frost-text
         hook='myTextInput'
@@ -170,7 +170,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('set required property', function () {
+  it('should set required property', function () {
     this.render(hbs`
       {{frost-text
         hook='myTextInput'
@@ -184,7 +184,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('set spellcheck property', function () {
+  it('should set spellcheck property', function () {
     this.render(hbs`
       {{frost-text
         hook='myTextInput'
@@ -198,7 +198,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('set tabindex property', function () {
+  it('should set tabindex property', function () {
     const tabindex = -1
 
     this.set('tabindex', tabindex)
@@ -216,7 +216,7 @@ describe(test.label, function () {
     ).to.eql(tabindex)
   })
 
-  it('set title property', function () {
+  it('should set title property', function () {
     const title = 'title'
 
     this.set('title', title)
@@ -234,7 +234,7 @@ describe(test.label, function () {
     ).to.eql(title)
   })
 
-  it('only renders the clear icon in insert', function () {
+  it('should only render the clear icon in insert', function () {
     this.render(hbs`
       {{frost-text hook='myTextInput'}}
     `)
@@ -262,7 +262,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('runs clear() which clears the input value', function () {
+  it('should run clear() which clears the input value', function () {
     this.render(hbs`
       {{frost-text hook='myTextInput'}}
     `)
@@ -296,7 +296,7 @@ describe(test.label, function () {
     })
   })
 
-  it('calls onKeyUp closure action', function () {
+  it('should call onKeyUp closure action', function () {
     const externalActionSpy = sinon.spy()
 
     this.on('externalAction', externalActionSpy)
@@ -316,7 +316,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('calls onInput closure action', function () {
+  it('should call onInput closure action', function () {
     const externalActionSpy = sinon.spy()
     const testValue = 'Test'
 
@@ -344,7 +344,7 @@ describe(test.label, function () {
     ).to.eql(testValue)
   })
 
-  it('renders using spread', function () {
+  it('should render using spread', function () {
     this.render(hbs`
       {{frost-text
         options=(hash

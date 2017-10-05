@@ -24,7 +24,7 @@ describe('Acceptance: Application', function () {
       return visit('/')
     })
 
-    it('redirects correct route', function () {
+    it('should redirect to correct route', function () {
       expect(currentPath()).to.equal('demo')
     })
   })
@@ -53,7 +53,7 @@ describe('Acceptance: Application', function () {
           return visit(`/${path}`)
         })
 
-        it('renders correct route', function () {
+        it('should render correct route', function () {
           expect(currentPath()).to.equal(path)
         })
       })
@@ -64,7 +64,7 @@ describe('Acceptance: Application', function () {
       return visit('/link')
     })
 
-    it('renders correct route', function () {
+    it('should render correct route', function () {
       expect(currentPath()).to.equal('link.index')
     })
   })

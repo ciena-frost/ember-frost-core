@@ -266,7 +266,7 @@ describe(test.label, function () {
       return wait()
     })
 
-    it('recognizes the true value and sets the On state', function () {
+    it('should recognize the true value and sets the On state', function () {
       expect($hook('myToggle-toggle-input')).to.have.prop('checked')
     })
   })
@@ -284,7 +284,7 @@ describe(test.label, function () {
       return wait()
     })
 
-    it('recognizes the false value and sets the Off state', function () {
+    it('should recognize the false value and sets the Off state', function () {
       expect($hook('myToggle-toggle-input')).to.have.prop('checked', false)
     })
   })

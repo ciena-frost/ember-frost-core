@@ -12,7 +12,8 @@ const path = require('path')
 const VersionChecker = require('ember-cli-version-checker')
 
 /**
- * Creates an object composed of the object properties predicate returns truthy for. The predicate is invoked with two arguments: (value, key).
+ * Creates an object composed of the object properties predicate returns truthy for. The predicate is invoked
+ * with two arguments: (value, key).
  * @param {Object} object - the source object
  * @param {Function} predicate - The function invoked per property
  * @returns {Object} Returns the new object
@@ -40,7 +41,7 @@ function pickBy (object, predicate) {
  */
 function get (object, path, defaultValue) {
   const segments = path.split('.')
-  var result = object
+  let result = object
 
   while (segments.length !== 0) {
     if (isObject(result)) {
@@ -131,7 +132,7 @@ module.exports = {
 
   flattenIcons: function (iconNames, subDir, srcDir) {
     fs.readdirSync(srcDir).forEach((fileName) => {
-      var filePath = path.join(srcDir, fileName)
+      const filePath = path.join(srcDir, fileName)
       if (fs.lstatSync(filePath).isDirectory()) {
         this.flattenIcons(iconNames, `${subDir}${subDir === '' ? '' : '/'}${fileName}`, filePath)
       } else if (fileName.endsWith('.svg')) {
@@ -145,15 +146,15 @@ module.exports = {
   /* eslint-disable complexity */
   // Present purely to allow programmatic access to the icon packs and icon names (for demo purposes)
   treeForAddon: function (tree) {
-    var addonTree = this._super.treeForAddon.call(this, tree)
+    const addonTree = this._super.treeForAddon.call(this, tree)
 
-    var iconNames = {}
+    let iconNames = {}
 
-    var addonPackages = pickBy(this.project.addonPackages, (addonPackage) => {
+    const addonPackages = pickBy(this.project.addonPackages, (addonPackage) => {
       return has(addonPackage.pkg, 'ember-frost-icon-pack')
     })
 
-    for (var addonName in addonPackages) {
+    for (let addonName in addonPackages) {
       if (addonPackages.hasOwnProperty(addonName)) {
         const addonPackage = addonPackages[addonName]
         const iconPack = addonPackage.pkg['ember-frost-icon-pack']
@@ -209,7 +210,7 @@ module.exports = {
    * @param  {[type]} treeForPublic [description]
    * @return {[type]}               [description]
    */
-   /* eslint-enable complexity */
+  /* eslint-enable complexity */
   treeForPublic: function (treeForPublic) {
     const isAddon = this.project.isEmberCLIAddon()
 
@@ -223,7 +224,7 @@ module.exports = {
       const iconPackPath = iconPack.path || 'svgs'
       const addonIconPackPath = path.join(addonPackage.path, iconPackPath)
 
-      var svgFunnel = new Funnel(addonIconPackPath, {
+      const svgFunnel = new Funnel(addonIconPackPath, {
         include: [new RegExp(/\.svg$/)]
       })
 

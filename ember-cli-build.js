@@ -27,7 +27,7 @@ module.exports = function (defaults) {
 
   app.import('bower_components/highlightjs/styles/github.css')
   app.import(app.project.addonPackages['ember-source']
-  ? 'vendor/ember/ember-template-compiler.js' : 'bower_components/ember/ember-template-compiler.js')
+    ? 'vendor/ember/ember-template-compiler.js' : 'bower_components/ember/ember-template-compiler.js')
 
   /*
     This build file specifies the options for the dummy test app of this

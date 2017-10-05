@@ -1,6 +1,6 @@
-var consumer = require('ember-frost-core/lib/utils/consumer')
-var npm = require('ember-frost-core/lib/utils/npm')
-var packageHandler = require('ember-frost-core/lib/utils/package-handler')
+const consumer = require('ember-frost-core/lib/utils/consumer')
+const npm = require('ember-frost-core/lib/utils/npm')
+const packageHandler = require('ember-frost-core/lib/utils/package-handler')
 
 /**
  * This helper is to facilite operations in blueprints. It's providing a set of functionalities like:

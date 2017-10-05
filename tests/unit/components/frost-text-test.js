@@ -17,7 +17,7 @@ describe(test.label, function () {
     })
   })
 
-  it('sets default property values correctly', function () {
+  it('should set default property values correctly', function () {
     expect(
       component.get('align'),
       'align: left'
@@ -84,14 +84,14 @@ describe(test.label, function () {
     ).to.equal(undefined)
   })
 
-  it('extends the commone frost component', function () {
+  it('should extend the commone frost component', function () {
     expect(
       component instanceof Component,
       'is instance of Frost Component'
     ).to.equal(true)
   })
 
-  it('has the expect Mixins', function () {
+  it('should have the expect Mixins', function () {
     expect(
       FrostEventsProxy.detect(component),
       'FrostEventsProxy is present'
@@ -103,7 +103,7 @@ describe(test.label, function () {
       run(() => component.set('keyUp', undefined))
     })
 
-    it('does not throw an error when keyUp action is triggered', function () {
+    it('should not throw an error when keyUp action is triggered', function () {
       expect(
         function () {
           component.get('actions.keyUp').call(component)

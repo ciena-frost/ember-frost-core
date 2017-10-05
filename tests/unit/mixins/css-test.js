@@ -21,11 +21,11 @@ describe('Unit / Mixin / css', function () {
     sandbox.restore()
   })
 
-  it('has classNameBindings set to include "css"', function () {
+  it('should have classNameBindings set to include "css"', function () {
     expect(component.get('classNameBindings')).to.include('css')
   })
 
-  it('defaults "css" to the component name', function () {
+  it('should default "css" to the component name', function () {
     expect(component.get('css')).to.equal('css-component')
   })
 

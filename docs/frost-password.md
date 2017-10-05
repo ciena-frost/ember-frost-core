@@ -30,7 +30,8 @@
 A comprehensive list of [HTML event handlers](frost-events.md) are available to choose from based on your needs.
 
 ## Testing with ember-hook
-The password component is accessible using ember-hook with the top level hook name or you can access the internal components as well -
+The password component is accessible using ember-hook with the top level hook name or you can access the internal
+components as well -
 * Input field hook - `<hook-name>-input`
 * Input field clear button hook - `<hook-name>-clear`
 * Input field reveal button hook - `<hook-name>-reveal`

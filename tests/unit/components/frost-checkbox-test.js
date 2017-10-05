@@ -18,7 +18,7 @@ describe(test.label, function () {
     })
   })
 
-  it('sets default property values correctly', function () {
+  it('should set default property values correctly', function () {
     expect(
       component.get('size'),
       'size: "small"'
@@ -50,14 +50,14 @@ describe(test.label, function () {
     ).not.to.equal(null)
   })
 
-  it('extends the base frost component', function () {
+  it('should extend the base frost component', function () {
     expect(
       component instanceof Component,
       'is instance of Frost Component'
     ).to.equal(true)
   })
 
-  it('_setInputId() concatenates elmenentId to "_input"', function () {
+  it('should have _setInputId() concatenate elmenentId to "_input"', function () {
     const testInputId = component.get('elementId')
 
     component._setInputId()
@@ -72,7 +72,7 @@ describe(test.label, function () {
       run(() => component.set('onBlur', undefined))
     })
 
-    it('does not throw an error when onBlur action is triggered', function () {
+    it('should not throw an error when onBlur action is triggered', function () {
       expect(function () {
         component.get('actions.onBlur').call(component)
       }).not.to.throw(Error)
@@ -93,7 +93,7 @@ describe(test.label, function () {
       preventDefaultSpy.reset()
       stopPropagationSpy.reset()
     })
-    it('sets state to checked', function () {
+    it('should set state to checked', function () {
       this.render()
 
       component.keyPress(eventTestObject)
@@ -104,7 +104,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
 
-    it('does not set state to checked when disabled is true', function () {
+    it('should not set state to checked when disabled is true', function () {
       const disabled = true
 
       this.render()
@@ -119,7 +119,7 @@ describe(test.label, function () {
       ).to.equal(false)
     })
 
-    it('calls preventDefault', function () {
+    it('should call preventDefault', function () {
       this.render()
 
       component.keyPress(eventTestObject)
@@ -130,7 +130,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
 
-    it('calls stopPropogation', function () {
+    it('should call stopPropogation', function () {
       this.render()
 
       component.keyPress(eventTestObject)
@@ -141,7 +141,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
 
-    it('returns false', function () {
+    it('should return false', function () {
       this.render()
 
       expect(
@@ -150,7 +150,7 @@ describe(test.label, function () {
       ).to.equal(false)
     })
 
-    it('calls input() action', function () {
+    it('should call input() action', function () {
       const spy = sinon.spy(component, 'send')
 
       this.render()

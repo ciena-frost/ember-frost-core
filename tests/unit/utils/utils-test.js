@@ -4,7 +4,7 @@ import $ from 'jquery'
 import {describe, it} from 'mocha'
 
 describe('Unit / Utility / cloneEvent', function () {
-  it('target cloned and original target unchanged', function () {
+  it('should target cloned and original target unchanged', function () {
     const eventText = 'my-original-target'
     const clonedEventText = 'cloned-target'
 
