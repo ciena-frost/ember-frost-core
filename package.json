@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "ember build",
+    "check-coverage": "pr-bumper check-coverage",
     "lint": "lint-all-the-things",
     "start": "ember server",
     "test": "npm run lint && npm run test-addon",
@@ -67,6 +68,7 @@
     "eslint-plugin-ember": "^4.5.0",
     "loader.js": "^4.2.3",
     "markdown-code-highlighting": "0.1.0",
+    "pr-bumper": "^2.0.1",
     "sinon-chai": "^2.13.0"
   },
   "keywords": [
