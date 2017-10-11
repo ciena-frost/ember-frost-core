@@ -86,7 +86,6 @@
     "name": "frost"
   },
   "dependencies": {
-    "babel-plugin-ember-modules-api-polyfill": "^2.0.1",
     "broccoli-autoprefixer": "^5.0.0",
     "broccoli-babel-transpiler": "^5.0.0",
     "broccoli-file-creator": "^1.1.1",
