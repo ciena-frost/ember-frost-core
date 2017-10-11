@@ -3,12 +3,12 @@ const blueprintHelper = require('ember-frost-core/blueprint-helper')
 module.exports = {
   afterInstall: function (options) {
     const addonsToAdd = [
-      {name: 'ember-cli-frost-blueprints', target: '^2.0.0'},
+      {name: 'ember-cli-frost-blueprints', target: '^2.0.1'},
       {name: 'ember-concurrency', target: '~0.8.10'},
       {name: 'ember-elsewhere', target: '1.0.2'},
       {name: 'ember-hook', target: '^1.4.2'},
-      {name: 'ember-prop-types', target: '^4.0.0'},
-      {name: 'ember-spread', target: '^2.0.0'},
+      {name: 'ember-prop-types', target: '^4.0.1'},
+      {name: 'ember-spread', target: '^2.0.1'},
       {name: 'ember-truth-helpers', target: '^1.3.0'}
     ]
 
