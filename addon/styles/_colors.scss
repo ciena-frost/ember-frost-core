@@ -32,7 +32,7 @@ $frost-color-teal-4: #9aefea !default;
 $frost-color-lilac-1: #a183db !default;
 $frost-color-lilac-2: #4c318c !default;
 $frost-color-lilac-3: #e8dffb !default;
-$frost-color-lilac-4: #c3aaee !default;  // not in style guide
+$frost-color-lilac-4: #c3aaee !default;
 
 $frost-color-yellow-1: #fed200 !default;
 $frost-color-yellow-2: #a57602 !default;
@@ -54,8 +54,8 @@ $frost-color-indigo-3: #6493f2 !default;
 $frost-color-indigo-4: #b0ceff !default;
 
 // TODO The following three colors should be in a theme an come from the palette (talk to Brain about palette)
-$frost-color-positive: #86c43b !default;  // no longer in style guide
-$frost-color-neutral: #efc059 !default;  // no longer in style guide
+$frost-color-positive: #86c43b !default;
+$frost-color-neutral: #efc059 !default;
 $frost-color-danger: #d1625e !default;
 
 // Greys
@@ -72,7 +72,7 @@ $frost-color-lgrey-1: #e2e2e2 !default;
 $frost-color-lgrey-2: #dbdbdb !default;
 $frost-color-lgrey-3: #f0f2f4 !default;
 $frost-color-lgrey-4: #f5f6f7 !default;
-$frost-color-lgrey-5: #f2f2f2 !default;  // no longer in style guide
+$frost-color-lgrey-5: #f2f2f2 !default;
 
 $frost-color-white: #fff !default;
 
@@ -102,13 +102,18 @@ $frost-color-loa-1: #00f2f2 !default;  // Used for LoA alarms
 $frost-color-loa-2: #2e5e5e !default;
 $frost-color-loa-3: #abfffb !default;
 
+//
 // Alarm colors
+//
+// Note that Warning and Loss of Association alarms use colors that
+// are already defined above.
+//
 
 $frost-color-clear: $frost-color-white;  // cleared alarm
 $frost-color-info-1: #b9cfea !default;
-$frost-color-warn-1: #7d8fb2 !default;
+// Warning alarms use $frost-color-warn-1
 $frost-color-minor-1: #ddd326 !default;
 $frost-color-major-1: #ef8e00 !default;
 $frost-color-critical-1: #e52c2c !default;
-// Loss of Association alarms should use loa-1
+// Loss of Association alarms use $frost-color-loa-1
 $frost-color-indeter-1: #272425 !default;  // indeterminate
