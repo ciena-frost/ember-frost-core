@@ -39,6 +39,7 @@ before_install:
 - $(npm root -g)/pr-bumper/.travis/maybe-check-scope.sh
 
 install:
+- bower install
 - $(npm root -g)/pr-bumper/.travis/maybe-install.sh
 
 before_script:
