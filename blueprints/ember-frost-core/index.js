@@ -9,7 +9,7 @@ module.exports = {
       {name: 'ember-hook', target: '^1.4.2'},
       {name: 'ember-prop-types', target: '^4.0.1'},
       {name: 'ember-spread', target: '^2.0.1'},
-      {name: 'ember-truth-helpers', target: '^1.3.0'}
+      {name: 'ember-truth-helpers', target: '^2.0.0'}
     ]
 
     // Get the packages installed in the consumer app/addon. Packages that are already installed in the consumer within
