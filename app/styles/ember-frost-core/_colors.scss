@@ -1,4 +1,5 @@
-$frost-color-white: #fff !default;
+// Matching visual style guide 1.624 (2017-09-12)
+// These colors are grouped to match the style guide's non-alphabetical ordering.
 
 $frost-color-blue-1: #009eef !default;
 $frost-color-blue-2: #005582 !default;
@@ -22,22 +23,38 @@ $frost-color-green-5: #c2efc7 !default;
 $frost-color-teal-1: #099 !default;
 $frost-color-teal-2: #005957 !default;
 $frost-color-teal-3: #00d3cd !default;
-$frost-color-teal-4: #a1e7ff !default;
+$frost-color-teal-4: #9aefea !default;
 
-$frost-color-lilac-1: #8d6ccf !default;
+$frost-color-lilac-1: #a183db !default;
 $frost-color-lilac-2: #4c318c !default;
 $frost-color-lilac-3: #e8dffb !default;
 $frost-color-lilac-4: #c3aaee !default;
+
+$frost-color-yellow-1: #fed200 !default;
+$frost-color-yellow-2: #a57602 !default;
+$frost-color-yellow-3: #ffe775 !default;
+$frost-color-yellow-4: #fff3c0 !default;
+
+$frost-color-pink-1: #e82896 !default;
+$frost-color-pink-2: #8e1b68 !default;
+$frost-color-pink-3: #ff71c9 !default;
+$frost-color-pink-4: #ffccf3 !default;
+
+$frost-color-brown-1: #a05a44 !default;
+$frost-color-brown-2: #5e3225 !default;
+$frost-color-brown-3: #f2dcd7 !default;
 
 $frost-color-indigo-1: #3c54ba !default;
 $frost-color-indigo-2: #0d246d !default;
 $frost-color-indigo-3: #6493f2 !default;
 $frost-color-indigo-4: #b0ceff !default;
 
-$frost-color-pink-1: #e82896 !default;
-$frost-color-pink-2: #8e1b68 !default;
-$frost-color-pink-3: #fe84cf !default;
-$frost-color-pink-4: #ffccf3 !default;
+// TODO The following three colors should be in a theme an come from the palette (talk to Brain about palette)
+$frost-color-positive: #86c43b !default;
+$frost-color-neutral: #efc059 !default;
+$frost-color-danger: #d1625e !default;
+
+// Greys
 
 $frost-color-grey-1: #404041 !default;
 $frost-color-grey-2: #231f20 !default;
@@ -53,7 +70,46 @@ $frost-color-lgrey-3: #f0f2f4 !default;
 $frost-color-lgrey-4: #f5f6f7 !default;
 $frost-color-lgrey-5: #f2f2f2 !default;
 
-// TODO The following three colors should be in a theme an come from the palette (talk to Brain about palette)
-$frost-color-positive: #86c43b !default;
-$frost-color-neutral: #efc059 !default;
-$frost-color-danger: #d1625e !default;
+$frost-color-white: #fff !default;
+
+// Frost status colors
+
+$frost-color-active-1: #00aa3e !default;
+$frost-color-active-2: #006823 !default;
+$frost-color-active-3: #c6ff8a !default;
+
+$frost-color-minor-1: #ddd326 !default;
+$frost-color-minor-2: #a89b00 !default;
+$frost-color-minor-3: #fff6b3 !default;
+
+$frost-color-major-1: #ef8e00 !default;
+$frost-color-major-2: #ba6a00 !default;
+$frost-color-major-3: #fdc !default;
+
+$frost-color-critical-1: #e52c2c !default;
+$frost-color-critical-2: #a31414 !default;
+$frost-color-critical-3: #ffbdbd !default;
+
+$frost-color-warn-1: #7d85b2 !default;
+$frost-color-warn-2: #36477f !default;
+$frost-color-warn-3: #cacfe5 !default;
+
+$frost-color-loa-1: #00f2f2 !default;  // Used for LoA alarms
+$frost-color-loa-2: #2e5e5e !default;
+$frost-color-loa-3: #abfffb !default;
+
+//
+// Alarm colors
+//
+// Note that Warning and Loss of Association alarms use colors that
+// are already defined above.
+//
+
+$frost-color-clear: $frost-color-white;  // cleared alarm
+$frost-color-info-1: #b9cfea !default;
+// Warning alarms use $frost-color-warn-1
+$frost-color-minor-1: #ddd326 !default;
+$frost-color-major-1: #ef8e00 !default;
+$frost-color-critical-1: #e52c2c !default;
+// Loss of Association alarms use $frost-color-loa-1
+$frost-color-indeter-1: #272425 !default;  // indeterminate

@@ -1,3 +1,6 @@
+# 1.24.0 (2017-10-16)
+- Update colors to match Frost Visual Style Guide 1.624 (2017-09-12).  Added colors include named alarm colors, status colors, yellows, and browns.  Some colors were fixed to match the most recent versions.
+
 # 1.23.13 (2017-09-12)
 
 * Use ember-cli-notifications v4.2.1 - 4.2.0 was using a beta version of ember-css-modules
