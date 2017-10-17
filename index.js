@@ -9,7 +9,6 @@ const mergeTrees = require('broccoli-merge-trees')
 const SVGStore = require('broccoli-svgstore')
 const fs = require('fs')
 const path = require('path')
-const VersionChecker = require('ember-cli-version-checker')
 
 /**
  * Creates an object composed of the object properties predicate returns truthy for. The predicate is invoked
@@ -179,26 +178,12 @@ module.exports = {
     const iconNameJson = JSON.stringify(iconNames, null, 2)
     const iconNameTree = writeFile('modules/ember-frost-core/icon-packs.js', `export default ${iconNameJson}`)
 
-    // The transpiling was done on the output of `treeForAddon` < `ember-cli@2.12.0`. We need to manually transpile
-    // for >= `embe-cli@2.12.0` - @dafortin 2017.06.21
-    const checker = new VersionChecker(this)
-    const emberCliVersion = checker.for('ember-cli')
-
     let output = iconNameTree
-    if (emberCliVersion.satisfies('>=2.14.0')) {
-      const addonOptions = this._getAddonOptions()
+    const addonOptions = this._getAddonOptions()
 
-      if (addonOptions && addonOptions.babel) {
-        const addon = this.addons.find(addon => addon.name === 'ember-cli-babel')
-        output = addon.transpileTree(iconNameTree, addonOptions.babel)
-      }
-    } else if (emberCliVersion.satisfies('>=2.12.0 <2.14.0')) {
-      const addonOptions = this._getAddonOptions()
-
-      if (addonOptions && addonOptions.babel) {
-        const BabelTranspiler = require('broccoli-babel-transpiler')
-        output = new BabelTranspiler(iconNameTree, addonOptions.babel)
-      }
+    if (addonOptions && addonOptions.babel) {
+      const addon = this.addons.find(addon => addon.name === 'ember-cli-babel')
+      output = addon.transpileTree(iconNameTree, addonOptions.babel)
     }
 
     return mergeTrees([addonTree, output], {overwrite: true})
