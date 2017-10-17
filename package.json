@@ -16,7 +16,7 @@
   },
   "repository": "git@github.com:ciena-frost/ember-frost-core.git",
   "engines": {
-    "node": ">= 6.0.0"
+    "node": ">= 8.1.2"
   },
   "author": "Roxanne Panthaky (https://github.com/rox163)",
   "contributors": [
@@ -68,7 +68,7 @@
     "eslint-plugin-ember": "^4.5.0",
     "loader.js": "^4.2.3",
     "markdown-code-highlighting": "0.1.0",
-    "pr-bumper": "^2.0.1",
+    "pr-bumper": "^3.1.0",
     "sinon-chai": "^2.13.0"
   },
   "keywords": [

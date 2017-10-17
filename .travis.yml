@@ -3,8 +3,7 @@ dist: trusty
 language: node_js
 
 node_js:
-- '6.11.0'
-- 'stable'
+- '8.1.2'
 
 addons:
   chrome: stable
@@ -32,11 +31,11 @@ matrix:
   allow_failures:
   - env: EMBER_TRY_SCENARIO=ember-beta
   - env: EMBER_TRY_SCENARIO=ember-canary
-  - node_js: 'stable'
+
 
 before_install:
 - npm config set spin false
-- npm install -g coveralls pr-bumper@^2.0.0
+- npm install -g coveralls pr-bumper@^3.1.0
 - $(npm root -g)/pr-bumper/.travis/maybe-check-scope.sh
 
 install:
@@ -65,7 +64,7 @@ deploy:
   on:
     all_branches: true
     condition: "$EMBER_TRY_SCENARIO = 'ember-default'"
-    node: '6.11.0'
+    node: '8.1.2'
     tags: true
 
 notifications:
