@@ -12,9 +12,7 @@ describe(test.label, function () {
 
   beforeEach(function () {
     component = this.subject({
-      _setupAssertions: function () {
-        return // eslint-disable-line no-useless-return
-      },
+      _setupAssertions: function () {},
       hook: 'myRadioButton',
       value: 'testValue'
     })

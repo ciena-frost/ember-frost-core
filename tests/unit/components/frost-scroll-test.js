@@ -28,8 +28,7 @@ describe(test.label, function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollUp', function () { return }) // eslint-disable-line no-useless-return
-
+    component.set('onScrollUp', function () {})
     this.render()
 
     spyOn.reset()
@@ -58,7 +57,7 @@ describe(test.label, function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollDown', function () { return }) // eslint-disable-line no-useless-return
+    component.set('onScrollDown', function () {})
 
     this.render()
 
@@ -88,7 +87,7 @@ describe(test.label, function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollYStart', function () { return }) // eslint-disable-line no-useless-return
+    component.set('onScrollYStart', function () {})
 
     this.render()
 
@@ -118,7 +117,7 @@ describe(test.label, function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollYEnd', function () { return }) // eslint-disable-line no-useless-return
+    component.set('onScrollYEnd', function () {})
 
     this.render()
 
@@ -148,7 +147,7 @@ describe(test.label, function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollX', function () { return }) // eslint-disable-line no-useless-return
+    component.set('onScrollX', function () {})
 
     this.render()
 
@@ -178,7 +177,7 @@ describe(test.label, function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollRight', function () { return }) // eslint-disable-line no-useless-return
+    component.set('onScrollRight', function () {})
 
     this.render()
 
@@ -208,7 +207,7 @@ describe(test.label, function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollLeft', function () { return }) // eslint-disable-line no-useless-return
+    component.set('onScrollLeft', function () {})
 
     this.render()
 
@@ -238,7 +237,7 @@ describe(test.label, function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onMouseEnter', function () { return }) // eslint-disable-line no-useless-return
+    component.set('onMouseEnter', function () {})
 
     this.render()
 
