@@ -3,8 +3,12 @@
  * NOTE: This should only be necessary until the PR adding this functionality directly to the `hook` is merged
  * @see {@link https://github.com/Ticketfly/ember-hook/pull/35}
  */
-import Ember from 'ember'
-const {Helper, deprecate, keys} = Ember
+
+import {deprecate} from '@ember/application/deprecations'
+import Helper from '@ember/component/helper'
+const {helper} = Helper
+import {keys} from '@ember/polyfills'
+
 import config from 'ember-get-config'
 import decorateHook from 'ember-hook/utils/decorate-hook'
 import delimit from 'ember-hook/utils/delimit'
@@ -48,4 +52,4 @@ export function ehook ([hook, qualifierObj = {}], attributes = {}) {
   return returnWhenTesting(config, decorateHook(delimit(hook), qualifiers))
 }
 
-export default Helper.helper(ehook)
+export default helper(ehook)

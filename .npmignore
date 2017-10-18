@@ -1,5 +1,5 @@
 /bower_components
-/config
+/config/ember-try.js
 /dist
 /tests
 /tmp
@@ -22,5 +22,5 @@ bower.json
 ember-cli-build.js
 dependency-snapshot.json
 jsconfig.json
-testem.json
+testem.js
 .idea

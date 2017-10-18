@@ -1,11 +1,17 @@
 /**
  * Component definition for frost-select-dropdown component
  */
-import Ember from 'ember'
-const {$, deprecate, get, isArray, isEmpty, merge} = Ember
-import computed, {readOnly} from 'ember-computed-decorators'
+
+import {deprecate} from '@ember/application/deprecations'
+import {isArray} from '@ember/array'
+import {get} from '@ember/object'
+import {merge} from '@ember/polyfills'
+import {htmlSafe} from '@ember/string'
+import {isEmpty} from '@ember/utils'
 import {task, timeout} from 'ember-concurrency'
+import {computed, readOnly} from 'ember-decorators/object'
 import {PropTypes} from 'ember-prop-types'
+import $ from 'jquery'
 
 import '../polyfills/replaceWith'
 import layout from '../templates/components/frost-select-dropdown'
@@ -153,7 +159,7 @@ export default Component.extend({
     ]
       .join(';')
 
-    return Ember.String.htmlSafe(style)
+    return htmlSafe(style)
   },
 
   @readOnly
@@ -177,7 +183,7 @@ export default Component.extend({
       style.push(`bottom:${bottom - ARROW_HEIGHT + BORDER_HEIGHT}px`)
     }
 
-    return Ember.String.htmlSafe(style.join(';'))
+    return htmlSafe(style.join(';'))
   },
 
   @readOnly
@@ -523,7 +529,7 @@ export default Component.extend({
 
         case TAB:
           this.get('onClose')()
-          return
+          return // eslint-disable-line no-useless-return
       }
     }
     /* eslint-enable complexity */

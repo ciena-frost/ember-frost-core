@@ -7,7 +7,7 @@ const test = integration('frost-loading')
 describe(test.label, function () {
   test.setup()
 
-  it('renders default values', function () {
+  it('should render default values', function () {
     this.render(hbs`
       {{frost-loading hook='myLoader'}}
     `)
@@ -18,7 +18,7 @@ describe(test.label, function () {
     ).to.have.length(1)
   })
 
-  it('type property sets class', function () {
+  it('should have type property set class', function () {
     this.render(hbs`
       {{frost-loading
         hook='myLoader'
@@ -32,7 +32,7 @@ describe(test.label, function () {
     ).to.have.length(1)
   })
 
-  it('renders using spread', function () {
+  it('should render using spread', function () {
     this.render(hbs`
       {{frost-loading
         options=(hash

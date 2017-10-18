@@ -1,10 +1,11 @@
 /**
  * Component definition for the my-content component
  */
-import {Component} from 'ember-frost-core'
-import {PropTypes} from 'ember-prop-types'
 
 import layout from './template'
+
+import {Component} from 'ember-frost-core'
+import {PropTypes} from 'ember-prop-types'
 
 export default Component.extend({
   // == Dependencies ==========================================================

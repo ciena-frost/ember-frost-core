@@ -1,15 +1,19 @@
 /**
  * Component definition for frost-select component
  */
+
+import {on} from '@ember/object/evented'
+import {run} from '@ember/runloop'
+import {htmlSafe} from '@ember/string'
+import {typeOf} from '@ember/utils'
+
 import layout from '../templates/components/frost-select'
 import keyCodes from '../utils/key-codes'
 import Component from './frost-component'
-import Ember from 'ember'
-import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
+import {computed, readOnly} from 'ember-decorators/object'
 import {PropTypes} from 'ember-prop-types'
-
-const {$, on, run, typeOf} = Ember
+import $ from 'jquery'
 
 const {DOWN_ARROW, SPACE, UP_ARROW} = keyCodes
 
@@ -255,7 +259,7 @@ export default Component.extend({
     // note that in the width case, we want the component interface to have absolute power over the width
     // so it will override any max or win widths to ensure ultimate control
     if (width) styles += `width: ${width}px; max-width: initial; min-width:initial; `
-    return Ember.String.htmlSafe(styles)
+    return htmlSafe(styles)
   },
   // == Tasks =================================================================
 

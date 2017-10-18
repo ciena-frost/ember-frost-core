@@ -9,7 +9,7 @@ const test = integration('frost-scroll')
 describe(test.label, function () {
   test.setup()
 
-  it('onScrollUp closure action is called', function () {
+  it('should call onScrollUp closure action', function () {
     const externalActionSpy = sinon.spy()
 
     this.on('externalAction', externalActionSpy)
@@ -29,7 +29,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('onScrollDown closure action is called', function () {
+  it('should call onScrollDown closure action', function () {
     const externalActionSpy = sinon.spy()
 
     this.on('externalAction', externalActionSpy)
@@ -49,7 +49,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('onScrollYStart closure action is called', function () {
+  it('should call onScrollYStart closure action', function () {
     const externalActionSpy = sinon.spy()
 
     this.on('externalAction', externalActionSpy)
@@ -69,7 +69,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('onScrollYEnd closure action is called', function () {
+  it('should call onScrollYEnd closure action', function () {
     const externalActionSpy = sinon.spy()
 
     this.on('externalAction', externalActionSpy)
@@ -89,7 +89,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('onScrollX closure action is called', function () {
+  it('should call onScrollX closure action', function () {
     const externalActionSpy = sinon.spy()
 
     this.on('externalAction', externalActionSpy)
@@ -109,7 +109,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('onScrollRight closure action is called', function () {
+  it('should call onScrollRight closure action', function () {
     const externalActionSpy = sinon.spy()
 
     this.on('externalAction', externalActionSpy)
@@ -129,7 +129,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('onScrollLeft closure action is called', function () {
+  it('should call onScrollLeft closure action', function () {
     const externalActionSpy = sinon.spy()
 
     this.on('externalAction', externalActionSpy)
@@ -149,7 +149,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('renders using spread', function () {
+  it('should render using spread', function () {
     const hook = 'my-hook'
 
     this.set('hook', hook)
@@ -168,7 +168,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('onMouseEnter closure action is called', function () {
+  it('should call onMouseEnter closure action', function () {
     const externalActionSpy = sinon.spy()
 
     this.on('externalAction', externalActionSpy)

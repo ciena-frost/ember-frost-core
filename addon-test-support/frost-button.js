@@ -6,14 +6,16 @@
  * @property {String} [text] - button text
  */
 
+import {assign, merge} from '@ember/polyfills'
+import {typeOf} from '@ember/utils'
+
 import {expect} from 'chai'
-import Ember from 'ember'
-const {$, typeOf} = Ember // eslint-disable-line
 import {$hook} from 'ember-hook'
+import $ from 'jquery'
 
 import {expectDisabledState} from './utils'
 
-const assign = Object.assign || Ember.assign || Ember.merge // eslint-disable-line
+const objectAssign = Object.assign || assign || merge // eslint-disable-line
 
 /**
  * Verify button exists with expected state
@@ -27,7 +29,7 @@ export function expectWithState (button, state) {
   }
 
   const $button = typeOf(button) === 'string' ? $hook(button) : button
-  state = assign(defaults, state)
+  state = objectAssign(defaults, state)
 
   expectDisabledState($button, state.disabled, 'button')
 

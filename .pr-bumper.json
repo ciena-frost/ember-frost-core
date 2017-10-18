@@ -1,3 +1,10 @@
 {
-  "dependencySnapshotFile": ""
+  "features": {
+    "changelog": {
+      "enabled": true
+    },
+    "coverage": {
+      "enabled": false
+    }
+  }
 }

@@ -15,14 +15,14 @@ describe(test.label, function () {
     })
   })
 
-  it('sets default property values correctly', function () {
+  it('should set default property values correctly', function () {
     expect(
       component.get('type'),
       'type: "ripple"'
     ).to.eql('ripple')
   })
 
-  it('extends the commone frost component', function () {
+  it('should extend the commone frost component', function () {
     expect(
       component instanceof Component,
       'is instance of Frost Component'

@@ -1,9 +1,9 @@
-import Ember from 'ember'
-const {Controller, inject} = Ember
+import Controller from '@ember/controller'
+import {inject as service} from '@ember/service'
 
 // BEGIN-SNIPPET scroll-controller
 export default Controller.extend({
-  notifications: inject.service('notification-messages'),
+  notifications: service('notification-messages'),
 
   actions: {
     onScrollUp () {

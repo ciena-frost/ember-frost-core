@@ -10,7 +10,7 @@ describe(test.label, function () {
   test.setup()
 
   describe('Checked property', function () {
-    it('sets checked property', function () {
+    it('should set checked property', function () {
       this.render(hbs`
         {{frost-radio-button
           checked=true
@@ -30,7 +30,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
 
-    it('does not set checked property', function () {
+    it('should not set checked property', function () {
       this.render(hbs`
           {{frost-radio-button
             hook='myRadioButton'
@@ -51,7 +51,7 @@ describe(test.label, function () {
   })
 
   describe('Disabled property', function () {
-    it('sets disabled property', function () {
+    it('should set disabled property', function () {
       this.render(hbs`
         {{frost-radio-button
           disabled=true
@@ -73,7 +73,7 @@ describe(test.label, function () {
   })
 
   describe('Hook property', function () {
-    it('sets when passed into radio-button', function () {
+    it('should set when passed into radio-button', function () {
       const value = 'testValue'
 
       this.set('value', value)
@@ -93,7 +93,7 @@ describe(test.label, function () {
   })
 
   describe('Size property', function () {
-    it('has small class set', function () {
+    it('should have small class set', function () {
       const size = 'small'
 
       this.set('size', size)
@@ -112,7 +112,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
 
-    it('has medium class set', function () {
+    it('should have medium class set', function () {
       const size = 'medium'
 
       this.set('size', size)
@@ -131,7 +131,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
 
-    it('has large class set', function () {
+    it('should have large class set', function () {
       const size = 'large'
 
       this.set('size', size)
@@ -151,7 +151,7 @@ describe(test.label, function () {
     })
   })
 
-  it('sets required property', function () {
+  it('should set required property', function () {
     this.render(hbs`
       {{frost-radio-button
         hook='myRadioButton'
@@ -171,7 +171,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('sets type to "radio"', function () {
+  it('should set type to "radio"', function () {
     this.render(hbs`
       {{frost-radio-button
         hook='myRadioButton'
@@ -185,7 +185,7 @@ describe(test.label, function () {
     ).to.eql('radio')
   })
 
-  it('sets value property', function () {
+  it('should set value property', function () {
     const value = 'test value'
 
     this.set('value', value)
@@ -204,7 +204,7 @@ describe(test.label, function () {
   })
 
   describe('Label property', function () {
-    it('inline format', function () {
+    it('should set correctly with inline format', function () {
       const text = 'my-text'
 
       this.set('text', text)
@@ -223,7 +223,7 @@ describe(test.label, function () {
       ).to.eql(text)
     })
 
-    it('block format', function () {
+    it('should set correctly with block format', function () {
       const text = 'my-text'
 
       this.set('text', text)
@@ -246,7 +246,7 @@ describe(test.label, function () {
 
   describe('Radio button in group', function () {
     describe('Checked property', function () {
-      it('sets checked property', function () {
+      it('should set checked property', function () {
         this.render(hbs`
           {{#frost-radio-group
             hook='myRadioGroup'
@@ -268,7 +268,7 @@ describe(test.label, function () {
         ).to.equal(true)
       })
 
-      it('does not set checked property', function () {
+      it('should not set checked property', function () {
         this.render(hbs`
           {{#frost-radio-group hook='myRadioGroup' as |controls|}}
             {{controls.button value='testValue'}}
@@ -288,7 +288,7 @@ describe(test.label, function () {
     })
 
     describe('Disabled property', function () {
-      it('sets disabled property', function () {
+      it('should set disabled property', function () {
         this.render(hbs`
           {{#frost-radio-group hook='myRadioGroup' as |controls|}}
             {{controls.button
@@ -311,7 +311,7 @@ describe(test.label, function () {
     })
 
     describe('Hook property', function () {
-      it('sets when passed into radio-group', function () {
+      it('should set when passed into radio-group', function () {
         const value = 'testValue'
 
         this.set('value', value)
@@ -340,7 +340,7 @@ describe(test.label, function () {
     })
 
     describe('Size property', function () {
-      it('has small class set', function () {
+      it('should have small class set', function () {
         const size = 'small'
 
         this.set('size', size)
@@ -360,7 +360,7 @@ describe(test.label, function () {
         ).to.equal(true)
       })
 
-      it('has medium class set', function () {
+      it('should have medium class set', function () {
         const size = 'medium'
 
         this.set('size', size)
@@ -380,7 +380,7 @@ describe(test.label, function () {
         ).to.equal(true)
       })
 
-      it('has large class set', function () {
+      it('should have large class set', function () {
         const size = 'large'
 
         this.set('size', size)
@@ -401,7 +401,7 @@ describe(test.label, function () {
       })
     })
 
-    it('sets required property', function () {
+    it('should set required property', function () {
       this.render(hbs`
         {{#frost-radio-group hook='myRadioGroup' as |controls|}}
           {{controls.button
@@ -422,7 +422,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
 
-    it('sets value property', function () {
+    it('should set value property', function () {
       const value = 'test value'
 
       this.set('value', value)
@@ -442,7 +442,7 @@ describe(test.label, function () {
     })
 
     describe('Label property', function () {
-      it('inline format', function () {
+      it('should set correctly with inline format', function () {
         const text = 'my-text'
 
         this.set('text', text)
@@ -462,7 +462,7 @@ describe(test.label, function () {
         ).to.eql(text)
       })
 
-      it('block format', function () {
+      it('should set correctly with block format', function () {
         const text = 'my-text'
 
         this.set('text', text)
@@ -485,7 +485,7 @@ describe(test.label, function () {
     })
 
     describe('onChange closure action', function () {
-      it('is called on click', function () {
+      it('should be called on click', function () {
         const externalActionSpy = sinon.spy()
 
         this.on('externalAction', externalActionSpy)
@@ -509,7 +509,7 @@ describe(test.label, function () {
   })
 
   describe('onChange closure action', function () {
-    it('is called on keypress of "enter"', function () {
+    it('should be called on keypress of "enter"', function () {
       const externalActionSpy = sinon.spy()
 
       this.on('externalAction', externalActionSpy)
@@ -533,7 +533,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
 
-    it('is called on keypress of "spacebar"', function () {
+    it('should be called on keypress of "spacebar"', function () {
       const externalActionSpy = sinon.spy()
 
       this.on('externalAction', externalActionSpy)
@@ -557,7 +557,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
 
-    it('is called on click', function () {
+    it('should be called on click', function () {
       const externalActionSpy = sinon.spy()
 
       this.on('externalAction', externalActionSpy)
@@ -582,7 +582,7 @@ describe(test.label, function () {
     })
   })
 
-  it('calls _createEvent() which sets the target id ', function () {
+  it('should call _createEvent() which sets the target id ', function () {
     const externalActionSpy = sinon.spy()
     const id = 'myTestGroupId'
 
@@ -608,7 +608,7 @@ describe(test.label, function () {
     ).to.eql(id)
   })
 
-  it('renders using spread', function () {
+  it('should render using spread', function () {
     this.render(hbs`
       {{frost-radio-button
         options=(hash

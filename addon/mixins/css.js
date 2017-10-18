@@ -2,8 +2,9 @@
  * Mixin for providing a `css` property on components
  * The `css` property will be the introspected name of the component
  */
-import Ember from 'ember'
-const {Mixin} = Ember
+
+import Mixin from '@ember/object/mixin'
+
 import {PropTypes} from 'ember-prop-types'
 
 export default Mixin.create({

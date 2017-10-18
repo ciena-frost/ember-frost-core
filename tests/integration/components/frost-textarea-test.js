@@ -1,6 +1,5 @@
+import {run} from '@ember/runloop'
 import {expect} from 'chai'
-import Ember from 'ember'
-const {run} = Ember
 import {$hook} from 'ember-hook'
 import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'
@@ -11,7 +10,7 @@ const test = integration('frost-textarea')
 describe(test.label, function () {
   test.setup()
 
-  it('renders default values', function () {
+  it('should render default values', function () {
     this.render(hbs`
       {{frost-textarea hook='myTextarea'}}
     `)
@@ -32,7 +31,7 @@ describe(test.label, function () {
     ).to.have.length(1)
   })
 
-  it('sets autofocus property', function () {
+  it('should set autofocus property', function () {
     this.render(hbs`
       {{frost-textarea
         autofocus=true
@@ -46,7 +45,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('sets disabled property', function () {
+  it('should set disabled property', function () {
     this.render(hbs`
       {{frost-textarea
         disabled=true
@@ -60,7 +59,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('sets readonly property', function () {
+  it('should set readonly property', function () {
     this.render(hbs`
       {{frost-textarea
         hook='myTextarea'
@@ -74,7 +73,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('sets cols property', function () {
+  it('should set cols property', function () {
     const cols = 20
 
     this.set('cols', cols)
@@ -92,7 +91,7 @@ describe(test.label, function () {
     ).to.eql(cols)
   })
 
-  it('sets tabindex', function () {
+  it('should set tabindex', function () {
     const tabindex = -1
 
     this.set('tabindex', tabindex)
@@ -110,7 +109,7 @@ describe(test.label, function () {
     ).to.eql(tabindex)
   })
 
-  it('sets rows property', function () {
+  it('should set rows property', function () {
     const rows = 20
 
     this.set('rows', rows)
@@ -128,7 +127,7 @@ describe(test.label, function () {
     ).to.eql(rows)
   })
 
-  it('sets placeholder property', function () {
+  it('should set placeholder property', function () {
     const placeholder = 'placeholder'
 
     this.set('placeholder', placeholder)
@@ -146,7 +145,7 @@ describe(test.label, function () {
     ).to.eql(placeholder)
   })
 
-  it('sets value', function () {
+  it('should set value', function () {
     const value = 'Test'
 
     this.set('value', value)
@@ -164,7 +163,7 @@ describe(test.label, function () {
     ).to.eql(value)
   })
 
-  it('calls onFocus closure action', function () {
+  it('should call onFocus closure action', function () {
     const externalActionSpy = sinon.spy()
 
     this.on('externalAction', externalActionSpy)
@@ -184,7 +183,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('calls onInput closure action', function () {
+  it('should call onInput closure action', function () {
     const externalActionSpy = sinon.spy()
 
     this.on('externalAction', externalActionSpy)
@@ -204,7 +203,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('calls onBlur closure action', function () {
+  it('should call onBlur closure action', function () {
     const externalActionSpy = sinon.spy()
 
     this.on('externalAction', externalActionSpy)
@@ -224,7 +223,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('hook attr grabs frost-textarea-input as expected', function () {
+  it('should have hook attr grab frost-textarea-input as expected', function () {
     this.render(hbs`
       {{frost-textarea
         hook='myTextarea'
@@ -237,7 +236,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('hook attr grabs frost-textarea-clear as expected', function () {
+  it('should have hook attr grab frost-textarea-clear as expected', function () {
     this.render(hbs`
       {{frost-textarea
         hook='myTextarea'
@@ -251,7 +250,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('only renders the clear icon in insert', function () {
+  it('should only render the clear icon in insert', function () {
     this.render(hbs`
       {{frost-textarea hook='myTextarea'}}
     `)
@@ -279,7 +278,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('runs clear() which clears the input value', function () {
+  it('should run clear() which clears the input value', function () {
     this.render(hbs`
       {{frost-textarea hook='myTextarea'}}
     `)
@@ -295,7 +294,7 @@ describe(test.label, function () {
     ).to.eql('')
   })
 
-  it('hook attr grabs frost-textarea as expected', function () {
+  it('should have hook attr grab frost-textarea as expected', function () {
     this.render(hbs`
         {{frost-textarea
           hook='my-text'
@@ -313,7 +312,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('calls onKeyUp closure action', function () {
+  it('should call onKeyUp closure action', function () {
     const externalActionSpy = sinon.spy()
 
     this.on('externalAction', externalActionSpy)
@@ -333,7 +332,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('calls onInput closure action', function () {
+  it('should call onInput closure action', function () {
     const externalActionSpy = sinon.spy()
     const testValue = 'Test'
 
@@ -361,7 +360,7 @@ describe(test.label, function () {
     ).to.eql(testValue)
   })
 
-  it('renders using spread', function () {
+  it('should render using spread', function () {
     this.render(hbs`
       {{frost-textarea
         options=(hash

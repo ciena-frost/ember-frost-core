@@ -2,12 +2,12 @@
  * Component definition for the frost-bookends component
  */
 
-import Ember from 'ember'
-const {run} = Ember
-import {Component} from 'ember-frost-core'
-import {PropTypes} from 'ember-prop-types'
+import {run} from '@ember/runloop'
 
 import layout from '../templates/components/frost-bookends'
+import Component from './frost-component'
+
+import {PropTypes} from 'ember-prop-types'
 
 export default Component.extend({
   // == Dependencies ==========================================================
