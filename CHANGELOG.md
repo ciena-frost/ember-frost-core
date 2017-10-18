@@ -1,3 +1,19 @@
+# 2.0.0 (2017-10-18)
+* **Updated** testing dependencies
+* **Updated** to Ember CLI 2.16.2 and babel 6
+* **Updated** to using ember-decorators which replaces ember-computed-decorators
+* **Updated** dependencies
+* **Updated** pr-bumber to version 3
+* **Updated** CONTRIBUTING.md file
+* **Updated** to using Ember Javascript Modules API https://github.com/ember-cli/ember-rfc176-data
+* **Updated** blueprints to latest versions of dependencies
+* **Updated** to use chrome headless in Travis CI
+* **Updated** to using Node 8.1.2 NPM 5
+* **Added** eslint-plugin-ember to enforce Ember Javascript Modules API syntax
+* **Removed** running of code coverage until issue is resolved with ember-cli-code-coverage: https://github.com/kategengler/ember-cli-code-coverage/issues/133
+* **Removed** running of ember-try its-2.12 scenario until issue is resolved: https://github.com/ember-cli/ember-try/issues/148
+* **Updated** blueprint helper tests to be commented out since in babel 6 CommonJS files are converted to AMD (which needs import of require) and then being transpiled.
+
 # 1.24.0 (2017-10-16)
 - Update colors to match Frost Visual Style Guide 1.624 (2017-09-12).  Added colors include named alarm colors, status colors, yellows, and browns.  Some colors were fixed to match the most recent versions.
 
