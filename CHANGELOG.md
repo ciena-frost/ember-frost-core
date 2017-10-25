@@ -1,3 +1,8 @@
+# 2.0.2 (2017-10-25)
+* **Updated** version of `ember-decorators`
+* **Removed** code setting babel plugins inside `index.js` since it is no longer needed for `ember-decorators'
+
+
 # 2.0.1 (2017-10-25)
 * **Updated** to ensure that the `included` method's `this._super` call is properly bound to the context (fixes ember-decorators/ember-decorators#173).
 
