@@ -95,7 +95,7 @@
     "ember-cli-htmlbars": "^2.0.1",
     "ember-cli-path-utils": "^1.0.0",
     "ember-cli-sass": "7.0.0",
-    "ember-decorators": "^1.3.1",
+    "ember-decorators": "1.3.1",
     "npm-install-security-check": "^1.0.4",
     "promise": "^8.0.1",
     "semver": "^5.4.1"
