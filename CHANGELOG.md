@@ -1,3 +1,6 @@
+# 2.0.1 (2017-10-25)
+* **Updated** to ensure that the `included` method's `this._super` call is properly bound to the context (fixes ember-decorators/ember-decorators#173).
+
 # 2.0.0 (2017-10-18)
 * **Updated** testing dependencies
 * **Updated** to Ember CLI 2.16.2 and babel 6
