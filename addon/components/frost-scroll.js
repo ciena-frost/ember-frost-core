@@ -72,9 +72,7 @@ export default Component.extend({
     }
 
     this._mouseEnterHandler = () => {
-      run(() => {
-        this.get('onMouseEnter')(this.get('element'))
-      })
+      this.get('onMouseEnter')(this.get('element'))
     }
 
     if (typeOf(this.onScrollUp) === 'function') {
