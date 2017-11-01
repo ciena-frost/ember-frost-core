@@ -216,7 +216,7 @@ describe(test.label, function () {
       // FIXME: tests for tabbing into components isn't working anymore, despite the fact that
       // code changes shouldn't have affected it, AFAIK, probably need to look into alternative ways of
       // testing this (ARM 2016-12-05)
-      describe.skip('tab into component', function () {
+      describe('tab into component', function () {
         beforeEach(function () {
           // In case you are wondering what the hell is going on here there is no
           // way to trigger a generic tab event on the document to move focus on to
@@ -462,7 +462,7 @@ describe(test.label, function () {
         // FIXME: tests for tabbing into components isn't working anymore, despite the fact that
         // code changes shouldn't have affected it, AFAIK, probably need to look into alternative ways of
         // testing this (ARM 2016-12-05)
-        describe.skip('tab into component', function () {
+        describe('tab into component', function () {
           beforeEach(function () {
             // In case you are wondering what the hell is going on here there is no
             // way to trigger a generic tab event on the document to move focus on to
@@ -932,7 +932,7 @@ describe(test.label, function () {
       // FIXME: tests for tabbing into components isn't working anymore, despite the fact that
       // code changes shouldn't have affected it, AFAIK, probably need to look into alternative ways of
       // testing this (ARM 2016-12-05)
-      describe.skip('tab into component', function () {
+      describe('tab into component', function () {
         beforeEach(function () {
           // In case you are wondering what the hell is going on here there is no
           // way to trigger a generic tab event on the document to move focus on to
@@ -1513,7 +1513,7 @@ describe(test.label, function () {
         // FIXME: tests for tabbing into components isn't working anymore, despite the fact that
         // code changes shouldn't have affected it, AFAIK, probably need to look into alternative ways of
         // testing this (ARM 2016-12-05)
-        describe.skip('tab into component', function () {
+        describe('tab into component', function () {
           beforeEach(function () {
             // In case you are wondering what the hell is going on here there is no
             // way to trigger a generic tab event on the document to move focus on to
@@ -1667,10 +1667,21 @@ describe(test.label, function () {
 
         it('should find items by index, label and value', function (done) {
           return wait().then(() => {
+            $hook('select-item', {index: 0})
             expect($hook('select-item', {index: 0})).to.have.length(1)
             expect($hook('select-item', {label: 'Foo'})).to.have.length(1)
             expect($hook('select-item', {value: 'foo'})).to.have.length(1)
             done()
+          })
+        })
+        it('mouseenter should focus item', function (done) {
+          return wait().then(() => {
+            $hook('select-item', {index: 0}).mouseenter()
+            wait().then(() => {
+              expect($hook('select-item', {index: 0})[0].className.includes('frost-select-list-item-focused'))
+                .to.have.equal(true)
+              done()
+            })
           })
         })
       })
