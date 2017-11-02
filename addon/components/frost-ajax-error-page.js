@@ -1,7 +1,6 @@
 /**
  * Component definition for the frost-ajax-error-page component
  */
-
 import layout from '../templates/components/frost-ajax-error-page'
 import Component from './frost-component'
 import {PropTypes} from 'ember-prop-types'

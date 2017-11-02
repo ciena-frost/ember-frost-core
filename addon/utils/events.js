@@ -1,4 +1,5 @@
-import {deprecate} from '@ember/application/deprecations'
+import Ember from 'ember'
+const {deprecate} = Ember
 
 export default {
   addProperty: function (event, frostEvent) {
@@ -24,7 +25,6 @@ export default {
     }
   },
 
-  /* eslint-disable indent */
   init: function (eventMap, add) {
     Object.keys(eventMap).forEach((event) => {
       eventMap[event].forEach((frostEvent, i) => {
@@ -44,7 +44,6 @@ export default {
       })
     })
   },
-  /* eslint-enable indent */
 
   map: {
     'change': ['onChange'],

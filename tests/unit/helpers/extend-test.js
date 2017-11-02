@@ -1,7 +1,6 @@
 /**
  * Unit test for extend helper
  */
-
 import {expect} from 'chai'
 import {extend} from 'ember-frost-core/helpers/extend'
 import {beforeEach, describe, it} from 'mocha'

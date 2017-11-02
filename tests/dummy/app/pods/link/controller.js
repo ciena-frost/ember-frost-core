@@ -1,10 +1,9 @@
-import Controller from '@ember/controller'
-import {inject as service} from '@ember/service'
-import {htmlSafe} from '@ember/string'
-import {computed, readOnly} from 'ember-decorators/object'
+import Ember from 'ember'
+const {Controller, inject} = Ember
+import computed, {readOnly} from 'ember-computed-decorators'
 
 export default Controller.extend({
-  notifications: service('notification-messages'),
+  notifications: inject.service('notification-messages'),
 
   fontSize: 20,
 
@@ -20,7 +19,7 @@ export default Controller.extend({
   @readOnly
   @computed('fontSize')
   fontSizeStyle (fontSize) {
-    return htmlSafe(`font-size: ${fontSize}px`)
+    return Ember.String.htmlSafe(`font-size: ${fontSize}px`)
   },
 
   actions: {

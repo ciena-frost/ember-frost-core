@@ -1,7 +1,6 @@
-import Component from '@ember/component'
 import {expect} from 'chai'
 import Ember from 'ember'
-const {Handlebars} = Ember
+const {Component, Handlebars} = Ember
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'

@@ -1,5 +1,6 @@
-import {run} from '@ember/runloop'
 import {expect} from 'chai'
+import Ember from 'ember'
+const {run} = Ember
 import Component from 'ember-frost-core/components/frost-component'
 import {unit} from 'ember-test-utils/test-support/setup-component-test'
 import {beforeEach, describe, it} from 'mocha'
@@ -16,7 +17,7 @@ describe(test.label, function () {
     })
   })
 
-  it('should set default property values correctly', function () {
+  it('sets default property values correctly', function () {
     expect(
       component.get('inputs'),
       'inputs: []'
@@ -28,7 +29,7 @@ describe(test.label, function () {
     ).to.equal(null)
   })
 
-  it('should extend the commone frost component', function () {
+  it('extends the commone frost component', function () {
     expect(
       component instanceof Component,
       'is instance of Frost Component'
@@ -36,14 +37,14 @@ describe(test.label, function () {
   })
 
   describe('"meshedInputs" computed property', function () {
-    it('should not be set when inputs is not set', function () {
+    it('is not set when inputs is not set', function () {
       expect(
         component.get('meshedInputs'),
         '"meshedInputs" is returning an empty list'
       ).to.eql([])
     })
 
-    it('should be set when inputs is set', function () {
+    it('is set when inputs is set', function () {
       const inputs = [{
         value: 'test', label: 'test'
       }]

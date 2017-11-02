@@ -1,7 +1,6 @@
 /**
  * Component definition for the frost-mult-select component
  */
-
 import FrostSelect from './frost-select'
 
 export default FrostSelect.extend({

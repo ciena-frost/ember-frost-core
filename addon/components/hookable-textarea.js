@@ -3,8 +3,8 @@
  * A simple extension of {{textarea}} to explicitly set the hook mixin
  */
 
-import TextArea from '@ember/component/text-area'
-
+import Ember from 'ember'
+const {TextArea} = Ember
 import {HookMixin} from 'ember-hook'
 
 export default TextArea.extend(HookMixin, {

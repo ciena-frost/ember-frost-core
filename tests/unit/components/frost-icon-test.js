@@ -1,5 +1,6 @@
-import {run} from '@ember/runloop'
 import {expect} from 'chai'
+import Ember from 'ember'
+const {run} = Ember
 import Component from 'ember-frost-core/components/frost-component'
 import PropTypeMixin from 'ember-prop-types'
 import SpreadMixin from 'ember-spread'
@@ -19,7 +20,7 @@ describe(test.label, function () {
     })
   })
 
-  it('should set default property values correctly', function () {
+  it('sets default property values correctly', function () {
     expect(
       component.get('tagName'),
       'tagName: "svg"'
@@ -31,14 +32,14 @@ describe(test.label, function () {
     ).to.eql('frost')
   })
 
-  it('should extend the base frost component', function () {
+  it('extends the base frost component', function () {
     expect(
       component instanceof Component,
       'is instance of Frost Component'
     ).to.equal(true)
   })
 
-  it('should set dependent keys correctly', function () {
+  it('sets dependent keys correctly', function () {
     const iconClassDependentKeys = [
       'icon',
       'pack'
@@ -50,7 +51,7 @@ describe(test.label, function () {
     ).to.eql(iconClassDependentKeys)
   })
 
-  it('should have the expected Mixins', function () {
+  it('has the expected Mixins', function () {
     expect(
       PropTypeMixin.detect(component),
       'PropTypeMixin Mixin is present'
@@ -63,7 +64,7 @@ describe(test.label, function () {
   })
 
   describe('"iconClass" computed property', function () {
-    it('should be set correctly', function () {
+    it('is set correctly', function () {
       const pack = 'frost'
       const icon = 'add'
 

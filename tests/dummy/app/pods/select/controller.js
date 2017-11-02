@@ -1,9 +1,8 @@
-import Controller from '@ember/controller'
-import {computed} from '@ember/object'
-import {inject as service} from '@ember/service'
+import Ember from 'ember'
+const {Controller, computed, inject} = Ember
 
 export default Controller.extend({
-  notifications: service('notification-messages'),
+  notifications: inject.service('notification-messages'),
   data: computed('data', 'search', function () {
     let result = this.model.map((record) => {
       return {

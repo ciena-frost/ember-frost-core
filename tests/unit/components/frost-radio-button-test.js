@@ -1,5 +1,6 @@
-import {run} from '@ember/runloop'
 import {expect} from 'chai'
+import Ember from 'ember'
+const {run} = Ember
 import Component from 'ember-frost-core/components/frost-component'
 import {unit} from 'ember-test-utils/test-support/setup-component-test'
 import {beforeEach, describe, it} from 'mocha'
@@ -12,13 +13,15 @@ describe(test.label, function () {
 
   beforeEach(function () {
     component = this.subject({
-      _setupAssertions: function () {},
+      _setupAssertions: function () {
+        return
+      },
       hook: 'myRadioButton',
       value: 'testValue'
     })
   })
 
-  it('should set default property values correctly', function () {
+  it('sets default property values correctly', function () {
     expect(
       component.get('checked'),
       'checked: false'
@@ -45,14 +48,14 @@ describe(test.label, function () {
     ).to.eql('small')
   })
 
-  it('should extend the commone frost component', function () {
+  it('extends the commone frost component', function () {
     expect(
       component instanceof Component,
       'is instance of Frost Component'
     ).to.equal(true)
   })
 
-  it('should set dependent keys correctly', function () {
+  it('sets dependent keys correctly', function () {
     const checkedDependentKeys = [
       'selectedValue',
       'value'
@@ -76,7 +79,7 @@ describe(test.label, function () {
   describe('"checked" computed property', function () {
     const selectedValue = 'testValue'
 
-    it('should be set to true when "selectedValue" is equal to "value"', function () {
+    it('is set to true when "selectedValue" is equal to "value"', function () {
       run(() => component.set('selectedValue', selectedValue))
 
       expect(
@@ -85,7 +88,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
 
-    it('should be set to false when "selectedValue" is NOT equal to "value"', function () {
+    it('is set to false when "selectedValue" is NOT equal to "value"', function () {
       run(() => {
         component.set('selectedValue', selectedValue)
         component.set('value', 'newTestValue')
@@ -98,7 +101,7 @@ describe(test.label, function () {
     })
   })
 
-  it('should have "tabindex" set to "-1" when "disabled" is set to true', function () {
+  it('"tabindex" set to "-1" when "disabled" is set to true', function () {
     run(() => component.set('disabled', true))
 
     expect(
@@ -108,7 +111,7 @@ describe(test.label, function () {
   })
 
   describe('"hookQualifiers" computed property', function () {
-    it('should be set when "value" is set', function () {
+    it('is set when "value" is set', function () {
       const value = 'my-value'
 
       run(() => component.set('value', value))
@@ -121,7 +124,7 @@ describe(test.label, function () {
   })
 
   describe('keyPress', function () {
-    it('should not call "onChange" when "disabled" is set', function () {
+    it('"onChange" not called when "disabled" is set', function () {
       run(() => {
         component.set('disabled', true)
       })
@@ -134,7 +137,7 @@ describe(test.label, function () {
       ).to.equal(undefined)
     })
 
-    it('should not call "onChange" when "checked" is set', function () {
+    it('"onChange" not called when "checked" is set', function () {
       run(() => {
         component.set('checked', true)
       })

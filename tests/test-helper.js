@@ -12,13 +12,13 @@ window.$hook = $hook
 // may need to look at how ember-cli-chai does that (loads plugins that is) (@job13er 2017-05-09)
 chai.use(function (_chai, utils) {
   _chai.Assertion.addMethod('text', function (text, doNotTrim) {
-    let actual = utils.flag(this, 'object').text()
+    var actual = utils.flag(this, 'object').text()
     if (!doNotTrim) {
       actual = actual.trim()
     }
 
-    const msg = 'expected #{this} to have text #{exp}, but the text was #{act}'
-    const negatedMsg = 'expected #{this} not to have text #{exp}'
+    var msg = 'expected #{this} to have text #{exp}, but the text was #{act}'
+    var negatedMsg = 'expected #{this} not to have text #{exp}'
 
     this.assert(actual === text, msg, negatedMsg, text, actual)
   })

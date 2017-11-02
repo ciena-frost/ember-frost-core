@@ -1,10 +1,9 @@
 /**
  * Component definition for frost-radio-group component
  */
-
 import layout from '../templates/components/frost-radio-group'
 import Component from './frost-component'
-import {computed, readOnly} from 'ember-decorators/object'
+import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
 
 export default Component.extend({

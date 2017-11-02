@@ -2,9 +2,8 @@
  * array helper
  * Temporary fix until the following bug is resolved: https://github.com/emberjs/ember.js/issues/14264
  */
-
-import {A} from '@ember/array'
-import Helper from '@ember/component/helper'
+import Ember from 'ember'
+const {A, Helper} = Ember
 const {helper} = Helper
 
 export function array (params) {

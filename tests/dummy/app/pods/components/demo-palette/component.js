@@ -1,5 +1,6 @@
-import Component from '@ember/component'
-import $ from 'jquery'
+/* global $ */
+import Ember from 'ember'
+const {Component} = Ember
 
 function hex (x) {
   return parseInt(x).toString(16).slice(-2)

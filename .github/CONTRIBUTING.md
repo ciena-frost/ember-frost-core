@@ -8,7 +8,8 @@ Coming Soon
 ## Pull Requests
 We use [`pr-bumper`](github.com/ciena-blueplanet/pr-bumper) in our projects, so every pull request should include a
 comment about what kind of change is being provided (think [`semver`](semver.org)). The [`README`](github.com/ciena-blueplanet/pr-bumper/blob/master/README.md#pull-requests) from `pr-bumper` has more details,
-but the gist of it is you need to include a directive in your pull request description that tells `pr-bumper` whether the change is `#major#`, `#minor#`, `#patch#` or `#none#`.
+but the gist of it is you need to include a directive in your pull request description that tells `pr-bumper` whether
+the change is `#major#`, `#minor#`, or `#patch#`.
 
 It is also encouraged (soon to be required) to include a `# CHANGELOG` section in the pull request description.
 Everything underneath this section will be prepended to the `CHANGELOG.md` in the repository when the pull-request

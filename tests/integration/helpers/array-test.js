@@ -11,12 +11,12 @@ describe(test.label, function () {
     this.render(hbs`{{array 1 2 3}}`)
   })
 
-  it('should render as expected', function () {
+  it('renders as expected', function () {
     this.render(hbs`{{array 1 2 3}}`)
     expect(this.$().text().trim()).to.be.equal('1,2,3')
   })
 
-  it('should work in loop', function () {
+  it('use in loop', function () {
     this.render(hbs`
     {{#each (array 1 2 3) as |value|}}
       <p class='value'>{{value}}</p>
