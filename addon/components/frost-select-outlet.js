@@ -1,7 +1,6 @@
 /**
  * Component definition for the frost-select-outlet component
  */
-
 import layout from '../templates/components/frost-select-outlet'
 import Component from './frost-component'
 import {PropTypes} from 'ember-prop-types'

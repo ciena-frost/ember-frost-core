@@ -9,7 +9,7 @@ const test = integration('frost-checkbox')
 describe(test.label, function () {
   test.setup()
 
-  it('should render default values', function () {
+  it('renders default values', function () {
     this.render(hbs`
       {{frost-checkbox hook='myCheckbox'}}
     `)
@@ -32,7 +32,7 @@ describe(test.label, function () {
     ).to.eql(0)
   })
 
-  it('should set size class correctly', function () {
+  it('sets size class correctly', function () {
     this.set('size', 'medium')
 
     this.render(hbs`
@@ -52,7 +52,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('should set checked state property to input', function () {
+  it('sets checked state property to input', function () {
     this.render(hbs`
       {{frost-checkbox hook='myCheckbox'}}
     `)
@@ -72,7 +72,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('should set error class correctly', function () {
+  it('sets error class correctly', function () {
     this.render(hbs`
       {{frost-checkbox hook='myCheckbox'}}
     `)
@@ -92,7 +92,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('should set disabled state property to input', function () {
+  it('sets disabled state property to input', function () {
     this.render(hbs`
       {{frost-checkbox hook='myCheckbox'}}
     `)
@@ -112,7 +112,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('should render label when it is set', function () {
+  it('renders label when it is set', function () {
     this.render(hbs`
       {{frost-checkbox hook='myCheckbox'}}
     `)
@@ -132,7 +132,7 @@ describe(test.label, function () {
     ).to.eql('lorem ipsum')
   })
 
-  it('should trigger value change', function () {
+  it('triggers value change', function () {
     this.set('checkbox-value', false)
     this.on('valueChange', function (attrs) {
       this.set('checkbox-value', attrs.value)
@@ -145,18 +145,17 @@ describe(test.label, function () {
       label='value'}}
     `)
 
-    let input = this.$('input')
+    var input = this.$('input')
     input.trigger('click')
 
     return wait()
       .then(() => {
         expect(this.get('checkbox-value')).to.eql(true)
-        input = null
       })
   })
 
-  describe('should call onInput closure action', function () {
-    it('should have an object with id set to value', function () {
+  describe('calls onInput closure action', function () {
+    it('has an object with id set to value', function () {
       const externalActionSpy = sinon.spy()
       const testValue = 'test'
 
@@ -183,7 +182,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
 
-    it('should have an object with id set to elementId', function () {
+    it('has an object with id set to elementId', function () {
       const externalActionSpy = sinon.spy()
 
       this.on('externalAction', externalActionSpy)
@@ -207,7 +206,7 @@ describe(test.label, function () {
     })
   })
 
-  it('should call onBlur callback when focus is lost', function () {
+  it('calls onBlur callback when focus is lost', function () {
     const externalActionSpy = sinon.spy()
 
     this.on('externalAction', externalActionSpy)
@@ -227,7 +226,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('should call onFocus closure action', function () {
+  it('calls onFocus closure action', function () {
     const externalActionSpy = sinon.spy()
 
     this.on('externalAction', externalActionSpy)
@@ -248,7 +247,7 @@ describe(test.label, function () {
   })
 
   // https://github.com/juwara0/ember-frost-core/issues/1
-  it.skip('should set focus on render when autofocus is true', function () {
+  it.skip('sets focus on render when autofocus is true', function () {
     const focusSpy = sinon.spy(this.$.prototype, 'focus')
 
     this.render(hbs`
@@ -266,7 +265,7 @@ describe(test.label, function () {
     this.$.prototype.focus.restore()
   })
 
-  it('should render using spread', function () {
+  it('renders using spread', function () {
     this.render(hbs`
       {{frost-checkbox
         options=(hash

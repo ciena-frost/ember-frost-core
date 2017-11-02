@@ -7,7 +7,7 @@ const test = integration('frost-icon')
 describe(test.label, function () {
   test.setup()
 
-  it('should set icon class', function () {
+  it('sets icon class', function () {
     this.render(hbs`
       {{frost-icon hook='myIcon' icon='round-add'}}
     `)
@@ -18,7 +18,7 @@ describe(test.label, function () {
     ).to.have.length(1)
   })
 
-  it('should set the pack property', function () {
+  it('sets the pack property', function () {
     this.render(hbs`
       {{frost-icon
         hook='myIcon'
@@ -33,7 +33,7 @@ describe(test.label, function () {
     ).to.have.length(1)
   })
 
-  it('should render using spread', function () {
+  it('renders using spread', function () {
     this.render(hbs`
       {{frost-icon hook='myIcon' options=(hash icon='round-add')}}
     `)

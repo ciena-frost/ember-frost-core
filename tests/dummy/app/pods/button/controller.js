@@ -1,8 +1,8 @@
-import Controller from '@ember/controller'
-import {inject as service} from '@ember/service'
+import Ember from 'ember'
+const {Controller, inject} = Ember
 
 export default Controller.extend({
-  notifications: service('notification-messages'),
+  notifications: inject.service('notification-messages'),
   vertical: false,
 
   actions: {

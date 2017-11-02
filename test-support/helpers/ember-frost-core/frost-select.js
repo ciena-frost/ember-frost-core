@@ -10,18 +10,15 @@
  * @property {String} [text=''] - text in select for describing what is selected
  */
 
-import {assign, merge} from '@ember/polyfills'
-import {run} from '@ember/runloop'
-import {typeOf} from '@ember/utils'
-
 import {expect} from 'chai'
+import Ember from 'ember'
+const {$, RSVP, run, typeOf} = Ember // eslint-disable-line
 import {$hook} from 'ember-hook'
 import wait from 'ember-test-helpers/wait'
-import $ from 'jquery'
 
 import {expectToggleClass} from './utils'
 
-const objectAssign = Object.assign || assign || merge // eslint-disable-line
+const assign = Object.assign || Ember.assign || Ember.merge // eslint-disable-line
 
 /* eslint-disable complexity */
 /**
@@ -39,7 +36,7 @@ export function expectWithState (select, state) {
   }
 
   const $select = typeOf(select) === 'string' ? $hook(select) : select
-  state = objectAssign(defaults, state)
+  state = assign(defaults, state)
 
   expect(
     $select.hasClass('frost-select'),

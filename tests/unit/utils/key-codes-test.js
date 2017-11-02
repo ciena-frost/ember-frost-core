@@ -4,7 +4,7 @@ import {describe, it} from 'mocha'
 
 describe('Unit / Utility / keycodes', function () {
   // Replace this with your real tests.
-  it('should work', function () {
+  it('works', function () {
     let result = keycodes
     expect(result).not.to.equal(null)
   })

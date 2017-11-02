@@ -3,7 +3,6 @@
  * May seem silly, but we had a bug where there was a typo in one of the modules being re-exported
  * Making it so that no one could import anything directly from 'ember-frost-core'
  */
-
 import {expect} from 'chai'
 import * as index from 'ember-frost-core'
 import {describe, it} from 'mocha'

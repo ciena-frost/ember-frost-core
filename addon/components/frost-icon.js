@@ -1,13 +1,12 @@
 /**
  * Component definition for frost-icon component
  */
-
-import {deprecate} from '@ember/application/deprecations'
-
 import layout from '../templates/components/frost-icon'
 import Component from './frost-component'
-import {computed, readOnly} from 'ember-decorators/object'
+import Ember from 'ember'
+import computed, {readOnly} from 'ember-computed-decorators'
 import {PropTypes} from 'ember-prop-types'
+const {deprecate} = Ember
 
 export default Component.extend({
 

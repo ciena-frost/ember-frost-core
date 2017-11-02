@@ -1,7 +1,8 @@
 import {expect} from 'chai'
+import Ember from 'ember'
+const {$} = Ember
 import Component from 'ember-frost-core/components/frost-component'
 import {unit} from 'ember-test-utils/test-support/setup-component-test'
-import $ from 'jquery'
 import {beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
@@ -17,18 +18,19 @@ describe(test.label, function () {
     })
   })
 
-  it('should extend the common frost component', function () {
+  it('extends the common frost component', function () {
     expect(
       component instanceof Component,
       'is instance of Frost Component'
     ).to.equal(true)
   })
 
-  it('should register and unregister "ps-scroll-up" event handlers', function () {
+  it('registers and unregisters "ps-scroll-up" event handlers', function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollUp', function () {})
+    component.set('onScrollUp', function () { return })
+
     this.render()
 
     spyOn.reset()
@@ -53,11 +55,11 @@ describe(test.label, function () {
     $.fn.off.restore()
   })
 
-  it('should register and unregister "ps-scroll-down" event handlers', function () {
+  it('registers and unregisters "ps-scroll-down" event handlers', function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollDown', function () {})
+    component.set('onScrollDown', function () { return })
 
     this.render()
 
@@ -83,11 +85,11 @@ describe(test.label, function () {
     $.fn.off.restore()
   })
 
-  it('should register and unregister "ps-y-reach-start" event handlers', function () {
+  it('registers and unregisters "ps-y-reach-start" event handlers', function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollYStart', function () {})
+    component.set('onScrollYStart', function () { return })
 
     this.render()
 
@@ -113,11 +115,11 @@ describe(test.label, function () {
     $.fn.off.restore()
   })
 
-  it('should register and unregister "ps-y-reach-end" event handlers', function () {
+  it('registers and unregisters "ps-y-reach-end" event handlers', function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollYEnd', function () {})
+    component.set('onScrollYEnd', function () { return })
 
     this.render()
 
@@ -143,11 +145,11 @@ describe(test.label, function () {
     $.fn.off.restore()
   })
 
-  it('should register and unregister "ps-scroll-x" event handlers', function () {
+  it('registers and unregisters "ps-scroll-x" event handlers', function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollX', function () {})
+    component.set('onScrollX', function () { return })
 
     this.render()
 
@@ -173,11 +175,11 @@ describe(test.label, function () {
     $.fn.off.restore()
   })
 
-  it('should register and unregister "ps-scroll-right" event handlers', function () {
+  it('registers and unregisters "ps-scroll-right" event handlers', function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollRight', function () {})
+    component.set('onScrollRight', function () { return })
 
     this.render()
 
@@ -203,11 +205,11 @@ describe(test.label, function () {
     $.fn.off.restore()
   })
 
-  it('should register and unregister "ps-scroll-left" event handlers', function () {
+  it('registers and unregisters "ps-scroll-left" event handlers', function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollLeft', function () {})
+    component.set('onScrollLeft', function () { return })
 
     this.render()
 
@@ -233,11 +235,11 @@ describe(test.label, function () {
     $.fn.off.restore()
   })
 
-  it('should register and unregister "mouseenter" event handlers', function () {
+  it('registers and unregisters "mouseenter" event handlers', function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onMouseEnter', function () {})
+    component.set('onMouseEnter', function () { return })
 
     this.render()
 

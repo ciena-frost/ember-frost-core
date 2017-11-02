@@ -6,14 +6,15 @@
  * @see {@link https://github.com/Ticketfly/ember-hook/pull/35}
  */
 
-import Helper from '@ember/component/helper'
-const {helper} = Helper
-import {assign, merge} from '@ember/polyfills'
+/* eslint-disable ember-standard/destructure */
 
-const objectAssign = Object.assign || assign || merge
+import Ember from 'ember'
+const {Helper} = Ember
+
+const assign = Object.assign || Ember.assign || Ember.merge
 
 export function extend ([original], newProps) {
-  return objectAssign({}, original, newProps)
+  return assign({}, original, newProps)
 }
 
-export default helper(extend)
+export default Helper.helper(extend)

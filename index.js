@@ -1,5 +1,6 @@
 /* eslint-env node */
-'use strict'
+
+// 'use strict'
 
 // const AssetRev = require('broccoli-asset-rev')
 const autoprefixer = require('broccoli-autoprefixer')
@@ -9,10 +10,10 @@ const mergeTrees = require('broccoli-merge-trees')
 const SVGStore = require('broccoli-svgstore')
 const fs = require('fs')
 const path = require('path')
+const VersionChecker = require('ember-cli-version-checker')
 
 /**
- * Creates an object composed of the object properties predicate returns truthy for. The predicate is invoked
- * with two arguments: (value, key).
+ * Creates an object composed of the object properties predicate returns truthy for. The predicate is invoked with two arguments: (value, key).
  * @param {Object} object - the source object
  * @param {Function} predicate - The function invoked per property
  * @returns {Object} Returns the new object
@@ -40,7 +41,7 @@ function pickBy (object, predicate) {
  */
 function get (object, path, defaultValue) {
   const segments = path.split('.')
-  let result = object
+  var result = object
 
   while (segments.length !== 0) {
     if (isObject(result)) {
@@ -74,6 +75,15 @@ function isObject (object) {
   return object !== null && typeof object === 'object'
 }
 
+/**
+ * Default the babel options
+ * @param {Object} options - the options for this build
+ */
+function defaultBabel (options) {
+  options.babel = options.babel || {}
+  options.babel.optional = options.babel.optional || []
+}
+
 module.exports = {
   name: 'ember-frost-core',
 
@@ -103,9 +113,21 @@ module.exports = {
     }
   },
 
+  init: function (app) {
+    this.options = this.options || {}
+    defaultBabel(this.options)
+
+    if (this.options.babel.optional.indexOf('es7.decorators') === -1) {
+      this.options.babel.optional.push('es7.decorators')
+    }
+    if (this._super.init) {
+      this._super.init.apply(this, arguments)
+    }
+  },
+
   flattenIcons: function (iconNames, subDir, srcDir) {
     fs.readdirSync(srcDir).forEach((fileName) => {
-      const filePath = path.join(srcDir, fileName)
+      var filePath = path.join(srcDir, fileName)
       if (fs.lstatSync(filePath).isDirectory()) {
         this.flattenIcons(iconNames, `${subDir}${subDir === '' ? '' : '/'}${fileName}`, filePath)
       } else if (fileName.endsWith('.svg')) {
@@ -119,15 +141,15 @@ module.exports = {
   /* eslint-disable complexity */
   // Present purely to allow programmatic access to the icon packs and icon names (for demo purposes)
   treeForAddon: function (tree) {
-    const addonTree = this._super.treeForAddon.call(this, tree)
+    var addonTree = this._super.treeForAddon.call(this, tree)
 
-    let iconNames = {}
+    var iconNames = {}
 
-    const addonPackages = pickBy(this.project.addonPackages, (addonPackage) => {
+    var addonPackages = pickBy(this.project.addonPackages, (addonPackage) => {
       return has(addonPackage.pkg, 'ember-frost-icon-pack')
     })
 
-    for (let addonName in addonPackages) {
+    for (var addonName in addonPackages) {
       if (addonPackages.hasOwnProperty(addonName)) {
         const addonPackage = addonPackages[addonName]
         const iconPack = addonPackage.pkg['ember-frost-icon-pack']
@@ -152,12 +174,17 @@ module.exports = {
     const iconNameJson = JSON.stringify(iconNames, null, 2)
     const iconNameTree = writeFile('modules/ember-frost-core/icon-packs.js', `export default ${iconNameJson}`)
 
+    // The transpiling was done on the output of `treeForAddon` < `ember-cli@2.12.0`. We need to manually transpile
+    // for >= `embe-cli@2.12.0` - @dafortin 2017.06.21
+    const checker = new VersionChecker(this)
+    const isEmberCliAbove12 = checker.for('ember-cli').satisfies('>= 2.12.0')
     let output = iconNameTree
-    const addonOptions = this._getAddonOptions()
-
-    if (addonOptions && addonOptions.babel) {
-      const addon = this.addons.find(addon => addon.name === 'ember-cli-babel')
-      output = addon.transpileTree(iconNameTree, addonOptions.babel)
+    if (isEmberCliAbove12) {
+      const addonOptions = this._getAddonOptions()
+      if (addonOptions && addonOptions.babel) {
+        const BabelTranspiler = require('broccoli-babel-transpiler')
+        output = new BabelTranspiler(iconNameTree, addonOptions.babel)
+      }
     }
 
     return mergeTrees([addonTree, output], {overwrite: true})
@@ -169,7 +196,7 @@ module.exports = {
    * @param  {[type]} treeForPublic [description]
    * @return {[type]}               [description]
    */
-  /* eslint-enable complexity */
+   /* eslint-enable complexity */
   treeForPublic: function (treeForPublic) {
     const isAddon = this.project.isEmberCLIAddon()
 
@@ -183,7 +210,7 @@ module.exports = {
       const iconPackPath = iconPack.path || 'svgs'
       const addonIconPackPath = path.join(addonPackage.path, iconPackPath)
 
-      const svgFunnel = new Funnel(addonIconPackPath, {
+      var svgFunnel = new Funnel(addonIconPackPath, {
         include: [new RegExp(/\.svg$/)]
       })
 

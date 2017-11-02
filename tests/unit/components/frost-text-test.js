@@ -1,5 +1,6 @@
-import {run} from '@ember/runloop'
 import {expect} from 'chai'
+import Ember from 'ember'
+const {run} = Ember
 import Component from 'ember-frost-core/components/frost-component'
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import {unit} from 'ember-test-utils/test-support/setup-component-test'
@@ -17,7 +18,7 @@ describe(test.label, function () {
     })
   })
 
-  it('should set default property values correctly', function () {
+  it('sets default property values correctly', function () {
     expect(
       component.get('align'),
       'align: left'
@@ -84,14 +85,14 @@ describe(test.label, function () {
     ).to.equal(undefined)
   })
 
-  it('should extend the commone frost component', function () {
+  it('extends the commone frost component', function () {
     expect(
       component instanceof Component,
       'is instance of Frost Component'
     ).to.equal(true)
   })
 
-  it('should have the expect Mixins', function () {
+  it('has the expect Mixins', function () {
     expect(
       FrostEventsProxy.detect(component),
       'FrostEventsProxy is present'
@@ -103,7 +104,7 @@ describe(test.label, function () {
       run(() => component.set('keyUp', undefined))
     })
 
-    it('should not throw an error when keyUp action is triggered', function () {
+    it('does not throw an error when keyUp action is triggered', function () {
       expect(
         function () {
           component.get('actions.keyUp').call(component)

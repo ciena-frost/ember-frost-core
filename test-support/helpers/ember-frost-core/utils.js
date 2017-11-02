@@ -1,16 +1,4 @@
-import {typeOf} from '@ember/utils'
-
 import {expect} from 'chai'
-import {$hook} from 'ember-hook'
-
-/**
- * Click on element
- * @param {jQuery|String} element - name of Ember hook or jQuery instance
- */
-export function click (element) {
-  const $element = typeOf(element) === 'string' ? $hook(element) : element
-  $element.click()
-}
 
 /**
  * Expect element to have disabled state
@@ -42,23 +30,4 @@ export function expectToggleClass ($element, className, state) {
     `${state ? 'has' : 'does not have'} ${className} class`
   )
     .to.equal(state)
-}
-
-/**
- * Fill in an element
- * @param {jQuery|String} element - name of Ember hook or jQuery instance
- * @param {String} value - value to fill in
- */
-export function fillIn (element, value) {
-  const $element = typeOf(element) === 'string' ? $hook(element) : element
-  $element.val(value).trigger('input')
-}
-
-/**
- * Remove focus from element
- * @param {jQuery|String} element - name of Ember hook or jQuery instance
- */
-export function focusout (element) {
-  const $element = typeOf(element) === 'string' ? $hook(element) : element
-  $element.focusout()
 }

@@ -1,5 +1,6 @@
-import {run} from '@ember/runloop'
 import {expect} from 'chai'
+import Ember from 'ember'
+const {run} = Ember
 import Component from 'ember-frost-core/components/frost-component'
 import FrostEventsProxy from 'ember-frost-core/mixins/frost-events-proxy'
 import {unit} from 'ember-test-utils/test-support/setup-component-test'
@@ -17,7 +18,7 @@ describe(test.label, function () {
     })
   })
 
-  it('should set default property values correctly', function () {
+  it('sets default property values correctly', function () {
     expect(
       component.get('autofocus'),
       'autofocus: false'
@@ -64,21 +65,21 @@ describe(test.label, function () {
     ).to.eql('password')
   })
 
-  it('should extend the commone frost component', function () {
+  it('extends the commone frost component', function () {
     expect(
       component instanceof Component,
       'is instance of Frost Component'
     ).to.equal(true)
   })
 
-  it('should have the expected Mixins', function () {
+  it('has the expected Mixins', function () {
     expect(
       FrostEventsProxy.detect(component),
       'FrostEventsProxy Mixin is present'
     ).to.equal(true)
   })
 
-  it('should set dependent keys correctly', function () {
+  it('sets dependent keys correctly', function () {
     const revealMessageDependentKeys = [
       'isRevealed'
     ]
@@ -99,7 +100,7 @@ describe(test.label, function () {
   })
 
   describe('"revealMessage" computed property', function () {
-    it('should be set to "Hide" when "isRevealed" is true', function () {
+    it('is set to "Hide" when "isRevealed" is true', function () {
       const isRevealed = true
 
       run(() => component.set('isRevealed', isRevealed))
@@ -110,7 +111,7 @@ describe(test.label, function () {
       ).to.eql('Hide')
     })
 
-    it('should be set to "Show" when "isRevealed" is false', function () {
+    it('is set to "Show" when "isRevealed" is false', function () {
       const isRevealed = false
 
       run(() => component.set('isRevealed', isRevealed))
@@ -123,7 +124,7 @@ describe(test.label, function () {
   })
 
   describe('"type" computed property', function () {
-    it('should be set to "text" when "isRevealed" is true', function () {
+    it('is set to "text" when "isRevealed" is true', function () {
       const isRevealed = true
 
       run(() => component.set('isRevealed', isRevealed))
@@ -134,7 +135,7 @@ describe(test.label, function () {
       ).to.eql('text')
     })
 
-    it('should be set to "password" when "isRevealed" is false', function () {
+    it('is set to "password" when "isRevealed" is false', function () {
       const isRevealed = false
 
       run(() => component.set('isRevealed', isRevealed))

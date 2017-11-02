@@ -1,4 +1,5 @@
-import Component from '@ember/component'
+import Ember from 'ember'
+const {Component} = Ember
 
 import CssMixin from 'ember-frost-core/mixins/css'
 

@@ -293,7 +293,7 @@ describe(test.label, function () {
       expect($hook('myLink')).to.have.text('Test')
     })
 
-    it('should not set target', function () {
+    it('does not set target', function () {
       expect(this.$('.frost-link').prop('target')).to.equal('')
     })
 
@@ -377,7 +377,7 @@ describe(test.label, function () {
       expect($hook('myLink').html().trim()).to.equal('<em>Test</em>')
     })
 
-    it('should not set target', function () {
+    it('does not set target', function () {
       expect(this.$('.frost-link').prop('target')).to.equal('')
     })
 
@@ -445,7 +445,7 @@ describe(test.label, function () {
       `)
     })
 
-    it('should log warning', function () {
+    it('logs warning', function () {
       expect(Logger.warn.calledWith(
         'Warning: The `design` property takes precedence over `size` and `priority`.'
       )).to.equal(true)
@@ -465,7 +465,7 @@ describe(test.label, function () {
       `)
     })
 
-    it('should log warning', function () {
+    it('logs warning', function () {
       expect(Logger.warn.calledWith(
         'Warning: The `design` property takes precedence over `size` and `priority`.'
       )).to.equal(true)
@@ -473,7 +473,7 @@ describe(test.label, function () {
   })
 
   describe('Priority property', function () {
-    it('should have primary class set', function () {
+    it('has primary class set', function () {
       this.render(hbs`
         {{frost-link 'title' 'testRoute'
           hook='myLink'
@@ -487,7 +487,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
 
-    it('should have secondary class set', function () {
+    it('has secondary class set', function () {
       this.render(hbs`
         {{frost-link 'title' 'testRoute'
           hook='myLink'
@@ -503,7 +503,7 @@ describe(test.label, function () {
   })
 
   describe('Size property', function () {
-    it('should have small class set', function () {
+    it('has small class set', function () {
       this.render(hbs`
         {{frost-link 'title' 'testRoute'
           hook='myLink'
@@ -517,7 +517,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
 
-    it('should have medium class set', function () {
+    it('has medium class set', function () {
       this.render(hbs`
         {{frost-link 'title' 'testRoute'
           hook='myLink'
@@ -531,7 +531,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
 
-    it('should have large class set', function () {
+    it('has large class set', function () {
       this.render(hbs`
         {{frost-link 'title' 'testRoute'
           hook='myLink'
@@ -547,7 +547,7 @@ describe(test.label, function () {
   })
 
   describe('Design property', function () {
-    it('should have info-bar class set', function () {
+    it('has info-bar class set', function () {
       this.render(hbs`
         {{#frost-link 'testRoute'
           design='info-bar'
@@ -563,7 +563,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
 
-    it('should have inline class set', function () {
+    it('has inline class set', function () {
       this.render(hbs`
         {{#frost-link 'testRoute'
           design='inline'
@@ -580,7 +580,7 @@ describe(test.label, function () {
     })
   })
 
-  it('should set disabled property', function () {
+  it('sets disabled property', function () {
     this.render(hbs`
       {{frost-link 'title' 'testRoute'
           disabled=true
@@ -594,7 +594,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('should set icon property', function () {
+  it('sets icon property', function () {
     const priority = 'primary'
 
     this.set('priority', priority)
@@ -612,7 +612,7 @@ describe(test.label, function () {
     ).to.have.length(1)
   })
 
-  it('should call onClick closure action', function () {
+  it('calls onClick closure action', function () {
     const externalActionSpy = sinon.spy()
 
     this.on('externalAction', externalActionSpy)
@@ -635,7 +635,7 @@ describe(test.label, function () {
       })
   })
 
-  it('should render using spread', function () {
+  it('renders using spread', function () {
     this.render(hbs`
       {{frost-link
         options=(hash

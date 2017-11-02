@@ -1,4 +1,5 @@
-import $ from 'jquery'
+import Ember from 'ember'
+const {$} = Ember
 
 const ctx = document.createElement('canvas').getContext('2d')
 

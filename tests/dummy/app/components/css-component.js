@@ -3,9 +3,9 @@
  * the dummy-app that includes the CssMixin
  */
 
-import Component from '@ember/component'
-
+import Ember from 'ember'
 import CssMixin from 'ember-frost-core/mixins/css'
 import PropTypesMixin from 'ember-prop-types'
+const {Component} = Ember
 
 export default Component.extend(CssMixin, PropTypesMixin)

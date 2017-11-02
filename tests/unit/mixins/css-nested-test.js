@@ -1,7 +1,6 @@
 /**
  * Unit test for the CssMixin
  */
-
 import {expect} from 'chai'
 import {setupComponentTest} from 'ember-mocha'
 import {afterEach, beforeEach, describe, it} from 'mocha'
@@ -21,11 +20,11 @@ describe('Unit / Mixin / css-nested', function () {
     sandbox.restore()
   })
 
-  it('should have classNameBindings set to include "css"', function () {
+  it('has classNameBindings set to include "css"', function () {
     expect(component.get('classNameBindings')).to.include('css')
   })
 
-  it('should default "css" to the component name', function () {
+  it('defaults "css" to the component name', function () {
     expect(component.get('css')).to.equal(expectedName)
   })
 

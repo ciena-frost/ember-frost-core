@@ -8,7 +8,7 @@ const test = integration('frost-radio-group')
 describe(test.label, function () {
   test.setup()
 
-  it('should render with block format', function () {
+  it('block format', function () {
     const label = 'b'
     const value = 'a'
 
@@ -32,7 +32,7 @@ describe(test.label, function () {
     ).to.eql(label)
   })
 
-  it('should render with inline format', function () {
+  it('inline format', function () {
     const inputs = [
       {value: 'a', label: 'b'}
     ]
@@ -54,7 +54,7 @@ describe(test.label, function () {
     ).to.eql(inputs[0].label)
   })
 
-  it('should set hook property', function () {
+  it('set hook property', function () {
     const hook = 'my-hook'
 
     this.set('hook', hook)
@@ -69,7 +69,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('should render using spread', function () {
+  it('renders using spread', function () {
     const value = 'b'
     const label = `Label for ${value}`
 
