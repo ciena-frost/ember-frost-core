@@ -74,6 +74,15 @@ function isObject (object) {
   return object !== null && typeof object === 'object'
 }
 
+/**
+ * Default the babel options
+ * @param {Object} options - the options for this build
+ */
+function defaultBabel (options) {
+  options.babel = options.babel || {}
+  options.babel.plugins = options.babel.plugins || []
+}
+
 module.exports = {
   name: 'ember-frost-core',
 
@@ -100,6 +109,23 @@ module.exports = {
       app.import(path.join('vendor', 'svg4everybody.min.js'))
       app.import(path.join('vendor', 'perfect-scrollbar.min.js'))
       app.import(path.join('vendor', 'perfect-scrollbar.min.css'))
+    }
+  },
+
+  init: function (app) {
+    this.options = this.options || {}
+    defaultBabel(this.options)
+
+    if (this.options.babel.plugins.indexOf('transform-decorators-legacy') === -1) {
+      this.options.babel.plugins.push('transform-decorators-legacy')
+    }
+
+    if (this.options.babel.plugins.indexOf('transform-class-properties') === -1) {
+      this.options.babel.plugins.push('transform-class-properties')
+    }
+
+    if (this._super.init) {
+      this._super.init.apply(this, arguments)
     }
   },
 
