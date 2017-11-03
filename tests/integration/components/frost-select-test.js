@@ -1674,7 +1674,7 @@ describe(test.label, function () {
             done()
           })
         })
-        it('mouseenter should focus item', function (done) {
+        it('should focus item on mouseenter', function (done) {
           return wait().then(() => {
             $hook('select-item', {index: 0}).mouseenter()
             wait().then(() => {
