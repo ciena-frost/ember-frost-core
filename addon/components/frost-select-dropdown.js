@@ -6,6 +6,7 @@ import {deprecate} from '@ember/application/deprecations'
 import {isArray} from '@ember/array'
 import {get} from '@ember/object'
 import {merge} from '@ember/polyfills'
+import {run} from '@ember/runloop'
 import {htmlSafe} from '@ember/string'
 import {isEmpty} from '@ember/utils'
 import {task, timeout} from 'ember-concurrency'
@@ -260,14 +261,18 @@ export default Component.extend({
     Array.from(listItemElements).forEach((li, index) => {
       $(li)
         .mousedown(() => {
-          if (this.isDestroyed || this.isDestroying) return
-          const value = this.get(`items.${index}.value`)
-          this.set('focusedIndex', index)
-          this.send('selectItem', value)
+          run(() => {
+            if (this.isDestroyed || this.isDestroying) return
+            const value = this.get(`items.${index}.value`)
+            this.set('focusedIndex', index)
+            this.send('selectItem', value)
+          })
         })
         .mouseenter(() => {
-          if (this.isDestroyed || this.isDestroying) return
-          this.set('focusedIndex', index)
+          run(() => {
+            if (this.isDestroyed || this.isDestroying) return
+            this.set('focusedIndex', index)
+          })
         })
     })
   },
@@ -502,35 +507,39 @@ export default Component.extend({
     $('.frost-select-dropdown .frost-text-input').focus() // Focus on filter
 
     this._updateHandler = () => {
-      this._lastInteraction = Date.now()
+      run(() => {
+        this._lastInteraction = Date.now()
 
-      if (!this._isUpdating) {
-        this.get('updateTask').perform()
-      }
+        if (!this._isUpdating) {
+          this.get('updateTask').perform()
+        }
+      })
     }
 
     /* eslint-disable complexity */
     this._keyDownHandler = (e) => {
-      if (this.isDestroyed || this.isDestroying) return
+      run(() => {
+        if (this.isDestroyed || this.isDestroying) return
 
-      if ([DOWN_ARROW, UP_ARROW].indexOf(e.keyCode) !== -1) {
-        e.preventDefault() // Keep arrow keys from scrolling document
-        this._handleArrowKey(e.keyCode === UP_ARROW)
-      }
+        if ([DOWN_ARROW, UP_ARROW].indexOf(e.keyCode) !== -1) {
+          e.preventDefault() // Keep arrow keys from scrolling document
+          this._handleArrowKey(e.keyCode === UP_ARROW)
+        }
 
-      switch (e.keyCode) {
-        case ENTER:
-          this._handleEnterKey()
-          return
+        switch (e.keyCode) {
+          case ENTER:
+            this._handleEnterKey()
+            return
 
-        case ESCAPE:
-          this.get('onClose')()
-          return
+          case ESCAPE:
+            this.get('onClose')()
+            return
 
-        case TAB:
-          this.get('onClose')()
-          return // eslint-disable-line no-useless-return
-      }
+          case TAB:
+            this.get('onClose')()
+            return // eslint-disable-line no-useless-return
+        }
+      })
     }
     /* eslint-enable complexity */
 
