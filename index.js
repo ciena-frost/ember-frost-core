@@ -97,7 +97,7 @@ module.exports = {
       this.app = app = app.app
     }
 
-    this._super.included(app)
+    this._super.included.apply(this, app)
 
     if (app) {
       const robotoPath = path.join('vendor', 'google', 'fonts', 'roboto')
