@@ -501,6 +501,7 @@ export default Component.extend({
 
     this._updateHandler = () => {
       run(() => {
+        if (this.isDestroyed || this.isDestroying) return
         this._lastInteraction = Date.now()
 
         if (!this._isUpdating) {
