@@ -1,8 +1,6 @@
 import {expect} from 'chai'
 import Ember from 'ember'
-const {$, run} = Ember
 import {keyCodes} from 'ember-frost-core/utils'
-const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
 import {$hook} from 'ember-hook'
 import wait from 'ember-test-helpers/wait'
 import {integration} from 'ember-test-utils/test-support/setup-component-test'
@@ -12,6 +10,9 @@ import sinon from 'sinon'
 
 import {expectSelectWithState, filterSelect} from 'dummy/tests/helpers/ember-frost-core'
 import {close, open, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
+
+const {$, run} = Ember
+const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
 
 /**
  * Blur element (ensuring it has focus first)
@@ -207,9 +208,6 @@ describe(test.label, function () {
         })
       })
 
-      // FIXME: tests for tabbing into components isn't working anymore, despite the fact that
-      // code changes shouldn't have affected it, AFAIK, probably need to look into alternative ways of
-      // testing this (ARM 2016-12-05)
       describe('tab into component', function () {
         beforeEach(function () {
           // In case you are wondering what the hell is going on here there is no
@@ -453,9 +451,6 @@ describe(test.label, function () {
           })
         })
 
-        // FIXME: tests for tabbing into components isn't working anymore, despite the fact that
-        // code changes shouldn't have affected it, AFAIK, probably need to look into alternative ways of
-        // testing this (ARM 2016-12-05)
         describe('tab into component', function () {
           beforeEach(function () {
             // In case you are wondering what the hell is going on here there is no
@@ -923,9 +918,6 @@ describe(test.label, function () {
         })
       })
 
-      // FIXME: tests for tabbing into components isn't working anymore, despite the fact that
-      // code changes shouldn't have affected it, AFAIK, probably need to look into alternative ways of
-      // testing this (ARM 2016-12-05)
       describe('tab into component', function () {
         beforeEach(function () {
           // In case you are wondering what the hell is going on here there is no
@@ -1504,9 +1496,6 @@ describe(test.label, function () {
           })
         })
 
-        // FIXME: tests for tabbing into components isn't working anymore, despite the fact that
-        // code changes shouldn't have affected it, AFAIK, probably need to look into alternative ways of
-        // testing this (ARM 2016-12-05)
         describe('tab into component', function () {
           beforeEach(function () {
             // In case you are wondering what the hell is going on here there is no
