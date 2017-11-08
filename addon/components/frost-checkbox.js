@@ -22,9 +22,11 @@ export default Component.extend({
     autofocus: PropTypes.bool,
     checked: PropTypes.bool,
     disabled: PropTypes.bool,
+    falseValue: PropTypes.any,
     inputId: PropTypes.string,
     label: PropTypes.string,
-    size: PropTypes.string
+    size: PropTypes.string,
+    trueValue: PropTypes.any
 
     // state
   },
@@ -35,9 +37,11 @@ export default Component.extend({
       autofocus: false,
       checked: false,
       disabled: false,
+      falseValue: false,
       inputId: null,
       label: '',
-      size: 'small'
+      size: 'small',
+      trueValue: true
     }
   },
 
@@ -116,10 +120,11 @@ export default Component.extend({
      */
     input () {
       let id = this.get('value')
+      const {falseValue, trueValue} = this.getProperties(['falseValue', 'trueValue'])
       if (this.onInput) {
         this.onInput({
           id: isEmpty(id) ? this.get('elementId') : id,
-          value: this.$('input').prop('checked')
+          value: this.$('input').prop('checked') ? trueValue : falseValue
         })
       }
     }

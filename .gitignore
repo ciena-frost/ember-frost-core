@@ -21,3 +21,4 @@ coverage.json
 /typings/*
 .vscode
 **.ember-try
+yarn.lock
