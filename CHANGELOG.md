@@ -1,3 +1,8 @@
+# 3.1.0 (2017-11-08)
+
+* Added optional falseValue and trueValue properties to `frost-checkbox`
+
+
 # 3.0.1 (2017-11-06)
 * Fix frost-select-dropdown breaking in tests because `autorun loop is disabled`
 
