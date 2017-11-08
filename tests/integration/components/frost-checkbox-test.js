@@ -2,12 +2,22 @@ import {expect} from 'chai'
 import wait from 'ember-test-helpers/wait'
 import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'
-import {describe, it} from 'mocha'
+import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
 const test = integration('frost-checkbox')
 describe(test.label, function () {
   test.setup()
+
+  let sandbox
+
+  beforeEach(function () {
+    sandbox = sinon.sandbox.create()
+  })
+
+  afterEach(function () {
+    sandbox.restore()
+  })
 
   it('renders default values', function () {
     this.render(hbs`
@@ -296,5 +306,46 @@ describe(test.label, function () {
       this.$('.frost-checkbox').find('input').prop('checked'),
       'Rendered input is checked'
     ).to.equal(true)
+  })
+
+  describe('When trueValue and falseValue are defined', function () {
+    let externalActionStub
+    beforeEach(function () {
+      externalActionStub = sandbox.stub()
+      this.on('externalAction', externalActionStub)
+
+      this.render(hbs`
+        {{frost-checkbox
+          hook='myCheckbox'
+          falseValue='my false value'
+          trueValue=1
+          
+          onInput=(action 'externalAction')
+        }}
+      `)
+      return wait()
+    })
+
+    describe('When checkbox is checked', function () {
+      beforeEach(function () {
+        this.$('input').trigger('click')
+        return wait()
+      })
+
+      it('should call onInput action with trueValue', function () {
+        expect(externalActionStub).to.have.been.calledWithMatch({value: 1})
+      })
+
+      describe('When checkbox is unchecked', function () {
+        beforeEach(function () {
+          this.$('input').trigger('click')
+          return wait()
+        })
+
+        it('should call onInput action with falseValue', function () {
+          expect(externalActionStub).to.have.been.calledWithMatch({value: 'my false value'})
+        })
+      })
+    })
   })
 })

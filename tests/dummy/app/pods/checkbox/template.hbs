@@ -264,5 +264,21 @@
         {{code-snippet name='checkbox-other-spread.hbs'}}
       </div>
     </div>
+    <div class='example'>
+      <div class='title'>True and false values</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET checkbox-other-values }}
+        {{frost-checkbox
+          falseValue='Example false value'
+          hook='myValuesCheckbox'
+          onInput=(action 'onInputHandler')
+          trueValue='Example true value'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='checkbox-other-values.hbs'}}
+      </div>
+    </div>
   </div>
 </div>

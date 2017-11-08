@@ -15,6 +15,7 @@ A check in a box, a checkbox
 | `class` | `string` | `error` | sets checkbox to error state |
 | `disabled` | `boolean` | `false` | **default** - basic checkbox |
 |  |  | `true` | disabled checkbox |
+| `falseValue` | `any` | `<any value>` | the value to send to onInput when unchecked
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `label` | `string` | `<label-name>` | label for the checkbox |
 | `onBlur` | `string` | `<action-name>` | triggers associated action when the checkbox loses focus |
@@ -24,6 +25,7 @@ A check in a box, a checkbox
 | `size` | `string` | `small` | **default** - small size checkbox |
 |  | | `medium` | medium size checkbox |
 |  |  | `large` | large size checkbox |
+| `trueValue` | `any` | `<any value>` | the value to send to onInput when checked
 
 ## Testing with ember-hook
 The checkbox component is accessible using ember-hook:
