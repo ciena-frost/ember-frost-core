@@ -1,3 +1,15 @@
+# 4.0.0 (2017-11-30)
+
+* Closes #520
+  * Removes dependencies being installed via `afterInstall()` hook in blueprint.
+  * Moved `ember-computed-decorators` from _devDependencies_ to _dependencies_ in _package.json_
+  * Moved `ember-concurrency` from _devDependencies_ to _dependencies_  in _package.json_
+  * Moved `ember-elsewhere` from _devDependencies_ to _dependencies_  in _package.json_
+  * Moved `ember-prop-types` from _devDependencies_ to _dependencies_  in _package.json_
+  * Moved `ember-spread` from _devDependencies_ to _dependencies_  in _package.json_
+  * Moved `ember-truth-helpers` from _devDependencies_ to _dependencies_  in _package.json_
+
+
 # 3.1.0 (2017-11-08)
 
 * Added optional falseValue and trueValue properties to `frost-checkbox`
