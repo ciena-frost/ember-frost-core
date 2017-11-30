@@ -146,6 +146,12 @@ export default Component.extend({
   },
 
   @readOnly
+  @computed('onInput')
+  isExternalFiltering (onInput) {
+    return typeOf(onInput) === 'function'
+  },
+
+  @readOnly
   @computed('data', 'filter', 'onInput')
   items (data, filter, onInput) {
     // If no data to filter we are done
@@ -353,7 +359,6 @@ export default Component.extend({
 
   didInsertElement () {
     this._super(...arguments)
-
     // We need jQuery instance of components root DOM node to hand off to
     // dropdown so it can position itself properly relative to the select
     this.set('$element', this.$())

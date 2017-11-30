@@ -315,7 +315,6 @@ export default Component.extend({
     const focusedIndex = this.get('focusedIndex')
     this.send('selectItem', items[focusedIndex].value)
   },
-
   /**
    * Get necessary property values for positioning dropdown above select
    * @param {Number} top - top position of select
@@ -397,6 +396,7 @@ export default Component.extend({
 
   _updateText () {
     const filter = this.get('filter')
+    const self = this
     const dropdownListElement = document.getElementById('frost-select-list')
     const clonedDropdownListElement = dropdownListElement.cloneNode(true)
     const clonedTextElements = clonedDropdownListElement.querySelectorAll('.frost-select-list-item-text')
@@ -406,7 +406,8 @@ export default Component.extend({
     const secondaryTextElements = dropdownListElement.querySelectorAll('.frost-select-list-secondary-item-text')
     const scrollTop = dropdownListElement.scrollTop
     const wrapLabels = this.get('wrapLabels')
-    const updateText = function (texElements, clonedTextElements) {
+    const updateText = function (texElements, clonedTextElements, alreadyFocusedFirst = false) {
+      let seenFirst = alreadyFocusedFirst
       Array.from(texElements).forEach((textElement, index) => {
         if (!wrapLabels) {
           const clonedTextElement = clonedTextElements[index]
@@ -425,6 +426,10 @@ export default Component.extend({
           // If rendered text has changed, update it
           if (textElement.innerHTML !== textWithMatch) {
             textElement.innerHTML = textWithMatch
+            if (self.get('isExternalFiltering') && !seenFirst && textWithMatch.includes('<u>')) {
+              self.set('focusedIndex', index)
+              seenFirst = true
+            }
           }
         }
       })
@@ -433,9 +438,8 @@ export default Component.extend({
     this._removeListItemEventListeners(dropdownListElement)
 
     dropdownListElement.replaceWith(clonedDropdownListElement)
-
     updateText(textElements, clonedTextElements)
-    updateText(secondaryTextElements, clonedSecondaryTextElements)
+    updateText(secondaryTextElements, clonedSecondaryTextElements, true)
 
     clonedDropdownListElement.replaceWith(dropdownListElement)
 
