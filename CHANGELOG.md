@@ -1,3 +1,8 @@
+# 4.0.1 (2017-12-01)
+
+* Move `ember-hook` from `devDependencies` to `dependencies`
+
+
 # 4.0.0 (2017-11-30)
 
 * Closes #520
