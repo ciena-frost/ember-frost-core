@@ -1,3 +1,7 @@
+# 4.0.2 (2017-12-06)
+
+* Remove unneeded _blueprints_ folder that should have been removed in #522
+
 # 4.0.1 (2017-12-01)
 
 * Move `ember-hook` from `devDependencies` to `dependencies`
