@@ -55,7 +55,7 @@
     "ember-export-application-global": "^1.0.5",
     "ember-frost-test": "^2.1.2",
     "ember-load-initializers": "^0.6.0",
-    "ember-resolver": "^2.1.1",
+    "ember-resolver": "^2.0.3",
     "ember-sinon": "^0.7.0",
     "ember-source": "~2.12.0",
     "ember-test-utils": "^4.3.2",
