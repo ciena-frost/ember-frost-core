@@ -1,3 +1,7 @@
+# 4.0.3 (2017-12-12)
+
+* Float `ember-disable-prototype-extensions` _devDependency_ to bring inline with semver range of other repos
+
 # 4.0.2 (2017-12-06)
 
 * Remove unneeded _blueprints_ folder that should have been removed in #522
