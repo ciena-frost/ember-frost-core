@@ -25,7 +25,7 @@ $frost-toggle-button-hover-shadow: rgba(0, 0, 0, .2);
           background-color: $frost-color-blue-1;
 
           &:after {
-            right: calc(100% - 35px - 5px);
+            right: calc(100% - 35px - 5px);  // accounts for width of button and padding
           }
         }
       }
@@ -47,7 +47,7 @@ $frost-toggle-button-hover-shadow: rgba(0, 0, 0, .2);
     }
 
     &.medium {
-      width: 90px;
+      width: 90px;  // per spec
       height: $frost-toggle-button-height;
       padding: 3px;
     }
