@@ -9,7 +9,7 @@ $frost-toggle-button-hover-shadow: rgba(0, 0, 0, .2);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 30px;
+  height: $frost-toggle-button-height;
   border-radius: 0;
 
   &.disabled {
