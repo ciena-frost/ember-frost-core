@@ -257,6 +257,13 @@ export default Component.extend({
     if (width) styles += `width: ${width}px; max-width: initial; min-width:initial; `
     return Ember.String.htmlSafe(styles)
   },
+
+  @readOnly
+  @computed('items', 'selectedItems')
+  frostSelectDropdownName () {
+    return 'frost-select-dropdown'
+  },
+
   // == Tasks =================================================================
 
   /**
