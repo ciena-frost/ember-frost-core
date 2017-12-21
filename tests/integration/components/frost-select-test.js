@@ -870,6 +870,31 @@ describe(test.label, function () {
           expect(onFocus.callCount, 'onFocus is called').to.equal(1)
         })
 
+        describe('when data is updated', function () {
+          beforeEach(function () {
+            this.set('data', [
+              {label: 'Bar', value: 'bar'},
+              {label: 'Baz', value: 'baz'},
+              {label: 'Ba ba black sheep', value: 'sheep'}
+            ])
+
+            return wait()
+          })
+
+          it('renders as expected', function () {
+            expectSelectWithState('select', {
+              focused: true,
+              focusedItem: 'Bar',
+              items: ['Bar', 'Baz', 'Ba ba black sheep'],
+              opened: true
+            })
+
+            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
+            expect(onChange.callCount, 'onChange is not called').to.equal(0)
+            expect(onFocus.callCount, 'onFocus is called').to.equal(1)
+          })
+        })
+
         describe('when escape key pressed', function () {
           beforeEach(function () {
             [onBlur, onChange, onFocus].forEach((func) => func.reset())
@@ -1690,6 +1715,7 @@ describe(test.label, function () {
       })
     })
   })
+
   describe('handles firing of events', function () {
     let onInput, sandbox
 

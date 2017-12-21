@@ -257,6 +257,19 @@ export default Component.extend({
     if (width) styles += `width: ${width}px; max-width: initial; min-width:initial; `
     return Ember.String.htmlSafe(styles)
   },
+
+  @readOnly
+  @computed('items', 'selectedItems')
+  /**
+   * As of Ember 2.10, we have to make this a computed property to tell Ember to update our frost-select-dropdown.
+   * Any properties that might be updated after the initial render should be observed by this property.
+   * (@theotherdude 12/20/2017)
+   * @returns {string} 'frost-select-dropdown'
+   */
+  frostSelectDropdownName () {
+    return 'frost-select-dropdown'
+  },
+
   // == Tasks =================================================================
 
   /**
