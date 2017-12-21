@@ -1,3 +1,7 @@
+# 4.1.0 (2017-12-21)
+
+* Add object helper to fix https://github.com/emberjs/ember.js/issues/14738
+
 # 4.0.5 (2017-12-21)
 
 * **Fixed** dropdown not updating with new select items
