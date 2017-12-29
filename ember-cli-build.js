@@ -10,9 +10,6 @@ module.exports = function (defaults) {
     'ember-cli-babel': {
       includePolyfill: true
     },
-    'ember-cli-mocha': {
-      useLintTree: false
-    },
     sassOptions: {
       includePaths: [
         'addon/styles'
