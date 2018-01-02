@@ -59,7 +59,6 @@
     "ember-sinon": "^0.7.0",
     "ember-source": "~2.12.0",
     "ember-test-utils": "^4.3.2",
-    "frost-guide-custom-routing": "0.0.4",
     "loader.js": "^4.2.3",
     "markdown-code-highlighting": "0.1.0",
     "sinon-chai": "^2.13.0"
