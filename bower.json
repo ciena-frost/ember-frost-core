@@ -3,7 +3,7 @@
   "dependencies": {
     "ember-inflector": "1.3.1",
     "Faker": "^3.1.0",
-    "highlightjs": "^9.5.0",
+    "highlightjs": "9.12.0",
     "marked": "0.3.6",
     "pretender": "^1.1.0"
   }
