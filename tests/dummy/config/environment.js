@@ -1,6 +1,6 @@
 /* eslint-env node */
 module.exports = function (environment) {
-  var ENV = {
+  const ENV = {
     modulePrefix: 'dummy',
     podModulePrefix: 'dummy/pods',
     environment: environment,

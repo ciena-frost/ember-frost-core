@@ -186,6 +186,7 @@ export default Component.extend({
 
   @readOnly
   @computed('data', 'selected', 'internalSelectedValue')
+  /* eslint-disable complexity */
   selectedItems (items, selected, selectedValue) {
     if (selectedValue !== undefined) {
       return items.filter((item) => {
@@ -209,6 +210,7 @@ export default Component.extend({
 
     return []
   },
+  /* eslint-enable complexity */
 
   @readOnly
   @computed('disabled', 'tabIndex')
@@ -334,6 +336,7 @@ export default Component.extend({
   _onFocusOut: on('focusOut', function () {
     // We must use run.later so filter text input has time to focus when select
     // dropdown is being opened
+    /* eslint-disable complexity */
     run.later(() => {
       if (this.isDestroyed || this.isDestroying) {
         return
@@ -360,6 +363,7 @@ export default Component.extend({
         this.get('onBlur')()
       }
     })
+    /* eslint-enable complexity */
   }),
 
   // == Lifecycle Hooks =======================================================

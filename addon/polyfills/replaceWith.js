@@ -6,7 +6,7 @@
       const docFrag = document.createDocumentFragment()
 
       argArr.forEach(function (argItem) {
-        var isNode = argItem instanceof window.Node
+        const isNode = argItem instanceof window.Node
         docFrag.appendChild(isNode ? argItem : document.createTextNode(String(argItem)))
       })
 

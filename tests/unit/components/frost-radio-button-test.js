@@ -13,15 +13,13 @@ describe(test.label, function () {
 
   beforeEach(function () {
     component = this.subject({
-      _setupAssertions: function () {
-        return
-      },
+      _setupAssertions: function () {},
       hook: 'myRadioButton',
       value: 'testValue'
     })
   })
 
-  it('sets default property values correctly', function () {
+  it('should set default property values correctly', function () {
     expect(
       component.get('checked'),
       'checked: false'
@@ -48,14 +46,14 @@ describe(test.label, function () {
     ).to.eql('small')
   })
 
-  it('extends the commone frost component', function () {
+  it('should extend the commone frost component', function () {
     expect(
       component instanceof Component,
       'is instance of Frost Component'
     ).to.equal(true)
   })
 
-  it('sets dependent keys correctly', function () {
+  it('should set dependent keys correctly', function () {
     const checkedDependentKeys = [
       'selectedValue',
       'value'
@@ -79,7 +77,7 @@ describe(test.label, function () {
   describe('"checked" computed property', function () {
     const selectedValue = 'testValue'
 
-    it('is set to true when "selectedValue" is equal to "value"', function () {
+    it('should set to true when "selectedValue" is equal to "value"', function () {
       run(() => component.set('selectedValue', selectedValue))
 
       expect(
@@ -88,7 +86,7 @@ describe(test.label, function () {
       ).to.equal(true)
     })
 
-    it('is set to false when "selectedValue" is NOT equal to "value"', function () {
+    it('should set to false when "selectedValue" is NOT equal to "value"', function () {
       run(() => {
         component.set('selectedValue', selectedValue)
         component.set('value', 'newTestValue')
@@ -101,7 +99,7 @@ describe(test.label, function () {
     })
   })
 
-  it('"tabindex" set to "-1" when "disabled" is set to true', function () {
+  it('should "tabindex" set to "-1" when "disabled" is set to true', function () {
     run(() => component.set('disabled', true))
 
     expect(
@@ -111,7 +109,7 @@ describe(test.label, function () {
   })
 
   describe('"hookQualifiers" computed property', function () {
-    it('is set when "value" is set', function () {
+    it('should set when "value" is set', function () {
       const value = 'my-value'
 
       run(() => component.set('value', value))
@@ -124,7 +122,7 @@ describe(test.label, function () {
   })
 
   describe('keyPress', function () {
-    it('"onChange" not called when "disabled" is set', function () {
+    it('should "onChange" not called when "disabled" is set', function () {
       run(() => {
         component.set('disabled', true)
       })
@@ -137,7 +135,7 @@ describe(test.label, function () {
       ).to.equal(undefined)
     })
 
-    it('"onChange" not called when "checked" is set', function () {
+    it('should "onChange" not called when "checked" is set', function () {
       run(() => {
         component.set('checked', true)
       })

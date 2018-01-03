@@ -4,10 +4,9 @@
 
 import Ember from 'ember'
 const {run} = Ember
+import layout from '../templates/components/frost-bookends'
 import {Component} from 'ember-frost-core'
 import {PropTypes} from 'ember-prop-types'
-
-import layout from '../templates/components/frost-bookends'
 
 export default Component.extend({
   // == Dependencies ==========================================================

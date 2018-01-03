@@ -23,7 +23,8 @@
 | | | `true` | Allow select option text to wrap |
 
 ## Testing with ember-hook
-The select component is accessible using ember-hook with the top level hook name or you can access the internal components as well -
+The select component is accessible using ember-hook with the top level hook name or you can access the internal 
+components as well -
 * Input field hook - `$hook('<hook-name>-input')`
 * List hook - `$hook('<hook-name>-list')`
 * Individual list items can be found using hook qualifiers like index, label or value -
@@ -120,4 +121,6 @@ var selectedValue = ["bar", "buzz"]
 
 will select both values `"bar"` and `"buzz"`.
 
-NOTE: Changing `selectedValue` will overwrite any previous selections. However, changing `selectedValue` to be undefined, or a value that can be evaluated to be equal to the previous value (using lodash's `isEqual` function) will not cause values to be overwritten. Setting `selectedValue` to `null` will clear the selection.
+NOTE: Changing `selectedValue` will overwrite any previous selections. However, changing `selectedValue` to be 
+undefined, or a value that can be evaluated to be equal to the previous value (using lodash's `isEqual` function) will 
+not cause values to be overwritten. Setting `selectedValue` to `null` will clear the selection.

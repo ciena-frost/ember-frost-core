@@ -1,4 +1,6 @@
 import {expect} from 'chai'
+import {expectSelectWithState, filterSelect} from 'dummy/tests/helpers/ember-frost-core'
+import {close, open, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
 import Ember from 'ember'
 import {keyCodes} from 'ember-frost-core/utils'
 import {$hook} from 'ember-hook'
@@ -7,9 +9,6 @@ import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
-
-import {expectSelectWithState, filterSelect} from 'dummy/tests/helpers/ember-frost-core'
-import {close, open, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
 
 const {$, run} = Ember
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
@@ -121,13 +120,13 @@ describe(test.label, function () {
       const minimumWidth = 175
       const specifiedWidth = 500
 
-      it('if no width is specified, and container is small', function () {
+      it('should if no width is specified, and container is small', function () {
         this.$().css('width', '100px')
         const actual = Math.floor(this.$('.frost-select')[0].getBoundingClientRect().width)
         expect(actual, 'it has the minimum width').to.equal(minimumWidth)
       })
 
-      it('if no width is specified, and container is large', function () {
+      it('should if no width is specified, and container is large', function () {
         // simulate some app setting a max-width on .frost-select via CSS (as the dummy demo does)
         this.$('.frost-select').css('max-width', `${maximumWidth}px`)
 
@@ -145,7 +144,7 @@ describe(test.label, function () {
           return this.set('width', specifiedWidth)
         })
 
-        it('it has the specified width regardless of container size', function () {
+        it('should have the specified width regardless of container size', function () {
           // let's check both the element's style attr and what the browser layed out
           const actualCSSValue = this.$('.frost-select').css('width')
           const actualRenderedWidth = this.$('.frost-select')[0].getBoundingClientRect().width
@@ -156,7 +155,7 @@ describe(test.label, function () {
     })
 
     describe('when data not present', function () {
-      it('renders as expected', function () {
+      it('should render as expected', function () {
         expectSelectWithState('select', {
           focused: false
         })
@@ -171,7 +170,7 @@ describe(test.label, function () {
           open('select')
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: true,
             items: [],
@@ -196,7 +195,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true
             })
@@ -232,7 +231,7 @@ describe(test.label, function () {
             )
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: true
           })
@@ -250,7 +249,7 @@ describe(test.label, function () {
           $hook('select').focusin()[0].focus()
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: true
           })
@@ -267,7 +266,7 @@ describe(test.label, function () {
             return wait()
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: false
             })
@@ -289,7 +288,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true,
               items: [],
@@ -308,7 +307,7 @@ describe(test.label, function () {
               return wait()
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: false
               })
@@ -330,7 +329,7 @@ describe(test.label, function () {
                 )
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true
               })
@@ -353,7 +352,7 @@ describe(test.label, function () {
                 )
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 opened: false
@@ -378,7 +377,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true,
               items: [],
@@ -403,7 +402,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true,
               items: [],
@@ -422,7 +421,7 @@ describe(test.label, function () {
           this.set('disabled', true)
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             disabled: true,
             focused: false
@@ -438,7 +437,7 @@ describe(test.label, function () {
             open('select')
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               disabled: true,
               focused: false
@@ -476,7 +475,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               disabled: true,
               focused: false
@@ -500,7 +499,7 @@ describe(test.label, function () {
           this.set('tabIndex', 3)
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: false,
             tabIndex: 3
@@ -521,7 +520,7 @@ describe(test.label, function () {
               this.set('disabled', false)
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: false,
                 tabIndex: 3
@@ -542,7 +541,7 @@ describe(test.label, function () {
               })
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: false,
                 tabIndex: 42
@@ -561,7 +560,7 @@ describe(test.label, function () {
           this.set('error', true)
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             error: true,
             focused: false
@@ -589,7 +588,7 @@ describe(test.label, function () {
           open('select')
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: true,
             focusedItem: 'Foo',
@@ -607,7 +606,7 @@ describe(test.label, function () {
           $hook('select').focusin()[0].focus()
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: true
           })
@@ -629,7 +628,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true,
               focusedItem: 'Foo',
@@ -647,7 +646,7 @@ describe(test.label, function () {
               filterSelect('asdf')
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 items: [],
@@ -662,7 +661,7 @@ describe(test.label, function () {
               filterSelect('Superman')
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 focusedItem: 'Superman',
@@ -694,7 +693,7 @@ describe(test.label, function () {
               filterSelect('Steel')
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 focusedItem: 'Superman',
@@ -726,7 +725,7 @@ describe(test.label, function () {
               filterSelect('Bar')
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 focusedItem: 'Bar',
@@ -758,7 +757,7 @@ describe(test.label, function () {
               filterSelect('ba')
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 focusedItem: 'Bar',
@@ -812,7 +811,7 @@ describe(test.label, function () {
               })
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 opened: false,
@@ -842,7 +841,7 @@ describe(test.label, function () {
         ])
       })
 
-      it('renders as expected', function () {
+      it('should render as expected', function () {
         expectSelectWithState('select', {
           focused: false
         })
@@ -857,7 +856,7 @@ describe(test.label, function () {
           open('select')
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: true,
             focusedItem: 'Foo',
@@ -881,7 +880,7 @@ describe(test.label, function () {
             return wait()
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true,
               focusedItem: 'Bar',
@@ -907,7 +906,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true
             })
@@ -930,7 +929,7 @@ describe(test.label, function () {
             return wait()
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true,
               opened: false
@@ -967,7 +966,7 @@ describe(test.label, function () {
             )
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: true
           })
@@ -985,7 +984,7 @@ describe(test.label, function () {
           $hook('select').focusin()[0].focus()
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: true
           })
@@ -1002,7 +1001,7 @@ describe(test.label, function () {
             return wait()
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: false
             })
@@ -1024,7 +1023,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true
             })
@@ -1047,7 +1046,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true,
               focusedItem: 'Foo',
@@ -1067,7 +1066,7 @@ describe(test.label, function () {
               return wait()
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: false
               })
@@ -1089,7 +1088,7 @@ describe(test.label, function () {
                 )
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 opened: false
@@ -1117,7 +1116,7 @@ describe(test.label, function () {
               })
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 opened: false,
@@ -1147,7 +1146,7 @@ describe(test.label, function () {
                 )
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 focusedItem: 'Foo',
@@ -1173,7 +1172,7 @@ describe(test.label, function () {
                 )
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 focusedItem: 'Bar',
@@ -1198,7 +1197,7 @@ describe(test.label, function () {
                   )
               })
 
-              it('renders as expected', function () {
+              it('should render as expected', function () {
                 expectSelectWithState('select', {
                   focused: true,
                   focusedItem: 'Foo',
@@ -1224,7 +1223,7 @@ describe(test.label, function () {
                   )
               })
 
-              it('renders as expected', function () {
+              it('should render as expected', function () {
                 expectSelectWithState('select', {
                   focused: true,
                   focusedItem: 'Baz',
@@ -1254,7 +1253,7 @@ describe(test.label, function () {
                 })
               })
 
-              it('renders as expected', function () {
+              it('should render as expected', function () {
                 expectSelectWithState('select', {
                   focused: true,
                   opened: false,
@@ -1279,7 +1278,7 @@ describe(test.label, function () {
               return selectItemAtIndex('select', 0, done)
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 opened: false,
@@ -1303,7 +1302,7 @@ describe(test.label, function () {
               selectItemAtIndex('select', 1, done)
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 opened: false,
@@ -1326,7 +1325,7 @@ describe(test.label, function () {
               filterSelect('asdf')
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 items: [],
@@ -1344,7 +1343,7 @@ describe(test.label, function () {
               filterSelect('baz')
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 focusedItem: 'Baz',
@@ -1369,7 +1368,7 @@ describe(test.label, function () {
               filterSelect('ba')
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 focusedItem: 'Bar',
@@ -1416,7 +1415,7 @@ describe(test.label, function () {
               })
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 opened: false,
@@ -1446,7 +1445,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true,
               focusedItem: 'Foo',
@@ -1472,7 +1471,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true,
               focusedItem: 'Foo',
@@ -1492,7 +1491,7 @@ describe(test.label, function () {
           this.set('disabled', true)
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             disabled: true,
             focused: false
@@ -1508,7 +1507,7 @@ describe(test.label, function () {
             open('select')
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               disabled: true,
               focused: false
@@ -1546,7 +1545,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               disabled: true,
               focused: false
@@ -1570,7 +1569,7 @@ describe(test.label, function () {
           this.set('tabIndex', 3)
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: false,
             tabIndex: 3
@@ -1587,7 +1586,7 @@ describe(test.label, function () {
           this.set('error', true)
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             error: true,
             focused: false
@@ -1669,11 +1668,11 @@ describe(test.label, function () {
           $hook('select').click()
         })
 
-        it('can find dropdown input', function () {
+        it('should find dropdown input', function () {
           expect($hook('select-list-input')).to.have.length(1)
         })
 
-        it('can find items by index, label and value', function (done) {
+        it('should find items by index, label and value', function (done) {
           return wait().then(() => {
             $hook('select-item', {index: 0})
             expect($hook('select-item', {index: 0})).to.have.length(1)
@@ -1682,7 +1681,7 @@ describe(test.label, function () {
             done()
           })
         })
-        it('mouseenter should focus item', function (done) {
+        it('should focus item on mouseenter', function (done) {
           return wait().then(() => {
             $hook('select-item', {index: 0}).mouseenter()
             wait().then(() => {
@@ -1697,7 +1696,7 @@ describe(test.label, function () {
   })
 
   describe('renders using spread', function () {
-    it('renders as expected', function () {
+    it('should render as expected', function () {
       this.render(hbs`
         {{frost-select-outlet hook='mySelectOutlet'}}
         {{input hook='pre'}}
@@ -1760,7 +1759,7 @@ describe(test.label, function () {
         return close()
       })
 
-      it('waits until after debounce period before firing', function (done) {
+      it('should wait until after debounce period before firing', function (done) {
         run.later(() => {
           expect(onInput.called).to.equal(false)
 
@@ -1791,7 +1790,7 @@ describe(test.label, function () {
       return open('select')
     })
 
-    it('renders as expected', function () {
+    it('should render as expected', function () {
       expectSelectWithState('select', {
         focused: true,
         items: [],

@@ -82,13 +82,13 @@
             </div>
           </div>
         {{else}}
-        <div
-          class={{dropdownTextClassNames}}
-          data-text={{item.label}}
-          data-test={{hook (concat hookPrefix '-label') index=index}}
-        >
-          {{item.label}}
-        </div>
+          <div
+            class={{dropdownTextClassNames}}
+            data-text={{item.label}}
+            data-test={{hook (concat hookPrefix '-label') index=index}}
+          >
+            {{item.label}}
+          </div>
         {{/if}}
       </li>
     {{/each}}

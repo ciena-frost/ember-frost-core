@@ -6,21 +6,21 @@ const npmModuleLocation = '../../../../lib/utils/npm'
 const packageHandlerModuleLocation = '../../../../lib/utils/package-handler'
 const semverModuleLocation = 'semver'
 
-describe('Unit / Lib / Utils / Package Handler', () => {
+describe('Unit / Lib / Utils / Package Handler', function () {
   let sandbox
   let packageHandler
-  beforeEach(() => {
+  beforeEach(function () {
     sandbox = sinon.sandbox.create()
     packageHandler = require(packageHandlerModuleLocation)
   })
 
-  afterEach(() => {
+  afterEach(function () {
     sandbox.restore()
     delete require.cache['packageHandler']
   })
 
-  describe('getPkgsToInstall', () => {
-    beforeEach(() => {
+  describe('getPkgsToInstall', function () {
+    beforeEach(function () {
       sandbox.stub(packageHandler, '_getPackagesVersions').callsFake((pkgs) => {
         const promises = []
         pkgs.forEach((pkg) => {
@@ -33,14 +33,14 @@ describe('Unit / Lib / Utils / Package Handler', () => {
       })
     })
 
-    describe('package not installed', () => {
-      beforeEach(() => {
+    describe('package not installed', function () {
+      beforeEach(function () {
         sandbox.stub(packageHandler, '_isPkgInstalled').callsFake(() => {
           return false
         })
       })
 
-      it('single package', () => {
+      it('should single package', function () {
         const pkg1 = {name: 'pkg1', target: '0.0.1'}
 
         const promise = packageHandler.getPkgsToInstall([pkg1], {})
@@ -50,7 +50,7 @@ describe('Unit / Lib / Utils / Package Handler', () => {
         })
       })
 
-      it('multiple packages', () => {
+      it('should multiple packages', function () {
         const pkg1 = {name: 'pkg1', target: '0.0.1'}
         const pkg2 = {name: 'pkg2', target: '0.0.1'}
 
@@ -63,9 +63,9 @@ describe('Unit / Lib / Utils / Package Handler', () => {
       })
     })
 
-    describe('package installed', () => {
+    describe('package installed', function () {
       let consoleOutputs = []
-      beforeEach(() => {
+      beforeEach(function () {
         sandbox.stub(packageHandler, '_isPkgInstalled').callsFake(() => {
           return true
         })
@@ -74,11 +74,11 @@ describe('Unit / Lib / Utils / Package Handler', () => {
         })
       })
 
-      afterEach(() => {
+      afterEach(function () {
         consoleOutputs = []
       })
 
-      it('single package', () => {
+      it('should single package', function () {
         const pkg1 = {name: 'pkg1', target: '0.0.1'}
 
         const promise = packageHandler.getPkgsToInstall([pkg1], {'pkg1': '0.0.1'})
@@ -90,7 +90,7 @@ describe('Unit / Lib / Utils / Package Handler', () => {
         })
       })
 
-      it('multiple packages', () => {
+      it('should multiple packages', function () {
         const pkg1 = {name: 'pkg1', target: '0.0.1'}
         const pkg2 = {name: 'pkg2', target: '0.0.1'}
 
@@ -110,42 +110,42 @@ describe('Unit / Lib / Utils / Package Handler', () => {
     })
   })
 
-  describe('_isPkgInstalled', () => {
-    beforeEach(() => {
+  describe('_isPkgInstalled', function () {
+    beforeEach(function () {
       sandbox.stub(packageHandler, '_getTargetVersion').callsFake((target) => {
         return target
       })
     })
 
-    it('package not installed', () => {
+    it('should package not installed', function () {
       const pkg = {name: 'pkg1', target: '0.0.1'}
       const result = packageHandler._isPkgInstalled(pkg, ['0.0.1'], {})
       expect(result).to.eql(false)
     })
 
-    it('installed package > target package', () => {
+    it('should installed package > target package', function () {
       const pkg = {name: 'pkg1', target: '0.0.1'}
       const result = packageHandler._isPkgInstalled(pkg, ['0.0.1'], {'pkg1': '0.0.2'})
       expect(result).to.eql(true)
     })
 
-    it('installed package < target package', () => {
+    it('should installed package < target package', function () {
       const pkg = {name: 'pkg1', target: '0.0.1'}
       const result = packageHandler._isPkgInstalled(pkg, ['0.0.1'], {'pkg1': '0.0.0'})
       expect(result).to.eql(false)
     })
 
-    it('installed package == target package', () => {
+    it('should installed package == target package', function () {
       const pkg = {name: 'pkg1', target: '0.0.1'}
       const result = packageHandler._isPkgInstalled(pkg, ['0.0.1'], {'pkg1': '0.0.1'})
       expect(result).to.eql(true)
     })
   })
 
-  describe('_getPackagesVersions', () => {
+  describe('_getPackagesVersions', function () {
     let npm
     let packageHandlerMock
-    beforeEach(() => {
+    beforeEach(function () {
       npm = require(npmModuleLocation)
       sandbox.stub(npm, 'getVersions').callsFake((pkg) => {
         return Promise.resolve({
@@ -156,12 +156,12 @@ describe('Unit / Lib / Utils / Package Handler', () => {
       packageHandlerMock = require(packageHandlerModuleLocation)
     })
 
-    afterEach(() => {
+    afterEach(function () {
       delete require.cache['npm']
       delete require.cache['packageHandler']
     })
 
-    it('single package', () => {
+    it('should single package', function () {
       const pkg1 = {name: 'pkg1', target: '0.0.1'}
       const promise = packageHandlerMock._getPackagesVersions([pkg1])
       return promise.then((result) => {
@@ -170,7 +170,7 @@ describe('Unit / Lib / Utils / Package Handler', () => {
       })
     })
 
-    it('multiple packages', () => {
+    it('should multiple packages', function () {
       const pkg1 = {name: 'pkg1', target: '0.0.1'}
       const pkg2 = {name: 'pkg2', target: '0.0.1'}
 
@@ -183,11 +183,11 @@ describe('Unit / Lib / Utils / Package Handler', () => {
     })
   })
 
-  describe('_getTargetVersion', () => {
+  describe('_getTargetVersion', function () {
     let semver
     let packageHandlerMock
 
-    beforeEach(() => {
+    beforeEach(function () {
       semver = require(semverModuleLocation)
       sandbox.stub(semver, 'maxSatisfying').callsFake((target) => {
         return '0.0.1'
@@ -197,34 +197,34 @@ describe('Unit / Lib / Utils / Package Handler', () => {
       })
     })
 
-    afterEach(() => {
+    afterEach(function () {
       delete require.cache['packageHandler']
       delete require.cache['semver']
     })
 
-    describe('not a range', () => {
-      beforeEach(() => {
+    describe('not a range', function () {
+      beforeEach(function () {
         sandbox.stub(semver, 'validRange').callsFake((target) => {
           return undefined
         })
         packageHandlerMock = require(packageHandlerModuleLocation)
       })
 
-      it('valid target', () => {
+      it('should valid target', function () {
         const result = packageHandlerMock._getTargetVersion('0.0.1')
         expect(result).to.eql('0.0.1')
       })
     })
 
-    describe('range', () => {
-      beforeEach(() => {
+    describe('range', function () {
+      beforeEach(function () {
         sandbox.stub(semver, 'validRange').callsFake((target) => {
           return target
         })
         packageHandlerMock = require(packageHandlerModuleLocation)
       })
 
-      it('valid target', () => {
+      it('should valid target', function () {
         const result = packageHandlerMock._getTargetVersion('~0.0.1', ['0.0.1'])
         expect(result).to.eql('0.0.1')
       })

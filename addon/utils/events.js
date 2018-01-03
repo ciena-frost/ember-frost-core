@@ -33,11 +33,11 @@ export default {
           deprecate(`
             Event handler '${frostEvent}' is deprecated.
             Please use '${eventMap[event][0]}' event instead`,
-            i === 0,
-            {
-              id: 'event-deprecated',
-              until: '2.0.0'
-            }
+          i === 0,
+          {
+            id: 'event-deprecated',
+            until: '2.0.0'
+          }
           )
           add.call(this, event, frostEvent)
         }

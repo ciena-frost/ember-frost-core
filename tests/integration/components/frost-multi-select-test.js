@@ -1,17 +1,17 @@
 import {expect} from 'chai'
+import {expectSelectWithState} from 'dummy/tests/helpers/ember-frost-core'
+import {open, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
 import Ember from 'ember'
-const {$, run} = Ember
-import keyCodes from 'ember-frost-core/utils/key-codes'
-const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
 import {$hook, initialize as initializeHook} from 'ember-hook'
+import keyCodes from 'ember-frost-core/utils/key-codes'
 import wait from 'ember-test-helpers/wait'
 import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
-import {expectSelectWithState} from 'dummy/tests/helpers/ember-frost-core'
-import {open, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
+const {$, run} = Ember
+const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
 
 /**
  * Blur element (ensuring it has focus first)
@@ -91,7 +91,7 @@ describe(test.label, function () {
     })
 
     describe('when data not present', function () {
-      it('renders as expected', function () {
+      it('should render as expected', function () {
         expectSelectWithState('select', {
           focused: false
         })
@@ -106,7 +106,7 @@ describe(test.label, function () {
           open('select')
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: true,
             items: [],
@@ -130,7 +130,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true
             })
@@ -145,7 +145,7 @@ describe(test.label, function () {
       // FIXME: tests for tabbing into components isn't working anymore, despite the fact that
       // code changes shouldn't have affected it, AFAIK, probably need to look into alternative ways of
       // testing this (ARM 2016-12-05)
-      describe.skip('tab into component', function () {
+      describe.skip('should tab into component', function () {
         beforeEach(function () {
           // In case you are wondering what the hell is going on here there is no
           // way to trigger a generic tab event on the document to move focus on to
@@ -169,7 +169,7 @@ describe(test.label, function () {
             )
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: true
           })
@@ -187,7 +187,7 @@ describe(test.label, function () {
           $hook('select').focusin()[0].focus()
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: true
           })
@@ -204,7 +204,7 @@ describe(test.label, function () {
             return wait()
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: false
             })
@@ -226,7 +226,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true,
               items: [],
@@ -245,7 +245,7 @@ describe(test.label, function () {
               return wait()
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: false
               })
@@ -267,7 +267,7 @@ describe(test.label, function () {
                 )
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true
               })
@@ -290,7 +290,7 @@ describe(test.label, function () {
                 )
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 opened: false
@@ -315,7 +315,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true,
               items: [],
@@ -340,7 +340,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true,
               items: [],
@@ -359,7 +359,7 @@ describe(test.label, function () {
           this.set('disabled', true)
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             disabled: true,
             focused: false
@@ -375,7 +375,7 @@ describe(test.label, function () {
             open('select')
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               disabled: true,
               focused: false
@@ -390,7 +390,7 @@ describe(test.label, function () {
         // FIXME: tests for tabbing into components isn't working anymore, despite the fact that
         // code changes shouldn't have affected it, AFAIK, probably need to look into alternative ways of
         // testing this (ARM 2016-12-05)
-        describe.skip('tab into component', function () {
+        describe.skip('should tab into component', function () {
           beforeEach(function () {
             // In case you are wondering what the hell is going on here there is no
             // way to trigger a generic tab event on the document to move focus on to
@@ -415,7 +415,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               disabled: true,
               focused: false
@@ -439,7 +439,7 @@ describe(test.label, function () {
           this.set('tabIndex', 3)
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: false,
             tabIndex: 3
@@ -456,7 +456,7 @@ describe(test.label, function () {
           this.set('error', true)
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             error: true,
             focused: false
@@ -477,7 +477,7 @@ describe(test.label, function () {
         ])
       })
 
-      it('renders as expected', function () {
+      it('should render as expected', function () {
         expectSelectWithState('select', {
           focused: false
         })
@@ -492,7 +492,7 @@ describe(test.label, function () {
           open('select')
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: true,
             focusedItem: 'Foo',
@@ -514,7 +514,7 @@ describe(test.label, function () {
             return wait()
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true,
               focusedItem: 'Bar',
@@ -540,7 +540,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true
             })
@@ -555,7 +555,7 @@ describe(test.label, function () {
       // FIXME: tests for tabbing into components isn't working anymore, despite the fact that
       // code changes shouldn't have affected it, AFAIK, probably need to look into alternative ways of
       // testing this (ARM 2016-12-05)
-      describe.skip('tab into component', function () {
+      describe.skip('should tab into component', function () {
         beforeEach(function () {
           // In case you are wondering what the hell is going on here there is no
           // way to trigger a generic tab event on the document to move focus on to
@@ -579,7 +579,7 @@ describe(test.label, function () {
             )
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: true
           })
@@ -597,7 +597,7 @@ describe(test.label, function () {
           $hook('select').focusin()[0].focus()
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: true
           })
@@ -614,7 +614,7 @@ describe(test.label, function () {
             return wait()
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: false
             })
@@ -636,7 +636,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true
             })
@@ -659,7 +659,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true,
               focusedItem: 'Foo',
@@ -679,7 +679,7 @@ describe(test.label, function () {
               return wait()
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: false
               })
@@ -701,7 +701,7 @@ describe(test.label, function () {
                 )
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 opened: false
@@ -729,7 +729,7 @@ describe(test.label, function () {
               })
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 items: ['Foo', 'Bar'],
@@ -760,7 +760,7 @@ describe(test.label, function () {
                   )
               })
 
-              it('renders as expected', function () {
+              it('should render as expected', function () {
                 expectSelectWithState('select', {
                   focused: true,
                   items: ['Foo', 'Bar'],
@@ -789,7 +789,7 @@ describe(test.label, function () {
                   })
                 })
 
-                it('renders as expected', function () {
+                it('should render as expected', function () {
                   expectSelectWithState('select', {
                     focused: true,
                     items: ['Foo', 'Bar'],
@@ -823,7 +823,7 @@ describe(test.label, function () {
                 )
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 focusedItem: 'Foo',
@@ -849,7 +849,7 @@ describe(test.label, function () {
                 )
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 focusedItem: 'Bar',
@@ -874,7 +874,7 @@ describe(test.label, function () {
                   )
               })
 
-              it('renders as expected', function () {
+              it('should render as expected', function () {
                 expectSelectWithState('select', {
                   focused: true,
                   focusedItem: 'Foo',
@@ -900,7 +900,7 @@ describe(test.label, function () {
                   )
               })
 
-              it('renders as expected', function () {
+              it('should render as expected', function () {
                 expectSelectWithState('select', {
                   focused: true,
                   focusedItem: 'Bar',
@@ -930,7 +930,7 @@ describe(test.label, function () {
                 })
               })
 
-              it('renders as expected', function () {
+              it('should render as expected', function () {
                 expectSelectWithState('select', {
                   focused: true,
                   items: ['Foo', 'Bar'],
@@ -957,7 +957,7 @@ describe(test.label, function () {
               return selectItemAtIndex('select', 0, done)
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 items: ['Foo', 'Bar'],
@@ -982,7 +982,7 @@ describe(test.label, function () {
               return selectItemAtIndex('select', 1, done)
             })
 
-            it('renders as expected', function () {
+            it('should render as expected', function () {
               expectSelectWithState('select', {
                 focused: true,
                 items: ['Foo', 'Bar'],
@@ -1014,7 +1014,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true,
               focusedItem: 'Foo',
@@ -1040,7 +1040,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               focused: true,
               focusedItem: 'Foo',
@@ -1060,7 +1060,7 @@ describe(test.label, function () {
           this.set('disabled', true)
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             disabled: true,
             focused: false
@@ -1076,7 +1076,7 @@ describe(test.label, function () {
             open('select')
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               disabled: true,
               focused: false
@@ -1091,7 +1091,7 @@ describe(test.label, function () {
         // FIXME: tests for tabbing into components isn't working anymore, despite the fact that
         // code changes shouldn't have affected it, AFAIK, probably need to look into alternative ways of
         // testing this (ARM 2016-12-05)
-        describe.skip('tab into component', function () {
+        describe.skip('should tab into component', function () {
           beforeEach(function () {
             // In case you are wondering what the hell is going on here there is no
             // way to trigger a generic tab event on the document to move focus on to
@@ -1116,7 +1116,7 @@ describe(test.label, function () {
               )
           })
 
-          it('renders as expected', function () {
+          it('should render as expected', function () {
             expectSelectWithState('select', {
               disabled: true,
               focused: false
@@ -1140,7 +1140,7 @@ describe(test.label, function () {
           this.set('tabIndex', 3)
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             focused: false,
             tabIndex: 3
@@ -1157,7 +1157,7 @@ describe(test.label, function () {
           this.set('error', true)
         })
 
-        it('renders as expected', function () {
+        it('should render as expected', function () {
           expectSelectWithState('select', {
             error: true,
             focused: false
@@ -1176,7 +1176,7 @@ describe(test.label, function () {
           $hook('select').click()
         })
 
-        it('can find dropdown input', function () {
+        it('should find dropdown input', function () {
           expect($hook('select-list-input')).to.have.length(1)
         })
       })
@@ -1184,7 +1184,7 @@ describe(test.label, function () {
   })
 
   describe('renders using spread', function () {
-    it('renders as expected', function () {
+    it('should render as expected', function () {
       this.render(hbs`
         {{frost-select-outlet hook='mySelectOutlet'}}
         {{input hook='pre'}}
