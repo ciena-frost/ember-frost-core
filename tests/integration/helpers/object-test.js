@@ -159,7 +159,8 @@ describe('Integration | Helper | object', function () {
 
     /*
     * ewhite 21/12/2017
-    * Added test to check when updating value array's toString for asserts does not throw error because hash doesn't have a toString method
+    * Added test to check when updating value array's toString for asserts does not throw error because hash doesn't
+    *   have a toString method
     * Example: https://ember-twiddle.com/2260b80be13a1d6ca5e59c99c40ec51a?openFiles=templates.application.hbs%2C
     * Issue: https://github.com/emberjs/ember.js/issues/14738
     * Cause: https://github.com/emberjs/ember.js/blob/v2.12.2/packages/ember-metal/lib/property_set.js#L45

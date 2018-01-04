@@ -48,6 +48,7 @@ const validSizes = [
  * @param {Array<Object>} routes - routes
  * @param {Array<String>} routeNames - route names
  */
+/* eslint-disable complexity */
 function addRouteToParams (params, {route, routes, routeNames}) {
   if (route) {
     params.push(route)
@@ -57,6 +58,7 @@ function addRouteToParams (params, {route, routes, routeNames}) {
     params.push(routeNames[0])
   }
 }
+/* eslint-enable complexity */
 
 /**
  * Get value of attribute from attributes object (also checking via spread options)
@@ -376,6 +378,7 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
    * as if we used the original link-to interface.
    * @param {Object} newAttrs - incoming properties
    */
+  /* eslint-disable complexity */
   didReceiveAttrs () {
     let params = getAttr(this, 'params')
 
@@ -423,6 +426,7 @@ export default LinkComponent.extend(PropTypeMixin, HookMixin, SpreadMixin, {
 
     this._super(...arguments)
   },
+  /* eslint-enable complexity */
 
   init () {
     this._super(...arguments)

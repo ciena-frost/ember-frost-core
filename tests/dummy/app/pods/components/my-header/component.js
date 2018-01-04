@@ -1,10 +1,9 @@
 /**
  * Component definition for the my-header component
  */
+import layout from './template'
 import {Component} from 'ember-frost-core'
 import {PropTypes} from 'ember-prop-types'
-
-import layout from './template'
 
 export default Component.extend({
   // == Dependencies ==========================================================

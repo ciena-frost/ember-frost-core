@@ -16,30 +16,30 @@ describe('Unit / Utils / text', () => {
     sandbox.restore()
   })
 
-  describe('.trimDataToFit()', () => {
-    it('does not throw an error when text is undefined', () => {
+  describe('.trimDataToFit()', function () {
+    it('should not throw an error when text is undefined', function () {
       expect(() => {
         trimDataToFit(undefined, 300)
       }).not.to.throw()
     })
 
-    it('does not throw an error when text is empty', () => {
+    it('should not throw an error when text is empty', function () {
       expect(() => {
         trimDataToFit('', 300)
       }).not.to.throw()
     })
 
-    it('returns original text when width is wider than text width', () => {
+    it('should return original text when width is wider than text width', function () {
       const text = 'my text'
       expect(trimDataToFit(text, 5000)).to.equal(text)
     })
   })
 
-  describe('.trimLongDataInElement()', () => {
+  describe('.trimLongDataInElement()', function () {
     describe('when initial text fits within element', function () {
       let $element, text
 
-      beforeEach(() => {
+      beforeEach(function () {
         text = 'The quick brown fox'
         $element = $(`<div data-text="${text}">${text}</div>`).appendTo('body')
         $element.css({
@@ -47,26 +47,26 @@ describe('Unit / Utils / text', () => {
         })
       })
 
-      afterEach(() => {
+      afterEach(function () {
         $element.remove()
       })
 
-      describe('when text fits within element', () => {
-        beforeEach(() => {
+      describe('when text fits within element', function () {
+        beforeEach(function () {
           $element.width(200)
         })
 
-        it('does not trim text or set title', () => {
+        it('should not trim text or set title', function () {
           expect(trimLongDataInElement($element.get(0))).to.equal(null)
         })
       })
 
-      describe('when text does not fit within element', () => {
-        beforeEach(() => {
+      describe('when text does not fit within element', function () {
+        beforeEach(function () {
           $element.width(80)
         })
 
-        it('trims text and sets title', () => {
+        it('should trim text and sets title', function () {
           const result = trimLongDataInElement($element.get(0))
 
           expect(result.text.indexOf('The')).to.eql(0)
@@ -80,7 +80,7 @@ describe('Unit / Utils / text', () => {
     describe('when initial text does not fit within element', function () {
       let $element, text
 
-      beforeEach(() => {
+      beforeEach(function () {
         text = 'The quick brown fox'
         $element = $(`<div data-text="${text}">${text}</div>`).appendTo('body')
         $element.css({
@@ -93,11 +93,11 @@ describe('Unit / Utils / text', () => {
         $element.text(initial.text).prop('title', initial.tooltip)
       })
 
-      afterEach(() => {
+      afterEach(function () {
         $element.remove()
       })
 
-      it('has trimmed text', () => {
+      it('should trim text', function () {
         let currentText = $element.text()
 
         expect(currentText.indexOf('The')).to.eql(0)
@@ -105,32 +105,32 @@ describe('Unit / Utils / text', () => {
         expect(currentText.indexOf('fox')).to.eql(currentText.length - 3)
       })
 
-      it('has title', () => {
+      it('should have title', function () {
         expect($element).to.have.prop('title', text)
       })
 
-      describe('when text fits within element', () => {
-        beforeEach(() => {
+      describe('when text fits within element', function () {
+        beforeEach(function () {
           $element.width(200)
         })
 
-        it('sets text back to full text and unsets tooltip', () => {
+        it('should set text back to full text and unsets tooltip', function () {
           const result = trimLongDataInElement($element.get(0))
           expect(result.text).to.equal(text)
           expect(result.tooltip).to.equal('')
         })
       })
 
-      describe('when trimmed text remains the same', () => {
-        beforeEach(() => {
+      describe('when trimmed text remains the same', function () {
+        beforeEach(function () {
           $element.width(80)
         })
 
-        it('does not update text or tooltip', function () {
+        it('should not update text or tooltip', function () {
           expect(trimLongDataInElement($element.get(0))).to.equal(null)
         })
 
-        it('has same trimmed text', () => {
+        it('should have same trimmed text', function () {
           let currentText = $element.text()
 
           expect(currentText.indexOf('The')).to.eql(0)
@@ -138,7 +138,7 @@ describe('Unit / Utils / text', () => {
           expect(currentText.indexOf('fox')).to.eql(currentText.length - 3)
         })
 
-        it('has same title', () => {
+        it('should have same title', function () {
           expect($element).to.have.prop('title', text)
         })
       })

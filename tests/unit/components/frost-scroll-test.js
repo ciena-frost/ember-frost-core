@@ -18,18 +18,18 @@ describe(test.label, function () {
     })
   })
 
-  it('extends the common frost component', function () {
+  it('should extend the common frost component', function () {
     expect(
       component instanceof Component,
       'is instance of Frost Component'
     ).to.equal(true)
   })
 
-  it('registers and unregisters "ps-scroll-up" event handlers', function () {
+  it('should register and unregisters "ps-scroll-up" event handlers', function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollUp', function () { return })
+    component.set('onScrollUp', function () {})
 
     this.render()
 
@@ -55,11 +55,11 @@ describe(test.label, function () {
     $.fn.off.restore()
   })
 
-  it('registers and unregisters "ps-scroll-down" event handlers', function () {
+  it('should register and unregisters "ps-scroll-down" event handlers', function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollDown', function () { return })
+    component.set('onScrollDown', function () {})
 
     this.render()
 
@@ -85,11 +85,11 @@ describe(test.label, function () {
     $.fn.off.restore()
   })
 
-  it('registers and unregisters "ps-y-reach-start" event handlers', function () {
+  it('should register and unregisters "ps-y-reach-start" event handlers', function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollYStart', function () { return })
+    component.set('onScrollYStart', function () {})
 
     this.render()
 
@@ -115,11 +115,11 @@ describe(test.label, function () {
     $.fn.off.restore()
   })
 
-  it('registers and unregisters "ps-y-reach-end" event handlers', function () {
+  it('should register and unregisters "ps-y-reach-end" event handlers', function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollYEnd', function () { return })
+    component.set('onScrollYEnd', function () {})
 
     this.render()
 
@@ -145,11 +145,11 @@ describe(test.label, function () {
     $.fn.off.restore()
   })
 
-  it('registers and unregisters "ps-scroll-x" event handlers', function () {
+  it('should register and unregisters "ps-scroll-x" event handlers', function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollX', function () { return })
+    component.set('onScrollX', function () {})
 
     this.render()
 
@@ -175,11 +175,11 @@ describe(test.label, function () {
     $.fn.off.restore()
   })
 
-  it('registers and unregisters "ps-scroll-right" event handlers', function () {
+  it('should register and unregisters "ps-scroll-right" event handlers', function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollRight', function () { return })
+    component.set('onScrollRight', function () {})
 
     this.render()
 
@@ -205,11 +205,11 @@ describe(test.label, function () {
     $.fn.off.restore()
   })
 
-  it('registers and unregisters "ps-scroll-left" event handlers', function () {
+  it('should register and unregisters "ps-scroll-left" event handlers', function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onScrollLeft', function () { return })
+    component.set('onScrollLeft', function () {})
 
     this.render()
 
@@ -235,11 +235,11 @@ describe(test.label, function () {
     $.fn.off.restore()
   })
 
-  it('registers and unregisters "mouseenter" event handlers', function () {
+  it('should register and unregisters "mouseenter" event handlers', function () {
     const spyOn = sinon.spy($.fn, 'on')
     const spyOff = sinon.spy($.fn, 'off')
 
-    component.set('onMouseEnter', function () { return })
+    component.set('onMouseEnter', function () {})
 
     this.render()
 

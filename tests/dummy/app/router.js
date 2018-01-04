@@ -2,7 +2,7 @@ import config from './config/environment'
 import Ember from 'ember'
 const {Router: EmberRouter} = Ember
 
-var Router = EmberRouter.extend({
+const Router = EmberRouter.extend({
   location: config.locationType,
   rootURL: config.rootURL
 })
