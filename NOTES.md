@@ -1,4 +1,4 @@
-There are some **dependencies** in _package.json_ for which is may not be readily understood why they are listed.  This document provides an explanation.
+There are some **dependencies** in _package.json_ for which it may not be readily understood why they are listed.  This document provides an explanation.
 
 | Dependency | Reason
 | --- | ---
