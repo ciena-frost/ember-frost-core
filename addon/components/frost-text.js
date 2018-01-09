@@ -29,6 +29,7 @@ export default Component.extend(FrostEventsProxyMixin, {
     isClearEnabled: PropTypes.bool,
     isClearVisible: PropTypes.bool,
     isHookEmbedded: PropTypes.bool,
+    onClear: PropTypes.func,
     receivedHook: PropTypes.string,
     tabindex: PropTypes.number,
     type: PropTypes.string,
@@ -60,6 +61,7 @@ export default Component.extend(FrostEventsProxyMixin, {
       isClearEnabled: false,
       isClearVisible: false,
       isHookEmbedded: false,
+      onClear: () => {},
       readonly: false,
       required: false,
       spellcheck: false,
@@ -79,9 +81,8 @@ export default Component.extend(FrostEventsProxyMixin, {
       .focus()
       .val('')
       .trigger('input')
-    if (typeof this.onClear === 'function') {
-      this.onClear()
-    }
+
+    this.onClear()
   }).restartable(),
 
   _showClear: task(function * (isFocused) {
