@@ -18,9 +18,9 @@ A check in a box, a checkbox
 | `falseValue` | `any` | `<any value>` | the value to send to onInput when unchecked
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `label` | `string` | `<label-name>` | label for the checkbox |
-| `onBlur` | `string` | `<action-name>` | triggers associated action when the checkbox loses focus |
-| `onFocus` | `string` | `<action-name>` | triggers associated action when the checkbox receives focusin event |
-| `onInput` |`string` | `<action-name>` | The action callback to call when the value of the checkbox changes as the user clicks |
+| `onBlur` | `closure-action` | `<closure-action>` | triggers associated action when the checkbox loses focus |
+| `onFocus` | `closure-action` | `<closure-action>` | triggers associated action when the checkbox receives focusin event |
+| `onInput` |`closure-action` | `<closure-action>` | The action callback to call when the value of the checkbox changes as the user clicks |
 | `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `size` | `string` | `small` | **default** - small size checkbox |
 |  | | `medium` | medium size checkbox |

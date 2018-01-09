@@ -14,7 +14,7 @@
 | `trueLabel` | `boolean` or `string` or `number` | `<value>` | the label for the true value of the toggle component |
 | `trueValue` | `boolean` or `string` or `number` | `<value>` | true value of the toggle component |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
-| `onClick` | `string` | `<action-name>` | triggers associated action when the toggle is clicked |
+| `onClick` | `closure-action` | `<closure-action>` | triggers associated action when the toggle is clicked |
 | `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `value` | `boolean` or `string` or `number` | `<value>` | value of the toggle component |
 

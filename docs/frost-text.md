@@ -23,7 +23,7 @@
 | `form` | `string` | `<form-owner>` | form element that this is associated with (its form owner) |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `maxlength` | `number` | `<maxlength-value>` | maximum number of characters a user can enter |
-| `onClear`| `function`/`action`| empty function | triggers associated action when `X` is clicked and text is cleared |
+| `onClear`| `closure-action` | `<closure-action>` | triggers associated action when `X` is clicked |
 | `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `placeholder` | `string` | `<text>` | placeholder text |
 | `readonly` | `boolean` | `false` | **default** - normal text field |
