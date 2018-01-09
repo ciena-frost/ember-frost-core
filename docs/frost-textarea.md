@@ -15,6 +15,7 @@ a text area component
 | | | `true` | disabled text area |
 | `form` | `string` | `<form-owner>` | form element that this is associated with (its form owner) |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
+| `onClear`| `function`/`action`| empty function | triggers associated action when `X` is clicked and text is cleared |
 | `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `placeholder` | `string` | `<text>` | placeholder text |
 | `readonly` | `boolean` | `false` | **default** - basic text area |
@@ -68,6 +69,13 @@ The text area component use ember-spread to `spread` a property object against t
 ```handlebars
 {{frost-textarea
   cols=80 rows=6
+}}
+```
+
+### Actions - onClear
+```handlebars
+{{frost-textarea
+  onClear=(action 'handleClear')
 }}
 ```
 
