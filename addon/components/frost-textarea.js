@@ -49,7 +49,6 @@ export default Component.extend(FrostEventsProxyMixin, {
       isClearEnabled: false,
       isClearVisible: false,
       disabled: false,
-      onClear: () => {},
       readonly: false,
       tabindex: 0,
 
@@ -77,7 +76,9 @@ export default Component.extend(FrostEventsProxyMixin, {
       .val('')
       .trigger('input')
 
-    this.onClear()
+    if (this.onClear) {
+      this.onClear()
+    }
   }).restartable(),
 
   _showClear: task(function * (isFocused) {
