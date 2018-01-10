@@ -1,5 +1,6 @@
-$frost-toggle-button-height: 35px;
-$frost-toggle-button-switch-height: 27px;
+$frost-toggle-button-height: 30px;
+$frost-toggle-button-switch-width: 35px;
+$frost-toggle-button-switch-height: 22px;
 
 $frost-toggle-button-hover-color: #c6eafc;
 $frost-toggle-button-hover-shadow: rgba(0, 0, 0, .2);
@@ -8,6 +9,8 @@ $frost-toggle-button-hover-shadow: rgba(0, 0, 0, .2);
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  height: $frost-toggle-button-height;
+  border-radius: 0;
 
   &.disabled {
     opacity: .4;
@@ -22,7 +25,7 @@ $frost-toggle-button-hover-shadow: rgba(0, 0, 0, .2);
           background-color: $frost-color-blue-1;
 
           &:after {
-            right: 50%;
+            right: calc(100% - 35px - 5px);  // accounts for width of button and padding
           }
         }
       }
@@ -44,17 +47,16 @@ $frost-toggle-button-hover-shadow: rgba(0, 0, 0, .2);
     }
 
     &.medium {
-      width: 115px;
+      width: 90px;  // per spec
       height: $frost-toggle-button-height;
       padding: 3px;
-      border-radius: 3px;
     }
 
     &:before,
     &:after {
       display: block;
       position: absolute;
-      width: 45%;
+      width: $frost-toggle-button-switch-width;
       height: $frost-toggle-button-switch-height;
       content: '';
     }
@@ -73,7 +75,6 @@ $frost-toggle-button-hover-shadow: rgba(0, 0, 0, .2);
       top: calc(50% - (#{$frost-toggle-button-switch-height} / 2));
       right: 5px;
       transition: right .2s;
-      border-radius: 2px;
       background-color: $frost-color-white;
     }
 
