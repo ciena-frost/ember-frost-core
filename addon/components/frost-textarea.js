@@ -31,6 +31,7 @@ export default Component.extend(FrostEventsProxyMixin, {
     form: PropTypes.string,
     isClearEnabled: PropTypes.bool,
     isClearVisible: PropTypes.bool,
+    onClear: PropTypes.func,
     placeholder: PropTypes.string,
     readonly: PropTypes.bool,
     rows: PropTypes.number,
@@ -74,6 +75,10 @@ export default Component.extend(FrostEventsProxyMixin, {
       .focus()
       .val('')
       .trigger('input')
+
+    if (this.onClear) {
+      this.onClear()
+    }
   }).restartable(),
 
   _showClear: task(function * (isFocused) {

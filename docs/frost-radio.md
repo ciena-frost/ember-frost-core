@@ -12,7 +12,7 @@
 | `inputs` | `array` | `[{ disabled: 'boolean', label: 'string', required: 'boolean', size: 'string', value: 'string' }, ...]` | used to set the label, value and disabled state when using radio group/radio button in a non-block (inline) usage
 | `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `selectedValue` | `string` | `<group-value>` | default checked radio button |
-| `onChange` | `string` |`<action-name>`| triggers associated action on change or keypress of space/enter |
+| `onChange` | `closure-action` | `<closure-action>` | triggers associated action on change or keypress of space/enter |
 
 ### radio-button
 | Attribute | Type | Value | Description |
@@ -30,7 +30,7 @@
 | | | `medium` | medium size radio button |
 | | | `large` | large size radio button |
 | `value` | `string` | `<value>` | value of the radio button |
-| `onChange` | `string` |`<action-name>`| triggers associated action |
+| `onChange` | `closure-action` | `<closure-action>` | triggers associated action |
 
 ## Testing with ember-hook
 If a hook is set on radio-group, a concatenated hook will be created as follows:

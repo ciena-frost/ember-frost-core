@@ -345,6 +345,30 @@ describe(test.label, function () {
     ).to.eql(testValue)
   })
 
+  it('should call onClear closure action', function () {
+    const externalActionSpy = sinon.spy()
+    const testValue = 'Test'
+
+    this.set('value', testValue)
+    this.on('externalAction', externalActionSpy)
+
+    this.render(hbs`
+      {{frost-text
+        hook='myTextInput'
+        onClear=(action "externalAction")
+        value=value
+      }}
+    `)
+    run(() => {
+      this.$('input').val('Test').trigger('input')
+      this.$('.frost-text-clear').trigger('click')
+    })
+    expect(
+      externalActionSpy.calledOnce,
+      'onClear closure action called '
+    ).to.eql(true)
+  })
+
   it('should render using spread', function () {
     this.render(hbs`
       {{frost-text

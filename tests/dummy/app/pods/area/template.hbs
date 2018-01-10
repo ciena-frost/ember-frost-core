@@ -1,9 +1,3 @@
-<div class="dummy-notification-container">
-  {{#each notifications as |notification|}}
-    {{notification-message notification=notification}}
-  {{/each}}
-</div>
-
 <div class="dummy-body textarea area">
 
   <div class="section-title">Default</div>
@@ -220,6 +214,25 @@
         <br>
         <div>Controller</div>
         {{code-snippet name='textarea-support-events.js'}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">onClear</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET onClear }}
+        {{frost-text
+          hook='myTextfield'
+          onClear=(action 'clear')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        <div>Template</div>
+        {{code-snippet name='onClear.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='onClear.js'}}
       </div>
     </div>
   </div>

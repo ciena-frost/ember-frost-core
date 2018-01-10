@@ -214,6 +214,26 @@
         {{code-snippet name='text-support-events.js'}}
       </div>
     </div>
+
+    <div class="example">
+      <div class="title">onClear</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET onClear }}
+        {{frost-text
+          hook='myTextfield'
+          onClear=(action 'clear')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        <div>Template</div>
+        {{code-snippet name='onClear.hbs'}}
+        <br>
+        <div>Controller</div>
+        {{code-snippet name='onClear.js'}}
+      </div>
+    </div>
+
   </div>
   <div class='section-title'>Other</div>
   <hr>
