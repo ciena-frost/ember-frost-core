@@ -19,7 +19,15 @@ export default Controller.extend({
         autoClear: true,
         clearDuration: 2000
       })
-    }
+    },
     // END-SNIPPET textarea-dom-events
+    // BEGIN-SNIPPET onClear
+    clear () {
+      this.get('notifications').success('Cleared', {
+        autoClear: true,
+        clearDuration: 2000
+      })
+    }
+    // END-SNIPPET onClear
   }
 })

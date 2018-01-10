@@ -48,11 +48,15 @@ based icon packs. The default path for dummy apps is
 
 ### Inline SVG rendering
 
-You may wish to have the svg in the DOM, so it can be controlled with JavaScript from the same document without having to do a request to GET the svg.
+You may wish to have the svg in the DOM, so it can be controlled with JavaScript from the same document without having 
+to do a request to GET the svg.
 
-`ember-frost-core` provides a configuration option that causes [svg4everybody](https://github.com/jonathantneal/svg4everybody) to always render the svg inline, rather than providing a reference.
+`ember-frost-core` provides a configuration option that causes
+[svg4everybody](https://github.com/jonathantneal/svg4everybody)
+to always render the svg inline, rather than providing a reference.
 
-In [config/environment.js](https://github.com/ciena-frost/ember-frost-core/blob/master/tests/dummy/config/environment.js#L14-L16) place the following object in `EmberENV`:
+In [config/environment.js](https://github.com/ciena-frost/ember-frost-core/blob/master/tests/dummy/config/
+environment.js#L14-L16) place the following object in `EmberENV`:
 
 ```javascript
 iconPacks: {

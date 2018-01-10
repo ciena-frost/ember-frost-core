@@ -187,7 +187,7 @@ describe(test.label, function () {
       return wait()
     })
 
-    it('still properly sets input properties', function () {
+    it('should still properly sets input properties', function () {
       expect(this.$('.frost-password input')).to.have.prop('disabled', true)
     })
   })

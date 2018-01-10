@@ -14,8 +14,8 @@
 |  |  | `true` | disabled button |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `icon` | `string` | `<icon-name>` | name of a frost-icon |
-| `onClick` | `string` | `<action-name>` | triggers associated action when the button is clicked |
-| `onFocus` | `string` | `<action-name>` | triggers associated action when the button received focusin event |
+| `onClick` | `closure-action` | `<closure-action>` | triggers associated action when the button is clicked |
+| `onFocus` | `closure-action` | `<closure-action>` | triggers associated action when the button receives focusin event |
 | `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `pack` | `string` | `frost` | **default** - name of the icon pack |
 | `priority` | `string` | `primary` | primary action button |

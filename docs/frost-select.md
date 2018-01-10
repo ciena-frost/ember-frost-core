@@ -12,9 +12,9 @@
 | `error`        | `boolean` |`false` | **default** - normal select component |
 |    | | `true` | sets select component to error state |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
-| `onChange`     | `string` | `<action-name>` | The action callback to call when the value of the select component changes |
-| `onClick`      | `string` | `<action-name>` | The action callback to call when the select component is clicked. Fires even if select is disabled. |
-| `onInput`      | `string` | `<action-name>` | The action callback to call when the value of the filter changes as the user types |
+| `onChange`     | `closure-action` | `<closure-action>` | The action callback to call when the value of the select component changes |
+| `onClick`      | `closure-action` | `<closure-action>` | The action callback to call when the select component is clicked. Fires even if select is disabled. |
+| `onInput`      | `closure-action` | `<closure-action>` | The action callback to call when the value of the filter changes as the user types |
 | `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `placeholder` | `string` | | Placeholder text for when nothing is selected. |
 | `selected`      | `number` or `array` | `1` or `[1, 2]` | The indices of the pre-selected values corresponding to values in the passed-in data. Passing negative values (e.g. `-1` or `[-1]`) to a single select will clear the current select state.|
@@ -23,7 +23,8 @@
 | | | `true` | Allow select option text to wrap |
 
 ## Testing with ember-hook
-The select component is accessible using ember-hook with the top level hook name or you can access the internal components as well -
+The select component is accessible using ember-hook with the top level hook name or you can access the internal 
+components as well -
 * Input field hook - `$hook('<hook-name>-input')`
 * List hook - `$hook('<hook-name>-list')`
 * Individual list items can be found using hook qualifiers like index, label or value -
@@ -120,4 +121,6 @@ var selectedValue = ["bar", "buzz"]
 
 will select both values `"bar"` and `"buzz"`.
 
-NOTE: Changing `selectedValue` will overwrite any previous selections. However, changing `selectedValue` to be undefined, or a value that can be evaluated to be equal to the previous value (using lodash's `isEqual` function) will not cause values to be overwritten. Setting `selectedValue` to `null` will clear the selection.
+NOTE: Changing `selectedValue` will overwrite any previous selections. However, changing `selectedValue` to be 
+undefined, or a value that can be evaluated to be equal to the previous value (using lodash's `isEqual` function) will 
+not cause values to be overwritten. Setting `selectedValue` to `null` will clear the selection.

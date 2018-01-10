@@ -12,7 +12,7 @@
 |  |  | `true` | disabled link |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `icon` | `string` | `<icon-name>` | the name of a frost-icon |
-| `onClick` |`string` | `<action-name>` | triggers associated action when the link is clicked prior to transition |
+| `onClick` |`closure-action` | `<closure-action>` | triggers associated action when the link is clicked prior to transition |
 | `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `priority` | `string` | `primary` | primary link - opens content in a new tab |
 |  |  | `secondary` | secondary link - opens content in the same tab |

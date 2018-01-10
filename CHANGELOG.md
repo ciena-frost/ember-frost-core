@@ -1,3 +1,42 @@
+# 5.1.0 (2018-01-10)
+* Add `onClear` functionality to both frost-text, and frost-textarea
+
+# 5.0.0 (2018-01-04)
+* Remove `ember-cli-path-utils`
+* Remove `frost-guide-custom-routing`
+* Remove `npm-install-security-check`
+* Pin `ember-cli-sass` NPM dependency to `7.1.1`
+* Pin `ember-computed-decorators` NPM dependency to `0.3.0`
+* Pin `ember-concurrency` NPM dependency to `0.7.19`
+* Pin `ember-hook` NPM dependency to `1.4.2`
+* Pin `ember-inflector` Bower dependency to `1.3.1`
+* Pin `highlightjs` Bower dependency to `9.12.0`
+* Update `broccoli-babel-transpiler` NPM dependency to `^5.7.2`
+* Update `ember-browserify` NPM devDependency to `^1.2.0`
+* Update `ember-prop-types` NPM dependency to `^6.0.1`
+* Upgrade `broccoli-autoprefixer` NPM dependency to `^5.0.0`
+* Upgrade `broccoli-funnel` NPM dependency to `^2.0.1`
+* Upgrade `broccoli-merge-trees` NPM dependency to `^2.0.0`
+* Upgrade `broccoli-svgstore` NPM dependency to `^0.4.2`
+* Upgrade `ember-frost-test` NPM devDependency to `^4.0.0`
+* Upgrade `ember-cli-frost-blueprints` NPM devDependency to `^5.0.1`
+* Upgrade `ember-spread` NPM dependency to `^4.0.1`
+* Install `bower` NPM devDependency at ^1.8.2
+* Move `Faker` Bower dependency to devDependencies
+* Move `pretender` Bower dependency to devDependencies
+* Remove useLintTree ember-cli-mocha build configuration
+* Remove _package-lock.json_ until officially support Node 8
+
+  
+
+# 4.1.0 (2017-12-21)
+
+* Add object helper to fix https://github.com/emberjs/ember.js/issues/14738
+
+# 4.0.5 (2017-12-21)
+
+* **Fixed** dropdown not updating with new select items
+
 # 4.0.4 (2017-12-13)
 
 * Change semver range of `ember-resolver` to align with other repos

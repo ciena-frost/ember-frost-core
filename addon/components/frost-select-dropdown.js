@@ -286,6 +286,7 @@ export default Component.extend({
     }
   },
 
+  /* eslint-disable complexity */
   _handleArrowKey (upArrow) {
     let focusedIndex = this.get('focusedIndex')
 
@@ -309,6 +310,7 @@ export default Component.extend({
       }
     }
   },
+  /* eslint-enable complexity */
 
   _handleEnterKey () {
     const items = this.get('items') || []

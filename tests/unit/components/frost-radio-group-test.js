@@ -17,7 +17,7 @@ describe(test.label, function () {
     })
   })
 
-  it('sets default property values correctly', function () {
+  it('should set default property values correctly', function () {
     expect(
       component.get('inputs'),
       'inputs: []'
@@ -29,7 +29,7 @@ describe(test.label, function () {
     ).to.equal(null)
   })
 
-  it('extends the commone frost component', function () {
+  it('should extend the commone frost component', function () {
     expect(
       component instanceof Component,
       'is instance of Frost Component'
@@ -37,14 +37,14 @@ describe(test.label, function () {
   })
 
   describe('"meshedInputs" computed property', function () {
-    it('is not set when inputs is not set', function () {
+    it('should not set when inputs is not set', function () {
       expect(
         component.get('meshedInputs'),
         '"meshedInputs" is returning an empty list'
       ).to.eql([])
     })
 
-    it('is set when inputs is set', function () {
+    it('should set when inputs is set', function () {
       const inputs = [{
         value: 'test', label: 'test'
       }]

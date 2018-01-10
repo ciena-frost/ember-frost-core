@@ -93,7 +93,7 @@ describe(test.label, function () {
       expect($hook('myError-expand-label-text').text().trim()).to.equal('Show details')
     })
 
-    it('additional details should be collapsed', function () {
+    it('should collapse additional details', function () {
       expect(this.$('.frost-expand')).to.have.class('collapsed')
     })
   })
@@ -115,11 +115,11 @@ describe(test.label, function () {
       $hook('myError-expand-label').click()
     })
 
-    it('additional details should be expanded', function () {
+    it('should expaned additional details', function () {
       expect($hook('myError-expand-label-text').text().trim()).to.equal('Hide details')
     })
 
-    it('additional details text should be set correctly', function () {
+    it('should correctly set additional details text', function () {
       expect(this.$('.frost-expand')).to.have.class('expanded')
       expect($hook('myError-details').text().trim()).to.equal('Detailed information would be displayed here.')
     })
