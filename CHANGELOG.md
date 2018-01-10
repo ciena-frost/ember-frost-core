@@ -1,3 +1,6 @@
+# 5.1.0 (2018-01-10)
+* Add `onClear` functionality to both frost-text, and frost-textarea
+
 # 5.0.0 (2018-01-04)
 * Remove `ember-cli-path-utils`
 * Remove `frost-guide-custom-routing`
