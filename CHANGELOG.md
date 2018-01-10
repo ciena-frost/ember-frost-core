@@ -1,3 +1,8 @@
+# 5.1.1 (2018-01-10)
+* updated to reflect UX spec.
+
+
+
 # 5.1.0 (2018-01-10)
 * Add `onClear` functionality to both frost-text, and frost-textarea
 
