@@ -263,7 +263,7 @@ describe(test.label, function () {
     ).to.equal(true)
   })
 
-  it('should run clear() which clears the input value', function () {
+  it('should run clear() which clears the input value', function (done) {
     this.render(hbs`
       {{frost-text hook='myTextInput'}}
     `)
@@ -277,6 +277,20 @@ describe(test.label, function () {
       this.$('input').val(),
       'input value cleared'
     ).to.eql('')
+
+    run.later(() => {
+      expect(
+        this.$('.frost-text').hasClass('is-clear-visible'),
+        'class "is-clear-visible" is not set'
+      ).to.equal(false)
+
+      expect(
+        this.$('.frost-text').hasClass('is-clear-enabled'),
+        'class "is-clear-enabled" is not set'
+      ).to.equal(false)
+
+      done()
+    }, 400)
   })
 
   describe('when setting the hook property', function () {

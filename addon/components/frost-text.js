@@ -101,7 +101,7 @@ export default Component.extend(FrostEventsProxyMixin, {
       yield timeout(200) // Duration of the visibility animation
     }
     this.set('isClearEnabled', showClear)
-  }).restartable(),
+  }).enqueue(),
 
   // == DOM Events ============================================================
 
