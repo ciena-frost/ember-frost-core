@@ -1,3 +1,10 @@
+# 6.0.0 (2018-02-13)
+
+* **Removed** `blueprint-helper.js`, related tests and mention in `README.md`
+* **Removed** `chalk`, `child-process-promise`, `promise`, and `semver` NPM dependencies
+* **Updated** test helpers to now be provided from `addon-test-support`. For example, test helpers previously available at `dummy/tests/helpers/ember-frost-core/<frost-select>` are now available via `ember-frost-core/test-support/<frost-select>`
+* **Updated** add information to `README.md` about test helpers
+
 # 5.1.1 (2018-01-10)
 * updated to reflect UX spec.
 
