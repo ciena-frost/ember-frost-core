@@ -12,9 +12,6 @@
 ember install ember-frost-core
 ```
 
-_Note:_ Packages that are already installed in the consumer within the required semver range will not be re-installed 
-or have blueprints re-run. ([blueprint](blueprint/ember-frost-core/index.js))
-
 ## Components
 
 The following components are available when you install ember-frost-core
@@ -54,6 +51,16 @@ visit the app at http://localhost:4200.
 
 Run `npm test` from the root of the project to run linting checks as well as execute the test suite
 and output code coverage.
+
+### Test Helpers
+
+
+The following test helpers are provided at `ember-frost-core/test-support/<frost-component-name|utils>` to assist with writing tests for code that uses frost components:
+
+* [frost-button](addon-test-support/frost-button.js)
+* [frost-select](addon-test-support/frost-select.js)
+* [frost-text](addon-test-support/frost-text.js)
+* [utils](addon-test-support/utils.js)
 
 [ci-img]: https://img.shields.io/travis/ciena-frost/ember-frost-core.svg "Travis CI Build Status"
 [ci-url]: https://travis-ci.org/ciena-frost/ember-frost-core
