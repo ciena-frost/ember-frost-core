@@ -1,6 +1,11 @@
 import {expect} from 'chai'
-import {expectSelectWithState, filterSelect} from 'dummy/tests/helpers/ember-frost-core'
-import {close, open, selectItemAtIndex} from 'dummy/tests/helpers/ember-frost-core/frost-select'
+import {
+  close,
+  expectWithState as expectSelectWithState,
+  filter as filterSelect,
+  open,
+  selectItemAtIndex
+} from 'ember-frost-core/test-support/frost-select'
 import Ember from 'ember'
 import {keyCodes} from 'ember-frost-core/utils'
 import {$hook} from 'ember-hook'
