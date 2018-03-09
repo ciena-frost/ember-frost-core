@@ -13,7 +13,10 @@
     "test": "npm run lint && npm run test-addon",
     "test-addon": "EMBER_TRY_SCENARIO=${EMBER_TRY_SCENARIO:=ember-default} && ember try:one $EMBER_TRY_SCENARIO --- COVERAGE=true ember test"
   },
-  "repository": "git@github.com:ciena-frost/ember-frost-core.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ciena-frost/ember-frost-core.git"
+  },
   "engines": {
     "node": ">= 6.0.0"
   },
