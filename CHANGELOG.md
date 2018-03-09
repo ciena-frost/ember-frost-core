@@ -1,3 +1,6 @@
+# 6.0.1 (2018-03-08)
+* Pass down hookQualifier on `frost-button`
+
 # 6.0.0 (2018-02-13)
 
 * **Removed** `blueprint-helper.js`, related tests and mention in `README.md`
