@@ -4,7 +4,7 @@ source $(npm root -g)/pr-bumper/.travis/is-bump-commit.sh
 
 if isBumpCommit
 then
-  echo "Skipping coverage publish for version bump commit"
+  echo "Skipping coverage publish for pr-bumper commit"
   exit 0
 fi
 
@@ -16,7 +16,7 @@ fi
 
 if [ "$EMBER_TRY_SCENARIO" != "ember-default" ]
 then
-  echo "Skipping coverage publish for EMBER_TRY_SCENARIO [${EMBER_TRY_SCENARIO}]"
+  echo "Skipping pr-bumper for EMBER_TRY_SCENARIO [${EMBER_TRY_SCENARIO}]"
   exit 0
 fi
 
