@@ -8,7 +8,7 @@ fi
 
 if [ "$EMBER_TRY_SCENARIO" != "ember-default" ]
 then
-  echo "Skipping version bump for EMBER_TRY_SCENARIO [${EMBER_TRY_SCENARIO}]"
+  echo "Skipping pr-bumper for EMBER_TRY_SCENARIO [${EMBER_TRY_SCENARIO}]"
   exit 0
 fi
 
