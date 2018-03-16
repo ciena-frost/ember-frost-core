@@ -1,8 +1,11 @@
 import {expect} from 'chai'
+import Ember from 'ember'
 import {after, before, beforeEach, describe, it} from 'mocha'
 
 import destroyApp from '../helpers/destroy-app'
 import startApp from '../helpers/start-app'
+
+const {String: EmberString} = Ember
 
 describe('Acceptance: Application', function () {
   let application
@@ -24,7 +27,12 @@ describe('Acceptance: Application', function () {
       return visit('/')
     })
 
+    it('should have default title provided by frost-page-title', function () {
+      expect(document.title).to.equal('ember-frost-core tests')
+    })
+
     it('should redirect correct route', function () {
+        console.log('fpt', document.title)
       expect(currentPath()).to.equal('demo')
     })
   })

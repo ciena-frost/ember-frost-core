@@ -21,7 +21,7 @@ export default Service.extend({
 
     // filter and map sections to words
     return sections
-      .filter(section => !/[^\w-]/.test(section))
+      .filter(section => !/[^A-Za-z-]/.test(section))
       .map(section => {
         return section.split('-')
           .map(word => Ember.String.capitalize(word))
