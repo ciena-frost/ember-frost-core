@@ -1,11 +1,8 @@
 import {expect} from 'chai'
-import Ember from 'ember'
 import {after, before, beforeEach, describe, it} from 'mocha'
 
 import destroyApp from '../helpers/destroy-app'
 import startApp from '../helpers/start-app'
-
-const {String: EmberString} = Ember
 
 describe('Acceptance: Application', function () {
   let application
@@ -32,7 +29,6 @@ describe('Acceptance: Application', function () {
     })
 
     it('should redirect correct route', function () {
-        console.log('fpt', document.title)
       expect(currentPath()).to.equal('demo')
     })
   })
