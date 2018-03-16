@@ -1,5 +1,5 @@
 # frost-page-title
-The frost-page-title `addon primarily provides a Route Mixin for dynamically handling page titles. The Mixin uses a simple service to build up and store title values for updating the dynamically whenever an application's router transitions, and its initializers setup the app with the default page title behavior if a default title is given in the app's config.
+The frost-page-title `addon` primarily provides a Route Mixin for dynamically handling page titles. The Mixin uses a simple service to build up and store title values for updating the dynamically whenever an application's router transitions, and its initializers setup the app with the default page title behavior if a default title is given in the app's config.
 
 * [Basic Usage](#basic-usage)
 * [Initializers](#initializers)
