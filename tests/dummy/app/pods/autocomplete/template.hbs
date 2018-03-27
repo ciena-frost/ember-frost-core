@@ -240,5 +240,21 @@
         {{code-snippet name='autocomplete-filter-type.hbs'}}
       </div>
     </div>
+
+    <div class='example'>
+      <div class='title'>isLoading</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET autocomplete-is-loading }}
+        {{frost-autocomplete
+          data=data
+          hook='myMultiSelect'
+          isLoading=true
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='autocomplete-is-loading.hbs'}}
+      </div>
+    </div>
   </div>
 </div>
