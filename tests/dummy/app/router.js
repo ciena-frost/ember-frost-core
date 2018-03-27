@@ -9,6 +9,7 @@ const Router = EmberRouter.extend({
 
 Router.map(function () {
   this.route('demo', {path: '/'})
+  this.route('autocomplete')
   this.route('bookends')
   this.route('button')
   this.route('checkbox')
@@ -35,7 +36,6 @@ Router.map(function () {
   this.route('ajax-error-page')
   this.route('typography')
   this.route('helpers')
-  this.route('autocompletetest')
 })
 
 export default Router

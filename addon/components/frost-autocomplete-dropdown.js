@@ -486,7 +486,6 @@ export default Component.extend({
 
     selectItem (item) {
       this.get('onSelect')(item)
-      return
     }
   }
 })

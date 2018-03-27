@@ -13,7 +13,7 @@ export default Controller.extend({
     if (this.get('search')) {
       let search = this.get('search').toLowerCase()
       let filteredResult = result.filter((item) => {
-        if (item.label.toLowerCase().indexOf(search) !== -1) {
+        if (item.label.toLowerCase().startsWith(search)) {
           return true
         }
       })
