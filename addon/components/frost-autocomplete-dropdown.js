@@ -15,7 +15,7 @@ import Component from './frost-component'
 const {$, deprecate, get, merge, run} = Ember
 const {ENTER, ESCAPE, TAB} = keyCodes
 
-const DROPDOWN_OFFSET = -1
+const DROPDOWN_OFFSET = 5
 const FPS = 1000 / 60 // Update at 60 frames per second
 const WINDOW_SPACE = 20
 
@@ -253,7 +253,7 @@ export default Component.extend({
    * @returns {Object} property values
    */
   _positionAboveInput (top) {
-    const bottom = $(window).height() - top + $(document).scrollTop() + DROPDOWN_OFFSET
+    const bottom = $(window).height() - top + $(document).scrollTop() - 4
 
     if (bottom === this.get('bottom')) {
       return {}
@@ -275,7 +275,7 @@ export default Component.extend({
   _positionBelowInput (height, top) {
     // Make sure dropdown is rendered below input and we leave space for arrow
     // that connects dropdown to input
-    top = top + height + DROPDOWN_OFFSET - $(document).scrollTop()
+    top = top + height - $(document).scrollTop() + 2
 
     if (top === this.get('top')) {
       return {}
