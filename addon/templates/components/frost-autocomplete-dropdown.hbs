@@ -12,12 +12,12 @@
     role='listbox'
   >
     {{#if isLoading}}
-    <span class='frost-autocomplete-loading' data-test={{hook (concat hook '-isLoading')}}>
-      {{frost-loading
-        type='ring'
-        hook='frostAutocompleteLoading'
-      }}
-    </span>
+      <span class='frost-autocomplete-loading' data-test={{hook (concat hook '-isLoading')}}>
+        {{frost-loading
+          type='ring'
+          hook='frostAutocompleteLoading'
+        }}
+      </span>
     {{else}}
       {{#if showEmptyMessage}}
         <div class="frost-select-dropdown-empty-msg">

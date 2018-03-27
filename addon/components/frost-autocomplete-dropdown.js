@@ -15,7 +15,6 @@ import Component from './frost-component'
 const {$, deprecate, get, merge, run} = Ember
 const {ENTER, ESCAPE, TAB} = keyCodes
 
-const DROPDOWN_OFFSET = 5
 const FPS = 1000 / 60 // Update at 60 frames per second
 const WINDOW_SPACE = 20
 
