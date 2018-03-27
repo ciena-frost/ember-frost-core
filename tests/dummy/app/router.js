@@ -35,6 +35,7 @@ Router.map(function () {
   this.route('ajax-error-page')
   this.route('typography')
   this.route('helpers')
+  this.route('autocompletetest')
 })
 
 export default Router

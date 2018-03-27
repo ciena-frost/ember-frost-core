@@ -7,7 +7,6 @@ export default Controller.extend({
     let result = this.model.map((record) => {
       return {
         label: record.get('label'),
-        secondaryLabels: record.get('secondaryLabels'),
         value: record.get('value')
       }
     })
@@ -17,11 +16,6 @@ export default Controller.extend({
         if (item.label.toLowerCase().indexOf(search) !== -1) {
           return true
         }
-        item.secondaryLabels.filter(function (item) {
-          if (item.label.toLowerCase().indexOf(search) !== -1) {
-            return true
-          }
-        })
       })
       result = filteredResult
     }

@@ -84,6 +84,8 @@ export default Component.extend({
     onInput: PropTypes.func,
     renderTarget: PropTypes.string,
     role: PropTypes.string,
+    disableSpaceToggle: PropTypes.bool,
+    filterType: PropTypes.oneOf(['startsWith', 'contains']),
     selected: PropTypes.oneOfType([
       PropTypes.array,
       PropTypes.number
@@ -124,8 +126,10 @@ export default Component.extend({
       multiselect: false,
       renderTarget: 'frost-select',
       role: 'button',
+      filterType: 'contains',
       tabIndex: 0,
       debounceInterval: 0,
+      disableSpaceToggle: false,
       // state
       focused: false
     }
@@ -171,12 +175,12 @@ export default Component.extend({
         const label = item.label || ''
         const secondaryLabels = item.secondaryLabels || []
 
-        if (label.toLowerCase().indexOf(filter) !== -1) {
+        if (this.isFilteredItem(label.toLowerCase(), filter)) {
           return true
         }
 
-        const filteredSecondaryLabels = secondaryLabels.filter(function (secondaryLabel) {
-          if (secondaryLabel.toLowerCase().indexOf(filter) !== -1) {
+        const filteredSecondaryLabels = secondaryLabels.filter((secondaryLabel) => {
+          if (this.isFilteredItem(secondaryLabel.toLowerCase(), filter)) {
             return true
           }
         })
@@ -287,6 +291,38 @@ export default Component.extend({
   }).restartable(),
 
   // == Functions =============================================================
+  isFilteredItem (value, filterValue) {
+    if (this.filterType === 'startsWith') {
+      return value.startsWith(filterValue)
+    }
+    return value.indexOf(filterValue) !== -1
+  },
+
+  selectItem (selectedValue) {
+    const isMultiselect = this.get('multiselect')
+    const props = {
+      opened: isMultiselect,
+      internalSelectedValue: selectedValue
+    }
+
+    if (!isMultiselect) {
+      props.filter = ''
+    }
+
+    this.setProperties(props)
+
+    const onChange = this.get('onChange')
+
+    if (typeOf(onChange) === 'function') {
+      run.next(() => {
+        this.onChange(selectedValue)
+      })
+    }
+
+    // We need to make sure focus goes back to select since it is on the
+    // filter text input while the dropdown is open
+    this.$().focus()
+  },
 
   // == DOM Events ============================================================
 
@@ -311,7 +347,7 @@ export default Component.extend({
   }),
 
   _onKeyPress: on('keyPress', function (e) {
-    if (e.keyCode === SPACE) {
+    if (e.keyCode === SPACE && this.disableSpaceToggle !== true) {
       e.preventDefault() // Keep space from scrolling page
       e.stopPropagation()
       this.toggleProperty('opened')
@@ -433,29 +469,7 @@ export default Component.extend({
     },
 
     selectItem (selectedValue) {
-      const isMultiselect = this.get('multiselect')
-      const props = {
-        opened: isMultiselect,
-        internalSelectedValue: selectedValue
-      }
-
-      if (!isMultiselect) {
-        props.filter = ''
-      }
-
-      this.setProperties(props)
-
-      const onChange = this.get('onChange')
-
-      if (typeOf(onChange) === 'function') {
-        run.next(() => {
-          this.onChange(selectedValue)
-        })
-      }
-
-      // We need to make sure focus goes back to select since it is on the
-      // filter text input while the dropdown is open
-      this.$().focus()
+      this.selectItem(selectedValue)
     }
   }
 })

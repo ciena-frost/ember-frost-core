@@ -1,0 +1,47 @@
+{{! Template for the frost-autocomplete-dropdown component }}
+<div class='frost-select-overlay' onclick={{onClose}} />
+<div
+  class='{{dropdownClassNames}}'
+  role="button"
+  data-test={{hook (concat hook '-list')}}
+  onmousedown={{action 'mouseDown'}}
+  style={{listStyle}}
+>
+  <ul
+    id='frost-select-list'
+    role='listbox'
+  >
+    {{#if isLoading}}
+    <span class='frost-autocomplete-loading' data-test={{hook (concat hook '-isLoading')}}>
+      {{frost-loading
+        type='ring'
+        hook='frostAutocompleteLoading'
+      }}
+    </span>
+    {{else}}
+      {{#if showEmptyMessage}}
+        <div class="frost-select-dropdown-empty-msg">
+          {{#if filter}}
+            No items match your filter.
+          {{else}}
+            No items.
+          {{/if}}
+        </div>
+      {{/if}}
+      {{#each renderItems key='value' as |item index|}}
+        <li
+          class={{item.className}}
+          data-test={{hook (concat hook '-item') index=index label=item.label value=item.value}}
+        >
+          <div
+            class='frost-select-list-item-text'
+            data-text={{item.label}}
+            data-test={{hook (concat hookPrefix '-label') index=index}}
+          >
+            {{item.label}}
+          </div>
+        </li>
+      {{/each}}
+    {{/if}}
+  </ul>
+</div>

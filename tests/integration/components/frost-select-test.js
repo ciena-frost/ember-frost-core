@@ -111,6 +111,7 @@ describe(test.label, function () {
           tabIndex=tabIndex
           width=width
           wrapLabels=wrapLabels
+          filterType=filterType
         }}
         {{input hook='post'}}
       `)
@@ -1800,6 +1801,77 @@ describe(test.label, function () {
         focused: true,
         items: [],
         opened: true
+      })
+    })
+  })
+
+  describe('when filterType startsWith', function () {
+    beforeEach(function () {
+      this.setProperties({
+        filterType: 'startsWith',
+        data: [
+          {label: 'Abc', value: 'abc'},
+          {label: 'Bac', value: 'bac'}
+        ],
+        hook: 'select'
+      })
+
+      this.render(hbs`
+        {{frost-select-outlet hook='myFilterTypeOutlet'}}
+        {{frost-select
+          filterType=filterType
+          data=data
+          hook=hook
+        }}
+      `)
+    })
+
+    describe('with labels', function () {
+      beforeEach(function () {
+        return open().then(() => {
+          filterSelect('a')
+          return wait()
+        })
+      })
+
+      it('should render as expected', function () {
+        expectSelectWithState('select', {
+          focused: true,
+          focusedItem: 'Abc',
+          items: ['Abc'],
+          opened: true
+        })
+      })
+    })
+
+    describe('with secondaryLabels', function () {
+      beforeEach(function () {
+        this.set('data', [
+          {
+            label: 'tuv',
+            value: 'bac',
+            secondaryLabels: ['345']
+          },
+          {
+            label: 'xyz',
+            value: 'abc',
+            secondaryLabels: ['123', '456']
+          }
+        ])
+
+        return open().then(() => {
+          filterSelect('4')
+          return wait()
+        })
+      })
+
+      it('should render as expected', function () {
+        expectSelectWithState('select', {
+          focused: true,
+          focusedItem: 'xyz',
+          items: ['xyz'],
+          opened: true
+        })
       })
     })
   })

@@ -1,0 +1,38 @@
+{{! Template for the frost-select component }}
+{{frost-text
+  class='frost-autocomplete-text'
+  ariaActiveDescendant=ariaActiveDescendant
+  ariaAutocomplete='list'
+  ariaExpanded=true
+  ariaMultiselectable=false
+  ariaOwns='frost-select-list'
+  hook=(concat hook '-text')
+  onInput=onFilterInput
+  onKeyDown=(action 'onKeyDown')
+  onKeyPress=(action 'onKeyPress')
+  onClear=(action 'onClear')
+  role='combobox'
+  value=filter
+  disabled=disabled
+  autofocus=_grabfocus
+  placeholder=placeholder
+}}
+
+{{#if _opened}}
+  {{to-elsewhere
+    named=renderTarget
+    send=(component 'frost-autocomplete-dropdown'
+      $element=$element
+      filter=filter
+      hook=(concat hook '-dropdown')
+      items=items
+      focusedIndex=focusedIndex
+      onClose=(action 'closeDropDown')
+      onFilterInput=(action 'filterInput')
+      onSelect=(action '_selectItem')
+      selectedItems=selectedItems
+      wrapLabels=wrapLabels
+      isLoading=isLoading
+    )
+  }}
+{{/if}}
