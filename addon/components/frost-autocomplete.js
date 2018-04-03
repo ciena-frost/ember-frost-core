@@ -6,11 +6,11 @@ import {keyCodes} from '../utils'
 import FrostSelect from './frost-select'
 
 const {$, get, isEmpty, run} = Ember
-const {DOWN_ARROW, UP_ARROW} = keyCodes
+const {BACKSPACE, DOWN_ARROW, UP_ARROW} = keyCodes
 
 export default FrostSelect.extend({
   layout,
-  classNames: 'frost-select',
+  // classNames: 'frost-select',
 
   propTypes: {
     // options
@@ -60,9 +60,9 @@ export default FrostSelect.extend({
 
   /* eslint-enable complexity */
   @readOnly
-  @computed('opened', '_userInput', 'filter')
-  _opened (opened, userInput, filter) {
-    const open = opened && userInput && !isEmpty(filter)
+  @computed('opened', '_userInput', 'filter', 'focused')
+  _opened (opened, userInput, filter, focused) {
+    const open = (opened || focused) && userInput && !isEmpty(filter)
     return open
   },
 
@@ -98,6 +98,8 @@ export default FrostSelect.extend({
     onKeyDown (event) {
       if ([DOWN_ARROW, UP_ARROW].indexOf(event.keyCode) !== -1) {
         this._handleArrowKey(event.keyCode === UP_ARROW)
+      } else if (BACKSPACE === event.keyCode) {
+        this.set('_userInput', true)
       }
     },
 
@@ -110,6 +112,7 @@ export default FrostSelect.extend({
       this.set('_userInput', false)
       this.selectItem(get(selectedItem, 'value'))
       this.set('filter', get(selectedItem, 'label'))
+      this.$element.find('input').first().focus()
     },
 
     onClear () {

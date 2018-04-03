@@ -117,8 +117,7 @@ export default Component.extend({
       `max-height:${maxHeight}px`,
       `top:${top}`,
       `width:${width}px`
-    ]
-      .join(';')
+    ].join(';')
 
     return Ember.String.htmlSafe(style)
   },
@@ -252,7 +251,7 @@ export default Component.extend({
    * @returns {Object} property values
    */
   _positionAboveInput (top) {
-    const bottom = $(window).height() - top + $(document).scrollTop() - 4
+    const bottom = $(window).height() - top + $(document).scrollTop() - 1
 
     if (bottom === this.get('bottom')) {
       return {}
@@ -274,7 +273,7 @@ export default Component.extend({
   _positionBelowInput (height, top) {
     // Make sure dropdown is rendered below input and we leave space for arrow
     // that connects dropdown to input
-    top = top + height - $(document).scrollTop() + 2
+    top = top + height - $(document).scrollTop() - 1
 
     if (top === this.get('top')) {
       return {}

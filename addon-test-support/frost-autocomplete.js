@@ -1,28 +1,13 @@
-/**
- * @typedef {Object} FrostSelectState
- * @property {Boolean} [disabled=false] - whether or not select is disabled
- * @property {Boolean} [error=false] - whether or not select has error
- * @property {Boolean} [focused] - whether or not select is focused
- * @property {String} [focusedItem] - label of focused item
- * @property {String} [items] - list of item labels present in dropdown
- * @property {Boolean} [opened=false] - whether or not select is opened
- * @property {Number} [tabIndex=0] - tab index of root element
- * @property {String} [text=''] - text in select for describing what is selected
- */
-
 import {expect} from 'chai'
 import Ember from 'ember'
-const {$, RSVP, run, typeOf} = Ember // eslint-disable-line
+const {$, assign, typeOf} = Ember
 import {$hook} from 'ember-hook'
 import wait from 'ember-test-helpers/wait'
 
-const assign = Object.assign || Ember.assign || Ember.merge // eslint-disable-line
-
-/* eslint-disable complexity */
 /**
  * Verify select exists with expected state
  * @param {jQuery|String} select - name of Ember hook or jQuery instance
- * @param {FrostSelectState} state - expected select state
+ * @param {AutoCompleteState} state - expected selection state
  */
 export function expectWithState (select, state) {
   const defaults = {
@@ -37,7 +22,7 @@ export function expectWithState (select, state) {
   state = assign(defaults, state)
 
   expect(
-    $select.hasClass('frost-select'),
+    $select.hasClass('frost-autocomplete'),
     'has frost-select class'
   )
     .to.equal(true)
@@ -56,6 +41,10 @@ export function expectWithState (select, state) {
       .to.equal(state.focusedItem)
   }
 
+  validateState(state)
+}
+
+function validateState (state) {
   const $emptyMessage = $('.frost-select-dropdown-empty-msg')
 
   if (state.items && state.items.length !== 0) {
@@ -69,7 +58,6 @@ export function expectWithState (select, state) {
     expect($emptyMessage, 'shows empty message').to.have.length(1)
   }
 }
-/* eslint-disable complexity */
 
 /**
  * Open frost-autocomplete dropdown

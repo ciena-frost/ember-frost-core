@@ -39,7 +39,7 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-select-outlet hook='mySelectOutlet'}}
+        {{frost-select-outlet hook='myAutocompleteOutlet'}}
         {{frost-autocomplete
           data=data
           disabled=disabled
@@ -67,19 +67,19 @@ describe(test.label, function () {
 
       it('should if no width is specified, and container is small', function () {
         this.$().css('width', '100px')
-        const actual = Math.floor(this.$('.frost-select')[0].getBoundingClientRect().width)
+        const actual = Math.floor(this.$('.frost-autocomplete')[0].getBoundingClientRect().width)
         expect(actual, 'it has the minimum width').to.equal(minimumWidth)
       })
 
       it('should if no width is specified, and container is large', function () {
-        // simulate some app setting a max-width on .frost-select via CSS (as the dummy demo does)
-        this.$('.frost-select').css('max-width', `${maximumWidth}px`)
+        // simulate some app setting a max-width on .frost-autocomplete via CSS (as the dummy demo does)
+        this.$('.frost-autocomplete').css('max-width', `${maximumWidth}px`)
 
         // set the container to some large width
         this.$().css('width', `${specifiedWidth}px`)
 
         // get the actual, factual horizontal space reserved in the layout for this element
-        const actual = Math.floor(this.$('.frost-select')[0].getBoundingClientRect().width)
+        const actual = Math.floor(this.$('.frost-autocomplete')[0].getBoundingClientRect().width)
 
         expect(actual, 'it respects max-width being set').to.equal(maximumWidth)
       })
@@ -91,8 +91,8 @@ describe(test.label, function () {
 
         it('should have the specified width regardless of container size', function () {
           // let's check both the element's style attr and what the browser layed out
-          const actualCSSValue = this.$('.frost-select').css('width')
-          const actualRenderedWidth = this.$('.frost-select')[0].getBoundingClientRect().width
+          const actualCSSValue = this.$('.frost-autocomplete').css('width')
+          const actualRenderedWidth = this.$('.frost-autocomplete')[0].getBoundingClientRect().width
           expect(parseInt(actualCSSValue, 10), 'in the element\'s style attr').to.equal(specifiedWidth)
           expect(parseInt(actualRenderedWidth, 10), 'and in the actual layout').to.equal(specifiedWidth)
         })
@@ -146,7 +146,6 @@ describe(test.label, function () {
         })
 
         it('should render as expected', function () {
-          expect($hook('autocomplete-text-input').is(':focus')).to.equal(true)
           expect($hook('autocomplete-dropdown').length).to.equal(0)
 
           expect(onChange.callCount, 'onChange is not called').to.equal(0)
@@ -195,7 +194,6 @@ describe(test.label, function () {
 
       it('should render as expected', function () {
         expect($hook('autocomplete-dropdown').length).to.equal(0)
-
         expect(onChange.callCount, 'onChange is not called').to.equal(0)
       })
 
@@ -239,9 +237,7 @@ describe(test.label, function () {
         })
 
         it('should render as expected', function () {
-          expect($hook('autocomplete-text-input').is(':focus')).to.equal(true)
           expect($hook('autocomplete-dropdown').length).to.equal(0)
-
           expect(onChange.callCount, 'onChange is not called').to.equal(0)
         })
       })
@@ -262,7 +258,6 @@ describe(test.label, function () {
         it('should render as expected', function () {
           expect($hook('autocomplete-text-input').text()).to.equal('')
           expect($hook('autocomplete-dropdown').length).to.equal(0)
-
           expect(onChange.callCount, 'onChange is not called').to.equal(0)
         })
       })
@@ -294,6 +289,22 @@ describe(test.label, function () {
           describe('when click', function () {
             beforeEach(function () {
               open()
+              return wait()
+            })
+
+            it('should render as expected', function () {
+              expectWithState('autocomplete', {
+                focused: true,
+                focusedItem: 'Spiderman',
+                items: ['Spiderman', 'Spawn'],
+                opened: true
+              })
+            })
+          })
+
+          describe('focus into component', function () {
+            beforeEach(function () {
+              $hook('autocomplete-text-input').focusin()
               return wait()
             })
 
@@ -357,7 +368,6 @@ describe(test.label, function () {
               return wait()
             })
             it('should move down as expected', function () {
-              // debugger
               expectWithState('autocomplete', {
                 focused: true,
                 focusedItem: 'Spiderman',
