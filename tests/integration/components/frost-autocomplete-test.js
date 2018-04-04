@@ -65,13 +65,13 @@ describe(test.label, function () {
       const minimumWidth = 175
       const specifiedWidth = 500
 
-      it('should if no width is specified, and container is small', function () {
+      it('should be min-width if width is specified and container is small', function () {
         this.$().css('width', '100px')
         const actual = Math.floor(this.$('.frost-autocomplete')[0].getBoundingClientRect().width)
         expect(actual, 'it has the minimum width').to.equal(minimumWidth)
       })
 
-      it('should if no width is specified, and container is large', function () {
+      it('should be max-width if width is specified, and container is large', function () {
         // simulate some app setting a max-width on .frost-autocomplete via CSS (as the dummy demo does)
         this.$('.frost-autocomplete').css('max-width', `${maximumWidth}px`)
 
@@ -108,7 +108,7 @@ describe(test.label, function () {
 
       describe('click on component', function () {
         beforeEach(function () {
-          open('autocomplete-text')
+          open('autocomplete-autocompleteText')
         })
 
         it('should render as expected', function () {
@@ -140,7 +140,7 @@ describe(test.label, function () {
       describe('focus into component', function () {
         beforeEach(function () {
           return wait().then(function () {
-            $hook('autocomplete-text-input').focus()
+            $hook('autocomplete-autocompleteText-input').focus()
             return wait()
           })
         })
@@ -156,7 +156,7 @@ describe(test.label, function () {
         beforeEach(function () {
           onChange.reset()
 
-          $hook('autocomplete-text-input')
+          $hook('autocomplete-autocompleteText-input')
             .trigger(
               $.Event('keypress', {
                 keyCode: SPACE
@@ -166,7 +166,7 @@ describe(test.label, function () {
         })
 
         it('should render as expected', function () {
-          expect($hook('autocomplete-text-input').text()).to.equal('')
+          expect($hook('autocomplete-autocompleteText-input').text()).to.equal('')
           expect($hook('autocomplete-dropdown').length).to.equal(0)
 
           expect(onChange.callCount, 'onChange is not called').to.equal(0)
@@ -199,7 +199,7 @@ describe(test.label, function () {
 
       describe('click on component', function () {
         beforeEach(function () {
-          open('autocomplete-text')
+          open('autocomplete-autocompleteText')
         })
 
         it('should render as expected', function () {
@@ -231,7 +231,7 @@ describe(test.label, function () {
       describe('focus into component', function () {
         beforeEach(function () {
           return wait().then(function () {
-            $hook('autocomplete-text-input').focus()
+            $hook('autocomplete-autocompleteText-input').focus()
             return wait()
           })
         })
@@ -246,7 +246,7 @@ describe(test.label, function () {
         beforeEach(function () {
           onChange.reset()
 
-          $hook('autocomplete-text-input')
+          $hook('autocomplete-autocompleteautocompleteText-input')
             .trigger(
               $.Event('keypress', {
                 keyCode: SPACE
@@ -256,7 +256,7 @@ describe(test.label, function () {
         })
 
         it('should render as expected', function () {
-          expect($hook('autocomplete-text-input').text()).to.equal('')
+          expect($hook('autocomplete-autocompleteText-input').text()).to.equal('')
           expect($hook('autocomplete-dropdown').length).to.equal(0)
           expect(onChange.callCount, 'onChange is not called').to.equal(0)
         })
@@ -264,7 +264,7 @@ describe(test.label, function () {
 
       describe('when filter present', function () {
         beforeEach(function () {
-          $('.frost-autocomplete-text .frost-text-input').val('sp').trigger('input').trigger('keypress')
+          $hook('autocomplete-autocompleteText-input').val('sp').trigger('input').trigger('keypress')
         })
 
         it('should render as expect', function () {
@@ -304,7 +304,7 @@ describe(test.label, function () {
 
           describe('focus into component', function () {
             beforeEach(function () {
-              $hook('autocomplete-text-input').focusin()
+              $hook('autocomplete-autocompleteText-input').focusin()
               return wait()
             })
 
@@ -353,13 +353,13 @@ describe(test.label, function () {
 
         describe('when arrow keys', function () {
           beforeEach(function () {
-            $('.frost-autocomplete-text .frost-text-input').val('s').trigger('input').trigger('keypress')
+            $hook('autocomplete-autocompleteText-input').val('s').trigger('input').trigger('keypress')
             return wait()
           })
 
           describe('when down arrow', function () {
             beforeEach(function () {
-              $hook('autocomplete-text-input')
+              $hook('autocomplete-autocompleteText-input')
                 .trigger(
                   $.Event('keydown', {
                     keyCode: DOWN_ARROW
@@ -387,13 +387,13 @@ describe(test.label, function () {
               })
 
               it('should have have expected value', function () {
-                expect($hook('autocomplete-text-input')[0].value).to.equal('Spiderman')
+                expect($hook('autocomplete-autocompleteText-input')[0].value).to.equal('Spiderman')
               })
             })
 
             describe('when up arrow', function () {
               beforeEach(function () {
-                $hook('autocomplete-text-input')
+                $hook('autocomplete-autocompleteText-input')
                   .trigger(
                     $.Event('keydown', {
                       keyCode: UP_ARROW
@@ -402,7 +402,6 @@ describe(test.label, function () {
                 return wait()
               })
               it('should move up as expected', function () {
-                // debugger
                 expectWithState('autocomplete', {
                   focused: true,
                   focusedItem: 'Superman',
@@ -416,18 +415,18 @@ describe(test.label, function () {
 
         describe('when mousedown', function () {
           beforeEach(function () {
-            $('.frost-select-list-item-focused').trigger('mousedown')
+            $('.frost-autocomplete-list-item-focused').trigger('mousedown')
             return wait()
           })
 
           it('should select item', function () {
-            expect($hook('autocomplete-text-input')[0].value).to.equal('Spiderman')
+            expect($hook('autocomplete-autocompleteText-input')[0].value).to.equal('Spiderman')
           })
         })
 
         describe('when mouseenter', function () {
           beforeEach(function () {
-            $hook('autocomplete-dropdown-item', {index: 1}).trigger('mouseenter')
+            $hook('autocomplete-autocompleteDropdown-item', {index: 1}).trigger('mouseenter')
             return wait()
           })
 
@@ -478,12 +477,12 @@ describe(test.label, function () {
       `)
       wait()
 
-      $('.frost-autocomplete-text .frost-text-input').val('V').trigger('input').trigger('keypress')
+      $hook(`${hook}-autocompleteText-input`).val('V').trigger('input').trigger('keypress')
       return wait()
     })
 
     it('should render correctly', function () {
-      expect($hook(`${hook}-dropdown-item`, {index: 1}).text().trim()).to.equal(this.get('data')[1].label)
+      expect($hook(`${hook}-autocompleteDropdown-item`, {index: 1}).text().trim()).to.equal(this.get('data')[1].label)
     })
   })
 
@@ -514,12 +513,12 @@ describe(test.label, function () {
       `)
       wait()
 
-      $('.frost-autocomplete-text .frost-text-input').val('s').trigger('input').trigger('keypress')
+      $hook(`${hook}-autocompleteText-input`).val('s').trigger('input').trigger('keypress')
       return wait()
     })
 
     it('should render correctly', function () {
-      expect($hook(`${hook}-dropdown-isLoading`).length).to.equal(1)
+      expect($hook(`${hook}-autocompleteDropdown-isLoading`).length).to.equal(1)
     })
   })
 
@@ -542,7 +541,7 @@ describe(test.label, function () {
     })
 
     it('should render correctly', function () {
-      expect($hook(`${hook}-text-input`)[0].disabled).to.equal(true)
+      expect($hook(`${hook}-autocompleteText-input`)[0].disabled).to.equal(true)
     })
   })
 })

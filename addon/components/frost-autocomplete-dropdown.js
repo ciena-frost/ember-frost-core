@@ -22,9 +22,10 @@ export default Component.extend({
   // == Dependencies ==========================================================
 
   // == Keyword Properties ====================================================
-
+  classNameBindings: [
+    'wrapLabels:frost-autocomplete-wrap-labels'
+  ],
   layout,
-  tagName: '',
 
   // == PropTypes =============================================================
 
@@ -65,6 +66,7 @@ export default Component.extend({
   getDefaultProps () {
     return {
       // options
+      filterType: 'startsWith',
 
       // state
       bottom: 0,
@@ -74,21 +76,6 @@ export default Component.extend({
       top: 0,
       width: 0
     }
-  },
-
-  @readOnly
-  @computed('wrapLabels')
-  /**
-   * The class names for the frost-autocomplete drop down
-   * @param {Boolean} wrapLabels - whether or not autocomplete option text should wrap
-   * @returns {string} the class names for the frost-autocomplete drop down
-   */
-  dropdownClassNames (wrapLabels) {
-    const classNames = ['frost-autocomplete-dropdown']
-    if (wrapLabels) {
-      classNames.push('frost-autocomplete-dropdown-wrap-labels')
-    }
-    return classNames.join(' ')
   },
 
   @readOnly
@@ -127,26 +114,26 @@ export default Component.extend({
   /**
    * Get render items
    * @param {Number} focusedIndex - index of focused item
-   * @param {Array<Object>} items - items to render in select dropdown
-   * @param {Array<Object>} selectedItems - items that are currently selected
-   * @returns {Array<Object>} render items
+   * @param {Object[]} items - items to render in select dropdown
+   * @param {Object[]} selectedItems - items that are currently selected
+   * @returns {Object[]} render items
    */
   renderItems (focusedIndex, items, selectedItems) {
     if (!items) {
-      return []
+      return [{}]
     }
 
     return items.map((item, index) => {
-      const classNames = ['frost-select-list-item']
+      const classNames = ['frost-autocomplete-list-item']
       const value = get(item, 'value')
       const isSelected = selectedItems.find((item) => item.value === value) !== undefined
 
       if (isSelected) {
-        classNames.push('frost-select-list-item-selected')
+        classNames.push('frost-autocomplete-list-item-selected')
       }
 
       if (index === focusedIndex) {
-        classNames.push('frost-select-list-item-focused')
+        classNames.push('frost-autocomplete-list-item-focused')
       }
 
       return {
@@ -213,6 +200,15 @@ export default Component.extend({
     }
   },
 
+  _getRegexPattern (filter) {
+    if (this.filterType === 'startsWith') {
+      // 'b' in bruce banner would only affect the 'b' in bruce
+      return new RegExp('^[ \n\r]*' + filter.replace(/[.*+?^${}()|[\]\\]/, '\\$&'), 'i')
+    }
+    // 'r' in bruce banner would affect both the 'r' in bruce as well as in banner
+    return new RegExp(filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi')
+  },
+
   /* eslint-disable complexity */
   _handleArrowKey (upArrow) {
     let focusedIndex = this.get('focusedIndex')
@@ -223,13 +219,13 @@ export default Component.extend({
     )
 
     if (newFocusedIndex !== undefined && newFocusedIndex !== focusedIndex) {
-      const listItems = document.querySelectorAll('.frost-select-list-item')
+      const listItems = document.querySelectorAll('.frost-autocomplete-list-item')
       const newFocusedListItem = listItems[newFocusedIndex]
 
       this.set('focusedIndex', newFocusedIndex)
 
       if (newFocusedIndex === 0) {
-        document.getElementById('frost-select-list').scrollTop = 0
+        document.getElementById('frost-autocomplete-list').scrollTop = 0
       } else if (newFocusedListItem.scrollIntoViewIfNeeded) {
         newFocusedListItem.scrollIntoViewIfNeeded(false)
       } else {
@@ -326,13 +322,13 @@ export default Component.extend({
 
   _updateText () {
     const filter = this.get('filter')
-    const dropdownListElement = document.getElementById('frost-select-list')
+    const dropdownListElement = document.getElementById('frost-autocomplete-list')
     const clonedDropdownListElement = dropdownListElement.cloneNode(true)
-    const clonedTextElements = clonedDropdownListElement.querySelectorAll('.frost-select-list-item-text')
-    const textElements = dropdownListElement.querySelectorAll('.frost-select-list-item-text')
+    const clonedTextElements = clonedDropdownListElement.querySelectorAll('.frost-autocomplete-list-item-text')
+    const textElements = dropdownListElement.querySelectorAll('.frost-autocomplete-list-item-text')
     const scrollTop = dropdownListElement.scrollTop
     const wrapLabels = this.get('wrapLabels')
-    const updateText = function (texElements, clonedTextElements) {
+    const updateText = (texElements, clonedTextElements) => {
       Array.from(texElements).forEach((textElement, index) => {
         if (!wrapLabels) {
           const clonedTextElement = clonedTextElements[index]
@@ -345,9 +341,9 @@ export default Component.extend({
         }
 
         if (filter) {
-          const pattern = new RegExp(filter.replace(/[.*+?^${}()|[\]\\]/, '\\$&'), 'i')
+          const pattern = this._getRegexPattern(filter)
           const textWithMatch = textElement.textContent.replace(pattern,
-            "<span class='frost-select-list-item-text-highlight'>$&</span>")
+            "<span class='frost-autocomplete-list-item-text-highlight'>$&</span>")
 
           // If rendered text has changed, update it
           if (textElement.innerHTML !== textWithMatch) {
@@ -368,7 +364,7 @@ export default Component.extend({
     this._addListItemEventListeners(dropdownListElement)
 
     // Make sure we scroll back to where the user was
-    document.getElementById('frost-select-list').scrollTop = scrollTop
+    document.getElementById('frost-autocomplete-list').scrollTop = scrollTop
   },
 
   // == Tasks =================================================================
@@ -468,7 +464,7 @@ export default Component.extend({
   },
 
   willDestroyElement () {
-    const dropdownListElement = document.getElementById('frost-select-list')
+    const dropdownListElement = document.getElementById('frost-autocomplete-list')
     this._removeListItemEventListeners(dropdownListElement)
     $(window).off('resize', this._updateHandler)
     $(document).off('scroll', this._updateHandler)

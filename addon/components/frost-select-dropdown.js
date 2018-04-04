@@ -288,6 +288,15 @@ export default Component.extend({
     }
   },
 
+  _getRegexPattern (filter) {
+    if (this.filterType === 'startsWith') {
+      // 'b' in bruce banner would only affect the 'b' in bruce
+      return new RegExp('^[ \n\r]*' + filter.replace(/[.*+?^${}()|[\]\\]/, '\\$&'), 'i')
+    }
+    // 'r' in bruce banner would affect both the 'r' in bruce as well as in banner
+    return new RegExp(filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi')
+  },
+
   /* eslint-disable complexity */
   _handleArrowKey (upArrow) {
     let focusedIndex = this.get('focusedIndex')
@@ -399,7 +408,6 @@ export default Component.extend({
   },
   /* eslint-enable complexity */
 
-  /* eslint-disable complexity */
   _updateText () {
     const filter = this.get('filter')
     const dropdownListElement = document.getElementById('frost-select-list')
@@ -424,13 +432,10 @@ export default Component.extend({
         }
 
         if (filter) {
-          let pattern
-          if (this.filterType === 'startsWith') {
-            pattern = new RegExp(filter.replace(/[.*+?^${}()|[\]\\]/, '\\$&'), 'i')
-          } else {
-            pattern = new RegExp(filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi')
-          }
-          const textWithMatch = textElement.textContent.replace(pattern, '<u>$&</u>')
+          const pattern = this._getRegexPattern(filter)
+          const textWithMatch = textElement.textContent.split('|').map((label) => {
+            return label.replace(pattern, '<u>$&</u>')
+          }).join(' | ')
 
           // If rendered text has changed, update it
           if (textElement.innerHTML !== textWithMatch) {
@@ -454,7 +459,6 @@ export default Component.extend({
     // Make sure we scroll back to where the user was
     document.getElementById('frost-select-list').scrollTop = scrollTop
   },
-  /* eslint-enable complexity */
   // == Tasks =================================================================
 
   updateTask: task(function * () {

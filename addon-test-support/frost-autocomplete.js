@@ -35,7 +35,7 @@ export function expectWithState (select, state) {
 
   if (state.focusedItem) {
     expect(
-      $('.frost-select-list-item-focused .frost-select-list-item-text').data('text'),
+      $('.frost-autocomplete-list-item-focused .frost-autocomplete-list-item-text').data('text'),
       'is focused on expected item'
     )
       .to.equal(state.focusedItem)
@@ -45,12 +45,13 @@ export function expectWithState (select, state) {
 }
 
 function validateState (state) {
-  const $emptyMessage = $('.frost-select-dropdown-empty-msg')
+  const $emptyMessage = $('.frost-autocomplete-dropdown-empty-msg')
 
   if (state.items && state.items.length !== 0) {
-    const labels = $('.frost-autocomplete-dropdown li')
+    // debugger
+    const labels = $('#frost-autocomplete-list li')
       .toArray()
-      .map((element) => $(element).find('.frost-select-list-item-text').data('text'))
+      .map((element) => $(element).find('.frost-autocomplete-list-item-text').data('text'))
 
     expect(labels, 'has expected items').to.eql(state.items)
     expect($emptyMessage, 'does not show empty message').to.have.length(0)
@@ -64,7 +65,7 @@ function validateState (state) {
  * @param {String} [hook='select'] - frost-autocomplete hook
  * @returns {Promise} the resolved promise from ember-test-helpers/wait
  */
-export function open (hook = 'autocomplete-text-input') {
+export function open (hook = 'autocomplete-autocompleteText-input') {
   // In a real browser when you click on the select with your mouse a
   // focusin event is fired on the component. However when using jQuery's
   // click() method the focusin is not fired so we are programitcally
@@ -78,7 +79,7 @@ export function open (hook = 'autocomplete-text-input') {
  * @param {String} [hook='select'] - frost-autocomplete hook
  * @returns {Promise} the resolved promise from ember-test-helpers/wait
  */
-export function close (hook = 'autocomplete-text-input') {
+export function close (hook = 'autocomplete-autocompleteText-input') {
   $hook(hook).trigger('focusout')
   return wait()
 }

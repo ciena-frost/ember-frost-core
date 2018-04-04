@@ -1,14 +1,12 @@
-{{! Template for the frost-autocomplete-dropdown component }}
-<div class='frost-select-overlay' onclick={{onClose}} />
 <div
-  class='{{dropdownClassNames}}'
+  class='frost-autocomplete-dropdown-container'
   role="button"
   data-test={{hook (concat hook '-list')}}
   onmousedown={{action 'mouseDown'}}
   style={{listStyle}}
 >
   <ul
-    id='frost-select-list'
+    id='frost-autocomplete-list'
     role='listbox'
   >
     {{#if isLoading}}
@@ -20,7 +18,7 @@
       </span>
     {{else}}
       {{#if showEmptyMessage}}
-        <div class="frost-select-dropdown-empty-msg">
+        <div class="frost-autocomplete-dropdown-empty-msg">
           {{#if filter}}
             No items match your filter.
           {{else}}
@@ -34,7 +32,7 @@
           data-test={{hook (concat hook '-item') index=index label=item.label value=item.value}}
         >
           <div
-            class='frost-select-list-item-text'
+            class='frost-autocomplete-list-item-text'
             data-text={{item.label}}
             data-test={{hook (concat hookPrefix '-label') index=index}}
           >

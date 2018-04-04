@@ -7,18 +7,15 @@
     <div class="example">
       <div class="title">data</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete }}
         {{frost-autocomplete
           data=data
           hook='myAutoComplete'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-autocomplete
-  data=data
-  hook='myAutoComplete'
-}}
-```"}}
+        {{code-snippet name='autocomplete.hbs'}}
       </div>
     </div>
   </div>
@@ -29,84 +26,83 @@
     <div class="example">
       <div class="title">autofocus</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-autofocus }}
         {{frost-autocomplete
           data=data
           hook='myAutoComplete'
           _autofocus=true
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-autocomplete
-  data=data
-  hook='myAutoComplete'
-  _autofocus=true
-}}
-```"}}
+        {{code-snippet name='autocomplete-autofocus.hbs'}}
       </div>
     </div>
 
     <div class="example">
       <div class="title">placeholder</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-placeholder }}
         {{frost-autocomplete
           data=data
           hook='myAutoComplete'
           placeholder='Superheroes'
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-autocomplete
-  data=data
-  hook='myAutoComplete'
-  placeholder='Superheroes'
-}}
-```"}}
+        {{code-snippet name='autocomplete-placeholder.hbs'}}
       </div>
     </div>
 
     <div class="example">
       <div class="title">selectedValue</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-selectedvalue }}
         {{frost-autocomplete
           data=data
           hook='myAutoComplete'
           label='superhero'
           selectedValue=preSelectedValue
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-autocomplete
-  data=data
-  hook='myAutoComplete'
-  label='superhero'
-  selectedValue=preSelectedValue
-}}
-```"}}
+        {{code-snippet name='autocomplete-selectedvalue.hbs'}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">selected</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-selected }}
+        {{frost-autocomplete
+          data=data
+          hook='myAutoComplete'
+          label='superhero'
+          selected=3
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='autocomplete-selected.hbs'}}
       </div>
     </div>
 
     <div class="example">
       <div class="title">width</div>
       <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-width }}
         {{frost-autocomplete
           data=data
           hook='myAutoComplete'
           label='superhero'
           width=width
         }}
+        {{! END-SNIPPET }}
       </div>
       <div class="snippet">
-        {{format-markdown "```handlebars
-{{frost-autocomplete
-  data=data
-  hook='myAutoComplete'
-  label='superhero'
-  width=width
-}}
-```"}}
+        {{code-snippet name='autocomplete-width.hbs'}}
       </div>
     </div>
   </div>
@@ -200,7 +196,6 @@
             data=data
             hook='myAutoComplete'
             label='superhero'
-            selected=selectedIndex
             error=true
           )
         }}
@@ -211,7 +206,7 @@
       </div>
     </div>
     <div class='example'>
-      <div class='title'>wrapLabels</div>
+      <div class='title'>wrapLabels - type m</div>
       <div class='demo'>
         {{! BEGIN-SNIPPET autocomplete-other-wrap-labels }}
         {{frost-autocomplete

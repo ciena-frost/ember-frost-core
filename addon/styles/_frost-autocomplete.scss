@@ -44,7 +44,7 @@ $frost-input-select-option-row-height: 30px;
 }
 // sass-lint:enable force-element-nesting
 
-.frost-autocomplete-dropdown {
+.frost-autocomplete-dropdown-container {
   display: flex;
   position: fixed;
   flex-direction: column;
@@ -79,7 +79,8 @@ $frost-input-select-option-row-height: 30px;
     right: 10px;
   }
 
-  .frost-select-list-item-text {
+  .frost-autocomplete-list-item-text {
+    width: 100%;
     color: $frost-color-grey-5;
     font-size: $frost-font-s;
 
@@ -88,21 +89,45 @@ $frost-input-select-option-row-height: 30px;
     }
   }
 
-  .frost-select-list-item {
-    height: $frost-input-select-option-row-height;
-    white-space: normal;
+  .frost-autocomplete-list-item-focused {
+    background: transparentize($frost-selection, .92);
   }
 
-  &-wrap-labels {
-    .frost-select-list-item {
-      height: auto;
-      min-height: $frost-input-select-option-row-height;
-      white-space: normal;
+  .frost-autocomplete-list-item-selected {
+    color: $frost-color-grey-2;
+    font-weight: 500;
+  }
+
+
+  .frost-autocomplete-list-item {
+    display: flex;
+    flex: 1 0 auto;
+    width: 100%;
+    height: $frost-input-select-option-row-height;
+    padding: 0 5px;
+    border-bottom: solid 1px $frost-color-lgrey-3;
+    color: $frost-color-grey-3;
+    line-height: $frost-input-select-option-row-height;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    overflow: hidden;
+
+    u {
+      color: $frost-color-grey-2;
     }
   }
 
-  .frost-select-dropdown-empty-msg {
+  .frost-autocomplete-dropdown-empty-msg {
     padding-top: 5px;
     color: $frost-color-grey-5;
+  }
+}
+
+.frost-autocomplete-wrap-labels {
+  .frost-autocomplete-list-item {
+    height: auto;
+    min-height: $frost-input-select-option-row-height;
+    white-space: normal;
   }
 }

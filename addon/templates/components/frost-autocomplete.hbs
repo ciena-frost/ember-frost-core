@@ -1,4 +1,3 @@
-{{! Template for the frost-select component }}
 {{frost-text
   class='frost-autocomplete-text'
   ariaActiveDescendant=ariaActiveDescendant
@@ -6,7 +5,7 @@
   ariaExpanded=true
   ariaMultiselectable=false
   ariaOwns='frost-select-list'
-  hook=(concat hook '-text')
+  hook=(concat hook '-autocompleteText')
   onInput=onFilterInput
   onKeyDown=(action 'onKeyDown')
   onKeyPress=(action 'onKeyPress')
@@ -24,7 +23,8 @@
     send=(component 'frost-autocomplete-dropdown'
       $element=$element
       filter=filter
-      hook=(concat hook '-dropdown')
+      filterType=filterType
+      hook=(concat hook '-autocompleteDropdown')
       items=items
       focusedIndex=focusedIndex
       onClose=(action 'closeDropDown')

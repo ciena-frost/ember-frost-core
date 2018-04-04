@@ -10,7 +10,6 @@ const {BACKSPACE, DOWN_ARROW, UP_ARROW} = keyCodes
 
 export default FrostSelect.extend({
   layout,
-  // classNames: 'frost-select',
 
   propTypes: {
     // options
@@ -36,12 +35,15 @@ export default FrostSelect.extend({
     }
   },
 
-  /* eslint-disable complexity */
   _handleArrowKey (upArrow) {
     if (this.get('_opened') !== true) {
       return
     }
 
+    this._setFocusedIndex(upArrow)
+  },
+
+  _setFocusedIndex (upArrow) {
     const items = this.get('items')
     if (isEmpty(items)) {
       return
@@ -58,7 +60,6 @@ export default FrostSelect.extend({
     }
   },
 
-  /* eslint-enable complexity */
   @readOnly
   @computed('opened', '_userInput', 'filter', 'focused')
   _opened (opened, userInput, filter, focused) {
@@ -73,25 +74,21 @@ export default FrostSelect.extend({
       if (this.get('_autofocus') && $(':focus').length === 0) {
         this.set('_grabfocus', true)
       }
+
+      this.configureFilter()
     })
+  },
 
-    run.scheduleOnce('afterRender', this, function () {
-      if (!isEmpty(this.internalSelectedValue) && !isEmpty(this.data)) {
-        const item = this.data.find((item) => {
-          if (isEmpty(item.value)) {
-            return false
-          }
-          if (item.value === this.internalSelectedValue) {
-            return true
-          }
-          return false
-        })
+  configureFilter () {
+    if (!isEmpty(this.internalSelectedValue) && !isEmpty(this.data)) {
+      const item = this.data.find((item) => {
+        return !isEmpty(item.value) && item.value === this.internalSelectedValue
+      })
 
-        if (!isEmpty(item) && !isEmpty(item.label)) {
-          this.set('filter', item.label)
-        }
+      if (!isEmpty(item) && !isEmpty(item.label)) {
+        this.set('filter', item.label)
       }
-    })
+    }
   },
 
   actions: {
@@ -104,25 +101,27 @@ export default FrostSelect.extend({
     },
 
     onKeyPress (event) {
-      this.set('_userInput', true)
-      this.set('opened', true)
+      this.setProperties({
+        _userInput: true,
+        opened: true
+      })
     },
 
     _selectItem (selectedItem) {
-      this.set('_userInput', false)
       this.selectItem(get(selectedItem, 'value'))
-      this.set('filter', get(selectedItem, 'label'))
+      this.setProperties({
+        _userInput: false,
+        filter: get(selectedItem, 'label')
+      })
       this.$element.find('input').first().focus()
     },
 
     onClear () {
-      const props = {
+      this.setProperties({
+        _userInput: false,
         opened: false,
         internalSelectedValue: undefined
-      }
-
-      this.set('_userInput', false)
-      this.setProperties(props)
+      })
     }
   }
 })
