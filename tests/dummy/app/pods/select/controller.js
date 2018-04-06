@@ -58,14 +58,6 @@ export default Controller.extend({
       this.set('search', filterValue)
     },
 
-    onAutocompleteInputHandler (filterValue) {
-      this.get('notifications').success('Handling input: ' + filterValue.value, {
-        autoClear: true,
-        clearDuration: 2000
-      })
-      this.set('search', filterValue)
-    },
-
     onClearSelect (event) {
       this.set('preSelectedValueForClearing', '')
     },

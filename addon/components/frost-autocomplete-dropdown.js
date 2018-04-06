@@ -12,7 +12,7 @@ import {keyCodes} from '../utils'
 import {trimLongDataInElement} from '../utils/text'
 import Component from './frost-component'
 
-const {$, deprecate, get, merge, run} = Ember
+const {$, deprecate, get, isEmpty, merge, run} = Ember
 const {ENTER, ESCAPE, TAB} = keyCodes
 
 const FPS = 1000 / 60 // Update at 60 frames per second
@@ -40,11 +40,9 @@ export default Component.extend({
     filter: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     multiselect: PropTypes.bool,
-    onClose: PropTypes.func.isRequired,
-    onFilterInput: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
     receivedHook: PropTypes.string,
-    selectedItems: PropTypes.arrayOf(PropTypes.object),
+    selectedValue: PropTypes.string,
     wrapLabels: PropTypes.bool,
     isLoading: PropTypes.bool,
 
@@ -110,15 +108,15 @@ export default Component.extend({
   },
 
   @readOnly
-  @computed('focusedIndex', 'items', 'selectedItems')
+  @computed('focusedIndex', 'items', 'selectedValue')
   /**
    * Get render items
    * @param {Number} focusedIndex - index of focused item
    * @param {Object[]} items - items to render in select dropdown
-   * @param {Object[]} selectedItems - items that are currently selected
+   * @param {String} selectedValue - items that are currently selected
    * @returns {Object[]} render items
    */
-  renderItems (focusedIndex, items, selectedItems) {
+  renderItems (focusedIndex, items, selectedValue) {
     if (!items) {
       return [{}]
     }
@@ -126,7 +124,8 @@ export default Component.extend({
     return items.map((item, index) => {
       const classNames = ['frost-autocomplete-list-item']
       const value = get(item, 'value')
-      const isSelected = selectedItems.find((item) => item.value === value) !== undefined
+
+      const isSelected = !isEmpty(selectedValue) && selectedValue === value
 
       if (isSelected) {
         classNames.push('frost-autocomplete-list-item-selected')
@@ -140,7 +139,7 @@ export default Component.extend({
         className: classNames.join(' '),
         label: get(item, 'label'),
         selected: isSelected,
-        value: get(item, 'value')
+        value
       }
     })
   },
@@ -209,32 +208,6 @@ export default Component.extend({
     return new RegExp(filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi')
   },
 
-  /* eslint-disable complexity */
-  _handleArrowKey (upArrow) {
-    let focusedIndex = this.get('focusedIndex')
-
-    const items = this.get('items')
-    const newFocusedIndex = (
-      upArrow ? Math.max(0, focusedIndex - 1) : Math.min(items.length - 1, focusedIndex + 1)
-    )
-
-    if (newFocusedIndex !== undefined && newFocusedIndex !== focusedIndex) {
-      const listItems = document.querySelectorAll('.frost-autocomplete-list-item')
-      const newFocusedListItem = listItems[newFocusedIndex]
-
-      this.set('focusedIndex', newFocusedIndex)
-
-      if (newFocusedIndex === 0) {
-        document.getElementById('frost-autocomplete-list').scrollTop = 0
-      } else if (newFocusedListItem.scrollIntoViewIfNeeded) {
-        newFocusedListItem.scrollIntoViewIfNeeded(false)
-      } else {
-        newFocusedListItem.scrollIntoView(upArrow)
-      }
-    }
-  },
-  /* eslint-enable complexity */
-
   _handleEnterKey () {
     const items = this.get('items') || []
     const focusedIndex = this.get('focusedIndex')
@@ -296,7 +269,6 @@ export default Component.extend({
     })
   },
 
-  /* eslint-disable complexity */
   _updatePosition ($element) {
     if (this.isDestroyed || this.isDestroying) return {}
 
@@ -308,6 +280,10 @@ export default Component.extend({
       center.x > windowCenterX ? this._positionAboveInput(top) : this._positionBelowInput(height, top)
     )
 
+    return this._adjustedPositionProperties(props, left, width)
+  },
+
+  _adjustedPositionProperties (props, left, width) {
     if (left !== this.get('left')) {
       props.left = left
     }
@@ -315,10 +291,8 @@ export default Component.extend({
     if (width !== this.get('width')) {
       props.width = width
     }
-
     return props
   },
-  /* eslint-enable complexity */
 
   _updateText () {
     const filter = this.get('filter')
@@ -365,6 +339,18 @@ export default Component.extend({
 
     // Make sure we scroll back to where the user was
     document.getElementById('frost-autocomplete-list').scrollTop = scrollTop
+  },
+
+  _handleKeyCode (keyCode) {
+    switch (keyCode) {
+      case ENTER:
+        this._handleEnterKey()
+        return
+
+      case ESCAPE:
+      case TAB:
+        this.onClose()
+    }
   },
 
   // == Tasks =================================================================
@@ -432,26 +418,12 @@ export default Component.extend({
       })
     }
 
-    /* eslint-disable complexity */
     this._keyDownHandler = (e) => {
       run(() => {
         if (this.isDestroyed || this.isDestroying) return
-
-        switch (e.keyCode) {
-          case ENTER:
-            this._handleEnterKey()
-            return
-
-          case ESCAPE:
-            this.get('onClose')()
-            return
-
-          case TAB:
-            this.get('onClose')()
-        }
+        this._handleKeyCode(e.keyCode)
       })
     }
-    /* eslint-enable complexity */
 
     $(window).on('resize', this._updateHandler)
     $(document).on('scroll', this._updateHandler)
@@ -473,11 +445,6 @@ export default Component.extend({
   // == Actions ===============================================================
 
   actions: {
-    mouseDown (e) {
-      // This keeps the overlay from swallowing clicks on the clear button
-      e.preventDefault()
-    },
-
     selectItem (item) {
       this.get('onSelect')(item)
     }

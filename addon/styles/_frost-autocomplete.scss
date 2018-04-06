@@ -33,16 +33,11 @@ $frost-input-select-option-row-height: 30px;
   }
 }
 
-// sass-lint:disable force-element-nesting
-.frost-autocomplete.frost-select {
-  height: $frost-input-select-option-row-height;
-  border: 0;
+.frost-autocomplete-error {
+  input {
+    border-color: $frost-color-danger;
+  }
 }
-
-.frost-autocomplete.frost-select-error input {
-  border-color: $frost-color-danger;
-}
-// sass-lint:enable force-element-nesting
 
 .frost-autocomplete-dropdown-container {
   display: flex;

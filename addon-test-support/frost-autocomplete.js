@@ -23,7 +23,7 @@ export function expectWithState (select, state) {
 
   expect(
     $select.hasClass('frost-autocomplete'),
-    'has frost-select class'
+    'has frost-autocomplete class'
   )
     .to.equal(true)
 
@@ -41,10 +41,10 @@ export function expectWithState (select, state) {
       .to.equal(state.focusedItem)
   }
 
-  validateState(state)
+  validateItems(state)
 }
 
-function validateState (state) {
+function validateItems (state) {
   const $emptyMessage = $('.frost-autocomplete-dropdown-empty-msg')
 
   if (state.items && state.items.length !== 0) {

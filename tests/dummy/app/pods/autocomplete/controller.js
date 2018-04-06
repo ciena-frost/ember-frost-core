@@ -22,14 +22,24 @@ export default Controller.extend({
     return result
   }).readOnly(),
 
-  selectedIndex: 1,
-  selectedIndices: [1, 2],
-  preSelectedValue: 'Arthur Curry',
-  preSelectedValueForClearing: 'Arthur Curry',
-  selectedValues: ['Arthur Curry', 'Ray Palmer'],
-  clearSelectedValue: false,
+  preSelectedValue: 'Bruce Wayne',
+  preFilter: 'B',
   width: 500,
   actions: {
+    onChangeHandler (item) {
+      this.get('notifications').success('User selected: ' + item.label + ' AKA ' + item.value, {
+        autoClear: true,
+        clearDuration: 2000
+      })
+    },
+
+    onClearHandler () {
+      this.get('notifications').success('Clearing filter', {
+        autoClear: true,
+        clearDuration: 2000
+      })
+    },
+
     onBlurHandler () {
       this.get('notifications').success('blur event', {
         autoClear: true,
@@ -37,35 +47,25 @@ export default Controller.extend({
       })
     },
 
-    onChangeHandler (values) {
-      this.get('notifications').success('User selected: ' + values, {
+    onFocusHandler () {
+      this.get('notifications').success('focus event', {
         autoClear: true,
         clearDuration: 2000
       })
     },
 
-    onInputHandler (filterValue) {
-      this.get('notifications').success('Handling input: ' + filterValue, {
+    onClickHandler () {
+      this.get('notifications').success('click event', {
         autoClear: true,
         clearDuration: 2000
       })
-      this.set('search', filterValue)
     },
 
-    onAutocompleteInputHandler (filterValue) {
-      this.get('notifications').success('Handling input: ' + filterValue.value, {
+    onInputHandler (filterInput) {
+      this.get('notifications').success('Handling input: ' + filterInput, {
         autoClear: true,
         clearDuration: 2000
       })
-      this.set('search', filterValue)
-    },
-
-    onClearSelect (event) {
-      this.set('preSelectedValueForClearing', '')
-    },
-
-    onChangeClearable (value) {
-      this.set('preSelectedValueForClearing', value[0])
     }
   }
 })

@@ -84,7 +84,6 @@ export default Component.extend({
     onInput: PropTypes.func,
     renderTarget: PropTypes.string,
     role: PropTypes.string,
-    disableSpaceToggle: PropTypes.bool,
     filterType: PropTypes.oneOf(['startsWith', 'contains']),
     selected: PropTypes.oneOfType([
       PropTypes.array,
@@ -129,7 +128,6 @@ export default Component.extend({
       filterType: 'contains',
       tabIndex: 0,
       debounceInterval: 0,
-      disableSpaceToggle: false,
       // state
       focused: false
     }
@@ -347,7 +345,7 @@ export default Component.extend({
   }),
 
   _onKeyPress: on('keyPress', function (e) {
-    if (e.keyCode === SPACE && this.disableSpaceToggle !== true) {
+    if (e.keyCode === SPACE) {
       e.preventDefault() // Keep space from scrolling page
       e.stopPropagation()
       this.toggleProperty('opened')

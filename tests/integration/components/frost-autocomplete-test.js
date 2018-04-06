@@ -13,7 +13,7 @@ import hbs from 'htmlbars-inline-precompile'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
-const {$} = Ember
+const {$, run} = Ember
 const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
 
 const test = integration('frost-autocomplete')
@@ -39,7 +39,7 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-select-outlet hook='myAutocompleteOutlet'}}
+        {{frost-autocomplete-outlet hook='myAutocompleteOutlet'}}
         {{frost-autocomplete
           data=data
           disabled=disabled
@@ -467,7 +467,7 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-select-outlet hook='myWrapSelectOutlet'}}
+        {{frost-autocomplete-outlet hook='myWrapOutlet'}}
         {{frost-autocomplete
           data=data
           hook=hook
@@ -504,7 +504,7 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-select-outlet hook='myWrapSelectOutlet'}}
+        {{frost-autocomplete-outlet hook='myWrapOutlet'}}
         {{frost-autocomplete
           data=data
           hook=hook
@@ -531,7 +531,7 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-select-outlet hook='myDisabledSelectOutlet'}}
+        {{frost-autocomplete-outlet hook='myDisabledOutlet'}}
         {{frost-autocomplete
           hook=hook
           disabled=true
@@ -542,6 +542,155 @@ describe(test.label, function () {
 
     it('should render correctly', function () {
       expect($hook(`${hook}-autocompleteText-input`)[0].disabled).to.equal(true)
+    })
+  })
+
+  describe('onClear', function () {
+    let onClear, sandbox
+    const hook = 'autocompleteClear'
+
+    beforeEach(function () {
+      sandbox = sinon.sandbox.create()
+
+      onClear = sandbox.spy()
+
+      this.setProperties({
+        hook,
+        onClear
+      })
+
+      this.render(hbs`
+        {{frost-autocomplete-outlet hook='myClearOutlet'}}
+        {{frost-autocomplete
+          data=data
+          hook=hook
+          filter='s'
+          onClear=onClear
+          autofocus=true
+        }}
+      `)
+      wait()
+
+      $hook(`${hook}-autocompleteText-clear`).click()
+      return wait()
+    })
+
+    afterEach(function () {
+      sandbox.restore()
+    })
+
+    it('should trigger onClear', function () {
+      expect(onClear.callCount, 'onClear is called').to.equal(1)
+    })
+  })
+
+  describe('events', function () {
+    let onClick, onFocus, onBlur, onInput, sandbox
+    const hook = 'autocompleteEvents'
+
+    beforeEach(function () {
+      sandbox = sinon.sandbox.create()
+
+      onClick = sandbox.stub()
+      onFocus = sandbox.spy()
+      onBlur = sandbox.spy()
+      onInput = sandbox.stub()
+
+      this.setProperties({
+        hook,
+        onClick,
+        onFocus,
+        onBlur,
+        onInput,
+        tabIndex: 0 // This is the default
+      })
+
+      this.render(hbs`
+        {{frost-autocomplete-outlet hook='myEventOutlet'}}
+        {{frost-autocomplete
+          data=data
+          hook=hook
+          onClick=onClick
+          onFocus=onFocus
+          onBlur=onBlur
+          onInput=onInput
+          debounceInterval=debounceInterval
+        }}
+      `)
+      return wait()
+    })
+
+    afterEach(function () {
+      sandbox.restore()
+    })
+
+    describe('onClick', function () {
+      beforeEach(function () {
+        $hook(`${hook}-autocompleteText-input`).click()
+        return wait()
+      })
+
+      it('should trigger onClick', function () {
+        expect(onClick.callCount, 'onClick is called').to.equal(1)
+        expect(onClick.args.length, 'onClick arguments').to.equal(1)
+      })
+    })
+
+    describe('onFocus', function () {
+      beforeEach(function () {
+        $hook(`${hook}-autocompleteText-input`).trigger('focusin')
+        return wait()
+      })
+
+      it('should trigger onFocus', function () {
+        expect(onFocus.callCount, 'onFocus is called').to.equal(1)
+      })
+    })
+
+    describe('onBlur', function () {
+      beforeEach(function () {
+        $hook(`${hook}-autocompleteText-input`).trigger('focusout')
+        return wait()
+      })
+
+      it('should trigger onBlur', function () {
+        expect(onBlur.callCount, 'onBlur is called').to.equal(1)
+      })
+    })
+
+    describe('onInput', function () {
+      const inputString = 's'
+      beforeEach(function () {
+        $hook(`${hook}-autocompleteText-input`).val(inputString).trigger('input')
+        return wait()
+      })
+
+      it('should trigger onInput', function () {
+        expect(onInput.callCount, 'onInput is called').to.equal(1)
+        expect(onInput.args.length, 'onInput arguments').to.equal(1)
+        expect(onInput.args[0].toString(), 'onInput filter').to.equal(inputString)
+      })
+
+      describe('debounceInterval', function () {
+        const debounceInterval = 100
+
+        beforeEach(function () {
+          onInput.reset()
+          this.set('debounceInterval', debounceInterval)
+          $hook(`${hook}-autocompleteText-input`).val(inputString).trigger('input')
+        })
+
+        it('should trigger onInput', function (done) {
+          run.later(() => {
+            expect(onInput.called).to.equal(false)
+
+            run.later(() => {
+              expect(onInput.called).to.equal(true)
+              done()
+            }, 100)
+          }, 50)
+        })
+      })
     })
   })
 })

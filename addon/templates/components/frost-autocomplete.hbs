@@ -6,14 +6,14 @@
   ariaMultiselectable=false
   ariaOwns='frost-select-list'
   hook=(concat hook '-autocompleteText')
-  onInput=onFilterInput
+  onInput=(action 'onInput')
   onKeyDown=(action 'onKeyDown')
   onKeyPress=(action 'onKeyPress')
   onClear=(action 'onClear')
   role='combobox'
   value=filter
   disabled=disabled
-  autofocus=_grabfocus
+  autofocus=autofocus
   placeholder=placeholder
 }}
 
@@ -27,10 +27,9 @@
       hook=(concat hook '-autocompleteDropdown')
       items=items
       focusedIndex=focusedIndex
+      onSelect=(action 'selectItem')
       onClose=(action 'closeDropDown')
-      onFilterInput=(action 'filterInput')
-      onSelect=(action '_selectItem')
-      selectedItems=selectedItems
+      selectedValue=internalSelectedItem.value
       wrapLabels=wrapLabels
       isLoading=isLoading
     )

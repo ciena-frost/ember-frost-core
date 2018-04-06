@@ -434,7 +434,7 @@ export default Component.extend({
         if (filter) {
           const pattern = this._getRegexPattern(filter)
           const textWithMatch = textElement.textContent.split('|').map((label) => {
-            return label.replace(pattern, '<u>$&</u>')
+            return label.replace(pattern, '<u>$&</u>').trim()
           }).join(' | ')
 
           // If rendered text has changed, update it
