@@ -14,7 +14,7 @@ import {afterEach, beforeEach, describe, it} from 'mocha'
 import sinon from 'sinon'
 
 const {$, run} = Ember
-const {DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
+const {BACKSPACE, DOWN_ARROW, ENTER, ESCAPE, SPACE, TAB, UP_ARROW} = keyCodes
 
 const test = integration('frost-autocomplete')
 describe(test.label, function () {
@@ -276,7 +276,7 @@ describe(test.label, function () {
           })
         })
 
-        describe('when focusout', function () {
+        describe('when close', function () {
           beforeEach(function () {
             close()
             return wait()
@@ -284,6 +284,36 @@ describe(test.label, function () {
 
           it('should be closed', function () {
             expect($('.frost-autocomplete-dropdown').length).to.equal(0)
+          })
+
+          describe('when disabled', function () {
+            beforeEach(function () {
+              this.set('disabled', true)
+              wait()
+
+              $hook('autocomplete-autocompleteText-input')
+                .val('sp')
+                .trigger('input')
+                .trigger('keypress')
+                .trigger('focusin')
+              return wait()
+            })
+
+            it('should render as expected', function () {
+              expect($('.frost-autocomplete-dropdown').length).to.equal(0)
+            })
+          })
+          describe('when backspace', function () {
+            beforeEach(function () {
+              $hook('autocomplete-autocompleteText-input')
+                .trigger('focusin')
+                .trigger($.Event('keydown', {keyCode: BACKSPACE}))
+              return wait()
+            })
+
+            it('should render as expected', function () {
+              expect($('.frost-autocomplete-dropdown').length).to.equal(1)
+            })
           })
 
           describe('when click', function () {
@@ -443,6 +473,124 @@ describe(test.label, function () {
     })
   })
 
+  describe('default tabIndex', function () {
+    const hook = 'tabIndex'
+
+    beforeEach(function () {
+      this.setProperties({
+        hook
+      })
+
+      this.render(hbs`
+        {{frost-autocomplete-outlet hook='myDefaultTabIndexOutlet'}}
+        {{frost-autocomplete
+          data=data
+          hook=hook
+        }}
+      `)
+    })
+
+    it('should have default tabIndex', function () {
+      expect($hook(hook)[0].tabIndex).to.equal(0)
+    })
+  })
+
+  describe('when selectedValue', function () {
+    const hook = 'selectedValue'
+    const data = [
+      {
+        label: 'Superman',
+        value: 'Clark Kent'
+      },
+      {
+        label: 'Spiderman',
+        value: 'Peter Parker'
+      },
+      {
+        label: 'Spawn',
+        value: 'Al Simmons'
+      }
+    ]
+    const selectedValue = data[1].value
+
+    beforeEach(function () {
+      this.setProperties({
+        hook,
+        data,
+        selectedValue,
+        tabIndex: 0
+      })
+
+      this.render(hbs`
+        {{frost-autocomplete-outlet hook='myWrapOutlet'}}
+        {{frost-autocomplete
+          data=data
+          hook=hook
+          selectedValue=selectedValue
+          tabIndex=tabIndex
+        }}
+      `)
+      wait()
+
+      $hook(`${hook}-autocompleteText-input`).val('s').trigger('input').trigger('keypress')
+      return wait()
+    })
+
+    it('should render as expected', function () {
+      expect($('.frost-autocomplete-list-item-selected').text().trim()).to.equal(data[1].label)
+    })
+  })
+
+  describe('when contains', function () {
+    const hook = 'contains'
+    const data = [
+      {
+        label: 'Superman',
+        value: 'Clark Kent'
+      },
+      {
+        label: 'Spiderman',
+        value: 'Peter Parker'
+      },
+      {
+        label: 'Spawn',
+        value: 'Al Simmons'
+      }
+    ]
+
+    beforeEach(function () {
+      this.setProperties({
+        hook,
+        data,
+        filterType: 'contains',
+        tabIndex: 0
+      })
+
+      this.render(hbs`
+        {{frost-autocomplete-outlet hook='myWrapOutlet'}}
+        {{frost-autocomplete
+          data=data
+          hook=hook
+          filterType=filterType
+          tabIndex=tabIndex
+        }}
+      `)
+      wait()
+
+      $hook(`${hook}-autocompleteText-input`).val('ider').trigger('input').trigger('keypress')
+      return wait()
+    })
+
+    it('should render as expected', function () {
+      expectWithState(hook, {
+        focused: true,
+        focusedItem: 'Spiderman',
+        items: ['Spiderman'],
+        opened: true
+      })
+    })
+  })
+
   describe('wrap labels', function () {
     const veryLongLabel = 'Very very very very very very very very very very very very very very long label'
     const veryNotSoLongLabel = 'Very not long'
@@ -483,6 +631,51 @@ describe(test.label, function () {
 
     it('should render correctly', function () {
       expect($hook(`${hook}-autocompleteDropdown-item`, {index: 1}).text().trim()).to.equal(this.get('data')[1].label)
+    })
+  })
+
+  describe('long labels', function () {
+    const veryLongLabel = 'Very very very very very very very very very very very very very very long label'
+    const veryNotSoLongLabel = 'Very not long'
+    const hook = 'autocompleteWrap'
+    const data = [
+      {
+        label: veryNotSoLongLabel,
+        value: 'veryNotSoLongLabel'
+      },
+      {
+        label: veryLongLabel,
+        value: 'veryLongLabel'
+      }
+    ]
+
+    beforeEach(function () {
+      this.setProperties({
+        hook,
+        data,
+        width: 300,
+        tabIndex: 0 // This is the default
+      })
+
+      this.render(hbs`
+        {{frost-autocomplete-outlet hook='myWrapOutlet'}}
+        {{frost-autocomplete
+          data=data
+          hook=hook
+          tabIndex=tabIndex
+          width=width
+        }}
+      `)
+      wait()
+
+      $hook(`${hook}-autocompleteText-input`).val('V').trigger('input').trigger('keypress')
+      return wait()
+    })
+
+    it('should render correctly', function () {
+      expect($hook(`${hook}-autocompleteDropdown-item`, {index: 1}).text().trim())
+        .to.not.equal(this.get('data')[1].label)
+      expect($hook(`${hook}-autocompleteDropdown-item`, {index: 1}).text().trim()).to.contain('…')
     })
   })
 

@@ -12,7 +12,7 @@ import {keyCodes} from '../utils'
 import {trimLongDataInElement} from '../utils/text'
 import Component from './frost-component'
 
-const {$, deprecate, get, isEmpty, merge, run} = Ember
+const {$, get, isEmpty, merge, run} = Ember
 const {ENTER, ESCAPE, TAB} = keyCodes
 
 const FPS = 1000 / 60 // Update at 60 frames per second
@@ -384,29 +384,12 @@ export default Component.extend({
       props = merge(props, this._updatePosition($element))
     }
 
-    const receivedHook = this.get('receivedHook')
-
-    if (receivedHook && receivedHook !== this.get('hook')) {
-      deprecate(
-        'receivedHook has been deprecated in favor of hook',
-        false,
-        {
-          id: 'receivedHook-deprecated',
-          until: '2.0.0'
-        }
-      )
-
-      props.hook = receivedHook
-    }
-
     if (Object.keys(props).length !== 0) {
       this.setProperties(props)
     }
   },
 
   didInsertElement () {
-    $('.frost-autocomplete-dropdown .frost-text-input').focus() // Focus on filter
-
     this._updateHandler = () => {
       run(() => {
         if (this.isDestroyed || this.isDestroying) return

@@ -39,6 +39,7 @@ export default Component.extend({
     role: PropTypes.string,
     filterType: PropTypes.oneOf(['startsWith', 'contains']),
     selectedValue: PropTypes.string,
+    tabIndex: PropTypes.number,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.null]),
     renderTarget: PropTypes.string,
     filter: PropTypes.string,
@@ -66,7 +67,8 @@ export default Component.extend({
       error: false,
       role: 'button',
       renderTarget: 'frost-autocomplete',
-      debounceInterval: 0
+      debounceInterval: 0,
+      tabIndex: 0
     }
   },
 
@@ -142,14 +144,14 @@ export default Component.extend({
   @readOnly
   @computed('data', 'filter', 'onInput')
   items (data, filter, onInput) {
-    if (!data) {
+    if (isEmpty(data)) {
       return []
     }
 
-    filter = filter ? filter.toLowerCase() : ''
+    filter = filter ? filter.toLowerCase() : null
 
     return data.filter((item) => {
-      if (!filter) {
+      if (isEmpty(filter)) {
         return true
       }
 
@@ -277,7 +279,7 @@ export default Component.extend({
 
       if (typeOf(onChange) === 'function') {
         run.next(() => {
-          this.onChange(selectedItem)
+          onChange(selectedItem)
         })
       }
 
@@ -295,7 +297,7 @@ export default Component.extend({
 
       if (typeOf(onClear) === 'function') {
         run.next(() => {
-          this.onClear()
+          onClear()
         })
       }
     },
