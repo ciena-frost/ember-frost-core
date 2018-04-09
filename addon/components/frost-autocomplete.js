@@ -80,11 +80,9 @@ export default Component.extend({
   },
 
   _handleArrowKey (upArrow) {
-    if (this.get('_opened') !== true) {
-      return
+    if (this.get('_opened') === true) {
+      this._setFocusedIndex(upArrow)
     }
-
-    this._setFocusedIndex(upArrow)
   },
 
   _setFocusedIndex (upArrow) {

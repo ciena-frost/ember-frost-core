@@ -567,7 +567,7 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-autocomplete-outlet hook='myWrapOutlet'}}
+        {{frost-autocomplete-outlet hook='myContainsOutlet'}}
         {{frost-autocomplete
           data=data
           hook=hook
