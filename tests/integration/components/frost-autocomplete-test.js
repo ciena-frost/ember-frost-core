@@ -262,6 +262,30 @@ describe(test.label, function () {
         })
       })
 
+      describe('when not useful filter present', function () {
+        beforeEach(function () {
+          $hook('autocomplete-autocompleteText-input').val('nothing').trigger('input').trigger('keypress')
+          return wait()
+        })
+
+        it('should render empty message', function () {
+          expect($('.frost-autocomplete-dropdown-empty-msg').length).to.equal(1)
+        })
+      })
+
+      describe('when filter with no data', function () {
+        beforeEach(function () {
+          this.set('data', null)
+          wait()
+          $hook('autocomplete-autocompleteText-input').val('nothing').trigger('input').trigger('keypress')
+          return wait()
+        })
+
+        it('should render empty message', function () {
+          expect($('.frost-autocomplete-dropdown-empty-msg').length).to.equal(1)
+        })
+      })
+
       describe('when filter present', function () {
         beforeEach(function () {
           $hook('autocomplete-autocompleteText-input').val('sp').trigger('input').trigger('keypress')
