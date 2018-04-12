@@ -81,7 +81,7 @@ const getSourceDirectory = function(svgSourceDir) {
     )
     {
         let packagePath = resolve.sync(this.moduleName(), {baseDir: this.project.root})
-        sourcePath = packagePath.substring(0, packagePath.lastIndexOf('/'))
+        sourcePath = path.join(packagePath.substring(0, packagePath.lastIndexOf('/')), svgSourceDir)
     }
 
     return sourcePath

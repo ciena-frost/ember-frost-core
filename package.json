@@ -76,9 +76,6 @@
     ],
     "configPath": "tests/dummy/config"
   },
-  "ember-frost-icon-pack": {
-    "name": "frost"
-  },
   "dependencies": {
     "broccoli-autoprefixer": "^5.0.0",
     "broccoli-babel-transpiler": "^5.7.2",

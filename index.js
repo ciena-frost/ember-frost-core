@@ -48,17 +48,22 @@ module.exports = {
     this._super.init.apply(this, arguments)
   },
 
-  // Present purely to allow programmatic access to the icon packs and icon names (for demo purposes)
+  /**
+   * Being used to allow programmatic access to the icons for documentation/demo purposes
+   *
+   * @param {Object} tree Addon Broccoli tree
+   * @returns {Object} Broccoli tree
+   */
   treeForAddon: function (tree) {
-    return mergeTrees(
-      [
-        this._super.treeForAddon.apply(this, arguments),
-        generateIconsForDocumentation.call(this)
-      ],
-      {
-        overwrite: true
-      }
-    )
+    let treesToMerge = []
+
+    treesToMerge.push(this._super.treeForAddon.apply(this, arguments))
+
+    if (this.project.pkg.name === 'ember-frost-core') {
+      treesToMerge.push(generateIconsForDocumentation.call(this))
+    }
+
+    return mergeTrees(treesToMerge, {overwrite: true})
   },
 
   /**
