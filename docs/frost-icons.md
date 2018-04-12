@@ -18,6 +18,22 @@ To include an icon pack for your addon simply:
 1. Add this entry to the *dependencies* of your _package.json_ file:
    - `"ember-cli-svgstore": "ciena-blueplanet/ember-cli-svgstore#977df1cf58ae43b1d98a591573c3e06947744321",`
 2. Add your SVGs to a folder named _"frost-icon-svgs"_ (without quotes) to the root of your project.
+3. In your _index.js_ file employ the following code:
+
+```js
+const {setSvgConfiguration} = require('ember-frost-core/utils/frost-icon-svg')
+
+module.exports = {
+  included: function () {
+    this.app = this._findHost.call(this)
+
+    // Set ember-cli-svgstore options so that consuming applications don't have to
+    setSvgOptions.call(this, '<icon-pack-name>')
+
+    this._super.included.apply(this, arguments)
+  }
+}
+```
 
 Icons from an icon pack can be consumed using the [icon pack](#icon pack) component format.
 
@@ -28,15 +44,31 @@ An application does not need to make any configuration changes in order to consu
 1. Add this entry to your _package.json_ file:
    - `"ember-cli-svgstore": "ciena-blueplanet/ember-cli-svgstore#977df1cf58ae43b1d98a591573c3e06947744321",`
 2. Add your SVGs to a folder named _"frost-icon-svgs"_ (without quotes) to the root of your project.
+3. In your _ember-cli-build.js_ file employ the following code:
 
-Icons from an icon pack can be consumed using the [icon pack](#icon pack) component format.
+```js
+svgstore: {
+  files: [
+    {
+      sourceDirs: 'frost-icon-svgs',
+      outputFile: '/assets/icon-packs/<icon-pack-name>.svg'
+    }
+  ]
+}
+```
 
-If you need to create additional icon packs you can do so by adding configuration options to your _ember-cli-build.js_ file, such as like the following:
+**IT IS VERY IMPORTANT** that the `svgstore.files` property is an _Array_, even if only one entry is specified.
+
+It is easy to create additional icon packs if they are needed:
 
 
 ```js
 svgstore: {
   files: [
+    {
+      sourceDirs: 'frost-icon-svgs',
+      outputFile: '/assets/icon-packs/<icon-pack-name>.svg'
+    },
     {
       sourceDirs: 'some-other-directory',
       outputFile: '/assets/icon-packs/some-other-name.svg'
@@ -45,7 +77,7 @@ svgstore: {
 }
 ```
 
-*IT IS VERY IMPORTANT* that the `svgstore.files` property is an ARRAY, even if only one entry is specified.
+Icons from an icon pack can be consumed using the [icon pack](#icon pack) component format.
 
 
 ### Inline SVG rendering
