@@ -75,7 +75,11 @@ const getAddonOptions = function() {
 const getSourceDirectory = function(svgSourceDir) {
     let sourcePath = svgSourceDir
 
-    if(!this.project.isEmberCLIAddon()) {
+    if (
+        !this.project.isEmberCLIAddon()
+        || (this.project.pkg.name != this.moduleName() && this.moduleName() === 'ember-frost-core')
+    )
+    {
         let packagePath = resolve.sync(this.moduleName(), {baseDir: this.project.root})
         sourcePath = packagePath.substring(0, packagePath.lastIndexOf('/'))
     }
