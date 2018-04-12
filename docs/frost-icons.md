@@ -25,7 +25,7 @@ const {setSvgConfiguration} = require('ember-frost-core/utils/frost-icon-svg')
 
 module.exports = {
   included: function () {
-    this.app = this._findHost
+    this.app = this._findHost.call(this)
 
     // Set ember-cli-svgstore options so that consuming applications don't have to
     setSvgOptions.call(this, '<icon-pack-name>')
