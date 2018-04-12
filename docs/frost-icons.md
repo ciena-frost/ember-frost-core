@@ -28,7 +28,7 @@ module.exports = {
     this.app = this._findHost.call(this)
 
     // Set ember-cli-svgstore options so that consuming applications don't have to
-    setSvgOptions.call(this, '<icon-pack-name>')
+    setSvgConfiguration.call(this, '<icon-pack-name>')
 
     this._super.included.apply(this, arguments)
   }
