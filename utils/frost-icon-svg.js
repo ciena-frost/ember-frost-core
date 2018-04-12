@@ -73,11 +73,13 @@ const getAddonOptions = function() {
  * @returns {String}
  */
 const getSourceDirectory = function(svgSourceDir) {
+    // can use this if are a top-level addon...
     let sourcePath = svgSourceDir
 
+    // ...otherwise need to find correct node_modules location when are...
     if (
-        !this.project.isEmberCLIAddon()
-        || (this.project.pkg.name != this.moduleName() && this.moduleName() === 'ember-frost-core')
+        !this.project.isEmberCLIAddon() // ...in an app
+        || this.project.pkg.name !== this.moduleName() // ...in a nested addon
     )
     {
         let packagePath = resolve.sync(this.moduleName(), {baseDir: this.project.root})
