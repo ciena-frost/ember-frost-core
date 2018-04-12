@@ -1,7 +1,7 @@
 import Ember from 'ember'
 import iconPack from 'modules/ember-frost-core/icons'
 
-const {Controller, computed} = Ember
+const {Controller} = Ember
 
 export default Controller.extend({
   backgroundColors: [
@@ -14,7 +14,7 @@ export default Controller.extend({
   ],
   backgroundColor: 'bg-tile-color',
 
-  init() {
+  init () {
     this.set(
       'icons',
       iconPack.map((icon) => {

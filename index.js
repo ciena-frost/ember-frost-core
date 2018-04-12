@@ -6,8 +6,8 @@ const autoprefixer = require('broccoli-autoprefixer')
 const mergeTrees = require('broccoli-merge-trees')
 const path = require('path')
 const {
-  getAddonOptions,
   generateIconsForDocumentation,
+  getAddonOptions,
   setSvgConfiguration
 } = require('./utils/frost-icon-svg')
 
@@ -15,7 +15,7 @@ module.exports = {
   name: 'ember-frost-core',
 
   included: function (app) {
-    this.app = app = this._findHost.call(this)
+    this.app = app = this._findHost
 
     // Set ember-cli-svgstore options so that consuming applications don't have to
     setSvgConfiguration.call(this, 'frost')
