@@ -17,6 +17,8 @@ export default Controller.extend({
   expanded5: false,
   expanded6: false,
   expanded7: false,
+  expanded9: false,
+  expanded10: false,
   notifications: inject.service('notification-messages'),
 
   actions: {
@@ -50,6 +52,14 @@ export default Controller.extend({
         clearDuration: 2000
       })
       this.set('expanded7', expanded)
+    },
+
+    onChangeHandler9 (expanded) {
+      this.set('expanded9', expanded)
+    },
+
+    onChangeHandler10 (expanded) {
+      this.set('expanded10', expanded)
     },
 
     // BEGIN-SNIPPET expand-query-controller2

@@ -31,7 +31,9 @@ export default Component.extend({
     animationDuration: PropTypes.number,
     expandLabel: PropTypes.string,
     collapseLabel: PropTypes.string,
-    content: PropTypes.any
+    content: PropTypes.any,
+    isChevronOnlyClickTrigger: PropTypes.bool,
+    labelComponent: PropTypes.EmberComponent
     // state
   },
 
@@ -41,7 +43,8 @@ export default Component.extend({
       // options
       expandLabel: 'Expand',
       collapseLabel: 'Collapse',
-      animationDuration: 300
+      animationDuration: 300,
+      isChevronOnlyClickTrigger: false
       // state
     }
   },
