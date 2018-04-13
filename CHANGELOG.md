@@ -1,3 +1,8 @@
+# 8.1.0 (2018-04-13)
+
+* Added `isChevronOnlyClickTrigger` and `labelComponent` props to `frost-expand`
+
+
 # 8.0.0 (2018-04-13)
 
 * Removed this addon from being responsible for building other addon's (within the Frost family) icon packs and instead require them to be responsible for doing so themselves.
