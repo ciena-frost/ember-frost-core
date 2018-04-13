@@ -1,3 +1,17 @@
+# 8.0.0 (2018-04-13)
+
+* Removed this addon from being responsible for building other addon's (within the Frost family) icon packs and instead require them to be responsible for doing so themselves.
+* Applications are now also responsible for building their own icon packs - this addon is only responsible for itself, just like any other addon.
+* Removed the `ember-frost-icon-pack` keyword from _package.json_
+* Removed the `ember-frost-icon-pack` property from _package.json_
+* Created a fork of `ember-cli-svgstore` and installed it in this addon.
+* Created _utils/frost-icon-svg.js_ utility to assist addons with the building of their own icon packs.
+* Renamed _/svgs_ folder to _/frost-icon-svgs_
+* Refactored "find parent" logic to use `this._findHost()`
+* Updated `frost-icons` documentation to demonstrate new way of managing/creating icon packs
+* Updated the dummy app's method of displaying the frost icon pack to align with new approach in _utils/frost-icon-svg.js_ utility
+
+
 # 7.0.0 (2018-03-09)
 * **Updated** pull request template
 * **Added** issue template
