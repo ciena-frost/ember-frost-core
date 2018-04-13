@@ -26,8 +26,8 @@ export default Controller.extend({
   preFilter: 'B',
   width: 500,
   actions: {
-    onChangeHandler (item) {
-      this.get('notifications').success('User selected: ' + item.label + ' AKA ' + item.value, {
+    onChangeHandler (value) {
+      this.get('notifications').success('User selected: ' + value, {
         autoClear: true,
         clearDuration: 2000
       })

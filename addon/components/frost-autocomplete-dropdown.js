@@ -118,7 +118,7 @@ export default Component.extend({
    */
   renderItems (focusedIndex, items, selectedValue) {
     if (!items) {
-      return [{}]
+      return []
     }
 
     return items.map((item, index) => {
@@ -148,7 +148,7 @@ export default Component.extend({
   @computed('items')
   /**
    * Whether or not to show message for when no items are present
-   * @param {Array<Object>} items - items
+   * @param {Object[]} items - items
    * @returns {Boolean} whether or not to show empty message
    */
   showEmptyMessage (items) {

@@ -277,7 +277,7 @@ export default Component.extend({
 
       if (typeOf(onChange) === 'function') {
         run.next(() => {
-          onChange(selectedItem)
+          onChange(get(selectedItem, 'value'))
         })
       }
 

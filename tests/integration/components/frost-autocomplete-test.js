@@ -476,6 +476,11 @@ describe(test.label, function () {
           it('should select item', function () {
             expect($hook('autocomplete-autocompleteText-input')[0].value).to.equal('Spiderman')
           })
+          it('should have onChange', function () {
+            expect(onChange.callCount, 'onChange is called').to.equal(1)
+            expect(onChange.args.length, 'onChange arguments length').to.equal(1)
+            expect(onChange.args[0][0], 'onChange argument').to.equal('Peter Parker')
+          })
         })
 
         describe('when mouseenter', function () {
