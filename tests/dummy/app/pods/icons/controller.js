@@ -1,7 +1,7 @@
 import Ember from 'ember'
-import iconPacks from 'modules/ember-frost-core/icon-packs'
+import iconPack from 'modules/ember-frost-core/icons'
 
-const {Controller, computed} = Ember
+const {Controller} = Ember
 
 export default Controller.extend({
   backgroundColors: [
@@ -13,19 +13,18 @@ export default Controller.extend({
     'bg-main-button-color'
   ],
   backgroundColor: 'bg-tile-color',
-  iconPacks: computed('iconPacks', () => {
-    return Object.keys(iconPacks).map((name) => {
-      return {
-        name: Ember.String.capitalize(name),
-        icons: iconPacks[name].map((icon) => {
-          return {
-            name: icon,
-            markdown: `\`${icon}\``
-          }
-        })
-      }
-    })
-  }).readOnly(),
+
+  init () {
+    this.set(
+      'icons',
+      iconPack.map((icon) => {
+        return {
+          name: icon,
+          markdown: `\`${icon}\``
+        }
+      })
+    )
+  },
 
   actions: {
     colorSelected (color) {

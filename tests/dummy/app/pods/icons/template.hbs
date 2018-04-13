@@ -80,28 +80,26 @@
   </div>
 
   <div class="icon-demo">
-    {{#each iconPacks as |iconPack|}}
-      <div class='icon-pack'>
-        <div class='name'>
-          Icon Pack: {{iconPack.name}}
-        </div>
-        <div class='icons'>
-          {{#each iconPack.icons as |icon|}}
-            <div class="entry">
-              <div class="title">
-                {{format-markdown icon.markdown}}
-              </div>
-              <div class="content" class="{{backgroundColor}}">
-                {{frost-icon
-                  hook=(concat icon.name 'Icon')
-                  icon=icon.name
-                }}
-              </div>
-            </div>
-          {{/each}}
-        </div>
+    <div class='icon-pack'>
+      <div class='name'>
+        Icon Pack: Frost
       </div>
-    {{/each}}
+      <div class='icons'>
+        {{#each icons as |icon|}}
+          <div class="entry">
+            <div class="title">
+              {{format-markdown icon.markdown}}
+            </div>
+            <div class="content" class="{{backgroundColor}}">
+              {{frost-icon
+                hook=(concat icon.name 'Icon')
+                icon=icon.name
+              }}
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
   </div>
 
 </div>
