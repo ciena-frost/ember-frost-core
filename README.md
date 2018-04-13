@@ -19,6 +19,7 @@ The following components are available when you install ember-frost-core
 * [frost-bookends](docs/frost-bookends.md)
 * [frost-button](docs/frost-button.md)
 * [frost-checkbox](docs/frost-checkbox.md)
+* [frost-expand](docs/frost-expand.md)
 * [frost-theme](docs/frost-css.md)
 * [frost-icon](docs/frost-icons.md)
 * [frost-link](docs/frost-link.md)
