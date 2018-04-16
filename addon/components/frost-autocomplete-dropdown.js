@@ -23,7 +23,8 @@ export default Component.extend({
 
   // == Keyword Properties ====================================================
   classNameBindings: [
-    'wrapLabels:frost-autocomplete-wrap-labels'
+    'wrapLabels:frost-autocomplete-wrap-labels',
+    'error:frost-autocomplete-dropdown-error'
   ],
   layout,
 
@@ -45,6 +46,7 @@ export default Component.extend({
     selectedValue: PropTypes.string,
     wrapLabels: PropTypes.bool,
     isLoading: PropTypes.bool,
+    error: PropTypes.bool,
 
     // state
     bottom: PropTypes.oneOfType([

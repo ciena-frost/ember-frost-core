@@ -33,12 +33,6 @@ $frost-input-select-option-row-height: 30px;
   }
 }
 
-.frost-autocomplete-error {
-  input {
-    border-color: $frost-color-danger;
-  }
-}
-
 .frost-autocomplete-dropdown-container {
   display: flex;
   position: fixed;
@@ -93,6 +87,9 @@ $frost-input-select-option-row-height: 30px;
     font-weight: 500;
   }
 
+  .frost-autocomplete-dropdown-error {
+    border-color: $frost-color-danger;
+  }
 
   .frost-autocomplete-list-item {
     display: flex;
@@ -124,5 +121,11 @@ $frost-input-select-option-row-height: 30px;
     height: auto;
     min-height: $frost-input-select-option-row-height;
     white-space: normal;
+  }
+}
+
+.frost-autocomplete-dropdown-error {
+  .frost-autocomplete-dropdown-container {
+    border-color: $frost-color-danger;
   }
 }
