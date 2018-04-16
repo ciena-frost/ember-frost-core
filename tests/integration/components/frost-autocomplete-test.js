@@ -806,6 +806,43 @@ describe(test.label, function () {
     })
   })
 
+  describe('error', function () {
+    let onClear, sandbox
+    const hook = 'autocompleteError'
+
+    beforeEach(function () {
+      sandbox = sinon.sandbox.create()
+
+      onClear = sandbox.spy()
+
+      this.setProperties({
+        hook,
+        onClear,
+        error: true
+      })
+
+      this.render(hbs`
+        {{frost-autocomplete-outlet hook='myErrorOutlet'}}
+        {{frost-autocomplete
+          data=data
+          hook=hook
+          error=error
+          onClear=onClear
+          autofocus=true
+        }}
+      `)
+      return wait()
+    })
+
+    afterEach(function () {
+      sandbox.restore()
+    })
+
+    it('should have error class', function () {
+      expect($hook(`${hook}-autocompleteText`).hasClass('error')).to.equal(true)
+    })
+  })
+
   describe('events', function () {
     let onClick, onFocus, onBlur, onInput, sandbox
     const hook = 'autocompleteEvents'
