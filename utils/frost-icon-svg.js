@@ -91,6 +91,8 @@ const getSourceDirectory = function(svgSourceDir) {
 
 /**
  * Set configuration options for ember-cli-svgstore addon
+ * - svgstore.files
+ * - svgstore.svgstoreOpts.copyAttrs
  *
  * @param {String} iconPack Name of the master SVG
  * @param {String} [frost-icon-svgs] svgSourceDir Source directory of SVG files
@@ -102,6 +104,16 @@ const setSvgConfiguration = function (iconPack, svgSourceDir = 'frost-icon-svgs'
     }
 
     this.app.options.svgstore = this.app.options.svgstore || {}
+
+    // svgstore.svgstoreOpts.copyAttrs
+    this.app.options.svgstore.svgstoreOpts = this.app.options.svgstore.svgstoreOpts || {}
+    this.app.options.svgstore.svgstoreOpts.copyAttrs = this.app.options.svgstore.svgstoreOpts.copyAttrs || []
+
+    if (!this.app.options.svgstore.svgstoreOpts.copyAttrs.includes('preserveAspectRatio')) {
+      this.app.options.svgstore.svgstoreOpts.copyAttrs.push('preserveAspectRatio')
+    }
+
+    // svgstore.files
     this.app.options.svgstore.files = this.app.options.svgstore.files || []
 
     this.app.options.svgstore.files.push({
