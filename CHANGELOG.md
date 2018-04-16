@@ -1,3 +1,7 @@
+# 8.1.1 (2018-04-16)
+
+* Updated _utils/frost-icon-svg.js_ to include default `copyAttrs` configuration option for `svgstore`
+
 # 8.1.0 (2018-04-13)
 
 * Added `isChevronOnlyClickTrigger` and `labelComponent` props to `frost-expand`
