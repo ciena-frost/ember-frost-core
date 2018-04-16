@@ -18,17 +18,17 @@ export function expectWithState (select, state) {
     text: ''
   }
 
-  const $select = typeOf(select) === 'string' ? $hook(select) : select
+  const _select = typeOf(select) === 'string' ? $hook(select) : select
   state = assign(defaults, state)
 
   expect(
-    $select.hasClass('frost-autocomplete'),
+    _select.hasClass('frost-autocomplete'),
     'has frost-autocomplete class'
   )
     .to.equal(true)
 
   expect(
-    $select.prop('tabindex'),
+    _select.find('input')[0].tabIndex,
     'has expected tab index'
   )
     .to.equal(state.disabled ? -1 : state.tabIndex)

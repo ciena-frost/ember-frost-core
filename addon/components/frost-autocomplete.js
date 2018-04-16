@@ -12,7 +12,6 @@ const {BACKSPACE, DOWN_ARROW, ENTER, UP_ARROW} = keyCodes
 export default Component.extend({
   attributeBindings: [
     'opened:aria-pressed',
-    'computedTabIndex:tabIndex',
     'role',
     'style'
   ],
@@ -47,7 +46,7 @@ export default Component.extend({
     debounceInterval: PropTypes.number,
 
     // state
-    $element: PropTypes.object,
+    _element: PropTypes.object,
     focusedIndex: PropTypes.number,
     _userInput: PropTypes.bool,
     _grabfocus: PropTypes.bool,
@@ -140,6 +139,19 @@ export default Component.extend({
   },
 
   @readOnly
+  @computed('error')
+  /**
+   * Get appropriate class for input text
+   * @param {Boolean} error - whether or not input is disabled
+   * @returns {String} class for input text
+   */
+  inputClass (error) {
+    if (error) {
+      return 'error'
+    }
+  },
+
+  @readOnly
   @computed('data', 'filter', 'onInput')
   items (data, filter, onInput) {
     if (isEmpty(data)) {
@@ -174,7 +186,7 @@ export default Component.extend({
 
     // We need jQuery instance of components root DOM node to hand off to
     // dropdown so it can position itself properly relative to the select
-    this.set('$element', this.$())
+    this.set('_element', this.$())
   },
 
   // == DOM Events ============================================================
@@ -189,10 +201,7 @@ export default Component.extend({
   }),
 
   _onKeyDown: on('keyDown', function (e) {
-    if (
-      [DOWN_ARROW, UP_ARROW].indexOf(e.keyCode) !== -1 &&
-      !this.get('openend')
-    ) {
+    if ([DOWN_ARROW, UP_ARROW].indexOf(e.keyCode) !== -1) {
       e.preventDefault() // Keep up/down arrow from scrolling page
       e.stopPropagation()
       this.set('opened', true)
@@ -281,7 +290,7 @@ export default Component.extend({
         })
       }
 
-      this.$element.find('input').first().focus()
+      this._element.find('input').first().focus()
     },
 
     onClear () {

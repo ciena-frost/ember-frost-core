@@ -520,7 +520,7 @@ describe(test.label, function () {
     })
 
     it('should have default tabIndex', function () {
-      expect($hook(hook)[0].tabIndex).to.equal(0)
+      expect($hook(hook).find('input')[0].tabIndex).to.equal(0)
     })
   })
 

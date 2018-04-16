@@ -22,9 +22,11 @@ export default Controller.extend({
     return result
   }).readOnly(),
 
+  isLoading: true,
   preSelectedValue: 'Bruce Wayne',
   preFilter: 'B',
   width: 500,
+
   actions: {
     onChangeHandler (value) {
       this.get('notifications').success('User selected: ' + value, {
@@ -66,6 +68,10 @@ export default Controller.extend({
         autoClear: true,
         clearDuration: 2000
       })
+    },
+
+    toggleLoading () {
+      this.set('isLoading', !this.get('isLoading'))
     }
   }
 })

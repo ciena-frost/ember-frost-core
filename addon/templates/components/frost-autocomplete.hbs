@@ -15,13 +15,15 @@
   disabled=disabled
   autofocus=autofocus
   placeholder=placeholder
+  tabIndex=computedTabIndex
+  class=inputClass
 }}
 
 {{#if _opened}}
   {{to-elsewhere
     named=renderTarget
     send=(component 'frost-autocomplete-dropdown'
-      $element=$element
+      _element=_element
       filter=filter
       filterType=filterType
       hook=(concat hook '-autocompleteDropdown')

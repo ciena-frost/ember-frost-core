@@ -36,7 +36,7 @@ export default Component.extend({
    */
   propTypes: {
     // options
-    $element: PropTypes.object.isRequired,
+    _element: PropTypes.object.isRequired,
     filter: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     multiselect: PropTypes.bool,
@@ -183,9 +183,9 @@ export default Component.extend({
     })
   },
 
-  _getElementDimensionsAndPosition ($element) {
-    const height = $element.height()
-    const offset = $element.offset()
+  _getElementDimensionsAndPosition (_element) {
+    const height = _element.height()
+    const offset = _element.offset()
     const top = offset.top
 
     return {
@@ -195,7 +195,7 @@ export default Component.extend({
       height,
       left: offset.left,
       top,
-      width: $element.width()
+      width: _element.width()
     }
   },
 
@@ -269,12 +269,12 @@ export default Component.extend({
     })
   },
 
-  _updatePosition ($element) {
+  _updatePosition (_element) {
     if (this.isDestroyed || this.isDestroying) return {}
 
-    $element = $element.first()
+    _element = _element.first()
 
-    const {center, height, left, top, width} = this._getElementDimensionsAndPosition($element)
+    const {center, height, left, top, width} = this._getElementDimensionsAndPosition(_element)
     const windowCenterX = $(window).height() / 2 + $(document).scrollTop()
     const props = (
       center.x > windowCenterX ? this._positionAboveInput(top) : this._positionBelowInput(height, top)
@@ -359,10 +359,10 @@ export default Component.extend({
     this._isUpdating = true
 
     while (Date.now() - this._lastInteraction < 250) {
-      const $element = get(this.attrs, '$element.value') || get(this.attrs, '$element')
+      const _element = get(this.attrs, '_element.value') || get(this.attrs, '_element')
 
-      if ($element) {
-        const props = this._updatePosition($element)
+      if (_element) {
+        const props = this._updatePosition(_element)
         this.setProperties(props)
       }
 
@@ -377,11 +377,11 @@ export default Component.extend({
   // == Lifecycle Hooks =======================================================
 
   didReceiveAttrs () {
-    const $element = this.get('$element')
+    const _element = this.get('_element')
     let props = {}
 
-    if ($element) {
-      props = merge(props, this._updatePosition($element))
+    if (_element) {
+      props = merge(props, this._updatePosition(_element))
     }
 
     if (Object.keys(props).length !== 0) {
