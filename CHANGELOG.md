@@ -1,3 +1,8 @@
+# 8.2.0 (2018-04-17)
+* **Added** frost-autocomplete
+
+
+
 # 8.1.1 (2018-04-16)
 
 * Updated _utils/frost-icon-svg.js_ to include default `copyAttrs` configuration option for `svgstore`
