@@ -46,10 +46,9 @@ export default Component.extend({
     debounceInterval: PropTypes.number,
 
     // state
-    _element: PropTypes.object,
+    jQueryElement: PropTypes.object,
     focusedIndex: PropTypes.number,
-    _userInput: PropTypes.bool,
-    _grabfocus: PropTypes.bool,
+    userInput: PropTypes.bool,
     internalSelectedItem: PropTypes.object,
     opened: PropTypes.bool
   },
@@ -57,8 +56,7 @@ export default Component.extend({
   getDefaultProps () {
     return {
       focusedIndex: 0,
-      _userInput: false,
-      _grabfocus: false,
+      userInput: false,
       filterType: 'startsWith',
       isLoading: false,
       disabled: false,
@@ -71,7 +69,7 @@ export default Component.extend({
     }
   },
 
-  isFilteredItem (value, filterValue) {
+  _isFilteredItem (value, filterValue) {
     if (this.filterType === 'startsWith') {
       return value.startsWith(filterValue)
     }
@@ -82,6 +80,15 @@ export default Component.extend({
     if (this.get('_opened') === true) {
       this._setFocusedIndex(upArrow)
     }
+  },
+
+  _runNext (func) {
+    run.next(() => {
+      if (this.isDestroyed || this.isDestroying) {
+        return
+      }
+      func()
+    })
   },
 
   _setFocusedIndex (upArrow) {
@@ -133,7 +140,7 @@ export default Component.extend({
   },
 
   @readOnly
-  @computed('opened', '_userInput', 'filter', 'focused')
+  @computed('opened', 'userInput', 'filter', 'focused')
   _opened (opened, userInput, filter, focused) {
     return (opened || focused) && userInput && !isEmpty(filter)
   },
@@ -167,7 +174,7 @@ export default Component.extend({
 
       const label = item.label || ''
 
-      if (this.isFilteredItem(label.toLowerCase(), filter)) {
+      if (this._isFilteredItem(label.toLowerCase(), filter)) {
         return true
       }
     })
@@ -186,7 +193,7 @@ export default Component.extend({
 
     // We need jQuery instance of components root DOM node to hand off to
     // dropdown so it can position itself properly relative to the select
-    this.set('_element', this.$())
+    this.set('jQueryElement', this.$())
   },
 
   // == DOM Events ============================================================
@@ -258,44 +265,9 @@ export default Component.extend({
       })
     },
 
-    onKeyDown (event) {
-      if ([DOWN_ARROW, UP_ARROW].indexOf(event.keyCode) !== -1) {
-        this._handleArrowKey(event.keyCode === UP_ARROW)
-      } else if (BACKSPACE === event.keyCode) {
-        this.set('_userInput', true)
-      }
-    },
-
-    onKeyPress (event) {
-      if (event.keyCode !== ENTER) {
-        this.setProperties({
-          _userInput: true,
-          opened: true
-        })
-      }
-    },
-
-    selectItem (selectedItem) {
+    handleClear () {
       this.setProperties({
-        _userInput: false,
-        filter: get(selectedItem, 'label'),
-        internalSelectedItem: selectedItem
-      })
-
-      const onChange = this.get('onChange')
-
-      if (typeOf(onChange) === 'function') {
-        run.next(() => {
-          onChange(get(selectedItem, 'value'))
-        })
-      }
-
-      this._element.find('input').first().focus()
-    },
-
-    onClear () {
-      this.setProperties({
-        _userInput: false,
+        userInput: false,
         opened: false,
         internalSelectedItem: undefined
       })
@@ -303,13 +275,30 @@ export default Component.extend({
       const onClear = this.get('onClear')
 
       if (typeOf(onClear) === 'function') {
-        run.next(() => {
+        this._runNext(() => {
           onClear()
         })
       }
     },
 
-    onInput (e) {
+    handleKeyDown (event) {
+      if ([DOWN_ARROW, UP_ARROW].indexOf(event.keyCode) !== -1) {
+        this._handleArrowKey(event.keyCode === UP_ARROW)
+      } else if (BACKSPACE === event.keyCode) {
+        this.set('userInput', true)
+      }
+    },
+
+    handleKeyPress (event) {
+      if (event.keyCode !== ENTER) {
+        this.setProperties({
+          userInput: true,
+          opened: true
+        })
+      }
+    },
+
+    handleInput (e) {
       const inputTask = this.get('inputTask')
       const onInput = this.get('onInput')
 
@@ -320,6 +309,24 @@ export default Component.extend({
       } else {
         this.set('filter', filter)
       }
+    },
+
+    selectItem (selectedItem) {
+      this.setProperties({
+        userInput: false,
+        filter: get(selectedItem, 'label'),
+        internalSelectedItem: selectedItem
+      })
+
+      const onChange = this.get('onChange')
+
+      if (typeOf(onChange) === 'function') {
+        this._runNext(() => {
+          onChange(get(selectedItem, 'value'))
+        })
+      }
+
+      this.jQueryElement.find('input').first().focus()
     }
   }
 })

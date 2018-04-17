@@ -37,7 +37,7 @@ export default Component.extend({
    */
   propTypes: {
     // options
-    _element: PropTypes.object.isRequired,
+    jQueryElement: PropTypes.object.isRequired,
     filter: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     multiselect: PropTypes.bool,
@@ -185,9 +185,9 @@ export default Component.extend({
     })
   },
 
-  _getElementDimensionsAndPosition (_element) {
-    const height = _element.height()
-    const offset = _element.offset()
+  _getElementDimensionsAndPosition (jQueryElement) {
+    const height = jQueryElement.height()
+    const offset = jQueryElement.offset()
     const top = offset.top
 
     return {
@@ -197,7 +197,7 @@ export default Component.extend({
       height,
       left: offset.left,
       top,
-      width: _element.width()
+      width: jQueryElement.width()
     }
   },
 
@@ -271,12 +271,12 @@ export default Component.extend({
     })
   },
 
-  _updatePosition (_element) {
+  _updatePosition (jQueryElement) {
     if (this.isDestroyed || this.isDestroying) return {}
 
-    _element = _element.first()
+    jQueryElement = jQueryElement.first()
 
-    const {center, height, left, top, width} = this._getElementDimensionsAndPosition(_element)
+    const {center, height, left, top, width} = this._getElementDimensionsAndPosition(jQueryElement)
     const windowCenterX = $(window).height() / 2 + $(document).scrollTop()
     const props = (
       center.x > windowCenterX ? this._positionAboveInput(top) : this._positionBelowInput(height, top)
@@ -361,10 +361,10 @@ export default Component.extend({
     this._isUpdating = true
 
     while (Date.now() - this._lastInteraction < 250) {
-      const _element = get(this.attrs, '_element.value') || get(this.attrs, '_element')
+      const jQueryElement = get(this.attrs, 'jQueryElement.value') || get(this.attrs, 'jQueryElement')
 
-      if (_element) {
-        const props = this._updatePosition(_element)
+      if (jQueryElement) {
+        const props = this._updatePosition(jQueryElement)
         this.setProperties(props)
       }
 
@@ -379,11 +379,11 @@ export default Component.extend({
   // == Lifecycle Hooks =======================================================
 
   didReceiveAttrs () {
-    const _element = this.get('_element')
+    const jQueryElement = this.get('jQueryElement')
     let props = {}
 
-    if (_element) {
-      props = merge(props, this._updatePosition(_element))
+    if (jQueryElement) {
+      props = merge(props, this._updatePosition(jQueryElement))
     }
 
     if (Object.keys(props).length !== 0) {

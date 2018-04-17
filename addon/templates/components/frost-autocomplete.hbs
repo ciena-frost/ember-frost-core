@@ -6,10 +6,10 @@
   ariaMultiselectable=false
   ariaOwns='frost-select-list'
   hook=(concat hook '-autocompleteText')
-  onInput=(action 'onInput')
-  onKeyDown=(action 'onKeyDown')
-  onKeyPress=(action 'onKeyPress')
-  onClear=(action 'onClear')
+  onInput=(action 'handleInput')
+  onKeyDown=(action 'handleKeyDown')
+  onKeyPress=(action 'handleKeyPress')
+  onClear=(action 'handleClear')
   role='combobox'
   value=filter
   disabled=disabled
@@ -23,7 +23,7 @@
   {{to-elsewhere
     named=renderTarget
     send=(component 'frost-autocomplete-dropdown'
-      _element=_element
+      jQueryElement=jQueryElement
       filter=filter
       filterType=filterType
       hook=(concat hook '-autocompleteDropdown')
