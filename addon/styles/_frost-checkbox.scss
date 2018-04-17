@@ -77,8 +77,8 @@ $error-border: 1px solid $frost-color-input-error-border;
           .label {
             svg {
               fill: $frost-color-grey-6;
-              cursor:default; //Solves cursor shows as pointer even when disabled
             }
+            cursor: default;
           }
         }
       }
