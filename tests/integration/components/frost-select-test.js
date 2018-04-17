@@ -36,19 +36,6 @@ function blur ($element) {
 }
 
 /**
- * Focus on next focusable element
- * @param {jQuery} $element - element to find next focusable sibling of
- */
-function focusNext ($element) {
-  const $focusableElements = $element.nextAll(':not([tabindex=-1])')
-  const $firstFocusableElement = $focusableElements.first()
-
-  // We must use jQuery's focusin() method for Ember event to fire and the
-  // HTMLElement's focus() method to ensure the element is actually focused
-  $firstFocusableElement.focusin()[0].focus()
-}
-
-/**
  * Get HTML for list item
  * @param {Number} index - item index (1 based)
  * @returns {String} list item's HTML
@@ -111,6 +98,7 @@ describe(test.label, function () {
           tabIndex=tabIndex
           width=width
           wrapLabels=wrapLabels
+          filterType=filterType
         }}
         {{input hook='post'}}
       `)
@@ -209,41 +197,6 @@ describe(test.label, function () {
             expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
-        })
-      })
-
-      describe('tab into component', function () {
-        beforeEach(function () {
-          // In case you are wondering what the hell is going on here there is no
-          // way to trigger a generic tab event on the document to move focus on to
-          // the next element for browser security reasons. So our approach is to
-          // simply bind a keypress event to the element before the select, which
-          // adds focus to the next element in the DOM when it receives a tab,
-          // simulating what would happen in a real world scenario. We then trigger
-          // a tab event on this input and ensure the our select receives focus.
-
-          $hook('pre')
-            .on('keypress', function (e) {
-              if (e.keyCode === TAB) {
-                focusNext($(this))
-              }
-            })
-            .focus()
-            .trigger(
-              $.Event('keypress', {
-                keyCode: TAB
-              })
-            )
-        })
-
-        it('should render as expected', function () {
-          expectSelectWithState('select', {
-            focused: true
-          })
-
-          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-          expect(onChange.callCount, 'onChange is not called').to.equal(0)
-          expect(onFocus.callCount, 'onFocus is called').not.to.equal(0)
         })
       })
 
@@ -451,49 +404,6 @@ describe(test.label, function () {
             expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
             expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onClick.callCount, 'onClick is called').to.equal(1)
-            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
-          })
-        })
-
-        describe('tab into component', function () {
-          beforeEach(function () {
-            // In case you are wondering what the hell is going on here there is no
-            // way to trigger a generic tab event on the document to move focus on to
-            // the next element for browser security reasons. So our approach is to
-            // simply bind a keypress event to the element before the select, which
-            // adds focus to the next element in the DOM when it receives a tab,
-            // simulating what would happen in a real world scenario. We then trigger
-            // a tab event on this input and ensure the our select is skipped since
-            // it is disabled.
-
-            $hook('pre')
-              .on('keypress', function (e) {
-                if (e.keyCode === TAB) {
-                  focusNext($(this))
-                }
-              })
-              .focus()
-              .trigger(
-                $.Event('keypress', {
-                  keyCode: TAB
-                })
-              )
-          })
-
-          it('should render as expected', function () {
-            expectSelectWithState('select', {
-              disabled: true,
-              focused: false
-            })
-
-            expect(
-              $hook('post')[0],
-              'focuses on element after select'
-            )
-              .to.equal(document.activeElement)
-
-            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-            expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
@@ -944,41 +854,6 @@ describe(test.label, function () {
             expect(onChange.callCount, 'onChange is not called').to.equal(0)
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
-        })
-      })
-
-      describe('tab into component', function () {
-        beforeEach(function () {
-          // In case you are wondering what the hell is going on here there is no
-          // way to trigger a generic tab event on the document to move focus on to
-          // the next element for browser security reasons. So our approach is to
-          // simply bind a keypress event to the element before the select, which
-          // adds focus to the next element in the DOM when it receives a tab,
-          // simulating what would happen in a real world scenario. We then trigger
-          // a tab event on this input and ensure the our select receives focus.
-
-          $hook('pre')
-            .on('keypress', function (e) {
-              if (e.keyCode === TAB) {
-                focusNext($(this))
-              }
-            })
-            .focus()
-            .trigger(
-              $.Event('keypress', {
-                keyCode: TAB
-              })
-            )
-        })
-
-        it('should render as expected', function () {
-          expectSelectWithState('select', {
-            focused: true
-          })
-
-          expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-          expect(onChange.callCount, 'onChange is not called').to.equal(0)
-          expect(onFocus.callCount, 'onFocus is called').not.to.equal(0)
         })
       })
 
@@ -1524,49 +1399,6 @@ describe(test.label, function () {
             expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
           })
         })
-
-        describe('tab into component', function () {
-          beforeEach(function () {
-            // In case you are wondering what the hell is going on here there is no
-            // way to trigger a generic tab event on the document to move focus on to
-            // the next element for browser security reasons. So our approach is to
-            // simply bind a keypress event to the element before the select, which
-            // adds focus to the next element in the DOM when it receives a tab,
-            // simulating what would happen in a real world scenario. We then trigger
-            // a tab event on this input and ensure the our select is skipped since
-            // it is disabled.
-
-            $hook('pre')
-              .on('keypress', function (e) {
-                if (e.keyCode === TAB) {
-                  focusNext($(this))
-                }
-              })
-              .focus()
-              .trigger(
-                $.Event('keypress', {
-                  keyCode: TAB
-                })
-              )
-          })
-
-          it('should render as expected', function () {
-            expectSelectWithState('select', {
-              disabled: true,
-              focused: false
-            })
-
-            expect(
-              $hook('post')[0],
-              'focuses on element after select'
-            )
-              .to.equal(document.activeElement)
-
-            expect(onBlur.callCount, 'onBlur is not called').to.equal(0)
-            expect(onChange.callCount, 'onChange is not called').to.equal(0)
-            expect(onFocus.callCount, 'onFocus is not called').to.equal(0)
-          })
-        })
       })
 
       describe('when input has custom tab index', function () {
@@ -1801,6 +1633,99 @@ describe(test.label, function () {
         items: [],
         opened: true
       })
+    })
+  })
+
+  describe('when filterType startsWith', function () {
+    beforeEach(function () {
+      this.setProperties({
+        filterType: 'startsWith',
+        data: [
+          {label: 'Abc', value: 'abc'},
+          {label: 'Bac', value: 'bac'}
+        ],
+        hook: 'select'
+      })
+
+      this.render(hbs`
+        {{frost-select-outlet hook='myFilterTypeOutlet'}}
+        {{frost-select
+          filterType=filterType
+          data=data
+          hook=hook
+        }}
+      `)
+    })
+
+    describe('with labels', function () {
+      beforeEach(function () {
+        return open().then(() => {
+          filterSelect('a')
+          return wait()
+        })
+      })
+
+      it('should render as expected', function () {
+        expectSelectWithState('select', {
+          focused: true,
+          focusedItem: 'Abc',
+          items: ['Abc'],
+          opened: true
+        })
+      })
+    })
+
+    describe('with secondaryLabels', function () {
+      beforeEach(function () {
+        this.set('data', [
+          {
+            label: 'tuv',
+            value: 'bac',
+            secondaryLabels: ['345']
+          },
+          {
+            label: 'xyz',
+            value: 'abc',
+            secondaryLabels: ['123', '456']
+          }
+        ])
+
+        return open().then(() => {
+          filterSelect('4')
+          return wait()
+        })
+      })
+
+      it('should render as expected', function () {
+        expectSelectWithState('select', {
+          focused: true,
+          focusedItem: 'xyz',
+          items: ['xyz'],
+          opened: true
+        })
+      })
+    })
+  })
+
+  describe('default tabIndex', function () {
+    const hook = 'tabIndex'
+
+    beforeEach(function () {
+      this.setProperties({
+        hook
+      })
+
+      this.render(hbs`
+        {{frost-select-outlet hook='myDefaultTabIndexOutlet'}}
+        {{frost-select
+          data=data
+          hook=hook
+        }}
+      `)
+    })
+
+    it('should have default tabIndex', function () {
+      expect($hook(hook)[0].tabIndex).to.equal(0)
     })
   })
 })

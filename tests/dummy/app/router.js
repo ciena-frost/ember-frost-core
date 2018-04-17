@@ -9,6 +9,7 @@ const Router = EmberRouter.extend({
 
 Router.map(function () {
   this.route('demo', {path: '/'})
+  this.route('autocomplete')
   this.route('bookends')
   this.route('button')
   this.route('checkbox')
