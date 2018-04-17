@@ -807,17 +807,11 @@ describe(test.label, function () {
   })
 
   describe('error', function () {
-    let onClear, sandbox
     const hook = 'autocompleteError'
 
     beforeEach(function () {
-      sandbox = sinon.sandbox.create()
-
-      onClear = sandbox.spy()
-
       this.setProperties({
         hook,
-        onClear,
         error: true
       })
 
@@ -827,10 +821,49 @@ describe(test.label, function () {
           data=data
           hook=hook
           error=error
-          onClear=onClear
           autofocus=true
         }}
       `)
+      return wait()
+    })
+
+    it('should have error class', function () {
+      expect($hook(`${hook}-autocompleteText`).hasClass('error')).to.equal(true)
+    })
+  })
+
+  describe('destroy', function () {
+    let onClear, sandbox
+    let showComponent = true
+    const hook = 'autocompleteDestroy'
+
+    beforeEach(function () {
+      sandbox = sinon.sandbox.create()
+
+      onClear = sandbox.spy()
+
+      this.setProperties({
+        hook,
+        onClear,
+        showComponent
+      })
+
+      this.render(hbs`
+        {{frost-autocomplete-outlet hook='myClearOutlet'}}
+        {{#if showComponent}}
+          {{frost-autocomplete
+            data=data
+            hook=hook
+            filter='s'
+            onClear=onClear
+            autofocus=true
+          }}
+        {{/if}}
+      `)
+      wait()
+
+      $hook(`${hook}-autocompleteText-clear`).click()
+      this.set('showComponent', false)
       return wait()
     })
 
@@ -838,8 +871,8 @@ describe(test.label, function () {
       sandbox.restore()
     })
 
-    it('should have error class', function () {
-      expect($hook(`${hook}-autocompleteText`).hasClass('error')).to.equal(true)
+    it('should not trigger onClear', function () {
+      expect(onClear.callCount, 'onClear is called').to.equal(0)
     })
   })
 
