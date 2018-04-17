@@ -985,4 +985,62 @@ describe(test.label, function () {
       })
     })
   })
+
+  describe('scroll', function () {
+    const hook = 'autocompleteScroll'
+
+    const data = [
+      {label: '101', value: '1'},
+      {label: '102', value: '2'},
+      {label: '103', value: '3'},
+      {label: '104', value: '4'},
+      {label: '105', value: '5'},
+      {label: '106', value: '6'},
+      {label: '107', value: '7'},
+      {label: '108', value: '8'},
+      {label: '109', value: '9'},
+      {label: '110', value: '10'},
+      {label: '111', value: '11'},
+      {label: '112', value: '12'},
+      {label: '113', value: '13'},
+      {label: '114', value: '14'},
+      {label: '115', value: '15'},
+      {label: '116', value: '16'},
+      {label: '117', value: '17'},
+      {label: '118', value: '18'},
+      {label: '119', value: '19'},
+      {label: '120', value: '20'}
+    ]
+    beforeEach(function () {
+      this.setProperties({
+        hook,
+        data
+      })
+    })
+
+    describe('dropdown below', function () {
+      beforeEach(function () {
+        this.render(hbs`
+          {{frost-autocomplete-outlet hook='myScrollOutlet'}}
+          {{frost-autocomplete
+            data=data
+            hook=hook
+          }}
+        `)
+        wait()
+
+        $hook(`${hook}-autocompleteText-input`).val('1').trigger('input').trigger('keypress')
+        wait()
+
+        $('.frost-autocomplete-dropdown-container').trigger('resize')
+        return wait()
+      })
+
+      it('should be below', function () {
+        const dropdownTop = $('.frost-autocomplete-dropdown-container')[0].getBoundingClientRect().top
+        const inputTop = $hook(`${hook}-autocompleteText-input`)[0].getBoundingClientRect().top
+        expect(inputTop, 'onClick is called').to.below(dropdownTop)
+      })
+    })
+  })
 })
