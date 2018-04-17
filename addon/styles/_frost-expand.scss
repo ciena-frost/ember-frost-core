@@ -19,6 +19,10 @@ $frost-color-expand-content-text: $frost-color-grey-3 !global;
     }
   }
 
+  .pointer {
+    cursor: pointer;
+  }
+
   .frost-expand-label {
     display: flex;
     flex-direction: row;
@@ -26,7 +30,10 @@ $frost-color-expand-content-text: $frost-color-grey-3 !global;
     align-items: center;
     justify-content: flex-start;
     margin-bottom: 5px;
-    cursor: pointer;
+
+    .frost-expand-label-chevron {
+      height: 30px;
+    }
 
     .frost-expand-label-text {
       padding-left: 10px;

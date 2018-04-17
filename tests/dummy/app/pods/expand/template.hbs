@@ -174,4 +174,53 @@
       </div>
     </div>
   </div>
+
+  <div class='section-title'>Label Component</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="demo">
+        {{! BEGIN-SNIPPET expand-label-component}}
+        {{#frost-expand
+          hook='myExpand'
+          onChange=(action 'onChangeHandler9')
+          expanded=expanded9
+          labelComponent=(component 'frost-icon'
+                          hook='myIcon'
+                          icon='info'
+                        )
+        }}
+          Expanded content.
+        {{/frost-expand}}
+        {{! END-SNIPPET expand-label-component}}
+      </div>
+      <br>
+      <div class="snippet">
+        {{code-snippet name="expand-label-component.hbs"}}
+      </div>
+    </div>
+  </div>
+
+  <div class='section-title'>Only Change On Chevron Click</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="demo">
+        {{! BEGIN-SNIPPET expand-chevron-click}}
+        {{#frost-expand
+          hook='myExpand'
+          onChange=(action 'onChangeHandler10')
+          expanded=expanded10
+          isChevronOnlyClickTrigger=true
+        }}
+          Expanded content.
+        {{/frost-expand}}
+        {{! END-SNIPPET expand-chevron-click}}
+      </div>
+      <br>
+      <div class="snippet">
+        {{code-snippet name="expand-chevron-click.hbs"}}
+      </div>
+    </div>
+  </div>
 </div>
