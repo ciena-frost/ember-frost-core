@@ -1,0 +1,340 @@
+<div class="dummy-body select">
+  <div class="section-header">frost-autocomplete</div>
+
+  <p>In order to use this component you must provide an outlet for it to render the dropdown in like so:</p>
+
+  <div class="snippet">
+    {{format-markdown "```handlebars
+{{frost-autocomplete-outlet
+  hook='autocompleteOutlet'
+}}
+```"}}
+  </div>
+
+  <p>In the event you want to render different selects in different outlets you may also use named outlets like so:</p>
+
+  <div class="snippet">
+    {{format-markdown "```handlebars
+{{frost-autocomplete-outlet
+  hook='namedAutocompleteOutlet'
+  name='foo-bar'
+}}
+…
+{{frost-autocomplete
+  hook='myAutocomplete'
+  renderTarget='foo-bar'
+  …
+}}
+```"}}
+  </div>
+
+  <p>This is the list of predefined data:</p>
+
+  <ul class="predefined-data">
+    {{#each data as |data|}}
+      <li>{{data.label}}</li>
+    {{/each}}
+  </ul>
+
+  <div class="section-title">Content</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="title">data</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete }}
+        {{frost-autocomplete
+          data=data
+          hook='myAutoComplete'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='autocomplete.hbs'}}
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Selection</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="title">autofocus</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-autofocus }}
+        {{frost-autocomplete
+          data=data
+          hook='myAutoComplete'
+          autofocus=true
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='autocomplete-autofocus.hbs'}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">placeholder</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-placeholder }}
+        {{frost-autocomplete
+          data=data
+          hook='myAutoComplete'
+          placeholder='Superheroes'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='autocomplete-placeholder.hbs'}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">selectedValue</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-selectedvalue }}
+        {{frost-autocomplete
+          data=data
+          hook='myAutoComplete'
+          selectedValue=preSelectedValue
+          filter=preFilter
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='autocomplete-selectedvalue.hbs'}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">width</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-width }}
+        {{frost-autocomplete
+          data=data
+          hook='myAutoComplete'
+          width=width
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='autocomplete-width.hbs'}}
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">State</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="title">error</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-error }}
+        {{frost-autocomplete
+          data=data
+          hook='myAutoComplete'
+          error=true
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='autocomplete-error.hbs'}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">disabled</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-disabled }}
+        {{frost-autocomplete
+          data=data
+          hook='myAutoComplete'
+          selectedValue=preSelectedValue
+          filter=preFilter
+          disabled=true
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='autocomplete-disabled.hbs'}}
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Events</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="title">onChange - local filtering</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-onchange }}
+        {{frost-autocomplete
+          data=data
+          hook='myAutoComplete'
+          onChange=(action 'onChangeHandler')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='autocomplete-onchange.hbs'}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">onBlur</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-onblur }}
+        {{frost-autocomplete
+          data=data
+          hook='myAutoComplete'
+          onBlur=(action 'onBlurHandler')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='autocomplete-onblur.hbs'}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">onFocus</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-onfocus }}
+        {{frost-autocomplete
+          data=data
+          hook='myAutoComplete'
+          onFocus=(action 'onFocusHandler')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='autocomplete-onfocus.hbs'}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">onClick</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-onclick }}
+        {{frost-autocomplete
+          data=data
+          hook='myAutoComplete'
+          onClick=(action 'onClickHandler')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='autocomplete-onclick.hbs'}}
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="title">onInput</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-onclick }}
+        {{frost-autocomplete
+          data=data
+          hook='myAutoComplete'
+          onInput=(action 'onInputHandler')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='autocomplete-onclick.hbs'}}
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">Other</div>
+  <hr>
+  <div class="section">
+    <div class="example">
+      <div class="title">onClear - needs focus first</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-onclear }}
+        {{frost-autocomplete
+          data=data
+          hook='myAutoComplete'
+          selectedValue=preSelectedValue
+          filter=preFilter
+          onClear=(action 'onClearHandler')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='autocomplete-onclear.hbs'}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>Spread - (using error state as an example)</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET autocomplete-other-spread }}
+        {{frost-autocomplete
+          options=(hash
+            data=data
+            hook='myAutoComplete'
+            error=true
+          )
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='autocomplete-other-spread.hbs'}}
+      </div>
+    </div>
+    <div class='example'>
+      <div class='title'>wrapLabels - type m</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET autocomplete-other-wrap-labels }}
+        {{frost-autocomplete
+          data=data
+          hook='myMultiSelect'
+          wrapLabels=true
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='autocomplete-other-wrap-labels.hbs'}}
+      </div>
+    </div>
+    <div class='example'>
+      <div class='title'>filterType - startsWith is the default</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET autocomplete-filter-type }}
+        {{frost-autocomplete
+          data=data
+          hook='myMultiSelect'
+          filterType='contains'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='autocomplete-filter-type.hbs'}}
+      </div>
+    </div>
+
+    <div class='example'>
+      <div class='title'>isLoading - (type m to show the dropdown, then play with the toggle)</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET autocomplete-is-loading }}
+        {{frost-autocomplete
+          data=data
+          hook='myMultiSelect'
+          isLoading=isLoading
+        }}
+        {{! END-SNIPPET }}
+        {{frost-button text='Toggle Loading'
+          hook='loadingButton'
+          onClick=(action 'toggleLoading')
+          priority='secondary'
+          size='small'
+        }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='autocomplete-is-loading.hbs'}}
+      </div>
+    </div>
+  </div>
+</div>

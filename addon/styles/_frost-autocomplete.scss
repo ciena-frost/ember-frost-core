@@ -1,0 +1,131 @@
+$frost-input-select-option-row-height: 30px;
+
+.frost-autocomplete {
+  min-width: 175px;
+
+  .frost-text {
+    width: 100%;
+    height: $frost-input-select-option-row-height;
+
+    input {
+      height: 100%;
+    }
+  }
+
+  .frost-text-clear {
+    top: 5px;
+
+    > svg {
+      top: 1px;
+      left: 2px;
+    }
+  }
+}
+
+.frost-autocomplete-loading {
+  display: block;
+  height: 80px;
+  margin: auto;
+  margin-top: 25px;
+
+  svg {
+    height: 50px;
+  }
+}
+
+.frost-autocomplete-dropdown-container {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  height: auto;
+  transition: height .4s ease, opacity .2s ease;
+  border: 1px solid $frost-color-blue-1;
+  background: $frost-select-container-background;
+  font-size: $frost-font-s;
+  opacity: 1;
+  z-index: 9002;
+  pointer-events: auto;
+  overflow-y: auto;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .frost-text {
+    width: auto;
+    min-width: auto;
+    padding: 5px;
+  }
+
+  .frost-text-clear {
+    top: 12px;
+    right: 10px;
+  }
+
+  .frost-autocomplete-list-item-text {
+    width: 100%;
+    color: $frost-color-grey-5;
+    font-size: $frost-font-s;
+
+    &-highlight {
+      color: $frost-color-grey-2;
+    }
+  }
+
+  .frost-autocomplete-list-item-focused {
+    background: transparentize($frost-selection, .92);
+  }
+
+  .frost-autocomplete-list-item-selected {
+    color: $frost-color-grey-2;
+    font-weight: 500;
+  }
+
+  .frost-autocomplete-dropdown-error {
+    border-color: $frost-color-danger;
+  }
+
+  .frost-autocomplete-list-item {
+    display: flex;
+    flex: 1 0 auto;
+    width: 100%;
+    height: $frost-input-select-option-row-height;
+    padding: 0 5px;
+    border-bottom: solid 1px $frost-color-lgrey-3;
+    color: $frost-color-grey-3;
+    line-height: $frost-input-select-option-row-height;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+    overflow: hidden;
+
+    u {
+      color: $frost-color-grey-2;
+    }
+  }
+
+  .frost-autocomplete-dropdown-empty-msg {
+    padding: 10px;
+    color: $frost-color-grey-5;
+  }
+}
+
+.frost-autocomplete-wrap-labels {
+  .frost-autocomplete-list-item {
+    height: auto;
+    min-height: $frost-input-select-option-row-height;
+    white-space: normal;
+  }
+}
+
+.frost-autocomplete-dropdown-error {
+  .frost-autocomplete-dropdown-container {
+    border-color: $frost-color-danger;
+  }
+}
