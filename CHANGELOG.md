@@ -1,3 +1,7 @@
+# 8.2.1 (2018-04-19)
+
+* Closes #543 - Disabled checkbox no longer displays pointer cursor when disabled
+
 # 8.2.0 (2018-04-17)
 * **Added** frost-autocomplete
 
