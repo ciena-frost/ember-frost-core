@@ -39,7 +39,6 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-autocomplete-outlet hook='myAutocompleteOutlet'}}
         {{frost-autocomplete
           data=data
           disabled=disabled
@@ -511,7 +510,6 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-autocomplete-outlet hook='myDefaultTabIndexOutlet'}}
         {{frost-autocomplete
           data=data
           hook=hook
@@ -551,7 +549,6 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-autocomplete-outlet hook='myWrapOutlet'}}
         {{frost-autocomplete
           data=data
           hook=hook
@@ -596,7 +593,6 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-autocomplete-outlet hook='myContainsOutlet'}}
         {{frost-autocomplete
           data=data
           hook=hook
@@ -644,7 +640,6 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-autocomplete-outlet hook='myWrapOutlet'}}
         {{frost-autocomplete
           data=data
           hook=hook
@@ -687,7 +682,6 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-autocomplete-outlet hook='myWrapOutlet'}}
         {{frost-autocomplete
           data=data
           hook=hook
@@ -726,7 +720,6 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-autocomplete-outlet hook='myWrapOutlet'}}
         {{frost-autocomplete
           data=data
           hook=hook
@@ -753,7 +746,6 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-autocomplete-outlet hook='myDisabledOutlet'}}
         {{frost-autocomplete
           hook=hook
           disabled=true
@@ -782,7 +774,6 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-autocomplete-outlet hook='myClearOutlet'}}
         {{frost-autocomplete
           data=data
           hook=hook
@@ -816,7 +807,6 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-autocomplete-outlet hook='myErrorOutlet'}}
         {{frost-autocomplete
           data=data
           hook=hook
@@ -849,7 +839,6 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-autocomplete-outlet hook='myClearOutlet'}}
         {{#if showComponent}}
           {{frost-autocomplete
             data=data
@@ -898,7 +887,6 @@ describe(test.label, function () {
       })
 
       this.render(hbs`
-        {{frost-autocomplete-outlet hook='myEventOutlet'}}
         {{frost-autocomplete
           data=data
           hook=hook
@@ -1021,7 +1009,6 @@ describe(test.label, function () {
     describe('dropdown below', function () {
       beforeEach(function () {
         this.render(hbs`
-          {{frost-autocomplete-outlet hook='myScrollOutlet'}}
           {{frost-autocomplete
             data=data
             hook=hook

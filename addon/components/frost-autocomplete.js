@@ -40,7 +40,6 @@ export default Component.extend({
     selectedValue: PropTypes.string,
     tabIndex: PropTypes.number,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.null]),
-    renderTarget: PropTypes.string,
     filter: PropTypes.string,
     autofocus: PropTypes.bool,
     debounceInterval: PropTypes.number,
@@ -63,7 +62,6 @@ export default Component.extend({
       autofocus: false,
       error: false,
       role: 'button',
-      renderTarget: 'frost-autocomplete',
       debounceInterval: 0,
       tabIndex: 0
     }

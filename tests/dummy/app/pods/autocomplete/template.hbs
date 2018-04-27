@@ -1,33 +1,6 @@
 <div class="dummy-body select">
   <div class="section-header">frost-autocomplete</div>
 
-  <p>In order to use this component you must provide an outlet for it to render the dropdown in like so:</p>
-
-  <div class="snippet">
-    {{format-markdown "```handlebars
-{{frost-autocomplete-outlet
-  hook='autocompleteOutlet'
-}}
-```"}}
-  </div>
-
-  <p>In the event you want to render different selects in different outlets you may also use named outlets like so:</p>
-
-  <div class="snippet">
-    {{format-markdown "```handlebars
-{{frost-autocomplete-outlet
-  hook='namedAutocompleteOutlet'
-  name='foo-bar'
-}}
-…
-{{frost-autocomplete
-  hook='myAutocomplete'
-  renderTarget='foo-bar'
-  …
-}}
-```"}}
-  </div>
-
   <p>This is the list of predefined data:</p>
 
   <ul class="predefined-data">
