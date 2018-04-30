@@ -20,21 +20,18 @@
 }}
 
 {{#if _opened}}
-  {{to-elsewhere
-    named=renderTarget
-    send=(component 'frost-autocomplete-dropdown'
-      jQueryElement=jQueryElement
-      filter=filter
-      filterType=filterType
-      hook=(concat hook '-autocompleteDropdown')
-      items=items
-      focusedIndex=focusedIndex
-      onSelect=(action 'selectItem')
-      onClose=(action 'closeDropDown')
-      selectedValue=internalSelectedItem.value
-      wrapLabels=wrapLabels
-      isLoading=isLoading
-      error=error
-    )
+  {{component 'frost-autocomplete-dropdown'
+    jQueryElement=jQueryElement
+    filter=filter
+    filterType=filterType
+    hook=(concat hook '-autocompleteDropdown')
+    items=items
+    focusedIndex=focusedIndex
+    onSelect=(action 'selectItem')
+    onClose=(action 'closeDropDown')
+    selectedValue=internalSelectedItem.value
+    wrapLabels=wrapLabels
+    isLoading=isLoading
+    error=error
   }}
 {{/if}}
