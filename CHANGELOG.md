@@ -1,3 +1,7 @@
+# 8.2.2 (2018-04-30)
+* **Removed** to-elsewhere usage in autocomplete
+
+
 # 8.2.1 (2018-04-19)
 
 * Closes #543 - Disabled checkbox no longer displays pointer cursor when disabled
