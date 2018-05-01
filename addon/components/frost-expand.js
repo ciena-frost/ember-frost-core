@@ -83,9 +83,9 @@ export default Component.extend({
       const expand = this.get('_expanded')
       const animationDuration = _expanded !== undefined ? this.get('animationDuration') : 0
       if (expand) {
-        this.$().find('.frost-expand-scroll').slideDown(animationDuration)
+        this.$().find('> .frost-expand-scroll').slideDown(animationDuration)
       } else {
-        this.$().find('.frost-expand-scroll').slideUp(animationDuration)
+        this.$().find('> .frost-expand-scroll').slideUp(animationDuration)
       }
     })
   },
