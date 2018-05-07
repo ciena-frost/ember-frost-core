@@ -1,3 +1,8 @@
+# 8.2.3 (2018-05-07)
+
+* Fix `frost-expand` animation target to target its direct children
+
+
 # 8.2.2 (2018-04-30)
 * **Removed** to-elsewhere usage in autocomplete
 
