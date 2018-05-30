@@ -1,3 +1,6 @@
+# 8.2.4 (2018-05-30)
+* **Updated** Pin `ember-cli-notifications` to version `4.2.1` to fix broken demo app
+
 # 8.2.3 (2018-05-07)
 
 * Fix `frost-expand` animation target to target its direct children
