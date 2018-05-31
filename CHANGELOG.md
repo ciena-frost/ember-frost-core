@@ -1,3 +1,7 @@
+# 8.2.5 (2018-05-31)
+* **Changed** styling for autocomplete input text and placeholder
+
+
 # 8.2.4 (2018-05-30)
 * **Updated** Pin `ember-cli-notifications` to version `4.2.1` to fix broken demo app
 
