@@ -1,3 +1,8 @@
+# 8.2.6 (2018-06-19)
+
+* Fixes #568. Correct `frost-icon-svg.js` util to use the correct option
+
+
 # 8.2.5 (2018-05-31)
 * **Changed** styling for autocomplete input text and placeholder
 
