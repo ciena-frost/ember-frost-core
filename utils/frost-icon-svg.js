@@ -82,7 +82,7 @@ const getSourceDirectory = function(svgSourceDir) {
         || this.project.pkg.name !== this.moduleName() // ...in a nested addon
     )
     {
-        let packagePath = resolve.sync(this.moduleName(), {basedir: this.project.root})
+        let packagePath = resolve.sync(this.moduleName(), {baseDir: this.project.root})
         sourcePath = path.join(packagePath.substring(0, packagePath.lastIndexOf('/')), svgSourceDir)
     }
 
