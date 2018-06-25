@@ -478,7 +478,7 @@ describe(test.label, function () {
           it('should have onChange', function () {
             expect(onChange.callCount, 'onChange is called').to.equal(1)
             expect(onChange.args.length, 'onChange arguments length').to.equal(1)
-            expect(onChange.args[0][0], 'onChange argument').to.equal('Peter Parker')
+            expect(onChange.args[0][0][0], 'onChange argument').to.equal('Peter Parker')
           })
         })
 

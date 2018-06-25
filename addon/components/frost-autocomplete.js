@@ -320,7 +320,7 @@ export default Component.extend({
 
       if (typeOf(onChange) === 'function') {
         this._runNext(() => {
-          onChange(get(selectedItem, 'value'))
+          onChange([get(selectedItem, 'value')])
         })
       }
 
