@@ -34,6 +34,18 @@ The following components are available when you install ember-frost-core
 
 ## Development
 
+When making any changes to the svg logic in the _index.js_ file the following scenarios need to be tested:
+
+* Test that each addon that uses this addon to make its svg packs continues to function as expected.
+  * For those that are using the same code to do so it should be a "rubber-stamp" review but there is no guarantee that they are all being done the same.
+* An addon that consumes another addon that makes its own svg pack needs to be tested
+* The above combinations then also need to be tested when consumed in an application.
+* The above combinations then also need to be tested in an addon like frost-foundation that is consumed by an application.
+* For good measure test that all of this works against existing apps as well, such as MCP-UI.
+
+This code is very intertwined with how Ember CLI works and the complicated relationship we have between all of our addons and these are all of the testing steps/scenarios we had to employ when making the last round of refactors. Without this testing there is no guarantee that something does not become broken.
+
+
 ### Setup
 
 ```bash
