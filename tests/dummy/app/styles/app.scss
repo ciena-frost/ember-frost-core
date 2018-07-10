@@ -6,6 +6,7 @@
 @import 'button';
 @import 'helpers';
 @import 'select';
+@import 'expand';
 
 .dummy-notification-container {
   position: fixed;
@@ -20,6 +21,12 @@
 .dummy-body {
   width: 100%;
   padding: 0 10px;
+
+  .predefined-data {
+    list-style-type: none;
+    padding: 0.5em;
+    background-color: #f8f8f8;
+  }
 }
 
 .dummy-content {

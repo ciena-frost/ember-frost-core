@@ -1,3 +1,88 @@
+# 8.2.7 (2018-06-21)
+
+* Revert #577 
+
+
+# 8.2.6 (2018-06-19)
+
+* Fixes #568. Correct `frost-icon-svg.js` util to use the correct option
+
+
+# 8.2.5 (2018-05-31)
+* **Changed** styling for autocomplete input text and placeholder
+
+
+# 8.2.4 (2018-05-30)
+* **Updated** Pin `ember-cli-notifications` to version `4.2.1` to fix broken demo app
+
+# 8.2.3 (2018-05-07)
+
+* Fix `frost-expand` animation target to target its direct children
+
+
+# 8.2.2 (2018-04-30)
+* **Removed** to-elsewhere usage in autocomplete
+
+
+# 8.2.1 (2018-04-19)
+
+* Closes #543 - Disabled checkbox no longer displays pointer cursor when disabled
+
+# 8.2.0 (2018-04-17)
+* **Added** frost-autocomplete
+
+
+
+# 8.1.1 (2018-04-16)
+
+* Updated _utils/frost-icon-svg.js_ to include default `copyAttrs` configuration option for `svgstore`
+
+# 8.1.0 (2018-04-13)
+
+* Added `isChevronOnlyClickTrigger` and `labelComponent` props to `frost-expand`
+
+
+# 8.0.0 (2018-04-13)
+
+* Removed this addon from being responsible for building other addon's (within the Frost family) icon packs and instead require them to be responsible for doing so themselves.
+* Applications are now also responsible for building their own icon packs - this addon is only responsible for itself, just like any other addon.
+* Removed the `ember-frost-icon-pack` keyword from _package.json_
+* Removed the `ember-frost-icon-pack` property from _package.json_
+* Created a fork of `ember-cli-svgstore` and installed it in this addon.
+* Created _utils/frost-icon-svg.js_ utility to assist addons with the building of their own icon packs.
+* Renamed _/svgs_ folder to _/frost-icon-svgs_
+* Refactored "find parent" logic to use `this._findHost()`
+* Updated `frost-icons` documentation to demonstrate new way of managing/creating icon packs
+* Updated the dummy app's method of displaying the frost icon pack to align with new approach in _utils/frost-icon-svg.js_ utility
+
+
+# 7.0.0 (2018-03-09)
+* **Updated** pull request template
+* **Added** issue template
+* **Updated** to `pr-bumper` version `3`
+* **Updated** to node 8
+* **Added** slack integration
+* **Updated** `ember-frost-test` to `^4.0.1`
+* **Updated** `ember-test-utils` to `^8.1.1`
+* **Updated** `ember-cli-frost-blueprints` to `^5.0.2`
+* **Updated** `ember-prop-types` to `^7.0.1`
+* **Updated** `ember-spread` to `^5.0.0`
+* **Updated** helper `array.js` to use `array.slice()`
+* **Removed** helper `ehook.js` app export and tests since it is now provided by `ember-hook`
+* **Removed** ignoring of `package-lock.json` file
+* **Added** `package-lock.json` file
+* **Updated** Travis CI scripts to allow non-exact node version
+
+# 6.0.1 (2018-03-08)
+* Pass down hookQualifier on `frost-button`
+
+# 6.0.0 (2018-02-13)
+
+* **Removed** `blueprint-helper.js`, related tests and mention in `README.md`
+* **Removed** `chalk`, `child-process-promise`, `promise`, and `semver` NPM dependencies
+* **Updated** test helpers to now be provided from `addon-test-support`. For example, test helpers previously available at `dummy/tests/helpers/ember-frost-core/<frost-select>` are now available via `ember-frost-core/test-support/<frost-select>`
+* **Updated** add information to `README.md` about test helpers
+
 # 5.1.1 (2018-01-10)
 * updated to reflect UX spec.
 

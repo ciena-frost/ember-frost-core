@@ -1,11 +1,19 @@
-<div class="{{css}}-label" role="button" data-test={{hook (concat hookPrefix '-label')}} onClick={{action '_onClick'}}>
-  {{frost-icon
-    hook=(concat hookPrefix '-label-icon')
-    pack='frost'
-    icon='chevron'
-  }}
+<div class={{concat css "-label" (if (not isChevronOnlyClickTrigger) ' pointer')}} role="button"
+  data-test={{hook (concat hookPrefix '-label')}} onClick={{if (not isChevronOnlyClickTrigger) (action '_onClick')}}>
+  <div class={{concat css "-label-chevron" (if isChevronOnlyClickTrigger ' pointer')}}
+    data-test={{hook (concat hookPrefix '-label-chevron')}} onClick={{if isChevronOnlyClickTrigger (action '_onClick')}}>
+    {{frost-icon
+      hook=(concat hookPrefix '-label-icon')
+      pack='frost'
+      icon='chevron'
+    }}
+  </div>
   <div class="{{css}}-label-text" data-test={{hook (concat hookPrefix '-label-text')}}>
-    {{#if expanded}}
+    {{#if labelComponent}}
+      {{component labelComponent
+        hook=(concat hookPrefix '-label-component')
+      }}
+    {{else if expanded}}
       {{collapseLabel}}
     {{else}}
       {{expandLabel}}

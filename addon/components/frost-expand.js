@@ -31,7 +31,9 @@ export default Component.extend({
     animationDuration: PropTypes.number,
     expandLabel: PropTypes.string,
     collapseLabel: PropTypes.string,
-    content: PropTypes.any
+    content: PropTypes.any,
+    isChevronOnlyClickTrigger: PropTypes.bool,
+    labelComponent: PropTypes.EmberComponent
     // state
   },
 
@@ -41,7 +43,8 @@ export default Component.extend({
       // options
       expandLabel: 'Expand',
       collapseLabel: 'Collapse',
-      animationDuration: 300
+      animationDuration: 300,
+      isChevronOnlyClickTrigger: false
       // state
     }
   },
@@ -80,9 +83,9 @@ export default Component.extend({
       const expand = this.get('_expanded')
       const animationDuration = _expanded !== undefined ? this.get('animationDuration') : 0
       if (expand) {
-        this.$().find('.frost-expand-scroll').slideDown(animationDuration)
+        this.$().find('> .frost-expand-scroll').slideDown(animationDuration)
       } else {
-        this.$().find('.frost-expand-scroll').slideUp(animationDuration)
+        this.$().find('> .frost-expand-scroll').slideUp(animationDuration)
       }
     })
   },

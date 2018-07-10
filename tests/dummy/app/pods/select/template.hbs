@@ -365,6 +365,21 @@
         {{code-snippet name='select-other-wrap-labels.hbs'}}
       </div>
     </div>
+    <div class='example'>
+      <div class='title'>filterType - contains is the default</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET select-filter-type }}
+        {{frost-select
+          data=data
+          hook='myMultiSelect'
+          filterType='startsWith'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='select-filter-type.hbs'}}
+      </div>
+    </div>
   </div>
 </div>
 
@@ -646,6 +661,22 @@
       </div>
       <div class='snippet'>
         {{code-snippet name='debounce-interval.hbs'}}
+      </div>
+    </div>
+    <div class='example'>
+      <div class='title'>filterType - contains is the default</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET filter-type }}
+        {{frost-select
+          data=data
+          hook='mySelect'
+          label='superhero'
+          filterType='startsWith'
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='filter-type.hbs'}}
       </div>
     </div>
   </div>

@@ -12,39 +12,73 @@ set of icons and support for additional icon pack extensions.
 ### Addon icon packs
 
 `frost-icon` comes with a base icon pack (`frost`) from `ember-frost-core`.
-To include an icon pack for your addon simply add the following to your `package.json`
 
-```json
-"ember-frost-icon-pack": {
-  "name": "<name>",
-  "path": "<custom path>"
+To include an icon pack for your addon simply:
+
+1. Add this entry to the *dependencies* of your _package.json_ file:
+   - `"ember-cli-svgstore": "ciena-blueplanet/ember-cli-svgstore#977df1cf58ae43b1d98a591573c3e06947744321",`
+2. Add your SVGs to a folder named _"frost-icon-svgs"_ (without quotes) to the root of your project.
+3. In your _index.js_ file employ the following code:
+
+```js
+const {setSvgConfiguration} = require('ember-frost-core/utils/frost-icon-svg')
+
+module.exports = {
+  included: function () {
+    this.app = this._findHost.call(this)
+
+    // Set ember-cli-svgstore options so that consuming applications don't have to
+    setSvgConfiguration.call(this, '<icon-pack-name>')
+
+    this._super.included.apply(this, arguments)
+  }
 }
 ```
 
-**Name** is required as a namespace for your icons.  **Path** is optional
-and defaults to `svgs/` if not provided.  Avoid using the `public/`
-directory as a path since all of the assest in public will be copied
-to `dist` and the SVGs will already be present in the icon pack.
-
-Icons from an icon pack can be consumed using the [icon pack](#icon pack)
-component format.
+Icons from an icon pack can be consumed using the [icon pack](#icon pack) component format.
 
 ### App (or dummy app) icon packs
 
-Local icon packs can be configured using `ember-cli-build.js` options.
+An application does not need to make any configuration changes in order to consume icon packs from other addons.  However, if an application has its own icons it wants to provide as an icon pack for its own consumption then it should follow these steps:
 
-```javascript
-var app = new EmberApp(defaults, {
-    iconPackOptions: {
-      name: '<name>',
-      path: '<custom path>'
+1. Add this entry to your _package.json_ file:
+   - `"ember-cli-svgstore": "ciena-blueplanet/ember-cli-svgstore#977df1cf58ae43b1d98a591573c3e06947744321",`
+2. Add your SVGs to a folder named _"frost-icon-svgs"_ (without quotes) to the root of your project.
+3. In your _ember-cli-build.js_ file employ the following code:
+
+```js
+svgstore: {
+  files: [
+    {
+      sourceDirs: 'frost-icon-svgs',
+      outputFile: '/assets/icon-packs/<icon-pack-name>.svg'
     }
-  });
+  ]
+}
 ```
 
-Parameters follow the same format as [addon](#addon icon packs)
-based icon packs. The default path for dummy apps is
-`tests/dummy/svgs`.
+**IT IS VERY IMPORTANT** that the `svgstore.files` property is an _Array_, even if only one entry is specified.
+
+It is easy to create additional icon packs if they are needed:
+
+
+```js
+svgstore: {
+  files: [
+    {
+      sourceDirs: 'frost-icon-svgs',
+      outputFile: '/assets/icon-packs/<icon-pack-name>.svg'
+    },
+    {
+      sourceDirs: 'some-other-directory',
+      outputFile: '/assets/icon-packs/some-other-name.svg'
+    }
+  ]
+}
+```
+
+Icons from an icon pack can be consumed using the [icon pack](#icon pack) component format.
+
 
 ### Inline SVG rendering
 
@@ -55,31 +89,28 @@ to do a request to GET the svg.
 [svg4everybody](https://github.com/jonathantneal/svg4everybody)
 to always render the svg inline, rather than providing a reference.
 
-In [config/environment.js](https://github.com/ciena-frost/ember-frost-core/blob/master/tests/dummy/config/
-environment.js#L14-L16) place the following object in `EmberENV`:
+In
+[config/environment.js](https://github.com/ciena-frost/ember-frost-core/blob/master/tests/dummy/config/environment.js#L14-L16)
+place the following object in `EmberENV`:
 
 ```javascript
 iconPacks: {
-        inline: true
-      }
+  inline: true
+}
 ```
 
 
 
 ## How icon packs work
 
-`ember-frost-core` contains a build process that looks for the
-`ember-frost-icon-pack` configuration in all installed ember addons
-and apps.  The SVGs in the configured path are consolidated into a
-sprite sheet and stored in `dist/assets/icon-packs/<name>` using
+Each Addon consolidates its own SVGs into a sprite sheet that is stored in `dist/assets/icon-packs/<name>` using
 the svgstore concept detailed in [CSSTricks](https://css-tricks.com/svg-sprites-use-better-icon-fonts/).
 
-The `frost-icon` component then loads the icon pack files and
-displays individual icons via SVG `use` (which has been polyfilled
-to work with legacy IE browsers using [svg4everybody](https://github.com/jonathantneal/svg4everybody)).
+The `frost-icon` component then loads the icon pack files and displays individual icons via SVG `use` (which has
+been polyfilled to work with legacy IE browsers using [svg4everybody](https://github.com/jonathantneal/svg4everybody)).
 
-`use` allows the icon pack files to be cached in the client and retains
-the [advantages](https://css-tricks.com/icon-fonts-vs-svg/) of inline
+`use` allows the icon pack files to be cached in the client and retains the
+[advantages](https://css-tricks.com/icon-fonts-vs-svg/) of inline
 SVGs versus icon fonts.
 
 ## API
@@ -87,7 +118,7 @@ SVGs versus icon fonts.
 | Name   | Description | Default |
 | ------ | ----------- | ----------- |
 | `hook` | the name used for testing with ember-hook | - |
-| `icon` | the name of the icon to display | - | 
+| `icon` | the name of the icon to display | - |
 | `options` | `object` | `{<attributes>}` | property object used to spread the attributes to the top level of the component with ember-spread. |
 | `pack` | the name of the icon pack to load | frost |
 
@@ -128,9 +159,9 @@ The icon component use ember-spread to `spread` a property object against the to
 
 ### Spread
 ```handlebars
-{{frost-icon 
+{{frost-icon
   options=(hash
-    pack='frost' 
+    pack='frost'
     icon='add'
   )
 }}

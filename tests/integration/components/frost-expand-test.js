@@ -335,4 +335,38 @@ describe(test.label, function () {
       expect(changeStub).to.have.been.calledWith(false)
     })
   })
+
+  describe('when isChevronOnlyClickTrigger property is set', function () {
+    beforeEach(function () {
+      this.setProperties({
+        expanded: false
+      })
+      this.on('myChangeAction', function (e) {
+        this.setProperties({
+          expanded: e
+        })
+      })
+      this.render(hbs`
+        {{#frost-expand
+          hook="myExpand"
+          expanded=expanded
+          onChange=(action 'myChangeAction')
+          animationDuration=0
+          isChevronOnlyClickTrigger=true
+        }}
+          Content would be displayed here.
+        {{/frost-expand}}
+      `)
+    })
+
+    it('should not show content on label click', function () {
+      $hook('myExpand-label').click()
+      expect(this.$('.' + componentClass)).to.have.class('collapsed')
+    })
+
+    it('should show content on chevron click', function () {
+      $hook('myExpand-label-chevron').click()
+      expect(this.$('.' + componentClass)).to.have.class('expanded')
+    })
+  })
 })

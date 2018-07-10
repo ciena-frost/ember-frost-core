@@ -111,7 +111,8 @@ export default [
     id: '11',
     attributes: {
       'value': 'Super secondary hero',
-      'label': 'My really really really really really really really really really really long label',
+      'label':
+        'My really really really really really really really really really really long label with secondary labels',
       'secondary-labels': [
         'My really really really really really really really really really really long secondary label'
       ]
