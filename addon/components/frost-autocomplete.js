@@ -30,6 +30,7 @@ export default Component.extend({
     disabled: PropTypes.bool,
     error: PropTypes.bool,
     onChange: PropTypes.func,
+    onChangeSendObject: PropTypes.bool,
     onClear: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
@@ -56,6 +57,7 @@ export default Component.extend({
     return {
       focusedIndex: 0,
       userInput: false,
+      onChangeSendObject: false,
       filterType: 'startsWith',
       isLoading: false,
       disabled: false,
@@ -315,12 +317,10 @@ export default Component.extend({
         filter: get(selectedItem, 'label'),
         internalSelectedItem: selectedItem
       })
-
-      const onChange = this.get('onChange')
-
+      const {onChange, onChangeSendObject} = this.getProperties(['onChange', 'onChangeSendObject'])
       if (typeOf(onChange) === 'function') {
         this._runNext(() => {
-          onChange(get(selectedItem, 'value'))
+          onChange(onChangeSendObject ? selectedItem : get(selectedItem, 'value'))
         })
       }
 
