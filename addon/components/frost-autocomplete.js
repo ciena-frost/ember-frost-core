@@ -38,7 +38,7 @@ export default Component.extend({
     onInput: PropTypes.func,
     role: PropTypes.string,
     filterType: PropTypes.oneOf(['startsWith', 'contains']),
-    selectedValue: PropTypes.string,
+    selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     tabIndex: PropTypes.number,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.null]),
     filter: PropTypes.string,
