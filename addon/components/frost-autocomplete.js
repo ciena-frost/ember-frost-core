@@ -182,9 +182,11 @@ export default Component.extend({
 
   init () {
     this._super(...arguments)
-
-    if (!isEmpty(this.selectedValue)) {
-      this.set('internalSelectedItem', {value: this.selectedValue})
+    const selectedValue = this.get('selectedValue')
+    if (!isEmpty(selectedValue)) {
+      this.set('internalSelectedItem', typeof selectedValue === 'object' ? selectedValue : {value: selectedValue})
+      const label = get(selectedValue, 'label')
+      if (!isEmpty(get(selectedValue, 'label'))) this.set('filter', label)
     }
   },
 
