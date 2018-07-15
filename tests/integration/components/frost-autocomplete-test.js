@@ -432,6 +432,24 @@ describe(test.label, function () {
               it('should be closed', function () {
                 expect($('.frost-autocomplete-dropdown')).to.have.length(0)
               })
+
+              describe('when backspace', function () {
+                beforeEach(function () {
+                  $hook('autocomplete-autocompleteText-input')
+                    .trigger('focusin')
+                    .trigger($.Event('keydown', {keyCode: BACKSPACE}))
+                  return wait()
+                })
+
+                it('should render as expected', function () {
+                  expectWithState('autocomplete', {
+                    focused: true,
+                    focusedItem: 'Spiderman',
+                    items: ['Spiderman'],
+                    opened: true
+                  })
+                })
+              })
             })
 
             describe('when tab', function () {

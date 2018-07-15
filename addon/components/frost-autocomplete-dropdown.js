@@ -41,6 +41,7 @@ export default Component.extend({
     filter: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     multiselect: PropTypes.bool,
+    onFocusIndex: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
     receivedHook: PropTypes.string,
     selectedValue: PropTypes.string,
@@ -172,14 +173,13 @@ export default Component.extend({
           run(() => {
             if (this.isDestroyed || this.isDestroying) return
             const item = this.get(`items.${index}`)
-            this.set('focusedIndex', index)
             this.send('selectItem', item)
           })
         })
         .mouseenter(() => {
           run(() => {
             if (this.isDestroyed || this.isDestroying) return
-            this.set('focusedIndex', index)
+            this.get('onFocusIndex')(index)
           })
         })
     })
