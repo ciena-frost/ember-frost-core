@@ -288,6 +288,7 @@ describe(test.label, function () {
       describe('when filter present', function () {
         beforeEach(function () {
           $hook('autocomplete-autocompleteText-input').val('sp').trigger('input').trigger('keypress')
+          return wait()
         })
 
         it('should render as expect', function () {
