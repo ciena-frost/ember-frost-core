@@ -189,6 +189,7 @@ describe(test.label, function () {
       ]
       beforeEach(function () {
         this.set('data', data)
+        return wait()
       })
 
       it('should render as expected', function () {
