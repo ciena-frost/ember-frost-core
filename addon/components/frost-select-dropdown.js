@@ -323,7 +323,7 @@ export default Component.extend({
   },
   /* eslint-enable complexity */
 
-  _handleEnterKey () {
+  _selectFocusedItem () {
     const items = this.get('items') || []
     const focusedIndex = this.get('focusedIndex')
     this.send('selectItem', items[focusedIndex].value)
@@ -536,7 +536,7 @@ export default Component.extend({
 
         switch (e.keyCode) {
           case ENTER:
-            this._handleEnterKey()
+            this._selectFocusedItem()
             return
 
           case ESCAPE:

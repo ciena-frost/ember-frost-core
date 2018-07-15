@@ -388,22 +388,6 @@ describe(test.label, function () {
           })
         })
 
-        describe('when tab', function () {
-          beforeEach(function () {
-            $(document)
-              .trigger(
-                $.Event('keydown', {
-                  keyCode: TAB
-                })
-              )
-            return wait()
-          })
-
-          it('should be closed', function () {
-            expect($('.frost-autocomplete-dropdown').length).to.equal(0)
-          })
-        })
-
         describe('when arrow keys', function () {
           beforeEach(function () {
             $hook('autocomplete-autocompleteText-input').val('s').trigger('input').trigger('keypress')
@@ -440,7 +424,30 @@ describe(test.label, function () {
               })
 
               it('should have have expected value', function () {
-                expect($hook('autocomplete-autocompleteText-input')[0].value).to.equal('Spiderman')
+                expect($hook('autocomplete-autocompleteText-input')).to.have.value('Spiderman')
+              })
+
+              it('should be closed', function () {
+                expect($('.frost-autocomplete-dropdown')).to.have.length(0)
+              })
+            })
+
+            describe('when tab', function () {
+              beforeEach(function () {
+                $(document)
+                  .trigger(
+                    $.Event('keydown', {
+                      keyCode: TAB
+                    })
+                  )
+              })
+
+              it('should have have expected value', function () {
+                expect($hook('autocomplete-autocompleteText-input')).to.have.value('Spiderman')
+              })
+
+              it('should be closed', function () {
+                expect($('.frost-autocomplete-dropdown')).to.have.length(0)
               })
             })
 

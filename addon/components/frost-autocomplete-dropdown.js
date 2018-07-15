@@ -210,7 +210,7 @@ export default Component.extend({
     return new RegExp(filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi')
   },
 
-  _handleEnterKey () {
+  _selectFocusedItem () {
     const items = this.get('items') || []
     const focusedIndex = this.get('focusedIndex')
     this.send('selectItem', items[focusedIndex])
@@ -346,11 +346,11 @@ export default Component.extend({
   _handleKeyCode (keyCode) {
     switch (keyCode) {
       case ENTER:
-        this._handleEnterKey()
+      case TAB:
+        this._selectFocusedItem()
         return
 
       case ESCAPE:
-      case TAB:
         this.onClose()
     }
   },
