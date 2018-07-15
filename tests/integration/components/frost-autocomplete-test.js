@@ -404,6 +404,7 @@ describe(test.label, function () {
                 )
               return wait()
             })
+
             it('should move down as expected', function () {
               expectWithState('autocomplete', {
                 focused: true,
@@ -421,6 +422,7 @@ describe(test.label, function () {
                       keyCode: ENTER
                     })
                   )
+                return wait()
               })
 
               it('should have have expected value', function () {
@@ -440,6 +442,7 @@ describe(test.label, function () {
                       keyCode: TAB
                     })
                   )
+                return wait()
               })
 
               it('should have have expected value', function () {
@@ -461,6 +464,7 @@ describe(test.label, function () {
                   )
                 return wait()
               })
+
               it('should move up as expected', function () {
                 expectWithState('autocomplete', {
                   focused: true,
