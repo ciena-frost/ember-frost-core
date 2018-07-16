@@ -38,6 +38,7 @@ export default Component.extend({
     onInput: PropTypes.func,
     role: PropTypes.string,
     filterType: PropTypes.oneOf(['startsWith', 'contains']),
+    localFiltering: PropTypes.bool,
     selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     tabIndex: PropTypes.number,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.null]),
@@ -65,7 +66,8 @@ export default Component.extend({
       error: false,
       role: 'button',
       debounceInterval: 0,
-      tabIndex: 0
+      tabIndex: 0,
+      localFiltering: true
     }
   },
 
@@ -159,25 +161,26 @@ export default Component.extend({
   },
 
   @readOnly
-  @computed('data', 'filter', 'onInput')
-  items (data, filter, onInput) {
+  @computed('data', 'filter', 'onInput', 'localFiltering')
+  items (data, filter, onInput, localFiltering) {
     if (isEmpty(data)) {
       return []
     }
 
     filter = filter ? filter.toLowerCase() : null
-
-    return data.filter((item) => {
-      if (isEmpty(filter)) {
-        return true
-      }
-
-      const label = item.label || ''
-
-      if (this._isFilteredItem(label.toLowerCase(), filter)) {
-        return true
-      }
-    })
+    if (localFiltering) {
+      return data.filter((item) => {
+        if (isEmpty(filter)) {
+          return true
+        }
+        const label = item.label || ''
+        if (this._isFilteredItem(label.toLowerCase(), filter)) {
+          return true
+        }
+      })
+    } else {
+      return data
+    }
   },
 
   init () {
