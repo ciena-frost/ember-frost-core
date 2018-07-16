@@ -356,6 +356,7 @@ describe(test.label, function () {
             })
           })
 
+          // FIXME: Weird async issues on Travis Firefox
           describe('when click', function () {
             beforeEach(function () {
               open()
@@ -372,7 +373,7 @@ describe(test.label, function () {
             })
           })
           // FIXME: Weird async issues on Travis Firefox
-          describe.skip('focus into component', function () {
+          describe('focus into component', function () {
             beforeEach(function () {
               $hook('autocomplete-autocompleteText-input').focusin()
               return wait()
@@ -447,7 +448,7 @@ describe(test.label, function () {
             })
 
             // FIXME: Weird async issues on Travis Firefox
-            describe.skip('when enter', function () {
+            describe('when enter', function () {
               beforeEach(function () {
                 $(document)
                   .trigger(
@@ -463,7 +464,7 @@ describe(test.label, function () {
             })
 
             // FIXME: Weird async issues on Travis Firefox
-            describe.skip('when up arrow', function () {
+            describe('when up arrow', function () {
               beforeEach(function () {
                 $hook('autocomplete-autocompleteText-input')
                   .trigger(
