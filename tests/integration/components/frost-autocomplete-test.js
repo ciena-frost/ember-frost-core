@@ -35,6 +35,7 @@ describe(test.label, function () {
         onFocus,
         onChange,
         onChangeSendObject: false,
+        localFiltering: true,
         onClick,
         tabIndex: 0 // This is the default
       })
@@ -52,6 +53,7 @@ describe(test.label, function () {
           tabIndex=tabIndex
           width=width
           wrapLabels=wrapLabels
+          localFiltering=localFiltering
         }}
       `)
       return wait()
@@ -286,7 +288,20 @@ describe(test.label, function () {
           expect($('.frost-autocomplete-dropdown-empty-msg').length).to.equal(1)
         })
       })
-
+      describe('when filter present and localFiltering is false', function () {
+        beforeEach(function () {
+          this.set('localFiltering', false)
+          $hook('autocomplete-autocompleteText-input').val('sp').trigger('input').trigger('keypress')
+        })
+        it('should render all items', function () {
+          expectWithState('autocomplete', {
+            focused: true,
+            focusedItem: 'Superman',
+            items: ['Superman', 'Spiderman', 'Spawn'],
+            opened: true
+          })
+        })
+      })
       describe('when filter present', function () {
         beforeEach(function () {
           $hook('autocomplete-autocompleteText-input').val('sp').trigger('input').trigger('keypress')
