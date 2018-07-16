@@ -34,6 +34,7 @@ describe(test.label, function () {
         hook: 'autocomplete',
         onFocus,
         onChange,
+        onChangeSendObject: false,
         onClick,
         tabIndex: 0 // This is the default
       })
@@ -45,6 +46,7 @@ describe(test.label, function () {
           error=error
           hook=hook
           onChange=onChange
+          onChangeSendObject=onChangeSendObject
           onClick=onClick
           onFocus=onFocus
           tabIndex=tabIndex
@@ -482,6 +484,19 @@ describe(test.label, function () {
           })
         })
 
+        describe('when mousedown and onChangeSendObject=true', function () {
+          beforeEach(function () {
+            this.set('onChangeSendObject', true)
+            $('.frost-autocomplete-list-item-focused').trigger('mousedown')
+            return wait()
+          })
+          it('should have onChange send object when onChangeSendObject set to true', function () {
+            expect(onChange.callCount, 'onChange is called').to.equal(1)
+            expect(onChange.args.length, 'onChange arguments length').to.equal(1)
+            expect(onChange.args[0][0], 'onChange argument').to.equal(data[1])
+          })
+        })
+
         describe('when mouseenter', function () {
           beforeEach(function () {
             $hook('autocomplete-autocompleteDropdown-item', {index: 1}).trigger('mouseenter')
@@ -521,34 +536,34 @@ describe(test.label, function () {
       expect($hook(hook).find('input')[0].tabIndex).to.equal(0)
     })
   })
+  describe('selectedValue', function () {
+    describe('when selectedValue', function () {
+      const hook = 'selectedValue'
+      const data = [
+        {
+          label: 'Superman',
+          value: 'Clark Kent'
+        },
+        {
+          label: 'Spiderman',
+          value: 'Peter Parker'
+        },
+        {
+          label: 'Spawn',
+          value: 'Al Simmons'
+        }
+      ]
+      const selectedValue = data[1].value
 
-  describe('when selectedValue', function () {
-    const hook = 'selectedValue'
-    const data = [
-      {
-        label: 'Superman',
-        value: 'Clark Kent'
-      },
-      {
-        label: 'Spiderman',
-        value: 'Peter Parker'
-      },
-      {
-        label: 'Spawn',
-        value: 'Al Simmons'
-      }
-    ]
-    const selectedValue = data[1].value
+      beforeEach(function () {
+        this.setProperties({
+          hook,
+          data,
+          selectedValue,
+          tabIndex: 0
+        })
 
-    beforeEach(function () {
-      this.setProperties({
-        hook,
-        data,
-        selectedValue,
-        tabIndex: 0
-      })
-
-      this.render(hbs`
+        this.render(hbs`
         {{frost-autocomplete
           data=data
           hook=hook
@@ -556,14 +571,67 @@ describe(test.label, function () {
           tabIndex=tabIndex
         }}
       `)
-      wait()
+        wait()
 
-      $hook(`${hook}-autocompleteText-input`).val('s').trigger('input').trigger('keypress')
-      return wait()
+        $hook(`${hook}-autocompleteText-input`).val('s').trigger('input').trigger('keypress')
+        return wait()
+      })
+
+      it('should render as expected', function () {
+        expect($('.frost-autocomplete-list-item-selected').text().trim()).to.equal(data[1].label)
+      })
     })
+    describe('when selectedValue is an object', function () {
+      const hook = 'selectedValue'
+      const data = [
+        {
+          label: 'Superman',
+          value: 'Clark Kent'
+        },
+        {
+          label: 'Spiderman',
+          value: 'Peter Parker'
+        },
+        {
+          label: 'Spawn',
+          value: 'Al Simmons'
+        }
+      ]
+      const selectedValue = data[1]
 
-    it('should render as expected', function () {
-      expect($('.frost-autocomplete-list-item-selected').text().trim()).to.equal(data[1].label)
+      beforeEach(function () {
+        this.setProperties({
+          hook,
+          data: [],
+          selectedValue,
+          tabIndex: 0
+        })
+
+        this.render(hbs`
+        {{frost-autocomplete
+          data=data
+          hook=hook
+          selectedValue=selectedValue
+          tabIndex=tabIndex
+        }}
+      `)
+        return wait()
+      })
+
+      it('should show label value in input', function () {
+        expect($hook('selectedValue-autocompleteText-input')[0].value).to.equal(data[1].label)
+      })
+
+      describe('with data', function () {
+        beforeEach(function () {
+          this.set('data', data)
+          $hook(`${hook}-autocompleteText-input`).val('s').trigger('input').trigger('keypress')
+          return wait()
+        })
+        it('should render as expected', function () {
+          expect($('.frost-autocomplete-list-item-selected').text().trim()).to.equal(data[1].label)
+        })
+      })
     })
   })
 
