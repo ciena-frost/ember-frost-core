@@ -27,7 +27,8 @@
 | | | `true` | Allow select option text to wrap |
 | `isLoading` | `boolean` | `false` | **default** - This is up to the consuming component to dictate if data is being loaded or not |
 | | | `true` | This will show the loading icon |
-
+| `localFiltering` | `boolean` | `true` | **default** - This is will filter the data to display locally|
+| | | `false` | This will always show the given data |
 ## Testing with ember-hook
 The autocomplete component is accessible using ember-hook with the top level hook name or you can access the internal
 components as well -
