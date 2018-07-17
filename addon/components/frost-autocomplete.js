@@ -189,7 +189,7 @@ export default Component.extend({
     if (!isEmpty(selectedValue)) {
       this.set('internalSelectedItem', typeof selectedValue === 'object' ? selectedValue : {value: selectedValue})
       const label = get(selectedValue, 'label')
-      if (!isEmpty(get(selectedValue, 'label'))) this.set('filter', label)
+      if (!isEmpty(label)) this.set('filter', label)
     }
   },
 
