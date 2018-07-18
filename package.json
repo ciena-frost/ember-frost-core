@@ -97,6 +97,6 @@
     "ember-truth-helpers": "^1.3.0"
   },
   "pr-bumper": {
-    "coverage": 91.99
+    "coverage": 91.00
   }
 }
