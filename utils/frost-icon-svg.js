@@ -116,10 +116,14 @@ const setSvgConfiguration = function (iconPack, svgSourceDir = 'frost-icon-svgs'
     // svgstore.files
     this.app.options.svgstore.files = this.app.options.svgstore.files || []
 
-    this.app.options.svgstore.files.push({
-        sourceDirs: getSourceDirectory.call(this, svgSourceDir),
-        outputFile: `/assets/icon-packs/${iconPack}.svg`
-    })
+    try {
+        this.app.options.svgstore.files.push({
+            sourceDirs: getSourceDirectory.call(this, svgSourceDir),
+            outputFile: `/assets/icon-packs/${iconPack}.svg`
+        })
+    } catch (e) {
+        console.error(`Cannot get icon pack ${iconPack}`)
+    }
 }
 
 module.exports = {
