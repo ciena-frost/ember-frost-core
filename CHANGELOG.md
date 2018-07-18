@@ -1,3 +1,8 @@
+# 8.3.0 (2018-07-18)
+
+* Add option for `frost-autocomplete` to send the object back (rather than just value), and receive object via `selectedValue`
+* Add `localFiltering` option to `frost-autocomplete`. Allows user to turn off local filtering, useful in the case of async filtering (ie data won't filter locally first then quickly switch to backend data)
+
 # 8.2.7 (2018-06-21)
 
 * Revert #577 
