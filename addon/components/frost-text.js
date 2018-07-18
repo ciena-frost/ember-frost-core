@@ -85,7 +85,7 @@ export default Component.extend(FrostEventsProxyMixin, {
       this.onClear()
     }
   }).restartable(),
-
+  /* eslint-disable complexity */
   _showClear: task(function * (isFocused) {
     const showClear = isFocused && isPresent(this.get('value')) && !this.get('readonly')
     if (this.get('isClearVisible') === showClear) {
@@ -100,8 +100,9 @@ export default Component.extend(FrostEventsProxyMixin, {
     if (!showClear) {
       yield timeout(200) // Duration of the visibility animation
     }
-    this.set('isClearEnabled', showClear)
+    if (!this.get('isDestroyed') && !this.get('isDestroying')) this.set('isClearEnabled', showClear)
   }).restartable(),
+  /* eslint-enable complexity */
 
   // == DOM Events ============================================================
 
