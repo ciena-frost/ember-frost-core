@@ -30,6 +30,7 @@ export default Component.extend({
     disabled: PropTypes.bool,
     error: PropTypes.bool,
     onChange: PropTypes.func,
+    onChangeSendObject: PropTypes.bool,
     onClear: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
@@ -37,7 +38,8 @@ export default Component.extend({
     onInput: PropTypes.func,
     role: PropTypes.string,
     filterType: PropTypes.oneOf(['startsWith', 'contains']),
-    selectedValue: PropTypes.string,
+    localFiltering: PropTypes.bool,
+    selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     tabIndex: PropTypes.number,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.null]),
     filter: PropTypes.string,
@@ -56,6 +58,7 @@ export default Component.extend({
     return {
       focusedIndex: 0,
       userInput: false,
+      onChangeSendObject: false,
       filterType: 'startsWith',
       isLoading: false,
       disabled: false,
@@ -63,7 +66,8 @@ export default Component.extend({
       error: false,
       role: 'button',
       debounceInterval: 0,
-      tabIndex: 0
+      tabIndex: 0,
+      localFiltering: true
     }
   },
 
@@ -157,32 +161,35 @@ export default Component.extend({
   },
 
   @readOnly
-  @computed('data', 'filter', 'onInput')
-  items (data, filter, onInput) {
+  @computed('data', 'filter', 'onInput', 'localFiltering')
+  items (data, filter, onInput, localFiltering) {
     if (isEmpty(data)) {
       return []
     }
 
     filter = filter ? filter.toLowerCase() : null
-
-    return data.filter((item) => {
-      if (isEmpty(filter)) {
-        return true
-      }
-
-      const label = item.label || ''
-
-      if (this._isFilteredItem(label.toLowerCase(), filter)) {
-        return true
-      }
-    })
+    if (localFiltering) {
+      return data.filter((item) => {
+        if (isEmpty(filter)) {
+          return true
+        }
+        const label = item.label || ''
+        if (this._isFilteredItem(label.toLowerCase(), filter)) {
+          return true
+        }
+      })
+    } else {
+      return data
+    }
   },
 
   init () {
     this._super(...arguments)
-
-    if (!isEmpty(this.selectedValue)) {
-      this.set('internalSelectedItem', {value: this.selectedValue})
+    const selectedValue = this.get('selectedValue')
+    if (!isEmpty(selectedValue)) {
+      this.set('internalSelectedItem', typeof selectedValue === 'object' ? selectedValue : {value: selectedValue})
+      const label = get(selectedValue, 'label')
+      if (!isEmpty(label)) this.set('filter', label)
     }
   },
 
@@ -315,12 +322,10 @@ export default Component.extend({
         filter: get(selectedItem, 'label'),
         internalSelectedItem: selectedItem
       })
-
-      const onChange = this.get('onChange')
-
+      const {onChange, onChangeSendObject} = this.getProperties(['onChange', 'onChangeSendObject'])
       if (typeOf(onChange) === 'function') {
         this._runNext(() => {
-          onChange(get(selectedItem, 'value'))
+          onChange(onChangeSendObject ? selectedItem : get(selectedItem, 'value'))
         })
       }
 

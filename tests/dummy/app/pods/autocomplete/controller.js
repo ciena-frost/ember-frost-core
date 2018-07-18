@@ -29,7 +29,7 @@ export default Controller.extend({
 
   actions: {
     onChangeHandler (value) {
-      this.get('notifications').success('User selected: ' + value, {
+      this.get('notifications').success('User selected: ' + JSON.stringify(value), {
         autoClear: true,
         clearDuration: 2000
       })
