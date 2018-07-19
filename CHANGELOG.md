@@ -1,3 +1,10 @@
+# 8.3.2 (2018-07-19)
+
+* **Fixed** tab key not selecting value in `frost-autocomplete`
+* **Removed** two-way binding of `focusedIndex` from  `frost-autocomplete-dropdown`
+* **Fixed** focus when reopening `frost-autocomplete`
+* **Fixed** inconsistent test rendering between Firefox and Chrome, allowing us to re-enable several `frost-autocomplete` tests
+
 # 8.3.1 (2018-07-19)
 
 * **Fix** wrap pushing svg files in try catch to not just error out in #583 (allowing a user to at least build)
