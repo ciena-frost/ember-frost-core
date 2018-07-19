@@ -1,3 +1,8 @@
+# 8.3.3 (2018-07-19)
+
+* **Fix** travis npm publish
+
+
 # 8.3.2 (2018-07-19)
 
 * **Fixed** tab key not selecting value in `frost-autocomplete`
