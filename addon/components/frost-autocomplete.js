@@ -6,7 +6,7 @@ import layout from '../templates/components/frost-autocomplete'
 import {keyCodes} from '../utils'
 import Component from './frost-component'
 
-const {get, isEmpty, on, run, typeOf} = Ember
+const {Logger, get, isEmpty, on, run, typeOf} = Ember
 const {BACKSPACE, DOWN_ARROW, ENTER, UP_ARROW} = keyCodes
 
 export default Component.extend({
