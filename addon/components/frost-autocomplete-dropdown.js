@@ -178,9 +178,10 @@ export default Component.extend({
             this.send('selectItem', item)
           })
         })
-        .mouseenter(() => {
+        .mouseenter((e) => {
           run(() => {
             if (this.isDestroyed || this.isDestroying) return
+            Logger.warn('List item mouse enter trigger', e)
             this.get('onFocusIndex')(index)
           })
         })
