@@ -319,6 +319,10 @@ describe(test.label, function () {
           })
         })
 
+        it('should only have one focused item', function () {
+          expect($('.frost-autocomplete-list-item-focused')).to.have.length(1)
+        })
+
         describe('when close', function () {
           beforeEach(function () {
             close()
