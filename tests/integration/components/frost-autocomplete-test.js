@@ -1112,7 +1112,6 @@ describe(test.label, function () {
           this.set('debounceInterval', debounceInterval)
           return wait().then(() => {
             $hook(`${hook}-autocompleteText-input`).val(inputString).trigger('input')
-            return wait()
           })
         })
 
