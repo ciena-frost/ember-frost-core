@@ -4,7 +4,7 @@ import {after, before, beforeEach, describe, it} from 'mocha'
 import destroyApp from '../helpers/destroy-app'
 import startApp from '../helpers/start-app'
 
-describe('Acceptance: Application', function () {
+describe.skip('Acceptance: Application', function () {
   let application
 
   this.timeout(5000)

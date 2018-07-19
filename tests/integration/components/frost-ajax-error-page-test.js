@@ -10,7 +10,7 @@ import hbs from 'htmlbars-inline-precompile'
 import {beforeEach, describe, it} from 'mocha'
 
 const test = integration('frost-ajax-error-page')
-describe(test.label, function () {
+describe.skip(test.label, function () {
   test.setup()
   describe('when hook is passed in', function () {
     beforeEach(function () {
