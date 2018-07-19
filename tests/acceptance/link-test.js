@@ -3,7 +3,7 @@ import startApp from '../helpers/start-app'
 import {expect} from 'chai'
 import {afterEach, beforeEach, describe, it} from 'mocha'
 
-describe.skip('Acceptance | link', function () {
+describe('Acceptance | link', function () {
   let application
 
   this.timeout(5000)

@@ -6,7 +6,7 @@ import layout from '../templates/components/frost-autocomplete'
 import {keyCodes} from '../utils'
 import Component from './frost-component'
 
-const {Logger, get, isEmpty, on, run, typeOf} = Ember
+const {get, isEmpty, on, run, typeOf} = Ember
 const {BACKSPACE, DOWN_ARROW, ENTER, UP_ARROW} = keyCodes
 
 export default Component.extend({
@@ -106,7 +106,6 @@ export default Component.extend({
     )
 
     if (newSelectedIndex !== selectedItemIndex) {
-      Logger.warn('Setting focused index in key handler', newSelectedIndex)
       this.set('focusedIndex', newSelectedIndex)
     }
   },
@@ -273,7 +272,6 @@ export default Component.extend({
     },
 
     focusIndex (index) {
-      Logger.warn('Setting focused index in focusIndex action', index)
       this.set('focusedIndex', index)
     },
 

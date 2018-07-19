@@ -63,7 +63,7 @@ describe(test.label, function () {
       sandbox.restore()
     })
 
-    describe.skip('at correct width', function () {
+    describe('at correct width', function () {
       const maximumWidth = 330
       const minimumWidth = 175
       const specifiedWidth = 500
@@ -103,7 +103,7 @@ describe(test.label, function () {
       })
     })
 
-    describe.skip('when data not present', function () {
+    describe('when data not present', function () {
       it('should render as expected', function () {
         expect($hook('autocomplete-dropdown').length).to.equal(0)
 
@@ -205,7 +205,7 @@ describe(test.label, function () {
         expect(onChange.callCount, 'onChange is not called').to.equal(0)
       })
 
-      describe.skip('click on component', function () {
+      describe('click on component', function () {
         beforeEach(function () {
           open('autocomplete-autocompleteText')
         })
@@ -236,7 +236,7 @@ describe(test.label, function () {
         })
       })
 
-      describe.skip('focus into component', function () {
+      describe('focus into component', function () {
         beforeEach(function () {
           return wait().then(function () {
             $hook('autocomplete-autocompleteText-input').focus()
@@ -250,7 +250,7 @@ describe(test.label, function () {
         })
       })
 
-      describe.skip('when space bar pressed', function () {
+      describe('when space bar pressed', function () {
         beforeEach(function () {
           onChange.reset()
 
@@ -270,7 +270,7 @@ describe(test.label, function () {
         })
       })
 
-      describe.skip('when not useful filter present', function () {
+      describe('when not useful filter present', function () {
         beforeEach(function () {
           $hook('autocomplete-autocompleteText-input').val('nothing').trigger('input').trigger('keypress')
           return wait()
@@ -281,7 +281,7 @@ describe(test.label, function () {
         })
       })
 
-      describe.skip('when filter with no data', function () {
+      describe('when filter with no data', function () {
         beforeEach(function () {
           this.set('data', null)
           return wait().then(() => {
@@ -323,7 +323,6 @@ describe(test.label, function () {
         it('should render as expect', function () {
           expectWithState('autocomplete', {
             focused: true,
-            // FIXME: focusedItem assertion is inconsistent in Firefox (@theotherdude 7/18/2018)
             focusedItem: 'Spiderman',
             items: ['Spiderman', 'Spawn'],
             opened: true
@@ -375,7 +374,6 @@ describe(test.label, function () {
             })
           })
 
-          // FIXME: Weird async issues on Travis Firefox
           describe('when click', function () {
             beforeEach(function () {
               open()
@@ -392,7 +390,6 @@ describe(test.label, function () {
             })
           })
 
-          // FIXME: Weird async issues on Travis Firefox
           describe('focus into component', function () {
             beforeEach(function () {
               $hook('autocomplete-autocompleteText-input').focusin()
@@ -432,7 +429,6 @@ describe(test.label, function () {
             return wait()
           })
 
-          // FIXME: Weird async issues on Travis Firefox
           describe('when down arrow', function () {
             beforeEach(function () {
               $hook('autocomplete-autocompleteText-input')
@@ -453,7 +449,6 @@ describe(test.label, function () {
               })
             })
 
-            // FIXME: Weird async issues on Travis Firefox
             describe('when enter', function () {
               beforeEach(function () {
                 $(document)
@@ -512,7 +507,6 @@ describe(test.label, function () {
               })
             })
 
-            // FIXME: Weird async issues on Travis Firefox
             describe('when up arrow', function () {
               beforeEach(function () {
                 $hook('autocomplete-autocompleteText-input')
@@ -542,7 +536,6 @@ describe(test.label, function () {
             return wait()
           })
 
-          // FIXME: focusedItem is inconsistent in Firefox (@theotherdude 7/18/2018)
           it('should select item', function () {
             expect($hook('autocomplete-autocompleteText-input')[0].value).to.equal('Spiderman')
           })
@@ -550,8 +543,7 @@ describe(test.label, function () {
           it('should have onChange', function () {
             expect(onChange.callCount, 'onChange is called').to.equal(1)
             expect(onChange.args.length, 'onChange arguments length').to.equal(1)
-            // FIXME: focusedItem is inconsistent in Firefox (@theotherdude 7/18/2018)
-            // expect(onChange.args[0][0], 'onChange argument').to.equal('Peter Parker')
+            expect(onChange.args[0][0], 'onChange argument').to.equal('Peter Parker')
           })
         })
 
@@ -566,7 +558,6 @@ describe(test.label, function () {
           it('should have onChange send object when onChangeSendObject set to true', function () {
             expect(onChange.callCount, 'onChange is called').to.equal(1)
             expect(onChange.args.length, 'onChange arguments length').to.equal(1)
-            // FIXME: focusedItem is inconsistent in Firefox (@theotherdude 7/18/2018)
             expect(onChange.args[0][0], 'onChange argument').to.equal(data[1])
           })
         })
@@ -1161,9 +1152,7 @@ describe(test.label, function () {
       })
     })
 
-    // FIXME: This test is ineffective because the dropdown will be above or below textbox depending on the text box's
-    // relative position on the screen
-    describe.skip('dropdown below', function () {
+    describe('dropdown below', function () {
       beforeEach(function () {
         this.render(hbs`
           {{frost-autocomplete
