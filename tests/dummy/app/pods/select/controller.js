@@ -1,5 +1,6 @@
 import Ember from 'ember'
-const {Controller, computed, inject} = Ember
+
+const {Controller, computed, get, inject, isEmpty} = Ember
 
 export default Controller.extend({
   notifications: inject.service('notification-messages'),
@@ -17,11 +18,15 @@ export default Controller.extend({
         if (item.label.toLowerCase().indexOf(search) !== -1) {
           return true
         }
-        item.secondaryLabels.filter(function (item) {
-          if (item.label.toLowerCase().indexOf(search) !== -1) {
-            return true
-          }
-        })
+        const secondaryLabels = get(item, 'secondaryLabels')
+        if (!isEmpty(secondaryLabels)) {
+          const resultSecondaryLabels = secondaryLabels.filter(function (item) {
+            if (item.toLowerCase().indexOf(search) !== -1) {
+              return true
+            }
+          })
+          return !isEmpty(resultSecondaryLabels)
+        }
       })
       result = filteredResult
     }
