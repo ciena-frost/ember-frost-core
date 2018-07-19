@@ -4,6 +4,7 @@
 
 import {expect} from 'chai'
 import {$hook} from 'ember-hook'
+import wait from 'ember-test-helpers/wait'
 import {integration} from 'ember-test-utils/test-support/setup-component-test'
 import hbs from 'htmlbars-inline-precompile'
 import {beforeEach, describe, it} from 'mocha'
@@ -23,6 +24,8 @@ describe(test.label, function () {
           errorDetails=""
         }}
       `)
+
+      return wait()
     })
 
     const componentClass = 'frost-ajax-error-page'
@@ -71,6 +74,8 @@ describe(test.label, function () {
           errorDetails='Detailed information would be displayed here.'
         }}
       `)
+
+      return wait()
     })
 
     it('should have the description text set correctly', function () {
@@ -112,7 +117,10 @@ describe(test.label, function () {
         }}
       `)
 
-      $hook('myError-expand-label').click()
+      return wait().then(() => {
+        $hook('myError-expand-label').click()
+        return wait()
+      })
     })
 
     it('should expaned additional details', function () {

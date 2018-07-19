@@ -1006,7 +1006,6 @@ describe(test.label, function () {
         this.set('showComponent', false)
         return wait()
       })
-
     })
 
     afterEach(function () {
@@ -1105,7 +1104,7 @@ describe(test.label, function () {
         expect(onInput.args[0].toString(), 'onInput filter').to.equal(inputString)
       })
 
-      describe.skip('debounceInterval', function () {
+      describe('debounceInterval', function () {
         const debounceInterval = 100
 
         beforeEach(function () {
