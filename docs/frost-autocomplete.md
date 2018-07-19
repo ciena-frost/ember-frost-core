@@ -13,6 +13,7 @@
 |    | | `true` | sets autocomplete component to error state |
 | `hook` | `string` | `<unique-name>` | name used for testing with ember-hook |
 | `onChange`     | `closure-action` | `<closure-action>` | The action callback to call when the value of the select component changes |
+| `onChangeSendObject`     | `boolean` | `false` | `OnChange` sends back the `{label: '...', value: '...'}` instead of just a string. Useful for when you have a default value but data isn't populated|
 | `onClick`      | `closure-action` | `<closure-action>` | The action callback to call when the select component is clicked. Fires even if select is disabled. |
 | `onInput`      | `closure-action` | `<closure-action>` | The action callback to call when the value of the filter changes as the user types |
 | `onFocus`      | `closure-action` | `<closure-action>` | The action callback to call when the autocomplete input gains focus |
@@ -26,7 +27,8 @@
 | | | `true` | Allow select option text to wrap |
 | `isLoading` | `boolean` | `false` | **default** - This is up to the consuming component to dictate if data is being loaded or not |
 | | | `true` | This will show the loading icon |
-
+| `localFiltering` | `boolean` | `true` | **default** - This is will filter the data to display locally|
+| | | `false` | This will always show the given data |
 ## Testing with ember-hook
 The autocomplete component is accessible using ember-hook with the top level hook name or you can access the internal
 components as well -
