@@ -1,3 +1,7 @@
+# 8.3.1 (2018-07-19)
+
+* **Fix** wrap pushing svg files in try catch to not just error out in #583 (allowing a user to at least build)
+
 # 8.3.0 (2018-07-18)
 
 * Add option for `frost-autocomplete` to send the object back (rather than just value), and receive object via `selectedValue`
