@@ -106,6 +106,7 @@ export default Component.extend({
     )
 
     if (newSelectedIndex !== selectedItemIndex) {
+      Logger.warn('Setting focused index in key handler', newSelectedIndex)
       this.set('focusedIndex', newSelectedIndex)
     }
   },
@@ -272,6 +273,7 @@ export default Component.extend({
     },
 
     focusIndex (index) {
+      Logger.warn('Setting focused index in focusIndex action', index)
       this.set('focusedIndex', index)
     },
 

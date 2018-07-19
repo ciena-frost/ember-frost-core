@@ -138,7 +138,7 @@ export default Component.extend({
         classNames.push('frost-autocomplete-list-item-focused')
       }
 
-      Logger.warn('Items', items, 'focusedIndex', focusedIndex)
+      Logger.log('Items', items, 'focusedIndex', focusedIndex)
 
       return {
         className: classNames.join(' '),
