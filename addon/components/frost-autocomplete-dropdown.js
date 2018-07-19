@@ -12,7 +12,7 @@ import {keyCodes} from '../utils'
 import {trimLongDataInElement} from '../utils/text'
 import Component from './frost-component'
 
-const {$, get, isEmpty, merge, run} = Ember
+const {$, Logger, get, isEmpty, merge, run} = Ember
 const {ENTER, ESCAPE, TAB} = keyCodes
 
 const FPS = 1000 / 60 // Update at 60 frames per second
@@ -137,6 +137,8 @@ export default Component.extend({
       if (index === focusedIndex) {
         classNames.push('frost-autocomplete-list-item-focused')
       }
+
+      Logger.warn('Items', items, 'focusedIndex', focusedIndex)
 
       return {
         className: classNames.join(' '),
