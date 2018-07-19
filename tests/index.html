@@ -14,6 +14,18 @@
     <link rel="stylesheet" href="{{rootURL}}assets/dummy.css">
     <link rel="stylesheet" href="{{rootURL}}assets/test-support.css">
 
+    <style>
+      /* This overrides ember-test-support's styling, yielding more consistent rendering between Firefox and Chrome */
+      #ember-testing-container {
+        position: fixed;
+        height: 432px;
+        width: 768px;
+      }
+      #ember-testing {
+        zoom: 100%;
+      }
+    </style>
+
     {{content-for 'head-footer'}}
     {{content-for 'test-head-footer'}}
   </head>

@@ -266,12 +266,18 @@ export default Component.extend({
     closeDropDown () {
       this.setProperties({
         filter: '',
+        focusedIndex: 0,
         opened: false
       })
     },
 
+    focusIndex (index) {
+      this.set('focusedIndex', index)
+    },
+
     handleClear () {
       this.setProperties({
+        focusedIndex: 0,
         userInput: false,
         opened: false,
         internalSelectedItem: undefined
@@ -318,6 +324,7 @@ export default Component.extend({
 
     selectItem (selectedItem) {
       this.setProperties({
+        focusedIndex: 0,
         userInput: false,
         filter: get(selectedItem, 'label'),
         internalSelectedItem: selectedItem
