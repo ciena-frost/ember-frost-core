@@ -1,3 +1,6 @@
+# 8.3.4 (2018-07-20)
+* Call onInput on close of the dropdown to make sure that the empty filter is applied
+
 # 8.3.3 (2018-07-19)
 
 * **Fix** travis npm publish
