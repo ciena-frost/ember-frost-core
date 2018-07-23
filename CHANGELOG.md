@@ -1,3 +1,8 @@
+# 8.3.5 (2018-07-23)
+
+* Turn off browser's autocomplete for frost-autocomplete
+
+
 # 8.3.4 (2018-07-20)
 * Call onInput on close of the dropdown to make sure that the empty filter is applied
 
