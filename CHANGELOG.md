@@ -1,3 +1,8 @@
+# 8.4.0 (2018-08-07)
+
+* Update and add new icons
+
+
 # 8.3.5 (2018-07-23)
 
 * Turn off browser's autocomplete for frost-autocomplete
