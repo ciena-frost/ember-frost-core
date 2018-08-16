@@ -264,9 +264,11 @@ export default Component.extend({
     yield timeout(debounceInterval)
     cb(value)
   }).restartable(),
-
+  /* eslint-disable complexity */
   checkIfShouldClearAndHandle () {
-    const {filter, internalSelectedItem, onChange} = this.getProperties('filter', 'internalSelectedItem', 'onChange')
+    const {filter, internalSelectedItem, onChange, onInput} =
+      this.getProperties('filter', 'internalSelectedItem', 'onChange', 'onInput')
+
     if (isEmpty(filter) && isPresent(internalSelectedItem)) {
       this.setProperties({
         focusedIndex: 0,
@@ -278,8 +280,20 @@ export default Component.extend({
           onChange(undefined)
         })
       }
+    } else if (isPresent(filter) && isEmpty(internalSelectedItem)) {
+      this.setProperties({
+        focusedIndex: 0,
+        userInput: false
+      })
+
+      if (typeOf(onInput) === 'function') {
+        onInput('')
+      } else {
+        this.set('filter', '')
+      }
     }
   },
+  /* eslint-enable complexity */
 
   // == Actions ============================================================
 
