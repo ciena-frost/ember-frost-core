@@ -290,6 +290,13 @@ export default Component.extend({
           onClear()
         })
       }
+
+      const onChange = this.get('onChange')
+      if (typeOf(onChange) === 'function') {
+        this._runNext(() => {
+          onChange(undefined)
+        })
+      }
     },
 
     handleKeyDown (event) {
