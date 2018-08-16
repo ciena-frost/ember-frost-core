@@ -1,15 +1,18 @@
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
-import {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-autocomplete'
 import {keyCodes} from '../utils'
 import Component from './frost-component'
+import {PropTypes} from 'ember-prop-types'
 
-const {get, isEmpty, on, run, typeOf} = Ember
+const {get, isEmpty, isPresent, on, run, typeOf} = Ember
 const {BACKSPACE, DOWN_ARROW, ENTER, UP_ARROW} = keyCodes
 
 export default Component.extend({
+
+  _isTyping: false,
+
   attributeBindings: [
     'opened:aria-pressed',
     'role',
@@ -232,7 +235,7 @@ export default Component.extend({
       }
     }
   }),
-
+  /* eslint-disable complexity */
   _onFocusOut: on('focusOut', function () {
     if (this.isDestroyed || this.isDestroying) {
       return
@@ -242,11 +245,13 @@ export default Component.extend({
       focused: false,
       opened: false
     })
+    this.checkIfShouldClearAndHandle()
 
     if (typeOf(this.onBlur) === 'function') {
       this.onBlur()
     }
   }),
+  /* eslint-enable complexity */
 
   /**
    * Fires input event after waiting for debounceInterval to clear
@@ -259,6 +264,22 @@ export default Component.extend({
     yield timeout(debounceInterval)
     cb(value)
   }).restartable(),
+
+  checkIfShouldClearAndHandle () {
+    const {filter, internalSelectedItem, onChange} = this.getProperties('filter', 'internalSelectedItem', 'onChange')
+    if (isEmpty(filter) && isPresent(internalSelectedItem)) {
+      this.setProperties({
+        focusedIndex: 0,
+        userInput: false,
+        internalSelectedItem: undefined
+      })
+      if (typeOf(onChange) === 'function') {
+        this._runNext(() => {
+          onChange(undefined)
+        })
+      }
+    }
+  },
 
   // == Actions ============================================================
 
@@ -313,6 +334,8 @@ export default Component.extend({
           userInput: true,
           opened: true
         })
+      } else {
+        this.checkIfShouldClearAndHandle()
       }
     },
 
