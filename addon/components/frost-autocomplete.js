@@ -11,8 +11,6 @@ const {BACKSPACE, DOWN_ARROW, ENTER, UP_ARROW} = keyCodes
 
 export default Component.extend({
 
-  _isTyping: false,
-
   attributeBindings: [
     'opened:aria-pressed',
     'role',

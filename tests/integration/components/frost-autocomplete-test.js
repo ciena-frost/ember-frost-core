@@ -54,6 +54,9 @@ describe(test.label, function () {
           width=width
           wrapLabels=wrapLabels
           localFiltering=localFiltering
+          filter=filter
+          selectedValue=selectedValue
+          internalSelectedItem=internalSelectedItem
         }}
       `)
       return wait()
@@ -363,6 +366,10 @@ describe(test.label, function () {
 
           describe('when backspace', function () {
             beforeEach(function () {
+              this.setProperties({
+                filter: 'Spiderman',
+                selectedValue: {label: 'Spiderman', value: 'Peter Parker'}
+              })
               $hook('autocomplete-autocompleteText-input')
                 .trigger('focusin')
                 .trigger($.Event('keydown', {keyCode: BACKSPACE}))
@@ -371,38 +378,6 @@ describe(test.label, function () {
 
             it('should render as expected', function () {
               expect($('.frost-autocomplete-dropdown').length).to.equal(1)
-            })
-          })
-
-          describe('when click', function () {
-            beforeEach(function () {
-              open()
-              return wait()
-            })
-
-            it('should render as expected', function () {
-              expectWithState('autocomplete', {
-                focused: true,
-                focusedItem: 'Spiderman',
-                items: ['Spiderman', 'Spawn'],
-                opened: true
-              })
-            })
-          })
-
-          describe('focus into component', function () {
-            beforeEach(function () {
-              $hook('autocomplete-autocompleteText-input').focusin()
-              return wait()
-            })
-
-            it('should render as expected', function () {
-              expectWithState('autocomplete', {
-                focused: true,
-                focusedItem: 'Spiderman',
-                items: ['Spiderman', 'Spawn'],
-                opened: true
-              })
             })
           })
         })
