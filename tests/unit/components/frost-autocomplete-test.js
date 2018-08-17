@@ -89,7 +89,7 @@ describe(test.label, function () {
 
       expect(component.getProperties('focused', 'filter', 'opened', 'internalSelectedItem')).to.deep.equal({
         focused: false,
-        filter: 'Spideran',
+        filter: 'Spiderman',
         opened: false,
         internalSelectedItem: {label: 'Spiderman', value: 'Peter Parker'}
       })
