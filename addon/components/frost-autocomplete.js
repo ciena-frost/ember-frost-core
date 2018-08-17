@@ -291,6 +291,12 @@ export default Component.extend({
       } else {
         this.set('filter', '')
       }
+    } else if (isPresent(filter) && isPresent(internalSelectedItem) && filter !== internalSelectedItem.label) {
+      if (typeOf(onInput) === 'function') {
+        onInput(internalSelectedItem.label)
+      } else {
+        this.set('filter', internalSelectedItem.label)
+      }
     }
   },
   /* eslint-enable complexity */
