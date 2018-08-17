@@ -877,17 +877,36 @@ describe(test.label, function () {
   })
 
   describe('onClear', function () {
-    let onClear, sandbox
+    let onClear, sandbox, onChange
     const hook = 'autocompleteClear'
 
     beforeEach(function () {
       sandbox = sinon.sandbox.create()
 
       onClear = sandbox.spy()
+      onChange = sandbox.spy()
 
+      const data = [
+        {
+          label: 'Superman',
+          value: 'Clark Kent'
+        },
+        {
+          label: 'Spiderman',
+          value: 'Peter Parker'
+        },
+        {
+          label: 'Spawn',
+          value: 'Al Simmons'
+        }
+      ]
+      const selectedValue = data[1]
       this.setProperties({
         hook,
-        onClear
+        onClear,
+        selectedValue,
+        data,
+        onChange
       })
 
       this.render(hbs`
@@ -896,7 +915,9 @@ describe(test.label, function () {
           hook=hook
           filter='s'
           onClear=onClear
+          onChange=onChange
           autofocus=true
+          selectedValue=selectedValue
         }}
       `)
       return wait().then(() => {
@@ -911,6 +932,10 @@ describe(test.label, function () {
 
     it('should trigger onClear', function () {
       expect(onClear.callCount, 'onClear is called').to.equal(1)
+    })
+
+    it('should trigger onChange with undefined', function () {
+      expect(onChange).to.be.calledWith(undefined)
     })
   })
 
