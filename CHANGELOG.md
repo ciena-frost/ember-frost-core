@@ -1,3 +1,8 @@
+# 8.6.0 (2018-08-20)
+
+* **Feature** add `isLoading` to `frost-select` and `frost-multi-select`
+
+
 # 8.5.0 (2018-08-20)
 
 * Autocomplete, `onClear` now also calls `onChange` with `undefined` to represent the selection being clear
