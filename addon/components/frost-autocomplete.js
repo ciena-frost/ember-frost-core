@@ -1,15 +1,16 @@
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
-import {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-autocomplete'
 import {keyCodes} from '../utils'
 import Component from './frost-component'
+import {PropTypes} from 'ember-prop-types'
 
-const {get, isEmpty, on, run, typeOf} = Ember
+const {get, isBlank, isEmpty, isPresent, on, run, typeOf} = Ember
 const {BACKSPACE, DOWN_ARROW, ENTER, UP_ARROW} = keyCodes
 
 export default Component.extend({
+
   attributeBindings: [
     'opened:aria-pressed',
     'role',
@@ -232,7 +233,7 @@ export default Component.extend({
       }
     }
   }),
-
+  /* eslint-disable complexity */
   _onFocusOut: on('focusOut', function () {
     if (this.isDestroyed || this.isDestroying) {
       return
@@ -242,11 +243,13 @@ export default Component.extend({
       focused: false,
       opened: false
     })
+    this.checkIfShouldClearAndHandle()
 
     if (typeOf(this.onBlur) === 'function') {
       this.onBlur()
     }
   }),
+  /* eslint-enable complexity */
 
   /**
    * Fires input event after waiting for debounceInterval to clear
@@ -259,6 +262,42 @@ export default Component.extend({
     yield timeout(debounceInterval)
     cb(value)
   }).restartable(),
+  /* eslint-disable complexity */
+  checkIfShouldClearAndHandle () {
+    const {filter, internalSelectedItem, onChange, onInput} =
+      this.getProperties('filter', 'internalSelectedItem', 'onChange', 'onInput')
+
+    if (isBlank(filter) && isPresent(internalSelectedItem)) {
+      this.setProperties({
+        focusedIndex: 0,
+        userInput: false,
+        internalSelectedItem: undefined
+      })
+      if (typeOf(onChange) === 'function') {
+        this._runNext(() => {
+          onChange(undefined)
+        })
+      }
+    } else if (isPresent(filter) && isBlank(internalSelectedItem)) {
+      this.setProperties({
+        focusedIndex: 0,
+        userInput: false
+      })
+
+      if (typeOf(onInput) === 'function') {
+        onInput('')
+      } else {
+        this.set('filter', '')
+      }
+    } else if (isPresent(filter) && isPresent(internalSelectedItem) && filter !== internalSelectedItem.label) {
+      if (typeOf(onInput) === 'function') {
+        onInput(internalSelectedItem.label)
+      } else {
+        this.set('filter', internalSelectedItem.label)
+      }
+    }
+  },
+  /* eslint-enable complexity */
 
   // == Actions ============================================================
 
@@ -290,6 +329,13 @@ export default Component.extend({
           onClear()
         })
       }
+
+      const onChange = this.get('onChange')
+      if (typeOf(onChange) === 'function') {
+        this._runNext(() => {
+          onChange(undefined)
+        })
+      }
     },
 
     handleKeyDown (event) {
@@ -306,6 +352,8 @@ export default Component.extend({
           userInput: true,
           opened: true
         })
+      } else {
+        this.checkIfShouldClearAndHandle()
       }
     },
 
