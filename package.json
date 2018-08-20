@@ -1,6 +1,6 @@
 {
   "name": "ember-frost-core",
-  "version": "8.4.0",
+  "version": "8.5.0",
   "description": "The library of core frost components",
   "directories": {
     "doc": "doc",
@@ -98,6 +98,6 @@
     "ember-truth-helpers": "^1.3.0"
   },
   "pr-bumper": {
-    "coverage": 93.00
+    "coverage": 93.51
   }
 }
