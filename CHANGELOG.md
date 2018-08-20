@@ -1,3 +1,12 @@
+# 8.5.0 (2018-08-20)
+
+* Autocomplete, `onClear` now also calls `onChange` with `undefined` to represent the selection being clear
+* Adjusted autocomplete font weight of highlight to match specs
+* When autocomplete loses focus
+  * it will now filter selection when the user enters a filter, but no selection is made 
+  * it will now clear selection when the user sets the filter to `''` if 
+  * it will now replace the filter with the selected item's label (if one has been previously selected)
+
 # 8.4.0 (2018-08-07)
 
 * Update and add new icons
