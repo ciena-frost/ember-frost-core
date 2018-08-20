@@ -6,7 +6,7 @@ import {keyCodes} from '../utils'
 import Component from './frost-component'
 import {PropTypes} from 'ember-prop-types'
 
-const {get, isEmpty, isPresent, on, run, typeOf} = Ember
+const {get, isBlank, isEmpty, isPresent, on, run, typeOf} = Ember
 const {BACKSPACE, DOWN_ARROW, ENTER, UP_ARROW} = keyCodes
 
 export default Component.extend({
@@ -267,7 +267,7 @@ export default Component.extend({
     const {filter, internalSelectedItem, onChange, onInput} =
       this.getProperties('filter', 'internalSelectedItem', 'onChange', 'onInput')
 
-    if (isEmpty(filter) && isPresent(internalSelectedItem)) {
+    if (isBlank(filter) && isPresent(internalSelectedItem)) {
       this.setProperties({
         focusedIndex: 0,
         userInput: false,
@@ -278,7 +278,7 @@ export default Component.extend({
           onChange(undefined)
         })
       }
-    } else if (isPresent(filter) && isEmpty(internalSelectedItem)) {
+    } else if (isPresent(filter) && isBlank(internalSelectedItem)) {
       this.setProperties({
         focusedIndex: 0,
         userInput: false
