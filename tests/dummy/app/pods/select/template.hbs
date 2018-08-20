@@ -380,6 +380,23 @@
         {{code-snippet name='select-filter-type.hbs'}}
       </div>
     </div>
+    <div class='example'>
+      <div class='title'>isLoading</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET select-other-spread }}
+        {{frost-select
+          options=(hash
+            data=data
+            hook='selectLoading'
+            isLoading=true
+          )
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='select-other-spread.hbs'}}
+      </div>
+    </div>
   </div>
 </div>
 
@@ -677,6 +694,23 @@
       </div>
       <div class='snippet'>
         {{code-snippet name='filter-type.hbs'}}
+      </div>
+    </div>
+    <div class='example'>
+      <div class='title'>isLoading</div>
+      <div class='demo'>
+        {{! BEGIN-SNIPPET multi-select-other-spread }}
+        {{frost-multi-select
+          options=(hash
+            data=data
+            isLoading=true
+            hook='multiSelectLoading'
+          )
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class='snippet'>
+        {{code-snippet name='multi-select-other-spread.hbs'}}
       </div>
     </div>
   </div>
