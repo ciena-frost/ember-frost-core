@@ -75,6 +75,7 @@ export default Component.extend({
     autofocus: PropTypes.bool,
     disabled: PropTypes.bool,
     error: PropTypes.bool,
+    isLoading: PropTypes.bool,
     label: PropTypes.string,
     secondaryLabels: PropTypes.arrayOf(PropTypes.string),
     multiselect: PropTypes.bool,
@@ -121,6 +122,7 @@ export default Component.extend({
       // options
       autofocus: false,
       disabled: false,
+      isLoading: false,
       error: false,
       multiselect: false,
       renderTarget: 'frost-select',

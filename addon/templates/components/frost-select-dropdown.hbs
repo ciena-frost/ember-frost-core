@@ -1,96 +1,117 @@
 {{! Template for the frost-select-dropdown component }}
-<div class='frost-select-overlay' onclick={{onClose}} />
+<div class="frost-select-overlay" onclick={{onClose}}></div>
 <div
-  class={{if (eq top 'auto') 'frost-select-down-arrow-shadow' 'frost-select-up-arrow-shadow'}}
+  class={{if
+    (eq top "auto")
+    "frost-select-down-arrow-shadow"
+    "frost-select-up-arrow-shadow"
+  }}
   style={{arrowStyle}}
-/>
+></div>
 <div
-  class={{if (eq top 'auto') 'frost-select-down-arrow' 'frost-select-up-arrow'}}
+  class={{if (eq top "auto") "frost-select-down-arrow" "frost-select-up-arrow"}}
   style={{arrowStyle}}
-/>
+></div>
 <div
   class={{dropdownClassNames}}
   role="button"
-  data-test={{hook (concat hook '-list')}}
-  onmousedown={{action 'mouseDown'}}
+  data-test={{hook (concat hook "-list")}}
+  onmousedown={{action "mouseDown"}}
   style={{listStyle}}
 >
   {{frost-text
     ariaActiveDescendant=ariaActiveDescendant
-    ariaAutocomplete='list'
+    ariaAutocomplete="list"
     ariaExpanded=true
     ariaMultiselectable=true
-    ariaOwns='frost-select-list'
-    hook=(concat hook '-list-input')
+    ariaOwns="frost-select-list"
+    hook=(concat hook "-list-input")
     onInput=onFilterInput
-    role='combobox'
+    role="combobox"
     value=filter
   }}
   {{#if multiselect}}
-    <div class='multi-status'>
-      <span class='number-selected'>{{selectedItems.length}} selected</span>
+    <div class="multi-status">
+      <span class="number-selected">
+        {{selectedItems.length}}
+        selected
+      </span>
       {{frost-button
-        class='frost-select-clear'
-        hook=(concat hook '-list-clear')
-        onClick=(action 'clear')
-        priority='tertiary'
-        text='Clear all'
+        class="frost-select-clear"
+        hook=(concat hook "-list-clear")
+        onClick=(action "clear")
+        priority="tertiary"
+        text="Clear all"
       }}
     </div>
   {{/if}}
-  <ul
-    id='frost-select-list'
-    role='listbox'
-  >
-    {{#if showEmptyMessage}}
-      <div class="frost-select-dropdown-empty-msg">
-        {{#if filter}}
-          No items match your filter.
-        {{else}}
-          No items.
-        {{/if}}
-      </div>
-    {{/if}}
-    {{#each renderItems key='value' as |item index|}}
-      <li
-        class={{item.className}}
-        data-test={{hook (concat hook '-item') index=index label=item.label value=item.value}}
+  <ul id="frost-select-list" role="listbox">
+    {{#if isLoading}}
+      <span
+        class="frost-autocomplete-loading"
+        data-test={{hook (concat hook "-isLoading")}}
       >
-        {{#if multiselect}}
-          {{frost-checkbox
-            checked=item.selected
-            hook=(concat hook '-item-checkbox')
-            hookQualifiers=(hash index=index label=item.label value=item.value)
-            size='medium'
+        {{frost-loading type="ring" hook="frostAutocompleteLoading"}}
+      </span>
+    {{else}}
+      {{#if showEmptyMessage}}
+        <div class="frost-select-dropdown-empty-msg">
+          {{#if filter}}
+            No items match your filter.
+          {{else}}
+            No items.
+          {{/if}}
+        </div>
+      {{/if}}
+      {{#each renderItems key="value" as |item index|}}
+        <li
+          class={{item.className}}
+          data-test={{hook
+            (concat hook "-item")
+            index=index
+            label=item.label
+            value=item.value
           }}
-        {{/if}}
-        {{#if item.hasSecondaryLabels}}
-          <div class="frost-select-list-item-container">
+        >
+          {{#if multiselect}}
+            {{frost-checkbox
+              checked=item.selected
+              hook=(concat hook "-item-checkbox")
+              hookQualifiers=(hash index=index label=item.label value=item.value)
+              size="medium"
+            }}
+          {{/if}}
+          {{#if item.hasSecondaryLabels}}
+            <div class="frost-select-list-item-container">
+              <div
+                class={{dropdownTextClassNames}}
+                data-text={{item.label}}
+                data-test={{hook (concat hookPrefix "-label") index=index}}
+              >
+                {{item.label}}
+              </div>
+              <div
+                class={{dropdownSecondaryLabelsTextClassNames}}
+                data-text={{item.displaySecondaryLabels}}
+                data-test={{hook
+                  (concat hookPrefix "-secondaryLabels")
+                  index=index
+                }}
+              >
+                {{item.displaySecondaryLabels}}
+              </div>
+            </div>
+          {{else}}
             <div
               class={{dropdownTextClassNames}}
               data-text={{item.label}}
-              data-test={{hook (concat hookPrefix '-label') index=index}}
+              data-test={{hook (concat hookPrefix "-label") index=index}}
             >
               {{item.label}}
             </div>
-            <div
-              class={{dropdownSecondaryLabelsTextClassNames}}
-              data-text={{item.displaySecondaryLabels}}
-              data-test={{hook (concat hookPrefix '-secondaryLabels') index=index}}
-            >
-              {{item.displaySecondaryLabels}}
-            </div>
-          </div>
-        {{else}}
-          <div
-            class={{dropdownTextClassNames}}
-            data-text={{item.label}}
-            data-test={{hook (concat hookPrefix '-label') index=index}}
-          >
-            {{item.label}}
-          </div>
-        {{/if}}
-      </li>
-    {{/each}}
+          {{/if}}
+        </li>
+      {{/each}}
+    {{/if}}
   </ul>
 </div>
