@@ -346,16 +346,6 @@ export default Component.extend({
       }
     },
 
-    // handlePaste (event) {
-    //   console.log('handle paste', event)
-    //   if (event.keyCode !== ENTER) {
-    //     this.setProperties({
-    //       userInput: true,
-    //       opened: true
-    //     })
-    //   }
-    // },
-
     handleKeyPress (event) {
       if (event.keyCode !== ENTER) {
         this.setProperties({
