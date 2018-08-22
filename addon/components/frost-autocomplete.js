@@ -346,6 +346,16 @@ export default Component.extend({
       }
     },
 
+    // handlePaste (event) {
+    //   console.log('handle paste', event)
+    //   if (event.keyCode !== ENTER) {
+    //     this.setProperties({
+    //       userInput: true,
+    //       opened: true
+    //     })
+    //   }
+    // },
+
     handleKeyPress (event) {
       if (event.keyCode !== ENTER) {
         this.setProperties({
@@ -362,6 +372,13 @@ export default Component.extend({
       const onInput = this.get('onInput')
 
       const filter = e.target.value
+
+      if (!isBlank(filter)) {
+        this.setProperties({
+          userInput: true,
+          opened: true
+        })
+      }
 
       if (typeOf(onInput) === 'function') {
         inputTask.perform(onInput, filter)
