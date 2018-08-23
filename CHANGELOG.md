@@ -1,3 +1,7 @@
+# 8.7.0 (2018-08-23)
+
+* Add step option to frost-text
+
 # 8.6.1 (2018-08-23)
 
 *  **Fixes** autocomplete issues with copy+paste, Ctrl+Z (anything that provides input but doesn't fire `keyPress`)
