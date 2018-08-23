@@ -1,3 +1,9 @@
+# 8.6.1 (2018-08-23)
+
+*  **Fixes** autocomplete issues with copy+paste, Ctrl+Z (anything that provides input but doesn't fire `keyPress`)
+
+
+
 # 8.6.0 (2018-08-20)
 
 * **Feature** add `isLoading` to `frost-select` and `frost-multi-select`

@@ -317,7 +317,7 @@ describe(test.label, function () {
         })
       })
 
-      describe('when filter present', function () {
+      describe('when filter present and keypress', function () {
         beforeEach(function () {
           $hook('autocomplete-autocompleteText-input').val('sp').trigger('input').trigger('keypress')
           return wait()
@@ -551,6 +551,26 @@ describe(test.label, function () {
               opened: true
             })
           })
+        })
+      })
+
+      describe('when filter present and just input triggered', function () {
+        beforeEach(function () {
+          $hook('autocomplete-autocompleteText-input').val('sp').trigger('input')
+          return wait()
+        })
+
+        it('should render as expect', function () {
+          expectWithState('autocomplete', {
+            focused: true,
+            focusedItem: 'Spiderman',
+            items: ['Spiderman', 'Spawn'],
+            opened: true
+          })
+        })
+
+        it('should only have one focused item', function () {
+          expect($('.frost-autocomplete-list-item-focused')).to.have.length(1)
         })
       })
     })
