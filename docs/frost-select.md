@@ -21,6 +21,7 @@
 | `selectedValue` | `any`, `array` if using multi-select, `null` or `''` (empty string) to clear | `'bar'` or `['bar', 'buzz']` | A value to choose in the drop down programmatically, or an array of values if using multi-select. Takes precedence over `selected` attribute. Passing `null` or `''` (empty string) will clear the selected state. |
 | `wrapLabels` | `boolean` | `false` | **default** - trim label text to fit without wrapping |
 | | | `true` | Allow select option text to wrap |
+| `isLoading` | `boolean` | `false` | **default** - This is up to the consuming component to dictate if data is being loaded or not |
 
 ## Testing with ember-hook
 The select component is accessible using ember-hook with the top level hook name or you can access the internal 

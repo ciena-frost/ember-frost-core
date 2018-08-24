@@ -1,15 +1,16 @@
 import Ember from 'ember'
 import computed, {readOnly} from 'ember-computed-decorators'
 import {task, timeout} from 'ember-concurrency'
-import {PropTypes} from 'ember-prop-types'
 import layout from '../templates/components/frost-autocomplete'
 import {keyCodes} from '../utils'
 import Component from './frost-component'
+import {PropTypes} from 'ember-prop-types'
 
-const {get, isEmpty, on, run, typeOf} = Ember
+const {get, isBlank, isEmpty, isPresent, on, run, typeOf} = Ember
 const {BACKSPACE, DOWN_ARROW, ENTER, UP_ARROW} = keyCodes
 
 export default Component.extend({
+
   attributeBindings: [
     'opened:aria-pressed',
     'role',
@@ -30,6 +31,7 @@ export default Component.extend({
     disabled: PropTypes.bool,
     error: PropTypes.bool,
     onChange: PropTypes.func,
+    onChangeSendObject: PropTypes.bool,
     onClear: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
@@ -37,7 +39,8 @@ export default Component.extend({
     onInput: PropTypes.func,
     role: PropTypes.string,
     filterType: PropTypes.oneOf(['startsWith', 'contains']),
-    selectedValue: PropTypes.string,
+    localFiltering: PropTypes.bool,
+    selectedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     tabIndex: PropTypes.number,
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.null]),
     filter: PropTypes.string,
@@ -56,6 +59,7 @@ export default Component.extend({
     return {
       focusedIndex: 0,
       userInput: false,
+      onChangeSendObject: false,
       filterType: 'startsWith',
       isLoading: false,
       disabled: false,
@@ -63,7 +67,8 @@ export default Component.extend({
       error: false,
       role: 'button',
       debounceInterval: 0,
-      tabIndex: 0
+      tabIndex: 0,
+      localFiltering: true
     }
   },
 
@@ -157,32 +162,35 @@ export default Component.extend({
   },
 
   @readOnly
-  @computed('data', 'filter', 'onInput')
-  items (data, filter, onInput) {
+  @computed('data', 'filter', 'onInput', 'localFiltering')
+  items (data, filter, onInput, localFiltering) {
     if (isEmpty(data)) {
       return []
     }
 
     filter = filter ? filter.toLowerCase() : null
-
-    return data.filter((item) => {
-      if (isEmpty(filter)) {
-        return true
-      }
-
-      const label = item.label || ''
-
-      if (this._isFilteredItem(label.toLowerCase(), filter)) {
-        return true
-      }
-    })
+    if (localFiltering) {
+      return data.filter((item) => {
+        if (isEmpty(filter)) {
+          return true
+        }
+        const label = item.label || ''
+        if (this._isFilteredItem(label.toLowerCase(), filter)) {
+          return true
+        }
+      })
+    } else {
+      return data
+    }
   },
 
   init () {
     this._super(...arguments)
-
-    if (!isEmpty(this.selectedValue)) {
-      this.set('internalSelectedItem', {value: this.selectedValue})
+    const selectedValue = this.get('selectedValue')
+    if (!isEmpty(selectedValue)) {
+      this.set('internalSelectedItem', typeof selectedValue === 'object' ? selectedValue : {value: selectedValue})
+      const label = get(selectedValue, 'label')
+      if (!isEmpty(label)) this.set('filter', label)
     }
   },
 
@@ -225,7 +233,7 @@ export default Component.extend({
       }
     }
   }),
-
+  /* eslint-disable complexity */
   _onFocusOut: on('focusOut', function () {
     if (this.isDestroyed || this.isDestroying) {
       return
@@ -235,11 +243,13 @@ export default Component.extend({
       focused: false,
       opened: false
     })
+    this.checkIfShouldClearAndHandle()
 
     if (typeOf(this.onBlur) === 'function') {
       this.onBlur()
     }
   }),
+  /* eslint-enable complexity */
 
   /**
    * Fires input event after waiting for debounceInterval to clear
@@ -252,6 +262,42 @@ export default Component.extend({
     yield timeout(debounceInterval)
     cb(value)
   }).restartable(),
+  /* eslint-disable complexity */
+  checkIfShouldClearAndHandle () {
+    const {filter, internalSelectedItem, onChange, onInput} =
+      this.getProperties('filter', 'internalSelectedItem', 'onChange', 'onInput')
+
+    if (isBlank(filter) && isPresent(internalSelectedItem)) {
+      this.setProperties({
+        focusedIndex: 0,
+        userInput: false,
+        internalSelectedItem: undefined
+      })
+      if (typeOf(onChange) === 'function') {
+        this._runNext(() => {
+          onChange(undefined)
+        })
+      }
+    } else if (isPresent(filter) && isBlank(internalSelectedItem)) {
+      this.setProperties({
+        focusedIndex: 0,
+        userInput: false
+      })
+
+      if (typeOf(onInput) === 'function') {
+        onInput('')
+      } else {
+        this.set('filter', '')
+      }
+    } else if (isPresent(filter) && isPresent(internalSelectedItem) && filter !== internalSelectedItem.label) {
+      if (typeOf(onInput) === 'function') {
+        onInput(internalSelectedItem.label)
+      } else {
+        this.set('filter', internalSelectedItem.label)
+      }
+    }
+  },
+  /* eslint-enable complexity */
 
   // == Actions ============================================================
 
@@ -259,12 +305,18 @@ export default Component.extend({
     closeDropDown () {
       this.setProperties({
         filter: '',
+        focusedIndex: 0,
         opened: false
       })
     },
 
+    focusIndex (index) {
+      this.set('focusedIndex', index)
+    },
+
     handleClear () {
       this.setProperties({
+        focusedIndex: 0,
         userInput: false,
         opened: false,
         internalSelectedItem: undefined
@@ -275,6 +327,13 @@ export default Component.extend({
       if (typeOf(onClear) === 'function') {
         this._runNext(() => {
           onClear()
+        })
+      }
+
+      const onChange = this.get('onChange')
+      if (typeOf(onChange) === 'function') {
+        this._runNext(() => {
+          onChange(undefined)
         })
       }
     },
@@ -293,6 +352,8 @@ export default Component.extend({
           userInput: true,
           opened: true
         })
+      } else {
+        this.checkIfShouldClearAndHandle()
       }
     },
 
@@ -301,6 +362,13 @@ export default Component.extend({
       const onInput = this.get('onInput')
 
       const filter = e.target.value
+
+      if (!isBlank(filter)) {
+        this.setProperties({
+          userInput: true,
+          opened: true
+        })
+      }
 
       if (typeOf(onInput) === 'function') {
         inputTask.perform(onInput, filter)
@@ -311,16 +379,15 @@ export default Component.extend({
 
     selectItem (selectedItem) {
       this.setProperties({
+        focusedIndex: 0,
         userInput: false,
         filter: get(selectedItem, 'label'),
         internalSelectedItem: selectedItem
       })
-
-      const onChange = this.get('onChange')
-
+      const {onChange, onChangeSendObject} = this.getProperties(['onChange', 'onChangeSendObject'])
       if (typeOf(onChange) === 'function') {
         this._runNext(() => {
-          onChange(get(selectedItem, 'value'))
+          onChange(onChangeSendObject ? selectedItem : get(selectedItem, 'value'))
         })
       }
 

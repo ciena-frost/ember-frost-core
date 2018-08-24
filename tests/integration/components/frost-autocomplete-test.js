@@ -34,6 +34,8 @@ describe(test.label, function () {
         hook: 'autocomplete',
         onFocus,
         onChange,
+        onChangeSendObject: false,
+        localFiltering: true,
         onClick,
         tabIndex: 0 // This is the default
       })
@@ -45,11 +47,16 @@ describe(test.label, function () {
           error=error
           hook=hook
           onChange=onChange
+          onChangeSendObject=onChangeSendObject
           onClick=onClick
           onFocus=onFocus
           tabIndex=tabIndex
           width=width
           wrapLabels=wrapLabels
+          localFiltering=localFiltering
+          filter=filter
+          selectedValue=selectedValue
+          internalSelectedItem=internalSelectedItem
         }}
       `)
       return wait()
@@ -85,7 +92,8 @@ describe(test.label, function () {
 
       describe('when width is set as property', function () {
         beforeEach(function () {
-          return this.set('width', specifiedWidth)
+          this.set('width', specifiedWidth)
+          return wait()
         })
 
         it('should have the specified width regardless of container size', function () {
@@ -108,6 +116,7 @@ describe(test.label, function () {
       describe('click on component', function () {
         beforeEach(function () {
           open('autocomplete-autocompleteText')
+          return wait()
         })
 
         it('should render as expected', function () {
@@ -127,6 +136,7 @@ describe(test.label, function () {
                   keyCode: ESCAPE
                 })
               )
+            return wait()
           })
 
           it('should render as expected', function () {
@@ -172,6 +182,7 @@ describe(test.label, function () {
         })
       })
     })
+
     describe('when data present', function () {
       const data = [
         {
@@ -189,6 +200,7 @@ describe(test.label, function () {
       ]
       beforeEach(function () {
         this.set('data', data)
+        return wait()
       })
 
       it('should render as expected', function () {
@@ -275,9 +287,10 @@ describe(test.label, function () {
       describe('when filter with no data', function () {
         beforeEach(function () {
           this.set('data', null)
-          wait()
-          $hook('autocomplete-autocompleteText-input').val('nothing').trigger('input').trigger('keypress')
-          return wait()
+          return wait().then(() => {
+            $hook('autocomplete-autocompleteText-input').val('nothing').trigger('input').trigger('keypress')
+            return wait()
+          })
         })
 
         it('should render empty message', function () {
@@ -285,9 +298,29 @@ describe(test.label, function () {
         })
       })
 
-      describe('when filter present', function () {
+      describe('when filter present and localFiltering is false', function () {
+        beforeEach(function () {
+          this.set('localFiltering', false)
+          return wait().then(() => {
+            $hook('autocomplete-autocompleteText-input').val('sp').trigger('input').trigger('keypress')
+            return wait()
+          })
+        })
+
+        it('should render all items', function () {
+          expectWithState('autocomplete', {
+            focused: true,
+            focusedItem: 'Superman',
+            items: ['Superman', 'Spiderman', 'Spawn'],
+            opened: true
+          })
+        })
+      })
+
+      describe('when filter present and keypress', function () {
         beforeEach(function () {
           $hook('autocomplete-autocompleteText-input').val('sp').trigger('input').trigger('keypress')
+          return wait()
         })
 
         it('should render as expect', function () {
@@ -297,6 +330,10 @@ describe(test.label, function () {
             items: ['Spiderman', 'Spawn'],
             opened: true
           })
+        })
+
+        it('should only have one focused item', function () {
+          expect($('.frost-autocomplete-list-item-focused')).to.have.length(1)
         })
 
         describe('when close', function () {
@@ -312,22 +349,27 @@ describe(test.label, function () {
           describe('when disabled', function () {
             beforeEach(function () {
               this.set('disabled', true)
-              wait()
-
-              $hook('autocomplete-autocompleteText-input')
-                .val('sp')
-                .trigger('input')
-                .trigger('keypress')
-                .trigger('focusin')
-              return wait()
+              return wait().then(() => {
+                $hook('autocomplete-autocompleteText-input')
+                  .val('sp')
+                  .trigger('input')
+                  .trigger('keypress')
+                  .trigger('focusin')
+                return wait()
+              })
             })
 
             it('should render as expected', function () {
               expect($('.frost-autocomplete-dropdown').length).to.equal(0)
             })
           })
+
           describe('when backspace', function () {
             beforeEach(function () {
+              this.setProperties({
+                filter: 'Spiderman',
+                selectedValue: {label: 'Spiderman', value: 'Peter Parker'}
+              })
               $hook('autocomplete-autocompleteText-input')
                 .trigger('focusin')
                 .trigger($.Event('keydown', {keyCode: BACKSPACE}))
@@ -338,38 +380,6 @@ describe(test.label, function () {
               expect($('.frost-autocomplete-dropdown').length).to.equal(1)
             })
           })
-
-          describe('when click', function () {
-            beforeEach(function () {
-              open()
-              return wait()
-            })
-
-            it('should render as expected', function () {
-              expectWithState('autocomplete', {
-                focused: true,
-                focusedItem: 'Spiderman',
-                items: ['Spiderman', 'Spawn'],
-                opened: true
-              })
-            })
-          })
-
-          describe('focus into component', function () {
-            beforeEach(function () {
-              $hook('autocomplete-autocompleteText-input').focusin()
-              return wait()
-            })
-
-            it('should render as expected', function () {
-              expectWithState('autocomplete', {
-                focused: true,
-                focusedItem: 'Spiderman',
-                items: ['Spiderman', 'Spawn'],
-                opened: true
-              })
-            })
-          })
         })
 
         describe('when escape', function () {
@@ -378,22 +388,6 @@ describe(test.label, function () {
               .trigger(
                 $.Event('keydown', {
                   keyCode: ESCAPE
-                })
-              )
-            return wait()
-          })
-
-          it('should be closed', function () {
-            expect($('.frost-autocomplete-dropdown').length).to.equal(0)
-          })
-        })
-
-        describe('when tab', function () {
-          beforeEach(function () {
-            $(document)
-              .trigger(
-                $.Event('keydown', {
-                  keyCode: TAB
                 })
               )
             return wait()
@@ -420,6 +414,7 @@ describe(test.label, function () {
                 )
               return wait()
             })
+
             it('should move down as expected', function () {
               expectWithState('autocomplete', {
                 focused: true,
@@ -437,10 +432,53 @@ describe(test.label, function () {
                       keyCode: ENTER
                     })
                   )
+                return wait()
               })
 
               it('should have have expected value', function () {
-                expect($hook('autocomplete-autocompleteText-input')[0].value).to.equal('Spiderman')
+                expect($hook('autocomplete-autocompleteText-input')).to.have.value('Spiderman')
+              })
+
+              it('should be closed', function () {
+                expect($('.frost-autocomplete-dropdown')).to.have.length(0)
+              })
+
+              describe('when backspace', function () {
+                beforeEach(function () {
+                  $hook('autocomplete-autocompleteText-input')
+                    .trigger('focusin')
+                    .trigger($.Event('keydown', {keyCode: BACKSPACE}))
+                  return wait()
+                })
+
+                it('should render as expected', function () {
+                  expectWithState('autocomplete', {
+                    focused: true,
+                    focusedItem: 'Spiderman',
+                    items: ['Spiderman'],
+                    opened: true
+                  })
+                })
+              })
+            })
+
+            describe('when tab', function () {
+              beforeEach(function () {
+                $(document)
+                  .trigger(
+                    $.Event('keydown', {
+                      keyCode: TAB
+                    })
+                  )
+                return wait()
+              })
+
+              it('should have have expected value', function () {
+                expect($hook('autocomplete-autocompleteText-input')).to.have.value('Spiderman')
+              })
+
+              it('should be closed', function () {
+                expect($('.frost-autocomplete-dropdown')).to.have.length(0)
               })
             })
 
@@ -454,6 +492,7 @@ describe(test.label, function () {
                   )
                 return wait()
               })
+
               it('should move up as expected', function () {
                 expectWithState('autocomplete', {
                   focused: true,
@@ -475,10 +514,26 @@ describe(test.label, function () {
           it('should select item', function () {
             expect($hook('autocomplete-autocompleteText-input')[0].value).to.equal('Spiderman')
           })
+
           it('should have onChange', function () {
             expect(onChange.callCount, 'onChange is called').to.equal(1)
             expect(onChange.args.length, 'onChange arguments length').to.equal(1)
             expect(onChange.args[0][0], 'onChange argument').to.equal('Peter Parker')
+          })
+        })
+
+        describe('when mousedown and onChangeSendObject=true', function () {
+          beforeEach(function () {
+            this.set('onChangeSendObject', true)
+            return wait().then(() => {
+              $('.frost-autocomplete-list-item-focused').trigger('mousedown')
+              return wait()
+            })
+          })
+          it('should have onChange send object when onChangeSendObject set to true', function () {
+            expect(onChange.callCount, 'onChange is called').to.equal(1)
+            expect(onChange.args.length, 'onChange arguments length').to.equal(1)
+            expect(onChange.args[0][0], 'onChange argument').to.equal(data[1])
           })
         })
 
@@ -498,6 +553,26 @@ describe(test.label, function () {
           })
         })
       })
+
+      describe('when filter present and just input triggered', function () {
+        beforeEach(function () {
+          $hook('autocomplete-autocompleteText-input').val('sp').trigger('input')
+          return wait()
+        })
+
+        it('should render as expect', function () {
+          expectWithState('autocomplete', {
+            focused: true,
+            focusedItem: 'Spiderman',
+            items: ['Spiderman', 'Spawn'],
+            opened: true
+          })
+        })
+
+        it('should only have one focused item', function () {
+          expect($('.frost-autocomplete-list-item-focused')).to.have.length(1)
+        })
+      })
     })
   })
 
@@ -515,6 +590,8 @@ describe(test.label, function () {
           hook=hook
         }}
       `)
+
+      return wait()
     })
 
     it('should have default tabIndex', function () {
@@ -522,48 +599,106 @@ describe(test.label, function () {
     })
   })
 
-  describe('when selectedValue', function () {
-    const hook = 'selectedValue'
-    const data = [
-      {
-        label: 'Superman',
-        value: 'Clark Kent'
-      },
-      {
-        label: 'Spiderman',
-        value: 'Peter Parker'
-      },
-      {
-        label: 'Spawn',
-        value: 'Al Simmons'
-      }
-    ]
-    const selectedValue = data[1].value
+  describe('selectedValue', function () {
+    describe('when selectedValue', function () {
+      const hook = 'selectedValue'
+      const data = [
+        {
+          label: 'Superman',
+          value: 'Clark Kent'
+        },
+        {
+          label: 'Spiderman',
+          value: 'Peter Parker'
+        },
+        {
+          label: 'Spawn',
+          value: 'Al Simmons'
+        }
+      ]
+      const selectedValue = data[1].value
 
-    beforeEach(function () {
-      this.setProperties({
-        hook,
-        data,
-        selectedValue,
-        tabIndex: 0
+      beforeEach(function () {
+        this.setProperties({
+          hook,
+          data,
+          selectedValue,
+          tabIndex: 0
+        })
+
+        this.render(hbs`
+          {{frost-autocomplete
+            data=data
+            hook=hook
+            selectedValue=selectedValue
+            tabIndex=tabIndex
+          }}
+        `)
+
+        return wait().then(() => {
+          $hook(`${hook}-autocompleteText-input`).val('s').trigger('input').trigger('keypress')
+          return wait()
+        })
       })
 
-      this.render(hbs`
-        {{frost-autocomplete
-          data=data
-          hook=hook
-          selectedValue=selectedValue
-          tabIndex=tabIndex
-        }}
-      `)
-      wait()
-
-      $hook(`${hook}-autocompleteText-input`).val('s').trigger('input').trigger('keypress')
-      return wait()
+      it('should render as expected', function () {
+        expect($('.frost-autocomplete-list-item-selected').text().trim()).to.equal(data[1].label)
+      })
     })
 
-    it('should render as expected', function () {
-      expect($('.frost-autocomplete-list-item-selected').text().trim()).to.equal(data[1].label)
+    describe('when selectedValue is an object', function () {
+      const hook = 'selectedValue'
+      const data = [
+        {
+          label: 'Superman',
+          value: 'Clark Kent'
+        },
+        {
+          label: 'Spiderman',
+          value: 'Peter Parker'
+        },
+        {
+          label: 'Spawn',
+          value: 'Al Simmons'
+        }
+      ]
+      const selectedValue = data[1]
+
+      beforeEach(function () {
+        this.setProperties({
+          hook,
+          data: [],
+          selectedValue,
+          tabIndex: 0
+        })
+
+        this.render(hbs`
+          {{frost-autocomplete
+            data=data
+            hook=hook
+            selectedValue=selectedValue
+            tabIndex=tabIndex
+          }}
+        `)
+        return wait()
+      })
+
+      it('should show label value in input', function () {
+        expect($hook('selectedValue-autocompleteText-input')[0].value).to.equal(data[1].label)
+      })
+
+      describe('with data', function () {
+        beforeEach(function () {
+          this.set('data', data)
+          return wait().then(() => {
+            $hook(`${hook}-autocompleteText-input`).val('s').trigger('input').trigger('keypress')
+            return wait()
+          })
+        })
+        it('should render as expected', function () {
+          expect($('.frost-autocomplete-list-item-selected').text().trim()).to.equal(data[1].label)
+        })
+      })
     })
   })
 
@@ -600,10 +735,11 @@ describe(test.label, function () {
           tabIndex=tabIndex
         }}
       `)
-      wait()
 
-      $hook(`${hook}-autocompleteText-input`).val('ider').trigger('input').trigger('keypress')
-      return wait()
+      return wait().then(() => {
+        $hook(`${hook}-autocompleteText-input`).val('ider').trigger('input').trigger('keypress')
+        return wait()
+      })
     })
 
     it('should render as expected', function () {
@@ -647,10 +783,10 @@ describe(test.label, function () {
           wrapLabels=wrapLabels
         }}
       `)
-      wait()
-
-      $hook(`${hook}-autocompleteText-input`).val('V').trigger('input').trigger('keypress')
-      return wait()
+      return wait().then(() => {
+        $hook(`${hook}-autocompleteText-input`).val('V').trigger('input').trigger('keypress')
+        return wait()
+      })
     })
 
     it('should render correctly', function () {
@@ -689,10 +825,10 @@ describe(test.label, function () {
           width=width
         }}
       `)
-      wait()
-
-      $hook(`${hook}-autocompleteText-input`).val('V').trigger('input').trigger('keypress')
-      return wait()
+      return wait().then(() => {
+        $hook(`${hook}-autocompleteText-input`).val('V').trigger('input').trigger('keypress')
+        return wait()
+      })
     })
 
     it('should render correctly', function () {
@@ -726,10 +862,11 @@ describe(test.label, function () {
           isLoading=isLoading
         }}
       `)
-      wait()
 
-      $hook(`${hook}-autocompleteText-input`).val('s').trigger('input').trigger('keypress')
-      return wait()
+      return wait().then(() => {
+        $hook(`${hook}-autocompleteText-input`).val('s').trigger('input').trigger('keypress')
+        return wait()
+      })
     })
 
     it('should render correctly', function () {
@@ -760,17 +897,36 @@ describe(test.label, function () {
   })
 
   describe('onClear', function () {
-    let onClear, sandbox
+    let onClear, sandbox, onChange
     const hook = 'autocompleteClear'
 
     beforeEach(function () {
       sandbox = sinon.sandbox.create()
 
       onClear = sandbox.spy()
+      onChange = sandbox.spy()
 
+      const data = [
+        {
+          label: 'Superman',
+          value: 'Clark Kent'
+        },
+        {
+          label: 'Spiderman',
+          value: 'Peter Parker'
+        },
+        {
+          label: 'Spawn',
+          value: 'Al Simmons'
+        }
+      ]
+      const selectedValue = data[1]
       this.setProperties({
         hook,
-        onClear
+        onClear,
+        selectedValue,
+        data,
+        onChange
       })
 
       this.render(hbs`
@@ -779,13 +935,15 @@ describe(test.label, function () {
           hook=hook
           filter='s'
           onClear=onClear
+          onChange=onChange
           autofocus=true
+          selectedValue=selectedValue
         }}
       `)
-      wait()
-
-      $hook(`${hook}-autocompleteText-clear`).click()
-      return wait()
+      return wait().then(() => {
+        $hook(`${hook}-autocompleteText-clear`).click()
+        return wait()
+      })
     })
 
     afterEach(function () {
@@ -794,6 +952,10 @@ describe(test.label, function () {
 
     it('should trigger onClear', function () {
       expect(onClear.callCount, 'onClear is called').to.equal(1)
+    })
+
+    it('should trigger onChange with undefined', function () {
+      expect(onChange).to.be.calledWith(undefined)
     })
   })
 
@@ -849,11 +1011,12 @@ describe(test.label, function () {
           }}
         {{/if}}
       `)
-      wait()
 
-      $hook(`${hook}-autocompleteText-clear`).click()
-      this.set('showComponent', false)
-      return wait()
+      return wait().then(() => {
+        $hook(`${hook}-autocompleteText-clear`).click()
+        this.set('showComponent', false)
+        return wait()
+      })
     })
 
     afterEach(function () {
@@ -897,6 +1060,7 @@ describe(test.label, function () {
           debounceInterval=debounceInterval
         }}
       `)
+
       return wait()
     })
 
@@ -957,7 +1121,9 @@ describe(test.label, function () {
         beforeEach(function () {
           onInput.reset()
           this.set('debounceInterval', debounceInterval)
-          $hook(`${hook}-autocompleteText-input`).val(inputString).trigger('input')
+          return wait().then(() => {
+            $hook(`${hook}-autocompleteText-input`).val(inputString).trigger('input')
+          })
         })
 
         it('should trigger onInput', function (done) {
@@ -1014,13 +1180,14 @@ describe(test.label, function () {
             hook=hook
           }}
         `)
-        wait()
 
-        $hook(`${hook}-autocompleteText-input`).val('1').trigger('input').trigger('keypress')
-        wait()
-
-        $('.frost-autocomplete-dropdown-container').trigger('resize')
-        return wait()
+        return wait().then(() => {
+          $hook(`${hook}-autocompleteText-input`).val('1').trigger('input').trigger('keypress')
+          return wait().then(() => {
+            $('.frost-autocomplete-dropdown-container').trigger('resize')
+            return wait()
+          })
+        })
       })
 
       it('should be below', function () {

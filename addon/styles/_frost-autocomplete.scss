@@ -9,6 +9,11 @@ $frost-input-select-option-row-height: 30px;
 
     input {
       height: 100%;
+      font-size: $frost-font-s;
+
+      &::placeholder {
+        color: $frost-color-grey-5;
+      }
     }
   }
 
@@ -75,6 +80,7 @@ $frost-input-select-option-row-height: 30px;
 
     &-highlight {
       color: $frost-color-grey-2;
+      font-weight: 500;
     }
   }
 

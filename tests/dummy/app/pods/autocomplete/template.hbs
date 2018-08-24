@@ -155,6 +155,23 @@
     </div>
 
     <div class="example">
+      <div class="title">onChangeSendObject</div>
+      <div class="demo">
+        {{! BEGIN-SNIPPET autocomplete-onchangesendobject }}
+        {{frost-autocomplete
+          data=data
+          hook='myAutoComplete'
+          onChangeSendObject=true
+          onChange=(action 'onChangeHandler')
+        }}
+        {{! END-SNIPPET }}
+      </div>
+      <div class="snippet">
+        {{code-snippet name='autocomplete-onchangesendobject.hbs'}}
+      </div>
+    </div>
+
+    <div class="example">
       <div class="title">onBlur</div>
       <div class="demo">
         {{! BEGIN-SNIPPET autocomplete-onblur }}

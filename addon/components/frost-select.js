@@ -75,6 +75,7 @@ export default Component.extend({
     autofocus: PropTypes.bool,
     disabled: PropTypes.bool,
     error: PropTypes.bool,
+    isLoading: PropTypes.bool,
     label: PropTypes.string,
     secondaryLabels: PropTypes.arrayOf(PropTypes.string),
     multiselect: PropTypes.bool,
@@ -121,6 +122,7 @@ export default Component.extend({
       // options
       autofocus: false,
       disabled: false,
+      isLoading: false,
       error: false,
       multiselect: false,
       renderTarget: 'frost-select',
@@ -322,6 +324,17 @@ export default Component.extend({
     this.$().focus()
   },
 
+  triggerFilterInput (filter) {
+    const inputTask = this.get('inputTask')
+    const onInput = this.get('onInput')
+
+    if (typeOf(onInput) === 'function') {
+      inputTask.perform(onInput, filter)
+    } else {
+      this.set('filter', filter)
+    }
+  },
+
   // == DOM Events ============================================================
 
   _onClick: on('click', function (e) {
@@ -443,10 +456,13 @@ export default Component.extend({
 
   actions: {
     closeDropDown () {
+      const filter = ''
       this.setProperties({
-        filter: '',
+        filter,
         opened: false
       })
+
+      this.triggerFilterInput(filter)
 
       // We need to make sure focus goes back to select since it is on the
       // filter text input while the dropdown is open
@@ -454,16 +470,7 @@ export default Component.extend({
     },
 
     filterInput (e) {
-      const inputTask = this.get('inputTask')
-      const onInput = this.get('onInput')
-
-      const filter = e.target.value
-
-      if (typeOf(onInput) === 'function') {
-        inputTask.perform(onInput, filter)
-      } else {
-        this.set('filter', filter)
-      }
+      this.triggerFilterInput(e.target.value)
     },
 
     selectItem (selectedValue) {

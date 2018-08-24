@@ -33,6 +33,8 @@ export function expectWithState (select, state) {
   )
     .to.equal(state.disabled ? -1 : state.tabIndex)
 
+  validateItems(state)
+
   if (state.focusedItem) {
     expect(
       $('.frost-autocomplete-list-item-focused .frost-autocomplete-list-item-text').data('text'),
@@ -40,8 +42,6 @@ export function expectWithState (select, state) {
     )
       .to.equal(state.focusedItem)
   }
-
-  validateItems(state)
 }
 
 function validateItems (state) {

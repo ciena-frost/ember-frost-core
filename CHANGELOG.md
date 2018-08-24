@@ -1,3 +1,78 @@
+# 8.7.0 (2018-08-23)
+
+* Add step option to frost-text
+
+# 8.6.1 (2018-08-23)
+
+*  **Fixes** autocomplete issues with copy+paste, Ctrl+Z (anything that provides input but doesn't fire `keyPress`)
+
+
+
+# 8.6.0 (2018-08-20)
+
+* **Feature** add `isLoading` to `frost-select` and `frost-multi-select`
+
+
+# 8.5.0 (2018-08-20)
+
+* Autocomplete, `onClear` now also calls `onChange` with `undefined` to represent the selection being clear
+* Adjusted autocomplete font weight of highlight to match specs
+* When autocomplete loses focus
+  * it will now filter selection when the user enters a filter, but no selection is made 
+  * it will now clear selection when the user sets the filter to `''` if 
+  * it will now replace the filter with the selected item's label (if one has been previously selected)
+
+# 8.4.0 (2018-08-07)
+
+* Update and add new icons
+
+
+# 8.3.5 (2018-07-23)
+
+* Turn off browser's autocomplete for frost-autocomplete
+
+
+# 8.3.4 (2018-07-20)
+* Call onInput on close of the dropdown to make sure that the empty filter is applied
+
+# 8.3.3 (2018-07-19)
+
+* **Fix** travis npm publish
+
+
+# 8.3.2 (2018-07-19)
+
+* **Fixed** tab key not selecting value in `frost-autocomplete`
+* **Removed** two-way binding of `focusedIndex` from  `frost-autocomplete-dropdown`
+* **Fixed** focus when reopening `frost-autocomplete`
+* **Fixed** inconsistent test rendering between Firefox and Chrome, allowing us to re-enable several `frost-autocomplete` tests
+
+# 8.3.1 (2018-07-19)
+
+* **Fix** wrap pushing svg files in try catch to not just error out in #583 (allowing a user to at least build)
+
+# 8.3.0 (2018-07-18)
+
+* Add option for `frost-autocomplete` to send the object back (rather than just value), and receive object via `selectedValue`
+* Add `localFiltering` option to `frost-autocomplete`. Allows user to turn off local filtering, useful in the case of async filtering (ie data won't filter locally first then quickly switch to backend data)
+
+# 8.2.7 (2018-06-21)
+
+* Revert #577 
+
+
+# 8.2.6 (2018-06-19)
+
+* Fixes #568. Correct `frost-icon-svg.js` util to use the correct option
+
+
+# 8.2.5 (2018-05-31)
+* **Changed** styling for autocomplete input text and placeholder
+
+
+# 8.2.4 (2018-05-30)
+* **Updated** Pin `ember-cli-notifications` to version `4.2.1` to fix broken demo app
+
 # 8.2.3 (2018-05-07)
 
 * Fix `frost-expand` animation target to target its direct children

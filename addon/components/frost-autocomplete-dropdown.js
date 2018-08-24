@@ -41,6 +41,7 @@ export default Component.extend({
     filter: PropTypes.string,
     items: PropTypes.arrayOf(PropTypes.object).isRequired,
     multiselect: PropTypes.bool,
+    onFocusIndex: PropTypes.func.isRequired,
     onSelect: PropTypes.func.isRequired,
     receivedHook: PropTypes.string,
     selectedValue: PropTypes.string,
@@ -172,14 +173,13 @@ export default Component.extend({
           run(() => {
             if (this.isDestroyed || this.isDestroying) return
             const item = this.get(`items.${index}`)
-            this.set('focusedIndex', index)
             this.send('selectItem', item)
           })
         })
         .mouseenter(() => {
           run(() => {
             if (this.isDestroyed || this.isDestroying) return
-            this.set('focusedIndex', index)
+            this.get('onFocusIndex')(index)
           })
         })
     })
@@ -210,7 +210,7 @@ export default Component.extend({
     return new RegExp(filter.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi')
   },
 
-  _handleEnterKey () {
+  _selectFocusedItem () {
     const items = this.get('items') || []
     const focusedIndex = this.get('focusedIndex')
     this.send('selectItem', items[focusedIndex])
@@ -346,11 +346,11 @@ export default Component.extend({
   _handleKeyCode (keyCode) {
     switch (keyCode) {
       case ENTER:
-        this._handleEnterKey()
+      case TAB:
+        this._selectFocusedItem()
         return
 
       case ESCAPE:
-      case TAB:
         this.onClose()
     }
   },

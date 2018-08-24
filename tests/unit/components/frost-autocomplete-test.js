@@ -45,4 +45,54 @@ describe(test.label, function () {
       expect(functionSpy.called, 'functionSpy() was called').to.equal(true)
     })
   })
+
+  describe('focus out component', function () {
+    it('should clear filter when nothing selected', function () {
+      component.setProperties({
+        opened: true,
+        focused: true,
+        filter: 'Spiderman'
+      })
+      component.trigger('focusOut')
+      expect(component.getProperties('focused', 'filter', 'opened')).to.deep.equal({
+        focused: false,
+        filter: '',
+        opened: false
+      })
+    })
+
+    it('should clear filter and item selected when backspaced all the way', function () {
+      component.setProperties({
+        opened: true,
+        focused: true,
+        filter: '',
+        internalSelectedItem: {label: 'Spiderman', value: 'Peter Parker'},
+        selectedValue: {label: 'Spiderman', value: 'Peter Parker'}
+      })
+
+      component.trigger('focusOut')
+
+      expect(component.getProperties('focused', 'filter', 'opened', 'internalSelectedItem')).to.deep.equal({
+        focused: false,
+        filter: '',
+        opened: false,
+        internalSelectedItem: undefined
+      })
+    })
+
+    it('should set filter to item selected when changed but not select', function () {
+      component.setProperties({
+        filter: 'Spider',
+        internalSelectedItem: {label: 'Spiderman', value: 'Peter Parker'}
+      })
+      component.trigger('focusOut')
+
+      expect(component.getProperties('focused', 'filter', 'opened', 'internalSelectedItem')).to.deep.equal({
+        focused: false,
+        filter: 'Spiderman',
+        opened: false,
+        internalSelectedItem: {label: 'Spiderman', value: 'Peter Parker'}
+      })
+    })
+  })
 })
