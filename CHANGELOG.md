@@ -1,3 +1,7 @@
+# 8.7.1 (2018-08-24)
+- Remove deprecated xlink attribute from frost-icon
+
+
 # 8.7.0 (2018-08-23)
 
 * Add step option to frost-text
