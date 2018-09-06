@@ -1,3 +1,7 @@
+# 8.7.2 (2018-09-06)
+- Remove deprecated xlink attribute from frost-icon
+
+
 # 8.7.1 (2018-08-24)
 - Remove deprecated xlink attribute from frost-icon
 
